@@ -1,0 +1,308 @@
+aid: mews-systems
+url: https://raw.githubusercontent.com/api-evangelist/mews-systems/refs/heads/main/apis.yml
+name: Mews
+type: Index
+image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+- Hospitality
+- Hotel
+- Property Management
+- PMS
+- Reservations
+- Bookings
+- Travel
+- Payments
+- Point of Sale
+- Channel Manager
+- Booking Engine
+description: Mews is a cloud-native hospitality cloud and property management system (PMS) headquartered in Prague,
+  Czech Republic that powers reservations, operations, payments, point of sale, revenue management, and distribution
+  for more than 15,000 hospitality properties globally. The Mews Open API surface is organised into five product
+  APIs — the general-purpose Connector API for partners working with Mews Operations data, the Channel Manager API
+  for two-way distribution with OTAs and channel managers, the Booking Engine API for guest-facing reservation
+  creation, the POS API for point-of-sale integrations, and the Loyalty Partner reverse API for membership systems.
+  Mews also runs a marketplace of more than 1,000 hospitality integrations.
+created: '2026-05-25'
+modified: '2026-05-25'
+specificationVersion: '0.19'
+apis:
+- aid: mews-systems:mews-connector-api
+  name: Mews Connector API
+  tags:
+  - Reservations
+  - Customers
+  - Bills
+  - Payments
+  - Rates
+  - Accounts
+  - Operations
+  - Hospitality
+  humanURL: https://docs.mews.com/connector-api
+  baseURL: https://api.mews.com/api/connector/v1
+  properties:
+  - url: https://docs.mews.com/connector-api
+    type: Documentation
+  - url: https://docs.mews.com/connector-api/getting-started
+    type: GettingStarted
+  - url: https://docs.mews.com/connector-api/operations
+    type: APIReference
+  - url: https://api.mews.com/Swagger/connector/swagger.yaml
+    type: OpenAPI
+  - url: https://docs.mews.com/connector-api/guidelines
+    type: Documentation
+  - url: https://docs.mews.com/connector-api/events
+    type: Webhooks
+  - url: https://docs.mews.com/connector-api/changelog
+    type: ChangeLog
+  - url: https://docs.mews.com/connector-api/deprecations
+    type: Documentation
+  - url: https://docs.mews.com/connector-api/contact-support
+    type: Support
+  description: The Mews Connector API is the general-purpose Open API for Mews Operations. Partners use it to access
+    enterprise configuration, reservations, customers, bills, payments, accounts, rates, products, restrictions,
+    services, resources, and tasks across single properties or whole portfolios. Authentication uses a triple of
+    Client (a free-form name for the calling application), ClientToken (issued by Mews to identify the partner
+    application) and AccessToken (issued by the property to authorise the application against the enterprise).
+    All operations are POST-based, return UTC timestamps, support pagination on multi-property lookups, and emit
+    webhook-style events for near real-time integration. Use cases include kiosks, in-room tech, upsell engines,
+    business intelligence, accounting reconciliation, and custom operational tooling.
+- aid: mews-systems:mews-channel-manager-api
+  name: Mews Channel Manager API
+  tags:
+  - Channel Manager
+  - Distribution
+  - OTA
+  - Availability
+  - Rates
+  - Inventory
+  - Reservations
+  humanURL: https://docs.mews.com/channel-manager-api
+  baseURL: https://api.mews.com/api/channelManager/v1
+  properties:
+  - url: https://docs.mews.com/channel-manager-api
+    type: Documentation
+  - url: https://docs.mews.com/channel-manager-api/guidelines
+    type: Documentation
+  - url: https://docs.mews.com/channel-manager-api/operations
+    type: APIReference
+  - url: https://docs.mews.com/channel-manager-api/changelog
+    type: ChangeLog
+  - url: https://docs.mews.com/channel-manager-api/deprecations
+    type: Documentation
+  description: The Mews Channel Manager API is the two-way distribution surface between Mews and channel managers,
+    online travel agents (OTAs), and other bulk sales channels. Mews pushes availability, rates, and inventory
+    updates outbound to the channel manager, while the channel manager pushes new and modified reservations back
+    into Mews. The API defines both Mews-side endpoints (consumed by the channel manager) and Channel Manager-side
+    endpoints (consumed by Mews) so that pricing, restrictions, stop-sells, and reservation lifecycle stay in sync
+    across all connected demand channels.
+- aid: mews-systems:mews-booking-engine-api
+  name: Mews Booking Engine API
+  tags:
+  - Booking Engine
+  - Reservations
+  - Distribution
+  - Direct Booking
+  - Guest
+  humanURL: https://docs.mews.com/booking-engine-guide
+  baseURL: https://api.mews.com/api/distributor/v1
+  properties:
+  - url: https://docs.mews.com/booking-engine-guide
+    type: Documentation
+  - url: https://docs.mews.com/booking-engine-guide/guidelines
+    type: Documentation
+  - url: https://docs.mews.com/booking-engine-guide/operations
+    type: APIReference
+  - url: https://docs.mews.com/booking-engine-guide/changelog
+    type: ChangeLog
+  description: The Mews Booking Engine API (historically published as the Distributor API and still served from
+    the /api/distributor/v1 path) lets developers build custom guest-facing booking engines that create reservations
+    directly in Mews. It is designed for front-end client consumption rather than server-to-server use, exposes
+    enterprise configuration, availability, rate plans, products, vouchers and reservation creation, and is the
+    foundation behind Mews-built and partner-built booking flows including widgets, kiosks, and direct-booking
+    websites.
+- aid: mews-systems:mews-pos-api
+  name: Mews POS API
+  tags:
+  - POS
+  - Point of Sale
+  - Orders
+  - Restaurant
+  - Bills
+  - Hospitality
+  humanURL: https://docs.mews.com/pos-api
+  baseURL: https://api.mews.com/api/pos/v1
+  properties:
+  - url: https://docs.mews.com/pos-api
+    type: Documentation
+  - url: https://docs.mews.com/pos-api/guidelines
+    type: Documentation
+  - url: https://docs.mews.com/pos-api/operations
+    type: APIReference
+  - url: https://docs.mews.com/pos-api/changelog
+    type: ChangeLog
+  description: The Mews POS API gives partner point-of-sale systems real-time access to Mews POS data and services
+    so that food and beverage, retail, and ancillary outlets can post charges to guest folios, share menus and
+    product catalogues, manage table state, and reconcile orders with the property management system. Typical
+    integrators include restaurant POS vendors, table-booking apps, inventory and stock-management systems, and
+    F&B business-intelligence tools.
+- aid: mews-systems:mews-loyalty-partner-api
+  name: Mews Loyalty Partner API
+  tags:
+  - Loyalty
+  - Membership
+  - Reverse API
+  - Hospitality
+  humanURL: https://docs.mews.com/loyalty-partner-api
+  baseURL: https://partner.example.com
+  properties:
+  - url: https://docs.mews.com/loyalty-partner-api
+    type: Documentation
+  description: The Mews Loyalty Partner API is a reverse API — Mews calls endpoints that the loyalty provider hosts
+    — used to integrate third-party loyalty and membership programs with Mews Operations. Loyalty partners implement
+    the contract so that member lookup, enrollment, point accrual, and point redemption can happen automatically
+    in the Mews reservation, check-in, and billing flow.
+common:
+- type: Website
+  url: https://www.mews.com/
+- type: Portal
+  url: https://developers.mews.com/
+- type: Documentation
+  url: https://docs.mews.com/
+- type: GettingStarted
+  url: https://docs.mews.com/getting-started/the-mews-apis
+- type: APIReference
+  url: https://docs.mews.com/connector-api/operations
+- type: Authentication
+  url: https://docs.mews.com/connector-api/guidelines
+- type: GitHubOrganization
+  url: https://github.com/MewsSystems
+- type: GitHubRepository
+  url: https://github.com/MewsSystems/open-api-docs
+  title: Mews Open API documentation source
+- type: GitHubRepository
+  url: https://github.com/MewsSystems/fiscalizations
+  title: .NET fiscalization library for government e-invoice reporting
+- type: GitHubRepository
+  url: https://github.com/MewsSystems/mews-flutter
+  title: Flutter and Dart open-source packages maintained by Mews
+- type: GitHubRepository
+  url: https://github.com/MewsSystems/developers
+  title: Mews engineering blog and developer microsite source
+- type: Blog
+  url: https://developers.mews.com/
+  title: Mews Engineering and R&D Blog
+- type: Blog
+  url: https://www.mews.com/en/blog
+  title: Mews Hospitality Blog
+- type: StatusPage
+  url: https://status.mews.com/
+- type: SignUp
+  url: https://www.mews.com/en/partners/new-partnerships
+  title: Become a Mews Partner
+- type: Pricing
+  url: https://www.mews.com/en/pricing
+- type: TermsOfService
+  url: https://www.mews.com/en/legal
+- type: PrivacyPolicy
+  url: https://www.mews.com/en/legal/privacy-policy
+- type: Support
+  url: https://help.mews.com/
+- type: Support
+  url: mailto:partnersuccess@mews.com
+  title: Partner Success email
+- type: About
+  url: https://www.mews.com/en/about-us
+- type: Careers
+  url: https://www.mews.com/en/careers
+- type: Marketplace
+  url: https://www.mews.com/en/marketplace
+  title: Mews Marketplace - 1,000+ hospitality integrations
+- type: LinkedIn
+  url: https://www.linkedin.com/company/mews-systems
+- type: Features
+  data:
+  - name: Cloud-Native Property Management System
+    description: Reservation management, group bookings, guest check-in/out, housekeeping, billing, and accounting in a single hosted PMS
+  - name: Point of Sale (POS)
+    description: Embedded POS for hotel restaurants, bars, and ancillary outlets with charge posting to guest folios
+  - name: Revenue Management System (RMS)
+    description: Dynamic pricing, demand forecasting, and portfolio/group pricing with AI assistance
+  - name: Integrated Payments
+    description: Tokenization, multicurrency, automated reconciliation, and certified payment terminals
+  - name: Open API Surface
+    description: Five product APIs — Connector, Channel Manager, Booking Engine, POS, and Loyalty Partner — for partners and custom integrations
+  - name: Webhook Events
+    description: Connector API events feed for near real-time integration with reservation, customer, and billing state changes
+  - name: Portfolio Access Tokens
+    description: Single-token access across multiple properties for chain and enterprise integrations
+  - name: Mews Marketplace
+    description: 1,000+ certified hospitality integrations spanning channel managers, OTAs, POS, payments, guest experience, BI, and operations
+  - name: Booking Engine
+    description: Direct-booking widgets and websites powered by the Booking Engine API
+  - name: Business Intelligence and Analytics
+    description: Reporting, KPI dashboards, and data exports for revenue, operations, and guest data
+  - name: Security and Compliance
+    description: SOC 2, ISO, and PCI DSS certified hosting and processing
+  - name: Multi-Property and Multi-Brand Support
+    description: Single Mews account spans many properties, brands, and legal entities under chain or enterprise structures
+- type: UseCases
+  data:
+  - name: Kiosk and Self Check-In
+    description: Build self-service kiosks and mobile check-in flows on top of the Connector API
+  - name: Custom Booking Engine
+    description: Power direct-booking widgets and white-label websites with the Booking Engine API
+  - name: OTA and Channel Manager Distribution
+    description: Two-way sync of availability, rates, inventory, and reservations between Mews and OTAs via the Channel Manager API
+  - name: Point of Sale Integration
+    description: Post charges from restaurant, retail, spa, and activity POS to guest folios via the POS API
+  - name: Loyalty Program Integration
+    description: Plug a loyalty or membership program into the Mews reservation and folio lifecycle via the Loyalty Partner API
+  - name: Business Intelligence and Reporting
+    description: Pull reservation, revenue, and operations data into BI tools and data warehouses
+  - name: Accounting and Finance Automation
+    description: Reconcile bills, payments, and accounting categories with general-ledger and ERP systems
+  - name: Guest Experience and Upsell
+    description: Deliver pre-arrival upsell, in-stay messaging, and guest-app experiences using Connector API data and events
+  - name: Operations and Housekeeping
+    description: Drive housekeeping, maintenance, and task workflows with real-time room and reservation state
+  - name: Fiscalization and Tax Reporting
+    description: Report e-invoices to government tax authorities using the open-source Mews Fiscalizations .NET library
+- type: Integrations
+  data:
+  - name: Online Travel Agents
+    description: Booking.com, Expedia, Airbnb, and other OTAs via certified channel managers using the Channel Manager API
+  - name: Channel Managers
+    description: SiteMinder, Cloudbeds, RateGain, D-EDGE and other channel managers via the Channel Manager API
+  - name: Payment Processors
+    description: Mews Payments plus integrations with Adyen, Stripe, and regional acquirers
+  - name: Point of Sale Systems
+    description: Mews POS plus third-party POS vendors integrated via the POS API
+  - name: Business Intelligence
+    description: Connector API feeds into Power BI, Tableau, Looker, and hospitality BI tools like HotelIQ and Demand Calendar
+  - name: Guest Experience Apps
+    description: Mobile check-in, messaging, upsell, and concierge apps built on the Connector API
+  - name: Revenue Management
+    description: Mews RMS plus third-party RMS vendors like Duetto, IDeaS, and Atomize integrated via the Connector API
+  - name: Accounting and ERP
+    description: General-ledger and ERP integrations including Xero, QuickBooks, NetSuite, and SAP via the Connector API
+  - name: Door Locks and IoT
+    description: Smart-lock and in-room device vendors integrated through the Connector API
+  - name: Fiscalization Authorities
+    description: Government e-invoice and fiscal reporting via the open-source Mews Fiscalizations .NET library
+- type: Solutions
+  data:
+  - name: Independent Hotels
+    description: PMS, POS, payments, and booking engine for single-property independent hotels
+  - name: Hotel Chains and Enterprise
+    description: Multi-property, multi-brand operations with portfolio access tokens and central reporting
+  - name: Hostels
+    description: Bed-level inventory, group bookings, and self-service flows for hostels
+  - name: Serviced Apartments and Extended Stay
+    description: Long-stay billing, recurring charges, and apartment-style inventory
+  - name: Motels and Limited Service
+    description: Streamlined operations and self-service check-in for limited-service properties
+maintainers:
+- FN: Kin Lane
+  email: info@apievangelist.com
+  X: apievangelist
+  url: https://apievangelist.com
