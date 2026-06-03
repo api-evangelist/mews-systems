@@ -1,0 +1,99 @@
+specification: FinOps Framework
+specificationVersion: '1.0'
+schema: https://www.finops.org/framework/
+provider: Mews
+providerId: mews-systems
+created: '2026-06-02'
+modified: '2026-06-02'
+reconciled: true
+tags:
+- FinOps
+- FOCUS
+- Hospitality
+- Property Management
+- Payments
+description: >-
+  FOCUS-aligned FinOps for Mews: tiered per-property PMS subscriptions plus usage-based add-on modules
+  (RMS, POS, services) and per-transaction integrated-payment processing fees, billed monthly per property.
+sources:
+- https://www.mews.com/en/pricing
+- https://docs.mews.com/connector-api/guidelines/environments
+- https://focus.finops.org/focus-specification/v1-3/
+alignedWith:
+  framework: FinOps Foundation Framework
+  frameworkUrl: https://www.finops.org/framework/
+  dataSpec: FOCUS
+  dataSpecVersion: '1.3'
+  dataSpecUrl: https://focus.finops.org/focus-specification/v1-3/
+publisherName: Mews Systems s.r.o.
+serviceCategory: Hospitality Software
+billingModel:
+  pricingCategory: Tiered Subscription + Usage
+  billingFrequency: Monthly
+  billingCurrency: USD/EUR/GBP
+  chargeCategories:
+  - Usage
+  - Purchase
+  - Tax
+  - Refund
+focusColumns:
+  ServiceName: Mews
+  ServiceCategory: Hospitality Software
+  ServiceSubcategory: Property Management System
+  ProviderName: Mews
+  PublisherName: Mews Systems s.r.o.
+  InvoiceIssuerName: Mews Systems s.r.o.
+  BillingCurrency: USD
+  ChargeCategory: Usage
+meters:
+- name: pms_subscription
+  unit: month
+  aggregation: sum
+  dimensions:
+  - property
+  - plan_tier
+- name: room_subscription
+  unit: month
+  aggregation: sum
+  dimensions:
+  - property
+  - room_count
+- name: payment_transactions
+  unit: transaction
+  aggregation: count
+  dimensions:
+  - property
+  - card_brand
+  - currency
+- name: payment_volume
+  unit: varies
+  aggregation: sum
+  dimensions:
+  - property
+  - currency
+- name: rms_module
+  unit: month
+  aggregation: sum
+  dimensions:
+  - property
+- name: pos_module
+  unit: month
+  aggregation: sum
+  dimensions:
+  - property
+  - outlet
+- name: marketplace_integrations
+  unit: month
+  aggregation: count
+  dimensions:
+  - property
+  - integration
+principles:
+- name: Visibility
+  description: Pull reservation, bill, payment, and accounting data via the Connector API (bills, payments, accountingItems, ledgerBalances) and Mews Business Intelligence dashboards to see revenue and cost consumption per property.
+- name: Allocation
+  description: Attribute spend by enterprise (property) and department using the Connector API enterprise/department resources and AccessToken-per-property scoping; group multi-brand portfolios via Portfolio Access Tokens.
+- name: Optimization
+  description: Right-size the subscription tier (Essentials vs Advanced vs Enterprise), enable only the add-on modules (RMS, POS) a property uses, and reconcile payment processing fees against transaction volume reported through the payments API.
+- name: Accountability
+  description: Assign per-property owners for the Mews subscription and payment-processing line items, review monthly invoices against BI exports, and monitor add-on module adoption across the portfolio.

@@ -1,0 +1,3325 @@
+openapi: 3.0.4
+info:
+  title: Mews Connector API — Enterprise Configuration
+  description: General-purpose API that enables partners of Mews to access data and services in Mews Operations This modular spec covers the Enterprise Configuration domain (8 operations).
+  termsOfService: https://www.mews.com/en/terms-conditions/partners
+  contact:
+    name: Partner success
+    email: partnersuccess@mews.com
+  version: v1
+  x-generated-from: documentation
+  x-source-url: https://api.mews.com/Swagger/connector/swagger.json
+  x-last-validated: '2026-06-02'
+paths:
+  /api/connector/v1/configuration/get:
+    post:
+      tags:
+      - Configuration
+      summary: Mews Get Configuration
+      description: Returns the enterprise configuration. For single-enterprise Access Tokens, this is the enterprise associated with the token. For [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property), use the `EnterpriseId` parameter to specify which enterprise you want the configuration for. In the case of service scoped integrations, the operation returns the configuration associated with both the enterprise and the bookable service linked to the token.
+      operationId: configuration_get
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ConfigurationFilterParameters'
+            example:
+              ClientToken: E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D
+              AccessToken: C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D
+              Client: Sample Client 1.0.0
+              EnterpriseId: 851df8c8-90f2-4c4a-8e01-a4fc46b25178
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Configuration'
+              example:
+                NowUtc: '2018-01-01T14:58:02Z'
+                Enterprise:
+                  Currencies:
+                  - Currency: GBP
+                    IsDefault: true
+                    IsEnabled: true
+                  - Currency: USD
+                    IsDefault: false
+                    IsEnabled: true
+                  AccountingConfiguration:
+                    AdditionalTaxIdentifier:
+                    CompanyName: Connector API Hotel
+                    BankAccountNumber: '1234'
+                    BankName: Random bank
+                    Iban: CZ7250517882393618329719
+                    Bic: GIBACZPY
+                    SurchargeConfiguration:
+                      SurchargeFees:
+                        Amex: 3.0
+                        DinersClub: 4.0
+                      SurchargeServiceId: 2b9b0143-3135-485b-8064-76c90d1be69e
+                      SurchargeTaxCode: US-HI-KA
+                    EnabledExternalPaymentTypes:
+                    - Invoice
+                    - Cash
+                    - GiftCard
+                    Options:
+                    - ReceivableTrackingEnabled
+                    - GroupTaxesOnBill
+                  IsPortfolio: false
+                  Id: 851df8c8-90f2-4c4a-8e01-a4fc46b25178
+                  ExternalIdentifier:
+                  HoldingKey: CA123
+                  ChainId: 8ddea57b-6a5c-4eec-8c4c-24467dce118e
+                  ChainName: Connector API Chain
+                  CreatedUtc: '2015-07-07T13:33:17Z'
+                  UpdatedUtc: '2015-07-07T13:33:17Z'
+                  Name: Connector API Hotel
+                  ShortName:
+                  TimeZoneIdentifier: Europe/Budapest
+                  LegalEnvironmentCode: UK
+                  AccommodationEnvironmentCode:
+                  AccountingEnvironmentCode:
+                  TaxEnvironmentCode:
+                  DefaultLanguageCode: en-US
+                  EditableHistoryInterval: P0M7DT0H0M0S
+                  AccountingEditableHistoryInterval: P0M7DT0H0M0S
+                  OperationalEditableHistoryInterval: P0M5DT0H0M0S
+                  BusinessDayClosingOffset:
+                  WebsiteUrl: https://en.wikipedia.org/wiki/St._Vitus_Cathedral
+                  Email: charging-api@mews.li
+                  Phone: 00000 123 456 789
+                  LogoImageId:
+                  CoverImageId:
+                  Pricing: Gross
+                  TaxPrecision:
+                  AddressId: c556f56e-713e-4102-9de5-0e853b5a8586
+                  Address:
+                    Id: 8c2c4371-5d42-40a9-b551-ab0b00d75076
+                    Line1: I.P. Pavlova 5
+                    Line2:
+                    City: Prague
+                    PostalCode: '1200'
+                    CountryCode: CZ
+                    CountrySubdivisionCode:
+                    Latitude: 14.429645
+                    Longitude: 50.075181
+                  GroupNames:
+                  - Connector API Group
+                  Subscription:
+                    TaxIdentifier: 123456789 RC 0001
+                Service:
+                  Id: bd26d8db-86da-4f96-9efc-e5a4654a4a94
+                  EnterpriseId: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+                  IsActive: true
+                  Name: Accommodation
+                  Names:
+                    en-GB: Accommodation
+                  StartTime: PT14H
+                  EndTime: PT12H
+                  Options:
+                    BillAsPackage: false
+                  Promotions:
+                    BeforeCheckIn: false
+                    AfterCheckIn: false
+                    DuringStay: false
+                    BeforeCheckOut: false
+                    AfterCheckOut: false
+                    DuringCheckOut: false
+                  Type: Reservable
+                  Ordering: 0
+                  Data:
+                  ExternalIdentifier:
+                  CreatedUtc: '2023-10-01T11:48:57Z'
+                  UpdatedUtc: '2023-10-28T11:48:57Z'
+                PaymentCardStorage:
+                IsIdentityDocumentNumberRequired: true
+        '400':
+          description: Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                ConfigurationGet400Example:
+                  summary: Default configuration_get 400 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '401':
+          description: Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                ConfigurationGet401Example:
+                  summary: Default configuration_get 401 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '403':
+          description: Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                ConfigurationGet403Example:
+                  summary: Default configuration_get 403 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '408':
+          description: Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-timeouts)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                ConfigurationGet408Example:
+                  summary: Default configuration_get 408 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '204':
+          description: Server has successfully fulfilled the request and there is no additional information to send back.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                ConfigurationGet204Example:
+                  summary: Default configuration_get 204 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '429':
+          description: Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-limits).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                ConfigurationGet429Example:
+                  summary: Default configuration_get 429 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '500':
+          description: Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.com/MewsSystems/gitbook-connector-api).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                ConfigurationGet500Example:
+                  summary: Default configuration_get 500 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+      x-microcks-operation: &id001
+        delay: 0
+        dispatcher: FALLBACK
+  /api/connector/v1/countries/getAll:
+    post:
+      tags:
+      - Countries
+      summary: Mews Get All Countries
+      description: Returns all countries supported by the API.
+      operationId: countries_getAll
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Parameters'
+            example:
+              ClientToken: E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D
+              AccessToken: C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D
+              Client: Sample Client 1.0.0
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CountryResult'
+              example:
+                Countries:
+                - Code: GB
+                  EnglishName: United Kingdom of Great Britain and Northern Ireland
+                - Code: US
+                  EnglishName: United States of America
+                CountrySubdivisions:
+                - Code: AU-NSW
+                  CountryCode: AU
+                  EnglishName: New South Wales
+                - Code: AU-QLD
+                  CountryCode: AU
+                  EnglishName: Queensland
+                CountryAlliances:
+                - Code: SCHENGEN
+                  EnglishName: Schengen Area
+                  CountryCodes:
+                  - AT
+                  - BE
+                  - CZ
+                  - '...'
+        '400':
+          description: Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                CountriesGetAll400Example:
+                  summary: Default countries_getAll 400 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '401':
+          description: Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                CountriesGetAll401Example:
+                  summary: Default countries_getAll 401 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '403':
+          description: Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                CountriesGetAll403Example:
+                  summary: Default countries_getAll 403 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '408':
+          description: Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-timeouts)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                CountriesGetAll408Example:
+                  summary: Default countries_getAll 408 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '204':
+          description: Server has successfully fulfilled the request and there is no additional information to send back.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                CountriesGetAll204Example:
+                  summary: Default countries_getAll 204 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '429':
+          description: Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-limits).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                CountriesGetAll429Example:
+                  summary: Default countries_getAll 429 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '500':
+          description: Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.com/MewsSystems/gitbook-connector-api).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                CountriesGetAll500Example:
+                  summary: Default countries_getAll 500 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+      x-microcks-operation: *id001
+  /api/connector/v1/currencies/getAll:
+    post:
+      tags:
+      - Currencies
+      summary: Mews Get All Currencies
+      description: Returns all currencies supported by the API.
+      operationId: currencies_getAll
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Parameters'
+            example:
+              ClientToken: E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D
+              AccessToken: C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D
+              Client: Sample Client 1.0.0
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CurrencyResult'
+              example:
+                Currencies:
+                - Code: USD
+                  Precision: 2
+                - Code: GBP
+                  Precision: 2
+        '400':
+          description: Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                CurrenciesGetAll400Example:
+                  summary: Default currencies_getAll 400 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '401':
+          description: Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                CurrenciesGetAll401Example:
+                  summary: Default currencies_getAll 401 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '403':
+          description: Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                CurrenciesGetAll403Example:
+                  summary: Default currencies_getAll 403 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '408':
+          description: Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-timeouts)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                CurrenciesGetAll408Example:
+                  summary: Default currencies_getAll 408 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '204':
+          description: Server has successfully fulfilled the request and there is no additional information to send back.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                CurrenciesGetAll204Example:
+                  summary: Default currencies_getAll 204 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '429':
+          description: Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-limits).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                CurrenciesGetAll429Example:
+                  summary: Default currencies_getAll 429 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '500':
+          description: Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.com/MewsSystems/gitbook-connector-api).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                CurrenciesGetAll500Example:
+                  summary: Default currencies_getAll 500 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+      x-microcks-operation: *id001
+  /api/connector/v1/departments/getAll:
+    post:
+      tags:
+      - Departments
+      summary: Mews Get All Departments
+      description: 'Returns all departments of an enterprise associated with the connector integration.
+
+        Note this operation uses [Pagination](https://mews-systems.gitbook.io/connector-api/guidelines/pagination/) and supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property).'
+      operationId: departments_getAll
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DepartmentFilterParameters'
+            example:
+              ClientToken: E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D
+              AccessToken: C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D
+              Client: Sample Client 1.0.0
+              EnterpriseIds:
+              - 3fa85f64-5717-4562-b3fc-2c963f66afa6
+              - 4d0201db-36f5-428b-8d11-4f0a65e960cc
+              DepartmentIds:
+              - 98776d06-60e4-495f-82f1-95ab2f644d63
+              - 915fbb82-de35-48a0-9e9b-f4a7eac711bb
+              UpdatedUtc:
+                StartUtc: '2023-10-01T00:00:00Z'
+                EndUtc: '2023-10-31T00:00:00Z'
+              Limitation:
+                Count: 10
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DepartmentResult'
+              example:
+                Departments:
+                - Id: 98776d06-60e4-495f-82f1-95ab2f644d63
+                  EnterpriseId: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+                  IsActive: true
+                  Name: Sales
+                  CreatedUtc: '2023-10-01T11:48:57Z'
+                  UpdatedUtc: '2023-10-28T11:48:57Z'
+                - Id: 915fbb82-de35-48a0-9e9b-f4a7eac711bb
+                  EnterpriseId: 4d0201db-36f5-428b-8d11-4f0a65e960cc
+                  IsActive: true
+                  Name: Housekeeping
+                  CreatedUtc: '2023-10-01T11:48:57Z'
+                  UpdatedUtc: '2023-10-28T11:48:57Z'
+                Cursor: 915fbb82-de35-48a0-9e9b-f4a7eac711bb
+        '400':
+          description: Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                DepartmentsGetAll400Example:
+                  summary: Default departments_getAll 400 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '401':
+          description: Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                DepartmentsGetAll401Example:
+                  summary: Default departments_getAll 401 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '403':
+          description: Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                DepartmentsGetAll403Example:
+                  summary: Default departments_getAll 403 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '408':
+          description: Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-timeouts)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                DepartmentsGetAll408Example:
+                  summary: Default departments_getAll 408 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '204':
+          description: Server has successfully fulfilled the request and there is no additional information to send back.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                DepartmentsGetAll204Example:
+                  summary: Default departments_getAll 204 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '429':
+          description: Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-limits).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                DepartmentsGetAll429Example:
+                  summary: Default departments_getAll 429 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '500':
+          description: Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.com/MewsSystems/gitbook-connector-api).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                DepartmentsGetAll500Example:
+                  summary: Default departments_getAll 500 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+      x-microcks-operation: *id001
+  /api/connector/v1/enterprises/getAll:
+    post:
+      tags:
+      - Enterprises
+      summary: Mews Get All Enterprises
+      description: Returns all enterprises within scope of the `Access Token`, optionally filtered by enterprise identifiers and external identifiers. Note this operation uses [Pagination](https://mews-systems.gitbook.io/connector-api/guidelines/pagination/) and supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property/).
+      operationId: enterprises_getAll
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EnterpriseFilterParameters'
+            example:
+              ClientToken: E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D
+              AccessToken: C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D
+              Client: Sample Client 1.0.0
+              EnterpriseIds:
+              - 3fa85f64-5717-4562-b3fc-2c963f66afa6
+              - 4d0201db-36f5-428b-8d11-4f0a65e960cc
+              ExternalIdentifiers:
+              - Enterprise2023
+              LinkedUtc:
+                StartUtc: '2023-06-01T00:00:00Z'
+                EndUtc: '2023-06-06T00:00:00Z'
+              UpdatedUtc:
+                StartUtc: '2023-10-01T00:00:00Z'
+                EndUtc: '2023-10-31T00:00:00Z'
+              Limitation:
+                Count: 100
+                Cursor: 4d0201db-36f5-428b-8d11-4f0a65e960cc
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EnterpriseResult'
+              example:
+                Enterprises:
+                - LinkedUtc: '2023-06-01T00:00:00Z'
+                  Id: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+                  ExternalIdentifier: Enterprise2023
+                  HoldingKey: CA123
+                  ChainId: 2f6be44e-9881-4b12-aefe-afce011a9d67
+                  ChainName: Connector API Chain
+                  CreatedUtc: '2022-03-23T17:12:06Z'
+                  UpdatedUtc: '2022-03-23T17:12:06Z'
+                  Name: Sample Portfolio Hotel
+                  ShortName:
+                  TimeZoneIdentifier: Europe/Budapest
+                  LegalEnvironmentCode: DE-2020-1
+                  AccommodationEnvironmentCode: DE
+                  AccountingEnvironmentCode: DE
+                  TaxEnvironmentCode: DE-2020-1
+                  DefaultLanguageCode: en-US
+                  EditableHistoryInterval:
+                  AccountingEditableHistoryInterval: P0M7DT0H0M0S
+                  OperationalEditableHistoryInterval: P0M5DT0H0M0S
+                  BusinessDayClosingOffset:
+                  WebsiteUrl: https://www.sample-portfolio-hotel-10004.com/
+                  Email: email@sample-portfolio-hotel.com
+                  Phone: (555) 555-1234
+                  LogoImageId:
+                  CoverImageId:
+                  Pricing: Gross
+                  TaxPrecision: 2
+                  AddressId: 31c505e9-9858-4d2f-9eab-afce011c4f47
+                  Address:
+                    Id: 8c2c4371-5d42-40a9-b551-ab0b00d75076
+                    Line1: I.P. Pavlova 5
+                    Line2:
+                    City: Prague
+                    PostalCode: '1200'
+                    CountryCode: CZ
+                    CountrySubdivisionCode:
+                    Latitude: 14.429645
+                    Longitude: 50.075181
+                  GroupNames:
+                  - Sample Group Name
+                  Subscription:
+                    TaxIdentifier: 123456789 RC 0001
+                Cursor: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+        '400':
+          description: Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                EnterprisesGetAll400Example:
+                  summary: Default enterprises_getAll 400 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '401':
+          description: Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                EnterprisesGetAll401Example:
+                  summary: Default enterprises_getAll 401 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '403':
+          description: Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                EnterprisesGetAll403Example:
+                  summary: Default enterprises_getAll 403 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '408':
+          description: Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-timeouts)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                EnterprisesGetAll408Example:
+                  summary: Default enterprises_getAll 408 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '204':
+          description: Server has successfully fulfilled the request and there is no additional information to send back.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                EnterprisesGetAll204Example:
+                  summary: Default enterprises_getAll 204 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '429':
+          description: Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-limits).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                EnterprisesGetAll429Example:
+                  summary: Default enterprises_getAll 429 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '500':
+          description: Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.com/MewsSystems/gitbook-connector-api).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                EnterprisesGetAll500Example:
+                  summary: Default enterprises_getAll 500 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+      x-microcks-operation: *id001
+  /api/connector/v1/exchangeRates/getAll:
+    post:
+      tags:
+      - Exchange rates
+      summary: Mews Get All Exchange Rates
+      description: Returns all available exchange rates among currencies of the [Enterprise](https://mews-systems.gitbook.io/connector-api/operations/configuration/#enterprise).
+      operationId: exchangeRates_getAll
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CurrencyAcceptanceFilterParameters'
+            example:
+              ClientToken: E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D
+              AccessToken: C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D
+              Client: Sample Client 1.0.0
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExchangeRateResult'
+              example:
+                ExchangeRates:
+                - SourceCurrency: EUR
+                  TargetCurrency: GBP
+                  Value: 0.8505342
+                - SourceCurrency: GBP
+                  TargetCurrency: EUR
+                  Value: 1.1757317
+        '400':
+          description: Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                ExchangeRatesGetAll400Example:
+                  summary: Default exchangeRates_getAll 400 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '401':
+          description: Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                ExchangeRatesGetAll401Example:
+                  summary: Default exchangeRates_getAll 401 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '403':
+          description: Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                ExchangeRatesGetAll403Example:
+                  summary: Default exchangeRates_getAll 403 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '408':
+          description: Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-timeouts)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                ExchangeRatesGetAll408Example:
+                  summary: Default exchangeRates_getAll 408 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '204':
+          description: Server has successfully fulfilled the request and there is no additional information to send back.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                ExchangeRatesGetAll204Example:
+                  summary: Default exchangeRates_getAll 204 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '429':
+          description: Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-limits).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                ExchangeRatesGetAll429Example:
+                  summary: Default exchangeRates_getAll 429 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '500':
+          description: Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.com/MewsSystems/gitbook-connector-api).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                ExchangeRatesGetAll500Example:
+                  summary: Default exchangeRates_getAll 500 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+      x-microcks-operation: *id001
+  /api/connector/v1/languages/getAll:
+    post:
+      tags:
+      - Languages
+      summary: Mews Get All Languages
+      description: Returns all languages supported by the API.
+      operationId: languages_getAll
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Parameters'
+            example:
+              ClientToken: E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D
+              AccessToken: C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D
+              Client: Sample Client 1.0.0
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LanguageResult'
+              example:
+                Languages:
+                - Code: zh-CN
+                  EnglishName: Chinese (Simplified)
+                  FallbackLanguageCode: en-US
+                  LocalName: 中文
+                - Code: cs-CZ
+                  EnglishName: Czech
+                  FallbackLanguageCode: en-US
+                  LocalName: Čeština
+        '400':
+          description: Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                LanguagesGetAll400Example:
+                  summary: Default languages_getAll 400 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '401':
+          description: Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                LanguagesGetAll401Example:
+                  summary: Default languages_getAll 401 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '403':
+          description: Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                LanguagesGetAll403Example:
+                  summary: Default languages_getAll 403 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '408':
+          description: Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-timeouts)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                LanguagesGetAll408Example:
+                  summary: Default languages_getAll 408 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '204':
+          description: Server has successfully fulfilled the request and there is no additional information to send back.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                LanguagesGetAll204Example:
+                  summary: Default languages_getAll 204 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '429':
+          description: Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-limits).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                LanguagesGetAll429Example:
+                  summary: Default languages_getAll 429 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '500':
+          description: Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.com/MewsSystems/gitbook-connector-api).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                LanguagesGetAll500Example:
+                  summary: Default languages_getAll 500 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+      x-microcks-operation: *id001
+  /api/connector/v1/languages/getTexts:
+    post:
+      tags:
+      - Languages
+      summary: Mews Get Language Texts
+      description: Returns translations of texts in the specified languages.
+      operationId: languages_getTexts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LanguageTextParameters'
+            example:
+              ClientToken: E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D
+              AccessToken: C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D
+              Client: Sample Client 1.0.0
+              LanguageCodes:
+              - en-US
+              - cs-CZ
+              Scope: ''
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LanguageTextResult'
+              example:
+                LanguageTexts:
+                - LanguageCode: en-US
+                  Texts:
+                    Address: Address
+                    AddressLine1: Address line 1
+                    AddressLine2: Address line 2
+                    AdultPlural: Adults
+                    Apartment: Apartment
+                    ApartmentPlural: Apartments
+        '400':
+          description: Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                LanguagesGetTexts400Example:
+                  summary: Default languages_getTexts 400 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '401':
+          description: Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                LanguagesGetTexts401Example:
+                  summary: Default languages_getTexts 401 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '403':
+          description: Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                LanguagesGetTexts403Example:
+                  summary: Default languages_getTexts 403 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '408':
+          description: Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-timeouts)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                LanguagesGetTexts408Example:
+                  summary: Default languages_getTexts 408 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '204':
+          description: Server has successfully fulfilled the request and there is no additional information to send back.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                LanguagesGetTexts204Example:
+                  summary: Default languages_getTexts 204 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '429':
+          description: Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-limits).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                LanguagesGetTexts429Example:
+                  summary: Default languages_getTexts 429 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '500':
+          description: Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.com/MewsSystems/gitbook-connector-api).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                LanguagesGetTexts500Example:
+                  summary: Default languages_getTexts 500 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+      x-microcks-operation: *id001
+components:
+  schemas:
+    AccountingConfigurationOptionEnum:
+      title: Accounting configuration option
+      enum:
+      - OptionalCreditCardPaymentDetails
+      - ReceivableTrackingEnabled
+      - SeparateDepositsOnBill
+      - AllowModifyingClosedBills
+      - RequireAccountingCategorySetup
+      - GroupTaxesOnBill
+      - DisplayEmployeeNameOnBill
+      - TaxDeclarationOnDeposit
+      - SplitVatByClassificationOnBill
+      - EmailClosedBillsAfterCheckout
+      type: string
+      description: '
+
+
+        OptionalCreditCardPaymentDetails (Optional credit card payment details)
+
+
+        ReceivableTrackingEnabled (Receivable tracking enabled)
+
+
+        SeparateDepositsOnBill (Separate deposits on bill)
+
+
+        AllowModifyingClosedBills (Allow modifying closed bills)
+
+
+        RequireAccountingCategorySetup (Require accounting category setup)
+
+
+        GroupTaxesOnBill (Group taxes on bill)
+
+
+        DisplayEmployeeNameOnBill (Display employee name on bill)
+
+
+        TaxDeclarationOnDeposit (Tax declaration on deposit)
+
+
+        SplitVatByClassificationOnBill (Split VAT by classification on bill)
+
+
+        EmailClosedBillsAfterCheckout (Send system closed bills automatically after checkout)'
+      x-enumNames:
+      - OptionalCreditCardPaymentDetails
+      - ReceivableTrackingEnabled
+      - SeparateDepositsOnBill
+      - AllowModifyingClosedBills
+      - RequireAccountingCategorySetup
+      - GroupTaxesOnBill
+      - DisplayEmployeeNameOnBill
+      - TaxDeclarationOnDeposit
+      - SplitVatByClassificationOnBill
+      - EmailClosedBillsAfterCheckout
+      x-enumDescriptions:
+      - Optional credit card payment details
+      - Receivable tracking enabled
+      - Separate deposits on bill
+      - Allow modifying closed bills
+      - Require accounting category setup
+      - Group taxes on bill
+      - Display employee name on bill
+      - Tax declaration on deposit
+      - Split VAT by classification on bill
+      - Send system closed bills automatically after checkout
+      x-extensible: true
+    AdditionalServiceData:
+      title: Additional service data
+      required:
+      - Promotions
+      type: object
+      properties:
+        Promotions:
+          allOf:
+          - $ref: '#/components/schemas/Promotions'
+          description: Promotions of the service.
+          example: string
+      additionalProperties: false
+      x-schema-id: AdditionalServiceData
+    DepartmentFilterParameters:
+      title: DepartmentFilterParameters
+      required:
+      - AccessToken
+      - Client
+      - ClientToken
+      - Limitation
+      type: object
+      properties:
+        ClientToken:
+          minLength: 1
+          type: string
+          description: Token identifying the client application.
+          example: string
+        AccessToken:
+          minLength: 1
+          type: string
+          description: Access token of the client application.
+          example: string
+        Client:
+          minLength: 1
+          type: string
+          description: Name and version of the client application.
+          example: string
+        Limitation:
+          allOf:
+          - $ref: '#/components/schemas/Limitation'
+          description: Limitation on the quantity of data returned and optional Cursor for the starting point of data.
+          example: string
+        EnterpriseIds:
+          maxItems: 1000
+          minItems: 1
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Unique identifiers of the Enterprises. If not specified, the operation returns data for all enterprises within scope of the Access Token.
+          nullable: true
+        DepartmentIds:
+          maxItems: 1000
+          minItems: 1
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Unique identifiers of [Department](https://mews-systems.gitbook.io/connector-api/operations/#department).
+          nullable: true
+        UpdatedUtc:
+          title: Time interval
+          allOf:
+          - $ref: '#/components/schemas/TimeFilterInterval'
+          description: Interval in which `Department` was updated.
+          nullable: true
+          x-max-interval-in-months: 3
+          example: string
+      additionalProperties: false
+      x-schema-id: DepartmentFilterParameters
+    Country:
+      title: Country
+      required:
+      - Code
+      - EnglishName
+      - SovereignCountryCode
+      type: object
+      properties:
+        Code:
+          minLength: 1
+          type: string
+          description: ISO 3166-1 alpha-2 code, e.g. `CZ` or `SK`.
+          example: string
+        SovereignCountryCode:
+          minLength: 1
+          type: string
+          description: ISO 3166-1 alpha-2 code of the sovereign country. May differ from `Code` for dependent territories.
+          example: string
+        EnglishName:
+          minLength: 1
+          type: string
+          description: English name of the country.
+          example: Example Name
+      additionalProperties: false
+      x-schema-id: Country
+    ConfigurationFilterParameters:
+      title: ConfigurationFilterParameters
+      required:
+      - AccessToken
+      - Client
+      - ClientToken
+      type: object
+      properties:
+        ClientToken:
+          minLength: 1
+          type: string
+          description: Token identifying the client application.
+          example: string
+        AccessToken:
+          minLength: 1
+          type: string
+          description: Access token of the client application.
+          example: string
+        Client:
+          minLength: 1
+          type: string
+          description: Name and version of the client application.
+          example: string
+        EnterpriseId:
+          type: string
+          description: Unique identifier of the [Enterprise](https://mews-systems.gitbook.io/connector-api/operations/#enterprise), defaults to the enterprise associated with the given access token.
+          format: uuid
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      additionalProperties: false
+      x-schema-id: ConfigurationFilterParameters
+    LanguageResult:
+      title: LanguageResult
+      required:
+      - Languages
+      type: object
+      properties:
+        Languages:
+          type: array
+          items:
+            $ref: '#/components/schemas/Language'
+          description: The supported languages.
+      additionalProperties: false
+      x-schema-id: LanguageResult
+    PricingModeEnum:
+      title: Pricing
+      enum:
+      - Gross
+      - Net
+      type: string
+      description: '
+
+
+        Gross (The enterprise shows amount with gross prices.)
+
+
+        Net (The enterprise shows amount with net prices.)'
+      x-enumNames:
+      - Gross
+      - Net
+      x-enumDescriptions:
+      - The enterprise shows amount with gross prices.
+      - The enterprise shows amount with net prices.
+    LanguageTextParameters:
+      title: LanguageTextParameters
+      required:
+      - AccessToken
+      - Client
+      - ClientToken
+      - LanguageCodes
+      - Scope
+      type: object
+      properties:
+        ClientToken:
+          minLength: 1
+          type: string
+          description: Token identifying the client application.
+          example: string
+        AccessToken:
+          minLength: 1
+          type: string
+          description: Access token of the client application.
+          example: string
+        Client:
+          minLength: 1
+          type: string
+          description: Name and version of the client application.
+          example: string
+        LanguageCodes:
+          type: array
+          items:
+            type: string
+          description: Language-culture codes of the `Languages` whose texts to return.
+        Scope:
+          minLength: 1
+          type: string
+          description: Scope of texts to return.
+          example: string
+      additionalProperties: false
+      x-schema-id: LanguageTextParameters
+    CountrySubdivision:
+      title: Country subdivision
+      required:
+      - Code
+      - CountryCode
+      - EnglishName
+      type: object
+      properties:
+        Code:
+          minLength: 1
+          type: string
+          description: ISO 3166-2 code of the administrative division, e.g AU-QLD.
+          example: string
+        CountryCode:
+          minLength: 1
+          type: string
+          description: ISO 3166-1 code of the [Country](https://mews-systems.gitbook.io/connector-api/operations/countries#country).
+          example: string
+        EnglishName:
+          minLength: 1
+          type: string
+          description: English name of the country subdivision.
+          example: Example Name
+      additionalProperties: false
+      x-schema-id: CountrySubdivision
+    Enterprise:
+      title: Enterprise
+      required:
+      - AccommodationEnvironmentCode
+      - AccountingEditableHistoryInterval
+      - AccountingEnvironmentCode
+      - Address
+      - AddressId
+      - ChainId
+      - ChainName
+      - CreatedUtc
+      - Currencies
+      - DefaultLanguageCode
+      - EditableHistoryInterval
+      - GroupNames
+      - Id
+      - LegalEnvironmentCode
+      - Name
+      - OperationalEditableHistoryInterval
+      - Pricing
+      - Subscription
+      - TaxEnvironmentCode
+      - TimeZoneIdentifier
+      - UpdatedUtc
+      type: object
+      properties:
+        Id:
+          type: string
+          description: Unique identifier of the enterprise.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        ExternalIdentifier:
+          maxLength: 255
+          type: string
+          description: Identifier of the enterprise from external system.
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        HoldingKey:
+          maxLength: 255
+          type: string
+          description: Identifies an enterprise in the external system of a holding company. The holding company may administer multiple portfolios.
+          nullable: true
+          example: string
+        ChainId:
+          type: string
+          description: Unique identifier of the chain to which the enterprise belongs.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        ChainName:
+          minLength: 1
+          type: string
+          description: Name of the `Chain` to which the enterprise belongs.
+          example: Example Name
+        CreatedUtc:
+          minLength: 1
+          type: string
+          description: Creation date and time of the enterprise in UTC timezone in ISO 8601 format.
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+        UpdatedUtc:
+          minLength: 1
+          type: string
+          description: Last update date and time of the enterprise in UTC timezone in ISO 8601 format.
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+        Name:
+          minLength: 1
+          type: string
+          description: Name of the enterprise.
+          example: Example Name
+        ShortName:
+          maxLength: 11
+          type: string
+          description: Short name of the enterprise used in Manager Report exports.
+          nullable: true
+          example: Example Name
+        TimeZoneIdentifier:
+          minLength: 1
+          type: string
+          description: IANA timezone identifier of the enterprise.
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        LegalEnvironmentCode:
+          minLength: 1
+          type: string
+          description: Unique identifier of the legal environment where the enterprise resides.
+          example: string
+        AccommodationEnvironmentCode:
+          minLength: 1
+          type: string
+          description: Unique code of the accommodation environment where the enterprise resides.
+          example: string
+        AccountingEnvironmentCode:
+          minLength: 1
+          type: string
+          description: Unique code of the accounting environment where the enterprise resides.
+          example: string
+        TaxEnvironmentCode:
+          minLength: 1
+          type: string
+          description: Unique code of the tax environment where the enterprise resides.
+          example: string
+        DefaultLanguageCode:
+          minLength: 1
+          type: string
+          description: Language-culture codes of the enterprise default `Language`.
+          example: string
+        EditableHistoryInterval:
+          minLength: 1
+          type: string
+          deprecated: true
+          x-deprecatedMessage: Use `AccountingEditableHistoryInterval` and `OperationalEditableHistoryInterval` instead.
+          example: string
+        AccountingEditableHistoryInterval:
+          minLength: 1
+          type: string
+          description: Editable history interval for accounting data in ISO 8601 duration format.
+          example: string
+        OperationalEditableHistoryInterval:
+          minLength: 1
+          type: string
+          description: Editable history interval for operational data in ISO 8601 duration format.
+          example: string
+        BusinessDayClosingOffset:
+          type: string
+          description: The offset value for the business day closing time, in ISO 8601 duration format.
+          nullable: true
+          example: string
+        WebsiteUrl:
+          type: string
+          description: URL of the enterprise website.
+          format: uri
+          nullable: true
+          example: https://api.mews.com/api/connector/v1
+        Email:
+          type: string
+          description: Email address of the enterprise.
+          format: email
+          nullable: true
+          example: partner@example.com
+        Phone:
+          type: string
+          description: Phone number of the enterprise.
+          format: tel
+          nullable: true
+          example: string
+        LogoImageId:
+          type: string
+          description: Unique identifier of the `Image` of the enterprise logo.
+          format: uuid
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        CoverImageId:
+          type: string
+          description: Unique identifier of the `Image` of the enterprise cover.
+          format: uuid
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Pricing:
+          title: Pricing
+          allOf:
+          - $ref: '#/components/schemas/PricingModeEnum'
+          description: 'Pricing of the enterprise.
+
+
+            Gross (The enterprise shows amount with gross prices.)
+
+
+            Net (The enterprise shows amount with net prices.)'
+          x-enumNames:
+          - Gross
+          - Net
+          x-enumDescriptions:
+          - The enterprise shows amount with gross prices.
+          - The enterprise shows amount with net prices.
+          example: string
+        TaxPrecision:
+          type: integer
+          description: Tax precision used for financial calculations in the enterprise. If `null`, `Currency` precision is used.
+          format: int32
+          nullable: true
+          example: 1
+        AddressId:
+          type: string
+          description: Unique identifier of the `Address` of the enterprise.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Address:
+          title: Address
+          allOf:
+          - $ref: '#/components/schemas/OldAddress'
+          description: Address of the enterprise.
+          example: string
+        GroupNames:
+          type: array
+          items:
+            type: string
+          description: A list of the group names of the enterprise.
+        Subscription:
+          title: Enterprise subscription
+          allOf:
+          - $ref: '#/components/schemas/EnterpriseSubscription'
+          description: Subscription information of the enterprise.
+          example: string
+        Currencies:
+          type: array
+          items:
+            $ref: '#/components/schemas/CurrencyAcceptance'
+          description: Currencies accepted by the enterprise.
+        AccountingConfiguration:
+          title: Accounting configuration
+          allOf:
+          - $ref: '#/components/schemas/AccountingConfiguration'
+          description: Configuration information containing financial information about the property.
+          nullable: true
+          example: string
+        IsPortfolio:
+          type: boolean
+          description: Whether the enterprise is a Portfolio enterprise (see [Multi-property guidelines](https://mews-systems.gitbook.io/connector-api/guidelines/multi-property)).
+          example: true
+      additionalProperties: false
+      description: ''
+      x-schema-id: Enterprise
+    DepartmentResult:
+      title: DepartmentResult
+      required:
+      - Departments
+      type: object
+      properties:
+        Departments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Department'
+          description: The departments of the enterprise.
+        Cursor:
+          type: string
+          description: Unique identifier of the item one newer in time order than the items to be returned. If Cursor is not specified, i.e. null, then the latest or most recent items will be returned.
+          format: uuid
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      additionalProperties: false
+      x-schema-id: DepartmentResult
+    CountryGroup:
+      title: Country group
+      required:
+      - Code
+      - CountryCodes
+      - EnglishName
+      type: object
+      properties:
+        Code:
+          minLength: 1
+          type: string
+          description: Group code, e.g. `EU`, `SCHENGEN`, `NORDIC`...
+          example: string
+        EnglishName:
+          minLength: 1
+          type: string
+          description: English name of the country group.
+          example: Example Name
+        CountryCodes:
+          type: array
+          items:
+            type: string
+          description: Codes of countries included in the group, in ISO 3166-1 alpha-2 format.
+      additionalProperties: false
+      x-schema-id: CountryGroup
+    CurrencyAcceptance:
+      title: Accepted currency
+      required:
+      - Currency
+      - IsDefault
+      - IsEnabled
+      type: object
+      properties:
+        Currency:
+          minLength: 1
+          type: string
+          description: ISO-4217 code of the `Currency`.
+          format: currency
+          example: EUR
+        IsDefault:
+          type: boolean
+          description: Whether the currency is a default accounting currency.
+          example: true
+        IsEnabled:
+          type: boolean
+          description: Whether the currency is enabled for usage.
+          example: true
+      additionalProperties: false
+      x-schema-id: CurrencyAcceptance
+    ServiceOptions:
+      title: Service options
+      required:
+      - BillAsPackage
+      type: object
+      properties:
+        BillAsPackage:
+          type: boolean
+          description: Products should be displayed as a single package instead of individual items.
+          example: true
+      additionalProperties: false
+      description: Options of the service.
+      x-schema-id: ServiceOptions
+    BookableServiceData:
+      title: Bookable service data
+      required:
+      - EndOffset
+      - OccupancyEndOffset
+      - OccupancyStartOffset
+      - StartOffset
+      - TimeUnit
+      - TimeUnitPeriod
+      type: object
+      properties:
+        StartOffset:
+          minLength: 1
+          type: string
+          description: Offset from the start of the [time unit](https://mews-systems.gitbook.io/connector-api/concepts/time-units/) which defines the default start of the service; expressed in ISO 8601 duration format.
+          example: string
+        EndOffset:
+          minLength: 1
+          type: string
+          description: Offset from the end of the [time unit](https://mews-systems.gitbook.io/connector-api/concepts/time-units/) which defines the default end of the service; expressed in ISO 8601 duration format.
+          example: string
+        OccupancyStartOffset:
+          minLength: 1
+          type: string
+          description: Offset from the start of the [time unit](https://mews-systems.gitbook.io/connector-api/concepts/time-units/) which defines the occupancy start of the service; expressed in ISO 8601 duration format. 'Occupancy start' is used for availability and reporting purposes, it implies the time at which the booked resource is considered occupied.
+          example: string
+        OccupancyEndOffset:
+          minLength: 1
+          type: string
+          description: Offset from the end of the [time unit](https://mews-systems.gitbook.io/connector-api/concepts/time-units/) which defines the occupancy end of the service; expressed in ISO 8601 duration format. 'Occupancy end' is used for availability and reporting purposes, it implies the time at which the booked resource is no longer considered occupied.
+          example: string
+        TimeUnit:
+          title: Time unit period
+          allOf:
+          - $ref: '#/components/schemas/TimeUnitPeriodEnum'
+          description: '
+
+
+            Day
+
+
+            Month
+
+
+            Hour'
+          deprecated: true
+          x-enumNames:
+          - Day
+          - Month
+          - Hour
+          x-enumDescriptions:
+          - ''
+          - ''
+          - ''
+          x-deprecatedMessage: Use `TimeUnitPeriod` instead.
+          example: string
+        TimeUnitPeriod:
+          title: Time unit period
+          allOf:
+          - $ref: '#/components/schemas/TimeUnitPeriodEnum'
+          description: 'The length of time or period represented by a [time unit](https://mews-systems.gitbook.io/connector-api/concepts/time-units/), for which the service can be booked.
+
+
+            Day
+
+
+            Month
+
+
+            Hour'
+          x-enumNames:
+          - Day
+          - Month
+          - Hour
+          x-enumDescriptions:
+          - ''
+          - ''
+          - ''
+          example: string
+      additionalProperties: false
+      x-schema-id: BookableServiceData
+    EnterprisePortfolio:
+      title: Enterprise
+      required:
+      - AccommodationEnvironmentCode
+      - AccountingEditableHistoryInterval
+      - AccountingEnvironmentCode
+      - Address
+      - AddressId
+      - ChainId
+      - ChainName
+      - CreatedUtc
+      - DefaultLanguageCode
+      - EditableHistoryInterval
+      - GroupNames
+      - Id
+      - LegalEnvironmentCode
+      - LinkedUtc
+      - Name
+      - OperationalEditableHistoryInterval
+      - Pricing
+      - Subscription
+      - TaxEnvironmentCode
+      - TimeZoneIdentifier
+      - UpdatedUtc
+      type: object
+      properties:
+        Id:
+          type: string
+          description: Unique identifier of the enterprise.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        ExternalIdentifier:
+          maxLength: 255
+          type: string
+          description: Identifier of the enterprise from external system.
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        HoldingKey:
+          maxLength: 255
+          type: string
+          description: Identifies an enterprise in the external system of a holding company. The holding company may administer multiple portfolios.
+          nullable: true
+          example: string
+        ChainId:
+          type: string
+          description: Unique identifier of the chain to which the enterprise belongs.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        ChainName:
+          minLength: 1
+          type: string
+          description: Name of the `Chain` to which the enterprise belongs.
+          example: Example Name
+        CreatedUtc:
+          minLength: 1
+          type: string
+          description: Creation date and time of the enterprise in UTC timezone in ISO 8601 format.
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+        UpdatedUtc:
+          minLength: 1
+          type: string
+          description: Last update date and time of the enterprise in UTC timezone in ISO 8601 format.
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+        Name:
+          minLength: 1
+          type: string
+          description: Name of the enterprise.
+          example: Example Name
+        ShortName:
+          maxLength: 11
+          type: string
+          description: Short name of the enterprise used in Manager Report exports.
+          nullable: true
+          example: Example Name
+        TimeZoneIdentifier:
+          minLength: 1
+          type: string
+          description: IANA timezone identifier of the enterprise.
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        LegalEnvironmentCode:
+          minLength: 1
+          type: string
+          description: Unique identifier of the legal environment where the enterprise resides.
+          example: string
+        AccommodationEnvironmentCode:
+          minLength: 1
+          type: string
+          description: Unique code of the accommodation environment where the enterprise resides.
+          example: string
+        AccountingEnvironmentCode:
+          minLength: 1
+          type: string
+          description: Unique code of the accounting environment where the enterprise resides.
+          example: string
+        TaxEnvironmentCode:
+          minLength: 1
+          type: string
+          description: Unique code of the tax environment where the enterprise resides.
+          example: string
+        DefaultLanguageCode:
+          minLength: 1
+          type: string
+          description: Language-culture codes of the enterprise default `Language`.
+          example: string
+        EditableHistoryInterval:
+          minLength: 1
+          type: string
+          deprecated: true
+          x-deprecatedMessage: Use `AccountingEditableHistoryInterval` and `OperationalEditableHistoryInterval` instead.
+          example: string
+        AccountingEditableHistoryInterval:
+          minLength: 1
+          type: string
+          description: Editable history interval for accounting data in ISO 8601 duration format.
+          example: string
+        OperationalEditableHistoryInterval:
+          minLength: 1
+          type: string
+          description: Editable history interval for operational data in ISO 8601 duration format.
+          example: string
+        BusinessDayClosingOffset:
+          type: string
+          description: The offset value for the business day closing time, in ISO 8601 duration format.
+          nullable: true
+          example: string
+        WebsiteUrl:
+          type: string
+          description: URL of the enterprise website.
+          format: uri
+          nullable: true
+          example: https://api.mews.com/api/connector/v1
+        Email:
+          type: string
+          description: Email address of the enterprise.
+          format: email
+          nullable: true
+          example: partner@example.com
+        Phone:
+          type: string
+          description: Phone number of the enterprise.
+          format: tel
+          nullable: true
+          example: string
+        LogoImageId:
+          type: string
+          description: Unique identifier of the `Image` of the enterprise logo.
+          format: uuid
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        CoverImageId:
+          type: string
+          description: Unique identifier of the `Image` of the enterprise cover.
+          format: uuid
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Pricing:
+          title: Pricing
+          allOf:
+          - $ref: '#/components/schemas/PricingModeEnum'
+          description: 'Pricing of the enterprise.
+
+
+            Gross (The enterprise shows amount with gross prices.)
+
+
+            Net (The enterprise shows amount with net prices.)'
+          x-enumNames:
+          - Gross
+          - Net
+          x-enumDescriptions:
+          - The enterprise shows amount with gross prices.
+          - The enterprise shows amount with net prices.
+          example: string
+        TaxPrecision:
+          type: integer
+          description: Tax precision used for financial calculations in the enterprise. If `null`, `Currency` precision is used.
+          format: int32
+          nullable: true
+          example: 1
+        AddressId:
+          type: string
+          description: Unique identifier of the `Address` of the enterprise.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Address:
+          title: Address
+          allOf:
+          - $ref: '#/components/schemas/OldAddress'
+          description: Address of the enterprise.
+          example: string
+        GroupNames:
+          type: array
+          items:
+            type: string
+          description: A list of the group names of the enterprise.
+        Subscription:
+          title: Enterprise subscription
+          allOf:
+          - $ref: '#/components/schemas/EnterpriseSubscription'
+          description: Subscription information of the enterprise.
+          example: string
+        LinkedUtc:
+          minLength: 1
+          type: string
+          description: Date and time when enterprise was added to the portfolio in UTC timezone in ISO 8601 format.
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+      additionalProperties: false
+      description: ''
+      x-schema-id: EnterprisePortfolio
+    TimeFilterInterval:
+      title: Time interval
+      type: object
+      properties:
+        StartUtc:
+          type: string
+          format: date-time
+          nullable: true
+          example: '2026-06-02T14:30:00Z'
+        EndUtc:
+          type: string
+          format: date-time
+          nullable: true
+          example: '2026-06-02T14:30:00Z'
+      additionalProperties: false
+      description: "When a time interval is used for **filtering** (for example in parameters such as `CreatedUtc.StartUtc` / `CreatedUtc.EndUtc`), the following rules apply:\r\n\r\n- **Start equals End (equality mode)**  \r\n  If `StartUtc` and `EndUtc` are exactly the same timestamp, the filter is treated as an equality check for that precise moment in time:\r\n  \r\n  ```\r\n  CreatedUtc == StartUtc\r\n  ```\r\n  \r\n  This does not represent an interval; only records with `CreatedUtc` equal to that exact instant are returned.\r\n\r\n- **Start differs from End (interval mode)**  \r\n  If `StartUtc` and `EndUtc` are different, the filter is evaluated as a half-open interval:\r\n  \r\n  ```\r\n  StartUtc <= CreatedUtc < EndUtc\r\n  ```\r\n  \r\n  In other words, the start is inclusive and the end is exclusive.\r\n\r\nMake sure your integration takes inclusive Start / exclusive End behavior of time intervals into account so that no records at the boundaries are omitted."
+      x-schema-id: TimeFilterInterval
+    EnterpriseSubscription:
+      title: Enterprise subscription
+      type: object
+      properties:
+        TaxIdentifier:
+          type: string
+          description: Tax identifier of the `Enterprise`.
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      additionalProperties: false
+      description: ''
+      x-schema-id: EnterpriseSubscription
+    LanguageTexts:
+      title: Language texts
+      required:
+      - LanguageCode
+      - Texts
+      type: object
+      properties:
+        LanguageCode:
+          minLength: 1
+          type: string
+          description: Language-culture code of the `Language`.
+          example: string
+        Texts:
+          title: Dictionary
+          type: object
+          additionalProperties:
+            type: string
+          description: Texts in the specified language by their keys.
+          x-schema-id: Dictionary
+      additionalProperties: false
+      x-schema-id: LanguageTexts
+    Department:
+      title: Department
+      required:
+      - CreatedUtc
+      - EnterpriseId
+      - Id
+      - IsActive
+      - Name
+      - UpdatedUtc
+      type: object
+      properties:
+        Id:
+          type: string
+          description: Unique identifier of the department.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        EnterpriseId:
+          type: string
+          description: Unique identifier of the [Enterprise](https://mews-systems.gitbook.io/connector-api/operations/enterprises/#enterprise).
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        IsActive:
+          type: boolean
+          description: Whether the department is still active.
+          example: true
+        Name:
+          minLength: 1
+          type: string
+          description: Name of the department.
+          example: Example Name
+        CreatedUtc:
+          minLength: 1
+          type: string
+          description: Creation date and time of the department in UTC timezone in ISO 8601 format.
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+        UpdatedUtc:
+          minLength: 1
+          type: string
+          description: Last update date and time of the department in UTC timezone in ISO 8601 format.
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+      additionalProperties: false
+      x-schema-id: Department
+    EnterpriseResult:
+      title: EnterpriseResult
+      required:
+      - Enterprises
+      type: object
+      properties:
+        Enterprises:
+          type: array
+          items:
+            $ref: '#/components/schemas/EnterprisePortfolio'
+          description: The filtered enterprises.
+        Cursor:
+          type: string
+          description: Unique identifier of the last and hence oldest enterprise returned. This can be used in [Limitation](https://mews-systems.gitbook.io/connector-api/guidelines/pagination/#limitation) in a subsequent request to fetch the next batch of older enterprises.
+          format: uuid
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      additionalProperties: false
+      x-schema-id: EnterpriseResult
+    Currency:
+      title: Currency
+      required:
+      - Code
+      - Precision
+      type: object
+      properties:
+        Code:
+          minLength: 1
+          type: string
+          description: ISO-4217 three-letter code, e.g. USD or GBP.
+          example: string
+        Precision:
+          type: integer
+          description: Precision of the currency (count of decimal places).
+          format: int32
+          example: 1
+      additionalProperties: false
+      x-schema-id: Currency
+    PaymentCardStorage:
+      title: Payment card storage
+      required:
+      - PublicKey
+      type: object
+      properties:
+        PublicKey:
+          minLength: 1
+          type: string
+          description: Key for accessing PCI proxy storage.
+          example: string
+      additionalProperties: false
+      description: ''
+      x-schema-id: PaymentCardStorage
+    ServiceDataDiscriminator:
+      title: Service data discriminator
+      enum:
+      - Bookable
+      - Additional
+      type: string
+    CountryResult:
+      title: CountryResult
+      required:
+      - Countries
+      - CountryGroups
+      - CountryRules
+      - CountrySubdivisions
+      type: object
+      properties:
+        Countries:
+          type: array
+          items:
+            $ref: '#/components/schemas/Country'
+          description: The supported countries.
+        CountrySubdivisions:
+          type: array
+          items:
+            $ref: '#/components/schemas/CountrySubdivision'
+          description: The supported country subdivisions.
+        CountryRules:
+          type: array
+          items:
+            $ref: '#/components/schemas/CountryRule'
+          description: Country-specific rules
+        CountryGroups:
+          title: Country group
+          type: array
+          items:
+            $ref: '#/components/schemas/CountryGroup'
+          description: The supported country groups.
+      additionalProperties: false
+      x-schema-id: CountryResult
+    SurchargeConfiguration:
+      title: Surcharging fees configuration
+      required:
+      - SurchargeFees
+      type: object
+      properties:
+        SurchargeFees:
+          title: CreditCardTypeDecimalIDictionary
+          type: object
+          properties:
+            MasterCard:
+              type: number
+              format: double
+            Visa:
+              type: number
+              format: double
+            Amex:
+              type: number
+              format: double
+            Discover:
+              type: number
+              format: double
+            DinersClub:
+              type: number
+              format: double
+            Jcb:
+              type: number
+              format: double
+            Maestro:
+              type: number
+              format: double
+            UnionPay:
+              type: number
+              format: double
+            VPay:
+              type: number
+              format: double
+            RuPay:
+              type: number
+              format: double
+            Dankort:
+              type: number
+              format: double
+            Mir:
+              type: number
+              format: double
+            Verve:
+              type: number
+              format: double
+            Troy:
+              type: number
+              format: double
+            PostFinance:
+              type: number
+              format: double
+            Giro:
+              type: number
+              format: double
+            Bancomat:
+              type: number
+              format: double
+            Bc:
+              type: number
+              format: double
+            CarteBleue:
+              type: number
+              format: double
+            Eftpos:
+              type: number
+              format: double
+            Eps:
+              type: number
+              format: double
+            Interac:
+              type: number
+              format: double
+            Isracard:
+              type: number
+              format: double
+            Meps:
+              type: number
+              format: double
+            Nets:
+              type: number
+              format: double
+            Bancontact:
+              type: number
+              format: double
+          additionalProperties: false
+          description: Dictionary keys are `CreditCardType` and values are surcharging fees as a percentage.
+          x-schema-id: CreditCardTypeDecimalIDictionary
+        SurchargeServiceId:
+          type: string
+          description: Unique identifier of the surcharging `Service`.
+          format: uuid
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        SurchargeTaxCode:
+          type: string
+          description: Surcharging fee `TaxCode`.
+          nullable: true
+          example: string
+      additionalProperties: false
+      x-schema-id: SurchargeConfiguration
+    CountryRule:
+      title: Country rules
+      required:
+      - CountryCode
+      - DriverLicenceExpirationDateNotRequired
+      - IdentityCardExpirationDateNotRequired
+      type: object
+      properties:
+        CountryCode:
+          minLength: 1
+          type: string
+          description: ISO 3166-1 alpha-2 code, e.g. US or GB.
+          example: string
+        IdentityCardExpirationDateNotRequired:
+          type: boolean
+          description: Whether the country requires expiration date for identity card.
+          example: true
+        DriverLicenceExpirationDateNotRequired:
+          type: boolean
+          description: Whether the country requires expiration date for driver's license.
+          example: true
+      additionalProperties: false
+      description: Country-specific rules
+      x-schema-id: CountryRule
+    Parameters:
+      title: Parameters
+      required:
+      - AccessToken
+      - Client
+      - ClientToken
+      type: object
+      properties:
+        ClientToken:
+          minLength: 1
+          type: string
+          description: Token identifying the client application.
+          example: string
+        AccessToken:
+          minLength: 1
+          type: string
+          description: Access token of the client application.
+          example: string
+        Client:
+          minLength: 1
+          type: string
+          description: Name and version of the client application.
+          example: string
+      additionalProperties: false
+      x-schema-id: Parameters
+    Service:
+      title: Service
+      required:
+      - CreatedUtc
+      - Data
+      - EnterpriseId
+      - Id
+      - IsActive
+      - Name
+      - Names
+      - Options
+      - Ordering
+      - UpdatedUtc
+      type: object
+      properties:
+        Id:
+          type: string
+          description: Unique identifier of the service.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        EnterpriseId:
+          type: string
+          description: Unique identifier of the [Enterprise](https://mews-systems.gitbook.io/connector-api/operations/enterprises/#enterprise).
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        IsActive:
+          type: boolean
+          description: Whether the service is still active.
+          example: true
+        Name:
+          minLength: 1
+          type: string
+          description: Name of the service.
+          deprecated: true
+          x-deprecatedMessage: Use `Names` instead
+          example: Example Name
+        Names:
+          title: Localized text
+          type: object
+          additionalProperties:
+            type: string
+          description: All translations of the name.
+          x-schema-id: LocalizedStrings
+        StartTime:
+          type: string
+          nullable: true
+          deprecated: true
+          example: string
+        EndTime:
+          type: string
+          nullable: true
+          deprecated: true
+          example: string
+        Options:
+          title: Service options
+          allOf:
+          - $ref: '#/components/schemas/ServiceOptions'
+          description: Options of the service.
+          example: string
+        Promotions:
+          allOf:
+          - $ref: '#/components/schemas/Promotions'
+          description: ''
+          nullable: true
+          deprecated: true
+          x-deprecatedMessage: Use `Promotions` in `Data` instead.
+          example: string
+        Type:
+          type: string
+          nullable: true
+          deprecated: true
+          example: string
+        Ordering:
+          type: integer
+          description: Order value for presentation purposes.
+          format: int32
+          example: 1
+        Data:
+          title: Service data
+          type: object
+          properties:
+            Discriminator:
+              $ref: '#/components/schemas/ServiceDataDiscriminator'
+            Value:
+              oneOf:
+              - $ref: '#/components/schemas/BookableServiceData'
+              - $ref: '#/components/schemas/AdditionalServiceData'
+          description: Additional information about the specific service.
+          x-coproduct: true
+          x-schema-id: ServiceDataCoproductOfServiceDataDiscriminator
+        ExternalIdentifier:
+          maxLength: 255
+          type: string
+          description: Identifier of the service from external system.
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        CreatedUtc:
+          minLength: 1
+          type: string
+          description: Creation date and time of the service in UTC timezone in ISO 8601 format.
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+        UpdatedUtc:
+          minLength: 1
+          type: string
+          description: Last update date and time of the service in UTC timezone in ISO 8601 format.
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+      additionalProperties: false
+      description: ''
+      x-schema-id: Service
+    CurrencyResult:
+      title: CurrencyResult
+      required:
+      - Currencies
+      type: object
+      properties:
+        Currencies:
+          type: array
+          items:
+            $ref: '#/components/schemas/Currency'
+          description: The supported currencies.
+      additionalProperties: false
+      x-schema-id: CurrencyResult
+    ExternalPaymentTypeEnum:
+      title: External payment type
+      enum:
+      - Unspecified
+      - BadDebts
+      - Bacs
+      - WireTransfer
+      - Invoice
+      - ExchangeRateDifference
+      - Complimentary
+      - Reseller
+      - ExchangeRoundingDifference
+      - Barter
+      - Commission
+      - BankCharges
+      - CrossSettlement
+      - Cash
+      - CreditCard
+      - Prepayment
+      - Cheque
+      - Bancontact
+      - IDeal
+      - PayPal
+      - GiftCard
+      - LoyaltyPoints
+      - ChequeVacances
+      - OnlinePayment
+      - CardCheck
+      - PaymentHubRedirection
+      - Voucher
+      - MasterCard
+      - Visa
+      - Amex
+      - Discover
+      - DinersClub
+      - Jcb
+      - UnionPay
+      - Twint
+      - Reka
+      - LoyaltyCard
+      - PosDiningAndSpaReward
+      - DirectDebit
+      - DepositCheck
+      - DepositCash
+      - DepositCreditCard
+      - DepositWireTransfer
+      type: string
+      description: '
+
+
+        Unspecified (Unspecified (unavailable in French Legal Environment))
+
+
+        BadDebts (Bad debts)
+
+
+        Bacs (Bacs payment)
+
+
+        WireTransfer (Wire transfer)
+
+
+        Invoice (Invoice)
+
+
+        ExchangeRateDifference (Exchange rate difference)
+
+
+        Complimentary (Complimentary)
+
+
+        Reseller (Reseller)
+
+
+        ExchangeRoundingDifference (Exchange rounding difference)
+
+
+        Barter (Barter)
+
+
+        Commission (Commission)
+
+
+        BankCharges (Bank charges)
+
+
+        CrossSettlement (Cross settlement)
+
+
+        Cash (Cash)
+
+
+        CreditCard (Credit card – deprecated, only for existing partners)
+
+
+        Prepayment (Prepayment)
+
+
+        Cheque (Cheque)
+
+
+        Bancontact (Bancontact)
+
+
+        IDeal (iDeal – deprecated, only for existing partners)
+
+
+        PayPal (PayPal – deprecated, only for existing partners)
+
+
+        GiftCard (Gift card)
+
+
+        LoyaltyPoints (Loyalty points)
+
+
+        ChequeVacances (Chèque-Vacances)
+
+
+        OnlinePayment (Online payment – deprecated, only for existing partners)
+
+
+        CardCheck (Card check)
+
+
+        PaymentHubRedirection (Payment hub redirection)
+
+
+        Voucher (Voucher)
+
+
+        MasterCard (MasterCard – deprecated, only for existing partners)
+
+
+        Visa (Visa – deprecated, only for existing partners)
+
+
+        Amex (American Express – deprecated, only for existing partners)
+
+
+        Discover (Discover – deprecated, only for existing partners)
+
+
+        DinersClub (Diners Club – deprecated, only for existing partners)
+
+
+        Jcb (JCB – deprecated, only for existing partners)
+
+
+        UnionPay (UnionPay – deprecated, only for existing partners)
+
+
+        Twint (TWINT)
+
+
+        Reka (Reka)
+
+
+        LoyaltyCard (Loyalty card)
+
+
+        PosDiningAndSpaReward (POS Dining & Spa Reward)
+
+
+        DirectDebit (Direct debit)
+
+
+        DepositCheck (Deposit - check)
+
+
+        DepositCash (Deposit - cash)
+
+
+        DepositCreditCard (Deposit - credit card – deprecated, only for existing partners)
+
+
+        DepositWireTransfer (Deposit - wire transfer)'
+      x-enumNames:
+      - Unspecified
+      - BadDebts
+      - Bacs
+      - WireTransfer
+      - Invoice
+      - ExchangeRateDifference
+      - Complimentary
+      - Reseller
+      - ExchangeRoundingDifference
+      - Barter
+      - Commission
+      - BankCharges
+      - CrossSettlement
+      - Cash
+      - CreditCard
+      - Prepayment
+      - Cheque
+      - Bancontact
+      - IDeal
+      - PayPal
+      - GiftCard
+      - LoyaltyPoints
+      - ChequeVacances
+      - OnlinePayment
+      - CardCheck
+      - PaymentHubRedirection
+      - Voucher
+      - MasterCard
+      - Visa
+      - Amex
+      - Discover
+      - DinersClub
+      - Jcb
+      - UnionPay
+      - Twint
+      - Reka
+      - LoyaltyCard
+      - PosDiningAndSpaReward
+      - DirectDebit
+      - DepositCheck
+      - DepositCash
+      - DepositCreditCard
+      - DepositWireTransfer
+      x-enumDescriptions:
+      - Unspecified (unavailable in French Legal Environment)
+      - Bad debts
+      - Bacs payment
+      - Wire transfer
+      - Invoice
+      - Exchange rate difference
+      - Complimentary
+      - Reseller
+      - Exchange rounding difference
+      - Barter
+      - Commission
+      - Bank charges
+      - Cross settlement
+      - Cash
+      - Credit card – deprecated, only for existing partners
+      - Prepayment
+      - Cheque
+      - Bancontact
+      - iDeal – deprecated, only for existing partners
+      - PayPal – deprecated, only for existing partners
+      - Gift card
+      - Loyalty points
+      - Chèque-Vacances
+      - Online payment – deprecated, only for existing partners
+      - Card check
+      - Payment hub redirection
+      - Voucher
+      - MasterCard – deprecated, only for existing partners
+      - Visa – deprecated, only for existing partners
+      - American Express – deprecated, only for existing partners
+      - Discover – deprecated, only for existing partners
+      - Diners Club – deprecated, only for existing partners
+      - JCB – deprecated, only for existing partners
+      - UnionPay – deprecated, only for existing partners
+      - TWINT
+      - Reka
+      - Loyalty card
+      - POS Dining & Spa Reward
+      - Direct debit
+      - Deposit - check
+      - Deposit - cash
+      - Deposit - credit card – deprecated, only for existing partners
+      - Deposit - wire transfer
+    Promotions:
+      title: Promotions
+      required:
+      - AfterCheckIn
+      - AfterCheckOut
+      - BeforeCheckIn
+      - BeforeCheckOut
+      - DuringCheckOut
+      - DuringStay
+      type: object
+      properties:
+        BeforeCheckIn:
+          type: boolean
+          description: Whether it can be promoted before check-in.
+          example: true
+        AfterCheckIn:
+          type: boolean
+          description: Whether it can be promoted after check-in.
+          example: true
+        DuringStay:
+          type: boolean
+          description: Whether it can be promoted during stay.
+          example: true
+        BeforeCheckOut:
+          type: boolean
+          description: Whether it can be promoted before check-out.
+          example: true
+        AfterCheckOut:
+          type: boolean
+          description: Whether it can be promoted after check-out.
+          example: true
+        DuringCheckOut:
+          type: boolean
+          description: Whether it can be promoted during check-out.
+          example: true
+      additionalProperties: false
+      description: ''
+      x-schema-id: Promotions
+    EnterpriseFilterParameters:
+      title: EnterpriseFilterParameters
+      required:
+      - AccessToken
+      - Client
+      - ClientToken
+      - Limitation
+      type: object
+      properties:
+        ClientToken:
+          minLength: 1
+          type: string
+          description: Token identifying the client application.
+          example: string
+        AccessToken:
+          minLength: 1
+          type: string
+          description: Access token of the client application.
+          example: string
+        Client:
+          minLength: 1
+          type: string
+          description: Name and version of the client application.
+          example: string
+        EnterpriseIds:
+          maxItems: 1000
+          minItems: 1
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Unique identifiers of the [Enterprises](https://mews-systems.gitbook.io/connector-api/operations/#enterprise). If not specified, all enterprises within scope of the Access Token are returned.
+          nullable: true
+        ExternalIdentifiers:
+          maxItems: 1000
+          minItems: 1
+          type: array
+          items:
+            type: string
+          description: Identifiers of the [Enterprise](https://mews-systems.gitbook.io/connector-api/operations/#enterprise) from external system.
+          nullable: true
+        LinkedUtc:
+          title: Time interval
+          allOf:
+          - $ref: '#/components/schemas/TimeFilterInterval'
+          description: Interval in which enterprises were linked.
+          nullable: true
+          x-max-interval-in-months: 3
+          example: string
+        UpdatedUtc:
+          title: Time interval
+          allOf:
+          - $ref: '#/components/schemas/TimeFilterInterval'
+          description: Interval in which enterprises were updated.
+          nullable: true
+          x-max-interval-in-months: 3
+          example: string
+        Limitation:
+          allOf:
+          - $ref: '#/components/schemas/Limitation'
+          description: Limitation on the quantity of data returned.
+          example: string
+      additionalProperties: false
+      x-schema-id: EnterpriseFilterParameters
+    ExchangeRate:
+      title: Exchange rate
+      required:
+      - EnterpriseId
+      - Id
+      - SourceCurrency
+      - TargetCurrency
+      - Value
+      type: object
+      properties:
+        Id:
+          type: string
+          description: Unique identifier of the Exchange Rate.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        EnterpriseId:
+          type: string
+          description: Unique identifier of the [Enterprise](https://mews-systems.gitbook.io/connector-api/operations/configuration/#enterprise) to which the Exchange Rate belongs.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        SourceCurrency:
+          minLength: 1
+          type: string
+          description: ISO-4217 code of the source [Currency](https://mews-systems.gitbook.io/connector-api/operations/currencies/#currency).
+          format: currency
+          example: EUR
+        TargetCurrency:
+          minLength: 1
+          type: string
+          description: ISO-4217 code of the target [Currency](https://mews-systems.gitbook.io/connector-api/operations/currencies/#currency).
+          format: currency
+          example: EUR
+        Value:
+          type: number
+          description: The exchange rate from the source currency to the target currency.
+          format: double
+          example: 100.0
+      additionalProperties: false
+      x-schema-id: ExchangeRate
+    ConnectorApiExceptionResult:
+      title: ConnectorApiExceptionResult
+      type: object
+      properties:
+        Message:
+          type: string
+          nullable: true
+          example: string
+        RequestId:
+          type: string
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Details:
+          nullable: true
+          example: string
+      additionalProperties: false
+      x-schema-id: ConnectorApiExceptionResult
+    LanguageTextResult:
+      title: LanguageTextResult
+      required:
+      - LanguageTexts
+      type: object
+      properties:
+        LanguageTexts:
+          type: array
+          items:
+            $ref: '#/components/schemas/LanguageTexts'
+          description: Texts in the specified languages.
+      additionalProperties: false
+      x-schema-id: LanguageTextResult
+    AccountingConfiguration:
+      title: Accounting configuration
+      required:
+      - EnabledExternalPaymentTypes
+      - Options
+      - SurchargeConfiguration
+      type: object
+      properties:
+        AdditionalTaxIdentifier:
+          maxLength: 50
+          type: string
+          description: Organization number.
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        CompanyName:
+          maxLength: 100
+          type: string
+          description: Legal name of the company.
+          nullable: true
+          example: Example Name
+        BankAccountNumber:
+          maxLength: 50
+          type: string
+          description: Bank account number.
+          nullable: true
+          example: '1001'
+        BankName:
+          maxLength: 100
+          type: string
+          description: Name of the bank.
+          nullable: true
+          example: Example Name
+        Iban:
+          maxLength: 40
+          type: string
+          description: International Bank Account Number.
+          nullable: true
+          example: string
+        Bic:
+          maxLength: 11
+          type: string
+          description: Business Identification Code.
+          nullable: true
+          example: string
+        SurchargeConfiguration:
+          title: Surcharging fees configuration
+          allOf:
+          - $ref: '#/components/schemas/SurchargeConfiguration'
+          description: Configuration for surcharging fees.
+          example: string
+        EnabledExternalPaymentTypes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExternalPaymentTypeEnum'
+          description: External payment types that are enabled for the enterprise and can be used in `payments/addExternal`.
+        Options:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccountingConfigurationOptionEnum'
+          description: Accounting configuration options.
+      additionalProperties: false
+      x-schema-id: AccountingConfiguration
+    Language:
+      title: Language
+      required:
+      - Code
+      - EnglishName
+      - LocalName
+      type: object
+      properties:
+        Code:
+          minLength: 1
+          type: string
+          description: Language-culture code of the language.
+          example: string
+        FallbackLanguageCode:
+          type: string
+          description: Language-culture code of the fallback language.
+          nullable: true
+          example: string
+        EnglishName:
+          minLength: 1
+          type: string
+          description: English name of the language.
+          example: Example Name
+        LocalName:
+          minLength: 1
+          type: string
+          description: Local name of the language.
+          example: Example Name
+      additionalProperties: false
+      x-schema-id: Language
+    OldAddress:
+      title: Address
+      type: object
+      properties:
+        Id:
+          type: string
+          description: Unique identifier of the address.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Line1:
+          type: string
+          description: First line of the address.
+          nullable: true
+          example: string
+        Line2:
+          type: string
+          description: Second line of the address.
+          nullable: true
+          example: string
+        City:
+          type: string
+          description: The city.
+          nullable: true
+          example: string
+        PostalCode:
+          type: string
+          description: Postal code.
+          nullable: true
+          example: string
+        CountryCode:
+          type: string
+          description: ISO 3166-1 code of the `Country`.
+          nullable: true
+          example: string
+        CountrySubdivisionCode:
+          type: string
+          description: ISO 3166-2 code of the administrative division, e.g. `DE-BW`.
+          nullable: true
+          example: string
+        Latitude:
+          type: number
+          description: The latitude.
+          format: double
+          nullable: true
+          example: 100.0
+        Longitude:
+          type: number
+          description: The longitude.
+          format: double
+          nullable: true
+          example: 100.0
+      additionalProperties: false
+      description: ''
+      x-schema-id: OldAddress
+    ExchangeRateResult:
+      title: ExchangeRateResult
+      required:
+      - ExchangeRates
+      type: object
+      properties:
+        ExchangeRates:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExchangeRate'
+          description: The available exchange rates.
+      additionalProperties: false
+      x-schema-id: ExchangeRateResult
+    Configuration:
+      title: Configuration
+      required:
+      - Enterprise
+      - NowUtc
+      type: object
+      properties:
+        NowUtc:
+          minLength: 1
+          type: string
+          description: Current server date and time in UTC timezone in ISO 8601 format.
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+        Enterprise:
+          title: Enterprise
+          allOf:
+          - $ref: '#/components/schemas/Enterprise'
+          description: The enterprise (e.g. hotel, hostel) associated with the access token.
+          example: string
+        Service:
+          allOf:
+          - $ref: '#/components/schemas/Service'
+          description: The reservable service (e.g. accommodation, parking) associated with the access token of the service scoped integration.
+          nullable: true
+          example: string
+        PaymentCardStorage:
+          title: Payment card storage
+          allOf:
+          - $ref: '#/components/schemas/PaymentCardStorage'
+          description: Contains information about payment card storage.
+          nullable: true
+          example: string
+        IsIdentityDocumentNumberRequired:
+          type: boolean
+          description: Whether the identity documents for this enterprise include the value of identity document number as required by the legal environment. When `false`, the number is not required, and an empty string can be used in write operations. In read operations, an empty string is returned when an empty string was provided for the number.
+          example: true
+      additionalProperties: false
+      x-schema-id: Configuration
+    TimeUnitPeriodEnum:
+      title: Time unit period
+      enum:
+      - Day
+      - Month
+      - Hour
+      type: string
+      description: '
+
+
+        Day
+
+
+        Month
+
+
+        Hour'
+      x-enumNames:
+      - Day
+      - Month
+      - Hour
+      x-enumDescriptions:
+      - ''
+      - ''
+      - ''
+    CurrencyAcceptanceFilterParameters:
+      title: CurrencyAcceptanceFilterParameters
+      required:
+      - AccessToken
+      - Client
+      - ClientToken
+      type: object
+      properties:
+        ClientToken:
+          minLength: 1
+          type: string
+          description: Token identifying the client application.
+          example: string
+        AccessToken:
+          minLength: 1
+          type: string
+          description: Access token of the client application.
+          example: string
+        Client:
+          minLength: 1
+          type: string
+          description: Name and version of the client application.
+          example: string
+        Ids:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Unique identifiers of the Exchange Rates. If not specified, the operation returns all exchange rates.
+          nullable: true
+        EnterpriseIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Unique identifiers of the [Enterprises](https://mews-systems.gitbook.io/connector-api/operations/configuration/#enterprise). If not specified, the operation returns the exchange rates for all enterprises within scope of the Access Token.
+          nullable: true
+      additionalProperties: false
+      x-schema-id: CurrencyAcceptanceFilterParameters
+    Limitation:
+      title: Limitation
+      required:
+      - Count
+      type: object
+      properties:
+        Count:
+          type: integer
+          format: int32
+          example: 1
+        Cursor:
+          type: string
+          format: uuid
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      additionalProperties: false
+      description: Limitation on the quantity of data returned.
+      x-schema-id: Limitation
+  securitySchemes:
+    MewsClientToken:
+      type: apiKey
+      in: header
+      name: ClientToken
+      description: Mews authentication is performed by supplying ClientToken, AccessToken and Client as fields in the JSON request body (not as HTTP headers). This securityScheme is a tooling-compatible representation of the ClientToken credential. ClientToken is unique to your application and identifies the API client.
+    MewsAccessToken:
+      type: apiKey
+      in: header
+      name: AccessToken
+      description: Tooling-compatible representation of the AccessToken credential, which is supplied in the JSON request body. AccessToken is unique to the connection with a property (enterprise) and identifies the property or properties whose data and services you can access. Portfolio Access Tokens enable multi-property access with a single token.
+servers:
+- url: https://api.mews.com
+  description: Production
+- url: https://api.mews-demo.com
+  description: Demo / sandbox
+security:
+- MewsClientToken: []
+  MewsAccessToken: []
+tags:
+- name: Configuration
+- name: Countries
+- name: Currencies
+- name: Departments
+- name: Enterprises
+- name: Exchange rates
+- name: Languages

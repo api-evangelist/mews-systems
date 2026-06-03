@@ -1,0 +1,372 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Mews Connector API — Enterprise Configuration
+  description: 'Connector API — Enterprise Configuration. 8 operations. Lead operation: Get Configuration. Self-contained Naftiko capability covering one Mews business surface.'
+  tags:
+  - Mews
+  - Connector
+  - Enterprise Configuration
+  created: '2026-06-02'
+  modified: '2026-06-02'
+binds:
+- namespace: env
+  keys:
+    MEWS_ACCESS_TOKEN: MEWS_ACCESS_TOKEN
+capability:
+  consumes:
+  - type: http
+    namespace: connector-configuration
+    baseUri: https://api.mews.com/api/connector/v1
+    description: Mews Connector API — Enterprise Configuration. Mews authentication (Client, ClientToken, AccessToken) is supplied in each JSON request body.
+    authentication:
+      type: bearer
+      token: '{{env.MEWS_ACCESS_TOKEN}}'
+    resources:
+    - name: configuration-get
+      path: /configuration/get
+      operations:
+      - name: configuration_get
+        method: POST
+        description: Get Configuration
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: countries-get-all
+      path: /countries/getAll
+      operations:
+      - name: countries_getAll
+        method: POST
+        description: Get All Countries
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: currencies-get-all
+      path: /currencies/getAll
+      operations:
+      - name: currencies_getAll
+        method: POST
+        description: Get All Currencies
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: departments-get-all
+      path: /departments/getAll
+      operations:
+      - name: departments_getAll
+        method: POST
+        description: Get All Departments
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: enterprises-get-all
+      path: /enterprises/getAll
+      operations:
+      - name: enterprises_getAll
+        method: POST
+        description: Get All Enterprises
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: exchange-rates-get-all
+      path: /exchangeRates/getAll
+      operations:
+      - name: exchangeRates_getAll
+        method: POST
+        description: Get All Exchange Rates
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: languages-get-all
+      path: /languages/getAll
+      operations:
+      - name: languages_getAll
+        method: POST
+        description: Get All Languages
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: languages-get-texts
+      path: /languages/getTexts
+      operations:
+      - name: languages_getTexts
+        method: POST
+        description: Get Language Texts
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: connector-configuration-rest
+    port: 8080
+    description: REST adapter for Mews Connector API — Enterprise Configuration. One Spectral-compliant resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/configuration-get
+      name: configuration-get
+      description: REST surface for configuration-get.
+      operations:
+      - method: POST
+        name: configuration_get
+        description: Get Configuration
+        call: connector-configuration.configuration_get
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/countries-get-all
+      name: countries-get-all
+      description: REST surface for countries-get-all.
+      operations:
+      - method: POST
+        name: countries_getAll
+        description: Get All Countries
+        call: connector-configuration.countries_getAll
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/currencies-get-all
+      name: currencies-get-all
+      description: REST surface for currencies-get-all.
+      operations:
+      - method: POST
+        name: currencies_getAll
+        description: Get All Currencies
+        call: connector-configuration.currencies_getAll
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/departments-get-all
+      name: departments-get-all
+      description: REST surface for departments-get-all.
+      operations:
+      - method: POST
+        name: departments_getAll
+        description: Get All Departments
+        call: connector-configuration.departments_getAll
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/enterprises-get-all
+      name: enterprises-get-all
+      description: REST surface for enterprises-get-all.
+      operations:
+      - method: POST
+        name: enterprises_getAll
+        description: Get All Enterprises
+        call: connector-configuration.enterprises_getAll
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/exchange-rates-get-all
+      name: exchange-rates-get-all
+      description: REST surface for exchange-rates-get-all.
+      operations:
+      - method: POST
+        name: exchangeRates_getAll
+        description: Get All Exchange Rates
+        call: connector-configuration.exchangeRates_getAll
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/languages-get-all
+      name: languages-get-all
+      description: REST surface for languages-get-all.
+      operations:
+      - method: POST
+        name: languages_getAll
+        description: Get All Languages
+        call: connector-configuration.languages_getAll
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/languages-get-texts
+      name: languages-get-texts
+      description: REST surface for languages-get-texts.
+      operations:
+      - method: POST
+        name: languages_getTexts
+        description: Get Language Texts
+        call: connector-configuration.languages_getTexts
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: connector-configuration-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Mews Connector API — Enterprise Configuration. One verb-noun tool per consumed operation, routed inline through this capability's consumes block.
+    tools:
+    - name: get-configuration
+      description: Get Configuration
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-configuration.configuration_get
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-countries
+      description: Get All Countries
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-configuration.countries_getAll
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-currencies
+      description: Get All Currencies
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-configuration.currencies_getAll
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-departments
+      description: Get All Departments
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-configuration.departments_getAll
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-enterprises
+      description: Get All Enterprises
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-configuration.enterprises_getAll
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-exchange-rates
+      description: Get All Exchange Rates
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-configuration.exchangeRates_getAll
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-languages
+      description: Get All Languages
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-configuration.languages_getAll
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-language-texts
+      description: Get Language Texts
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-configuration.languages_getTexts
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

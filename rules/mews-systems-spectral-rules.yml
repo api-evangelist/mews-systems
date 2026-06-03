@@ -1,0 +1,300 @@
+# Mews API Spectral Ruleset
+# Enforces the conventions observed across the Mews Connector and Booking Engine (Distributor)
+# OpenAPI specifications: POST-only RPC-style operations, camelCase resource/action paths,
+# PascalCase schema properties, Title Case tags, body-based ClientToken/AccessToken auth.
+#
+# Usage: spectral lint openapi/*.yml --ruleset rules/mews-systems-spectral-rules.yml
+extends: []
+rules:
+
+  # ── INFO / METADATA ────────────────────────────────────────────────
+  info-title-mews-prefix:
+    description: API title should identify Mews.
+    message: "info.title should start with 'Mews'."
+    severity: warn
+    given: $.info
+    then:
+      field: title
+      function: pattern
+      functionOptions:
+        match: "^Mews"
+  info-description-required:
+    description: A meaningful info.description is required.
+    severity: warn
+    given: $.info
+    then:
+      field: description
+      function: truthy
+  info-description-min-length:
+    description: info.description should be reasonably descriptive.
+    severity: info
+    given: $.info.description
+    then:
+      function: length
+      functionOptions:
+        min: 40
+  info-version-required:
+    description: info.version is required.
+    severity: error
+    given: $.info
+    then:
+      field: version
+      function: truthy
+  info-contact-required:
+    description: A contact block should be present.
+    severity: info
+    given: $.info
+    then:
+      field: contact
+      function: truthy
+
+  # ── OPENAPI VERSION ────────────────────────────────────────────────
+  openapi-version-3:
+    description: Specs must be OpenAPI 3.0.x.
+    message: "Use OpenAPI 3.0.x (Mews publishes 3.0.4)."
+    severity: error
+    given: $
+    then:
+      field: openapi
+      function: pattern
+      functionOptions:
+        match: "^3\\.0\\."
+
+  # ── SERVERS ────────────────────────────────────────────────────────
+  servers-defined:
+    description: At least one server must be defined.
+    severity: error
+    given: $
+    then:
+      field: servers
+      function: truthy
+  servers-https:
+    description: Server URLs must use HTTPS.
+    severity: error
+    given: $.servers[*]
+    then:
+      field: url
+      function: pattern
+      functionOptions:
+        match: "^https://"
+  servers-mews-host:
+    description: Production server should be the Mews API host.
+    severity: info
+    given: $.servers[*]
+    then:
+      field: url
+      function: pattern
+      functionOptions:
+        match: "mews(-demo)?\\.com"
+
+  # ── PATHS — NAMING CONVENTIONS ─────────────────────────────────────
+  paths-no-trailing-slash:
+    description: Paths must not end with a trailing slash.
+    severity: warn
+    given: $.paths[*]~
+    then:
+      function: pattern
+      functionOptions:
+        notMatch: ".+/$"
+  paths-versioned:
+    description: Mews paths carry an API version segment (/v1/).
+    message: "Path should include a version segment such as /v1/."
+    severity: info
+    given: $.paths[*]~
+    then:
+      function: pattern
+      functionOptions:
+        match: "/v\\d+/"
+  paths-camelcase-actions:
+    description: Mews uses camelCase resource and RPC-style action segments (e.g. /accountNotes/getAll).
+    message: "Path segments should be camelCase resource/action names."
+    severity: info
+    given: $.paths[*]~
+    then:
+      function: pattern
+      functionOptions:
+        match: "^/[a-z0-9/{}.-]*[a-zA-Z0-9/{}.-]*$"
+
+  # ── OPERATIONS ─────────────────────────────────────────────────────
+  operation-post-only:
+    description: Mews APIs are RPC-style and POST-only. Non-POST methods are unexpected.
+    message: "Mews operations should use POST."
+    severity: warn
+    given: $.paths[*]
+    then:
+      field: post
+      function: truthy
+  operation-operationid-required:
+    description: Every operation must have an operationId.
+    severity: error
+    given: $.paths[*][post,get,put,delete,patch]
+    then:
+      field: operationId
+      function: truthy
+  operation-operationid-pattern:
+    description: operationId follows the Mews resource_action convention (e.g. accountNotes_getAll).
+    severity: info
+    given: $.paths[*][post,get,put,delete,patch]
+    then:
+      field: operationId
+      function: pattern
+      functionOptions:
+        match: "^[a-zA-Z][a-zA-Z0-9]*_[a-zA-Z][a-zA-Z0-9]*$"
+  operation-summary-required:
+    description: Every operation must have a summary.
+    severity: warn
+    given: $.paths[*][post,get,put,delete,patch]
+    then:
+      field: summary
+      function: truthy
+  operation-summary-mews-prefix:
+    description: Operation summaries are prefixed with 'Mews' and Title Cased.
+    severity: info
+    given: $.paths[*][post,get,put,delete,patch]
+    then:
+      field: summary
+      function: pattern
+      functionOptions:
+        match: "^Mews "
+  operation-description-required:
+    description: Every operation must have a description.
+    severity: warn
+    given: $.paths[*][post,get,put,delete,patch]
+    then:
+      field: description
+      function: truthy
+  operation-tags-required:
+    description: Every operation must have at least one tag.
+    severity: warn
+    given: $.paths[*][post,get,put,delete,patch]
+    then:
+      field: tags
+      function: truthy
+  operation-microcks-extension:
+    description: Operations should carry x-microcks-operation for mock-server compatibility.
+    severity: info
+    given: $.paths[*][post,get,put,delete,patch]
+    then:
+      field: x-microcks-operation
+      function: truthy
+
+  # ── TAGS ───────────────────────────────────────────────────────────
+  tag-title-case:
+    description: Tags use Title Case (e.g. "Account Notes", "Reservation Groups").
+    severity: info
+    given: $.tags[*]
+    then:
+      field: name
+      function: pattern
+      functionOptions:
+        match: "^[A-Z][A-Za-z0-9]*( [A-Z][A-Za-z0-9]*)*$"
+
+  # ── REQUEST BODIES ─────────────────────────────────────────────────
+  request-body-on-post:
+    description: POST operations should declare a request body (Mews passes all input in the body).
+    severity: warn
+    given: $.paths[*].post
+    then:
+      field: requestBody
+      function: truthy
+  request-body-json:
+    description: Request bodies must offer application/json.
+    severity: warn
+    given: $.paths[*][post,put,patch].requestBody.content
+    then:
+      field: application/json
+      function: truthy
+
+  # ── RESPONSES ──────────────────────────────────────────────────────
+  response-200-defined:
+    description: Operations must define a 200 response.
+    severity: warn
+    given: $.paths[*][post,get,put,delete,patch].responses
+    then:
+      field: "200"
+      function: defined
+  response-401-defined:
+    description: Operations should define a 401 (authentication) response.
+    severity: info
+    given: $.paths[*][post,get,put,delete,patch].responses
+    then:
+      field: "401"
+      function: defined
+  response-429-defined:
+    description: Operations should define a 429 response (Mews enforces 200 requests / 30s per AccessToken).
+    severity: info
+    given: $.paths[*][post,get,put,delete,patch].responses
+    then:
+      field: "429"
+      function: defined
+  response-json-content:
+    description: Success responses should return application/json.
+    severity: info
+    given: $.paths[*][post,get,put,delete,patch].responses.200.content
+    then:
+      field: application/json
+      function: truthy
+
+  # ── SCHEMAS — PROPERTY NAMING ──────────────────────────────────────
+  schema-property-pascalcase:
+    description: Mews schema properties are PascalCase (e.g. AccountId, ServiceOrders).
+    message: "Schema property names should be PascalCase."
+    severity: info
+    given: $.components.schemas[*].properties[*]~
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z][A-Za-z0-9]*$"
+  schema-type-defined:
+    description: Top-level component schemas should declare a type or composition keyword.
+    severity: info
+    given: $.components.schemas[*]
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          anyOf:
+            - required: [type]
+            - required: [allOf]
+            - required: [oneOf]
+            - required: [anyOf]
+            - required: [$ref]
+            - required: [enum]
+
+  # ── SECURITY ───────────────────────────────────────────────────────
+  security-schemes-defined:
+    description: components.securitySchemes must define the Mews token credentials.
+    severity: warn
+    given: $.components
+    then:
+      field: securitySchemes
+      function: truthy
+  security-global-defined:
+    description: A global security requirement should be declared.
+    severity: info
+    given: $
+    then:
+      field: security
+      function: truthy
+  security-mews-tokens:
+    description: Mews auth uses ClientToken and AccessToken (supplied in the request body).
+    severity: info
+    given: $.components.securitySchemes
+    then:
+      field: MewsClientToken
+      function: truthy
+
+  # ── GENERAL QUALITY ────────────────────────────────────────────────
+  no-empty-descriptions:
+    description: Descriptions must not be empty when present.
+    severity: warn
+    given: $..description
+    then:
+      function: truthy
+  deprecation-documented:
+    description: Deprecated operations should be flagged with deprecated:true.
+    severity: info
+    given: $.paths[*][post,get,put,delete,patch]
+    then:
+      field: deprecated
+      function: defined

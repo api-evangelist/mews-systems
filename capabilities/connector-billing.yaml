@@ -1,0 +1,1044 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Mews Connector API — Bills and Accounting
+  description: 'Connector API — Bills and Accounting. 24 operations. Lead operation: Get All Accounting Categories. Self-contained Naftiko capability covering one Mews business surface.'
+  tags:
+  - Mews
+  - Connector
+  - Bills and Accounting
+  created: '2026-06-02'
+  modified: '2026-06-02'
+binds:
+- namespace: env
+  keys:
+    MEWS_ACCESS_TOKEN: MEWS_ACCESS_TOKEN
+capability:
+  consumes:
+  - type: http
+    namespace: connector-billing
+    baseUri: https://api.mews.com/api/connector/v1
+    description: Mews Connector API — Bills and Accounting. Mews authentication (Client, ClientToken, AccessToken) is supplied in each JSON request body.
+    authentication:
+      type: bearer
+      token: '{{env.MEWS_ACCESS_TOKEN}}'
+    resources:
+    - name: accounting-categories-get-all
+      path: /accountingCategories/getAll
+      operations:
+      - name: accountingCategories_getAll
+        method: POST
+        description: Get All Accounting Categories
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: accounting-items-update
+      path: /accountingItems/update
+      operations:
+      - name: accountingItems_update
+        method: POST
+        description: Update Accounting Items
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: accounting-items-get-all
+      path: /accountingItems/getAll
+      operations:
+      - name: accountingItems_getAll
+        method: POST
+        description: Get All Accounting Items
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: billing-automations-get-all
+      path: /billingAutomations/getAll
+      operations:
+      - name: billingAutomations_getAll
+        method: POST
+        description: Get All Billing Automations
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: billing-automations-add
+      path: /billingAutomations/add
+      operations:
+      - name: billingAutomations_add
+        method: POST
+        description: Add Billing Automations
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: billing-automations-update
+      path: /billingAutomations/update
+      operations:
+      - name: billingAutomations_update
+        method: POST
+        description: Update Billing Automations
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: billing-automations-update-assignments
+      path: /billingAutomations/updateAssignments
+      operations:
+      - name: billingAutomations_updateAssignments
+        method: POST
+        description: Update Billing Automations Assignments
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: billing-automations-delete
+      path: /billingAutomations/delete
+      operations:
+      - name: billingAutomations_delete
+        method: POST
+        description: Delete Billing Automations
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: bills-update
+      path: /bills/update
+      operations:
+      - name: bills_update
+        method: POST
+        description: Update Bills
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: bills-get-all
+      path: /bills/getAll
+      operations:
+      - name: bills_getAll
+        method: POST
+        description: Get All Bills
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: bills-get-pdf
+      path: /bills/getPdf
+      operations:
+      - name: bills_getPdf
+        method: POST
+        description: Get Bill PDF
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: bills-add
+      path: /bills/add
+      operations:
+      - name: bills_add
+        method: POST
+        description: Add Bill
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: bills-delete
+      path: /bills/delete
+      operations:
+      - name: bills_delete
+        method: POST
+        description: Delete Bill
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: bills-close
+      path: /bills/close
+      operations:
+      - name: bills_close
+        method: POST
+        description: Close Bill
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: counters-get-all
+      path: /counters/getAll
+      operations:
+      - name: counters_getAll
+        method: POST
+        description: Get All Counters
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: exports-add
+      path: /exports/add
+      operations:
+      - name: exports_add
+        method: POST
+        description: Add Export
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: exports-get-all
+      path: /exports/getAll
+      operations:
+      - name: exports_getAll
+        method: POST
+        description: Get All Exports
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: ledger-balances-get-all
+      path: /ledgerBalances/getAll
+      operations:
+      - name: ledgerBalances_getAll
+        method: POST
+        description: Get All Ledger Balances
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: order-items-cancel
+      path: /orderItems/cancel
+      operations:
+      - name: orderItems_cancel
+        method: POST
+        description: Cancel Order Items
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: order-items-get-all
+      path: /orderItems/getAll
+      operations:
+      - name: orderItems_getAll
+        method: POST
+        description: Get All Order Items
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: orders-add
+      path: /orders/add
+      operations:
+      - name: orders_add
+        method: POST
+        description: Add Order
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: billing-automation-payment-plans-add
+      path: /billingAutomationPaymentPlans/add
+      operations:
+      - name: billingAutomationPaymentPlans_add
+        method: POST
+        description: Add Billing Automation Payment Plan
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: tax-environments-get-all
+      path: /taxEnvironments/getAll
+      operations:
+      - name: taxEnvironments_getAll
+        method: POST
+        description: Get All Tax Environments
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: taxations-get-all
+      path: /taxations/getAll
+      operations:
+      - name: taxations_getAll
+        method: POST
+        description: Get All Taxations
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: connector-billing-rest
+    port: 8080
+    description: REST adapter for Mews Connector API — Bills and Accounting. One Spectral-compliant resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/accounting-categories-get-all
+      name: accounting-categories-get-all
+      description: REST surface for accounting-categories-get-all.
+      operations:
+      - method: POST
+        name: accountingCategories_getAll
+        description: Get All Accounting Categories
+        call: connector-billing.accountingCategories_getAll
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/accounting-items-update
+      name: accounting-items-update
+      description: REST surface for accounting-items-update.
+      operations:
+      - method: POST
+        name: accountingItems_update
+        description: Update Accounting Items
+        call: connector-billing.accountingItems_update
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/accounting-items-get-all
+      name: accounting-items-get-all
+      description: REST surface for accounting-items-get-all.
+      operations:
+      - method: POST
+        name: accountingItems_getAll
+        description: Get All Accounting Items
+        call: connector-billing.accountingItems_getAll
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/billing-automations-get-all
+      name: billing-automations-get-all
+      description: REST surface for billing-automations-get-all.
+      operations:
+      - method: POST
+        name: billingAutomations_getAll
+        description: Get All Billing Automations
+        call: connector-billing.billingAutomations_getAll
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/billing-automations-add
+      name: billing-automations-add
+      description: REST surface for billing-automations-add.
+      operations:
+      - method: POST
+        name: billingAutomations_add
+        description: Add Billing Automations
+        call: connector-billing.billingAutomations_add
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/billing-automations-update
+      name: billing-automations-update
+      description: REST surface for billing-automations-update.
+      operations:
+      - method: POST
+        name: billingAutomations_update
+        description: Update Billing Automations
+        call: connector-billing.billingAutomations_update
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/billing-automations-update-assignments
+      name: billing-automations-update-assignments
+      description: REST surface for billing-automations-update-assignments.
+      operations:
+      - method: POST
+        name: billingAutomations_updateAssignments
+        description: Update Billing Automations Assignments
+        call: connector-billing.billingAutomations_updateAssignments
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/billing-automations-delete
+      name: billing-automations-delete
+      description: REST surface for billing-automations-delete.
+      operations:
+      - method: POST
+        name: billingAutomations_delete
+        description: Delete Billing Automations
+        call: connector-billing.billingAutomations_delete
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/bills-update
+      name: bills-update
+      description: REST surface for bills-update.
+      operations:
+      - method: POST
+        name: bills_update
+        description: Update Bills
+        call: connector-billing.bills_update
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/bills-get-all
+      name: bills-get-all
+      description: REST surface for bills-get-all.
+      operations:
+      - method: POST
+        name: bills_getAll
+        description: Get All Bills
+        call: connector-billing.bills_getAll
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/bills-get-pdf
+      name: bills-get-pdf
+      description: REST surface for bills-get-pdf.
+      operations:
+      - method: POST
+        name: bills_getPdf
+        description: Get Bill PDF
+        call: connector-billing.bills_getPdf
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/bills-add
+      name: bills-add
+      description: REST surface for bills-add.
+      operations:
+      - method: POST
+        name: bills_add
+        description: Add Bill
+        call: connector-billing.bills_add
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/bills-delete
+      name: bills-delete
+      description: REST surface for bills-delete.
+      operations:
+      - method: POST
+        name: bills_delete
+        description: Delete Bill
+        call: connector-billing.bills_delete
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/bills-close
+      name: bills-close
+      description: REST surface for bills-close.
+      operations:
+      - method: POST
+        name: bills_close
+        description: Close Bill
+        call: connector-billing.bills_close
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/counters-get-all
+      name: counters-get-all
+      description: REST surface for counters-get-all.
+      operations:
+      - method: POST
+        name: counters_getAll
+        description: Get All Counters
+        call: connector-billing.counters_getAll
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/exports-add
+      name: exports-add
+      description: REST surface for exports-add.
+      operations:
+      - method: POST
+        name: exports_add
+        description: Add Export
+        call: connector-billing.exports_add
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/exports-get-all
+      name: exports-get-all
+      description: REST surface for exports-get-all.
+      operations:
+      - method: POST
+        name: exports_getAll
+        description: Get All Exports
+        call: connector-billing.exports_getAll
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/ledger-balances-get-all
+      name: ledger-balances-get-all
+      description: REST surface for ledger-balances-get-all.
+      operations:
+      - method: POST
+        name: ledgerBalances_getAll
+        description: Get All Ledger Balances
+        call: connector-billing.ledgerBalances_getAll
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/order-items-cancel
+      name: order-items-cancel
+      description: REST surface for order-items-cancel.
+      operations:
+      - method: POST
+        name: orderItems_cancel
+        description: Cancel Order Items
+        call: connector-billing.orderItems_cancel
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/order-items-get-all
+      name: order-items-get-all
+      description: REST surface for order-items-get-all.
+      operations:
+      - method: POST
+        name: orderItems_getAll
+        description: Get All Order Items
+        call: connector-billing.orderItems_getAll
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/orders-add
+      name: orders-add
+      description: REST surface for orders-add.
+      operations:
+      - method: POST
+        name: orders_add
+        description: Add Order
+        call: connector-billing.orders_add
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/billing-automation-payment-plans-add
+      name: billing-automation-payment-plans-add
+      description: REST surface for billing-automation-payment-plans-add.
+      operations:
+      - method: POST
+        name: billingAutomationPaymentPlans_add
+        description: Add Billing Automation Payment Plan
+        call: connector-billing.billingAutomationPaymentPlans_add
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/tax-environments-get-all
+      name: tax-environments-get-all
+      description: REST surface for tax-environments-get-all.
+      operations:
+      - method: POST
+        name: taxEnvironments_getAll
+        description: Get All Tax Environments
+        call: connector-billing.taxEnvironments_getAll
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/taxations-get-all
+      name: taxations-get-all
+      description: REST surface for taxations-get-all.
+      operations:
+      - method: POST
+        name: taxations_getAll
+        description: Get All Taxations
+        call: connector-billing.taxations_getAll
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: connector-billing-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Mews Connector API — Bills and Accounting. One verb-noun tool per consumed operation, routed inline through this capability's consumes block.
+    tools:
+    - name: get-accounting-categories
+      description: Get All Accounting Categories
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-billing.accountingCategories_getAll
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-accounting-items
+      description: Update Accounting Items
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: connector-billing.accountingItems_update
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-accounting-items
+      description: Get All Accounting Items
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-billing.accountingItems_getAll
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-billing-automations
+      description: Get All Billing Automations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-billing.billingAutomations_getAll
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: add-billing-automations
+      description: Add Billing Automations
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: connector-billing.billingAutomations_add
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-billing-automations
+      description: Update Billing Automations
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: connector-billing.billingAutomations_update
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-billing-automations-assignments
+      description: Update Billing Automations Assignments
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: connector-billing.billingAutomations_updateAssignments
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-billing-automations
+      description: Delete Billing Automations
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: connector-billing.billingAutomations_delete
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-bills
+      description: Update Bills
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: connector-billing.bills_update
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-bills
+      description: Get All Bills
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-billing.bills_getAll
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-bill-pdf
+      description: Get Bill PDF
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-billing.bills_getPdf
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: add-bill
+      description: Add Bill
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: connector-billing.bills_add
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-bill
+      description: Delete Bill
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: connector-billing.bills_delete
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: close-bill
+      description: Close Bill
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: connector-billing.bills_close
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-counters
+      description: Get All Counters
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-billing.counters_getAll
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: add-export
+      description: Add Export
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: connector-billing.exports_add
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-exports
+      description: Get All Exports
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-billing.exports_getAll
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-ledger-balances
+      description: Get All Ledger Balances
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-billing.ledgerBalances_getAll
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: cancel-order-items
+      description: Cancel Order Items
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: connector-billing.orderItems_cancel
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-order-items
+      description: Get All Order Items
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-billing.orderItems_getAll
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: add-order
+      description: Add Order
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: connector-billing.orders_add
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: add-billing-automation-payment-plan
+      description: Add Billing Automation Payment Plan
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: connector-billing.billingAutomationPaymentPlans_add
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-tax-environments
+      description: Get All Tax Environments
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-billing.taxEnvironments_getAll
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-taxations
+      description: Get All Taxations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-billing.taxations_getAll
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,59 @@
+specification: API Commons Rate Limits
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits
+provider: Mews
+providerId: mews-systems
+created: '2026-06-02'
+modified: '2026-06-02'
+reconciled: true
+tags:
+- Rate Limiting
+- Hospitality
+- Property Management
+- PMS
+description: >-
+  The Mews Connector API enforces rate limiting scoped per AccessToken (per connected property/enterprise),
+  not per ClientToken or per IP. Both the demo and production environments allow up to 200 requests per
+  AccessToken within a rolling 30-second window. The limiter uses a sliding window anchored to the first
+  request in a burst rather than fixed clock buckets. When the limit is exceeded the API returns 429 Too Many
+  Requests with a Retry-After header indicating how long to wait; Mews advises client-side rate limiting and
+  exponential backoff. In rare cases where a request places heavy demand on the system the API may return
+  408 Request Timeout. Mews notes the request count and time window may change without prior notice.
+sources:
+- https://docs.mews.com/connector-api/guidelines/environments
+- https://docs.mews.com/connector-api/guidelines/requests
+- https://docs.mews.com/connector-api/guidelines/best-practices
+headers:
+  retryAfter: Retry-After
+responseCodes:
+  throttled: 429
+  requestTimeout: 408
+limits:
+- name: Connector API requests (production)
+  scope: account
+  metric: requests_per_second
+  limit: 200
+  timeFrame: second
+  notes: 200 requests per AccessToken within any rolling 30-second window (sliding window anchored to the first request in a burst).
+- name: Connector API requests (demo / sandbox)
+  scope: account
+  metric: requests_per_second
+  limit: 200
+  timeFrame: second
+  notes: Demo environment (api.mews-demo.com) enforces the same 200 requests per AccessToken per 30 seconds as production.
+- name: Booking Engine (Distributor) API requests
+  scope: account
+  metric: varies
+  limit: 'shares the Mews API platform limiter; expect AccessToken-scoped throttling with 429 + Retry-After'
+  notes: Front-end client-facing API on the same api.mews.com platform; treat the 200-per-30s AccessToken budget as the baseline.
+policies:
+- name: Sliding window
+  description: The 30-second window is anchored to the first request in a burst, not to clock boundaries, so spreading requests evenly avoids tripping the limiter.
+- name: Per-AccessToken scope
+  description: Limits are bound to the AccessToken (the connection to a specific property/enterprise). Multi-property integrations using Portfolio Access Tokens should account for shared budget across that token.
+- name: Retry-After backoff
+  description: On 429, read the Retry-After response header and wait the indicated duration before retrying; fall back to exponential backoff if the header is absent.
+- name: Client-side rate limiting
+  description: Mews recommends implementing client-side rate limiting so the integration does not keep sending requests after receiving a 429.
+- name: Subject to change
+  description: Mews states the number of requests and the time window can change without prior notice; integrations must handle 429 gracefully rather than hard-coding assumptions.

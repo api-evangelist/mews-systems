@@ -1,0 +1,1044 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Mews Connector API — Services and Products
+  description: 'Connector API — Services and Products. 24 operations. Lead operation: Get All Product Categories. Self-contained Naftiko capability covering one Mews business surface.'
+  tags:
+  - Mews
+  - Connector
+  - Services and Products
+  created: '2026-06-02'
+  modified: '2026-06-02'
+binds:
+- namespace: env
+  keys:
+    MEWS_ACCESS_TOKEN: MEWS_ACCESS_TOKEN
+capability:
+  consumes:
+  - type: http
+    namespace: connector-services
+    baseUri: https://api.mews.com/api/connector/v1
+    description: Mews Connector API — Services and Products. Mews authentication (Client, ClientToken, AccessToken) is supplied in each JSON request body.
+    authentication:
+      type: bearer
+      token: '{{env.MEWS_ACCESS_TOKEN}}'
+    resources:
+    - name: product-categories-get-all
+      path: /productCategories/getAll
+      operations:
+      - name: productCategories_getAll
+        method: POST
+        description: Get All Product Categories
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: product-service-orders-get-all
+      path: /productServiceOrders/getAll
+      operations:
+      - name: productServiceOrders_getAll
+        method: POST
+        description: Get All Product Service Orders
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: products-get-pricing
+      path: /products/getPricing
+      operations:
+      - name: products_getPricing
+        method: POST
+        description: Get Product Pricing
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: products-update-price
+      path: /products/updatePrice
+      operations:
+      - name: products_updatePrice
+        method: POST
+        description: Update Product Pricing
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: products-get-all
+      path: /products/getAll
+      operations:
+      - name: products_getAll
+        method: POST
+        description: Get All Products
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: products-delete
+      path: /products/delete
+      operations:
+      - name: products_delete
+        method: POST
+        description: Delete Products
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: service-order-notes-add
+      path: /serviceOrderNotes/add
+      operations:
+      - name: serviceOrderNotes_add
+        method: POST
+        description: Add Service Order Notes
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: service-order-notes-update
+      path: /serviceOrderNotes/update
+      operations:
+      - name: serviceOrderNotes_update
+        method: POST
+        description: Update Service Order Notes
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: service-order-notes-get-all
+      path: /serviceOrderNotes/getAll
+      operations:
+      - name: serviceOrderNotes_getAll
+        method: POST
+        description: Get All Service Order Notes
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: service-order-notes-delete
+      path: /serviceOrderNotes/delete
+      operations:
+      - name: serviceOrderNotes_delete
+        method: POST
+        description: Delete Service Order Notes
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: service-overbooking-limits-get-all
+      path: /serviceOverbookingLimits/getAll
+      operations:
+      - name: serviceOverbookingLimits_getAll
+        method: POST
+        description: Get All Service Overbooking Limits
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: service-overbooking-limits-set
+      path: /serviceOverbookingLimits/set
+      operations:
+      - name: serviceOverbookingLimits_set
+        method: POST
+        description: Set Service Overbooking Limits
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: service-overbooking-limits-clear
+      path: /serviceOverbookingLimits/clear
+      operations:
+      - name: serviceOverbookingLimits_clear
+        method: POST
+        description: Clear Service Overbooking Limits
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: services-get-all
+      path: /services/getAll
+      operations:
+      - name: services_getAll
+        method: POST
+        description: Get All Services
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: services-update-availability
+      path: /services/updateAvailability
+      operations:
+      - name: services_updateAvailability
+        method: POST
+        description: Update Service Availability
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: services-get-availability
+      path: /services/getAvailability
+      operations:
+      - name: services_getAvailability
+        method: POST
+        description: Get Service Availability
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: services-get-availability-2024-01-22
+      path: /services/getAvailability/2024-01-22
+      operations:
+      - name: services_getAvailability_2024-01-22
+        method: POST
+        description: Get Service Availability (ver 2024-01-22)
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: voucher-codes-add
+      path: /voucherCodes/add
+      operations:
+      - name: voucherCodes_add
+        method: POST
+        description: Add Voucher Codes
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: voucher-codes-delete
+      path: /voucherCodes/delete
+      operations:
+      - name: voucherCodes_delete
+        method: POST
+        description: Delete Voucher Codes
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: voucher-codes-get-all
+      path: /voucherCodes/getAll
+      operations:
+      - name: voucherCodes_getAll
+        method: POST
+        description: Get All Voucher Codes
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: vouchers-get-all
+      path: /vouchers/getAll
+      operations:
+      - name: vouchers_getAll
+        method: POST
+        description: Get All Vouchers
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: vouchers-add
+      path: /vouchers/add
+      operations:
+      - name: vouchers_add
+        method: POST
+        description: Add Vouchers
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: vouchers-update
+      path: /vouchers/update
+      operations:
+      - name: vouchers_update
+        method: POST
+        description: Update Vouchers
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: vouchers-delete
+      path: /vouchers/delete
+      operations:
+      - name: vouchers_delete
+        method: POST
+        description: Delete Vouchers
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: connector-services-rest
+    port: 8080
+    description: REST adapter for Mews Connector API — Services and Products. One Spectral-compliant resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/product-categories-get-all
+      name: product-categories-get-all
+      description: REST surface for product-categories-get-all.
+      operations:
+      - method: POST
+        name: productCategories_getAll
+        description: Get All Product Categories
+        call: connector-services.productCategories_getAll
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/product-service-orders-get-all
+      name: product-service-orders-get-all
+      description: REST surface for product-service-orders-get-all.
+      operations:
+      - method: POST
+        name: productServiceOrders_getAll
+        description: Get All Product Service Orders
+        call: connector-services.productServiceOrders_getAll
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/products-get-pricing
+      name: products-get-pricing
+      description: REST surface for products-get-pricing.
+      operations:
+      - method: POST
+        name: products_getPricing
+        description: Get Product Pricing
+        call: connector-services.products_getPricing
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/products-update-price
+      name: products-update-price
+      description: REST surface for products-update-price.
+      operations:
+      - method: POST
+        name: products_updatePrice
+        description: Update Product Pricing
+        call: connector-services.products_updatePrice
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/products-get-all
+      name: products-get-all
+      description: REST surface for products-get-all.
+      operations:
+      - method: POST
+        name: products_getAll
+        description: Get All Products
+        call: connector-services.products_getAll
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/products-delete
+      name: products-delete
+      description: REST surface for products-delete.
+      operations:
+      - method: POST
+        name: products_delete
+        description: Delete Products
+        call: connector-services.products_delete
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/service-order-notes-add
+      name: service-order-notes-add
+      description: REST surface for service-order-notes-add.
+      operations:
+      - method: POST
+        name: serviceOrderNotes_add
+        description: Add Service Order Notes
+        call: connector-services.serviceOrderNotes_add
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/service-order-notes-update
+      name: service-order-notes-update
+      description: REST surface for service-order-notes-update.
+      operations:
+      - method: POST
+        name: serviceOrderNotes_update
+        description: Update Service Order Notes
+        call: connector-services.serviceOrderNotes_update
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/service-order-notes-get-all
+      name: service-order-notes-get-all
+      description: REST surface for service-order-notes-get-all.
+      operations:
+      - method: POST
+        name: serviceOrderNotes_getAll
+        description: Get All Service Order Notes
+        call: connector-services.serviceOrderNotes_getAll
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/service-order-notes-delete
+      name: service-order-notes-delete
+      description: REST surface for service-order-notes-delete.
+      operations:
+      - method: POST
+        name: serviceOrderNotes_delete
+        description: Delete Service Order Notes
+        call: connector-services.serviceOrderNotes_delete
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/service-overbooking-limits-get-all
+      name: service-overbooking-limits-get-all
+      description: REST surface for service-overbooking-limits-get-all.
+      operations:
+      - method: POST
+        name: serviceOverbookingLimits_getAll
+        description: Get All Service Overbooking Limits
+        call: connector-services.serviceOverbookingLimits_getAll
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/service-overbooking-limits-set
+      name: service-overbooking-limits-set
+      description: REST surface for service-overbooking-limits-set.
+      operations:
+      - method: POST
+        name: serviceOverbookingLimits_set
+        description: Set Service Overbooking Limits
+        call: connector-services.serviceOverbookingLimits_set
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/service-overbooking-limits-clear
+      name: service-overbooking-limits-clear
+      description: REST surface for service-overbooking-limits-clear.
+      operations:
+      - method: POST
+        name: serviceOverbookingLimits_clear
+        description: Clear Service Overbooking Limits
+        call: connector-services.serviceOverbookingLimits_clear
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/services-get-all
+      name: services-get-all
+      description: REST surface for services-get-all.
+      operations:
+      - method: POST
+        name: services_getAll
+        description: Get All Services
+        call: connector-services.services_getAll
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/services-update-availability
+      name: services-update-availability
+      description: REST surface for services-update-availability.
+      operations:
+      - method: POST
+        name: services_updateAvailability
+        description: Update Service Availability
+        call: connector-services.services_updateAvailability
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/services-get-availability
+      name: services-get-availability
+      description: REST surface for services-get-availability.
+      operations:
+      - method: POST
+        name: services_getAvailability
+        description: Get Service Availability
+        call: connector-services.services_getAvailability
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/services-get-availability-2024-01-22
+      name: services-get-availability-2024-01-22
+      description: REST surface for services-get-availability-2024-01-22.
+      operations:
+      - method: POST
+        name: services_getAvailability_2024-01-22
+        description: Get Service Availability (ver 2024-01-22)
+        call: connector-services.services_getAvailability_2024-01-22
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/voucher-codes-add
+      name: voucher-codes-add
+      description: REST surface for voucher-codes-add.
+      operations:
+      - method: POST
+        name: voucherCodes_add
+        description: Add Voucher Codes
+        call: connector-services.voucherCodes_add
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/voucher-codes-delete
+      name: voucher-codes-delete
+      description: REST surface for voucher-codes-delete.
+      operations:
+      - method: POST
+        name: voucherCodes_delete
+        description: Delete Voucher Codes
+        call: connector-services.voucherCodes_delete
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/voucher-codes-get-all
+      name: voucher-codes-get-all
+      description: REST surface for voucher-codes-get-all.
+      operations:
+      - method: POST
+        name: voucherCodes_getAll
+        description: Get All Voucher Codes
+        call: connector-services.voucherCodes_getAll
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/vouchers-get-all
+      name: vouchers-get-all
+      description: REST surface for vouchers-get-all.
+      operations:
+      - method: POST
+        name: vouchers_getAll
+        description: Get All Vouchers
+        call: connector-services.vouchers_getAll
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/vouchers-add
+      name: vouchers-add
+      description: REST surface for vouchers-add.
+      operations:
+      - method: POST
+        name: vouchers_add
+        description: Add Vouchers
+        call: connector-services.vouchers_add
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/vouchers-update
+      name: vouchers-update
+      description: REST surface for vouchers-update.
+      operations:
+      - method: POST
+        name: vouchers_update
+        description: Update Vouchers
+        call: connector-services.vouchers_update
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/vouchers-delete
+      name: vouchers-delete
+      description: REST surface for vouchers-delete.
+      operations:
+      - method: POST
+        name: vouchers_delete
+        description: Delete Vouchers
+        call: connector-services.vouchers_delete
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: connector-services-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Mews Connector API — Services and Products. One verb-noun tool per consumed operation, routed inline through this capability's consumes block.
+    tools:
+    - name: get-product-categories
+      description: Get All Product Categories
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-services.productCategories_getAll
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-product-service-orders
+      description: Get All Product Service Orders
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-services.productServiceOrders_getAll
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-product-pricing
+      description: Get Product Pricing
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-services.products_getPricing
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-product-pricing
+      description: Update Product Pricing
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-services.products_updatePrice
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-products
+      description: Get All Products
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-services.products_getAll
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-products
+      description: Delete Products
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: connector-services.products_delete
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: add-service-order-notes
+      description: Add Service Order Notes
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: connector-services.serviceOrderNotes_add
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-service-order-notes
+      description: Update Service Order Notes
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: connector-services.serviceOrderNotes_update
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-service-order-notes
+      description: Get All Service Order Notes
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-services.serviceOrderNotes_getAll
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-service-order-notes
+      description: Delete Service Order Notes
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: connector-services.serviceOrderNotes_delete
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-service-overbooking-limits
+      description: Get All Service Overbooking Limits
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-services.serviceOverbookingLimits_getAll
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: set-service-overbooking-limits
+      description: Set Service Overbooking Limits
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: connector-services.serviceOverbookingLimits_set
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: clear-service-overbooking-limits
+      description: Clear Service Overbooking Limits
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: connector-services.serviceOverbookingLimits_clear
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-services
+      description: Get All Services
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-services.services_getAll
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-service-availability
+      description: Update Service Availability
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-services.services_updateAvailability
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-service-availability
+      description: Get Service Availability
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-services.services_getAvailability
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-service-availability-ver-2024-01-22
+      description: Get Service Availability (ver 2024-01-22)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-services.services_getAvailability_2024-01-22
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: add-voucher-codes
+      description: Add Voucher Codes
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: connector-services.voucherCodes_add
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-voucher-codes
+      description: Delete Voucher Codes
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: connector-services.voucherCodes_delete
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-voucher-codes
+      description: Get All Voucher Codes
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-services.voucherCodes_getAll
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-vouchers
+      description: Get All Vouchers
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-services.vouchers_getAll
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: add-vouchers
+      description: Add Vouchers
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: connector-services.vouchers_add
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-vouchers
+      description: Update Vouchers
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: connector-services.vouchers_update
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-vouchers
+      description: Delete Vouchers
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: connector-services.vouchers_delete
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,190 @@
+specification: API Commons Plans
+specificationVersion: '0.1'
+schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans
+provider: Mews
+providerId: mews-systems
+created: '2026-06-02'
+modified: '2026-06-02'
+reconciled: true
+tags:
+- Hospitality
+- Property Management
+- PMS
+- Point of Sale
+- Payments
+description: >-
+  Mews prices its hospitality cloud as tiered software subscriptions for properties (Essentials, Advanced,
+  Enterprise) layered with usage-based add-on products (Revenue Management, Point of Sale, bookable services)
+  and integrated payment processing fees. Open API access — the Connector, Channel Manager, and Booking Engine
+  APIs — is bundled into the Enterprise tier, while the developer/partner program itself (sandbox access,
+  certification) is free for approved integration partners; commercial terms for partners are arranged through
+  the Mews Marketplace partnership program. Subscription pricing is quote-based (per-property / per-room) and
+  is not published as fixed numbers on the public pricing page.
+sources:
+- https://www.mews.com/en/pricing
+- https://www.mews.com/en/partners/new-partnerships
+- https://docs.mews.com/getting-started/the-mews-apis
+plans:
+- id: mews-systems-essentials
+  name: Essentials
+  type: subscription
+  description: Entry-level PMS subscription with booking engine, guest portal, payments, and a starter set of marketplace integrations.
+  entries:
+  - label: PMS Subscription
+    name: pms_subscription
+    type: subscription
+    metric: month
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: '1'
+    price: 'custom'
+    userMultiplied: false
+  - label: Marketplace Integrations
+    name: marketplace_integrations
+    type: quota
+    metric: varies
+    limit: 8
+    timeFrame: usage
+    geo: global
+    unit: '1'
+    price: 'included'
+    userMultiplied: false
+  elements:
+  - name: Mews PMS with Booking Engine
+  - name: Guest Portal Online Check-In
+  - name: Automated Payments Platform
+  - name: Business Intelligence Dashboards
+  - name: 24/7 Chatbot Support
+- id: mews-systems-advanced
+  name: Advanced
+  type: subscription
+  description: Mid-tier subscription adding AI guest summaries, customizable booking engine, custom-domain email, SMS reminders, and Digital Key.
+  entries:
+  - label: PMS Subscription
+    name: pms_subscription
+    type: subscription
+    metric: month
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: '1'
+    price: 'custom'
+    userMultiplied: false
+  elements:
+  - name: AI Guest Preference Summaries
+  - name: Customizable Booking Engine
+  - name: Custom Domain Email Communications
+  - name: SMS Check-In Reminders
+  - name: Digital Key Contactless Check-In
+- id: mews-systems-enterprise
+  name: Enterprise
+  type: enterprise
+  description: Premium tier with unlimited marketplace access, full Open API access (Connector, Channel Manager, Booking Engine), no implementation fees, and direct OTA connections.
+  entries:
+  - label: PMS Subscription
+    name: pms_subscription
+    type: subscription
+    metric: month
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: '1'
+    price: 'custom'
+    userMultiplied: false
+  - label: Open API Access
+    name: open_api_access
+    type: flat
+    metric: varies
+    limit: -1
+    timeFrame: usage
+    geo: global
+    unit: '1'
+    price: 'included'
+    userMultiplied: false
+  - label: Marketplace Integrations
+    name: marketplace_integrations
+    type: quota
+    metric: varies
+    limit: -1
+    timeFrame: usage
+    geo: global
+    unit: '1'
+    price: 'included'
+    userMultiplied: false
+  elements:
+  - name: Open API Access (Connector, Channel Manager, Booking Engine)
+  - name: Unlimited Mews Marketplace Access (1,000+ Integrations)
+  - name: Mews Business Intelligence with Custom Dashboards
+  - name: No Implementation Fees
+  - name: Direct Expedia and Booking.com Connections
+- id: mews-systems-add-ons
+  name: Add-On Products
+  type: usage-based
+  description: Optional modules layered onto any subscription tier, priced separately and quote-based.
+  entries:
+  - label: Revenue Management System (RMS)
+    name: rms
+    type: subscription
+    metric: month
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: '1'
+    price: 'custom'
+    userMultiplied: false
+  - label: Point of Sale (POS)
+    name: pos
+    type: subscription
+    metric: month
+    limit: -1
+    timeFrame: month
+    geo: global
+    unit: '1'
+    price: 'custom'
+    userMultiplied: false
+  - label: Payment Processing
+    name: payment_processing
+    type: metered
+    metric: transaction
+    limit: -1
+    timeFrame: usage
+    geo: global
+    unit: '1'
+    price: 'see vendor pricing - per-transaction processing fee'
+    userMultiplied: false
+  elements:
+  - name: Revenue Management System
+  - name: Point of Sale
+  - name: Bookable Services
+  - name: Integrated Payments
+- id: mews-systems-partner-program
+  name: Mews Partner Program
+  type: freemium
+  description: Free developer/partner access to sandbox, documentation, and certification for building Mews Marketplace integrations.
+  entries:
+  - label: Demo / Sandbox API Access
+    name: sandbox_access
+    type: flat
+    metric: varies
+    limit: -1
+    timeFrame: usage
+    geo: global
+    unit: '1'
+    price: 'free'
+    userMultiplied: false
+  - label: Certification
+    name: certification
+    type: flat
+    metric: varies
+    limit: -1
+    timeFrame: usage
+    geo: global
+    unit: '1'
+    price: 'free'
+    userMultiplied: false
+  elements:
+  - name: Demo Environment (api.mews-demo.com)
+  - name: Connector, Channel Manager, Booking Engine, POS API Documentation
+  - name: Production Certification Process
+  - name: Mews Marketplace Listing

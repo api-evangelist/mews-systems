@@ -1,0 +1,1884 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Mews Connector API — Reservations and Availability
+  description: 'Connector API — Reservations and Availability. 44 operations. Lead operation: Get All Availability Adjustments. Self-contained Naftiko capability covering one Mews business surface.'
+  tags:
+  - Mews
+  - Connector
+  - Reservations and Availability
+  created: '2026-06-02'
+  modified: '2026-06-02'
+binds:
+- namespace: env
+  keys:
+    MEWS_ACCESS_TOKEN: MEWS_ACCESS_TOKEN
+capability:
+  consumes:
+  - type: http
+    namespace: connector-reservations
+    baseUri: https://api.mews.com/api/connector/v1
+    description: Mews Connector API — Reservations and Availability. Mews authentication (Client, ClientToken, AccessToken) is supplied in each JSON request body.
+    authentication:
+      type: bearer
+      token: '{{env.MEWS_ACCESS_TOKEN}}'
+    resources:
+    - name: availability-adjustments-get-all
+      path: /availabilityAdjustments/getAll
+      operations:
+      - name: availabilityAdjustments_getAll
+        method: POST
+        description: Get All Availability Adjustments
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: availability-blocks-delete
+      path: /availabilityBlocks/delete
+      operations:
+      - name: availabilityBlocks_delete
+        method: POST
+        description: Delete Availability Blocks
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: availability-blocks-get-all
+      path: /availabilityBlocks/getAll
+      operations:
+      - name: availabilityBlocks_getAll
+        method: POST
+        description: Get All Availability Blocks
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: availability-blocks-add
+      path: /availabilityBlocks/add
+      operations:
+      - name: availabilityBlocks_add
+        method: POST
+        description: Add Availability Blocks
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: availability-blocks-update
+      path: /availabilityBlocks/update
+      operations:
+      - name: availabilityBlocks_update
+        method: POST
+        description: Update Availability Blocks
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: business-segments-get-all
+      path: /businessSegments/getAll
+      operations:
+      - name: businessSegments_getAll
+        method: POST
+        description: Get All Business Segments
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: cancellation-policies-get-all
+      path: /cancellationPolicies/getAll
+      operations:
+      - name: cancellationPolicies_getAll
+        method: POST
+        description: Get All Cancellation Policies
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: cancellation-policies-get-by-reservations
+      path: /cancellationPolicies/getByReservations
+      operations:
+      - name: cancellationPolicies_getByReservations
+        method: POST
+        description: Get Cancellation Policies by Reservations
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: cancellation-policies-get-by-rates
+      path: /cancellationPolicies/getByRates
+      operations:
+      - name: cancellationPolicies_getByRates
+        method: POST
+        description: Get Cancellation Policies by Rates
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rate-groups-get-all
+      path: /rateGroups/getAll
+      operations:
+      - name: rateGroups_getAll
+        method: POST
+        description: Get All Rate Groups
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rates-update-capacity-offset
+      path: /rates/updateCapacityOffset
+      operations:
+      - name: rates_updateCapacityOffset
+        method: POST
+        description: Update Rate Capacity Offset Pricing
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rates-get-all
+      path: /rates/getAll
+      operations:
+      - name: rates_getAll
+        method: POST
+        description: Get All Rates
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rates-add
+      path: /rates/add
+      operations:
+      - name: rates_add
+        method: POST
+        description: Add Rates
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rates-set
+      path: /rates/set
+      operations:
+      - name: rates_set
+        method: POST
+        description: Set Rates
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rates-delete
+      path: /rates/delete
+      operations:
+      - name: rates_delete
+        method: POST
+        description: Delete Rates
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rates-get-pricing
+      path: /rates/getPricing
+      operations:
+      - name: rates_getPricing
+        method: POST
+        description: Get Rate Pricing
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: rates-update-price
+      path: /rates/updatePrice
+      operations:
+      - name: rates_updatePrice
+        method: POST
+        description: Update Rate Price
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: reservation-groups-get-all
+      path: /reservationGroups/getAll
+      operations:
+      - name: reservationGroups_getAll
+        method: POST
+        description: Get All Reservation Groups
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: reservations-get-channel-manager-details
+      path: /reservations/getChannelManagerDetails
+      operations:
+      - name: reservations_getChannelManagerDetails
+        method: POST
+        description: Get Reservation Channel Manager Details
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: reservations-get-all-2023-06-06
+      path: /reservations/getAll/2023-06-06
+      operations:
+      - name: reservations_getAll_2023-06-06
+        method: POST
+        description: Get All Reservations (ver 2023-06-06)
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: reservations-get-all
+      path: /reservations/getAll
+      operations:
+      - name: reservations_getAll
+        method: POST
+        description: Get All Reservations (ver 2017-04-12)
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: reservations-add
+      path: /reservations/add
+      operations:
+      - name: reservations_add
+        method: POST
+        description: Add Reservations
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: reservations-update
+      path: /reservations/update
+      operations:
+      - name: reservations_update
+        method: POST
+        description: Update Reservations
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: reservations-confirm
+      path: /reservations/confirm
+      operations:
+      - name: reservations_confirm
+        method: POST
+        description: Confirm Reservation
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: reservations-start
+      path: /reservations/start
+      operations:
+      - name: reservations_start
+        method: POST
+        description: Start Reservation
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: reservations-process
+      path: /reservations/process
+      operations:
+      - name: reservations_process
+        method: POST
+        description: Process Reservation
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: reservations-cancel
+      path: /reservations/cancel
+      operations:
+      - name: reservations_cancel
+        method: POST
+        description: Cancel Reservation
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: reservations-update-customer
+      path: /reservations/updateCustomer
+      operations:
+      - name: reservations_updateCustomer
+        method: POST
+        description: Update Reservation Customer
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: reservations-update-interval
+      path: /reservations/updateInterval
+      operations:
+      - name: reservations_updateInterval
+        method: POST
+        description: Update Reservation Interval
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: reservations-add-companion
+      path: /reservations/addCompanion
+      operations:
+      - name: reservations_addCompanion
+        method: POST
+        description: Add Reservation Companion
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: reservations-delete-companion
+      path: /reservations/deleteCompanion
+      operations:
+      - name: reservations_deleteCompanion
+        method: POST
+        description: Delete Reservation Companion
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: reservations-add-product
+      path: /reservations/addProduct
+      operations:
+      - name: reservations_addProduct
+        method: POST
+        description: Add Reservation Product
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: reservations-get-all-items
+      path: /reservations/getAllItems
+      operations:
+      - name: reservations_getAllItems
+        method: POST
+        description: Get All Reservation Items
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: reservations-price
+      path: /reservations/price
+      operations:
+      - name: reservations_price
+        method: POST
+        description: Price Reservations
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: restrictions-set
+      path: /restrictions/set
+      operations:
+      - name: restrictions_set
+        method: POST
+        description: Set Restrictions
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: restrictions-clear
+      path: /restrictions/clear
+      operations:
+      - name: restrictions_clear
+        method: POST
+        description: Clear Restrictions
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: restrictions-get-all
+      path: /restrictions/getAll
+      operations:
+      - name: restrictions_getAll
+        method: POST
+        description: Get All Restrictions
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: routing-rules-get-all
+      path: /routingRules/getAll
+      operations:
+      - name: routingRules_getAll
+        method: POST
+        description: Get All Routing Rules
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: routing-rules-add
+      path: /routingRules/add
+      operations:
+      - name: routingRules_add
+        method: POST
+        description: Add Routing Rules
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: routing-rules-update
+      path: /routingRules/update
+      operations:
+      - name: routingRules_update
+        method: POST
+        description: Update Routing Rules
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: routing-rules-delete
+      path: /routingRules/delete
+      operations:
+      - name: routingRules_delete
+        method: POST
+        description: Delete Routing Rules
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: source-assignments-get-all
+      path: /sourceAssignments/getAll
+      operations:
+      - name: sourceAssignments_getAll
+        method: POST
+        description: Get All Source Assignments
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: source-assignments-get-all-2024-09-20
+      path: /sourceAssignments/getAll/2024-09-20
+      operations:
+      - name: sourceAssignments_getAll_2024-09-20
+        method: POST
+        description: Get All Source Assignments (ver 2024-09-20)
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: sources-get-all
+      path: /sources/getAll
+      operations:
+      - name: sources_getAll
+        method: POST
+        description: Get All Sources
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: connector-reservations-rest
+    port: 8080
+    description: REST adapter for Mews Connector API — Reservations and Availability. One Spectral-compliant resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/availability-adjustments-get-all
+      name: availability-adjustments-get-all
+      description: REST surface for availability-adjustments-get-all.
+      operations:
+      - method: POST
+        name: availabilityAdjustments_getAll
+        description: Get All Availability Adjustments
+        call: connector-reservations.availabilityAdjustments_getAll
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/availability-blocks-delete
+      name: availability-blocks-delete
+      description: REST surface for availability-blocks-delete.
+      operations:
+      - method: POST
+        name: availabilityBlocks_delete
+        description: Delete Availability Blocks
+        call: connector-reservations.availabilityBlocks_delete
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/availability-blocks-get-all
+      name: availability-blocks-get-all
+      description: REST surface for availability-blocks-get-all.
+      operations:
+      - method: POST
+        name: availabilityBlocks_getAll
+        description: Get All Availability Blocks
+        call: connector-reservations.availabilityBlocks_getAll
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/availability-blocks-add
+      name: availability-blocks-add
+      description: REST surface for availability-blocks-add.
+      operations:
+      - method: POST
+        name: availabilityBlocks_add
+        description: Add Availability Blocks
+        call: connector-reservations.availabilityBlocks_add
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/availability-blocks-update
+      name: availability-blocks-update
+      description: REST surface for availability-blocks-update.
+      operations:
+      - method: POST
+        name: availabilityBlocks_update
+        description: Update Availability Blocks
+        call: connector-reservations.availabilityBlocks_update
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/business-segments-get-all
+      name: business-segments-get-all
+      description: REST surface for business-segments-get-all.
+      operations:
+      - method: POST
+        name: businessSegments_getAll
+        description: Get All Business Segments
+        call: connector-reservations.businessSegments_getAll
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/cancellation-policies-get-all
+      name: cancellation-policies-get-all
+      description: REST surface for cancellation-policies-get-all.
+      operations:
+      - method: POST
+        name: cancellationPolicies_getAll
+        description: Get All Cancellation Policies
+        call: connector-reservations.cancellationPolicies_getAll
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/cancellation-policies-get-by-reservations
+      name: cancellation-policies-get-by-reservations
+      description: REST surface for cancellation-policies-get-by-reservations.
+      operations:
+      - method: POST
+        name: cancellationPolicies_getByReservations
+        description: Get Cancellation Policies by Reservations
+        call: connector-reservations.cancellationPolicies_getByReservations
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/cancellation-policies-get-by-rates
+      name: cancellation-policies-get-by-rates
+      description: REST surface for cancellation-policies-get-by-rates.
+      operations:
+      - method: POST
+        name: cancellationPolicies_getByRates
+        description: Get Cancellation Policies by Rates
+        call: connector-reservations.cancellationPolicies_getByRates
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/rate-groups-get-all
+      name: rate-groups-get-all
+      description: REST surface for rate-groups-get-all.
+      operations:
+      - method: POST
+        name: rateGroups_getAll
+        description: Get All Rate Groups
+        call: connector-reservations.rateGroups_getAll
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/rates-update-capacity-offset
+      name: rates-update-capacity-offset
+      description: REST surface for rates-update-capacity-offset.
+      operations:
+      - method: POST
+        name: rates_updateCapacityOffset
+        description: Update Rate Capacity Offset Pricing
+        call: connector-reservations.rates_updateCapacityOffset
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/rates-get-all
+      name: rates-get-all
+      description: REST surface for rates-get-all.
+      operations:
+      - method: POST
+        name: rates_getAll
+        description: Get All Rates
+        call: connector-reservations.rates_getAll
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/rates-add
+      name: rates-add
+      description: REST surface for rates-add.
+      operations:
+      - method: POST
+        name: rates_add
+        description: Add Rates
+        call: connector-reservations.rates_add
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/rates-set
+      name: rates-set
+      description: REST surface for rates-set.
+      operations:
+      - method: POST
+        name: rates_set
+        description: Set Rates
+        call: connector-reservations.rates_set
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/rates-delete
+      name: rates-delete
+      description: REST surface for rates-delete.
+      operations:
+      - method: POST
+        name: rates_delete
+        description: Delete Rates
+        call: connector-reservations.rates_delete
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/rates-get-pricing
+      name: rates-get-pricing
+      description: REST surface for rates-get-pricing.
+      operations:
+      - method: POST
+        name: rates_getPricing
+        description: Get Rate Pricing
+        call: connector-reservations.rates_getPricing
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/rates-update-price
+      name: rates-update-price
+      description: REST surface for rates-update-price.
+      operations:
+      - method: POST
+        name: rates_updatePrice
+        description: Update Rate Price
+        call: connector-reservations.rates_updatePrice
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/reservation-groups-get-all
+      name: reservation-groups-get-all
+      description: REST surface for reservation-groups-get-all.
+      operations:
+      - method: POST
+        name: reservationGroups_getAll
+        description: Get All Reservation Groups
+        call: connector-reservations.reservationGroups_getAll
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/reservations-get-channel-manager-details
+      name: reservations-get-channel-manager-details
+      description: REST surface for reservations-get-channel-manager-details.
+      operations:
+      - method: POST
+        name: reservations_getChannelManagerDetails
+        description: Get Reservation Channel Manager Details
+        call: connector-reservations.reservations_getChannelManagerDetails
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/reservations-get-all-2023-06-06
+      name: reservations-get-all-2023-06-06
+      description: REST surface for reservations-get-all-2023-06-06.
+      operations:
+      - method: POST
+        name: reservations_getAll_2023-06-06
+        description: Get All Reservations (ver 2023-06-06)
+        call: connector-reservations.reservations_getAll_2023-06-06
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/reservations-get-all
+      name: reservations-get-all
+      description: REST surface for reservations-get-all.
+      operations:
+      - method: POST
+        name: reservations_getAll
+        description: Get All Reservations (ver 2017-04-12)
+        call: connector-reservations.reservations_getAll
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/reservations-add
+      name: reservations-add
+      description: REST surface for reservations-add.
+      operations:
+      - method: POST
+        name: reservations_add
+        description: Add Reservations
+        call: connector-reservations.reservations_add
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/reservations-update
+      name: reservations-update
+      description: REST surface for reservations-update.
+      operations:
+      - method: POST
+        name: reservations_update
+        description: Update Reservations
+        call: connector-reservations.reservations_update
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/reservations-confirm
+      name: reservations-confirm
+      description: REST surface for reservations-confirm.
+      operations:
+      - method: POST
+        name: reservations_confirm
+        description: Confirm Reservation
+        call: connector-reservations.reservations_confirm
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/reservations-start
+      name: reservations-start
+      description: REST surface for reservations-start.
+      operations:
+      - method: POST
+        name: reservations_start
+        description: Start Reservation
+        call: connector-reservations.reservations_start
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/reservations-process
+      name: reservations-process
+      description: REST surface for reservations-process.
+      operations:
+      - method: POST
+        name: reservations_process
+        description: Process Reservation
+        call: connector-reservations.reservations_process
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/reservations-cancel
+      name: reservations-cancel
+      description: REST surface for reservations-cancel.
+      operations:
+      - method: POST
+        name: reservations_cancel
+        description: Cancel Reservation
+        call: connector-reservations.reservations_cancel
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/reservations-update-customer
+      name: reservations-update-customer
+      description: REST surface for reservations-update-customer.
+      operations:
+      - method: POST
+        name: reservations_updateCustomer
+        description: Update Reservation Customer
+        call: connector-reservations.reservations_updateCustomer
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/reservations-update-interval
+      name: reservations-update-interval
+      description: REST surface for reservations-update-interval.
+      operations:
+      - method: POST
+        name: reservations_updateInterval
+        description: Update Reservation Interval
+        call: connector-reservations.reservations_updateInterval
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/reservations-add-companion
+      name: reservations-add-companion
+      description: REST surface for reservations-add-companion.
+      operations:
+      - method: POST
+        name: reservations_addCompanion
+        description: Add Reservation Companion
+        call: connector-reservations.reservations_addCompanion
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/reservations-delete-companion
+      name: reservations-delete-companion
+      description: REST surface for reservations-delete-companion.
+      operations:
+      - method: POST
+        name: reservations_deleteCompanion
+        description: Delete Reservation Companion
+        call: connector-reservations.reservations_deleteCompanion
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/reservations-add-product
+      name: reservations-add-product
+      description: REST surface for reservations-add-product.
+      operations:
+      - method: POST
+        name: reservations_addProduct
+        description: Add Reservation Product
+        call: connector-reservations.reservations_addProduct
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/reservations-get-all-items
+      name: reservations-get-all-items
+      description: REST surface for reservations-get-all-items.
+      operations:
+      - method: POST
+        name: reservations_getAllItems
+        description: Get All Reservation Items
+        call: connector-reservations.reservations_getAllItems
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/reservations-price
+      name: reservations-price
+      description: REST surface for reservations-price.
+      operations:
+      - method: POST
+        name: reservations_price
+        description: Price Reservations
+        call: connector-reservations.reservations_price
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/restrictions-set
+      name: restrictions-set
+      description: REST surface for restrictions-set.
+      operations:
+      - method: POST
+        name: restrictions_set
+        description: Set Restrictions
+        call: connector-reservations.restrictions_set
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/restrictions-clear
+      name: restrictions-clear
+      description: REST surface for restrictions-clear.
+      operations:
+      - method: POST
+        name: restrictions_clear
+        description: Clear Restrictions
+        call: connector-reservations.restrictions_clear
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/restrictions-get-all
+      name: restrictions-get-all
+      description: REST surface for restrictions-get-all.
+      operations:
+      - method: POST
+        name: restrictions_getAll
+        description: Get All Restrictions
+        call: connector-reservations.restrictions_getAll
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/routing-rules-get-all
+      name: routing-rules-get-all
+      description: REST surface for routing-rules-get-all.
+      operations:
+      - method: POST
+        name: routingRules_getAll
+        description: Get All Routing Rules
+        call: connector-reservations.routingRules_getAll
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/routing-rules-add
+      name: routing-rules-add
+      description: REST surface for routing-rules-add.
+      operations:
+      - method: POST
+        name: routingRules_add
+        description: Add Routing Rules
+        call: connector-reservations.routingRules_add
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/routing-rules-update
+      name: routing-rules-update
+      description: REST surface for routing-rules-update.
+      operations:
+      - method: POST
+        name: routingRules_update
+        description: Update Routing Rules
+        call: connector-reservations.routingRules_update
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/routing-rules-delete
+      name: routing-rules-delete
+      description: REST surface for routing-rules-delete.
+      operations:
+      - method: POST
+        name: routingRules_delete
+        description: Delete Routing Rules
+        call: connector-reservations.routingRules_delete
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/source-assignments-get-all
+      name: source-assignments-get-all
+      description: REST surface for source-assignments-get-all.
+      operations:
+      - method: POST
+        name: sourceAssignments_getAll
+        description: Get All Source Assignments
+        call: connector-reservations.sourceAssignments_getAll
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/source-assignments-get-all-2024-09-20
+      name: source-assignments-get-all-2024-09-20
+      description: REST surface for source-assignments-get-all-2024-09-20.
+      operations:
+      - method: POST
+        name: sourceAssignments_getAll_2024-09-20
+        description: Get All Source Assignments (ver 2024-09-20)
+        call: connector-reservations.sourceAssignments_getAll_2024-09-20
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/sources-get-all
+      name: sources-get-all
+      description: REST surface for sources-get-all.
+      operations:
+      - method: POST
+        name: sources_getAll
+        description: Get All Sources
+        call: connector-reservations.sources_getAll
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: connector-reservations-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Mews Connector API — Reservations and Availability. One verb-noun tool per consumed operation, routed inline through this capability's consumes block.
+    tools:
+    - name: get-availability-adjustments
+      description: Get All Availability Adjustments
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-reservations.availabilityAdjustments_getAll
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-availability-blocks
+      description: Delete Availability Blocks
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-reservations.availabilityBlocks_delete
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-availability-blocks
+      description: Get All Availability Blocks
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-reservations.availabilityBlocks_getAll
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: add-availability-blocks
+      description: Add Availability Blocks
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-reservations.availabilityBlocks_add
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-availability-blocks
+      description: Update Availability Blocks
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-reservations.availabilityBlocks_update
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-business-segments
+      description: Get All Business Segments
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-reservations.businessSegments_getAll
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-cancellation-policies
+      description: Get All Cancellation Policies
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-reservations.cancellationPolicies_getAll
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-cancellation-policies-reservations
+      description: Get Cancellation Policies by Reservations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-reservations.cancellationPolicies_getByReservations
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-cancellation-policies-rates
+      description: Get Cancellation Policies by Rates
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-reservations.cancellationPolicies_getByRates
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-rate-groups
+      description: Get All Rate Groups
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-reservations.rateGroups_getAll
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-rate-capacity-offset-pricing
+      description: Update Rate Capacity Offset Pricing
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-reservations.rates_updateCapacityOffset
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-rates
+      description: Get All Rates
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-reservations.rates_getAll
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: add-rates
+      description: Add Rates
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: connector-reservations.rates_add
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: set-rates
+      description: Set Rates
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: connector-reservations.rates_set
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-rates
+      description: Delete Rates
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: connector-reservations.rates_delete
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-rate-pricing
+      description: Get Rate Pricing
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-reservations.rates_getPricing
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-rate-price
+      description: Update Rate Price
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-reservations.rates_updatePrice
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-reservation-groups
+      description: Get All Reservation Groups
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-reservations.reservationGroups_getAll
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-reservation-channel-manager-details
+      description: Get Reservation Channel Manager Details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-reservations.reservations_getChannelManagerDetails
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-reservations-ver-2023-06-06
+      description: Get All Reservations (ver 2023-06-06)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-reservations.reservations_getAll_2023-06-06
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-reservations-ver-2017-04-12
+      description: Get All Reservations (ver 2017-04-12)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-reservations.reservations_getAll
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: add-reservations
+      description: Add Reservations
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: connector-reservations.reservations_add
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-reservations
+      description: Update Reservations
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: connector-reservations.reservations_update
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: confirm-reservation
+      description: Confirm Reservation
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: connector-reservations.reservations_confirm
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: start-reservation
+      description: Start Reservation
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: connector-reservations.reservations_start
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: process-reservation
+      description: Process Reservation
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: connector-reservations.reservations_process
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: cancel-reservation
+      description: Cancel Reservation
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: connector-reservations.reservations_cancel
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-reservation-customer
+      description: Update Reservation Customer
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: connector-reservations.reservations_updateCustomer
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-reservation-interval
+      description: Update Reservation Interval
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: connector-reservations.reservations_updateInterval
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: add-reservation-companion
+      description: Add Reservation Companion
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: connector-reservations.reservations_addCompanion
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-reservation-companion
+      description: Delete Reservation Companion
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: connector-reservations.reservations_deleteCompanion
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: add-reservation-product
+      description: Add Reservation Product
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: connector-reservations.reservations_addProduct
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-reservation-items
+      description: Get All Reservation Items
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-reservations.reservations_getAllItems
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: price-reservations
+      description: Price Reservations
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-reservations.reservations_price
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: set-restrictions
+      description: Set Restrictions
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: connector-reservations.restrictions_set
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: clear-restrictions
+      description: Clear Restrictions
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: connector-reservations.restrictions_clear
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-restrictions
+      description: Get All Restrictions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-reservations.restrictions_getAll
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-routing-rules
+      description: Get All Routing Rules
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-reservations.routingRules_getAll
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: add-routing-rules
+      description: Add Routing Rules
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: connector-reservations.routingRules_add
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-routing-rules
+      description: Update Routing Rules
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: connector-reservations.routingRules_update
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-routing-rules
+      description: Delete Routing Rules
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: connector-reservations.routingRules_delete
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-source-assignments
+      description: Get All Source Assignments
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-reservations.sourceAssignments_getAll
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-source-assignments-ver-2024-09-20
+      description: Get All Source Assignments (ver 2024-09-20)
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-reservations.sourceAssignments_getAll_2024-09-20
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-sources
+      description: Get All Sources
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-reservations.sources_getAll
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

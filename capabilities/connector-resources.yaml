@@ -1,0 +1,666 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Mews Connector API — Resources and Spaces
+  description: 'Connector API — Resources and Spaces. 15 operations. Lead operation: Get All Resource Access Tokens. Self-contained Naftiko capability covering one Mews business surface.'
+  tags:
+  - Mews
+  - Connector
+  - Resources and Spaces
+  created: '2026-06-02'
+  modified: '2026-06-02'
+binds:
+- namespace: env
+  keys:
+    MEWS_ACCESS_TOKEN: MEWS_ACCESS_TOKEN
+capability:
+  consumes:
+  - type: http
+    namespace: connector-resources
+    baseUri: https://api.mews.com/api/connector/v1
+    description: Mews Connector API — Resources and Spaces. Mews authentication (Client, ClientToken, AccessToken) is supplied in each JSON request body.
+    authentication:
+      type: bearer
+      token: '{{env.MEWS_ACCESS_TOKEN}}'
+    resources:
+    - name: resource-access-tokens-get-all
+      path: /resourceAccessTokens/getAll
+      operations:
+      - name: resourceAccessTokens_getAll
+        method: POST
+        description: Get All Resource Access Tokens
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: resource-access-tokens-add
+      path: /resourceAccessTokens/add
+      operations:
+      - name: resourceAccessTokens_add
+        method: POST
+        description: Add Resource Access Tokens
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: resource-access-tokens-update
+      path: /resourceAccessTokens/update
+      operations:
+      - name: resourceAccessTokens_update
+        method: POST
+        description: Update Resource Access Tokens
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: resource-access-tokens-delete
+      path: /resourceAccessTokens/delete
+      operations:
+      - name: resourceAccessTokens_delete
+        method: POST
+        description: Delete Resource Access Tokens
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: resource-blocks-get-all
+      path: /resourceBlocks/getAll
+      operations:
+      - name: resourceBlocks_getAll
+        method: POST
+        description: Get All Resource Blocks
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: resource-blocks-add
+      path: /resourceBlocks/add
+      operations:
+      - name: resourceBlocks_add
+        method: POST
+        description: Add Resource Block
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: resource-blocks-delete
+      path: /resourceBlocks/delete
+      operations:
+      - name: resourceBlocks_delete
+        method: POST
+        description: Delete Resource Blocks
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: resource-categories-get-all
+      path: /resourceCategories/getAll
+      operations:
+      - name: resourceCategories_getAll
+        method: POST
+        description: Get All Resource Categories
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: resource-category-assignments-get-all
+      path: /resourceCategoryAssignments/getAll
+      operations:
+      - name: resourceCategoryAssignments_getAll
+        method: POST
+        description: Get All Resource Category Assignments
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: resource-category-image-assignments-get-all
+      path: /resourceCategoryImageAssignments/getAll
+      operations:
+      - name: resourceCategoryImageAssignments_getAll
+        method: POST
+        description: Get All Resource Category Image Assignments
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: resource-feature-assignments-get-all
+      path: /resourceFeatureAssignments/getAll
+      operations:
+      - name: resourceFeatureAssignments_getAll
+        method: POST
+        description: Get All Resource Feature Assignments
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: resource-features-get-all
+      path: /resourceFeatures/getAll
+      operations:
+      - name: resourceFeatures_getAll
+        method: POST
+        description: Get All Resource Features
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: resources-get-all
+      path: /resources/getAll
+      operations:
+      - name: resources_getAll
+        method: POST
+        description: Get All Resources
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: resources-update
+      path: /resources/update
+      operations:
+      - name: resources_update
+        method: POST
+        description: Update Resources
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: resources-get-occupancy-state
+      path: /resources/getOccupancyState
+      operations:
+      - name: resources_getOccupancyState
+        method: POST
+        description: Get Resources' Occupancy State
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: connector-resources-rest
+    port: 8080
+    description: REST adapter for Mews Connector API — Resources and Spaces. One Spectral-compliant resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/resource-access-tokens-get-all
+      name: resource-access-tokens-get-all
+      description: REST surface for resource-access-tokens-get-all.
+      operations:
+      - method: POST
+        name: resourceAccessTokens_getAll
+        description: Get All Resource Access Tokens
+        call: connector-resources.resourceAccessTokens_getAll
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/resource-access-tokens-add
+      name: resource-access-tokens-add
+      description: REST surface for resource-access-tokens-add.
+      operations:
+      - method: POST
+        name: resourceAccessTokens_add
+        description: Add Resource Access Tokens
+        call: connector-resources.resourceAccessTokens_add
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/resource-access-tokens-update
+      name: resource-access-tokens-update
+      description: REST surface for resource-access-tokens-update.
+      operations:
+      - method: POST
+        name: resourceAccessTokens_update
+        description: Update Resource Access Tokens
+        call: connector-resources.resourceAccessTokens_update
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/resource-access-tokens-delete
+      name: resource-access-tokens-delete
+      description: REST surface for resource-access-tokens-delete.
+      operations:
+      - method: POST
+        name: resourceAccessTokens_delete
+        description: Delete Resource Access Tokens
+        call: connector-resources.resourceAccessTokens_delete
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/resource-blocks-get-all
+      name: resource-blocks-get-all
+      description: REST surface for resource-blocks-get-all.
+      operations:
+      - method: POST
+        name: resourceBlocks_getAll
+        description: Get All Resource Blocks
+        call: connector-resources.resourceBlocks_getAll
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/resource-blocks-add
+      name: resource-blocks-add
+      description: REST surface for resource-blocks-add.
+      operations:
+      - method: POST
+        name: resourceBlocks_add
+        description: Add Resource Block
+        call: connector-resources.resourceBlocks_add
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/resource-blocks-delete
+      name: resource-blocks-delete
+      description: REST surface for resource-blocks-delete.
+      operations:
+      - method: POST
+        name: resourceBlocks_delete
+        description: Delete Resource Blocks
+        call: connector-resources.resourceBlocks_delete
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/resource-categories-get-all
+      name: resource-categories-get-all
+      description: REST surface for resource-categories-get-all.
+      operations:
+      - method: POST
+        name: resourceCategories_getAll
+        description: Get All Resource Categories
+        call: connector-resources.resourceCategories_getAll
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/resource-category-assignments-get-all
+      name: resource-category-assignments-get-all
+      description: REST surface for resource-category-assignments-get-all.
+      operations:
+      - method: POST
+        name: resourceCategoryAssignments_getAll
+        description: Get All Resource Category Assignments
+        call: connector-resources.resourceCategoryAssignments_getAll
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/resource-category-image-assignments-get-all
+      name: resource-category-image-assignments-get-all
+      description: REST surface for resource-category-image-assignments-get-all.
+      operations:
+      - method: POST
+        name: resourceCategoryImageAssignments_getAll
+        description: Get All Resource Category Image Assignments
+        call: connector-resources.resourceCategoryImageAssignments_getAll
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/resource-feature-assignments-get-all
+      name: resource-feature-assignments-get-all
+      description: REST surface for resource-feature-assignments-get-all.
+      operations:
+      - method: POST
+        name: resourceFeatureAssignments_getAll
+        description: Get All Resource Feature Assignments
+        call: connector-resources.resourceFeatureAssignments_getAll
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/resource-features-get-all
+      name: resource-features-get-all
+      description: REST surface for resource-features-get-all.
+      operations:
+      - method: POST
+        name: resourceFeatures_getAll
+        description: Get All Resource Features
+        call: connector-resources.resourceFeatures_getAll
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/resources-get-all
+      name: resources-get-all
+      description: REST surface for resources-get-all.
+      operations:
+      - method: POST
+        name: resources_getAll
+        description: Get All Resources
+        call: connector-resources.resources_getAll
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/resources-update
+      name: resources-update
+      description: REST surface for resources-update.
+      operations:
+      - method: POST
+        name: resources_update
+        description: Update Resources
+        call: connector-resources.resources_update
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/resources-get-occupancy-state
+      name: resources-get-occupancy-state
+      description: REST surface for resources-get-occupancy-state.
+      operations:
+      - method: POST
+        name: resources_getOccupancyState
+        description: Get Resources' Occupancy State
+        call: connector-resources.resources_getOccupancyState
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: connector-resources-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Mews Connector API — Resources and Spaces. One verb-noun tool per consumed operation, routed inline through this capability's consumes block.
+    tools:
+    - name: get-resource-access-tokens
+      description: Get All Resource Access Tokens
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-resources.resourceAccessTokens_getAll
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: add-resource-access-tokens
+      description: Add Resource Access Tokens
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: connector-resources.resourceAccessTokens_add
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-resource-access-tokens
+      description: Update Resource Access Tokens
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: connector-resources.resourceAccessTokens_update
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-resource-access-tokens
+      description: Delete Resource Access Tokens
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: connector-resources.resourceAccessTokens_delete
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-resource-blocks
+      description: Get All Resource Blocks
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-resources.resourceBlocks_getAll
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: add-resource-block
+      description: Add Resource Block
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: connector-resources.resourceBlocks_add
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-resource-blocks
+      description: Delete Resource Blocks
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: connector-resources.resourceBlocks_delete
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-resource-categories
+      description: Get All Resource Categories
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-resources.resourceCategories_getAll
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-resource-category-assignments
+      description: Get All Resource Category Assignments
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-resources.resourceCategoryAssignments_getAll
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-resource-category-image-assignments
+      description: Get All Resource Category Image Assignments
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-resources.resourceCategoryImageAssignments_getAll
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-resource-feature-assignments
+      description: Get All Resource Feature Assignments
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-resources.resourceFeatureAssignments_getAll
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-resource-features
+      description: Get All Resource Features
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-resources.resourceFeatures_getAll
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-resources
+      description: Get All Resources
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-resources.resources_getAll
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-resources
+      description: Update Resources
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: connector-resources.resources_update
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-resources-occupancy-state
+      description: Get Resources' Occupancy State
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: connector-resources.resources_getOccupancyState
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,876 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Mews Booking Engine API
+  description: 'Booking Engine API — Mews Booking Engine API. 20 operations. Lead operation: Get Availability. Self-contained Naftiko capability covering one Mews business surface.'
+  tags:
+  - Mews
+  - Booking Engine
+  - Booking-Engine
+  created: '2026-06-02'
+  modified: '2026-06-02'
+binds:
+- namespace: env
+  keys:
+    MEWS_ACCESS_TOKEN: MEWS_ACCESS_TOKEN
+capability:
+  consumes:
+  - type: http
+    namespace: booking-engine
+    baseUri: https://api.mews.com/api/distributor/v1
+    description: Mews Booking Engine API. Mews authentication (Client, ClientToken, AccessToken) is supplied in each JSON request body.
+    authentication:
+      type: bearer
+      token: '{{env.MEWS_ACCESS_TOKEN}}'
+    resources:
+    - name: hotels-get-availability
+      path: /hotels/getAvailability
+      operations:
+      - name: hotels_getAvailability
+        method: POST
+        description: Get Availability
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: services-get-availability
+      path: /services/getAvailability
+      operations:
+      - name: services_getAvailability
+        method: POST
+        description: Get Availability
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: reservations-get-pricing
+      path: /reservations/getPricing
+      operations:
+      - name: reservations_getPricing
+        method: POST
+        description: Get Pricing
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: availability-blocks-get-all
+      path: /availabilityBlocks/getAll
+      operations:
+      - name: availabilityBlocks_getAll
+        method: POST
+        description: Get All
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: configuration-get
+      path: /configuration/get
+      operations:
+      - name: configuration_get
+        method: POST
+        description: Get
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: hotels-get
+      path: /hotels/get
+      operations:
+      - name: hotels_get
+        method: POST
+        description: Get
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: languages-get-all
+      path: /languages/getAll
+      operations:
+      - name: languages_getAll
+        method: POST
+        description: Get All
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: currencies-get-all
+      path: /currencies/getAll
+      operations:
+      - name: currencies_getAll
+        method: POST
+        description: Get All
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: countries-get-all
+      path: /countries/getAll
+      operations:
+      - name: countries_getAll
+        method: POST
+        description: Get All
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: vouchers-validate
+      path: /vouchers/validate
+      operations:
+      - name: vouchers_validate
+        method: POST
+        description: Validate
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: hotels-get-payment-configuration
+      path: /hotels/getPaymentConfiguration
+      operations:
+      - name: hotels_getPaymentConfiguration
+        method: POST
+        description: Get Payment Configuration
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: exchange-rates-get-all
+      path: /exchangeRates/getAll
+      operations:
+      - name: exchangeRates_getAll
+        method: POST
+        description: Get All
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: payment-cards-authorize
+      path: /paymentCards/authorize
+      operations:
+      - name: paymentCards_authorize
+        method: POST
+        description: Authorize
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: payment-cards-get-all
+      path: /paymentCards/getAll
+      operations:
+      - name: paymentCards_getAll
+        method: POST
+        description: Get All
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: reservation-groups-create
+      path: /reservationGroups/create
+      operations:
+      - name: reservationGroups_create
+        method: POST
+        description: Create
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: reservation-groups-get
+      path: /reservationGroups/get
+      operations:
+      - name: reservationGroups_get
+        method: POST
+        description: Get
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: reservations-price
+      path: /reservations/price
+      operations:
+      - name: reservations_price
+        method: POST
+        description: Price
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: products-get-prices
+      path: /products/getPrices
+      operations:
+      - name: products_getPrices
+        method: POST
+        description: Get Prices
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: services-get-pricing
+      path: /services/getPricing
+      operations:
+      - name: services_getPricing
+        method: POST
+        description: Get Pricing
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: services-get-promotions
+      path: /services/getPromotions
+      operations:
+      - name: services_getPromotions
+        method: POST
+        description: Get Promotions
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          required: true
+          description: JSON request body including Client, ClientToken and AccessToken authentication fields.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: booking-engine-rest
+    port: 8080
+    description: REST adapter for Mews Booking Engine API. One Spectral-compliant resource per consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/hotels-get-availability
+      name: hotels-get-availability
+      description: REST surface for hotels-get-availability.
+      operations:
+      - method: POST
+        name: hotels_getAvailability
+        description: Get Availability
+        call: booking-engine.hotels_getAvailability
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/services-get-availability
+      name: services-get-availability
+      description: REST surface for services-get-availability.
+      operations:
+      - method: POST
+        name: services_getAvailability
+        description: Get Availability
+        call: booking-engine.services_getAvailability
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/reservations-get-pricing
+      name: reservations-get-pricing
+      description: REST surface for reservations-get-pricing.
+      operations:
+      - method: POST
+        name: reservations_getPricing
+        description: Get Pricing
+        call: booking-engine.reservations_getPricing
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/availability-blocks-get-all
+      name: availability-blocks-get-all
+      description: REST surface for availability-blocks-get-all.
+      operations:
+      - method: POST
+        name: availabilityBlocks_getAll
+        description: Get All
+        call: booking-engine.availabilityBlocks_getAll
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/configuration-get
+      name: configuration-get
+      description: REST surface for configuration-get.
+      operations:
+      - method: POST
+        name: configuration_get
+        description: Get
+        call: booking-engine.configuration_get
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/hotels-get
+      name: hotels-get
+      description: REST surface for hotels-get.
+      operations:
+      - method: POST
+        name: hotels_get
+        description: Get
+        call: booking-engine.hotels_get
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/languages-get-all
+      name: languages-get-all
+      description: REST surface for languages-get-all.
+      operations:
+      - method: POST
+        name: languages_getAll
+        description: Get All
+        call: booking-engine.languages_getAll
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/currencies-get-all
+      name: currencies-get-all
+      description: REST surface for currencies-get-all.
+      operations:
+      - method: POST
+        name: currencies_getAll
+        description: Get All
+        call: booking-engine.currencies_getAll
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/countries-get-all
+      name: countries-get-all
+      description: REST surface for countries-get-all.
+      operations:
+      - method: POST
+        name: countries_getAll
+        description: Get All
+        call: booking-engine.countries_getAll
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/vouchers-validate
+      name: vouchers-validate
+      description: REST surface for vouchers-validate.
+      operations:
+      - method: POST
+        name: vouchers_validate
+        description: Validate
+        call: booking-engine.vouchers_validate
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/hotels-get-payment-configuration
+      name: hotels-get-payment-configuration
+      description: REST surface for hotels-get-payment-configuration.
+      operations:
+      - method: POST
+        name: hotels_getPaymentConfiguration
+        description: Get Payment Configuration
+        call: booking-engine.hotels_getPaymentConfiguration
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/exchange-rates-get-all
+      name: exchange-rates-get-all
+      description: REST surface for exchange-rates-get-all.
+      operations:
+      - method: POST
+        name: exchangeRates_getAll
+        description: Get All
+        call: booking-engine.exchangeRates_getAll
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/payment-cards-authorize
+      name: payment-cards-authorize
+      description: REST surface for payment-cards-authorize.
+      operations:
+      - method: POST
+        name: paymentCards_authorize
+        description: Authorize
+        call: booking-engine.paymentCards_authorize
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/payment-cards-get-all
+      name: payment-cards-get-all
+      description: REST surface for payment-cards-get-all.
+      operations:
+      - method: POST
+        name: paymentCards_getAll
+        description: Get All
+        call: booking-engine.paymentCards_getAll
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/reservation-groups-create
+      name: reservation-groups-create
+      description: REST surface for reservation-groups-create.
+      operations:
+      - method: POST
+        name: reservationGroups_create
+        description: Create
+        call: booking-engine.reservationGroups_create
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/reservation-groups-get
+      name: reservation-groups-get
+      description: REST surface for reservation-groups-get.
+      operations:
+      - method: POST
+        name: reservationGroups_get
+        description: Get
+        call: booking-engine.reservationGroups_get
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/reservations-price
+      name: reservations-price
+      description: REST surface for reservations-price.
+      operations:
+      - method: POST
+        name: reservations_price
+        description: Price
+        call: booking-engine.reservations_price
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/products-get-prices
+      name: products-get-prices
+      description: REST surface for products-get-prices.
+      operations:
+      - method: POST
+        name: products_getPrices
+        description: Get Prices
+        call: booking-engine.products_getPrices
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/services-get-pricing
+      name: services-get-pricing
+      description: REST surface for services-get-pricing.
+      operations:
+      - method: POST
+        name: services_getPricing
+        description: Get Pricing
+        call: booking-engine.services_getPricing
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/services-get-promotions
+      name: services-get-promotions
+      description: REST surface for services-get-promotions.
+      operations:
+      - method: POST
+        name: services_getPromotions
+        description: Get Promotions
+        call: booking-engine.services_getPromotions
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: booking-engine-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Mews Booking Engine API. One verb-noun tool per consumed operation, routed inline through this capability's consumes block.
+    tools:
+    - name: get-availability
+      description: Get Availability
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: booking-engine.hotels_getAvailability
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-availability-2
+      description: Get Availability
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: booking-engine.services_getAvailability
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-pricing
+      description: Get Pricing
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: booking-engine.reservations_getPricing
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get
+      description: Get All
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: booking-engine.availabilityBlocks_getAll
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-2
+      description: Get
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: booking-engine.configuration_get
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-3
+      description: Get
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: booking-engine.hotels_get
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-4
+      description: Get All
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: booking-engine.languages_getAll
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-5
+      description: Get All
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: booking-engine.currencies_getAll
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-6
+      description: Get All
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: booking-engine.countries_getAll
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: validate
+      description: Validate
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: booking-engine.vouchers_validate
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-payment-configuration
+      description: Get Payment Configuration
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: booking-engine.hotels_getPaymentConfiguration
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-7
+      description: Get All
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: booking-engine.exchangeRates_getAll
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: authorize
+      description: Authorize
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: booking-engine.paymentCards_authorize
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-8
+      description: Get All
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: booking-engine.paymentCards_getAll
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create
+      description: Create
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: booking-engine.reservationGroups_create
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-9
+      description: Get
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: booking-engine.reservationGroups_get
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: price
+      description: Price
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: booking-engine.reservations_price
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-prices
+      description: Get Prices
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: booking-engine.products_getPrices
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-pricing-2
+      description: Get Pricing
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: booking-engine.services_getPricing
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-promotions
+      description: Get Promotions
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: booking-engine.services_getPromotions
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
