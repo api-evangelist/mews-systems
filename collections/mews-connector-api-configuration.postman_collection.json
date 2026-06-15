@@ -1,0 +1,4051 @@
+{
+  "item": [
+    {
+      "id": "d16826e3-17a8-4155-92c8-869071d227e2",
+      "name": "Configuration",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a34397c6-3348-415b-a5cf-ef584bc2d80e",
+          "name": "Mews Get Configuration",
+          "request": {
+            "name": "Mews Get Configuration",
+            "description": {
+              "content": "Returns the enterprise configuration. For single-enterprise Access Tokens, this is the enterprise associated with the token. For [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property), use the `EnterpriseId` parameter to specify which enterprise you want the configuration for. In the case of service scoped integrations, the operation returns the configuration associated with both the enterprise and the bookable service linked to the token.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "connector",
+                "v1",
+                "configuration",
+                "get"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"EnterpriseId\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9c9c4335-05b3-405b-bdaf-f3ecb38ff3bc",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "configuration",
+                    "get"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"EnterpriseId\": \"851df8c8-90f2-4c4a-8e01-a4fc46b25178\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"NowUtc\": \"2018-01-01T14:58:02Z\",\n  \"Enterprise\": {\n    \"Currencies\": [\n      {\n        \"Currency\": \"GBP\",\n        \"IsDefault\": true,\n        \"IsEnabled\": true\n      },\n      {\n        \"Currency\": \"USD\",\n        \"IsDefault\": false,\n        \"IsEnabled\": true\n      }\n    ],\n    \"AccountingConfiguration\": {\n      \"AdditionalTaxIdentifier\": null,\n      \"CompanyName\": \"Connector API Hotel\",\n      \"BankAccountNumber\": \"1234\",\n      \"BankName\": \"Random bank\",\n      \"Iban\": \"CZ7250517882393618329719\",\n      \"Bic\": \"GIBACZPY\",\n      \"SurchargeConfiguration\": {\n        \"SurchargeFees\": {\n          \"Amex\": 3,\n          \"DinersClub\": 4\n        },\n        \"SurchargeServiceId\": \"2b9b0143-3135-485b-8064-76c90d1be69e\",\n        \"SurchargeTaxCode\": \"US-HI-KA\"\n      },\n      \"EnabledExternalPaymentTypes\": [\n        \"Invoice\",\n        \"Cash\",\n        \"GiftCard\"\n      ],\n      \"Options\": [\n        \"ReceivableTrackingEnabled\",\n        \"GroupTaxesOnBill\"\n      ]\n    },\n    \"IsPortfolio\": false,\n    \"Id\": \"851df8c8-90f2-4c4a-8e01-a4fc46b25178\",\n    \"ExternalIdentifier\": null,\n    \"HoldingKey\": \"CA123\",\n    \"ChainId\": \"8ddea57b-6a5c-4eec-8c4c-24467dce118e\",\n    \"ChainName\": \"Connector API Chain\",\n    \"CreatedUtc\": \"2015-07-07T13:33:17Z\",\n    \"UpdatedUtc\": \"2015-07-07T13:33:17Z\",\n    \"Name\": \"Connector API Hotel\",\n    \"ShortName\": null,\n    \"TimeZoneIdentifier\": \"Europe/Budapest\",\n    \"LegalEnvironmentCode\": \"UK\",\n    \"AccommodationEnvironmentCode\": null,\n    \"AccountingEnvironmentCode\": null,\n    \"TaxEnvironmentCode\": null,\n    \"DefaultLanguageCode\": \"en-US\",\n    \"EditableHistoryInterval\": \"P0M7DT0H0M0S\",\n    \"AccountingEditableHistoryInterval\": \"P0M7DT0H0M0S\",\n    \"OperationalEditableHistoryInterval\": \"P0M5DT0H0M0S\",\n    \"BusinessDayClosingOffset\": null,\n    \"WebsiteUrl\": \"https://en.wikipedia.org/wiki/St._Vitus_Cathedral\",\n    \"Email\": \"charging-api@mews.li\",\n    \"Phone\": \"00000 123 456 789\",\n    \"LogoImageId\": null,\n    \"CoverImageId\": null,\n    \"Pricing\": \"Gross\",\n    \"TaxPrecision\": null,\n    \"AddressId\": \"c556f56e-713e-4102-9de5-0e853b5a8586\",\n    \"Address\": {\n      \"Id\": \"8c2c4371-5d42-40a9-b551-ab0b00d75076\",\n      \"Line1\": \"I.P. Pavlova 5\",\n      \"Line2\": null,\n      \"City\": \"Prague\",\n      \"PostalCode\": \"1200\",\n      \"CountryCode\": \"CZ\",\n      \"CountrySubdivisionCode\": null,\n      \"Latitude\": 14.429645,\n      \"Longitude\": 50.075181\n    },\n    \"GroupNames\": [\n      \"Connector API Group\"\n    ],\n    \"Subscription\": {\n      \"TaxIdentifier\": \"123456789 RC 0001\"\n    }\n  },\n  \"Service\": {\n    \"Id\": \"bd26d8db-86da-4f96-9efc-e5a4654a4a94\",\n    \"EnterpriseId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n    \"IsActive\": true,\n    \"Name\": \"Accommodation\",\n    \"Names\": {\n      \"en-GB\": \"Accommodation\"\n    },\n    \"StartTime\": \"PT14H\",\n    \"EndTime\": \"PT12H\",\n    \"Options\": {\n      \"BillAsPackage\": false\n    },\n    \"Promotions\": {\n      \"BeforeCheckIn\": false,\n      \"AfterCheckIn\": false,\n      \"DuringStay\": false,\n      \"BeforeCheckOut\": false,\n      \"AfterCheckOut\": false,\n      \"DuringCheckOut\": false\n    },\n    \"Type\": \"Reservable\",\n    \"Ordering\": 0,\n    \"Data\": null,\n    \"ExternalIdentifier\": null,\n    \"CreatedUtc\": \"2023-10-01T11:48:57Z\",\n    \"UpdatedUtc\": \"2023-10-28T11:48:57Z\"\n  },\n  \"PaymentCardStorage\": null,\n  \"IsIdentityDocumentNumberRequired\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3a80d8f0-a82e-474c-8754-988d8cd3ca53",
+              "name": "Server has successfully fulfilled the request and there is no additional information to send back.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "configuration",
+                    "get"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"EnterpriseId\": \"851df8c8-90f2-4c4a-8e01-a4fc46b25178\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b0403609-e8aa-4e21-be85-1eaa46aacbe2",
+              "name": "Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "configuration",
+                    "get"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"EnterpriseId\": \"851df8c8-90f2-4c4a-8e01-a4fc46b25178\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b3179490-888f-40d3-b149-5ed93ab2013f",
+              "name": "Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "configuration",
+                    "get"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"EnterpriseId\": \"851df8c8-90f2-4c4a-8e01-a4fc46b25178\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4f89850d-b711-401a-a2ee-389081b6cd79",
+              "name": "Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "configuration",
+                    "get"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"EnterpriseId\": \"851df8c8-90f2-4c4a-8e01-a4fc46b25178\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ec320007-ab7b-4ded-a7fd-b10fc0d0fa0a",
+              "name": "Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-timeouts)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "configuration",
+                    "get"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"EnterpriseId\": \"851df8c8-90f2-4c4a-8e01-a4fc46b25178\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Request Timeout",
+              "code": 408,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f9649a39-7dc2-4666-b4c1-b8716b2630fe",
+              "name": "Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-limits).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "configuration",
+                    "get"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"EnterpriseId\": \"851df8c8-90f2-4c4a-8e01-a4fc46b25178\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "42cd8679-a8a6-4772-969a-d4f44b90b4c7",
+              "name": "Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.com/MewsSystems/gitbook-connector-api).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "configuration",
+                    "get"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"EnterpriseId\": \"851df8c8-90f2-4c4a-8e01-a4fc46b25178\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "bad61823-f445-4fed-86ef-bab897a43a2d",
+      "name": "Countries",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "78dd5a89-a62d-4dc3-9e28-07a7c200b4e0",
+          "name": "Mews Get All Countries",
+          "request": {
+            "name": "Mews Get All Countries",
+            "description": {
+              "content": "Returns all countries supported by the API.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "connector",
+                "v1",
+                "countries",
+                "getAll"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "0d451308-8a3a-4758-90a7-ff04b39697f5",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "countries",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Countries\": [\n    {\n      \"Code\": \"GB\",\n      \"EnglishName\": \"United Kingdom of Great Britain and Northern Ireland\"\n    },\n    {\n      \"Code\": \"US\",\n      \"EnglishName\": \"United States of America\"\n    }\n  ],\n  \"CountrySubdivisions\": [\n    {\n      \"Code\": \"AU-NSW\",\n      \"CountryCode\": \"AU\",\n      \"EnglishName\": \"New South Wales\"\n    },\n    {\n      \"Code\": \"AU-QLD\",\n      \"CountryCode\": \"AU\",\n      \"EnglishName\": \"Queensland\"\n    }\n  ],\n  \"CountryAlliances\": [\n    {\n      \"Code\": \"SCHENGEN\",\n      \"EnglishName\": \"Schengen Area\",\n      \"CountryCodes\": [\n        \"AT\",\n        \"BE\",\n        \"CZ\",\n        \"...\"\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c211e473-cc77-4e48-adcf-2c33a5aed461",
+              "name": "Server has successfully fulfilled the request and there is no additional information to send back.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "countries",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ada3cd28-7603-4c8a-b7c5-69afb8e485ec",
+              "name": "Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "countries",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c46ddc94-9757-4ec9-a0ff-ad9acbf141c6",
+              "name": "Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "countries",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "929f8687-d973-4516-89cb-1849445bdbfc",
+              "name": "Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "countries",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d5b21405-dc83-484e-96b7-1d94b5c7c23e",
+              "name": "Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-timeouts)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "countries",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Request Timeout",
+              "code": 408,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6b306547-1309-45b8-b842-12a2004219ac",
+              "name": "Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-limits).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "countries",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "de956359-6742-4363-8df7-67277f924dea",
+              "name": "Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.com/MewsSystems/gitbook-connector-api).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "countries",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "c38b95cb-cb0f-4b0a-95e3-426c180d110e",
+      "name": "Currencies",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a99c30fd-4e49-441c-a5eb-cc0f3c9583ba",
+          "name": "Mews Get All Currencies",
+          "request": {
+            "name": "Mews Get All Currencies",
+            "description": {
+              "content": "Returns all currencies supported by the API.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "connector",
+                "v1",
+                "currencies",
+                "getAll"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1e73366b-f088-482a-8fbd-f86141951fb4",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "currencies",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Currencies\": [\n    {\n      \"Code\": \"USD\",\n      \"Precision\": 2\n    },\n    {\n      \"Code\": \"GBP\",\n      \"Precision\": 2\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "27d00997-c7fc-48f4-a7cc-342e2ce277c1",
+              "name": "Server has successfully fulfilled the request and there is no additional information to send back.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "currencies",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "683b3876-3c24-443a-9ecb-5aede42757ee",
+              "name": "Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "currencies",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c911ee30-45ad-4fcc-a10c-648a103a83be",
+              "name": "Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "currencies",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "04e2cb49-b556-4fce-8d3f-0fc127e878d9",
+              "name": "Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "currencies",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6c66ce14-459c-44d4-97f9-69506d2f7426",
+              "name": "Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-timeouts)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "currencies",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Request Timeout",
+              "code": 408,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "10ede945-9e36-4ff7-a03a-154aa456138a",
+              "name": "Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-limits).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "currencies",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "eb4306c4-0f01-45e2-9754-0009cce09fbe",
+              "name": "Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.com/MewsSystems/gitbook-connector-api).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "currencies",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "b16c28e5-5ce4-4a6a-b613-95230b51e9ba",
+      "name": "Departments",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2c7c74df-201a-46c9-9828-6d8731f3fa2c",
+          "name": "Mews Get All Departments",
+          "request": {
+            "name": "Mews Get All Departments",
+            "description": {
+              "content": "Returns all departments of an enterprise associated with the connector integration.\nNote this operation uses [Pagination](https://mews-systems.gitbook.io/connector-api/guidelines/pagination/) and supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "connector",
+                "v1",
+                "departments",
+                "getAll"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"DepartmentIds\": [\n    \"<uuid>\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "48fde826-b036-4271-8936-1a2cb1ed5d58",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "departments",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"EnterpriseIds\": [\n    \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n    \"4d0201db-36f5-428b-8d11-4f0a65e960cc\"\n  ],\n  \"DepartmentIds\": [\n    \"98776d06-60e4-495f-82f1-95ab2f644d63\",\n    \"915fbb82-de35-48a0-9e9b-f4a7eac711bb\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"2023-10-01T00:00:00Z\",\n    \"EndUtc\": \"2023-10-31T00:00:00Z\"\n  },\n  \"Limitation\": {\n    \"Count\": 10\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Departments\": [\n    {\n      \"Id\": \"98776d06-60e4-495f-82f1-95ab2f644d63\",\n      \"EnterpriseId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n      \"IsActive\": true,\n      \"Name\": \"Sales\",\n      \"CreatedUtc\": \"2023-10-01T11:48:57Z\",\n      \"UpdatedUtc\": \"2023-10-28T11:48:57Z\"\n    },\n    {\n      \"Id\": \"915fbb82-de35-48a0-9e9b-f4a7eac711bb\",\n      \"EnterpriseId\": \"4d0201db-36f5-428b-8d11-4f0a65e960cc\",\n      \"IsActive\": true,\n      \"Name\": \"Housekeeping\",\n      \"CreatedUtc\": \"2023-10-01T11:48:57Z\",\n      \"UpdatedUtc\": \"2023-10-28T11:48:57Z\"\n    }\n  ],\n  \"Cursor\": \"915fbb82-de35-48a0-9e9b-f4a7eac711bb\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "374bbf08-6f5e-4e12-8002-79c327e7e6fa",
+              "name": "Server has successfully fulfilled the request and there is no additional information to send back.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "departments",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"EnterpriseIds\": [\n    \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n    \"4d0201db-36f5-428b-8d11-4f0a65e960cc\"\n  ],\n  \"DepartmentIds\": [\n    \"98776d06-60e4-495f-82f1-95ab2f644d63\",\n    \"915fbb82-de35-48a0-9e9b-f4a7eac711bb\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"2023-10-01T00:00:00Z\",\n    \"EndUtc\": \"2023-10-31T00:00:00Z\"\n  },\n  \"Limitation\": {\n    \"Count\": 10\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dba9a4af-60b0-4330-a590-334e509b9be7",
+              "name": "Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "departments",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"EnterpriseIds\": [\n    \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n    \"4d0201db-36f5-428b-8d11-4f0a65e960cc\"\n  ],\n  \"DepartmentIds\": [\n    \"98776d06-60e4-495f-82f1-95ab2f644d63\",\n    \"915fbb82-de35-48a0-9e9b-f4a7eac711bb\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"2023-10-01T00:00:00Z\",\n    \"EndUtc\": \"2023-10-31T00:00:00Z\"\n  },\n  \"Limitation\": {\n    \"Count\": 10\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "15607245-1791-4e63-8904-7c57da282429",
+              "name": "Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "departments",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"EnterpriseIds\": [\n    \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n    \"4d0201db-36f5-428b-8d11-4f0a65e960cc\"\n  ],\n  \"DepartmentIds\": [\n    \"98776d06-60e4-495f-82f1-95ab2f644d63\",\n    \"915fbb82-de35-48a0-9e9b-f4a7eac711bb\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"2023-10-01T00:00:00Z\",\n    \"EndUtc\": \"2023-10-31T00:00:00Z\"\n  },\n  \"Limitation\": {\n    \"Count\": 10\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fa274924-88e7-4dfc-ab97-d431c5608c27",
+              "name": "Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "departments",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"EnterpriseIds\": [\n    \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n    \"4d0201db-36f5-428b-8d11-4f0a65e960cc\"\n  ],\n  \"DepartmentIds\": [\n    \"98776d06-60e4-495f-82f1-95ab2f644d63\",\n    \"915fbb82-de35-48a0-9e9b-f4a7eac711bb\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"2023-10-01T00:00:00Z\",\n    \"EndUtc\": \"2023-10-31T00:00:00Z\"\n  },\n  \"Limitation\": {\n    \"Count\": 10\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8e4b2eac-119f-4473-83fe-f36756d9aaf6",
+              "name": "Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-timeouts)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "departments",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"EnterpriseIds\": [\n    \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n    \"4d0201db-36f5-428b-8d11-4f0a65e960cc\"\n  ],\n  \"DepartmentIds\": [\n    \"98776d06-60e4-495f-82f1-95ab2f644d63\",\n    \"915fbb82-de35-48a0-9e9b-f4a7eac711bb\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"2023-10-01T00:00:00Z\",\n    \"EndUtc\": \"2023-10-31T00:00:00Z\"\n  },\n  \"Limitation\": {\n    \"Count\": 10\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Request Timeout",
+              "code": 408,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d65877a4-82b7-4ae7-adff-c050ee2345c4",
+              "name": "Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-limits).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "departments",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"EnterpriseIds\": [\n    \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n    \"4d0201db-36f5-428b-8d11-4f0a65e960cc\"\n  ],\n  \"DepartmentIds\": [\n    \"98776d06-60e4-495f-82f1-95ab2f644d63\",\n    \"915fbb82-de35-48a0-9e9b-f4a7eac711bb\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"2023-10-01T00:00:00Z\",\n    \"EndUtc\": \"2023-10-31T00:00:00Z\"\n  },\n  \"Limitation\": {\n    \"Count\": 10\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "15a55ddb-6ada-474e-8b78-7351d8cf380f",
+              "name": "Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.com/MewsSystems/gitbook-connector-api).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "departments",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"EnterpriseIds\": [\n    \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n    \"4d0201db-36f5-428b-8d11-4f0a65e960cc\"\n  ],\n  \"DepartmentIds\": [\n    \"98776d06-60e4-495f-82f1-95ab2f644d63\",\n    \"915fbb82-de35-48a0-9e9b-f4a7eac711bb\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"2023-10-01T00:00:00Z\",\n    \"EndUtc\": \"2023-10-31T00:00:00Z\"\n  },\n  \"Limitation\": {\n    \"Count\": 10\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "1926f992-19d8-43e3-b7ba-5a290deeb674",
+      "name": "Enterprises",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1db0e2ce-26a5-4c45-9387-dec89497a4ec",
+          "name": "Mews Get All Enterprises",
+          "request": {
+            "name": "Mews Get All Enterprises",
+            "description": {
+              "content": "Returns all enterprises within scope of the `Access Token`, optionally filtered by enterprise identifiers and external identifiers. Note this operation uses [Pagination](https://mews-systems.gitbook.io/connector-api/guidelines/pagination/) and supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property/).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "connector",
+                "v1",
+                "enterprises",
+                "getAll"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"ExternalIdentifiers\": [\n    \"<string>\"\n  ],\n  \"LinkedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2eec5791-95b7-4428-82ec-b2fdf7d0b91e",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "enterprises",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"EnterpriseIds\": [\n    \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n    \"4d0201db-36f5-428b-8d11-4f0a65e960cc\"\n  ],\n  \"ExternalIdentifiers\": [\n    \"Enterprise2023\"\n  ],\n  \"LinkedUtc\": {\n    \"StartUtc\": \"2023-06-01T00:00:00Z\",\n    \"EndUtc\": \"2023-06-06T00:00:00Z\"\n  },\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"2023-10-01T00:00:00Z\",\n    \"EndUtc\": \"2023-10-31T00:00:00Z\"\n  },\n  \"Limitation\": {\n    \"Count\": 100,\n    \"Cursor\": \"4d0201db-36f5-428b-8d11-4f0a65e960cc\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Enterprises\": [\n    {\n      \"LinkedUtc\": \"2023-06-01T00:00:00Z\",\n      \"Id\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n      \"ExternalIdentifier\": \"Enterprise2023\",\n      \"HoldingKey\": \"CA123\",\n      \"ChainId\": \"2f6be44e-9881-4b12-aefe-afce011a9d67\",\n      \"ChainName\": \"Connector API Chain\",\n      \"CreatedUtc\": \"2022-03-23T17:12:06Z\",\n      \"UpdatedUtc\": \"2022-03-23T17:12:06Z\",\n      \"Name\": \"Sample Portfolio Hotel\",\n      \"ShortName\": null,\n      \"TimeZoneIdentifier\": \"Europe/Budapest\",\n      \"LegalEnvironmentCode\": \"DE-2020-1\",\n      \"AccommodationEnvironmentCode\": \"DE\",\n      \"AccountingEnvironmentCode\": \"DE\",\n      \"TaxEnvironmentCode\": \"DE-2020-1\",\n      \"DefaultLanguageCode\": \"en-US\",\n      \"EditableHistoryInterval\": null,\n      \"AccountingEditableHistoryInterval\": \"P0M7DT0H0M0S\",\n      \"OperationalEditableHistoryInterval\": \"P0M5DT0H0M0S\",\n      \"BusinessDayClosingOffset\": null,\n      \"WebsiteUrl\": \"https://www.sample-portfolio-hotel-10004.com/\",\n      \"Email\": \"email@sample-portfolio-hotel.com\",\n      \"Phone\": \"(555) 555-1234\",\n      \"LogoImageId\": null,\n      \"CoverImageId\": null,\n      \"Pricing\": \"Gross\",\n      \"TaxPrecision\": 2,\n      \"AddressId\": \"31c505e9-9858-4d2f-9eab-afce011c4f47\",\n      \"Address\": {\n        \"Id\": \"8c2c4371-5d42-40a9-b551-ab0b00d75076\",\n        \"Line1\": \"I.P. Pavlova 5\",\n        \"Line2\": null,\n        \"City\": \"Prague\",\n        \"PostalCode\": \"1200\",\n        \"CountryCode\": \"CZ\",\n        \"CountrySubdivisionCode\": null,\n        \"Latitude\": 14.429645,\n        \"Longitude\": 50.075181\n      },\n      \"GroupNames\": [\n        \"Sample Group Name\"\n      ],\n      \"Subscription\": {\n        \"TaxIdentifier\": \"123456789 RC 0001\"\n      }\n    }\n  ],\n  \"Cursor\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9b1fffc8-4f38-48f0-9b17-0f697cd00bdd",
+              "name": "Server has successfully fulfilled the request and there is no additional information to send back.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "enterprises",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"EnterpriseIds\": [\n    \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n    \"4d0201db-36f5-428b-8d11-4f0a65e960cc\"\n  ],\n  \"ExternalIdentifiers\": [\n    \"Enterprise2023\"\n  ],\n  \"LinkedUtc\": {\n    \"StartUtc\": \"2023-06-01T00:00:00Z\",\n    \"EndUtc\": \"2023-06-06T00:00:00Z\"\n  },\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"2023-10-01T00:00:00Z\",\n    \"EndUtc\": \"2023-10-31T00:00:00Z\"\n  },\n  \"Limitation\": {\n    \"Count\": 100,\n    \"Cursor\": \"4d0201db-36f5-428b-8d11-4f0a65e960cc\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f376d7b2-49ce-4194-8542-156529b895eb",
+              "name": "Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "enterprises",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"EnterpriseIds\": [\n    \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n    \"4d0201db-36f5-428b-8d11-4f0a65e960cc\"\n  ],\n  \"ExternalIdentifiers\": [\n    \"Enterprise2023\"\n  ],\n  \"LinkedUtc\": {\n    \"StartUtc\": \"2023-06-01T00:00:00Z\",\n    \"EndUtc\": \"2023-06-06T00:00:00Z\"\n  },\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"2023-10-01T00:00:00Z\",\n    \"EndUtc\": \"2023-10-31T00:00:00Z\"\n  },\n  \"Limitation\": {\n    \"Count\": 100,\n    \"Cursor\": \"4d0201db-36f5-428b-8d11-4f0a65e960cc\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3cde84e8-4dff-42cc-8f47-a537983dfa5b",
+              "name": "Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "enterprises",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"EnterpriseIds\": [\n    \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n    \"4d0201db-36f5-428b-8d11-4f0a65e960cc\"\n  ],\n  \"ExternalIdentifiers\": [\n    \"Enterprise2023\"\n  ],\n  \"LinkedUtc\": {\n    \"StartUtc\": \"2023-06-01T00:00:00Z\",\n    \"EndUtc\": \"2023-06-06T00:00:00Z\"\n  },\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"2023-10-01T00:00:00Z\",\n    \"EndUtc\": \"2023-10-31T00:00:00Z\"\n  },\n  \"Limitation\": {\n    \"Count\": 100,\n    \"Cursor\": \"4d0201db-36f5-428b-8d11-4f0a65e960cc\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "db460597-ae72-491c-92af-c59701b9d23e",
+              "name": "Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "enterprises",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"EnterpriseIds\": [\n    \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n    \"4d0201db-36f5-428b-8d11-4f0a65e960cc\"\n  ],\n  \"ExternalIdentifiers\": [\n    \"Enterprise2023\"\n  ],\n  \"LinkedUtc\": {\n    \"StartUtc\": \"2023-06-01T00:00:00Z\",\n    \"EndUtc\": \"2023-06-06T00:00:00Z\"\n  },\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"2023-10-01T00:00:00Z\",\n    \"EndUtc\": \"2023-10-31T00:00:00Z\"\n  },\n  \"Limitation\": {\n    \"Count\": 100,\n    \"Cursor\": \"4d0201db-36f5-428b-8d11-4f0a65e960cc\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3c63ddfd-72b6-4a1e-a2b9-3ae075536962",
+              "name": "Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-timeouts)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "enterprises",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"EnterpriseIds\": [\n    \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n    \"4d0201db-36f5-428b-8d11-4f0a65e960cc\"\n  ],\n  \"ExternalIdentifiers\": [\n    \"Enterprise2023\"\n  ],\n  \"LinkedUtc\": {\n    \"StartUtc\": \"2023-06-01T00:00:00Z\",\n    \"EndUtc\": \"2023-06-06T00:00:00Z\"\n  },\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"2023-10-01T00:00:00Z\",\n    \"EndUtc\": \"2023-10-31T00:00:00Z\"\n  },\n  \"Limitation\": {\n    \"Count\": 100,\n    \"Cursor\": \"4d0201db-36f5-428b-8d11-4f0a65e960cc\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Request Timeout",
+              "code": 408,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "07ffaaf7-d81a-4a6f-abbb-f3855209ce0c",
+              "name": "Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-limits).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "enterprises",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"EnterpriseIds\": [\n    \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n    \"4d0201db-36f5-428b-8d11-4f0a65e960cc\"\n  ],\n  \"ExternalIdentifiers\": [\n    \"Enterprise2023\"\n  ],\n  \"LinkedUtc\": {\n    \"StartUtc\": \"2023-06-01T00:00:00Z\",\n    \"EndUtc\": \"2023-06-06T00:00:00Z\"\n  },\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"2023-10-01T00:00:00Z\",\n    \"EndUtc\": \"2023-10-31T00:00:00Z\"\n  },\n  \"Limitation\": {\n    \"Count\": 100,\n    \"Cursor\": \"4d0201db-36f5-428b-8d11-4f0a65e960cc\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "89678dcc-95c2-4f32-8a32-13a3f97db4b4",
+              "name": "Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.com/MewsSystems/gitbook-connector-api).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "enterprises",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"EnterpriseIds\": [\n    \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n    \"4d0201db-36f5-428b-8d11-4f0a65e960cc\"\n  ],\n  \"ExternalIdentifiers\": [\n    \"Enterprise2023\"\n  ],\n  \"LinkedUtc\": {\n    \"StartUtc\": \"2023-06-01T00:00:00Z\",\n    \"EndUtc\": \"2023-06-06T00:00:00Z\"\n  },\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"2023-10-01T00:00:00Z\",\n    \"EndUtc\": \"2023-10-31T00:00:00Z\"\n  },\n  \"Limitation\": {\n    \"Count\": 100,\n    \"Cursor\": \"4d0201db-36f5-428b-8d11-4f0a65e960cc\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "43c45a19-addf-48b0-abdb-153a6b11fd55",
+      "name": "Exchange rates",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f51aa0d2-e5bb-4c9c-b89e-ef34a8a13c70",
+          "name": "Mews Get All Exchange Rates",
+          "request": {
+            "name": "Mews Get All Exchange Rates",
+            "description": {
+              "content": "Returns all available exchange rates among currencies of the [Enterprise](https://mews-systems.gitbook.io/connector-api/operations/configuration/#enterprise).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "connector",
+                "v1",
+                "exchangeRates",
+                "getAll"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Ids\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"EnterpriseIds\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "9d092533-e83b-473b-a04e-16ce281894c1",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "exchangeRates",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"ExchangeRates\": [\n    {\n      \"SourceCurrency\": \"EUR\",\n      \"TargetCurrency\": \"GBP\",\n      \"Value\": 0.8505342\n    },\n    {\n      \"SourceCurrency\": \"GBP\",\n      \"TargetCurrency\": \"EUR\",\n      \"Value\": 1.1757317\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f7fcb587-6a92-4930-bfc9-278ce27c90c9",
+              "name": "Server has successfully fulfilled the request and there is no additional information to send back.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "exchangeRates",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bc282234-4300-4fd4-b34c-959badd554d8",
+              "name": "Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "exchangeRates",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e2b7ad95-6758-4316-8c04-dffe6b905a8e",
+              "name": "Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "exchangeRates",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0ba3432e-158c-4e1e-887a-cbbe117767c5",
+              "name": "Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "exchangeRates",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e0598391-c995-4e39-ba11-eb9a7735cf21",
+              "name": "Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-timeouts)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "exchangeRates",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Request Timeout",
+              "code": 408,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "87c316f6-b82a-419e-9979-1396ca5cd2f6",
+              "name": "Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-limits).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "exchangeRates",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b1d69661-8962-4378-ae00-b4847ceaafa8",
+              "name": "Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.com/MewsSystems/gitbook-connector-api).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "exchangeRates",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "44dc56d0-92de-47c5-bf77-c3f006958ce7",
+      "name": "Languages",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6a3c9761-3e2a-48ec-a687-8cdee3c4cbf0",
+          "name": "Mews Get All Languages",
+          "request": {
+            "name": "Mews Get All Languages",
+            "description": {
+              "content": "Returns all languages supported by the API.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "connector",
+                "v1",
+                "languages",
+                "getAll"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a08a14e4-7bd6-4c4f-bb31-fb74ededd395",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "languages",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Languages\": [\n    {\n      \"Code\": \"zh-CN\",\n      \"EnglishName\": \"Chinese (Simplified)\",\n      \"FallbackLanguageCode\": \"en-US\",\n      \"LocalName\": \"中文\"\n    },\n    {\n      \"Code\": \"cs-CZ\",\n      \"EnglishName\": \"Czech\",\n      \"FallbackLanguageCode\": \"en-US\",\n      \"LocalName\": \"Čeština\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8ffbd4aa-3b64-41e7-bbad-48cae7b7232d",
+              "name": "Server has successfully fulfilled the request and there is no additional information to send back.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "languages",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0e95c87f-5389-45e5-95fa-53533cacc0b0",
+              "name": "Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "languages",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f6c69f29-84a2-4b1b-b928-2cfb3b6091d4",
+              "name": "Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "languages",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b526fddf-08a6-4eb8-a3e7-7e89dbaa0170",
+              "name": "Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "languages",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a0ef7311-748f-4829-b081-fd649286eb53",
+              "name": "Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-timeouts)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "languages",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Request Timeout",
+              "code": 408,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c413169e-ff09-4baf-b02a-aaf84ed8cc1a",
+              "name": "Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-limits).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "languages",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4b9fa937-fd51-4ecb-a3a3-e2d5d88742c5",
+              "name": "Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.com/MewsSystems/gitbook-connector-api).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "languages",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "89835397-dd97-43dd-ba90-3da8c39af008",
+          "name": "Mews Get Language Texts",
+          "request": {
+            "name": "Mews Get Language Texts",
+            "description": {
+              "content": "Returns translations of texts in the specified languages.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "connector",
+                "v1",
+                "languages",
+                "getTexts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"LanguageCodes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"Scope\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "7e46d0b7-b234-4c18-81b8-c348402db087",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "languages",
+                    "getTexts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"LanguageCodes\": [\n    \"en-US\",\n    \"cs-CZ\"\n  ],\n  \"Scope\": \"\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"LanguageTexts\": [\n    {\n      \"LanguageCode\": \"en-US\",\n      \"Texts\": {\n        \"Address\": \"Address\",\n        \"AddressLine1\": \"Address line 1\",\n        \"AddressLine2\": \"Address line 2\",\n        \"AdultPlural\": \"Adults\",\n        \"Apartment\": \"Apartment\",\n        \"ApartmentPlural\": \"Apartments\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ee0cc35e-d003-4eec-aa50-d1521a604abf",
+              "name": "Server has successfully fulfilled the request and there is no additional information to send back.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "languages",
+                    "getTexts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"LanguageCodes\": [\n    \"en-US\",\n    \"cs-CZ\"\n  ],\n  \"Scope\": \"\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3fb64ca8-d912-49ee-9768-4e98280f8237",
+              "name": "Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "languages",
+                    "getTexts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"LanguageCodes\": [\n    \"en-US\",\n    \"cs-CZ\"\n  ],\n  \"Scope\": \"\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "78198172-ceea-4e7e-8564-5fa68cd3bdfd",
+              "name": "Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "languages",
+                    "getTexts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"LanguageCodes\": [\n    \"en-US\",\n    \"cs-CZ\"\n  ],\n  \"Scope\": \"\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f087ad7a-fe67-47fc-8cf8-1b5b7dd2ea99",
+              "name": "Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "languages",
+                    "getTexts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"LanguageCodes\": [\n    \"en-US\",\n    \"cs-CZ\"\n  ],\n  \"Scope\": \"\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b090131a-d7cf-41dc-b98d-0e1a05c70435",
+              "name": "Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-timeouts)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "languages",
+                    "getTexts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"LanguageCodes\": [\n    \"en-US\",\n    \"cs-CZ\"\n  ],\n  \"Scope\": \"\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Request Timeout",
+              "code": 408,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5acbda5f-d2c3-4b4f-bd39-cb2aa6743fc6",
+              "name": "Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-limits).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "languages",
+                    "getTexts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"LanguageCodes\": [\n    \"en-US\",\n    \"cs-CZ\"\n  ],\n  \"Scope\": \"\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "31715a80-a17d-49a5-826e-1a9810b6e3c7",
+              "name": "Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.com/MewsSystems/gitbook-connector-api).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "languages",
+                    "getTexts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"LanguageCodes\": [\n    \"en-US\",\n    \"cs-CZ\"\n  ],\n  \"Scope\": \"\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.mews.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "ClientToken"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "4e367910-da34-4202-8ad0-3606ed69b81f",
+    "name": "Mews Connector API — Enterprise Configuration",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "General-purpose API that enables partners of Mews to access data and services in Mews Operations This modular spec covers the Enterprise Configuration domain (8 operations).\n\nContact Support:\n Name: Partner success\n Email: partnersuccess@mews.com",
+      "type": "text/plain"
+    }
+  }
+}

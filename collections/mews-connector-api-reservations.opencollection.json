@@ -1,0 +1,774 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mews Connector API — Reservations and Availability",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "ClientToken",
+      "value": "{{ClientToken}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Availability adjustments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Mews Get All Availability Adjustments",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/availabilityAdjustments/getAll",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns all availability adjustments.\nNote this operation uses [Pagination](https://mews-systems.gitbook.io/connector-api/guidelines/pagination/) and supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property)."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Availability blocks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Mews Delete Availability Blocks",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/availabilityBlocks/delete",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Delete availability blocks. Note that an availability block containing active reservations (reservations which are not Canceled) cannot be deleted. Note this operation supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property/)."
+        },
+        {
+          "info": {
+            "name": "Mews Get All Availability Blocks",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/availabilityBlocks/getAll",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns all availability blocks filtered by services, unique identifiers and other filters. Note this operation uses [Pagination](https://mews-systems.gitbook.io/connector-api/guidelines/pagination/) and supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property/)."
+        },
+        {
+          "info": {
+            "name": "Mews Add Availability Blocks",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/availabilityBlocks/add",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds availability blocks which are used to group related `Availability updates`. This makes limiting public availability easier and more organized. Note this operation supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property/)."
+        },
+        {
+          "info": {
+            "name": "Mews Update Availability Blocks",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/availabilityBlocks/update",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates information about the specified `Availability block`. Note this operation supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property/)."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Business segments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Mews Get All Business Segments",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/businessSegments/getAll",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns all business segments. This operation supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property/)."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Cancellation policies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Mews Get All Cancellation Policies",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/cancellationPolicies/getAll",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "> ### Restricted!\n> This operation is currently in beta-test and as such it is subject to change.\nReturns all cancellation policies, filtered by services, rate groups and other filters. \nNote this operation uses [Pagination](https://mews-systems.gitbook.io/connector-api/guidelines/pagination/) and supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property)."
+        },
+        {
+          "info": {
+            "name": "Mews Get Cancellation Policies by Reservations",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/cancellationPolicies/getByReservations",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Gets cancellation policies for enterprise grouped by reservation for granular cancellation policies flow. This operation supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property/)."
+        },
+        {
+          "info": {
+            "name": "Mews Get Cancellation Policies by Rates",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/cancellationPolicies/getByRates",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Gets cancellation policies for enterprise grouped by rate for granular cancellation policies flow. This operation supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property/)."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Rate groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Mews Get All Rate Groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/rateGroups/getAll",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns all rate groups, filtered by unique identifiers and other filters. Note this operation uses [Pagination](https://mews-systems.gitbook.io/connector-api/guidelines/pagination/) and supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property)."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Rates",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Mews Update Rate Capacity Offset Pricing",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/rates/updateCapacityOffset",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates capacity offset based pricing for specified rates. This operation supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property/)."
+        },
+        {
+          "info": {
+            "name": "Mews Get All Rates",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/rates/getAll",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns all rates (pricing setups) of the default service provided by the enterprise. Note this operation uses [Pagination](https://mews-systems.gitbook.io/connector-api/guidelines/pagination/) and supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property/)."
+        },
+        {
+          "info": {
+            "name": "Mews Add Rates",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/rates/add",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds rates to the enterprise. Note this operation supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property). Rate type of `AvailabilityBlock` cannot be created via this operation."
+        },
+        {
+          "info": {
+            "name": "Mews Set Rates",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/rates/set",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds new Rates or updates existing ones if they are matched by `Id` or `ExternalIdentifier` property. This operation supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property/)."
+        },
+        {
+          "info": {
+            "name": "Mews Delete Rates",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/rates/delete",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deletes specified rates. This operation supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property/)."
+        },
+        {
+          "info": {
+            "name": "Mews Get Rate Pricing",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/rates/getPricing",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns prices for a given rate for a specified time interval. Prices will be returned for all service time units that the specified time interval intersects. So, for example, an interval `1st Jan 23:00 UTC - 1st Jan 23:00 UTC` will result in one price for `2nd Jan`, while Interval `1st Jan 23:00 UTC - 2nd Jan 23:00 UTC` will result in two prices for `2nd Jan` and `3rd Jan` (assuming a time unit period of \"Day\"). UTC timestamps must correspond to the start boundary of a time unit, e.g. 00:00 con"
+        },
+        {
+          "info": {
+            "name": "Mews Update Rate Price",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/rates/updatePrice",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates the prices for a given rate. You can make multiple price updates with one API call, and for each one specify the time interval for which the update applies, the price value and the applicable [resource category](https://mews-systems.gitbook.io/connector-api/operations/resources/#resource-category). The price will be updated for all service [time units](https://mews-systems.gitbook.io/connector-api/operations/services/#time-unit) that the specified time interval intersects. The price is p"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Reservation groups",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Mews Get All Reservation Groups",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/reservationGroups/getAll",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns all reservation groups, filtered by unique identifiers and other filters. Note this operation uses [Pagination](https://mews-systems.gitbook.io/connector-api/guidelines/pagination/) and supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property)."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Reservations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Mews Get Reservation Channel Manager Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/reservations/getChannelManagerDetails",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns channel manager-related details for the specified reservations. Note this operation supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property/)."
+        },
+        {
+          "info": {
+            "name": "Mews Get All Reservations (ver 2023-06-06)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/reservations/getAll/2023-06-06",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns all reservations within scope of the Access Token, filtered according to the specified parameters. This operation uses [Pagination](https://mews-systems.gitbook.io/connector-api/guidelines/pagination) and supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property).\n"
+        },
+        {
+          "info": {
+            "name": "Mews Get All Reservations (ver 2017-04-12)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/reservations/getAll",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Use [Get all reservations (ver 2023-06-06)](https://mews-systems.gitbook.io/connector-api/operations/reservations#get-all-reservations-ver-2023-06-06)."
+        },
+        {
+          "info": {
+            "name": "Mews Add Reservations",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/reservations/add",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds the specified reservations as a single group. If `GroupId` is specified, adds the reservations to an already existing group. Note that all reservations linked to an availability block must belong to the same reservation group."
+        },
+        {
+          "info": {
+            "name": "Mews Update Reservations",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/reservations/update",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates information about the specified reservations. Note that if any of the fields are sent as `null`, it won't clear the field in Mews. If the `Value` within the object is sent as `null`, the field will be cleared in Mews. Note this operation supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property)."
+        },
+        {
+          "info": {
+            "name": "Mews Confirm Reservation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/reservations/confirm",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Marks all specified reservations as `Confirmed`. Succeeds only if all confirmation conditions are met (the reservations have the `Optional` state). Note this operation supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property/)."
+        },
+        {
+          "info": {
+            "name": "Mews Start Reservation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/reservations/start",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Marks a reservation as `Started` (= checked in). Succeeds only if all starting conditions are met (the reservation has the `Confirmed` state, does not have start set to future, has an inspected room assigned etc). Note this operation supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property)."
+        },
+        {
+          "info": {
+            "name": "Mews Process Reservation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/reservations/process",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Marks a reservation as `Processed` (= checked out). Succeeds only if all processing conditions are met (the reservation has the `Started` state, balance of all reservation members is zero etc). Note this operation supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property).\n### Conditions\n- Reservation has already been checked in.\n- Reservation isn't alredy in `Processed` state.\n- Reservation can't be checked out sooner than last day of planned stay."
+        },
+        {
+          "info": {
+            "name": "Mews Cancel Reservation",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/reservations/cancel",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Cancels all reservation with specified identifiers. Succeeds only if the reservations are cancellable. Note this operation supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property)."
+        },
+        {
+          "info": {
+            "name": "Mews Update Reservation Customer",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/reservations/updateCustomer",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates customer of a reservation. Note this operation supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property)."
+        },
+        {
+          "info": {
+            "name": "Mews Update Reservation Interval",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/reservations/updateInterval",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates reservation interval (start, end or both). Note this operation supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property)."
+        },
+        {
+          "info": {
+            "name": "Mews Add Reservation Companion",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/reservations/addCompanion",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a customer as a companion to the reservation. Succeeds only if there is space for the new companion (count of current companions is less than `AdultCount + ChildCount`). Note this operation supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property/)."
+        },
+        {
+          "info": {
+            "name": "Mews Delete Reservation Companion",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/reservations/deleteCompanion",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Removes customer companionship from the reservation. Note that the customer profile stays untouched, only the relation between the customer and reservation is deleted. Note this operation supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property/)."
+        },
+        {
+          "info": {
+            "name": "Mews Add Reservation Product",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/reservations/addProduct",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a new product order of the specified product to the reservation."
+        },
+        {
+          "info": {
+            "name": "Mews Get All Reservation Items",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/reservations/getAllItems",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Use orderItems/getAll."
+        },
+        {
+          "info": {
+            "name": "Mews Price Reservations",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/reservations/price",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns prices of reservations with the specified parameters.\r\nNote that the operation doesn't check the maximum capacity of requested resource category. Requesting person counts above the capacity will return prices for the maximum available capacity.\r\n\r\nThis operation supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property/)."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Restrictions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Mews Set Restrictions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/restrictions/set",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds new restrictions with the specified conditions. For improved efficiency, multiple similar restrictions will be merged into a single restriction. A quota of 150,000 restrictions per service applies, although it is unlikely to be exceeded because of the merging algorithm. For more information about the merging algorithm, see [Restrictions concepts](https://mews-systems.gitbook.io/connector-api/concepts/restrictions).\r\n\r\nCare is needed to specify `StartUtc` and `EndUtc` in the correct format -"
+        },
+        {
+          "info": {
+            "name": "Mews Clear Restrictions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/restrictions/clear",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deletes restrictions that exactly match the specified conditions, using a splicing algorithm. This operation is intended to be used alongside [Set restrictions](https://mews-systems.gitbook.io/connector-api/operations/restrictions#set-restrictions). The specified conditions must be met exactly. The time interval, however, does not need to correspond to an existing restriction in the system, instead the API uses a splicing algorithm to work out how to divide up any existing restrictions to meet t"
+        },
+        {
+          "info": {
+            "name": "Mews Get All Restrictions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/restrictions/getAll",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns all restrictions of the default service provided by the enterprise.\nNote this operation uses [Pagination](https://mews-systems.gitbook.io/connector-api/guidelines/pagination/) and supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property)."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Routing rules",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Mews Get All Routing Rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/routingRules/getAll",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Use [Get all billing automations](https://mews-systems.gitbook.io/connector-api/operations/billingautomations#get-all-billing-automations)."
+        },
+        {
+          "info": {
+            "name": "Mews Add Routing Rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/routingRules/add",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Use [Add billing automations](https://mews-systems.gitbook.io/connector-api/operations/billingautomations#add-billing-automations)."
+        },
+        {
+          "info": {
+            "name": "Mews Update Routing Rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/routingRules/update",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Use [Update billing automations](https://mews-systems.gitbook.io/connector-api/operations/billingautomations#update-billing-automations) and [Update billing automations assignments](https://mews-systems.gitbook.io/connector-api/operations/billingautomations#update-billing-automations-assignments)."
+        },
+        {
+          "info": {
+            "name": "Mews Delete Routing Rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/routingRules/delete",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Use [Delete billing automations](https://mews-systems.gitbook.io/connector-api/operations/billingautomations#delete-billing-automations)."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Source assignments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Mews Get All Source Assignments",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/sourceAssignments/getAll",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns all Sources assigned to a Reservation group. Each reservation group can have multiple sources. Note this operation uses [Pagination](https://mews-systems.gitbook.io/connector-api/guidelines/pagination/) and supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property/)."
+        },
+        {
+          "info": {
+            "name": "Mews Get All Source Assignments (ver 2024-09-20)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/sourceAssignments/getAll/2024-09-20",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns all Sources assigned to Reservations. Each reservation can have multiple sources. Note this operation uses [Pagination](https://mews-systems.gitbook.io/connector-api/guidelines/pagination/) and supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property/)."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Sources",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Mews Get All Sources",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/sources/getAll",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns all sources from which reservations can originate. Note this operation uses [Pagination](https://mews-systems.gitbook.io/connector-api/guidelines/pagination/)."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,450 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mews Connector API — Operations and Messaging",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "ClientToken",
+      "value": "{{ClientToken}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Account notes",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Mews Get All Account Notes",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/accountNotes/getAll",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns all account notes of an account, optionally filtered by activity state, account identifiers, specific account note identifiers or other filter parameters.\nNote this operation uses [Pagination](https://mews-systems.gitbook.io/connector-api/guidelines/pagination/) and supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property)."
+        },
+        {
+          "info": {
+            "name": "Mews Add Account Notes",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/accountNotes/add",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds account notes to an account of the enterprise chain. Note this operation supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property)."
+        },
+        {
+          "info": {
+            "name": "Mews Update Account Notes",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/accountNotes/update",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates information about the specified account notes."
+        },
+        {
+          "info": {
+            "name": "Mews Delete Account Notes",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/accountNotes/delete",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Deletes specified account notes."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Mews Update Accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/accounts/update",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates one or more existing accounts in the system. Note this operation supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property)."
+        },
+        {
+          "info": {
+            "name": "Mews Upload and Link File to Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/accounts/addFile",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Attaches the specified file to the account. \r\n\r\nAllowed MIME types: `application/pdf`, `image/bmp`, `image/gif`, `image/jpeg`, `image/png`, `image/tiff`.\r\n\r\nNote this operation supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/guidelines/multi-property)."
+        },
+        {
+          "info": {
+            "name": "Mews Merge Accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/accounts/merge",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Merges two or more accounts of the same account type together. The given source accounts will be merged into the given target account and the merged account will keep the target account ID."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Commands",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Mews Get All Commands by Ids",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/commands/getAllByIds",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns all commands by their identifiers."
+        },
+        {
+          "info": {
+            "name": "Mews Get All Commands",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/commands/getAllActive",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns all commands the are still active from the client application point of view. That means commands that are in either `Pending` or `Received` state."
+        },
+        {
+          "info": {
+            "name": "Mews Add Printer Command",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/commands/addPrinter",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a new printer command representing printing of the specified document on a printer. Note this operation supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property)."
+        },
+        {
+          "info": {
+            "name": "Mews Add Key Cutter Command",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/commands/addKeyCutter",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a new key cutter command representing cutting of a key for the specified reservation. Note this operation supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property)."
+        },
+        {
+          "info": {
+            "name": "Mews Add Payment Command",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/commands/addPaymentTerminal",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "> ### Restricted!\r\n> This operation is part of a custom workflow for Mews partners such as POS systems to access Mews Payment Terminals.\r\n> See [Mews Payment Terminals](https://mews-systems.gitbook.io/connector-api/use-cases/mews-terminals).\r\n\r\nAdds a new Mews Payment Terminal command for taking a customer payment.\r\nThe operation instructs a specified terminal device to take a payment from a specified customer for a specified amount."
+        },
+        {
+          "info": {
+            "name": "Mews Update Command",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/commands/update",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates state of a command."
+        },
+        {
+          "info": {
+            "name": "Mews Get All Fiscal Machine Commands",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/fiscalMachineCommands/getAll",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns fiscal machine commands. The commands can be filtered either by unique command identifiers or by `Device` unique identifiers and command states. Note this operation supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property/)."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Devices",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Mews Get All Devices",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/devices/getAll",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns all devices in the enterprise."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Images",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Mews Get Image URLs",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/images/getUrls",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns URLs of the specified images."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Message threads",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Mews Get All Message Threads",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/messageThreads/getAll",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Get all message threads that you have created, filtered by time interval and/or specific message thread IDs. Note this operation uses [Pagination](https://mews-systems.gitbook.io/connector-api/guidelines/pagination/) and supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property)."
+        },
+        {
+          "info": {
+            "name": "Mews Add Message Thread",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/messageThreads/add",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new [Message thread](https://mews-systems.gitbook.io/connector-api/operations/#message-thread) on behalf of the specified customer, i.e. the sender of the original message in the message thread."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Messages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Mews Get All Messages",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/messages/getAll",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Get all messages belonging to the specified [Message threads](https://mews-systems.gitbook.io/connector-api/operations/messagethreads/#message-thread). Messages can only be returned for message threads you have created. Note this operation uses [Pagination](https://mews-systems.gitbook.io/connector-api/guidelines/pagination/) and supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property)."
+        },
+        {
+          "info": {
+            "name": "Mews Add Messages",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/messages/add",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add the specified messages to the specified [Message threads](https://mews-systems.gitbook.io/connector-api/operations/messagethreads/#message-thread). You can only add messages to message threads that you have created."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Rules",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Mews Get All Rules",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/rules/getAll",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns all rules applied with the reservations.\nNote this operation uses [Pagination](https://mews-systems.gitbook.io/connector-api/guidelines/pagination/) and supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property)."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Tasks",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Mews Get All Tasks",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/tasks/getAll",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns all tasks of the enterprise, filtered by identifiers or other filters."
+        },
+        {
+          "info": {
+            "name": "Mews Add Task",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/tasks/add",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a new task to the enterprise, optionally to a specified department."
+        },
+        {
+          "info": {
+            "name": "Mews Close Task",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/tasks/close",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Closes one or more tasks. Closed tasks are considered completed and not shown in active task lists."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,314 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Mews Connector API — Payments and Cashiers",
+    "version": "v1"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "ClientToken",
+      "value": "{{ClientToken}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Cashier transactions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Mews Get All Cashier Transactions",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/cashierTransactions/getAll",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns all cashier transactions. At least one of the filter parameters `CashierTransactionIds` or `CreatedUtc` must be specified in the request. Note this operation uses [Pagination](../guidelines/pagination.md) and supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property/)."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Cashiers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Mews Get All Cashiers",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/cashiers/getAll",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns all cashiers. Note this operation uses [Pagination](https://mews-systems.gitbook.io/connector-api/guidelines/pagination/) and supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property/)."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Credit cards",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Mews Get All Credit Cards",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/creditCards/getAll",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns all credit cards, possibly filtered by identifiers, [Customers](https://mews-systems.gitbook.io/connector-api/operations/customers/#customer) or other filters.\nNote this operation uses [Pagination](https://mews-systems.gitbook.io/connector-api/guidelines/pagination/) and supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property)."
+        },
+        {
+          "info": {
+            "name": "Mews Add Tokenized Credit Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/creditCards/addTokenized",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a new tokenized credit card to the specified customer. To be able to use this operation special permission has to be granted during certification. Note this operation supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property/)."
+        },
+        {
+          "info": {
+            "name": "Mews Charge Credit Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/creditCards/charge",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates payment for specified customer credit card and charges the credit card via a gateway. Note that the kind of the card has to be `Gateway`."
+        },
+        {
+          "info": {
+            "name": "Mews Disable Gateway Credit Card",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/creditCards/disable",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Disable an existing credit card in the system. Only gateway credit cards can be disabled. Note this operation supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property/)."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Payment method requests",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Mews Add Payment Method Request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/paymentMethodRequests/add",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a payment method request for the specified customer or company account to securely collect a payment method without charging the guest immediately. An optional email notification is sent to the account's email address or a specified override address.\r\nNote this operation supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property/)."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Payment requests",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Mews Get All Payment Requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/paymentRequests/getAll",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Get all payment requests belonging to the specified customer accounts. \nNote this operation uses [Pagination](https://mews-systems.gitbook.io/connector-api/guidelines/pagination/) and supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property)."
+        },
+        {
+          "info": {
+            "name": "Mews Add Payment Requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/paymentRequests/add",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a payment request to the specified [Customer](https://mews-systems.gitbook.io/connector-api/operations/customers/#customer). Note this operation supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property)."
+        },
+        {
+          "info": {
+            "name": "Mews Cancel Payment Requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/paymentRequests/cancel",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Cancels specified payment requests. Only payment requests which are in `Pending` state can be canceled."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Payments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Mews Get All Payments",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/payments/getAll",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns all payments in the system, filtered by various parameters. At least one filter parameter must be specified. Note this operation uses [Pagination](https://mews-systems.gitbook.io/connector-api/guidelines/pagination/) and supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property)."
+        },
+        {
+          "info": {
+            "name": "Mews Refund Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/payments/refund",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Refunds a specified payment on a specified account. A reason must be provided. Optionally, specify an amount for a partial refund. This operation supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property/).\r\n                                                   \r\n* **Payment types**: Only `CreditCardPayment` and `AlternativePayment` can be refunded. Other payment types will fail.\r\n* **Refund information**: The refund is a payment itself. To get more in"
+        },
+        {
+          "info": {
+            "name": "Mews Add Credit Card Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/payments/addCreditCard",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a new credit card payment to a bill of the specified customer. Note that the payment is added to open bill of the customer, either to the specified one or the default one. This operation only serves to record a credit card payment that has already been taken outside of Mews or Mews' payment terminal, and does not actually charge the customer's credit card. \nThe bill can then be closed manually by a Mews user, or automatically via API with the [Close bill](https://mews-systems.gitbook.io/con"
+        },
+        {
+          "info": {
+            "name": "Mews Add External Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/payments/addExternal",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a new external payment to a bill of the specified customer. An external payment represents a payment that is tracked outside of the system. Note this operation supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property/).\r\n\r\n**Prerequisites:** The external payment type must be enabled by the property in order to accept such payments in their Mews environment. Use [Get configuration](https://mews-systems.gitbook.io/connector-api/operations/config"
+        },
+        {
+          "info": {
+            "name": "Mews Add Alternative Payment",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/payments/addAlternative",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a new alternative payment to a specified customer.\n**Pre-requisites:** The property must have the relevant type of alternative payment method enabled in their Mews subscriptions in order to accept such payments in their Mews environment. Please ask the property to confirm."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Preauthorizations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Mews Get All Preauthorizations by Customers",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.mews.com/api/connector/v1/preauthorizations/getAllByCustomers",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Returns all preauthorizations of specified customers."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
