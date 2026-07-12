@@ -1,0 +1,34 @@
+generated: '2026-07-11'
+method: probed
+source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
+hosts:
+- host: www.mews.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep 21 01:01:40 2026 GMT
+  hsts: true
+  hsts_max_age: 63072000
+- host: developers.mews.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Sep  5 17:58:02 2026 GMT
+  hsts: false
+- host: docs.mews.com
+  https: true
+  tls_version: TLSv1.3
+  cert_expires: Aug 19 18:53:59 2026 GMT
+  hsts: true
+  hsts_max_age: 31536000
+domains:
+- domain: mews.com
+  dnssec: true
+  caa:
+  - 0 issuewild "ssl.com"
+  - 0 Issuewild "sectigo.com"
+  - 0 issue "amazon.com"
+  - 0 issue "comodoca.com"
+  - 0 issue "digicert.com; cansignhttpexchanges=yes"
+  - 0 issue "letsencrypt.org"
+  spf: true
+  dmarc: true
+  dmarc_policy: reject
