@@ -1,0 +1,586 @@
+openapi: 3.0.4
+info:
+  title: Mews Booking Engine API (Distributor) Account notes Languages API
+  version: v1
+  description: The Mews Booking Engine API (historically the Distributor API, served from /api/distributor/v1) lets developers build guest-facing booking engines that create reservations directly in Mews. It exposes enterprise configuration, availability, pricing, products, vouchers, payment cards, and reservation group creation for front-end client consumption.
+  x-generated-from: documentation
+  x-source-url: https://api.mews.com/Swagger/distributor/swagger.json
+  x-last-validated: '2026-06-02'
+servers:
+- url: https://api.mews.com
+  description: Production
+- url: https://api.mews-demo.com
+  description: Demo / sandbox
+security:
+- MewsClientToken: []
+  MewsAccessToken: []
+tags:
+- name: Languages
+paths:
+  /api/distributor/v1/languages/getAll:
+    post:
+      tags:
+      - Languages
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookingEngineParameters'
+            examples:
+              LanguagesGetAllRequestExample:
+                summary: Default languages_getAll request
+                x-microcks-default: true
+                value:
+                  Client: string
+                  LanguageCode: string
+                  CultureCode: string
+                  FullAmounts: true
+                  Session: string
+                  ConfigurationId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LanguageResult'
+              examples:
+                LanguagesGetAll200Example:
+                  summary: Default languages_getAll 200 response
+                  x-microcks-default: true
+                  value:
+                    Languages:
+                    - Code: string
+                      Name: Example Name
+                      DefaultCulture: string
+      operationId: languages_getAll
+      summary: Mews Get All
+      description: Get All via the Mews Booking Engine (Distributor) API languages resource.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/connector/v1/languages/getAll:
+    post:
+      tags:
+      - Languages
+      summary: Mews Get All Languages
+      description: Returns all languages supported by the API.
+      operationId: languages_getAll
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Parameters'
+            example:
+              ClientToken: E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D
+              AccessToken: C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D
+              Client: Sample Client 1.0.0
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LanguageResult_2'
+              example:
+                Languages:
+                - Code: zh-CN
+                  EnglishName: Chinese (Simplified)
+                  FallbackLanguageCode: en-US
+                  LocalName: 中文
+                - Code: cs-CZ
+                  EnglishName: Czech
+                  FallbackLanguageCode: en-US
+                  LocalName: Čeština
+        '400':
+          description: Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                LanguagesGetAll400Example:
+                  summary: Default languages_getAll 400 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '401':
+          description: Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                LanguagesGetAll401Example:
+                  summary: Default languages_getAll 401 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '403':
+          description: Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                LanguagesGetAll403Example:
+                  summary: Default languages_getAll 403 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '408':
+          description: Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-timeouts)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                LanguagesGetAll408Example:
+                  summary: Default languages_getAll 408 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '204':
+          description: Server has successfully fulfilled the request and there is no additional information to send back.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                LanguagesGetAll204Example:
+                  summary: Default languages_getAll 204 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '429':
+          description: Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-limits).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                LanguagesGetAll429Example:
+                  summary: Default languages_getAll 429 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '500':
+          description: Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.com/MewsSystems/gitbook-connector-api).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                LanguagesGetAll500Example:
+                  summary: Default languages_getAll 500 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/connector/v1/languages/getTexts:
+    post:
+      tags:
+      - Languages
+      summary: Mews Get Language Texts
+      description: Returns translations of texts in the specified languages.
+      operationId: languages_getTexts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LanguageTextParameters'
+            example:
+              ClientToken: E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D
+              AccessToken: C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D
+              Client: Sample Client 1.0.0
+              LanguageCodes:
+              - en-US
+              - cs-CZ
+              Scope: ''
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LanguageTextResult'
+              example:
+                LanguageTexts:
+                - LanguageCode: en-US
+                  Texts:
+                    Address: Address
+                    AddressLine1: Address line 1
+                    AddressLine2: Address line 2
+                    AdultPlural: Adults
+                    Apartment: Apartment
+                    ApartmentPlural: Apartments
+        '400':
+          description: Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                LanguagesGetTexts400Example:
+                  summary: Default languages_getTexts 400 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '401':
+          description: Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                LanguagesGetTexts401Example:
+                  summary: Default languages_getTexts 401 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '403':
+          description: Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                LanguagesGetTexts403Example:
+                  summary: Default languages_getTexts 403 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '408':
+          description: Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-timeouts)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                LanguagesGetTexts408Example:
+                  summary: Default languages_getTexts 408 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '204':
+          description: Server has successfully fulfilled the request and there is no additional information to send back.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                LanguagesGetTexts204Example:
+                  summary: Default languages_getTexts 204 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '429':
+          description: Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-limits).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                LanguagesGetTexts429Example:
+                  summary: Default languages_getTexts 429 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '500':
+          description: Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.com/MewsSystems/gitbook-connector-api).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                LanguagesGetTexts500Example:
+                  summary: Default languages_getTexts 500 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    Language_2:
+      title: Language
+      required:
+      - Code
+      - EnglishName
+      - LocalName
+      type: object
+      properties:
+        Code:
+          minLength: 1
+          type: string
+          description: Language-culture code of the language.
+          example: string
+        FallbackLanguageCode:
+          type: string
+          description: Language-culture code of the fallback language.
+          nullable: true
+          example: string
+        EnglishName:
+          minLength: 1
+          type: string
+          description: English name of the language.
+          example: Example Name
+        LocalName:
+          minLength: 1
+          type: string
+          description: Local name of the language.
+          example: Example Name
+      additionalProperties: false
+      x-schema-id: Language
+    ConnectorApiExceptionResult:
+      title: ConnectorApiExceptionResult
+      type: object
+      properties:
+        Message:
+          type: string
+          nullable: true
+          example: string
+        RequestId:
+          type: string
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Details:
+          nullable: true
+          example: string
+      additionalProperties: false
+      x-schema-id: ConnectorApiExceptionResult
+    LanguageResult:
+      title: LanguageResult
+      required:
+      - Languages
+      type: object
+      properties:
+        Languages:
+          type: array
+          items:
+            $ref: '#/components/schemas/Language'
+      additionalProperties: false
+      x-schema-id: LanguageResult
+    Parameters:
+      title: Parameters
+      required:
+      - AccessToken
+      - Client
+      - ClientToken
+      type: object
+      properties:
+        ClientToken:
+          minLength: 1
+          type: string
+          description: Token identifying the client application.
+          example: string
+        AccessToken:
+          minLength: 1
+          type: string
+          description: Access token of the client application.
+          example: string
+        Client:
+          minLength: 1
+          type: string
+          description: Name and version of the client application.
+          example: string
+      additionalProperties: false
+      x-schema-id: Parameters
+    LanguageTextParameters:
+      title: LanguageTextParameters
+      required:
+      - AccessToken
+      - Client
+      - ClientToken
+      - LanguageCodes
+      - Scope
+      type: object
+      properties:
+        ClientToken:
+          minLength: 1
+          type: string
+          description: Token identifying the client application.
+          example: string
+        AccessToken:
+          minLength: 1
+          type: string
+          description: Access token of the client application.
+          example: string
+        Client:
+          minLength: 1
+          type: string
+          description: Name and version of the client application.
+          example: string
+        LanguageCodes:
+          type: array
+          items:
+            type: string
+          description: Language-culture codes of the `Languages` whose texts to return.
+        Scope:
+          minLength: 1
+          type: string
+          description: Scope of texts to return.
+          example: string
+      additionalProperties: false
+      x-schema-id: LanguageTextParameters
+    Culture:
+      title: Culture
+      required:
+      - CurrencyDecimalSeparator
+      - CurrencyGroupSeparator
+      type: object
+      properties:
+        CurrencyDecimalSeparator:
+          minLength: 1
+          type: string
+          example: EUR
+        CurrencyGroupSeparator:
+          minLength: 1
+          type: string
+          example: EUR
+      additionalProperties: false
+      x-schema-id: Culture
+    LanguageTexts:
+      title: Language texts
+      required:
+      - LanguageCode
+      - Texts
+      type: object
+      properties:
+        LanguageCode:
+          minLength: 1
+          type: string
+          description: Language-culture code of the `Language`.
+          example: string
+        Texts:
+          title: Dictionary
+          type: object
+          additionalProperties:
+            type: string
+          description: Texts in the specified language by their keys.
+          x-schema-id: Dictionary
+      additionalProperties: false
+      x-schema-id: LanguageTexts
+    Language:
+      title: Language
+      required:
+      - Code
+      - DefaultCulture
+      - Name
+      type: object
+      properties:
+        Code:
+          minLength: 1
+          type: string
+          example: string
+        Name:
+          minLength: 1
+          type: string
+          example: Example Name
+        DefaultCulture:
+          allOf:
+          - $ref: '#/components/schemas/Culture'
+          example: string
+      additionalProperties: false
+      x-schema-id: Language
+    LanguageResult_2:
+      title: LanguageResult
+      required:
+      - Languages
+      type: object
+      properties:
+        Languages:
+          type: array
+          items:
+            $ref: '#/components/schemas/Language_2'
+          description: The supported languages.
+      additionalProperties: false
+      x-schema-id: LanguageResult
+    BookingEngineParameters:
+      title: BookingEngineParameters
+      required:
+      - Client
+      - ConfigurationId
+      - FullAmounts
+      type: object
+      properties:
+        Client:
+          minLength: 1
+          type: string
+          example: string
+        LanguageCode:
+          type: string
+          nullable: true
+          example: string
+        CultureCode:
+          type: string
+          nullable: true
+          example: string
+        FullAmounts:
+          type: boolean
+          example: true
+        Session:
+          type: string
+          nullable: true
+          example: string
+        ConfigurationId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      additionalProperties: false
+      x-schema-id: BookingEngineParameters
+    LanguageTextResult:
+      title: LanguageTextResult
+      required:
+      - LanguageTexts
+      type: object
+      properties:
+        LanguageTexts:
+          type: array
+          items:
+            $ref: '#/components/schemas/LanguageTexts'
+          description: Texts in the specified languages.
+      additionalProperties: false
+      x-schema-id: LanguageTextResult
+  securitySchemes:
+    MewsClientToken:
+      type: apiKey
+      in: header
+      name: ClientToken
+      description: Mews authentication is performed by supplying ClientToken, AccessToken and Client as fields in the JSON request body (not as HTTP headers). This securityScheme is a tooling-compatible representation of the ClientToken credential. ClientToken is unique to your application and identifies the API client.
+    MewsAccessToken:
+      type: apiKey
+      in: header
+      name: AccessToken
+      description: Tooling-compatible representation of the AccessToken credential, which is supplied in the JSON request body. AccessToken is unique to the connection with a property (enterprise) and identifies the property or properties whose data and services you can access. Portfolio Access Tokens enable multi-property access with a single token.

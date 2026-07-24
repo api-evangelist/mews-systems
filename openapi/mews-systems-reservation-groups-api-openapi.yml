@@ -1,0 +1,1066 @@
+openapi: 3.0.4
+info:
+  title: Mews Booking Engine API (Distributor) Account notes Reservation Groups API
+  version: v1
+  description: The Mews Booking Engine API (historically the Distributor API, served from /api/distributor/v1) lets developers build guest-facing booking engines that create reservations directly in Mews. It exposes enterprise configuration, availability, pricing, products, vouchers, payment cards, and reservation group creation for front-end client consumption.
+  x-generated-from: documentation
+  x-source-url: https://api.mews.com/Swagger/distributor/swagger.json
+  x-last-validated: '2026-06-02'
+servers:
+- url: https://api.mews.com
+  description: Production
+- url: https://api.mews-demo.com
+  description: Demo / sandbox
+security:
+- MewsClientToken: []
+  MewsAccessToken: []
+tags:
+- name: Reservation Groups
+paths:
+  /api/distributor/v1/reservationGroups/create:
+    post:
+      tags:
+      - Reservation Groups
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateReservationGroupParameters'
+            examples:
+              ReservationGroupsCreateRequestExample:
+                summary: Default reservationGroups_create request
+                x-microcks-default: true
+                value:
+                  Client: string
+                  LanguageCode: string
+                  CultureCode: string
+                  FullAmounts: true
+                  Session: string
+                  HotelId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                  ConfigurationId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                  AvailabilityBlockId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                  Customer: string
+                  Booker: string
+                  Reservations:
+                  - Id: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Identifier: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Number: '1001'
+                    StartUtc: '2026-06-02T14:30:00Z'
+                    EndUtc: '2026-06-02T14:30:00Z'
+                    VoucherCode: string
+                    AvailabilityBlockId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    RoomCategoryId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    RateId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Rate: string
+                    ProductIds:
+                    - 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    AdultCount: 1
+                    ChildCount: 1
+                    OccupancyData:
+                    - {}
+                    Notes: string
+                    Cost: string
+                    Amount: string
+                  CreditCardData: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReservationGroup'
+              examples:
+                ReservationGroupsCreate200Example:
+                  summary: Default reservationGroups_create 200 response
+                  x-microcks-default: true
+                  value:
+                    Id: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    CustomerId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Reservations:
+                    - Id: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                      Identifier: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                      Number: '1001'
+                      StartUtc: '2026-06-02T14:30:00Z'
+                      EndUtc: '2026-06-02T14:30:00Z'
+                      VoucherCode: string
+                      AvailabilityBlockId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                      RoomCategoryId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                      RateId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                      Rate: string
+                      ProductIds:
+                      - 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                      AdultCount: 1
+                      ChildCount: 1
+                      OccupancyData:
+                      - {}
+                      Notes: string
+                      Cost: string
+                      Amount: string
+                    PaymentRequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    TotalCost: string
+                    TotalAmount: string
+                    PaymentCardId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    CreditCardAvailable: true
+                    PaymentRequests:
+                    - Id: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                      ReservationGroupId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                      State: {}
+                    Payments:
+                    - Id: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                      EnterpriseId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                      PaymentRequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                      CreatedUtc: '2026-06-02T14:30:00Z'
+                      State: {}
+                      Amount: string
+                      ChargeAmount: string
+      operationId: reservationGroups_create
+      summary: Mews Create
+      description: Create via the Mews Booking Engine (Distributor) API reservationGroups resource.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/distributor/v1/reservationGroups/get:
+    post:
+      tags:
+      - Reservation Groups
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReservationGroupParameters'
+            examples:
+              ReservationGroupsGetRequestExample:
+                summary: Default reservationGroups_get request
+                x-microcks-default: true
+                value:
+                  Client: string
+                  LanguageCode: string
+                  CultureCode: string
+                  FullAmounts: true
+                  Session: string
+                  HotelId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                  ReservationGroupId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                  Extent: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReservationGroup'
+              examples:
+                ReservationGroupsGet200Example:
+                  summary: Default reservationGroups_get 200 response
+                  x-microcks-default: true
+                  value:
+                    Id: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    CustomerId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Reservations:
+                    - Id: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                      Identifier: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                      Number: '1001'
+                      StartUtc: '2026-06-02T14:30:00Z'
+                      EndUtc: '2026-06-02T14:30:00Z'
+                      VoucherCode: string
+                      AvailabilityBlockId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                      RoomCategoryId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                      RateId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                      Rate: string
+                      ProductIds:
+                      - 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                      AdultCount: 1
+                      ChildCount: 1
+                      OccupancyData:
+                      - {}
+                      Notes: string
+                      Cost: string
+                      Amount: string
+                    PaymentRequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    TotalCost: string
+                    TotalAmount: string
+                    PaymentCardId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    CreditCardAvailable: true
+                    PaymentRequests:
+                    - Id: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                      ReservationGroupId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                      State: {}
+                    Payments:
+                    - Id: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                      EnterpriseId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                      PaymentRequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                      CreatedUtc: '2026-06-02T14:30:00Z'
+                      State: {}
+                      Amount: string
+                      ChargeAmount: string
+      operationId: reservationGroups_get
+      summary: Mews Get
+      description: Get via the Mews Booking Engine (Distributor) API reservationGroups resource.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/connector/v1/reservationGroups/getAll:
+    post:
+      tags:
+      - Reservation Groups
+      summary: Mews Get All Reservation Groups
+      description: Returns all reservation groups, filtered by unique identifiers and other filters. Note this operation uses [Pagination](https://mews-systems.gitbook.io/connector-api/guidelines/pagination/) and supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property).
+      operationId: reservationGroups_getAll
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReservationGroupFilterParameters'
+            example:
+              ClientToken: E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D
+              AccessToken: C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D
+              Client: Sample Client 1.0.0
+              EnterpriseIds:
+              - 3fa85f64-5717-4562-b3fc-2c963f66afa6
+              - 4d0201db-36f5-428b-8d11-4f0a65e960cc
+              ReservationGroupIds:
+              - fe795f96-0b64-445b-89ed-c032563f2bac
+              UpdatedUtc:
+                StartUtc: '2023-04-27T11:48:57Z'
+                EndUtc: '2023-04-27T11:48:57Z'
+              Limitation:
+                Cursor: e7f26210-10e7-462e-9da8-ae8300be8ab7
+                Count: 100
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReservationGroupResult'
+              example:
+                ReservationGroups:
+                - Id: 769fc613-838f-41a7-ac2a-aff100c3189f
+                  EnterpriseId: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+                  Name: Mr and Mrs smith wedding
+                  ChannelManager: '2023-04-27T11:48:57Z'
+                  ChannelManagerGroupNumber: 152fg645-834f-63a7-he6a-vsy845c4753a
+                Cursor: 723jd664-235f-36a4-tg6d-gfy850c645f
+        '400':
+          description: Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                ReservationGroupsGetAll400Example:
+                  summary: Default reservationGroups_getAll 400 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '401':
+          description: Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                ReservationGroupsGetAll401Example:
+                  summary: Default reservationGroups_getAll 401 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '403':
+          description: Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                ReservationGroupsGetAll403Example:
+                  summary: Default reservationGroups_getAll 403 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '408':
+          description: Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-timeouts)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                ReservationGroupsGetAll408Example:
+                  summary: Default reservationGroups_getAll 408 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '204':
+          description: Server has successfully fulfilled the request and there is no additional information to send back.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                ReservationGroupsGetAll204Example:
+                  summary: Default reservationGroups_getAll 204 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '429':
+          description: Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-limits).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                ReservationGroupsGetAll429Example:
+                  summary: Default reservationGroups_getAll 429 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '500':
+          description: Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.com/MewsSystems/gitbook-connector-api).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                ReservationGroupsGetAll500Example:
+                  summary: Default reservationGroups_getAll 500 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    PaymentRequestState:
+      enum:
+      - Pending
+      - Completed
+      - Canceled
+      - Expired
+      type: string
+    PaymentRequest:
+      title: PaymentRequest
+      required:
+      - Id
+      - ReservationGroupId
+      - State
+      type: object
+      properties:
+        Id:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        ReservationGroupId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        State:
+          $ref: '#/components/schemas/PaymentRequestState'
+      additionalProperties: false
+      x-schema-id: PaymentRequest
+    ReservationGroup_2:
+      title: Reservation Group
+      required:
+      - EnterpriseId
+      - Id
+      type: object
+      properties:
+        Id:
+          type: string
+          description: Unique identifier of the reservation group.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Name:
+          type: string
+          description: Name of the reservation group, might be empty or same for multiple groups.
+          nullable: true
+          example: Example Name
+        ChannelManager:
+          type: string
+          description: Name of the corresponding channel manager.
+          nullable: true
+          example: string
+        ChannelManagerGroupNumber:
+          type: string
+          description: Identifier of the channel manager.
+          nullable: true
+          example: '1001'
+        EnterpriseId:
+          type: string
+          description: Unique identifier of the `Enterprise` the reservation group belongs to.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      additionalProperties: false
+      x-schema-id: ReservationGroup
+    Rate:
+      title: Rate
+      required:
+      - CurrencyCode
+      - Description
+      - Id
+      - IsPrivate
+      - Name
+      - Ordering
+      - RateGroupId
+      type: object
+      properties:
+        Id:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        RateGroupId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Ordering:
+          type: integer
+          format: int32
+          example: 1
+        Name:
+          type: object
+          additionalProperties:
+            type: string
+            nullable: true
+        Description:
+          type: object
+          additionalProperties:
+            type: string
+            nullable: true
+        IsPrivate:
+          type: boolean
+          example: true
+        CurrencyCode:
+          maxLength: 3
+          minLength: 1
+          type: string
+          format: currency
+          example: EUR
+      additionalProperties: false
+      x-schema-id: Rate
+    Amount:
+      title: Amount
+      required:
+      - Breakdown
+      - Currency
+      - GrossValue
+      - NetValue
+      - TaxValues
+      type: object
+      properties:
+        Currency:
+          maxLength: 3
+          minLength: 1
+          type: string
+          format: currency
+          example: EUR
+        GrossValue:
+          type: number
+          format: double
+          example: 100.0
+        NetValue:
+          type: number
+          format: double
+          example: 100.0
+        TaxValues:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaxValue'
+        Breakdown:
+          allOf:
+          - $ref: '#/components/schemas/TaxBreakdown'
+          example: string
+      additionalProperties: false
+      x-schema-id: Amount
+    CreditCardData:
+      title: CreditCardData
+      required:
+      - Expiration
+      type: object
+      properties:
+        PaymentGatewayData:
+          minLength: 11
+          type: string
+          nullable: true
+          example: string
+        ObfuscatedCreditCardNumber:
+          type: string
+          nullable: true
+          example: '1001'
+        Expiration:
+          minLength: 1
+          type: string
+          format: date
+          example: '2026-06-02'
+        HolderName:
+          type: string
+          nullable: true
+          example: Example Name
+      additionalProperties: false
+      x-schema-id: CreditCardData
+    TimeFilterInterval:
+      title: Time interval
+      type: object
+      properties:
+        StartUtc:
+          type: string
+          format: date-time
+          nullable: true
+          example: '2026-06-02T14:30:00Z'
+        EndUtc:
+          type: string
+          format: date-time
+          nullable: true
+          example: '2026-06-02T14:30:00Z'
+      additionalProperties: false
+      description: "When a time interval is used for **filtering** (for example in parameters such as `CreatedUtc.StartUtc` / `CreatedUtc.EndUtc`), the following rules apply:\r\n\r\n- **Start equals End (equality mode)**  \r\n  If `StartUtc` and `EndUtc` are exactly the same timestamp, the filter is treated as an equality check for that precise moment in time:\r\n  \r\n  ```\r\n  CreatedUtc == StartUtc\r\n  ```\r\n  \r\n  This does not represent an interval; only records with `CreatedUtc` equal to that exact instant are returned.\r\n\r\n- **Start differs from End (interval mode)**  \r\n  If `StartUtc` and `EndUtc` are different, the filter is evaluated as a half-open interval:\r\n  \r\n  ```\r\n  StartUtc <= CreatedUtc < EndUtc\r\n  ```\r\n  \r\n  In other words, the start is inclusive and the end is exclusive.\r\n\r\nMake sure your integration takes inclusive Start / exclusive End behavior of time intervals into account so that no records at the boundaries are omitted."
+      x-schema-id: TimeFilterInterval
+    Customer:
+      title: Customer
+      required:
+      - LastName
+      type: object
+      properties:
+        Email:
+          type: string
+          format: email
+          nullable: true
+          example: partner@example.com
+        FirstName:
+          type: string
+          nullable: true
+          example: Example Name
+        LastName:
+          minLength: 1
+          type: string
+          example: Example Name
+        Telephone:
+          type: string
+          format: tel
+          nullable: true
+          example: string
+        NationalityCode:
+          maxLength: 2
+          type: string
+          nullable: true
+          example: string
+        SendMarketingEmails:
+          type: boolean
+          nullable: true
+          example: true
+      additionalProperties: false
+      x-schema-id: Customer
+    CreateReservationGroupParameters:
+      title: CreateReservationGroupParameters
+      required:
+      - Client
+      - Customer
+      - FullAmounts
+      - HotelId
+      - Reservations
+      type: object
+      properties:
+        Client:
+          minLength: 1
+          type: string
+          example: string
+        LanguageCode:
+          type: string
+          nullable: true
+          example: string
+        CultureCode:
+          type: string
+          nullable: true
+          example: string
+        FullAmounts:
+          type: boolean
+          example: true
+        Session:
+          type: string
+          nullable: true
+          example: string
+        HotelId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        ConfigurationId:
+          type: string
+          format: uuid
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        AvailabilityBlockId:
+          type: string
+          format: uuid
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Customer:
+          allOf:
+          - $ref: '#/components/schemas/Customer'
+          example: string
+        Booker:
+          allOf:
+          - $ref: '#/components/schemas/Customer'
+          nullable: true
+          example: string
+        Reservations:
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/Reservation'
+        CreditCardData:
+          allOf:
+          - $ref: '#/components/schemas/CreditCardData'
+          nullable: true
+          example: string
+      additionalProperties: false
+      x-schema-id: CreateReservationGroupParameters
+    TaxBreakdownItem:
+      title: TaxBreakdownItem
+      required:
+      - NetValue
+      - TaxValue
+      type: object
+      properties:
+        TaxRateCode:
+          type: string
+          nullable: true
+          example: string
+        NetValue:
+          type: number
+          format: double
+          example: 100.0
+        TaxValue:
+          type: number
+          format: double
+          example: 100.0
+      additionalProperties: false
+      x-schema-id: TaxBreakdownItem
+    TaxValue:
+      title: TaxValue
+      required:
+      - TaxRateCode
+      - Value
+      type: object
+      properties:
+        TaxRateCode:
+          minLength: 1
+          type: string
+          example: string
+        Value:
+          type: number
+          format: double
+          example: 100.0
+      additionalProperties: false
+      x-schema-id: TaxValue
+    TaxBreakdown:
+      title: TaxBreakdown
+      required:
+      - Items
+      type: object
+      properties:
+        Items:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaxBreakdownItem'
+      additionalProperties: false
+      x-schema-id: TaxBreakdown
+    ReservationGroupExtent:
+      title: ReservationGroupExtent
+      required:
+      - PaymentRequests
+      - Payments
+      type: object
+      properties:
+        PaymentRequests:
+          type: boolean
+          example: true
+        Payments:
+          type: boolean
+          example: true
+      additionalProperties: false
+      x-schema-id: ReservationGroupExtent
+    ConnectorApiExceptionResult:
+      title: ConnectorApiExceptionResult
+      type: object
+      properties:
+        Message:
+          type: string
+          nullable: true
+          example: string
+        RequestId:
+          type: string
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Details:
+          nullable: true
+          example: string
+      additionalProperties: false
+      x-schema-id: ConnectorApiExceptionResult
+    ReservationGroupParameters:
+      title: ReservationGroupParameters
+      required:
+      - Client
+      - FullAmounts
+      - HotelId
+      - ReservationGroupId
+      type: object
+      properties:
+        Client:
+          minLength: 1
+          type: string
+          example: string
+        LanguageCode:
+          type: string
+          nullable: true
+          example: string
+        CultureCode:
+          type: string
+          nullable: true
+          example: string
+        FullAmounts:
+          type: boolean
+          example: true
+        Session:
+          type: string
+          nullable: true
+          example: string
+        HotelId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        ReservationGroupId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Extent:
+          allOf:
+          - $ref: '#/components/schemas/ReservationGroupExtent'
+          nullable: true
+          example: string
+      additionalProperties: false
+      x-schema-id: ReservationGroupParameters
+    Limitation:
+      title: Limitation
+      required:
+      - Count
+      type: object
+      properties:
+        Count:
+          type: integer
+          format: int32
+          example: 1
+        Cursor:
+          type: string
+          format: uuid
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      additionalProperties: false
+      description: Limitation on the quantity of data returned.
+      x-schema-id: Limitation
+    PaymentState:
+      enum:
+      - Charged
+      - Canceled
+      - Pending
+      - Failed
+      - Verifying
+      type: string
+    Reservation:
+      title: Reservation
+      required:
+      - Amount
+      - Cost
+      - EndUtc
+      - Id
+      - Number
+      - OccupancyData
+      - RateId
+      - RoomCategoryId
+      - StartUtc
+      type: object
+      properties:
+        Id:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Identifier:
+          type: string
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Number:
+          minLength: 1
+          type: string
+          example: '1001'
+        StartUtc:
+          minLength: 1
+          type: string
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+        EndUtc:
+          minLength: 1
+          type: string
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+        VoucherCode:
+          type: string
+          nullable: true
+          example: string
+        AvailabilityBlockId:
+          type: string
+          format: uuid
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        RoomCategoryId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        RateId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Rate:
+          allOf:
+          - $ref: '#/components/schemas/Rate'
+          nullable: true
+          example: string
+        ProductIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+          nullable: true
+        AdultCount:
+          type: integer
+          format: int32
+          nullable: true
+          deprecated: true
+          example: 1
+        ChildCount:
+          type: integer
+          format: int32
+          nullable: true
+          deprecated: true
+          example: 1
+        OccupancyData:
+          type: array
+          items:
+            $ref: '#/components/schemas/OccupancyData'
+        Notes:
+          type: string
+          nullable: true
+          example: string
+        Cost:
+          example: string
+        Amount:
+          example: string
+      additionalProperties: false
+      x-schema-id: Reservation
+    OccupancyData:
+      title: OccupancyData
+      required:
+      - AgeCategoryId
+      - PersonCount
+      type: object
+      properties:
+        AgeCategoryId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        PersonCount:
+          type: integer
+          format: int32
+          example: 1
+      additionalProperties: false
+      x-schema-id: OccupancyData
+    ReservationGroupResult:
+      title: ReservationGroupResult
+      required:
+      - ReservationGroups
+      type: object
+      properties:
+        ReservationGroups:
+          maxItems: 1000
+          type: array
+          items:
+            $ref: '#/components/schemas/ReservationGroup_2'
+          description: The filtered reservation groups.
+        Cursor:
+          type: string
+          description: Unique identifier of the last and hence oldest reservation group returned. This can be used in `Limitation` in a subsequent request to fetch the next batch of older reservation groups.
+          format: uuid
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      additionalProperties: false
+      x-schema-id: ReservationGroupResult
+    ReservationGroup:
+      title: ReservationGroup
+      required:
+      - CreditCardAvailable
+      - Id
+      - Reservations
+      - TotalAmount
+      - TotalCost
+      type: object
+      properties:
+        Id:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        CustomerId:
+          type: string
+          format: uuid
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Reservations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Reservation'
+        PaymentRequestId:
+          type: string
+          format: uuid
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        TotalCost:
+          example: string
+        TotalAmount:
+          example: string
+        PaymentCardId:
+          type: string
+          format: uuid
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        CreditCardAvailable:
+          type: boolean
+          example: true
+        PaymentRequests:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentRequest'
+          nullable: true
+        Payments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Payment'
+          nullable: true
+      additionalProperties: false
+      x-schema-id: ReservationGroup
+    ReservationGroupFilterParameters:
+      title: ReservationGroupFilterParameters
+      required:
+      - AccessToken
+      - Client
+      - ClientToken
+      - Limitation
+      type: object
+      properties:
+        ClientToken:
+          minLength: 1
+          type: string
+          description: Token identifying the client application.
+          example: string
+        AccessToken:
+          minLength: 1
+          type: string
+          description: Access token of the client application.
+          example: string
+        Client:
+          minLength: 1
+          type: string
+          description: Name and version of the client application.
+          example: string
+        Limitation:
+          allOf:
+          - $ref: '#/components/schemas/Limitation'
+          description: Limitation on the quantity of data returned and optional Cursor for the starting point of data.
+          example: string
+        EnterpriseIds:
+          maxItems: 1000
+          minItems: 1
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Unique identifiers of the Enterprises. If not specified, the operation returns data for all enterprises within scope of the Access Token.
+          nullable: true
+        ReservationGroupIds:
+          maxItems: 1000
+          minItems: 1
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Unique identifiers of the `ReservationGroup`. Required if no other filter is provided.
+          nullable: true
+        UpdatedUtc:
+          title: Time interval
+          allOf:
+          - $ref: '#/components/schemas/TimeFilterInterval'
+          description: Interval in which the `ReservationGroup` was updated. Required if no other filter is provided.
+          nullable: true
+          x-max-interval-in-months: 3
+          example: string
+      additionalProperties: false
+      x-schema-id: ReservationGroupFilterParameters
+    Payment:
+      title: Payment
+      required:
+      - Amount
+      - CreatedUtc
+      - EnterpriseId
+      - Id
+      - State
+      type: object
+      properties:
+        Id:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        EnterpriseId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        PaymentRequestId:
+          type: string
+          format: uuid
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        CreatedUtc:
+          minLength: 1
+          type: string
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+        State:
+          $ref: '#/components/schemas/PaymentState'
+        Amount:
+          allOf:
+          - $ref: '#/components/schemas/Amount'
+          example: string
+        ChargeAmount:
+          allOf:
+          - $ref: '#/components/schemas/Amount'
+          nullable: true
+          example: string
+      additionalProperties: false
+      x-schema-id: Payment
+  securitySchemes:
+    MewsClientToken:
+      type: apiKey
+      in: header
+      name: ClientToken
+      description: Mews authentication is performed by supplying ClientToken, AccessToken and Client as fields in the JSON request body (not as HTTP headers). This securityScheme is a tooling-compatible representation of the ClientToken credential. ClientToken is unique to your application and identifies the API client.
+    MewsAccessToken:
+      type: apiKey
+      in: header
+      name: AccessToken
+      description: Tooling-compatible representation of the AccessToken credential, which is supplied in the JSON request body. AccessToken is unique to the connection with a property (enterprise) and identifies the property or properties whose data and services you can access. Portfolio Access Tokens enable multi-property access with a single token.

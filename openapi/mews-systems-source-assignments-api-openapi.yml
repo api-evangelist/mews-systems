@@ -1,0 +1,595 @@
+openapi: 3.0.4
+info:
+  title: Mews Booking Engine API (Distributor) Account notes Source assignments API
+  version: v1
+  description: The Mews Booking Engine API (historically the Distributor API, served from /api/distributor/v1) lets developers build guest-facing booking engines that create reservations directly in Mews. It exposes enterprise configuration, availability, pricing, products, vouchers, payment cards, and reservation group creation for front-end client consumption.
+  x-generated-from: documentation
+  x-source-url: https://api.mews.com/Swagger/distributor/swagger.json
+  x-last-validated: '2026-06-02'
+servers:
+- url: https://api.mews.com
+  description: Production
+- url: https://api.mews-demo.com
+  description: Demo / sandbox
+security:
+- MewsClientToken: []
+  MewsAccessToken: []
+tags:
+- name: Source assignments
+paths:
+  /api/connector/v1/sourceAssignments/getAll:
+    post:
+      tags:
+      - Source assignments
+      summary: Mews Get All Source Assignments
+      description: Returns all Sources assigned to a Reservation group. Each reservation group can have multiple sources. Note this operation uses [Pagination](https://mews-systems.gitbook.io/connector-api/guidelines/pagination/) and supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property/).
+      operationId: sourceAssignments_getAll
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SourceAssignmentFilterParameters'
+            example:
+              ClientToken: E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D
+              AccessToken: C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D
+              Client: Sample Client 1.0.0
+              ReservationGroupIds:
+              - 730d050c-8098-415a-95af-af2500a2de47
+              UpdatedUtc:
+                StartUtc: '2023-02-1T00:00:00Z'
+                EndUtc: '2023-02-28T00:00:00Z'
+              EnterpriseIds:
+              - 3fa85f64-5717-4562-b3fc-2c963f66afa6
+              - 4d0201db-36f5-428b-8d11-4f0a65e960cc
+              Limitation:
+                Count: 10
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SourceAssignmentResult'
+              example:
+                SourceAssignments:
+                - Id: 670ef167-0380-4dd5-8dbb-af1500d3eb16
+                  ReservationGroupId: 730d050c-8098-415a-95af-af2500a2de47
+                  SourceId: de6c3fcc-feb9-4385-92e0-af25008b864e
+                  IsPrimary: true
+                - Id: da272c89-3afc-4e6f-ad12-af2500a2de79
+                  ReservationGroupId: 730d050c-8098-415a-95af-af2500a2de47
+                  SourceId: 04db79fa-3a31-47c3-ae25-af25008b864e
+                  IsPrimary: false
+                Cursor: da272c89-3afc-4e6f-ad12-af2500a2de79
+        '400':
+          description: Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                SourceAssignmentsGetAll400Example:
+                  summary: Default sourceAssignments_getAll 400 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '401':
+          description: Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                SourceAssignmentsGetAll401Example:
+                  summary: Default sourceAssignments_getAll 401 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '403':
+          description: Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                SourceAssignmentsGetAll403Example:
+                  summary: Default sourceAssignments_getAll 403 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '408':
+          description: Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-timeouts)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                SourceAssignmentsGetAll408Example:
+                  summary: Default sourceAssignments_getAll 408 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '204':
+          description: Server has successfully fulfilled the request and there is no additional information to send back.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                SourceAssignmentsGetAll204Example:
+                  summary: Default sourceAssignments_getAll 204 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '429':
+          description: Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-limits).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                SourceAssignmentsGetAll429Example:
+                  summary: Default sourceAssignments_getAll 429 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '500':
+          description: Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.com/MewsSystems/gitbook-connector-api).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                SourceAssignmentsGetAll500Example:
+                  summary: Default sourceAssignments_getAll 500 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/connector/v1/sourceAssignments/getAll/2024-09-20:
+    post:
+      tags:
+      - Source assignments
+      summary: Mews Get All Source Assignments (ver 2024-09-20)
+      description: Returns all Sources assigned to Reservations. Each reservation can have multiple sources. Note this operation uses [Pagination](https://mews-systems.gitbook.io/connector-api/guidelines/pagination/) and supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property/).
+      operationId: sourceAssignments_getAll_2024-09-20
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SourceAssignmentFilterParametersV20240920'
+            example:
+              ClientToken: E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D
+              AccessToken: C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D
+              Client: Sample Client 1.0.0
+              ReservationIds:
+              - 9b59b50d-bd32-4ce5-add8-09ea0e1300e7
+              UpdatedUtc:
+                StartUtc: '2025-11-01T00:00:00Z'
+                EndUtc: '2025-11-30T00:00:00Z'
+              EnterpriseIds:
+              - 3fa85f64-5717-4562-b3fc-2c963f66afa6
+              Limitation:
+                Count: 100
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SourceAssignmentResultV20240920'
+              example:
+                SourceAssignments:
+                - Id: c5e11f73-7e85-4a3c-9fe1-872014a10b43
+                  ReservationId: 9b59b50d-bd32-4ce5-add8-09ea0e1300e7
+                  SourceId: 22e42a59-b321-43f8-a5d1-af1f00e1bb8b
+                  IsPrimary: true
+                  UpdatedUtc: '2025-11-05T11:00:00Z'
+                - Id: 5411ffd5-72c6-4ab3-b179-708bcac73d08
+                  ReservationId: 9b59b50d-bd32-4ce5-add8-09ea0e1300e7
+                  SourceId: bbe29c21-401a-4746-b97d-af1f00e1bb8b
+                  IsPrimary: false
+                  UpdatedUtc: '2025-11-11T05:00:00Z'
+                Cursor: 5411ffd5-72c6-4ab3-b179-708bcac73d08
+        '400':
+          description: Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                SourceAssignmentsGetAll20240920400Example:
+                  summary: Default sourceAssignments_getAll_2024-09-20 400 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '401':
+          description: Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                SourceAssignmentsGetAll20240920401Example:
+                  summary: Default sourceAssignments_getAll_2024-09-20 401 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '403':
+          description: Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                SourceAssignmentsGetAll20240920403Example:
+                  summary: Default sourceAssignments_getAll_2024-09-20 403 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '408':
+          description: Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-timeouts)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                SourceAssignmentsGetAll20240920408Example:
+                  summary: Default sourceAssignments_getAll_2024-09-20 408 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '204':
+          description: Server has successfully fulfilled the request and there is no additional information to send back.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                SourceAssignmentsGetAll20240920204Example:
+                  summary: Default sourceAssignments_getAll_2024-09-20 204 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '429':
+          description: Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-limits).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                SourceAssignmentsGetAll20240920429Example:
+                  summary: Default sourceAssignments_getAll_2024-09-20 429 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '500':
+          description: Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.com/MewsSystems/gitbook-connector-api).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                SourceAssignmentsGetAll20240920500Example:
+                  summary: Default sourceAssignments_getAll_2024-09-20 500 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+      x-restricted: true
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    SourceAssignmentResult:
+      title: SourceAssignmentResult
+      required:
+      - Cursor
+      - SourceAssignments
+      type: object
+      properties:
+        SourceAssignments:
+          type: array
+          items:
+            $ref: '#/components/schemas/SourceAssignment'
+          description: Assignments between reservation group and sources.
+        Cursor:
+          type: string
+          description: Unique identifier of the last and hence oldest source assignment returned. This can be used in `Limitation` in a subsequent request to fetch the next batch of older source assignments.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      additionalProperties: false
+      x-schema-id: SourceAssignmentResult
+    ConnectorApiExceptionResult:
+      title: ConnectorApiExceptionResult
+      type: object
+      properties:
+        Message:
+          type: string
+          nullable: true
+          example: string
+        RequestId:
+          type: string
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Details:
+          nullable: true
+          example: string
+      additionalProperties: false
+      x-schema-id: ConnectorApiExceptionResult
+    SourceAssignmentV20240920:
+      title: Source assignments (ver 2024-09-20)
+      required:
+      - Id
+      - IsPrimary
+      - ReservationId
+      - SourceId
+      - UpdatedUtc
+      type: object
+      properties:
+        Id:
+          type: string
+          description: Unique identifier of the source assignment.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        ReservationId:
+          type: string
+          description: Unique identifier of the `Reservation`.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        SourceId:
+          type: string
+          description: Unique identifier of the `Source`.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        IsPrimary:
+          type: boolean
+          description: Specifies whether the source is primary for the `Reservation`.
+          example: true
+        UpdatedUtc:
+          minLength: 1
+          type: string
+          description: Date and time of the source assignment last update in UTC timezone in ISO 8601 format.
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+      additionalProperties: false
+      x-schema-id: SourceAssignmentV20240920
+    Limitation:
+      title: Limitation
+      required:
+      - Count
+      type: object
+      properties:
+        Count:
+          type: integer
+          format: int32
+          example: 1
+        Cursor:
+          type: string
+          format: uuid
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      additionalProperties: false
+      description: Limitation on the quantity of data returned.
+      x-schema-id: Limitation
+    SourceAssignmentResultV20240920:
+      title: SourceAssignmentResultV20240920
+      required:
+      - SourceAssignments
+      type: object
+      properties:
+        SourceAssignments:
+          type: array
+          items:
+            $ref: '#/components/schemas/SourceAssignmentV20240920'
+          description: Assignments between `Reservation` and `Source`.
+        Cursor:
+          type: string
+          description: Opaque pagination cursor which can be used in `Limitation` to fetch newer source assignments.
+          format: string
+          nullable: true
+          example: string
+      additionalProperties: false
+      x-schema-id: SourceAssignmentResultV20240920
+    TimeFilterInterval:
+      title: Time interval
+      type: object
+      properties:
+        StartUtc:
+          type: string
+          format: date-time
+          nullable: true
+          example: '2026-06-02T14:30:00Z'
+        EndUtc:
+          type: string
+          format: date-time
+          nullable: true
+          example: '2026-06-02T14:30:00Z'
+      additionalProperties: false
+      description: "When a time interval is used for **filtering** (for example in parameters such as `CreatedUtc.StartUtc` / `CreatedUtc.EndUtc`), the following rules apply:\r\n\r\n- **Start equals End (equality mode)**  \r\n  If `StartUtc` and `EndUtc` are exactly the same timestamp, the filter is treated as an equality check for that precise moment in time:\r\n  \r\n  ```\r\n  CreatedUtc == StartUtc\r\n  ```\r\n  \r\n  This does not represent an interval; only records with `CreatedUtc` equal to that exact instant are returned.\r\n\r\n- **Start differs from End (interval mode)**  \r\n  If `StartUtc` and `EndUtc` are different, the filter is evaluated as a half-open interval:\r\n  \r\n  ```\r\n  StartUtc <= CreatedUtc < EndUtc\r\n  ```\r\n  \r\n  In other words, the start is inclusive and the end is exclusive.\r\n\r\nMake sure your integration takes inclusive Start / exclusive End behavior of time intervals into account so that no records at the boundaries are omitted."
+      x-schema-id: TimeFilterInterval
+    SourceAssignmentFilterParameters:
+      title: SourceAssignmentFilterParameters
+      required:
+      - AccessToken
+      - Client
+      - ClientToken
+      - Limitation
+      type: object
+      properties:
+        ClientToken:
+          minLength: 1
+          type: string
+          description: Token identifying the client application.
+          example: string
+        AccessToken:
+          minLength: 1
+          type: string
+          description: Access token of the client application.
+          example: string
+        Client:
+          minLength: 1
+          type: string
+          description: Name and version of the client application.
+          example: string
+        Limitation:
+          allOf:
+          - $ref: '#/components/schemas/Limitation'
+          description: Limitation on the quantity of data returned and optional Cursor for the starting point of data.
+          example: string
+        EnterpriseIds:
+          maxItems: 1000
+          minItems: 1
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Unique identifiers of the Enterprises. If not specified, the operation returns data for all enterprises within scope of the Access Token.
+          nullable: true
+        ReservationGroupIds:
+          maxItems: 1000
+          minItems: 1
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Unique identifiers of the `Reservation group`.
+          nullable: true
+        UpdatedUtc:
+          title: Time interval
+          allOf:
+          - $ref: '#/components/schemas/TimeFilterInterval'
+          description: Interval of `Reservation group` last update date and time.
+          nullable: true
+          x-max-interval-in-months: 3
+          example: string
+      additionalProperties: false
+      x-schema-id: SourceAssignmentFilterParameters
+    SourceAssignment:
+      title: Source assignment
+      required:
+      - Id
+      - IsPrimary
+      - ReservationGroupId
+      - SourceId
+      type: object
+      properties:
+        Id:
+          type: string
+          description: Unique identifier of the source assignement.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        ReservationGroupId:
+          type: string
+          description: Unique identifier of the [Reservation group](https://mews-systems.gitbook.io/connector-api/operations/reservations/#reservation-group).
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        SourceId:
+          type: string
+          description: Unique identifier of the [Source](https://mews-systems.gitbook.io/connector-api/operations/sources/#source).
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        IsPrimary:
+          type: boolean
+          description: Specifies the primary source for the [Reservation group](https://mews-systems.gitbook.io/connector-api/operations/reservations/#reservation-group).
+          example: true
+      additionalProperties: false
+      x-schema-id: SourceAssignment
+    SourceAssignmentFilterParametersV20240920:
+      title: SourceAssignmentFilterParametersV20240920
+      required:
+      - AccessToken
+      - Client
+      - ClientToken
+      - Limitation
+      type: object
+      properties:
+        ClientToken:
+          minLength: 1
+          type: string
+          description: Token identifying the client application.
+          example: string
+        AccessToken:
+          minLength: 1
+          type: string
+          description: Access token of the client application.
+          example: string
+        Client:
+          minLength: 1
+          type: string
+          description: Name and version of the client application.
+          example: string
+        Limitation:
+          allOf:
+          - $ref: '#/components/schemas/Limitation'
+          description: Limitation on the quantity of data returned and optional Cursor for the starting point of data.
+          example: string
+        ReservationIds:
+          maxItems: 100
+          minItems: 1
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Unique identifiers of `Reservation`.
+          nullable: true
+        UpdatedUtc:
+          title: Time interval
+          allOf:
+          - $ref: '#/components/schemas/TimeFilterInterval'
+          description: Interval of source assignment last update date and time.
+          nullable: true
+          x-max-interval-in-months: 1
+          example: string
+        EnterpriseIds:
+          maxItems: 1
+          minItems: 1
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Unique identifiers of the Enterprises. Required when using Portfolio Access Tokens, ignored otherwise.
+          nullable: true
+      additionalProperties: false
+      x-schema-id: SourceAssignmentFilterParametersV20240920
+  securitySchemes:
+    MewsClientToken:
+      type: apiKey
+      in: header
+      name: ClientToken
+      description: Mews authentication is performed by supplying ClientToken, AccessToken and Client as fields in the JSON request body (not as HTTP headers). This securityScheme is a tooling-compatible representation of the ClientToken credential. ClientToken is unique to your application and identifies the API client.
+    MewsAccessToken:
+      type: apiKey
+      in: header
+      name: AccessToken
+      description: Tooling-compatible representation of the AccessToken credential, which is supplied in the JSON request body. AccessToken is unique to the connection with a property (enterprise) and identifies the property or properties whose data and services you can access. Portfolio Access Tokens enable multi-property access with a single token.

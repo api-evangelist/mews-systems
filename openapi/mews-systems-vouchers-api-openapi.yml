@@ -1,0 +1,2103 @@
+openapi: 3.0.4
+info:
+  title: Mews Booking Engine API (Distributor) Account notes Vouchers API
+  version: v1
+  description: The Mews Booking Engine API (historically the Distributor API, served from /api/distributor/v1) lets developers build guest-facing booking engines that create reservations directly in Mews. It exposes enterprise configuration, availability, pricing, products, vouchers, payment cards, and reservation group creation for front-end client consumption.
+  x-generated-from: documentation
+  x-source-url: https://api.mews.com/Swagger/distributor/swagger.json
+  x-last-validated: '2026-06-02'
+servers:
+- url: https://api.mews.com
+  description: Production
+- url: https://api.mews-demo.com
+  description: Demo / sandbox
+security:
+- MewsClientToken: []
+  MewsAccessToken: []
+tags:
+- name: Vouchers
+paths:
+  /api/distributor/v1/vouchers/validate:
+    post:
+      tags:
+      - Vouchers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VoucherParameters'
+            examples:
+              VouchersValidateRequestExample:
+                summary: Default vouchers_validate request
+                x-microcks-default: true
+                value:
+                  Client: string
+                  LanguageCode: string
+                  CultureCode: string
+                  FullAmounts: true
+                  Session: string
+                  HotelId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                  VoucherCode: string
+                  ServiceIds:
+                  - 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VoucherValidity'
+              examples:
+                VouchersValidate200Example:
+                  summary: Default vouchers_validate 200 response
+                  x-microcks-default: true
+                  value:
+                    IsValid: true
+      operationId: vouchers_validate
+      summary: Mews Validate
+      description: Validate via the Mews Booking Engine (Distributor) API vouchers resource.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/connector/v1/vouchers/getAll:
+    post:
+      tags:
+      - Vouchers
+      summary: Mews Get All Vouchers
+      description: Returns all rate vouchers filtered by [Service](https://mews-systems.gitbook.io/connector-api/operations/services/#service), voucher code or voucher identifier. Note this operation uses [Pagination](https://mews-systems.gitbook.io/connector-api/guidelines/pagination/) and supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property).
+      operationId: vouchers_getAll
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VoucherFilterParameters'
+            example:
+              ClientToken: E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D
+              AccessToken: C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D
+              Client: Sample Client 1.0.0
+              Extent:
+                Vouchers: true
+                VoucherCodes: true
+                VoucherAssignments: true
+                Companies: false
+                Rates: false
+              ServiceIds:
+              - bd26d8db-86da-4f96-9efc-e5a4654a4a94
+              - 8c1bd738-a505-4b29-aa71-9ecc2982b843
+              VoucherIds:
+              - fe568bbd-1ecb-4bb2-bf77-96c3698de20d
+              VoucherCodeValues:
+              - TEST-VOUCHER-CODE
+              ActivityStates:
+              - Active
+              UpdatedUtc:
+                StartUtc: '2023-10-10T00:00:00Z'
+                EndUtc: '2023-10-17T00:00:00Z'
+              ExternalIdentifiers:
+              - Voucher-001
+              - Voucher-002
+              EnterpriseIds:
+              - 3fa85f64-5717-4562-b3fc-2c963f66afa6
+              - 4d0201db-36f5-428b-8d11-4f0a65e960cc
+              Limitation:
+                Count: 100
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VoucherResult'
+              example:
+                Vouchers:
+                - Id: fe568bbd-1ecb-4bb2-bf77-96c3698de20d
+                  ServiceId: bd26d8db-86da-4f96-9efc-e5a4654a4a94
+                  EnterpriseId: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+                  Name: Weekend Voucher
+                  CreatedUtc: '2018-11-29T08:17:05Z'
+                  UpdatedUtc: '2020-10-30T13:38:49Z'
+                  Type: Public
+                  ActivityState: Active
+                  CompanyId: c6f5c82d-621a-4c8a-903b-1b0a9a23b71f
+                  TravelAgencyId: null
+                  OccupiableIntervalStartUtc: null
+                  OccupiableIntervalEndUtc: null
+                  ExternalIdentifier: VCHR-278
+                  IsActive: true
+                VoucherCodes:
+                - Id: 11111111-1111-1111-1111-111111111111
+                  VoucherId: fe568bbd-1ecb-4bb2-bf77-96c3698de20d
+                  Value: TEST-VOUCHER-CODE
+                  ValidityStartUtc: null
+                  ValidityEndUtc: null
+                  CreatedUtc: '2020-10-30T13:37:16Z'
+                  UpdatedUtc: '2020-10-30T13:37:16Z'
+                  ActivityState: Active
+                  IsActive: true
+                - Id: 22222222-2222-2222-2222-222222222222
+                  VoucherId: fe568bbd-1ecb-4bb2-bf77-96c3698de20d
+                  Value: 05400269B23A59C649E4
+                  ValidityStartUtc: '2020-10-09T22:00:00Z'
+                  ValidityEndUtc: '2020-10-09T22:00:00Z'
+                  CreatedUtc: '2020-10-09T15:08:14Z'
+                  UpdatedUtc: '2020-10-09T15:08:14Z'
+                  ActivityState: Active
+                  IsActive: true
+                VoucherAssignments:
+                - VoucherId: fe568bbd-1ecb-4bb2-bf77-96c3698de20d
+                  RateId: ed4b660b-19d0-434b-9360-a4de2ea42eda
+                - VoucherId: fe568bbd-1ecb-4bb2-bf77-96c3698de20d
+                  RateId: b7e6a1c2-4f3a-4e2b-9c1d-2a5e7b8c9d0f
+                Rates: null
+                Companies: null
+                Cursor: fe568bbd-1ecb-4bb2-bf77-96c3698de20d
+        '400':
+          description: Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                VouchersGetAll400Example:
+                  summary: Default vouchers_getAll 400 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '401':
+          description: Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                VouchersGetAll401Example:
+                  summary: Default vouchers_getAll 401 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '403':
+          description: Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                VouchersGetAll403Example:
+                  summary: Default vouchers_getAll 403 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '408':
+          description: Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-timeouts)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                VouchersGetAll408Example:
+                  summary: Default vouchers_getAll 408 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '204':
+          description: Server has successfully fulfilled the request and there is no additional information to send back.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                VouchersGetAll204Example:
+                  summary: Default vouchers_getAll 204 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '429':
+          description: Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-limits).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                VouchersGetAll429Example:
+                  summary: Default vouchers_getAll 429 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '500':
+          description: Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.com/MewsSystems/gitbook-connector-api).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                VouchersGetAll500Example:
+                  summary: Default vouchers_getAll 500 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/connector/v1/vouchers/add:
+    post:
+      tags:
+      - Vouchers
+      summary: Mews Add Vouchers
+      description: Adds the specified vouchers to the specified [Services](https://mews-systems.gitbook.io/connector-api/operations/services/#service). Note this operation supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property).
+      operationId: vouchers_add
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MultipleVoucherAddParameters'
+            example:
+              ClientToken: E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D
+              AccessToken: C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D
+              Client: Sample Client 1.0.0
+              VoucherParameters:
+              - ServiceId: bd26d8db-86da-4f96-9efc-e5a4654a4a94
+                Name: Weekend Voucher
+                Type: Public
+                AssignedRateIds:
+                - ed4b660b-19d0-434b-9360-a4de2ea42eda
+                - b7e6a1c2-4f3a-4e2b-9c1d-2a5e7b8c9d0f
+              - ServiceId: bd26d8db-86da-4f96-9efc-e5a4654a4a94
+                Name: Sample company voucher
+                Type: PartnerCompany
+                CompanyId: c6f5c82d-621a-4c8a-903b-1b0a9a23b71f
+                AssignedRateIds:
+                - ed4b660b-19d0-434b-9360-a4de2ea42eda
+                - b7e6a1c2-4f3a-4e2b-9c1d-2a5e7b8c9d0f
+                OccupiableIntervalStartUtc: '2023-12-31T22:00:00Z'
+                OccupiableIntervalEndUtc: '2024-01-01T22:00:00Z'
+                ExternalIdentifier: VCHR-278
+              EnterpriseId: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VoucherWriteResult'
+              example:
+                Vouchers:
+                - Id: fe568bbd-1ecb-4bb2-bf77-96c3698de20d
+                  ServiceId: bd26d8db-86da-4f96-9efc-e5a4654a4a94
+                  EnterpriseId: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+                  Name: Weekend Voucher
+                  CreatedUtc: '2018-11-29T08:17:05Z'
+                  UpdatedUtc: '2020-10-30T13:38:49Z'
+                  Type: Public
+                  ActivityState: Active
+                  CompanyId: c6f5c82d-621a-4c8a-903b-1b0a9a23b71f
+                  TravelAgencyId: null
+                  OccupiableIntervalStartUtc: null
+                  OccupiableIntervalEndUtc: null
+                  ExternalIdentifier: VCHR-278
+                  IsActive: true
+                - Id: f4a9942c-2616-4074-b1f4-4b959515e933
+                  ServiceId: bd26d8db-86da-4f96-9efc-e5a4654a4a94
+                  EnterpriseId: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+                  Name: Sample company voucher
+                  CreatedUtc: '2023-12-01T08:17:05Z'
+                  UpdatedUtc: '2023-12-02T13:38:49Z'
+                  Type: PartnerCompany
+                  ActivityState: Active
+                  CompanyId: c6f5c82d-621a-4c8a-903b-1b0a9a23b71f
+                  TravelAgencyId: null
+                  OccupiableIntervalStartUtc: '2023-12-31T22:00:00Z'
+                  OccupiableIntervalEndUtc: '2024-01-01T22:00:00Z'
+                  ExternalIdentifier: VCHR-278
+                  IsActive: true
+        '400':
+          description: Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                VouchersAdd400Example:
+                  summary: Default vouchers_add 400 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '401':
+          description: Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                VouchersAdd401Example:
+                  summary: Default vouchers_add 401 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '403':
+          description: Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                VouchersAdd403Example:
+                  summary: Default vouchers_add 403 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '408':
+          description: Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-timeouts)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                VouchersAdd408Example:
+                  summary: Default vouchers_add 408 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '204':
+          description: Server has successfully fulfilled the request and there is no additional information to send back.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                VouchersAdd204Example:
+                  summary: Default vouchers_add 204 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '429':
+          description: Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-limits).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                VouchersAdd429Example:
+                  summary: Default vouchers_add 429 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '500':
+          description: Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.com/MewsSystems/gitbook-connector-api).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                VouchersAdd500Example:
+                  summary: Default vouchers_add 500 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/connector/v1/vouchers/update:
+    post:
+      tags:
+      - Vouchers
+      summary: Mews Update Vouchers
+      description: Updates information about the specified vouchers. Note this operation supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property).
+      operationId: vouchers_update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MultipleVoucherUpdateParameters'
+            example:
+              ClientToken: E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D
+              AccessToken: C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D
+              Client: Sample Client 1.0.0
+              VoucherUpdates:
+              - VoucherId: fe568bbd-1ecb-4bb2-bf77-96c3698de20d
+                Name:
+                  Value: Weekend Voucher
+                Type:
+                  Value: Public
+                AssignedRateIds:
+                  Value:
+                  - ed4b660b-19d0-434b-9360-a4de2ea42eda
+                  - b7e6a1c2-4f3a-4e2b-9c1d-2a5e7b8c9d0f
+              - VoucherId: f4a9942c-2616-4074-b1f4-4b959515e933
+                Name:
+                  Value: Sample company voucher
+                Type:
+                  Value: PartnerCompany
+                CompanyId:
+                  Value: c6f5c82d-621a-4c8a-903b-1b0a9a23b71f
+                AssignedRateIds:
+                  Value:
+                  - ed4b660b-19d0-434b-9360-a4de2ea42eda
+                  - b7e6a1c2-4f3a-4e2b-9c1d-2a5e7b8c9d0f
+                OccupiableIntervalStartUtc:
+                  Value: '2023-12-31T22:00:00Z'
+                OccupiableIntervalEndUtc:
+                  Value: '2024-01-01T22:00:00Z'
+                ExternalIdentifier:
+                  Value: VCHR-278
+              EnterpriseId: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VoucherWriteResult'
+              example:
+                Vouchers:
+                - Id: fe568bbd-1ecb-4bb2-bf77-96c3698de20d
+                  ServiceId: bd26d8db-86da-4f96-9efc-e5a4654a4a94
+                  EnterpriseId: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+                  Name: Weekend Voucher
+                  CreatedUtc: '2018-11-29T08:17:05Z'
+                  UpdatedUtc: '2020-10-30T13:38:49Z'
+                  Type: Public
+                  ActivityState: Active
+                  CompanyId: c6f5c82d-621a-4c8a-903b-1b0a9a23b71f
+                  TravelAgencyId: null
+                  OccupiableIntervalStartUtc: null
+                  OccupiableIntervalEndUtc: null
+                  ExternalIdentifier: VCHR-278
+                  IsActive: true
+                - Id: f4a9942c-2616-4074-b1f4-4b959515e933
+                  ServiceId: bd26d8db-86da-4f96-9efc-e5a4654a4a94
+                  EnterpriseId: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+                  Name: Sample company voucher
+                  CreatedUtc: '2023-12-01T08:17:05Z'
+                  UpdatedUtc: '2023-12-02T13:38:49Z'
+                  Type: PartnerCompany
+                  ActivityState: Active
+                  CompanyId: c6f5c82d-621a-4c8a-903b-1b0a9a23b71f
+                  TravelAgencyId: null
+                  OccupiableIntervalStartUtc: '2023-12-31T22:00:00Z'
+                  OccupiableIntervalEndUtc: '2024-01-01T22:00:00Z'
+                  ExternalIdentifier: VCHR-278
+                  IsActive: true
+        '400':
+          description: Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                VouchersUpdate400Example:
+                  summary: Default vouchers_update 400 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '401':
+          description: Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                VouchersUpdate401Example:
+                  summary: Default vouchers_update 401 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '403':
+          description: Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                VouchersUpdate403Example:
+                  summary: Default vouchers_update 403 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '408':
+          description: Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-timeouts)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                VouchersUpdate408Example:
+                  summary: Default vouchers_update 408 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '204':
+          description: Server has successfully fulfilled the request and there is no additional information to send back.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                VouchersUpdate204Example:
+                  summary: Default vouchers_update 204 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '429':
+          description: Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-limits).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                VouchersUpdate429Example:
+                  summary: Default vouchers_update 429 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '500':
+          description: Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.com/MewsSystems/gitbook-connector-api).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                VouchersUpdate500Example:
+                  summary: Default vouchers_update 500 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/connector/v1/vouchers/delete:
+    post:
+      tags:
+      - Vouchers
+      summary: Mews Delete Vouchers
+      description: Delete specified vouchers. Note this operation supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property).
+      operationId: vouchers_delete
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MultipleVoucherDeleteParameters'
+            example:
+              ClientToken: E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D
+              AccessToken: C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D
+              Client: Sample Client 1.0.0
+              VoucherIds:
+              - fe568bbd-1ecb-4bb2-bf77-96c3698de20d
+              - f4a9942c-2616-4074-b1f4-4b959515e933
+              EnterpriseId: 3fa85f64-5717-4562-b3fc-2c963f66afa6
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unit'
+              example: {}
+        '400':
+          description: Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                VouchersDelete400Example:
+                  summary: Default vouchers_delete 400 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '401':
+          description: Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                VouchersDelete401Example:
+                  summary: Default vouchers_delete 401 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '403':
+          description: Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                VouchersDelete403Example:
+                  summary: Default vouchers_delete 403 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '408':
+          description: Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-timeouts)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                VouchersDelete408Example:
+                  summary: Default vouchers_delete 408 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '204':
+          description: Server has successfully fulfilled the request and there is no additional information to send back.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                VouchersDelete204Example:
+                  summary: Default vouchers_delete 204 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '429':
+          description: Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-limits).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                VouchersDelete429Example:
+                  summary: Default vouchers_delete 429 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '500':
+          description: Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.com/MewsSystems/gitbook-connector-api).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                VouchersDelete500Example:
+                  summary: Default vouchers_delete 500 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    VoucherResult:
+      title: VoucherResult
+      type: object
+      properties:
+        Vouchers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Voucher'
+          description: Details about vouchers added to the system.
+          nullable: true
+        VoucherCodes:
+          type: array
+          items:
+            $ref: '#/components/schemas/VoucherCode'
+          description: Information about voucher codes used by customers.
+          nullable: true
+        VoucherAssignments:
+          type: array
+          items:
+            $ref: '#/components/schemas/VoucherAssignment'
+          description: The assignments between vouchers and [Rates](https://mews-systems.gitbook.io/connector-api/operations/rates/#rate).
+          nullable: true
+        Rates:
+          type: array
+          items:
+            $ref: '#/components/schemas/RateForExtent'
+          description: The assigned rates.
+          nullable: true
+        Companies:
+          type: array
+          items:
+            $ref: '#/components/schemas/Company'
+          description: The related companies and travel agencies.
+          nullable: true
+        Cursor:
+          type: string
+          description: Unique identifier of the item one newer in time order than the items to be returned. If Cursor is not specified, i.e. null, then the latest or most recent items will be returned.
+          format: uuid
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      additionalProperties: false
+      x-schema-id: VoucherResult
+    Unit:
+      type: object
+      additionalProperties: false
+    MultipleVoucherAddParameters:
+      title: MultipleVoucherAddParameters
+      required:
+      - AccessToken
+      - Client
+      - ClientToken
+      - VoucherParameters
+      type: object
+      properties:
+        ClientToken:
+          minLength: 1
+          type: string
+          description: Token identifying the client application.
+          example: string
+        AccessToken:
+          minLength: 1
+          type: string
+          description: Access token of the client application.
+          example: string
+        Client:
+          minLength: 1
+          type: string
+          description: Name and version of the client application.
+          example: string
+        EnterpriseId:
+          type: string
+          description: Unique identifier of the enterprise. Required when using [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property), ignored otherwise.
+          format: uuid
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        VoucherParameters:
+          maxItems: 1000
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/VoucherAddParameters'
+          description: Vouchers to be added.
+      additionalProperties: false
+      x-schema-id: MultipleVoucherAddParameters
+    VoucherValidity:
+      title: VoucherValidity
+      required:
+      - IsValid
+      type: object
+      properties:
+        IsValid:
+          type: boolean
+          example: true
+      additionalProperties: false
+      x-schema-id: VoucherValidity
+    MultipleVoucherUpdateParameters:
+      title: MultipleVoucherUpdateParameters
+      required:
+      - AccessToken
+      - Client
+      - ClientToken
+      - VoucherUpdates
+      type: object
+      properties:
+        ClientToken:
+          minLength: 1
+          type: string
+          description: Token identifying the client application.
+          example: string
+        AccessToken:
+          minLength: 1
+          type: string
+          description: Access token of the client application.
+          example: string
+        Client:
+          minLength: 1
+          type: string
+          description: Name and version of the client application.
+          example: string
+        EnterpriseId:
+          type: string
+          description: Unique identifier of the enterprise. Required when using [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property), ignored otherwise.
+          format: uuid
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        VoucherUpdates:
+          maxItems: 1000
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/VoucherUpdateParameters'
+          description: Details of voucher updates.
+      additionalProperties: false
+      x-schema-id: MultipleVoucherUpdateParameters
+    CreditRatingBasicEnum:
+      title: Credit rating basic
+      enum:
+      - CreditOk
+      - PaymentRequiredUpfront
+      - LocalDecisionRequired
+      type: string
+      description: '
+
+
+        CreditOk (Company can book services.)
+
+
+        PaymentRequiredUpfront (Company must pay upfront.)
+
+
+        LocalDecisionRequired (Requires local approval.)'
+      x-enumNames:
+      - CreditOk
+      - PaymentRequiredUpfront
+      - LocalDecisionRequired
+      x-enumDescriptions:
+      - Company can book services.
+      - Company must pay upfront.
+      - Requires local approval.
+    VoucherCode:
+      title: Voucher code
+      required:
+      - ActivityState
+      - Id
+      - IsActive
+      - VoucherId
+      type: object
+      properties:
+        Id:
+          type: string
+          description: Unique identifier of the voucher code.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        VoucherId:
+          type: string
+          description: Unique identifier of `Voucher` the code belongs to.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Value:
+          type: string
+          description: Value of voucher code used by customers.
+          nullable: true
+          example: string
+        ValidityStartUtc:
+          type: string
+          description: If specified, marks the beginning of interval in which the code can be used.
+          nullable: true
+          example: string
+        ValidityEndUtc:
+          type: string
+          description: If specified, marks the end of interval in which the code can be used.
+          nullable: true
+          example: string
+        CreatedUtc:
+          type: string
+          description: Creation date and time of the voucher in UTC timezone in ISO 8601 format.
+          nullable: true
+          example: string
+        UpdatedUtc:
+          type: string
+          description: Last update date and time of the voucher in UTC timezone in ISO 8601 format.
+          nullable: true
+          example: string
+        ActivityState:
+          title: Activity state
+          allOf:
+          - $ref: '#/components/schemas/ActivityStateEnum'
+          description: 'Whether voucher code is active or deleted.
+
+
+            Deleted
+
+
+            Active'
+          deprecated: true
+          x-enumNames:
+          - Deleted
+          - Active
+          x-enumDescriptions:
+          - ''
+          - ''
+          x-deprecatedMessage: Use `IsActive` instead.
+          example: string
+        IsActive:
+          type: boolean
+          description: Whether the voucher code is still active.
+          example: true
+      additionalProperties: false
+      x-schema-id: VoucherCode
+    CreditRating:
+      title: Credit Rating
+      type: object
+      properties:
+        Basic:
+          allOf:
+          - $ref: '#/components/schemas/CreditRatingBasicEnum'
+          description: 'Indicates the credit status of a company.
+
+
+            CreditOk (Company can book services.)
+
+
+            PaymentRequiredUpfront (Company must pay upfront.)
+
+
+            LocalDecisionRequired (Requires local approval.)'
+          nullable: true
+          example: string
+      additionalProperties: false
+      description: Credit rating to define creditworthiness of the company.
+      x-schema-id: CreditRating
+    TimeFilterInterval:
+      title: Time interval
+      type: object
+      properties:
+        StartUtc:
+          type: string
+          format: date-time
+          nullable: true
+          example: '2026-06-02T14:30:00Z'
+        EndUtc:
+          type: string
+          format: date-time
+          nullable: true
+          example: '2026-06-02T14:30:00Z'
+      additionalProperties: false
+      description: "When a time interval is used for **filtering** (for example in parameters such as `CreatedUtc.StartUtc` / `CreatedUtc.EndUtc`), the following rules apply:\r\n\r\n- **Start equals End (equality mode)**  \r\n  If `StartUtc` and `EndUtc` are exactly the same timestamp, the filter is treated as an equality check for that precise moment in time:\r\n  \r\n  ```\r\n  CreatedUtc == StartUtc\r\n  ```\r\n  \r\n  This does not represent an interval; only records with `CreatedUtc` equal to that exact instant are returned.\r\n\r\n- **Start differs from End (interval mode)**  \r\n  If `StartUtc` and `EndUtc` are different, the filter is evaluated as a half-open interval:\r\n  \r\n  ```\r\n  StartUtc <= CreatedUtc < EndUtc\r\n  ```\r\n  \r\n  In other words, the start is inclusive and the end is exclusive.\r\n\r\nMake sure your integration takes inclusive Start / exclusive End behavior of time intervals into account so that no records at the boundaries are omitted."
+      x-schema-id: TimeFilterInterval
+    VoucherAssignment:
+      title: Voucher assignment
+      type: object
+      properties:
+        VoucherId:
+          type: string
+          description: Unique identifier of [Voucher](https://mews-systems.gitbook.io/connector-api/operations/#voucher).
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        RateId:
+          type: string
+          description: Unique identifier of [Rate](https://mews-systems.gitbook.io/connector-api/operations/rates/#rate) the voucher is assigned with.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      additionalProperties: false
+      x-schema-id: VoucherAssignment
+    AssignedRateIds:
+      title: Assigned rate ids
+      type: object
+      properties:
+        Value:
+          maxItems: 10
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Unique identifiers of Rates (or `null` should it not be updated).
+          nullable: true
+      additionalProperties: false
+      description: Has same structure as [Array of strings update value](https://mews-systems.gitbook.io/connector-api/operations/_objects#array-of-strings-update-value).
+      x-schema-id: AssignedRateIds
+    ActivityStates:
+      title: Activity state
+      enum:
+      - Deleted
+      - Active
+      type: string
+      description: Activity states used for filtering.
+    Company:
+      title: Company
+      required:
+      - ChainId
+      - CreditRating
+      - Id
+      - IsActive
+      - Name
+      - Number
+      - Options
+      type: object
+      properties:
+        Id:
+          type: string
+          description: Unique identifier of the company.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        ChainId:
+          type: string
+          description: Unique identifier of the chain.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Name:
+          minLength: 1
+          type: string
+          description: Name of the company.
+          example: Example Name
+        MotherCompanyId:
+          type: string
+          description: Unique identifier of mother company.
+          format: uuid
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        InvoicingEmail:
+          type: string
+          description: Email for issuing invoices to the company.
+          format: email
+          nullable: true
+          example: partner@example.com
+        WebsiteUrl:
+          type: string
+          description: The website url of the company.
+          format: uri
+          nullable: true
+          example: https://api.mews.com/api/connector/v1
+        InvoiceDueInterval:
+          type: string
+          description: The maximum time, when the invoice has to be be paid in ISO 8601 duration format.
+          nullable: true
+          example: string
+        Options:
+          title: Company Options
+          allOf:
+          - $ref: '#/components/schemas/CompanyOptions'
+          description: Options of the company.
+          example: string
+        CreditRating:
+          title: Credit Rating
+          allOf:
+          - $ref: '#/components/schemas/CreditRating'
+          description: Credit rating to define creditworthiness of the company.
+          example: string
+        Department:
+          type: string
+          description: The internal segmentation of a company, e.g. sales department.
+          nullable: true
+          example: string
+        DunsNumber:
+          type: string
+          description: The Dun & Bradstreet unique 9-digit DUNS number.
+          nullable: true
+          example: '1001'
+        ReferenceIdentifier:
+          type: string
+          description: External system identifier - custom identifier used by an external system such as an external database.
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        AccountingCode:
+          type: string
+          description: Accounting code of the company.
+          nullable: true
+          example: string
+        AdditionalTaxIdentifier:
+          type: string
+          description: Additional tax identifier of the company.
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        BillingCode:
+          type: string
+          description: Billing code of the company.
+          nullable: true
+          example: string
+        Contact:
+          type: string
+          description: Other contact details, such as telephone, email or similar.
+          nullable: true
+          example: string
+        ContactPerson:
+          type: string
+          description: Contact person of the company.
+          nullable: true
+          example: string
+        ElectronicInvoiceIdentifier:
+          type: string
+          description: Electronic invoice identifier of the company.
+          nullable: true
+          deprecated: true
+          x-deprecatedMessage: Use `AdditionalTaxIdentifier` instead.
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Identifier:
+          type: string
+          description: Fiscal or legal identifier of the company.
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Iata:
+          type: string
+          description: Iata of the company.
+          nullable: true
+          example: string
+        IsActive:
+          type: boolean
+          description: Whether the company is still active.
+          example: true
+        Notes:
+          type: string
+          description: Additional notes.
+          nullable: true
+          example: string
+        Number:
+          type: integer
+          description: Unique number of the company (max 19 digits).
+          format: int64
+          example: 1
+        TaxIdentifier:
+          type: string
+          description: Tax identification number of the company.
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Telephone:
+          type: string
+          description: Contact telephone number.
+          format: tel
+          nullable: true
+          example: string
+        CreatedUtc:
+          type: string
+          description: Date of [Company](https://mews-systems.gitbook.io/connector-api/operations/#company) creation date and time.
+          format: date-time
+          nullable: true
+          example: '2026-06-02T14:30:00Z'
+        UpdatedUtc:
+          type: string
+          description: Date of [Company](https://mews-systems.gitbook.io/connector-api/operations/#company) last update date and time.
+          format: date-time
+          nullable: true
+          example: '2026-06-02T14:30:00Z'
+        Address:
+          title: Address
+          allOf:
+          - $ref: '#/components/schemas/OldAddress'
+          description: ''
+          nullable: true
+          deprecated: true
+          x-deprecatedMessage: Use AddressId instead.
+          example: string
+        AddressId:
+          type: string
+          description: Unique identifier of the company [Address](https://mews-systems.gitbook.io/connector-api/operations/addresses/#account-address).
+          format: uuid
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        MergeTargetId:
+          type: string
+          description: Unique identifier of the account (Customer) to which this company is linked.
+          format: uuid
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        TaxIdentificationNumber:
+          type: string
+          nullable: true
+          deprecated: true
+          x-deprecatedMessage: Use TaxIdentifier instead.
+          example: '1001'
+        ExternalIdentifier:
+          maxLength: 255
+          type: string
+          description: Identifier of company from external system.
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      additionalProperties: false
+      x-schema-id: Company
+    VoucherTypeUpdateValue:
+      title: Voucher Type update value
+      type: object
+      properties:
+        Value:
+          title: Voucher Type
+          allOf:
+          - $ref: '#/components/schemas/VoucherTypeEnum'
+          description: Value which is to be updated.
+          x-enumNames:
+          - Public
+          - PartnerCompany
+          - TravelAgency
+          x-enumDescriptions:
+          - ''
+          - ''
+          - ''
+          example: string
+      additionalProperties: false
+      x-schema-id: VoucherTypeUpdateValue
+    Voucher:
+      title: Voucher
+      required:
+      - ActivityState
+      - CreatedUtc
+      - EnterpriseId
+      - Id
+      - IsActive
+      - Name
+      - ServiceId
+      - Type
+      - UpdatedUtc
+      type: object
+      properties:
+        Id:
+          type: string
+          description: Unique identifier of voucher.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        ServiceId:
+          type: string
+          description: Unique identifier of [Service](https://mews-systems.gitbook.io/connector-api/operations/services/#service) the voucher belongs to.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        EnterpriseId:
+          type: string
+          description: Unique identifier of the enterprise to which the voucher belongs.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Name:
+          maxLength: 128
+          minLength: 1
+          type: string
+          description: Internal name of the voucher.
+          example: Example Name
+        CreatedUtc:
+          minLength: 1
+          type: string
+          description: Creation date and time of the voucher in UTC timezone in ISO 8601 format.
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+        UpdatedUtc:
+          minLength: 1
+          type: string
+          description: Last update date and time of the voucher in UTC timezone in ISO 8601 format.
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+        Type:
+          title: Voucher Type
+          allOf:
+          - $ref: '#/components/schemas/VoucherTypeEnum'
+          description: 'Type of the voucher.
+
+
+            Public
+
+
+            PartnerCompany
+
+
+            TravelAgency'
+          x-enumNames:
+          - Public
+          - PartnerCompany
+          - TravelAgency
+          x-enumDescriptions:
+          - ''
+          - ''
+          - ''
+          example: string
+        ActivityState:
+          title: Activity state
+          allOf:
+          - $ref: '#/components/schemas/ActivityStateEnum'
+          description: 'Whether voucher is active or deleted.
+
+
+            Deleted
+
+
+            Active'
+          deprecated: true
+          x-enumNames:
+          - Deleted
+          - Active
+          x-enumDescriptions:
+          - ''
+          - ''
+          x-deprecatedMessage: Use `IsActive` instead.
+          example: string
+        CompanyId:
+          type: string
+          description: Unique identifier of [Company](https://mews-systems.gitbook.io/connector-api/operations/companies/#company) the voucher is related to.
+          format: uuid
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        TravelAgencyId:
+          type: string
+          description: Unique identifier of [Company](https://mews-systems.gitbook.io/connector-api/operations/companies/#company) with [Travel agency contract](https://mews-systems.gitbook.io/connector-api/operations/companycontracts/#travel-agency-contract) the voucher is related to.
+          format: uuid
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        OccupiableIntervalStartUtc:
+          type: string
+          description: Start of the time interval, expressed as the timestamp for the start of the first time unit, in UTC timezone ISO 8601 format.
+          format: date-time
+          nullable: true
+          example: '2026-06-02T14:30:00Z'
+        OccupiableIntervalEndUtc:
+          type: string
+          description: End of the time interval, expressed as the timestamp for the start of the last time unit, in UTC timezone ISO 8601 format.
+          format: date-time
+          nullable: true
+          example: '2026-06-02T14:30:00Z'
+        ExternalIdentifier:
+          maxLength: 255
+          type: string
+          description: Identifier of the voucher from external system.
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        IsActive:
+          type: boolean
+          description: Whether the voucher is still active.
+          example: true
+      additionalProperties: false
+      x-schema-id: Voucher
+    VoucherUpdateParameters:
+      title: Vouchers update parameters
+      required:
+      - VoucherId
+      type: object
+      properties:
+        VoucherId:
+          type: string
+          description: Unique identifier of the Voucher.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Name:
+          title: String update value
+          maxLength: 128
+          allOf:
+          - $ref: '#/components/schemas/StringUpdateValue'
+          description: Internal name of the voucher (or `null` if the name should not be updated).
+          nullable: true
+          example: Example Name
+        Type:
+          title: Voucher Type update value
+          allOf:
+          - $ref: '#/components/schemas/VoucherTypeUpdateValue'
+          description: Type of the voucher e.g. 'Public', 'PartnerCompany' or 'TravelAgency' (or `null` if the type should not be updated).
+          nullable: true
+          example: string
+        CompanyId:
+          title: Guid update value
+          allOf:
+          - $ref: '#/components/schemas/GuidNullableUpdateValue'
+          description: Unique identifier of Company (Company or Travel Agency) the voucher is related to. This is required for Type of `PartnerCompany` or `TravelAgency`. Use `null` if Company should not be updated.
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        AssignedRateIds:
+          title: Assigned rate IDs
+          allOf:
+          - $ref: '#/components/schemas/AssignedRateIds'
+          description: Unique identifiers of Rates (or `null` should it not be updated).
+          nullable: true
+          example: string
+        OccupiableIntervalStartUtc:
+          title: String update value
+          allOf:
+          - $ref: '#/components/schemas/StringUpdateValue'
+          description: Start of the interval in which the voucher can be applied (or `null` if the start time should not be updated).
+          format: date-time
+          nullable: true
+          example: '2026-06-02T14:30:00Z'
+        OccupiableIntervalEndUtc:
+          title: String update value
+          allOf:
+          - $ref: '#/components/schemas/StringUpdateValue'
+          description: End of the interval in which the voucher can be applied (or `null` if the end time should not be updated).
+          format: date-time
+          nullable: true
+          example: '2026-06-02T14:30:00Z'
+        ExternalIdentifier:
+          title: String update value
+          maxLength: 255
+          allOf:
+          - $ref: '#/components/schemas/StringUpdateValue'
+          description: Identifier of the voucher from external system (or `null` if the identifier should not be updated).
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      additionalProperties: false
+      x-schema-id: VoucherUpdateParameters
+    VoucherAddParameters:
+      title: Voucher Parameters
+      required:
+      - Name
+      - ServiceId
+      - Type
+      type: object
+      properties:
+        ServiceId:
+          type: string
+          description: Unique identifier of Service.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Name:
+          maxLength: 128
+          minLength: 1
+          type: string
+          description: Internal name of the voucher.
+          example: Example Name
+        Type:
+          title: Voucher Type
+          allOf:
+          - $ref: '#/components/schemas/VoucherTypeEnum'
+          description: 'Type of the voucher.
+
+
+            Public
+
+
+            PartnerCompany
+
+
+            TravelAgency'
+          x-enumNames:
+          - Public
+          - PartnerCompany
+          - TravelAgency
+          x-enumDescriptions:
+          - ''
+          - ''
+          - ''
+          example: string
+        CompanyId:
+          type: string
+          description: Unique identifier of Company.
+          format: uuid
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        AssignedRateIds:
+          maxItems: 10
+          uniqueItems: true
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Unique identifiers of Rates.
+          nullable: true
+        OccupiableIntervalStartUtc:
+          type: string
+          description: Start of the interval in which the voucher can be applied.
+          format: date-time
+          nullable: true
+          example: '2026-06-02T14:30:00Z'
+        OccupiableIntervalEndUtc:
+          type: string
+          description: End of the interval in which the voucher can be applied.
+          format: date-time
+          nullable: true
+          example: '2026-06-02T14:30:00Z'
+        ExternalIdentifier:
+          maxLength: 255
+          type: string
+          description: Identifier of the voucher from external system.
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      additionalProperties: false
+      x-schema-id: VoucherAddParameters
+    RateTypeEnum:
+      title: Rate type
+      enum:
+      - Public
+      - Private
+      - AvailabilityBlock
+      type: string
+      description: '
+
+
+        Public
+
+
+        Private
+
+
+        AvailabilityBlock'
+      x-enumNames:
+      - Public
+      - Private
+      - AvailabilityBlock
+      x-enumDescriptions:
+      - ''
+      - ''
+      - ''
+    OldAddress:
+      title: Address
+      type: object
+      properties:
+        Id:
+          type: string
+          description: Unique identifier of the address.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Line1:
+          type: string
+          description: First line of the address.
+          nullable: true
+          example: string
+        Line2:
+          type: string
+          description: Second line of the address.
+          nullable: true
+          example: string
+        City:
+          type: string
+          description: The city.
+          nullable: true
+          example: string
+        PostalCode:
+          type: string
+          description: Postal code.
+          nullable: true
+          example: string
+        CountryCode:
+          type: string
+          description: ISO 3166-1 code of the `Country`.
+          nullable: true
+          example: string
+        CountrySubdivisionCode:
+          type: string
+          description: ISO 3166-2 code of the administrative division, e.g. `DE-BW`.
+          nullable: true
+          example: string
+        Latitude:
+          type: number
+          description: The latitude.
+          format: double
+          nullable: true
+          example: 100.0
+        Longitude:
+          type: number
+          description: The longitude.
+          format: double
+          nullable: true
+          example: 100.0
+      additionalProperties: false
+      description: ''
+      x-schema-id: OldAddress
+    CompanyOptions:
+      title: Company Options
+      type: object
+      properties:
+        Invoiceable:
+          type: boolean
+          description: Whether the company is invoiceable or not.
+          example: true
+        AddFeesToInvoices:
+          type: boolean
+          description: Whether the company has an additional fee applied for invoicing or not.
+          example: true
+        AddTaxDeductedPaymentToInvoices:
+          type: boolean
+          description: Whether tax-deducted payments should be automatically added to invoices.
+          example: true
+      additionalProperties: false
+      description: Options of the company.
+      x-schema-id: CompanyOptions
+    ActivityStateEnum:
+      title: Activity state
+      enum:
+      - Deleted
+      - Active
+      type: string
+      description: '
+
+
+        Deleted
+
+
+        Active'
+      x-enumNames:
+      - Deleted
+      - Active
+      x-enumDescriptions:
+      - ''
+      - ''
+    MultipleVoucherDeleteParameters:
+      title: MultipleVoucherDeleteParameters
+      required:
+      - AccessToken
+      - Client
+      - ClientToken
+      - VoucherIds
+      type: object
+      properties:
+        ClientToken:
+          minLength: 1
+          type: string
+          description: Token identifying the client application.
+          example: string
+        AccessToken:
+          minLength: 1
+          type: string
+          description: Access token of the client application.
+          example: string
+        Client:
+          minLength: 1
+          type: string
+          description: Name and version of the client application.
+          example: string
+        EnterpriseId:
+          type: string
+          description: Unique identifier of the enterprise. Required when using [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property), ignored otherwise.
+          format: uuid
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        VoucherIds:
+          maxItems: 1000
+          minItems: 1
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Unique identifiers of the vouchers to be deleted.
+      additionalProperties: false
+      x-schema-id: MultipleVoucherDeleteParameters
+    VoucherExtent:
+      title: Voucher Extent
+      type: object
+      properties:
+        Vouchers:
+          type: boolean
+          description: Whether the response should contain main information about vouchers.
+          nullable: true
+          example: true
+        VoucherCodes:
+          type: boolean
+          description: Whether the response should contain voucher codes used by customers.
+          nullable: true
+          deprecated: true
+          x-deprecatedMessage: Use `voucherCodes/getAll`
+          example: true
+        VoucherAssignments:
+          type: boolean
+          description: Whether the response should contain assignments between vouchers and Rates.
+          nullable: true
+          example: true
+        Companies:
+          type: boolean
+          description: Whether the response should contain detail of related companies.
+          nullable: true
+          deprecated: true
+          x-deprecatedMessage: Use `companies/getAll`
+          example: true
+        Rates:
+          type: boolean
+          description: Whether the response should contain detail of assigned rates.
+          nullable: true
+          example: true
+      additionalProperties: false
+      description: Extent of data to be returned. Whether only specific voucher info should be returned or related items as well.
+      x-schema-id: VoucherExtent
+    VoucherFilterParameters:
+      title: VoucherFilterParameters
+      required:
+      - AccessToken
+      - Client
+      - ClientToken
+      - Extent
+      - Limitation
+      - ServiceIds
+      type: object
+      properties:
+        ClientToken:
+          minLength: 1
+          type: string
+          description: Token identifying the client application.
+          example: string
+        AccessToken:
+          minLength: 1
+          type: string
+          description: Access token of the client application.
+          example: string
+        Client:
+          minLength: 1
+          type: string
+          description: Name and version of the client application.
+          example: string
+        Limitation:
+          allOf:
+          - $ref: '#/components/schemas/Limitation'
+          description: Limitation on the quantity of data returned and optional Cursor for the starting point of data.
+          example: string
+        EnterpriseIds:
+          maxItems: 1000
+          minItems: 1
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Unique identifiers of the Enterprises. If not specified, the operation returns data for all enterprises within scope of the Access Token.
+          nullable: true
+        Extent:
+          title: Voucher Extent
+          allOf:
+          - $ref: '#/components/schemas/VoucherExtent'
+          description: Extent of data to be returned. Whether only specific voucher info should be returned or related items as well.
+          example: string
+        ServiceIds:
+          maxItems: 1000
+          minItems: 1
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Unique identifiers of [Services](https://mews-systems.gitbook.io/connector-api/operations/services/#service) where the vouchers belong to.
+        VoucherIds:
+          maxItems: 1000
+          minItems: 1
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Unique identifiers of vouchers.
+          nullable: true
+        CompanyIds:
+          maxItems: 1000
+          minItems: 1
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Unique identifiers of the companies.
+          nullable: true
+        VoucherCodeValues:
+          maxItems: 1000
+          minItems: 1
+          type: array
+          items:
+            type: string
+          description: Value of voucher codes used by customers.
+          nullable: true
+        ActivityStates:
+          type: array
+          items:
+            $ref: '#/components/schemas/ActivityStates'
+          description: Whether to return only active, only deleted, or both types of record. If not specified, both active and deleted records will be returned.
+          nullable: true
+        UpdatedUtc:
+          title: Time interval
+          allOf:
+          - $ref: '#/components/schemas/TimeFilterInterval'
+          description: Interval in which the vouchers were updated.
+          nullable: true
+          x-max-interval-in-months: 3
+          example: string
+        ExternalIdentifiers:
+          maxItems: 1000
+          minItems: 1
+          type: array
+          items:
+            type: string
+          description: Identifiers of [Voucher](https://mews-systems.gitbook.io/connector-api/operations/#voucher) from external systems.
+          nullable: true
+      additionalProperties: false
+      x-schema-id: VoucherFilterParameters
+    ConnectorApiExceptionResult:
+      title: ConnectorApiExceptionResult
+      type: object
+      properties:
+        Message:
+          type: string
+          nullable: true
+          example: string
+        RequestId:
+          type: string
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Details:
+          nullable: true
+          example: string
+      additionalProperties: false
+      x-schema-id: ConnectorApiExceptionResult
+    RateForExtent:
+      title: Rate for extent
+      required:
+      - GroupId
+      - Id
+      - IsActive
+      - IsBaseRate
+      - IsEnabled
+      - IsPublic
+      - Names
+      - ServiceId
+      - Type
+      - UpdatedUtc
+      type: object
+      properties:
+        Id:
+          type: string
+          description: Unique identifier of the rate.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        GroupId:
+          type: string
+          description: Unique identifier of `Rate Group` where the rate belongs.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        ServiceId:
+          type: string
+          description: Unique identifier of the `Service`.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        BaseRateId:
+          type: string
+          description: Unique identifier of the base `Rate`.
+          format: uuid
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        IsBaseRate:
+          type: boolean
+          description: Whether the rate is a base rate.
+          example: true
+        BusinessSegmentId:
+          type: string
+          description: Unique identifier of the `Business Segment`.
+          format: uuid
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        IsActive:
+          type: boolean
+          description: Whether the rate is still active.
+          example: true
+        IsEnabled:
+          type: boolean
+          description: Whether the rate is currently available to customers.
+          example: true
+        IsPublic:
+          type: boolean
+          description: Whether the rate is publicly available.
+          example: true
+        Type:
+          title: Rate type
+          allOf:
+          - $ref: '#/components/schemas/RateTypeEnum'
+          description: 'Type of the rate.
+
+
+            Public
+
+
+            Private
+
+
+            AvailabilityBlock'
+          x-enumNames:
+          - Public
+          - Private
+          - AvailabilityBlock
+          x-enumDescriptions:
+          - ''
+          - ''
+          - ''
+          example: string
+        Name:
+          type: string
+          description: Name of the rate (in the default language).
+          nullable: true
+          deprecated: true
+          x-deprecatedMessage: Use `Names` instead
+          example: Example Name
+        Names:
+          title: Localized text
+          type: object
+          additionalProperties:
+            type: string
+          description: All translations of the name.
+          x-schema-id: LocalizedStrings
+        ShortName:
+          type: string
+          description: Short name of the rate (in the default language).
+          nullable: true
+          example: Example Name
+        UpdatedUtc:
+          minLength: 1
+          type: string
+          description: Interval in which the rates were updated.
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+        ExternalNames:
+          title: Localized text
+          type: object
+          additionalProperties:
+            type: string
+          description: All translations of the external name of the rate.
+          nullable: true
+          x-schema-id: LocalizedStrings
+        Description:
+          title: Localized text
+          type: object
+          additionalProperties:
+            type: string
+          description: All translations of the description of the rate.
+          nullable: true
+          x-schema-id: LocalizedStrings
+        ExternalIdentifier:
+          maxLength: 255
+          type: string
+          description: Identifier of the rate from external system.
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      additionalProperties: false
+      description: '`Rate` entity, without some of the details, e.g. pricing.'
+      x-schema-id: RateForExtent
+    Limitation:
+      title: Limitation
+      required:
+      - Count
+      type: object
+      properties:
+        Count:
+          type: integer
+          format: int32
+          example: 1
+        Cursor:
+          type: string
+          format: uuid
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      additionalProperties: false
+      description: Limitation on the quantity of data returned.
+      x-schema-id: Limitation
+    VoucherTypeEnum:
+      title: Voucher Type
+      enum:
+      - Public
+      - PartnerCompany
+      - TravelAgency
+      type: string
+      description: '
+
+
+        Public
+
+
+        PartnerCompany
+
+
+        TravelAgency'
+      x-enumNames:
+      - Public
+      - PartnerCompany
+      - TravelAgency
+      x-enumDescriptions:
+      - ''
+      - ''
+      - ''
+    GuidNullableUpdateValue:
+      title: Guid update value
+      type: object
+      properties:
+        Value:
+          type: string
+          description: Value which is to be updated.
+          format: uuid
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      additionalProperties: false
+      x-schema-id: GuidNullableUpdateValue
+    VoucherParameters:
+      title: VoucherParameters
+      required:
+      - Client
+      - FullAmounts
+      - HotelId
+      - VoucherCode
+      type: object
+      properties:
+        Client:
+          minLength: 1
+          type: string
+          example: string
+        LanguageCode:
+          type: string
+          nullable: true
+          example: string
+        CultureCode:
+          type: string
+          nullable: true
+          example: string
+        FullAmounts:
+          type: boolean
+          example: true
+        Session:
+          type: string
+          nullable: true
+          example: string
+        HotelId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        VoucherCode:
+          minLength: 1
+          type: string
+          example: string
+        ServiceIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+          nullable: true
+      additionalProperties: false
+      x-schema-id: VoucherParameters
+    VoucherWriteResult:
+      title: VoucherWriteResult
+      type: object
+      properties:
+        Vouchers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Voucher'
+          description: Details about vouchers added to the system.
+          nullable: true
+      additionalProperties: false
+      x-schema-id: VoucherWriteResult
+    StringUpdateValue:
+      title: String update value
+      type: object
+      properties:
+        Value:
+          type: string
+          description: Value which is to be updated.
+          nullable: true
+          example: string
+      additionalProperties: false
+      x-schema-id: StringUpdateValue
+  securitySchemes:
+    MewsClientToken:
+      type: apiKey
+      in: header
+      name: ClientToken
+      description: Mews authentication is performed by supplying ClientToken, AccessToken and Client as fields in the JSON request body (not as HTTP headers). This securityScheme is a tooling-compatible representation of the ClientToken credential. ClientToken is unique to your application and identifies the API client.
+    MewsAccessToken:
+      type: apiKey
+      in: header
+      name: AccessToken
+      description: Tooling-compatible representation of the AccessToken credential, which is supplied in the JSON request body. AccessToken is unique to the connection with a property (enterprise) and identifies the property or properties whose data and services you can access. Portfolio Access Tokens enable multi-property access with a single token.

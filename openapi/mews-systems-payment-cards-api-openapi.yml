@@ -1,0 +1,334 @@
+openapi: 3.0.4
+info:
+  title: Mews Booking Engine API (Distributor) Account notes Payment Cards API
+  version: v1
+  description: The Mews Booking Engine API (historically the Distributor API, served from /api/distributor/v1) lets developers build guest-facing booking engines that create reservations directly in Mews. It exposes enterprise configuration, availability, pricing, products, vouchers, payment cards, and reservation group creation for front-end client consumption.
+  x-generated-from: documentation
+  x-source-url: https://api.mews.com/Swagger/distributor/swagger.json
+  x-last-validated: '2026-06-02'
+servers:
+- url: https://api.mews.com
+  description: Production
+- url: https://api.mews-demo.com
+  description: Demo / sandbox
+security:
+- MewsClientToken: []
+  MewsAccessToken: []
+tags:
+- name: Payment Cards
+paths:
+  /api/distributor/v1/paymentCards/authorize:
+    post:
+      tags:
+      - Payment Cards
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthorizePaymentCardParameters'
+            examples:
+              PaymentCardsAuthorizeRequestExample:
+                summary: Default paymentCards_authorize request
+                x-microcks-default: true
+                value:
+                  Client: string
+                  LanguageCode: string
+                  CultureCode: string
+                  FullAmounts: true
+                  Session: string
+                  EnterpriseId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                  PaymentCardId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                  BrowserInfo: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthorizePaymentCardResult'
+              examples:
+                PaymentCardsAuthorize200Example:
+                  summary: Default paymentCards_authorize 200 response
+                  x-microcks-default: true
+                  value:
+                    Id: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    PaymentCardId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    State: Authorized
+                    Action: string
+      operationId: paymentCards_authorize
+      summary: Mews Authorize
+      description: Authorize via the Mews Booking Engine (Distributor) API paymentCards resource.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/distributor/v1/paymentCards/getAll:
+    post:
+      tags:
+      - Payment Cards
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentCardFilterParameters'
+            examples:
+              PaymentCardsGetAllRequestExample:
+                summary: Default paymentCards_getAll request
+                x-microcks-default: true
+                value:
+                  Client: string
+                  LanguageCode: string
+                  CultureCode: string
+                  FullAmounts: true
+                  Session: string
+                  PaymentCardIds:
+                  - 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentCardResult'
+              examples:
+                PaymentCardsGetAll200Example:
+                  summary: Default paymentCards_getAll 200 response
+                  x-microcks-default: true
+                  value:
+                    PaymentCards:
+                    - Id: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                      AuthorizationState: {}
+      operationId: paymentCards_getAll
+      summary: Mews Get All
+      description: Get All via the Mews Booking Engine (Distributor) API paymentCards resource.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    AuthorizePaymentCardResult:
+      title: AuthorizePaymentCardResult
+      required:
+      - Id
+      - PaymentCardId
+      - State
+      type: object
+      properties:
+        Id:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        PaymentCardId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        State:
+          $ref: '#/components/schemas/PaymentCardAuthorizationState'
+        Action:
+          allOf:
+          - $ref: '#/components/schemas/PaymentCardAuthorizationAction'
+          nullable: true
+          example: string
+      additionalProperties: false
+      x-schema-id: AuthorizePaymentCardResult
+    AuthorizePaymentCardParameters:
+      title: AuthorizePaymentCardParameters
+      required:
+      - BrowserInfo
+      - Client
+      - EnterpriseId
+      - FullAmounts
+      - PaymentCardId
+      type: object
+      properties:
+        Client:
+          minLength: 1
+          type: string
+          example: string
+        LanguageCode:
+          type: string
+          nullable: true
+          example: string
+        CultureCode:
+          type: string
+          nullable: true
+          example: string
+        FullAmounts:
+          type: boolean
+          example: true
+        Session:
+          type: string
+          nullable: true
+          example: string
+        EnterpriseId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        PaymentCardId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        BrowserInfo:
+          allOf:
+          - $ref: '#/components/schemas/BrowserInfo'
+          example: string
+      additionalProperties: false
+      x-schema-id: AuthorizePaymentCardParameters
+    BrowserInfo:
+      title: BrowserInfo
+      required:
+      - AcceptHeader
+      - ColorDepth
+      - Language
+      - ScreenHeight
+      - ScreenWidth
+      - TimeZoneOffset
+      - UserAgent
+      type: object
+      properties:
+        UserAgent:
+          minLength: 1
+          type: string
+          example: string
+        AcceptHeader:
+          minLength: 1
+          type: string
+          example: string
+        Language:
+          minLength: 1
+          type: string
+          example: string
+        ColorDepth:
+          type: integer
+          format: int32
+          example: 1
+        ScreenWidth:
+          type: integer
+          format: int32
+          example: 1
+        ScreenHeight:
+          type: integer
+          format: int32
+          example: 1
+        TimeZoneOffset:
+          type: integer
+          format: int32
+          example: 1
+      additionalProperties: false
+      x-schema-id: BrowserInfo
+    PaymentCard3DsAuthorizationState:
+      enum:
+      - Authorized
+      - Authorizable
+      - Unauthorizable
+      type: string
+    PaymentCardAuthorizationAction:
+      title: PaymentCardAuthorizationAction
+      required:
+      - HttpMethod
+      - Type
+      - Url
+      type: object
+      properties:
+        Type:
+          $ref: '#/components/schemas/PaymentCardAuthorizationRequestedAction'
+        Url:
+          minLength: 1
+          type: string
+          format: uri
+          example: https://api.mews.com/api/connector/v1
+        HttpMethod:
+          minLength: 1
+          type: string
+          example: string
+        Data:
+          nullable: true
+          example: string
+      additionalProperties: false
+      x-schema-id: PaymentCardAuthorizationAction
+    PaymentCardAuthorizationRequestedAction:
+      enum:
+      - Redirect
+      - Show
+      - Nothing
+      type: string
+    PaymentCardAuthorizationState:
+      enum:
+      - Authorized
+      - Requested
+      - Pending
+      - Declined
+      - Canceled
+      type: string
+    PaymentCardFilterParameters:
+      title: PaymentCardFilterParameters
+      required:
+      - Client
+      - FullAmounts
+      - PaymentCardIds
+      type: object
+      properties:
+        Client:
+          minLength: 1
+          type: string
+          example: string
+        LanguageCode:
+          type: string
+          nullable: true
+          example: string
+        CultureCode:
+          type: string
+          nullable: true
+          example: string
+        FullAmounts:
+          type: boolean
+          example: true
+        Session:
+          type: string
+          nullable: true
+          example: string
+        PaymentCardIds:
+          minItems: 1
+          type: array
+          items:
+            type: string
+            format: uuid
+      additionalProperties: false
+      x-schema-id: PaymentCardFilterParameters
+    PaymentCardResult:
+      title: PaymentCardResult
+      required:
+      - PaymentCards
+      type: object
+      properties:
+        PaymentCards:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentCard'
+      additionalProperties: false
+      x-schema-id: PaymentCardResult
+    PaymentCard:
+      title: PaymentCard
+      required:
+      - AuthorizationState
+      - Id
+      type: object
+      properties:
+        Id:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        AuthorizationState:
+          $ref: '#/components/schemas/PaymentCard3DsAuthorizationState'
+      additionalProperties: false
+      x-schema-id: PaymentCard
+  securitySchemes:
+    MewsClientToken:
+      type: apiKey
+      in: header
+      name: ClientToken
+      description: Mews authentication is performed by supplying ClientToken, AccessToken and Client as fields in the JSON request body (not as HTTP headers). This securityScheme is a tooling-compatible representation of the ClientToken credential. ClientToken is unique to your application and identifies the API client.
+    MewsAccessToken:
+      type: apiKey
+      in: header
+      name: AccessToken
+      description: Tooling-compatible representation of the AccessToken credential, which is supplied in the JSON request body. AccessToken is unique to the connection with a property (enterprise) and identifies the property or properties whose data and services you can access. Portfolio Access Tokens enable multi-property access with a single token.

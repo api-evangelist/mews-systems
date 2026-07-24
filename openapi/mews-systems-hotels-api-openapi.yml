@@ -1,0 +1,1444 @@
+openapi: 3.0.4
+info:
+  title: Mews Booking Engine API (Distributor) Account notes Hotels API
+  version: v1
+  description: The Mews Booking Engine API (historically the Distributor API, served from /api/distributor/v1) lets developers build guest-facing booking engines that create reservations directly in Mews. It exposes enterprise configuration, availability, pricing, products, vouchers, payment cards, and reservation group creation for front-end client consumption.
+  x-generated-from: documentation
+  x-source-url: https://api.mews.com/Swagger/distributor/swagger.json
+  x-last-validated: '2026-06-02'
+servers:
+- url: https://api.mews.com
+  description: Production
+- url: https://api.mews-demo.com
+  description: Demo / sandbox
+security:
+- MewsClientToken: []
+  MewsAccessToken: []
+tags:
+- name: Hotels
+paths:
+  /api/distributor/v1/hotels/getAvailability:
+    post:
+      tags:
+      - Hotels
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AvailabilityParameters'
+            examples:
+              HotelsGetAvailabilityRequestExample:
+                summary: Default hotels_getAvailability request
+                x-microcks-default: true
+                value:
+                  Client: string
+                  LanguageCode: string
+                  CultureCode: string
+                  FullAmounts: true
+                  Session: string
+                  HotelId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                  ConfigurationId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                  AvailabilityBlockId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                  CurrencyCode: EUR
+                  CurrencyCodes:
+                  - EUR
+                  StartUtc: '2026-06-02T14:30:00Z'
+                  EndUtc: '2026-06-02T14:30:00Z'
+                  AdultCount: 1
+                  ChildCount: 1
+                  OccupancyData:
+                  - AgeCategoryId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    PersonCount: 1
+                  VoucherCode: string
+                  ProductIds:
+                  - 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                  CategoryIds:
+                  - 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                  RateIds:
+                  - 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Availability'
+              examples:
+                HotelsGetAvailability200Example:
+                  summary: Default hotels_getAvailability 200 response
+                  x-microcks-default: true
+                  value:
+                    RateGroups:
+                    - Id: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                      Ordering: 1
+                      SettlementType: {}
+                      SettlementAction: {}
+                      SettlementTrigger: {}
+                      SettlementOffset: string
+                      SettlementValue: 100.0
+                      SettlementFlatValue: 100.0
+                      SettlementMaximumNights: 1
+                      SettlementMaximumTimeUnits: 1
+                      SettlementCurrencyCode: EUR
+                    Rates:
+                    - Id: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                      RateGroupId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                      Ordering: 1
+                      Name: {}
+                      Description: {}
+                      IsPrivate: true
+                      CurrencyCode: EUR
+                    RoomCategoryAvailabilities:
+                    - RoomCategoryId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                      AvailableRoomCount: 1
+                      RoomOccupancyAvailabilities:
+                      - {}
+                    ViolatedRestrictions:
+                    - Id: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                      ServiceId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                      Conditions: string
+                      Exceptions: string
+                      ExternalIdentifier: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      operationId: hotels_getAvailability
+      summary: Mews Get Availability
+      description: Get Availability via the Mews Booking Engine (Distributor) API hotels resource.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/distributor/v1/hotels/get:
+    post:
+      tags:
+      - Hotels
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HotelParameters'
+            examples:
+              HotelsGetRequestExample:
+                summary: Default hotels_get request
+                x-microcks-default: true
+                value:
+                  Client: string
+                  LanguageCode: string
+                  CultureCode: string
+                  FullAmounts: true
+                  Session: string
+                  HotelId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SingleHotelResult'
+              examples:
+                HotelsGet200Example:
+                  summary: Default hotels_get 200 response
+                  x-microcks-default: true
+                  value:
+                    Id: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Name: {}
+                    Description: {}
+                    CityId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    ImageId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    IntroImageId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    DefaultLanguageCode: string
+                    DefaultCurrencyCode: EUR
+                    DefaultRateCurrencyCode: EUR
+                    SupportedLanguageCodes:
+                    - string
+                    AcceptedCurrencyCodes:
+                    - EUR
+                    TaxEnvironmentCode: string
+                    Pricing: Gross
+                    RoomCategories:
+                    - Id: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                      Name: {}
+                      Description: {}
+                      ImageIds:
+                      - 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                      Ordering: 1
+                      NormalBedCount: 1
+                      ExtraBedCount: 1
+                      SpaceType: {}
+                    Products:
+                    - Id: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                      Name: {}
+                      Description: {}
+                      CategoryId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                      ImageId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                      IncludedByDefault: true
+                      AlwaysIncluded: true
+                      Prices: string
+                      Pricing: {}
+                      Amounts: string
+                      RelativePrice: 100.0
+                      Charging: string
+                      ChargingMode: {}
+                      Posting: string
+                      PostingMode: {}
+                      Ordering: 1
+                    PaymentGateway: string
+                    TermsAndConditionsUrl: https://api.mews.com/api/connector/v1
+                    IanaTimeZoneIdentifier: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Email: partner@example.com
+                    Telephone: string
+                    AdditionalLegalStatements:
+                    - {}
+                    Address: string
+                    Languages:
+                    - Code: string
+                      Name: Example Name
+                      DefaultCulture: string
+                    Currencies:
+                    - Code: string
+                      Symbol: string
+                      ValueFormat: string
+                      DecimalPlaces: 1
+                      SymbolIsBehindValue: true
+                    Countries:
+                    - Code: string
+                      SovereignCountryCode: string
+                      Name: Example Name
+                    ImageBaseUrl: https://api.mews.com/api/connector/v1
+      operationId: hotels_get
+      summary: Mews Get
+      description: Get via the Mews Booking Engine (Distributor) API hotels resource.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/distributor/v1/hotels/getPaymentConfiguration:
+    post:
+      tags:
+      - Hotels
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HotelParameters'
+            examples:
+              HotelsGetPaymentConfigurationRequestExample:
+                summary: Default hotels_getPaymentConfiguration request
+                x-microcks-default: true
+                value:
+                  Client: string
+                  LanguageCode: string
+                  CultureCode: string
+                  FullAmounts: true
+                  Session: string
+                  HotelId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentConfiguration'
+              examples:
+                HotelsGetPaymentConfiguration200Example:
+                  summary: Default hotels_getPaymentConfiguration 200 response
+                  x-microcks-default: true
+                  value:
+                    PaymentGateway: string
+                    SurchargeConfiguration: string
+      operationId: hotels_getPaymentConfiguration
+      summary: Mews Get Payment Configuration
+      description: Get Payment Configuration via the Mews Booking Engine (Distributor) API hotels resource.
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    ResourceCategoryAvailability:
+      title: ResourceCategoryAvailability
+      required:
+      - AvailableRoomCount
+      - RoomCategoryId
+      - RoomOccupancyAvailabilities
+      type: object
+      properties:
+        RoomCategoryId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        AvailableRoomCount:
+          type: integer
+          format: int32
+          example: 1
+        RoomOccupancyAvailabilities:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceOccupancyPricing'
+      additionalProperties: false
+      x-schema-id: ResourceCategoryAvailability
+    PricingMode:
+      enum:
+      - Gross
+      - Net
+      type: string
+    PaymentMethods:
+      title: PaymentMethods
+      required:
+      - ApplePay
+      - GooglePay
+      - Ideal
+      - PaymentCard
+      type: object
+      properties:
+        PaymentCard:
+          type: boolean
+          example: true
+        Ideal:
+          type: boolean
+          example: true
+        ApplePay:
+          type: boolean
+          example: true
+        GooglePay:
+          type: boolean
+          example: true
+      additionalProperties: false
+      x-schema-id: PaymentMethods
+    ResourcePrice:
+      title: ResourcePrice
+      required:
+      - AverageAmountPerTimeUnit
+      - AveragePerTimeUnit
+      - Total
+      - TotalAmount
+      type: object
+      properties:
+        Total:
+          example: string
+        TotalAmount:
+          example: string
+        AveragePerNight:
+          nullable: true
+          deprecated: true
+          example: string
+        AveragePerTimeUnit:
+          example: string
+        AverageAmountPerNight:
+          nullable: true
+          deprecated: true
+          example: string
+        AverageAmountPerTimeUnit:
+          example: string
+      additionalProperties: false
+      x-schema-id: ResourcePrice
+    PaymentGatewayModel:
+      enum:
+      - MerchantOfRecord
+      - PaymentFacilitator
+      - Direct
+      type: string
+    SingleHotelResult:
+      title: SingleHotelResult
+      required:
+      - AcceptedCurrencyCodes
+      - Address
+      - CityId
+      - Countries
+      - Currencies
+      - DefaultCurrencyCode
+      - DefaultLanguageCode
+      - DefaultRateCurrencyCode
+      - Description
+      - Email
+      - IanaTimeZoneIdentifier
+      - Id
+      - ImageBaseUrl
+      - Languages
+      - Name
+      - Pricing
+      - Products
+      - RoomCategories
+      - SupportedLanguageCodes
+      - TaxEnvironmentCode
+      - TermsAndConditionsUrl
+      type: object
+      properties:
+        Id:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Name:
+          type: object
+          additionalProperties:
+            type: string
+        Description:
+          type: object
+          additionalProperties:
+            type: string
+        CityId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        ImageId:
+          type: string
+          format: uuid
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        IntroImageId:
+          type: string
+          format: uuid
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        DefaultLanguageCode:
+          minLength: 1
+          type: string
+          example: string
+        DefaultCurrencyCode:
+          maxLength: 3
+          minLength: 1
+          type: string
+          format: currency
+          example: EUR
+        DefaultRateCurrencyCode:
+          maxLength: 3
+          minLength: 1
+          type: string
+          format: currency
+          example: EUR
+        SupportedLanguageCodes:
+          type: array
+          items:
+            type: string
+        AcceptedCurrencyCodes:
+          type: array
+          items:
+            type: string
+        TaxEnvironmentCode:
+          minLength: 1
+          type: string
+          example: string
+        Pricing:
+          $ref: '#/components/schemas/PricingMode'
+        RoomCategories:
+          type: array
+          items:
+            $ref: '#/components/schemas/Category'
+        Products:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+        PaymentGateway:
+          allOf:
+          - $ref: '#/components/schemas/PaymentGateway'
+          nullable: true
+          example: string
+        TermsAndConditionsUrl:
+          minLength: 1
+          type: string
+          format: uri
+          example: https://api.mews.com/api/connector/v1
+        IanaTimeZoneIdentifier:
+          minLength: 1
+          type: string
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Email:
+          minLength: 1
+          type: string
+          example: partner@example.com
+        Telephone:
+          type: string
+          nullable: true
+          example: string
+        AdditionalLegalStatements:
+          type: array
+          items:
+            type: object
+            additionalProperties:
+              type: string
+          nullable: true
+          deprecated: true
+        Address:
+          allOf:
+          - $ref: '#/components/schemas/Address'
+          example: string
+        Languages:
+          type: array
+          items:
+            $ref: '#/components/schemas/Language'
+        Currencies:
+          type: array
+          items:
+            $ref: '#/components/schemas/Currency'
+        Countries:
+          type: array
+          items:
+            $ref: '#/components/schemas/Country'
+        ImageBaseUrl:
+          minLength: 1
+          type: string
+          format: uri
+          example: https://api.mews.com/api/connector/v1
+      additionalProperties: false
+      x-schema-id: SingleHotelResult
+    AmountPart:
+      enum:
+      - NetValue
+      - TaxValue
+      - GrossValue
+      type: string
+    Address:
+      title: Address
+      type: object
+      properties:
+        Line1:
+          maxLength: 1023
+          type: string
+          nullable: true
+          example: string
+        Line2:
+          maxLength: 255
+          type: string
+          nullable: true
+          example: string
+        City:
+          maxLength: 255
+          type: string
+          nullable: true
+          example: string
+        PostalCode:
+          maxLength: 255
+          type: string
+          nullable: true
+          example: string
+        CountryCode:
+          maxLength: 8
+          type: string
+          nullable: true
+          example: string
+        Latitude:
+          type: number
+          format: double
+          nullable: true
+          example: 100.0
+        Longitude:
+          type: number
+          format: double
+          nullable: true
+          example: 100.0
+      additionalProperties: false
+      x-schema-id: Address
+    HotelParameters:
+      title: HotelParameters
+      required:
+      - Client
+      - FullAmounts
+      - HotelId
+      type: object
+      properties:
+        Client:
+          minLength: 1
+          type: string
+          example: string
+        LanguageCode:
+          type: string
+          nullable: true
+          example: string
+        CultureCode:
+          type: string
+          nullable: true
+          example: string
+        FullAmounts:
+          type: boolean
+          example: true
+        Session:
+          type: string
+          nullable: true
+          example: string
+        HotelId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      additionalProperties: false
+      x-schema-id: HotelParameters
+    ProductChargingMode:
+      enum:
+      - Once
+      - PerTimeUnit
+      - PerPersonPerTimeUnit
+      - PerPerson
+      type: string
+    RestrictionExceptions:
+      title: RestrictionExceptions
+      type: object
+      properties:
+        MinAdvance:
+          type: string
+          nullable: true
+          example: string
+        MaxAdvance:
+          type: string
+          nullable: true
+          example: string
+        MinLength:
+          type: string
+          nullable: true
+          example: string
+        MaxLength:
+          type: string
+          nullable: true
+          example: string
+        MinPrice:
+          type: number
+          format: double
+          nullable: true
+          example: 100.0
+        MaxPrice:
+          type: number
+          format: double
+          nullable: true
+          example: 100.0
+        PriceCurrencyCode:
+          maxLength: 3
+          type: string
+          nullable: true
+          example: EUR
+        MaxReservationCount:
+          type: integer
+          format: int32
+          nullable: true
+          example: 1
+      additionalProperties: false
+      x-schema-id: RestrictionExceptions
+    Rate:
+      title: Rate
+      required:
+      - CurrencyCode
+      - Description
+      - Id
+      - IsPrivate
+      - Name
+      - Ordering
+      - RateGroupId
+      type: object
+      properties:
+        Id:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        RateGroupId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Ordering:
+          type: integer
+          format: int32
+          example: 1
+        Name:
+          type: object
+          additionalProperties:
+            type: string
+            nullable: true
+        Description:
+          type: object
+          additionalProperties:
+            type: string
+            nullable: true
+        IsPrivate:
+          type: boolean
+          example: true
+        CurrencyCode:
+          maxLength: 3
+          minLength: 1
+          type: string
+          format: currency
+          example: EUR
+      additionalProperties: false
+      x-schema-id: Rate
+    Availability:
+      title: Availability
+      required:
+      - RateGroups
+      - Rates
+      - RoomCategoryAvailabilities
+      type: object
+      properties:
+        RateGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/RateGroup'
+        Rates:
+          type: array
+          items:
+            $ref: '#/components/schemas/Rate'
+        RoomCategoryAvailabilities:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceCategoryAvailability'
+        ViolatedRestrictions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Restriction'
+          nullable: true
+      additionalProperties: false
+      x-schema-id: Availability
+    SettlementRuleAction:
+      enum:
+      - ChargeCreditCard
+      - CreatePreauthorization
+      type: string
+    CreditCardTypes:
+      enum:
+      - MasterCard
+      - Visa
+      - Amex
+      - Discover
+      - DinersClub
+      - Jcb
+      - Maestro
+      - UnionPay
+      - VPay
+      - RuPay
+      - Dankort
+      - Mir
+      - Verve
+      - Troy
+      - PostFinance
+      - Giro
+      - Bancomat
+      - Bc
+      - CarteBleue
+      - Eftpos
+      - Eps
+      - Interac
+      - Isracard
+      - Meps
+      - Nets
+      - Bancontact
+      type: string
+    Culture:
+      title: Culture
+      required:
+      - CurrencyDecimalSeparator
+      - CurrencyGroupSeparator
+      type: object
+      properties:
+        CurrencyDecimalSeparator:
+          minLength: 1
+          type: string
+          example: EUR
+        CurrencyGroupSeparator:
+          minLength: 1
+          type: string
+          example: EUR
+      additionalProperties: false
+      x-schema-id: Culture
+    ResourceCategoryType:
+      enum:
+      - Room
+      - Bed
+      - Dorm
+      - Apartment
+      - Suite
+      - Villa
+      - Site
+      - Office
+      - MeetingRoom
+      - ParkingSpot
+      - Desk
+      - TeamArea
+      - Membership
+      - Tent
+      - CaravanOrRV
+      - UnequippedCampsite
+      - Bike
+      - ExtraBed
+      - Cot
+      - Crib
+      - ConferenceRoom
+      - Rooftop
+      - Garden
+      - Restaurant
+      - Amphitheater
+      - PrivateSpaces
+      type: string
+    AvailabilityParameters:
+      title: AvailabilityParameters
+      required:
+      - Client
+      - EndUtc
+      - FullAmounts
+      - HotelId
+      - StartUtc
+      type: object
+      properties:
+        Client:
+          minLength: 1
+          type: string
+          example: string
+        LanguageCode:
+          type: string
+          nullable: true
+          example: string
+        CultureCode:
+          type: string
+          nullable: true
+          example: string
+        FullAmounts:
+          type: boolean
+          example: true
+        Session:
+          type: string
+          nullable: true
+          example: string
+        HotelId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        ConfigurationId:
+          type: string
+          format: uuid
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        AvailabilityBlockId:
+          type: string
+          format: uuid
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        CurrencyCode:
+          type: string
+          nullable: true
+          deprecated: true
+          example: EUR
+        CurrencyCodes:
+          type: array
+          items:
+            type: string
+          nullable: true
+        StartUtc:
+          minLength: 1
+          type: string
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+        EndUtc:
+          minLength: 1
+          type: string
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+        AdultCount:
+          type: integer
+          format: int32
+          nullable: true
+          deprecated: true
+          example: 1
+        ChildCount:
+          type: integer
+          format: int32
+          nullable: true
+          deprecated: true
+          example: 1
+        OccupancyData:
+          type: array
+          items:
+            $ref: '#/components/schemas/OccupancyData'
+          nullable: true
+        VoucherCode:
+          type: string
+          nullable: true
+          example: string
+        ProductIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+          nullable: true
+        CategoryIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+          nullable: true
+        RateIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+          nullable: true
+      additionalProperties: false
+      x-schema-id: AvailabilityParameters
+    RestrictionType:
+      enum:
+      - ClosedToStay
+      - ClosedToArrival
+      - ClosedToDeparture
+      type: string
+    PaymentCardStorageType:
+      enum:
+      - Adyen
+      - Stripe
+      - PciProxy
+      type: string
+    SettlementRuleType:
+      enum:
+      - Manual
+      - Automatic
+      type: string
+    ResourcePricing:
+      title: ResourcePricing
+      required:
+      - MaxPrice
+      - Price
+      - RateId
+      type: object
+      properties:
+        RateId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Price:
+          allOf:
+          - $ref: '#/components/schemas/ResourcePrice'
+          example: string
+        MaxPrice:
+          allOf:
+          - $ref: '#/components/schemas/ResourcePrice'
+          example: string
+      additionalProperties: false
+      x-schema-id: ResourcePricing
+    PaymentGateway:
+      title: PaymentGateway
+      required:
+      - Accounts
+      - DefaultCurrencyCode
+      - IsMerchant
+      - Model
+      - PaymentCardStorageType
+      - PublicKey
+      - SupportedCreditCardTypes
+      - SupportedPaymentMethods
+      type: object
+      properties:
+        PaymentGatewayType:
+          type: string
+          nullable: true
+          deprecated: true
+          example: string
+        PaymentCardStorageType:
+          $ref: '#/components/schemas/PaymentCardStorageType'
+        IsMerchant:
+          type: boolean
+          example: true
+        Model:
+          $ref: '#/components/schemas/PaymentGatewayModel'
+        SupportedCreditCardTypes:
+          type: array
+          items:
+            $ref: '#/components/schemas/CreditCardTypes'
+        SupportedPaymentMethods:
+          allOf:
+          - $ref: '#/components/schemas/PaymentMethods'
+          example: string
+        PublicKey:
+          minLength: 1
+          type: string
+          example: string
+        DefaultCurrencyCode:
+          maxLength: 3
+          minLength: 1
+          type: string
+          format: currency
+          example: EUR
+        Accounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentGatewayAccount'
+      additionalProperties: false
+      x-schema-id: PaymentGateway
+    Currency:
+      title: Currency
+      required:
+      - Code
+      - DecimalPlaces
+      - Symbol
+      - SymbolIsBehindValue
+      - ValueFormat
+      type: object
+      properties:
+        Code:
+          maxLength: 3
+          minLength: 1
+          type: string
+          format: currency
+          example: string
+        Symbol:
+          minLength: 1
+          type: string
+          example: string
+        ValueFormat:
+          minLength: 1
+          type: string
+          example: string
+        DecimalPlaces:
+          type: integer
+          format: int32
+          example: 1
+        SymbolIsBehindValue:
+          type: boolean
+          example: true
+      additionalProperties: false
+      x-schema-id: Currency
+    RateGroup:
+      title: RateGroup
+      required:
+      - Id
+      - Ordering
+      - SettlementAction
+      - SettlementCurrencyCode
+      - SettlementOffset
+      - SettlementTrigger
+      - SettlementType
+      type: object
+      properties:
+        Id:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Ordering:
+          type: integer
+          format: int32
+          example: 1
+        SettlementType:
+          $ref: '#/components/schemas/SettlementRuleType'
+        SettlementAction:
+          $ref: '#/components/schemas/SettlementRuleAction'
+        SettlementTrigger:
+          $ref: '#/components/schemas/SettlementRuleTrigger'
+        SettlementOffset:
+          minLength: 1
+          type: string
+          example: string
+        SettlementValue:
+          type: number
+          format: double
+          nullable: true
+          example: 100.0
+        SettlementFlatValue:
+          type: number
+          format: double
+          nullable: true
+          example: 100.0
+        SettlementMaximumNights:
+          type: integer
+          format: int32
+          nullable: true
+          deprecated: true
+          example: 1
+        SettlementMaximumTimeUnits:
+          type: integer
+          format: int32
+          nullable: true
+          example: 1
+        SettlementCurrencyCode:
+          maxLength: 3
+          minLength: 1
+          type: string
+          format: currency
+          example: EUR
+      additionalProperties: false
+      x-schema-id: RateGroup
+    SurchargeConfiguration:
+      title: SurchargeConfiguration
+      required:
+      - SurchargeFees
+      type: object
+      properties:
+        SurchargeServiceId:
+          type: string
+          format: uuid
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        SurchargeFees:
+          type: object
+          additionalProperties:
+            type: number
+            format: double
+      additionalProperties: false
+      x-schema-id: SurchargeConfiguration
+    RestrictionConditions:
+      title: RestrictionConditions
+      required:
+      - Days
+      - Type
+      type: object
+      properties:
+        Type:
+          $ref: '#/components/schemas/RestrictionType'
+        ExactRateId:
+          type: string
+          format: uuid
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        BaseRateId:
+          type: string
+          format: uuid
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        RateGroupId:
+          type: string
+          format: uuid
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        ResourceCategoryId:
+          type: string
+          format: uuid
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        ResourceCategoryType:
+          anyOf:
+          - $ref: '#/components/schemas/ResourceCategoryType'
+          nullable: true
+          example: string
+        StartUtc:
+          type: string
+          format: date-time
+          nullable: true
+          example: '2026-06-02T14:30:00Z'
+        EndUtc:
+          type: string
+          format: date-time
+          nullable: true
+          example: '2026-06-02T14:30:00Z'
+        Days:
+          type: array
+          items:
+            type: string
+      additionalProperties: false
+      x-schema-id: RestrictionConditions
+    PaymentConfiguration:
+      title: PaymentConfiguration
+      required:
+      - SurchargeConfiguration
+      type: object
+      properties:
+        PaymentGateway:
+          allOf:
+          - $ref: '#/components/schemas/PaymentGateway'
+          nullable: true
+          example: string
+        SurchargeConfiguration:
+          allOf:
+          - $ref: '#/components/schemas/SurchargeConfiguration'
+          example: string
+      additionalProperties: false
+      x-schema-id: PaymentConfiguration
+    Category:
+      title: Category
+      required:
+      - Description
+      - ExtraBedCount
+      - Id
+      - Name
+      - NormalBedCount
+      - SpaceType
+      type: object
+      properties:
+        Id:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Name:
+          type: object
+          additionalProperties:
+            type: string
+        Description:
+          type: object
+          additionalProperties:
+            type: string
+        ImageIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+          nullable: true
+          deprecated: true
+        Ordering:
+          type: integer
+          format: int32
+          nullable: true
+          example: 1
+        NormalBedCount:
+          type: integer
+          format: int32
+          example: 1
+        ExtraBedCount:
+          type: integer
+          format: int32
+          example: 1
+        SpaceType:
+          $ref: '#/components/schemas/ResourceCategoryType'
+      additionalProperties: false
+      x-schema-id: Category
+    Language:
+      title: Language
+      required:
+      - Code
+      - DefaultCulture
+      - Name
+      type: object
+      properties:
+        Code:
+          minLength: 1
+          type: string
+          example: string
+        Name:
+          minLength: 1
+          type: string
+          example: Example Name
+        DefaultCulture:
+          allOf:
+          - $ref: '#/components/schemas/Culture'
+          example: string
+      additionalProperties: false
+      x-schema-id: Language
+    SettlementRuleTrigger:
+      enum:
+      - Confirmation
+      - Start
+      - End
+      - StartDate
+      - EndDate
+      type: string
+    Country:
+      title: Country
+      required:
+      - Code
+      - Name
+      type: object
+      properties:
+        Code:
+          maxLength: 2
+          minLength: 1
+          type: string
+          example: string
+        SovereignCountryCode:
+          type: string
+          nullable: true
+          example: string
+        Name:
+          minLength: 1
+          type: string
+          example: Example Name
+      additionalProperties: false
+      x-schema-id: Country
+    ProductPostingMode:
+      enum:
+      - Once
+      - PerTimeUnit
+      type: string
+    PaymentGatewayAccount:
+      title: PaymentGatewayAccount
+      required:
+      - CurrencyCode
+      type: object
+      properties:
+        CurrencyCode:
+          maxLength: 3
+          minLength: 1
+          type: string
+          format: currency
+          example: EUR
+      additionalProperties: false
+      x-schema-id: PaymentGatewayAccount
+    Restriction:
+      title: Restriction
+      required:
+      - Conditions
+      - Exceptions
+      - Id
+      - ServiceId
+      type: object
+      properties:
+        Id:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        ServiceId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Conditions:
+          allOf:
+          - $ref: '#/components/schemas/RestrictionConditions'
+          example: string
+        Exceptions:
+          allOf:
+          - $ref: '#/components/schemas/RestrictionExceptions'
+          example: string
+        ExternalIdentifier:
+          type: string
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      additionalProperties: false
+      x-schema-id: Restriction
+    ResourceOccupancyPricing:
+      title: ResourceOccupancyPricing
+      required:
+      - Pricing
+      type: object
+      properties:
+        AdultCount:
+          type: integer
+          format: int32
+          nullable: true
+          deprecated: true
+          example: 1
+        ChildCount:
+          type: integer
+          format: int32
+          nullable: true
+          deprecated: true
+          example: 1
+        OccupancyData:
+          type: array
+          items:
+            $ref: '#/components/schemas/OccupancyData'
+          nullable: true
+        Pricing:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourcePricing'
+      additionalProperties: false
+      x-schema-id: ResourceOccupancyPricing
+    OccupancyData:
+      title: OccupancyData
+      required:
+      - AgeCategoryId
+      - PersonCount
+      type: object
+      properties:
+        AgeCategoryId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        PersonCount:
+          type: integer
+          format: int32
+          example: 1
+      additionalProperties: false
+      x-schema-id: OccupancyData
+    Product:
+      title: Product
+      required:
+      - AlwaysIncluded
+      - Amounts
+      - ChargingMode
+      - Description
+      - Id
+      - IncludedByDefault
+      - Name
+      - Ordering
+      - PostingMode
+      - Prices
+      - Pricing
+      type: object
+      properties:
+        Id:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Name:
+          type: object
+          additionalProperties:
+            type: string
+        Description:
+          type: object
+          additionalProperties:
+            type: string
+        CategoryId:
+          type: string
+          format: uuid
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        ImageId:
+          type: string
+          format: uuid
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        IncludedByDefault:
+          type: boolean
+          example: true
+        AlwaysIncluded:
+          type: boolean
+          example: true
+        Prices:
+          example: string
+        Pricing:
+          title: Pricing
+          type: object
+          properties:
+            discriminator:
+              type: string
+            value:
+              oneOf:
+              - $ref: '#/components/schemas/RelativeProductPrice'
+          x-coproduct: true
+          x-schema-id: ProductPricingCoproductOfRelativeProductPrice
+        Amounts:
+          example: string
+        RelativePrice:
+          type: number
+          format: double
+          nullable: true
+          example: 100.0
+        Charging:
+          type: string
+          nullable: true
+          deprecated: true
+          example: string
+        ChargingMode:
+          $ref: '#/components/schemas/ProductChargingMode'
+        Posting:
+          type: string
+          nullable: true
+          deprecated: true
+          example: string
+        PostingMode:
+          $ref: '#/components/schemas/ProductPostingMode'
+        Ordering:
+          type: integer
+          format: int32
+          example: 1
+      additionalProperties: false
+      x-schema-id: Product
+    RelativeProductPrice:
+      title: RelativeProductPrice
+      required:
+      - Multiplier
+      - ProductIds
+      - Target
+      - TaxRateCodes
+      type: object
+      properties:
+        ProductIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+        TaxRateCodes:
+          type: array
+          items:
+            type: string
+        Multiplier:
+          type: number
+          format: double
+          example: 100.0
+        Target:
+          $ref: '#/components/schemas/AmountPart'
+      additionalProperties: false
+      x-schema-id: RelativeProductPrice
+  securitySchemes:
+    MewsClientToken:
+      type: apiKey
+      in: header
+      name: ClientToken
+      description: Mews authentication is performed by supplying ClientToken, AccessToken and Client as fields in the JSON request body (not as HTTP headers). This securityScheme is a tooling-compatible representation of the ClientToken credential. ClientToken is unique to your application and identifies the API client.
+    MewsAccessToken:
+      type: apiKey
+      in: header
+      name: AccessToken
+      description: Tooling-compatible representation of the AccessToken credential, which is supplied in the JSON request body. AccessToken is unique to the connection with a property (enterprise) and identifies the property or properties whose data and services you can access. Portfolio Access Tokens enable multi-property access with a single token.

@@ -1,0 +1,319 @@
+openapi: 3.0.4
+info:
+  title: Mews Booking Engine API (Distributor) Account notes Images API
+  version: v1
+  description: The Mews Booking Engine API (historically the Distributor API, served from /api/distributor/v1) lets developers build guest-facing booking engines that create reservations directly in Mews. It exposes enterprise configuration, availability, pricing, products, vouchers, payment cards, and reservation group creation for front-end client consumption.
+  x-generated-from: documentation
+  x-source-url: https://api.mews.com/Swagger/distributor/swagger.json
+  x-last-validated: '2026-06-02'
+servers:
+- url: https://api.mews.com
+  description: Production
+- url: https://api.mews-demo.com
+  description: Demo / sandbox
+security:
+- MewsClientToken: []
+  MewsAccessToken: []
+tags:
+- name: Images
+paths:
+  /api/connector/v1/images/getUrls:
+    post:
+      tags:
+      - Images
+      summary: Mews Get Image URLs
+      description: Returns URLs of the specified images.
+      operationId: images_getUrls
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ImageUrlParameters'
+            example:
+              ClientToken: E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D
+              AccessToken: C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D
+              Client: Sample Client 1.0.0
+              Images:
+              - ImageId: 57a971a5-a335-48f4-8cd1-595245d1a876
+                Width: 200
+                Height: 150
+                ResizeMode: Fit
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ImageUrlResult'
+              example:
+                ImageUrls:
+                - ImageId: 57a971a5-a335-48f4-8cd1-595245d1a876
+                  Url: https://cdn.demo.mews.li/Media/Image/57a971a5-a335-48f4-8cd1-595245d1a876?Mode=Fit&Width=200&Height=150
+        '400':
+          description: Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                ImagesGetUrls400Example:
+                  summary: Default images_getUrls 400 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '401':
+          description: Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                ImagesGetUrls401Example:
+                  summary: Default images_getUrls 401 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '403':
+          description: Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                ImagesGetUrls403Example:
+                  summary: Default images_getUrls 403 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '408':
+          description: Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-timeouts)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                ImagesGetUrls408Example:
+                  summary: Default images_getUrls 408 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '204':
+          description: Server has successfully fulfilled the request and there is no additional information to send back.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                ImagesGetUrls204Example:
+                  summary: Default images_getUrls 204 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '429':
+          description: Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-limits).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                ImagesGetUrls429Example:
+                  summary: Default images_getUrls 429 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+        '500':
+          description: Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.com/MewsSystems/gitbook-connector-api).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectorApiExceptionResult'
+              examples:
+                ImagesGetUrls500Example:
+                  summary: Default images_getUrls 500 response
+                  x-microcks-default: true
+                  value:
+                    Message: string
+                    RequestId: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+                    Details: string
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    ImageSizeParameters:
+      title: Image size parameters
+      required:
+      - ImageId
+      type: object
+      properties:
+        ImageId:
+          type: string
+          description: Unique identifier of the image.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Width:
+          type: integer
+          description: Desired width of the image.
+          format: int32
+          nullable: true
+          example: 1
+        Height:
+          type: integer
+          description: Desired height of the image.
+          format: int32
+          nullable: true
+          example: 1
+        ResizeMode:
+          allOf:
+          - $ref: '#/components/schemas/ImageResizeModeEnum'
+          description: 'Mode how the image should be resized to the desired width and height.
+
+
+            Cover (Resize to fit within the specified size, so the result might be smaller than requested.)
+
+
+            CoverExact (Resize and pad to exactly fit within the specified size.)
+
+
+            Fit (Resize to fit within the specified size, so the result might be smaller than requested.)
+
+
+            FitExact (Resize and pad to exactly fit within the specified size.)'
+          nullable: true
+          example: string
+      additionalProperties: false
+      x-schema-id: ImageSizeParameters
+    ConnectorApiExceptionResult:
+      title: ConnectorApiExceptionResult
+      type: object
+      properties:
+        Message:
+          type: string
+          nullable: true
+          example: string
+        RequestId:
+          type: string
+          nullable: true
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Details:
+          nullable: true
+          example: string
+      additionalProperties: false
+      x-schema-id: ConnectorApiExceptionResult
+    ImageResizeModeEnum:
+      title: Image resize mode
+      enum:
+      - Cover
+      - CoverExact
+      - Fit
+      - FitExact
+      type: string
+      description: '
+
+
+        Cover (Resize to fit within the specified size, so the result might be smaller than requested.)
+
+
+        CoverExact (Resize and pad to exactly fit within the specified size.)
+
+
+        Fit (Resize to fit within the specified size, so the result might be smaller than requested.)
+
+
+        FitExact (Resize and pad to exactly fit within the specified size.)'
+      x-enumNames:
+      - Cover
+      - CoverExact
+      - Fit
+      - FitExact
+      x-enumDescriptions:
+      - Resize to fit within the specified size, so the result might be smaller than requested.
+      - Resize and pad to exactly fit within the specified size.
+      - Resize to fit within the specified size, so the result might be smaller than requested.
+      - Resize and pad to exactly fit within the specified size.
+    ImageUrlParameters:
+      title: ImageUrlParameters
+      required:
+      - AccessToken
+      - Client
+      - ClientToken
+      - Images
+      type: object
+      properties:
+        ClientToken:
+          minLength: 1
+          type: string
+          description: Token identifying the client application.
+          example: string
+        AccessToken:
+          minLength: 1
+          type: string
+          description: Access token of the client application.
+          example: string
+        Client:
+          minLength: 1
+          type: string
+          description: Name and version of the client application.
+          example: string
+        Images:
+          type: array
+          items:
+            $ref: '#/components/schemas/ImageSizeParameters'
+          description: Parameters of images whose URLs should be returned.
+      additionalProperties: false
+      x-schema-id: ImageUrlParameters
+    ImageUrl:
+      title: Image URL
+      required:
+      - ImageId
+      - Url
+      type: object
+      properties:
+        ImageId:
+          type: string
+          description: Unique identifier of the image.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Url:
+          minLength: 1
+          type: string
+          description: URL of the image.
+          example: https://api.mews.com/api/connector/v1
+      additionalProperties: false
+      x-schema-id: ImageUrl
+    ImageUrlResult:
+      title: ImageUrlResult
+      required:
+      - ImageUrls
+      type: object
+      properties:
+        ImageUrls:
+          type: array
+          items:
+            $ref: '#/components/schemas/ImageUrl'
+          description: URLs of the images.
+      additionalProperties: false
+      x-schema-id: ImageUrlResult
+  securitySchemes:
+    MewsClientToken:
+      type: apiKey
+      in: header
+      name: ClientToken
+      description: Mews authentication is performed by supplying ClientToken, AccessToken and Client as fields in the JSON request body (not as HTTP headers). This securityScheme is a tooling-compatible representation of the ClientToken credential. ClientToken is unique to your application and identifies the API client.
+    MewsAccessToken:
+      type: apiKey
+      in: header
+      name: AccessToken
+      description: Tooling-compatible representation of the AccessToken credential, which is supplied in the JSON request body. AccessToken is unique to the connection with a property (enterprise) and identifies the property or properties whose data and services you can access. Portfolio Access Tokens enable multi-property access with a single token.
