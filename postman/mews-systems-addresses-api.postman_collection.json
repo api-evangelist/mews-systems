@@ -1,0 +1,2228 @@
+{
+  "info": {
+    "_postman_id": "e545e117-a55e-4d61-9dac-1a9a8f9a86f5",
+    "name": "Mews Booking Engine API (Distributor) Account notes Addresses API",
+    "description": "The Mews Booking Engine API (historically the Distributor API, served from /api/distributor/v1) lets developers build guest-facing booking engines that create reservations directly in Mews. It exposes enterprise configuration, availability, pricing, products, vouchers, payment cards, and reservation group creation for front-end client consumption.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:09:38.000Z",
+    "updatedAt": "2026-07-28T02:09:38.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-e545e117-a55e-4d61-9dac-1a9a8f9a86f5"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "connector",
+          "item": [
+            {
+              "name": "v1",
+              "item": [
+                {
+                  "name": "addresses",
+                  "item": [
+                    {
+                      "name": "getAll",
+                      "item": [
+                        {
+                          "name": "Mews Get All Addresses",
+                          "id": "b221c858-af6c-4336-b726-c73f0b52e842",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"ChainIds\": [\n    \"<uuid>\"\n  ],\n  \"AccountIds\": [\n    \"<uuid>\"\n  ],\n  \"AddressIds\": [\n    \"<uuid>\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"ActivityStates\": [\n    \"Active\",\n    \"Active\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/connector/v1/addresses/getAll",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "connector",
+                                "v1",
+                                "addresses",
+                                "getAll"
+                              ]
+                            },
+                            "description": "Returns all addresses associated with the specified accounts within the enterprise. \nNote this operation uses [Pagination](https://mews-systems.gitbook.io/connector-api/guidelines/pagination/) and supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property)."
+                          },
+                          "response": [
+                            {
+                              "id": "e57e73c0-d6b5-41ae-9f13-2153e1ad3235",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"ChainIds\": [\n    \"<uuid>\"\n  ],\n  \"AccountIds\": [\n    \"<uuid>\"\n  ],\n  \"AddressIds\": [\n    \"<uuid>\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"ActivityStates\": [\n    \"Active\",\n    \"Active\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/addresses/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "addresses",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Addresses\": [\n    {\n      \"AccountType\": \"Company\",\n      \"Id\": \"<uuid>\",\n      \"AccountId\": \"<uuid>\",\n      \"ChainId\": \"<uuid>\",\n      \"Line1\": \"<string>\",\n      \"Line2\": \"<string>\",\n      \"City\": \"<string>\",\n      \"PostalCode\": \"<string>\",\n      \"CountryCode\": \"<string>\",\n      \"CountrySubdivisionCode\": \"<string>\",\n      \"Latitude\": \"<double>\",\n      \"Longitude\": \"<double>\",\n      \"UpdatedUtc\": \"<dateTime>\",\n      \"IsActive\": \"<boolean>\"\n    },\n    {\n      \"AccountType\": \"Customer\",\n      \"Id\": \"<uuid>\",\n      \"AccountId\": \"<uuid>\",\n      \"ChainId\": \"<uuid>\",\n      \"Line1\": \"<string>\",\n      \"Line2\": \"<string>\",\n      \"City\": \"<string>\",\n      \"PostalCode\": \"<string>\",\n      \"CountryCode\": \"<string>\",\n      \"CountrySubdivisionCode\": \"<string>\",\n      \"Latitude\": \"<double>\",\n      \"Longitude\": \"<double>\",\n      \"UpdatedUtc\": \"<dateTime>\",\n      \"IsActive\": \"<boolean>\"\n    }\n  ],\n  \"Cursor\": \"<uuid>\"\n}",
+                              "createdAt": "2026-07-28T02:09:38.000Z",
+                              "updatedAt": "2026-07-28T02:09:38.000Z",
+                              "uid": "35240-e57e73c0-d6b5-41ae-9f13-2153e1ad3235"
+                            },
+                            {
+                              "id": "fd441612-1344-450f-9a29-ec9ec355cce4",
+                              "name": "Server has successfully fulfilled the request and there is no additional information to send back.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"ChainIds\": [\n    \"<uuid>\"\n  ],\n  \"AccountIds\": [\n    \"<uuid>\"\n  ],\n  \"AddressIds\": [\n    \"<uuid>\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"ActivityStates\": [\n    \"Active\",\n    \"Active\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/addresses/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "addresses",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:38.000Z",
+                              "updatedAt": "2026-07-28T02:09:38.000Z",
+                              "uid": "35240-fd441612-1344-450f-9a29-ec9ec355cce4"
+                            },
+                            {
+                              "id": "f19d9cd8-0fd3-41dc-8d3e-10af8a2e7a06",
+                              "name": "Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"ChainIds\": [\n    \"<uuid>\"\n  ],\n  \"AccountIds\": [\n    \"<uuid>\"\n  ],\n  \"AddressIds\": [\n    \"<uuid>\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"ActivityStates\": [\n    \"Active\",\n    \"Active\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/addresses/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "addresses",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:38.000Z",
+                              "updatedAt": "2026-07-28T02:09:38.000Z",
+                              "uid": "35240-f19d9cd8-0fd3-41dc-8d3e-10af8a2e7a06"
+                            },
+                            {
+                              "id": "ccbb6b69-8ea6-436f-bb59-af86f1acecb1",
+                              "name": "Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"ChainIds\": [\n    \"<uuid>\"\n  ],\n  \"AccountIds\": [\n    \"<uuid>\"\n  ],\n  \"AddressIds\": [\n    \"<uuid>\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"ActivityStates\": [\n    \"Active\",\n    \"Active\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/addresses/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "addresses",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:38.000Z",
+                              "updatedAt": "2026-07-28T02:09:38.000Z",
+                              "uid": "35240-ccbb6b69-8ea6-436f-bb59-af86f1acecb1"
+                            },
+                            {
+                              "id": "885f5c9e-e6fd-4ca0-9e8f-750145d7e02d",
+                              "name": "Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"ChainIds\": [\n    \"<uuid>\"\n  ],\n  \"AccountIds\": [\n    \"<uuid>\"\n  ],\n  \"AddressIds\": [\n    \"<uuid>\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"ActivityStates\": [\n    \"Active\",\n    \"Active\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/addresses/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "addresses",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:38.000Z",
+                              "updatedAt": "2026-07-28T02:09:38.000Z",
+                              "uid": "35240-885f5c9e-e6fd-4ca0-9e8f-750145d7e02d"
+                            },
+                            {
+                              "id": "1d29b740-596a-45e1-8ad2-c7ca3969deff",
+                              "name": "Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#r",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"ChainIds\": [\n    \"<uuid>\"\n  ],\n  \"AccountIds\": [\n    \"<uuid>\"\n  ],\n  \"AddressIds\": [\n    \"<uuid>\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"ActivityStates\": [\n    \"Active\",\n    \"Active\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/addresses/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "addresses",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Request Timeout",
+                              "code": 408,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:38.000Z",
+                              "updatedAt": "2026-07-28T02:09:38.000Z",
+                              "uid": "35240-1d29b740-596a-45e1-8ad2-c7ca3969deff"
+                            },
+                            {
+                              "id": "d5329e11-cfc3-4760-84ad-74c471b0b937",
+                              "name": "Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitb",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"ChainIds\": [\n    \"<uuid>\"\n  ],\n  \"AccountIds\": [\n    \"<uuid>\"\n  ],\n  \"AddressIds\": [\n    \"<uuid>\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"ActivityStates\": [\n    \"Active\",\n    \"Active\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/addresses/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "addresses",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Too Many Requests",
+                              "code": 429,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:38.000Z",
+                              "updatedAt": "2026-07-28T02:09:38.000Z",
+                              "uid": "35240-d5329e11-cfc3-4760-84ad-74c471b0b937"
+                            },
+                            {
+                              "id": "369663a3-58a7-4667-9cd8-2dbb63755271",
+                              "name": "Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"ChainIds\": [\n    \"<uuid>\"\n  ],\n  \"AccountIds\": [\n    \"<uuid>\"\n  ],\n  \"AddressIds\": [\n    \"<uuid>\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"ActivityStates\": [\n    \"Active\",\n    \"Active\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/addresses/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "addresses",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:38.000Z",
+                              "updatedAt": "2026-07-28T02:09:38.000Z",
+                              "uid": "35240-369663a3-58a7-4667-9cd8-2dbb63755271"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:09:38.000Z",
+                          "updatedAt": "2026-07-28T02:09:38.000Z",
+                          "uid": "35240-b221c858-af6c-4336-b726-c73f0b52e842"
+                        }
+                      ],
+                      "id": "1c2c290a-d149-408a-8198-b88c4249d14b",
+                      "createdAt": "2026-07-28T02:09:38.000Z",
+                      "updatedAt": "2026-07-28T02:09:38.000Z",
+                      "uid": "35240-1c2c290a-d149-408a-8198-b88c4249d14b"
+                    },
+                    {
+                      "name": "add",
+                      "item": [
+                        {
+                          "name": "Mews Add Addresses",
+                          "id": "645008c5-2402-4b9c-8724-a17657dda746",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Addresses\": [\n    {\n      \"AccountId\": \"<uuid>\",\n      \"Line1\": \"<string>\",\n      \"Line2\": \"<string>\",\n      \"City\": \"<string>\",\n      \"PostalCode\": \"<string>\",\n      \"CountryCode\": \"<string>\",\n      \"CountrySubdivisionCode\": \"<string>\",\n      \"Latitude\": \"<double>\",\n      \"Longitude\": \"<double>\"\n    }\n  ],\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ChainId\": \"<uuid>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/connector/v1/addresses/add",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "connector",
+                                "v1",
+                                "addresses",
+                                "add"
+                              ]
+                            },
+                            "description": "Adds one or more new addresses to the system and assigns them to specified accounts. Note this operation supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property)."
+                          },
+                          "response": [
+                            {
+                              "id": "4932c5c5-941b-41df-a071-d7314f1206cd",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Addresses\": [\n    {\n      \"AccountId\": \"<uuid>\",\n      \"Line1\": \"<string>\",\n      \"Line2\": \"<string>\",\n      \"City\": \"<string>\",\n      \"PostalCode\": \"<string>\",\n      \"CountryCode\": \"<string>\",\n      \"CountrySubdivisionCode\": \"<string>\",\n      \"Latitude\": \"<double>\",\n      \"Longitude\": \"<double>\"\n    }\n  ],\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/addresses/add",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "addresses",
+                                    "add"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Addresses\": [\n    {\n      \"AccountType\": \"Company\",\n      \"Id\": \"<uuid>\",\n      \"AccountId\": \"<uuid>\",\n      \"ChainId\": \"<uuid>\",\n      \"Line1\": \"<string>\",\n      \"Line2\": \"<string>\",\n      \"City\": \"<string>\",\n      \"PostalCode\": \"<string>\",\n      \"CountryCode\": \"<string>\",\n      \"CountrySubdivisionCode\": \"<string>\",\n      \"Latitude\": \"<double>\",\n      \"Longitude\": \"<double>\",\n      \"UpdatedUtc\": \"<dateTime>\",\n      \"IsActive\": \"<boolean>\"\n    },\n    {\n      \"AccountType\": \"Customer\",\n      \"Id\": \"<uuid>\",\n      \"AccountId\": \"<uuid>\",\n      \"ChainId\": \"<uuid>\",\n      \"Line1\": \"<string>\",\n      \"Line2\": \"<string>\",\n      \"City\": \"<string>\",\n      \"PostalCode\": \"<string>\",\n      \"CountryCode\": \"<string>\",\n      \"CountrySubdivisionCode\": \"<string>\",\n      \"Latitude\": \"<double>\",\n      \"Longitude\": \"<double>\",\n      \"UpdatedUtc\": \"<dateTime>\",\n      \"IsActive\": \"<boolean>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:09:38.000Z",
+                              "updatedAt": "2026-07-28T02:09:38.000Z",
+                              "uid": "35240-4932c5c5-941b-41df-a071-d7314f1206cd"
+                            },
+                            {
+                              "id": "01862d93-4445-47e6-b52b-71c28d99fe0c",
+                              "name": "Server has successfully fulfilled the request and there is no additional information to send back.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Addresses\": [\n    {\n      \"AccountId\": \"<uuid>\",\n      \"Line1\": \"<string>\",\n      \"Line2\": \"<string>\",\n      \"City\": \"<string>\",\n      \"PostalCode\": \"<string>\",\n      \"CountryCode\": \"<string>\",\n      \"CountrySubdivisionCode\": \"<string>\",\n      \"Latitude\": \"<double>\",\n      \"Longitude\": \"<double>\"\n    }\n  ],\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/addresses/add",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "addresses",
+                                    "add"
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:38.000Z",
+                              "updatedAt": "2026-07-28T02:09:38.000Z",
+                              "uid": "35240-01862d93-4445-47e6-b52b-71c28d99fe0c"
+                            },
+                            {
+                              "id": "47345d15-ee48-4b4f-b5a3-02de45197016",
+                              "name": "Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Addresses\": [\n    {\n      \"AccountId\": \"<uuid>\",\n      \"Line1\": \"<string>\",\n      \"Line2\": \"<string>\",\n      \"City\": \"<string>\",\n      \"PostalCode\": \"<string>\",\n      \"CountryCode\": \"<string>\",\n      \"CountrySubdivisionCode\": \"<string>\",\n      \"Latitude\": \"<double>\",\n      \"Longitude\": \"<double>\"\n    }\n  ],\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/addresses/add",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "addresses",
+                                    "add"
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:38.000Z",
+                              "updatedAt": "2026-07-28T02:09:38.000Z",
+                              "uid": "35240-47345d15-ee48-4b4f-b5a3-02de45197016"
+                            },
+                            {
+                              "id": "f958239f-7226-4dc3-bb47-d4ec04a3fc41",
+                              "name": "Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Addresses\": [\n    {\n      \"AccountId\": \"<uuid>\",\n      \"Line1\": \"<string>\",\n      \"Line2\": \"<string>\",\n      \"City\": \"<string>\",\n      \"PostalCode\": \"<string>\",\n      \"CountryCode\": \"<string>\",\n      \"CountrySubdivisionCode\": \"<string>\",\n      \"Latitude\": \"<double>\",\n      \"Longitude\": \"<double>\"\n    }\n  ],\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/addresses/add",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "addresses",
+                                    "add"
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:38.000Z",
+                              "updatedAt": "2026-07-28T02:09:38.000Z",
+                              "uid": "35240-f958239f-7226-4dc3-bb47-d4ec04a3fc41"
+                            },
+                            {
+                              "id": "549c846c-7941-47ef-87c8-e550752508f1",
+                              "name": "Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Addresses\": [\n    {\n      \"AccountId\": \"<uuid>\",\n      \"Line1\": \"<string>\",\n      \"Line2\": \"<string>\",\n      \"City\": \"<string>\",\n      \"PostalCode\": \"<string>\",\n      \"CountryCode\": \"<string>\",\n      \"CountrySubdivisionCode\": \"<string>\",\n      \"Latitude\": \"<double>\",\n      \"Longitude\": \"<double>\"\n    }\n  ],\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/addresses/add",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "addresses",
+                                    "add"
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:38.000Z",
+                              "updatedAt": "2026-07-28T02:09:38.000Z",
+                              "uid": "35240-549c846c-7941-47ef-87c8-e550752508f1"
+                            },
+                            {
+                              "id": "c05bee9e-7b17-453d-895c-a4640664b130",
+                              "name": "Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#r",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Addresses\": [\n    {\n      \"AccountId\": \"<uuid>\",\n      \"Line1\": \"<string>\",\n      \"Line2\": \"<string>\",\n      \"City\": \"<string>\",\n      \"PostalCode\": \"<string>\",\n      \"CountryCode\": \"<string>\",\n      \"CountrySubdivisionCode\": \"<string>\",\n      \"Latitude\": \"<double>\",\n      \"Longitude\": \"<double>\"\n    }\n  ],\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/addresses/add",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "addresses",
+                                    "add"
+                                  ]
+                                }
+                              },
+                              "status": "Request Timeout",
+                              "code": 408,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:38.000Z",
+                              "updatedAt": "2026-07-28T02:09:38.000Z",
+                              "uid": "35240-c05bee9e-7b17-453d-895c-a4640664b130"
+                            },
+                            {
+                              "id": "6b7a052a-06ba-4a1a-8d8c-be7112e224a6",
+                              "name": "Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitb",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Addresses\": [\n    {\n      \"AccountId\": \"<uuid>\",\n      \"Line1\": \"<string>\",\n      \"Line2\": \"<string>\",\n      \"City\": \"<string>\",\n      \"PostalCode\": \"<string>\",\n      \"CountryCode\": \"<string>\",\n      \"CountrySubdivisionCode\": \"<string>\",\n      \"Latitude\": \"<double>\",\n      \"Longitude\": \"<double>\"\n    }\n  ],\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/addresses/add",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "addresses",
+                                    "add"
+                                  ]
+                                }
+                              },
+                              "status": "Too Many Requests",
+                              "code": 429,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:38.000Z",
+                              "updatedAt": "2026-07-28T02:09:38.000Z",
+                              "uid": "35240-6b7a052a-06ba-4a1a-8d8c-be7112e224a6"
+                            },
+                            {
+                              "id": "7b795edb-105b-436c-b5c4-7785523620f4",
+                              "name": "Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Addresses\": [\n    {\n      \"AccountId\": \"<uuid>\",\n      \"Line1\": \"<string>\",\n      \"Line2\": \"<string>\",\n      \"City\": \"<string>\",\n      \"PostalCode\": \"<string>\",\n      \"CountryCode\": \"<string>\",\n      \"CountrySubdivisionCode\": \"<string>\",\n      \"Latitude\": \"<double>\",\n      \"Longitude\": \"<double>\"\n    }\n  ],\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/addresses/add",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "addresses",
+                                    "add"
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:38.000Z",
+                              "updatedAt": "2026-07-28T02:09:38.000Z",
+                              "uid": "35240-7b795edb-105b-436c-b5c4-7785523620f4"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:09:38.000Z",
+                          "updatedAt": "2026-07-28T02:09:38.000Z",
+                          "uid": "35240-645008c5-2402-4b9c-8724-a17657dda746"
+                        }
+                      ],
+                      "id": "aa6ac4c0-c817-4f92-8e6a-68d2f6ffc67a",
+                      "createdAt": "2026-07-28T02:09:38.000Z",
+                      "updatedAt": "2026-07-28T02:09:38.000Z",
+                      "uid": "35240-aa6ac4c0-c817-4f92-8e6a-68d2f6ffc67a"
+                    },
+                    {
+                      "name": "update",
+                      "item": [
+                        {
+                          "name": "Mews Update Addresses",
+                          "id": "4bb08a98-cea4-4262-b74b-27dacf13554f",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AddressUpdates\": [\n    {\n      \"AddressId\": \"<uuid>\",\n      \"Line1\": {\n        \"Value\": \"<string>\"\n      },\n      \"Line2\": {\n        \"Value\": \"<string>\"\n      },\n      \"City\": {\n        \"Value\": \"<string>\"\n      },\n      \"PostalCode\": {\n        \"Value\": \"<string>\"\n      },\n      \"CountryCode\": {\n        \"Value\": \"<string>\"\n      },\n      \"CountrySubdivisionCode\": {\n        \"Value\": \"<string>\"\n      }\n    }\n  ],\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ChainId\": \"<uuid>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/connector/v1/addresses/update",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "connector",
+                                "v1",
+                                "addresses",
+                                "update"
+                              ]
+                            },
+                            "description": "Updates one or more existing addresses in the system, assigned to specified accounts. Note this operation supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property)."
+                          },
+                          "response": [
+                            {
+                              "id": "f62df86e-b483-428f-bdf0-118f17f07150",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AddressUpdates\": [\n    {\n      \"AddressId\": \"<uuid>\",\n      \"Line1\": {\n        \"Value\": \"<string>\"\n      },\n      \"Line2\": {\n        \"Value\": \"<string>\"\n      },\n      \"City\": {\n        \"Value\": \"<string>\"\n      },\n      \"PostalCode\": {\n        \"Value\": \"<string>\"\n      },\n      \"CountryCode\": {\n        \"Value\": \"<string>\"\n      },\n      \"CountrySubdivisionCode\": {\n        \"Value\": \"<string>\"\n      }\n    }\n  ],\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/addresses/update",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "addresses",
+                                    "update"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Addresses\": [\n    {\n      \"AccountType\": \"Company\",\n      \"Id\": \"<uuid>\",\n      \"AccountId\": \"<uuid>\",\n      \"ChainId\": \"<uuid>\",\n      \"Line1\": \"<string>\",\n      \"Line2\": \"<string>\",\n      \"City\": \"<string>\",\n      \"PostalCode\": \"<string>\",\n      \"CountryCode\": \"<string>\",\n      \"CountrySubdivisionCode\": \"<string>\",\n      \"Latitude\": \"<double>\",\n      \"Longitude\": \"<double>\",\n      \"UpdatedUtc\": \"<dateTime>\",\n      \"IsActive\": \"<boolean>\"\n    },\n    {\n      \"AccountType\": \"Customer\",\n      \"Id\": \"<uuid>\",\n      \"AccountId\": \"<uuid>\",\n      \"ChainId\": \"<uuid>\",\n      \"Line1\": \"<string>\",\n      \"Line2\": \"<string>\",\n      \"City\": \"<string>\",\n      \"PostalCode\": \"<string>\",\n      \"CountryCode\": \"<string>\",\n      \"CountrySubdivisionCode\": \"<string>\",\n      \"Latitude\": \"<double>\",\n      \"Longitude\": \"<double>\",\n      \"UpdatedUtc\": \"<dateTime>\",\n      \"IsActive\": \"<boolean>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:09:38.000Z",
+                              "updatedAt": "2026-07-28T02:09:38.000Z",
+                              "uid": "35240-f62df86e-b483-428f-bdf0-118f17f07150"
+                            },
+                            {
+                              "id": "847438b1-391d-4464-af65-c15213dd7a74",
+                              "name": "Server has successfully fulfilled the request and there is no additional information to send back.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AddressUpdates\": [\n    {\n      \"AddressId\": \"<uuid>\",\n      \"Line1\": {\n        \"Value\": \"<string>\"\n      },\n      \"Line2\": {\n        \"Value\": \"<string>\"\n      },\n      \"City\": {\n        \"Value\": \"<string>\"\n      },\n      \"PostalCode\": {\n        \"Value\": \"<string>\"\n      },\n      \"CountryCode\": {\n        \"Value\": \"<string>\"\n      },\n      \"CountrySubdivisionCode\": {\n        \"Value\": \"<string>\"\n      }\n    }\n  ],\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/addresses/update",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "addresses",
+                                    "update"
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:38.000Z",
+                              "updatedAt": "2026-07-28T02:09:38.000Z",
+                              "uid": "35240-847438b1-391d-4464-af65-c15213dd7a74"
+                            },
+                            {
+                              "id": "d368c1f0-b0ae-48a3-9106-d7f1d7f441c7",
+                              "name": "Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AddressUpdates\": [\n    {\n      \"AddressId\": \"<uuid>\",\n      \"Line1\": {\n        \"Value\": \"<string>\"\n      },\n      \"Line2\": {\n        \"Value\": \"<string>\"\n      },\n      \"City\": {\n        \"Value\": \"<string>\"\n      },\n      \"PostalCode\": {\n        \"Value\": \"<string>\"\n      },\n      \"CountryCode\": {\n        \"Value\": \"<string>\"\n      },\n      \"CountrySubdivisionCode\": {\n        \"Value\": \"<string>\"\n      }\n    }\n  ],\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/addresses/update",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "addresses",
+                                    "update"
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:38.000Z",
+                              "updatedAt": "2026-07-28T02:09:38.000Z",
+                              "uid": "35240-d368c1f0-b0ae-48a3-9106-d7f1d7f441c7"
+                            },
+                            {
+                              "id": "1f0306b4-7771-437a-8fe7-7446e4252fe3",
+                              "name": "Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AddressUpdates\": [\n    {\n      \"AddressId\": \"<uuid>\",\n      \"Line1\": {\n        \"Value\": \"<string>\"\n      },\n      \"Line2\": {\n        \"Value\": \"<string>\"\n      },\n      \"City\": {\n        \"Value\": \"<string>\"\n      },\n      \"PostalCode\": {\n        \"Value\": \"<string>\"\n      },\n      \"CountryCode\": {\n        \"Value\": \"<string>\"\n      },\n      \"CountrySubdivisionCode\": {\n        \"Value\": \"<string>\"\n      }\n    }\n  ],\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/addresses/update",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "addresses",
+                                    "update"
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:38.000Z",
+                              "updatedAt": "2026-07-28T02:09:38.000Z",
+                              "uid": "35240-1f0306b4-7771-437a-8fe7-7446e4252fe3"
+                            },
+                            {
+                              "id": "3aefc2e9-cee1-43bf-b45f-cb10b5248989",
+                              "name": "Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AddressUpdates\": [\n    {\n      \"AddressId\": \"<uuid>\",\n      \"Line1\": {\n        \"Value\": \"<string>\"\n      },\n      \"Line2\": {\n        \"Value\": \"<string>\"\n      },\n      \"City\": {\n        \"Value\": \"<string>\"\n      },\n      \"PostalCode\": {\n        \"Value\": \"<string>\"\n      },\n      \"CountryCode\": {\n        \"Value\": \"<string>\"\n      },\n      \"CountrySubdivisionCode\": {\n        \"Value\": \"<string>\"\n      }\n    }\n  ],\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/addresses/update",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "addresses",
+                                    "update"
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:38.000Z",
+                              "updatedAt": "2026-07-28T02:09:38.000Z",
+                              "uid": "35240-3aefc2e9-cee1-43bf-b45f-cb10b5248989"
+                            },
+                            {
+                              "id": "b4faef7a-b01d-4ef0-819b-de19d0640037",
+                              "name": "Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#r",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AddressUpdates\": [\n    {\n      \"AddressId\": \"<uuid>\",\n      \"Line1\": {\n        \"Value\": \"<string>\"\n      },\n      \"Line2\": {\n        \"Value\": \"<string>\"\n      },\n      \"City\": {\n        \"Value\": \"<string>\"\n      },\n      \"PostalCode\": {\n        \"Value\": \"<string>\"\n      },\n      \"CountryCode\": {\n        \"Value\": \"<string>\"\n      },\n      \"CountrySubdivisionCode\": {\n        \"Value\": \"<string>\"\n      }\n    }\n  ],\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/addresses/update",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "addresses",
+                                    "update"
+                                  ]
+                                }
+                              },
+                              "status": "Request Timeout",
+                              "code": 408,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:38.000Z",
+                              "updatedAt": "2026-07-28T02:09:38.000Z",
+                              "uid": "35240-b4faef7a-b01d-4ef0-819b-de19d0640037"
+                            },
+                            {
+                              "id": "fdc058b0-234b-4006-90e6-a860218c9018",
+                              "name": "Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitb",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AddressUpdates\": [\n    {\n      \"AddressId\": \"<uuid>\",\n      \"Line1\": {\n        \"Value\": \"<string>\"\n      },\n      \"Line2\": {\n        \"Value\": \"<string>\"\n      },\n      \"City\": {\n        \"Value\": \"<string>\"\n      },\n      \"PostalCode\": {\n        \"Value\": \"<string>\"\n      },\n      \"CountryCode\": {\n        \"Value\": \"<string>\"\n      },\n      \"CountrySubdivisionCode\": {\n        \"Value\": \"<string>\"\n      }\n    }\n  ],\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/addresses/update",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "addresses",
+                                    "update"
+                                  ]
+                                }
+                              },
+                              "status": "Too Many Requests",
+                              "code": 429,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:38.000Z",
+                              "updatedAt": "2026-07-28T02:09:38.000Z",
+                              "uid": "35240-fdc058b0-234b-4006-90e6-a860218c9018"
+                            },
+                            {
+                              "id": "dc454e7a-ee9b-49ea-890d-04d74cba2ba4",
+                              "name": "Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AddressUpdates\": [\n    {\n      \"AddressId\": \"<uuid>\",\n      \"Line1\": {\n        \"Value\": \"<string>\"\n      },\n      \"Line2\": {\n        \"Value\": \"<string>\"\n      },\n      \"City\": {\n        \"Value\": \"<string>\"\n      },\n      \"PostalCode\": {\n        \"Value\": \"<string>\"\n      },\n      \"CountryCode\": {\n        \"Value\": \"<string>\"\n      },\n      \"CountrySubdivisionCode\": {\n        \"Value\": \"<string>\"\n      }\n    }\n  ],\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/addresses/update",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "addresses",
+                                    "update"
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:38.000Z",
+                              "updatedAt": "2026-07-28T02:09:38.000Z",
+                              "uid": "35240-dc454e7a-ee9b-49ea-890d-04d74cba2ba4"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:09:38.000Z",
+                          "updatedAt": "2026-07-28T02:09:38.000Z",
+                          "uid": "35240-4bb08a98-cea4-4262-b74b-27dacf13554f"
+                        }
+                      ],
+                      "id": "9c8d6293-ea60-44d5-91d2-7e8386890cac",
+                      "createdAt": "2026-07-28T02:09:38.000Z",
+                      "updatedAt": "2026-07-28T02:09:38.000Z",
+                      "uid": "35240-9c8d6293-ea60-44d5-91d2-7e8386890cac"
+                    },
+                    {
+                      "name": "delete",
+                      "item": [
+                        {
+                          "name": "Mews Delete Addresses",
+                          "id": "01762f4a-3aa8-43e6-a3f5-17ee4cc2e696",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AddressIds\": [\n    \"<uuid>\"\n  ],\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ChainId\": \"<uuid>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/connector/v1/addresses/delete",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "connector",
+                                "v1",
+                                "addresses",
+                                "delete"
+                              ]
+                            },
+                            "description": "Deletes one or more addresses in the system. Note this operation supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property)."
+                          },
+                          "response": [
+                            {
+                              "id": "9ce1dea7-0694-485a-8748-12bae5c67640",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AddressIds\": [\n    \"<uuid>\"\n  ],\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/addresses/delete",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "addresses",
+                                    "delete"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{}",
+                              "createdAt": "2026-07-28T02:09:38.000Z",
+                              "updatedAt": "2026-07-28T02:09:38.000Z",
+                              "uid": "35240-9ce1dea7-0694-485a-8748-12bae5c67640"
+                            },
+                            {
+                              "id": "a0898d20-5a9a-4680-94d0-54a3d55e2032",
+                              "name": "Server has successfully fulfilled the request and there is no additional information to send back.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AddressIds\": [\n    \"<uuid>\"\n  ],\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/addresses/delete",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "addresses",
+                                    "delete"
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:38.000Z",
+                              "updatedAt": "2026-07-28T02:09:38.000Z",
+                              "uid": "35240-a0898d20-5a9a-4680-94d0-54a3d55e2032"
+                            },
+                            {
+                              "id": "bef88aba-124c-4f49-955f-6b1ecfcd003f",
+                              "name": "Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AddressIds\": [\n    \"<uuid>\"\n  ],\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/addresses/delete",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "addresses",
+                                    "delete"
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:38.000Z",
+                              "updatedAt": "2026-07-28T02:09:38.000Z",
+                              "uid": "35240-bef88aba-124c-4f49-955f-6b1ecfcd003f"
+                            },
+                            {
+                              "id": "468e6938-9a9d-4b44-a694-d8d2d555d2f1",
+                              "name": "Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AddressIds\": [\n    \"<uuid>\"\n  ],\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/addresses/delete",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "addresses",
+                                    "delete"
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:38.000Z",
+                              "updatedAt": "2026-07-28T02:09:38.000Z",
+                              "uid": "35240-468e6938-9a9d-4b44-a694-d8d2d555d2f1"
+                            },
+                            {
+                              "id": "3acb8109-6add-457b-ab56-a2fc979a944e",
+                              "name": "Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AddressIds\": [\n    \"<uuid>\"\n  ],\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/addresses/delete",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "addresses",
+                                    "delete"
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:38.000Z",
+                              "updatedAt": "2026-07-28T02:09:38.000Z",
+                              "uid": "35240-3acb8109-6add-457b-ab56-a2fc979a944e"
+                            },
+                            {
+                              "id": "b5c8716a-601f-4bc9-857a-78ca197dc05f",
+                              "name": "Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#r",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AddressIds\": [\n    \"<uuid>\"\n  ],\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/addresses/delete",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "addresses",
+                                    "delete"
+                                  ]
+                                }
+                              },
+                              "status": "Request Timeout",
+                              "code": 408,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:38.000Z",
+                              "updatedAt": "2026-07-28T02:09:38.000Z",
+                              "uid": "35240-b5c8716a-601f-4bc9-857a-78ca197dc05f"
+                            },
+                            {
+                              "id": "853d97ac-2f85-4a5d-a597-a9a2df4767de",
+                              "name": "Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitb",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AddressIds\": [\n    \"<uuid>\"\n  ],\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/addresses/delete",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "addresses",
+                                    "delete"
+                                  ]
+                                }
+                              },
+                              "status": "Too Many Requests",
+                              "code": 429,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:38.000Z",
+                              "updatedAt": "2026-07-28T02:09:38.000Z",
+                              "uid": "35240-853d97ac-2f85-4a5d-a597-a9a2df4767de"
+                            },
+                            {
+                              "id": "0d1f6a31-551a-4d22-9304-81ed15bde714",
+                              "name": "Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AddressIds\": [\n    \"<uuid>\"\n  ],\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/addresses/delete",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "addresses",
+                                    "delete"
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:38.000Z",
+                              "updatedAt": "2026-07-28T02:09:38.000Z",
+                              "uid": "35240-0d1f6a31-551a-4d22-9304-81ed15bde714"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:09:38.000Z",
+                          "updatedAt": "2026-07-28T02:09:38.000Z",
+                          "uid": "35240-01762f4a-3aa8-43e6-a3f5-17ee4cc2e696"
+                        }
+                      ],
+                      "id": "b1da7fe5-2594-4cd5-ae09-d536d4177af0",
+                      "createdAt": "2026-07-28T02:09:38.000Z",
+                      "updatedAt": "2026-07-28T02:09:38.000Z",
+                      "uid": "35240-b1da7fe5-2594-4cd5-ae09-d536d4177af0"
+                    }
+                  ],
+                  "id": "4778a75b-32b9-4938-9276-1d74fe93621c",
+                  "createdAt": "2026-07-28T02:09:38.000Z",
+                  "updatedAt": "2026-07-28T02:09:38.000Z",
+                  "uid": "35240-4778a75b-32b9-4938-9276-1d74fe93621c"
+                }
+              ],
+              "id": "37122d6c-c67e-4ec1-8d1a-77016ff25994",
+              "createdAt": "2026-07-28T02:09:38.000Z",
+              "updatedAt": "2026-07-28T02:09:38.000Z",
+              "uid": "35240-37122d6c-c67e-4ec1-8d1a-77016ff25994"
+            }
+          ],
+          "id": "44290548-1d07-4a6a-99e9-995fce801c49",
+          "createdAt": "2026-07-28T02:09:38.000Z",
+          "updatedAt": "2026-07-28T02:09:38.000Z",
+          "uid": "35240-44290548-1d07-4a6a-99e9-995fce801c49"
+        }
+      ],
+      "id": "354c5e22-7f28-40aa-b28c-52a6548a3489",
+      "createdAt": "2026-07-28T02:09:38.000Z",
+      "updatedAt": "2026-07-28T02:09:38.000Z",
+      "uid": "35240-354c5e22-7f28-40aa-b28c-52a6548a3489"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "ClientToken",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.mews.com"
+    }
+  ]
+}

@@ -1,0 +1,2228 @@
+{
+  "info": {
+    "_postman_id": "b1361481-583d-483f-94e1-755924fc52f1",
+    "name": "Mews Booking Engine API (Distributor) Account notes Loyalty tiers API",
+    "description": "The Mews Booking Engine API (historically the Distributor API, served from /api/distributor/v1) lets developers build guest-facing booking engines that create reservations directly in Mews. It exposes enterprise configuration, availability, pricing, products, vouchers, payment cards, and reservation group creation for front-end client consumption.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:11:04.000Z",
+    "updatedAt": "2026-07-28T02:11:04.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-b1361481-583d-483f-94e1-755924fc52f1"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "connector",
+          "item": [
+            {
+              "name": "v1",
+              "item": [
+                {
+                  "name": "loyaltyTiers",
+                  "item": [
+                    {
+                      "name": "getAll",
+                      "item": [
+                        {
+                          "name": "Mews Get All Loyalty Tiers",
+                          "id": "596978c2-5e07-481d-b33c-393dd9c06b66",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"LoyaltyProgramIds\": [\n    \"<uuid>\"\n  ],\n  \"ChainIds\": [\n    \"<uuid>\"\n  ],\n  \"LoyaltyTierIds\": [\n    \"<uuid>\"\n  ],\n  \"ActivityStates\": [\n    \"Active\",\n    \"Deleted\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/connector/v1/loyaltyTiers/getAll",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "connector",
+                                "v1",
+                                "loyaltyTiers",
+                                "getAll"
+                              ]
+                            },
+                            "description": "Returns all loyalty tiers of the chain or chains, filtered by loyalty program identifiers and optionally filtered by specific loyalty tier identifiers, activity states, or other filter parameters. Note this operation uses [Pagination](https://mews-systems.gitbook.io/connector-api/guidelines/pagination/) and supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property/)."
+                          },
+                          "response": [
+                            {
+                              "id": "95115be0-5e24-4c4e-b1bc-be8e6af52023",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"LoyaltyProgramIds\": [\n    \"<uuid>\"\n  ],\n  \"ChainIds\": [\n    \"<uuid>\"\n  ],\n  \"LoyaltyTierIds\": [\n    \"<uuid>\"\n  ],\n  \"ActivityStates\": [\n    \"Active\",\n    \"Deleted\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/loyaltyTiers/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "loyaltyTiers",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"LoyaltyTiers\": [\n    {\n      \"Code\": \"<string>\",\n      \"Id\": \"<uuid>\",\n      \"LoyaltyProgramId\": \"<uuid>\",\n      \"Name\": \"<string>\",\n      \"Ordering\": \"<integer>\"\n    },\n    {\n      \"Code\": \"<string>\",\n      \"Id\": \"<uuid>\",\n      \"LoyaltyProgramId\": \"<uuid>\",\n      \"Name\": \"<string>\",\n      \"Ordering\": \"<integer>\"\n    }\n  ],\n  \"Cursor\": \"<uuid>\"\n}",
+                              "createdAt": "2026-07-28T02:11:04.000Z",
+                              "updatedAt": "2026-07-28T02:11:04.000Z",
+                              "uid": "35240-95115be0-5e24-4c4e-b1bc-be8e6af52023"
+                            },
+                            {
+                              "id": "c43920dd-e70c-4b2d-9749-aedfdf5b6400",
+                              "name": "Server has successfully fulfilled the request and there is no additional information to send back.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"LoyaltyProgramIds\": [\n    \"<uuid>\"\n  ],\n  \"ChainIds\": [\n    \"<uuid>\"\n  ],\n  \"LoyaltyTierIds\": [\n    \"<uuid>\"\n  ],\n  \"ActivityStates\": [\n    \"Active\",\n    \"Deleted\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/loyaltyTiers/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "loyaltyTiers",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:11:04.000Z",
+                              "updatedAt": "2026-07-28T02:11:04.000Z",
+                              "uid": "35240-c43920dd-e70c-4b2d-9749-aedfdf5b6400"
+                            },
+                            {
+                              "id": "ae3c15b9-a1d8-4a96-a6df-f38e4c3aa965",
+                              "name": "Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"LoyaltyProgramIds\": [\n    \"<uuid>\"\n  ],\n  \"ChainIds\": [\n    \"<uuid>\"\n  ],\n  \"LoyaltyTierIds\": [\n    \"<uuid>\"\n  ],\n  \"ActivityStates\": [\n    \"Active\",\n    \"Deleted\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/loyaltyTiers/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "loyaltyTiers",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:11:04.000Z",
+                              "updatedAt": "2026-07-28T02:11:04.000Z",
+                              "uid": "35240-ae3c15b9-a1d8-4a96-a6df-f38e4c3aa965"
+                            },
+                            {
+                              "id": "96952702-35ac-4321-a107-1d76975b82c6",
+                              "name": "Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"LoyaltyProgramIds\": [\n    \"<uuid>\"\n  ],\n  \"ChainIds\": [\n    \"<uuid>\"\n  ],\n  \"LoyaltyTierIds\": [\n    \"<uuid>\"\n  ],\n  \"ActivityStates\": [\n    \"Active\",\n    \"Deleted\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/loyaltyTiers/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "loyaltyTiers",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:11:04.000Z",
+                              "updatedAt": "2026-07-28T02:11:04.000Z",
+                              "uid": "35240-96952702-35ac-4321-a107-1d76975b82c6"
+                            },
+                            {
+                              "id": "51bfd23b-0b9e-43fb-a686-767c8cd42542",
+                              "name": "Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"LoyaltyProgramIds\": [\n    \"<uuid>\"\n  ],\n  \"ChainIds\": [\n    \"<uuid>\"\n  ],\n  \"LoyaltyTierIds\": [\n    \"<uuid>\"\n  ],\n  \"ActivityStates\": [\n    \"Active\",\n    \"Deleted\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/loyaltyTiers/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "loyaltyTiers",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:11:04.000Z",
+                              "updatedAt": "2026-07-28T02:11:04.000Z",
+                              "uid": "35240-51bfd23b-0b9e-43fb-a686-767c8cd42542"
+                            },
+                            {
+                              "id": "70727989-c503-4156-86c4-4418e88647b6",
+                              "name": "Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#r",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"LoyaltyProgramIds\": [\n    \"<uuid>\"\n  ],\n  \"ChainIds\": [\n    \"<uuid>\"\n  ],\n  \"LoyaltyTierIds\": [\n    \"<uuid>\"\n  ],\n  \"ActivityStates\": [\n    \"Active\",\n    \"Deleted\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/loyaltyTiers/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "loyaltyTiers",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Request Timeout",
+                              "code": 408,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:11:04.000Z",
+                              "updatedAt": "2026-07-28T02:11:04.000Z",
+                              "uid": "35240-70727989-c503-4156-86c4-4418e88647b6"
+                            },
+                            {
+                              "id": "efc08f47-dfb4-4b6f-bbee-729821956804",
+                              "name": "Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitb",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"LoyaltyProgramIds\": [\n    \"<uuid>\"\n  ],\n  \"ChainIds\": [\n    \"<uuid>\"\n  ],\n  \"LoyaltyTierIds\": [\n    \"<uuid>\"\n  ],\n  \"ActivityStates\": [\n    \"Active\",\n    \"Deleted\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/loyaltyTiers/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "loyaltyTiers",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Too Many Requests",
+                              "code": 429,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:11:04.000Z",
+                              "updatedAt": "2026-07-28T02:11:04.000Z",
+                              "uid": "35240-efc08f47-dfb4-4b6f-bbee-729821956804"
+                            },
+                            {
+                              "id": "5ee92cc5-2e7e-4ef1-8897-1427ba6d6465",
+                              "name": "Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"LoyaltyProgramIds\": [\n    \"<uuid>\"\n  ],\n  \"ChainIds\": [\n    \"<uuid>\"\n  ],\n  \"LoyaltyTierIds\": [\n    \"<uuid>\"\n  ],\n  \"ActivityStates\": [\n    \"Active\",\n    \"Deleted\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/loyaltyTiers/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "loyaltyTiers",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:11:04.000Z",
+                              "updatedAt": "2026-07-28T02:11:04.000Z",
+                              "uid": "35240-5ee92cc5-2e7e-4ef1-8897-1427ba6d6465"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:11:04.000Z",
+                          "updatedAt": "2026-07-28T02:11:04.000Z",
+                          "uid": "35240-596978c2-5e07-481d-b33c-393dd9c06b66"
+                        }
+                      ],
+                      "id": "82a01687-7458-4297-91e2-d37fa1c50056",
+                      "createdAt": "2026-07-28T02:11:04.000Z",
+                      "updatedAt": "2026-07-28T02:11:04.000Z",
+                      "uid": "35240-82a01687-7458-4297-91e2-d37fa1c50056"
+                    },
+                    {
+                      "name": "add",
+                      "item": [
+                        {
+                          "name": "Mews Add Loyalty Tiers",
+                          "id": "134d5013-dcde-46ef-9494-4e40dd251aea",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"LoyaltyTiers\": [\n    {\n      \"Code\": \"<string>\",\n      \"LoyaltyProgramId\": \"<uuid>\",\n      \"Name\": \"<string>\",\n      \"Ordering\": \"<integer>\"\n    }\n  ],\n  \"ChainId\": \"<uuid>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/connector/v1/loyaltyTiers/add",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "connector",
+                                "v1",
+                                "loyaltyTiers",
+                                "add"
+                              ]
+                            },
+                            "description": "Adds loyalty tiers to a loyalty program of the enterprise chain. Note this operation supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property/)."
+                          },
+                          "response": [
+                            {
+                              "id": "a8a0d3f8-2e62-4c17-9ba1-76d173f53e5e",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"LoyaltyTiers\": [\n    {\n      \"Code\": \"<string>\",\n      \"LoyaltyProgramId\": \"<uuid>\",\n      \"Name\": \"<string>\",\n      \"Ordering\": \"<integer>\"\n    }\n  ],\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/loyaltyTiers/add",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "loyaltyTiers",
+                                    "add"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"LoyaltyTiers\": [\n    {\n      \"Code\": \"<string>\",\n      \"Id\": \"<uuid>\",\n      \"LoyaltyProgramId\": \"<uuid>\",\n      \"Name\": \"<string>\",\n      \"Ordering\": \"<integer>\"\n    },\n    {\n      \"Code\": \"<string>\",\n      \"Id\": \"<uuid>\",\n      \"LoyaltyProgramId\": \"<uuid>\",\n      \"Name\": \"<string>\",\n      \"Ordering\": \"<integer>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:11:04.000Z",
+                              "updatedAt": "2026-07-28T02:11:04.000Z",
+                              "uid": "35240-a8a0d3f8-2e62-4c17-9ba1-76d173f53e5e"
+                            },
+                            {
+                              "id": "ea911519-d013-4abc-a02c-9f14c3015c1d",
+                              "name": "Server has successfully fulfilled the request and there is no additional information to send back.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"LoyaltyTiers\": [\n    {\n      \"Code\": \"<string>\",\n      \"LoyaltyProgramId\": \"<uuid>\",\n      \"Name\": \"<string>\",\n      \"Ordering\": \"<integer>\"\n    }\n  ],\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/loyaltyTiers/add",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "loyaltyTiers",
+                                    "add"
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:11:04.000Z",
+                              "updatedAt": "2026-07-28T02:11:04.000Z",
+                              "uid": "35240-ea911519-d013-4abc-a02c-9f14c3015c1d"
+                            },
+                            {
+                              "id": "ab108635-3757-4e37-9c9b-ce469e53e97b",
+                              "name": "Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"LoyaltyTiers\": [\n    {\n      \"Code\": \"<string>\",\n      \"LoyaltyProgramId\": \"<uuid>\",\n      \"Name\": \"<string>\",\n      \"Ordering\": \"<integer>\"\n    }\n  ],\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/loyaltyTiers/add",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "loyaltyTiers",
+                                    "add"
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:11:04.000Z",
+                              "updatedAt": "2026-07-28T02:11:04.000Z",
+                              "uid": "35240-ab108635-3757-4e37-9c9b-ce469e53e97b"
+                            },
+                            {
+                              "id": "146d6e20-5472-4430-8cb7-70998dab4861",
+                              "name": "Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"LoyaltyTiers\": [\n    {\n      \"Code\": \"<string>\",\n      \"LoyaltyProgramId\": \"<uuid>\",\n      \"Name\": \"<string>\",\n      \"Ordering\": \"<integer>\"\n    }\n  ],\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/loyaltyTiers/add",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "loyaltyTiers",
+                                    "add"
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:11:04.000Z",
+                              "updatedAt": "2026-07-28T02:11:04.000Z",
+                              "uid": "35240-146d6e20-5472-4430-8cb7-70998dab4861"
+                            },
+                            {
+                              "id": "31e44656-8cb5-42d6-be37-3cc3a16629a3",
+                              "name": "Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"LoyaltyTiers\": [\n    {\n      \"Code\": \"<string>\",\n      \"LoyaltyProgramId\": \"<uuid>\",\n      \"Name\": \"<string>\",\n      \"Ordering\": \"<integer>\"\n    }\n  ],\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/loyaltyTiers/add",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "loyaltyTiers",
+                                    "add"
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:11:04.000Z",
+                              "updatedAt": "2026-07-28T02:11:04.000Z",
+                              "uid": "35240-31e44656-8cb5-42d6-be37-3cc3a16629a3"
+                            },
+                            {
+                              "id": "b0f45043-b2d0-42b0-83b4-84cc5884def7",
+                              "name": "Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#r",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"LoyaltyTiers\": [\n    {\n      \"Code\": \"<string>\",\n      \"LoyaltyProgramId\": \"<uuid>\",\n      \"Name\": \"<string>\",\n      \"Ordering\": \"<integer>\"\n    }\n  ],\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/loyaltyTiers/add",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "loyaltyTiers",
+                                    "add"
+                                  ]
+                                }
+                              },
+                              "status": "Request Timeout",
+                              "code": 408,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:11:04.000Z",
+                              "updatedAt": "2026-07-28T02:11:04.000Z",
+                              "uid": "35240-b0f45043-b2d0-42b0-83b4-84cc5884def7"
+                            },
+                            {
+                              "id": "1b93b8e1-c023-4657-9e23-325264a4bf90",
+                              "name": "Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitb",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"LoyaltyTiers\": [\n    {\n      \"Code\": \"<string>\",\n      \"LoyaltyProgramId\": \"<uuid>\",\n      \"Name\": \"<string>\",\n      \"Ordering\": \"<integer>\"\n    }\n  ],\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/loyaltyTiers/add",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "loyaltyTiers",
+                                    "add"
+                                  ]
+                                }
+                              },
+                              "status": "Too Many Requests",
+                              "code": 429,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:11:04.000Z",
+                              "updatedAt": "2026-07-28T02:11:04.000Z",
+                              "uid": "35240-1b93b8e1-c023-4657-9e23-325264a4bf90"
+                            },
+                            {
+                              "id": "fe6fdc10-152f-451f-a169-2278970bc49c",
+                              "name": "Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"LoyaltyTiers\": [\n    {\n      \"Code\": \"<string>\",\n      \"LoyaltyProgramId\": \"<uuid>\",\n      \"Name\": \"<string>\",\n      \"Ordering\": \"<integer>\"\n    }\n  ],\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/loyaltyTiers/add",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "loyaltyTiers",
+                                    "add"
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:11:04.000Z",
+                              "updatedAt": "2026-07-28T02:11:04.000Z",
+                              "uid": "35240-fe6fdc10-152f-451f-a169-2278970bc49c"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:11:04.000Z",
+                          "updatedAt": "2026-07-28T02:11:04.000Z",
+                          "uid": "35240-134d5013-dcde-46ef-9494-4e40dd251aea"
+                        }
+                      ],
+                      "id": "1569e889-234a-47de-ada3-cd4bde82c1c5",
+                      "createdAt": "2026-07-28T02:11:04.000Z",
+                      "updatedAt": "2026-07-28T02:11:04.000Z",
+                      "uid": "35240-1569e889-234a-47de-ada3-cd4bde82c1c5"
+                    },
+                    {
+                      "name": "update",
+                      "item": [
+                        {
+                          "name": "Mews Update Loyalty Tiers",
+                          "id": "4f978182-dbaf-4883-92f1-b2549ae1b423",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"LoyaltyTierUpdates\": [\n    {\n      \"LoyaltyTierId\": \"<uuid>\",\n      \"Name\": {\n        \"Value\": \"<string>\"\n      },\n      \"Code\": {\n        \"Value\": \"<string>\"\n      },\n      \"Ordering\": {\n        \"Value\": \"<integer>\"\n      }\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/connector/v1/loyaltyTiers/update",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "connector",
+                                "v1",
+                                "loyaltyTiers",
+                                "update"
+                              ]
+                            },
+                            "description": "Updates information about the specified loyalty tiers."
+                          },
+                          "response": [
+                            {
+                              "id": "c0629d86-f00d-4544-8017-50ba087553a5",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"LoyaltyTierUpdates\": [\n    {\n      \"LoyaltyTierId\": \"<uuid>\",\n      \"Name\": {\n        \"Value\": \"<string>\"\n      },\n      \"Code\": {\n        \"Value\": \"<string>\"\n      },\n      \"Ordering\": {\n        \"Value\": \"<integer>\"\n      }\n    }\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/loyaltyTiers/update",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "loyaltyTiers",
+                                    "update"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"LoyaltyTiers\": [\n    {\n      \"Code\": \"<string>\",\n      \"Id\": \"<uuid>\",\n      \"LoyaltyProgramId\": \"<uuid>\",\n      \"Name\": \"<string>\",\n      \"Ordering\": \"<integer>\"\n    },\n    {\n      \"Code\": \"<string>\",\n      \"Id\": \"<uuid>\",\n      \"LoyaltyProgramId\": \"<uuid>\",\n      \"Name\": \"<string>\",\n      \"Ordering\": \"<integer>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:11:04.000Z",
+                              "updatedAt": "2026-07-28T02:11:04.000Z",
+                              "uid": "35240-c0629d86-f00d-4544-8017-50ba087553a5"
+                            },
+                            {
+                              "id": "b043ed73-de60-410a-8ba5-2663dc11c4a8",
+                              "name": "Server has successfully fulfilled the request and there is no additional information to send back.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"LoyaltyTierUpdates\": [\n    {\n      \"LoyaltyTierId\": \"<uuid>\",\n      \"Name\": {\n        \"Value\": \"<string>\"\n      },\n      \"Code\": {\n        \"Value\": \"<string>\"\n      },\n      \"Ordering\": {\n        \"Value\": \"<integer>\"\n      }\n    }\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/loyaltyTiers/update",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "loyaltyTiers",
+                                    "update"
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:11:04.000Z",
+                              "updatedAt": "2026-07-28T02:11:04.000Z",
+                              "uid": "35240-b043ed73-de60-410a-8ba5-2663dc11c4a8"
+                            },
+                            {
+                              "id": "8dbbc1f1-d0ce-4c90-8c10-3da4e31c10d8",
+                              "name": "Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"LoyaltyTierUpdates\": [\n    {\n      \"LoyaltyTierId\": \"<uuid>\",\n      \"Name\": {\n        \"Value\": \"<string>\"\n      },\n      \"Code\": {\n        \"Value\": \"<string>\"\n      },\n      \"Ordering\": {\n        \"Value\": \"<integer>\"\n      }\n    }\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/loyaltyTiers/update",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "loyaltyTiers",
+                                    "update"
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:11:04.000Z",
+                              "updatedAt": "2026-07-28T02:11:04.000Z",
+                              "uid": "35240-8dbbc1f1-d0ce-4c90-8c10-3da4e31c10d8"
+                            },
+                            {
+                              "id": "8f002b87-7779-4f3f-b15f-1834360ab33b",
+                              "name": "Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"LoyaltyTierUpdates\": [\n    {\n      \"LoyaltyTierId\": \"<uuid>\",\n      \"Name\": {\n        \"Value\": \"<string>\"\n      },\n      \"Code\": {\n        \"Value\": \"<string>\"\n      },\n      \"Ordering\": {\n        \"Value\": \"<integer>\"\n      }\n    }\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/loyaltyTiers/update",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "loyaltyTiers",
+                                    "update"
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:11:04.000Z",
+                              "updatedAt": "2026-07-28T02:11:04.000Z",
+                              "uid": "35240-8f002b87-7779-4f3f-b15f-1834360ab33b"
+                            },
+                            {
+                              "id": "7da44541-9f4a-42bf-a033-2b7fde6d739e",
+                              "name": "Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"LoyaltyTierUpdates\": [\n    {\n      \"LoyaltyTierId\": \"<uuid>\",\n      \"Name\": {\n        \"Value\": \"<string>\"\n      },\n      \"Code\": {\n        \"Value\": \"<string>\"\n      },\n      \"Ordering\": {\n        \"Value\": \"<integer>\"\n      }\n    }\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/loyaltyTiers/update",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "loyaltyTiers",
+                                    "update"
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:11:04.000Z",
+                              "updatedAt": "2026-07-28T02:11:04.000Z",
+                              "uid": "35240-7da44541-9f4a-42bf-a033-2b7fde6d739e"
+                            },
+                            {
+                              "id": "c0eabcbe-5182-4224-8523-158ed8882f6a",
+                              "name": "Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#r",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"LoyaltyTierUpdates\": [\n    {\n      \"LoyaltyTierId\": \"<uuid>\",\n      \"Name\": {\n        \"Value\": \"<string>\"\n      },\n      \"Code\": {\n        \"Value\": \"<string>\"\n      },\n      \"Ordering\": {\n        \"Value\": \"<integer>\"\n      }\n    }\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/loyaltyTiers/update",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "loyaltyTiers",
+                                    "update"
+                                  ]
+                                }
+                              },
+                              "status": "Request Timeout",
+                              "code": 408,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:11:04.000Z",
+                              "updatedAt": "2026-07-28T02:11:04.000Z",
+                              "uid": "35240-c0eabcbe-5182-4224-8523-158ed8882f6a"
+                            },
+                            {
+                              "id": "5362aa44-9129-4de2-925d-712851687101",
+                              "name": "Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitb",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"LoyaltyTierUpdates\": [\n    {\n      \"LoyaltyTierId\": \"<uuid>\",\n      \"Name\": {\n        \"Value\": \"<string>\"\n      },\n      \"Code\": {\n        \"Value\": \"<string>\"\n      },\n      \"Ordering\": {\n        \"Value\": \"<integer>\"\n      }\n    }\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/loyaltyTiers/update",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "loyaltyTiers",
+                                    "update"
+                                  ]
+                                }
+                              },
+                              "status": "Too Many Requests",
+                              "code": 429,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:11:04.000Z",
+                              "updatedAt": "2026-07-28T02:11:04.000Z",
+                              "uid": "35240-5362aa44-9129-4de2-925d-712851687101"
+                            },
+                            {
+                              "id": "54515b35-0758-40ff-bd2d-de2e22be1188",
+                              "name": "Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"LoyaltyTierUpdates\": [\n    {\n      \"LoyaltyTierId\": \"<uuid>\",\n      \"Name\": {\n        \"Value\": \"<string>\"\n      },\n      \"Code\": {\n        \"Value\": \"<string>\"\n      },\n      \"Ordering\": {\n        \"Value\": \"<integer>\"\n      }\n    }\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/loyaltyTiers/update",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "loyaltyTiers",
+                                    "update"
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:11:04.000Z",
+                              "updatedAt": "2026-07-28T02:11:04.000Z",
+                              "uid": "35240-54515b35-0758-40ff-bd2d-de2e22be1188"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:11:04.000Z",
+                          "updatedAt": "2026-07-28T02:11:04.000Z",
+                          "uid": "35240-4f978182-dbaf-4883-92f1-b2549ae1b423"
+                        }
+                      ],
+                      "id": "4e42da97-f847-4e07-b1ad-1564016d0f59",
+                      "createdAt": "2026-07-28T02:11:04.000Z",
+                      "updatedAt": "2026-07-28T02:11:04.000Z",
+                      "uid": "35240-4e42da97-f847-4e07-b1ad-1564016d0f59"
+                    },
+                    {
+                      "name": "delete",
+                      "item": [
+                        {
+                          "name": "Mews Delete Loyalty Tiers",
+                          "id": "d8b5f31e-2912-4a6d-8c89-12e0f2dac8c1",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"LoyaltyTierIds\": [\n    \"<uuid>\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/connector/v1/loyaltyTiers/delete",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "connector",
+                                "v1",
+                                "loyaltyTiers",
+                                "delete"
+                              ]
+                            },
+                            "description": "Deletes loyalty tiers."
+                          },
+                          "response": [
+                            {
+                              "id": "a3081540-ffd9-427b-a650-3779532ded4c",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"LoyaltyTierIds\": [\n    \"<uuid>\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/loyaltyTiers/delete",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "loyaltyTiers",
+                                    "delete"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{}",
+                              "createdAt": "2026-07-28T02:11:04.000Z",
+                              "updatedAt": "2026-07-28T02:11:04.000Z",
+                              "uid": "35240-a3081540-ffd9-427b-a650-3779532ded4c"
+                            },
+                            {
+                              "id": "9809e7e0-eb30-4e9e-ab2e-354019f7fd4b",
+                              "name": "Server has successfully fulfilled the request and there is no additional information to send back.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"LoyaltyTierIds\": [\n    \"<uuid>\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/loyaltyTiers/delete",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "loyaltyTiers",
+                                    "delete"
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:11:04.000Z",
+                              "updatedAt": "2026-07-28T02:11:04.000Z",
+                              "uid": "35240-9809e7e0-eb30-4e9e-ab2e-354019f7fd4b"
+                            },
+                            {
+                              "id": "272e4e36-ecea-4ed6-820b-5e252f8c4cce",
+                              "name": "Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"LoyaltyTierIds\": [\n    \"<uuid>\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/loyaltyTiers/delete",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "loyaltyTiers",
+                                    "delete"
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:11:04.000Z",
+                              "updatedAt": "2026-07-28T02:11:04.000Z",
+                              "uid": "35240-272e4e36-ecea-4ed6-820b-5e252f8c4cce"
+                            },
+                            {
+                              "id": "8a3c297a-7606-4e4f-9287-6df5a395cd5e",
+                              "name": "Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"LoyaltyTierIds\": [\n    \"<uuid>\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/loyaltyTiers/delete",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "loyaltyTiers",
+                                    "delete"
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:11:04.000Z",
+                              "updatedAt": "2026-07-28T02:11:04.000Z",
+                              "uid": "35240-8a3c297a-7606-4e4f-9287-6df5a395cd5e"
+                            },
+                            {
+                              "id": "0e0280f2-12b0-4f09-90d6-11dab7e33d51",
+                              "name": "Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"LoyaltyTierIds\": [\n    \"<uuid>\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/loyaltyTiers/delete",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "loyaltyTiers",
+                                    "delete"
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:11:04.000Z",
+                              "updatedAt": "2026-07-28T02:11:04.000Z",
+                              "uid": "35240-0e0280f2-12b0-4f09-90d6-11dab7e33d51"
+                            },
+                            {
+                              "id": "efcff964-8984-4f7f-b1d6-187d86ca90e2",
+                              "name": "Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#r",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"LoyaltyTierIds\": [\n    \"<uuid>\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/loyaltyTiers/delete",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "loyaltyTiers",
+                                    "delete"
+                                  ]
+                                }
+                              },
+                              "status": "Request Timeout",
+                              "code": 408,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:11:04.000Z",
+                              "updatedAt": "2026-07-28T02:11:04.000Z",
+                              "uid": "35240-efcff964-8984-4f7f-b1d6-187d86ca90e2"
+                            },
+                            {
+                              "id": "269575a4-8556-4597-8b23-009262ed035c",
+                              "name": "Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitb",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"LoyaltyTierIds\": [\n    \"<uuid>\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/loyaltyTiers/delete",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "loyaltyTiers",
+                                    "delete"
+                                  ]
+                                }
+                              },
+                              "status": "Too Many Requests",
+                              "code": 429,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:11:04.000Z",
+                              "updatedAt": "2026-07-28T02:11:04.000Z",
+                              "uid": "35240-269575a4-8556-4597-8b23-009262ed035c"
+                            },
+                            {
+                              "id": "9cccded9-aafd-4927-b147-0c3c499696c3",
+                              "name": "Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"LoyaltyTierIds\": [\n    \"<uuid>\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/loyaltyTiers/delete",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "loyaltyTiers",
+                                    "delete"
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:11:04.000Z",
+                              "updatedAt": "2026-07-28T02:11:04.000Z",
+                              "uid": "35240-9cccded9-aafd-4927-b147-0c3c499696c3"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:11:04.000Z",
+                          "updatedAt": "2026-07-28T02:11:04.000Z",
+                          "uid": "35240-d8b5f31e-2912-4a6d-8c89-12e0f2dac8c1"
+                        }
+                      ],
+                      "id": "529c539d-c1d9-4d58-9efb-6ac78acecbe1",
+                      "createdAt": "2026-07-28T02:11:04.000Z",
+                      "updatedAt": "2026-07-28T02:11:04.000Z",
+                      "uid": "35240-529c539d-c1d9-4d58-9efb-6ac78acecbe1"
+                    }
+                  ],
+                  "id": "e88f62d8-746f-4711-92ff-8701cc9b78b0",
+                  "createdAt": "2026-07-28T02:11:04.000Z",
+                  "updatedAt": "2026-07-28T02:11:04.000Z",
+                  "uid": "35240-e88f62d8-746f-4711-92ff-8701cc9b78b0"
+                }
+              ],
+              "id": "c02e2f33-be80-442d-9b3d-4aa09eaf15ca",
+              "createdAt": "2026-07-28T02:11:04.000Z",
+              "updatedAt": "2026-07-28T02:11:04.000Z",
+              "uid": "35240-c02e2f33-be80-442d-9b3d-4aa09eaf15ca"
+            }
+          ],
+          "id": "1e02a85b-ca49-4531-bbb6-dc192480c1d9",
+          "createdAt": "2026-07-28T02:11:04.000Z",
+          "updatedAt": "2026-07-28T02:11:04.000Z",
+          "uid": "35240-1e02a85b-ca49-4531-bbb6-dc192480c1d9"
+        }
+      ],
+      "id": "40c588cf-ba8e-41aa-866d-3c1791f0948d",
+      "createdAt": "2026-07-28T02:11:04.000Z",
+      "updatedAt": "2026-07-28T02:11:04.000Z",
+      "uid": "35240-40c588cf-ba8e-41aa-866d-3c1791f0948d"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "ClientToken",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.mews.com"
+    }
+  ]
+}

@@ -1,0 +1,2766 @@
+{
+  "info": {
+    "_postman_id": "3fd35550-0aea-4688-b2a7-2db590f85fed",
+    "name": "Mews Booking Engine API (Distributor) Account notes Payments API",
+    "description": "The Mews Booking Engine API (historically the Distributor API, served from /api/distributor/v1) lets developers build guest-facing booking engines that create reservations directly in Mews. It exposes enterprise configuration, availability, pricing, products, vouchers, payment cards, and reservation group creation for front-end client consumption.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:12:08.000Z",
+    "updatedAt": "2026-07-28T02:12:08.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-3fd35550-0aea-4688-b2a7-2db590f85fed"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "connector",
+          "item": [
+            {
+              "name": "v1",
+              "item": [
+                {
+                  "name": "payments",
+                  "item": [
+                    {
+                      "name": "getAll",
+                      "item": [
+                        {
+                          "name": "Mews Get All Payments",
+                          "id": "87764b2f-be01-4358-8e6d-bc1b1064ef4b",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"PaymentIds\": [\n    \"<uuid>\"\n  ],\n  \"AccountIds\": [\n    \"<uuid>\"\n  ],\n  \"BillIds\": [\n    \"<uuid>\"\n  ],\n  \"ReservationIds\": [\n    \"<uuid>\"\n  ],\n  \"CreatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"ChargedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"ClosedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"SettlementUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"Currency\": \"<string>\",\n  \"AccountingStates\": [\n    \"Open\"\n  ],\n  \"States\": [\n    \"Verifying\"\n  ],\n  \"Type\": \"ExternalPayment\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/connector/v1/payments/getAll",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "connector",
+                                "v1",
+                                "payments",
+                                "getAll"
+                              ]
+                            },
+                            "description": "Returns all payments in the system, filtered by various parameters. At least one filter parameter must be specified. Note this operation uses [Pagination](https://mews-systems.gitbook.io/connector-api/guidelines/pagination/) and supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property)."
+                          },
+                          "response": [
+                            {
+                              "id": "a1d02077-e444-4370-b8fc-33830b53592f",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"PaymentIds\": [\n    \"<uuid>\"\n  ],\n  \"AccountIds\": [\n    \"<uuid>\"\n  ],\n  \"BillIds\": [\n    \"<uuid>\"\n  ],\n  \"ReservationIds\": [\n    \"<uuid>\"\n  ],\n  \"CreatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"ChargedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"ClosedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"SettlementUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"Currency\": \"<string>\",\n  \"AccountingStates\": [\n    \"Open\"\n  ],\n  \"States\": [\n    \"Verifying\"\n  ],\n  \"Type\": \"ExternalPayment\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/payments/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "payments",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Payments\": [\n    {\n      \"AccountId\": \"<uuid>\",\n      \"AccountingState\": \"Closed\",\n      \"AccountType\": \"Company\",\n      \"Amount\": {\n        \"Breakdown\": {\n          \"Items\": [\n            {\n              \"NetValue\": \"<double>\",\n              \"TaxValue\": \"<double>\",\n              \"TaxRateCode\": \"<string>\"\n            },\n            {\n              \"NetValue\": \"<double>\",\n              \"TaxValue\": \"<double>\",\n              \"TaxRateCode\": \"<string>\"\n            }\n          ]\n        },\n        \"Currency\": \"<string>\",\n        \"GrossValue\": \"<double>\",\n        \"NetValue\": \"<double>\",\n        \"TaxValues\": [\n          {\n            \"Value\": \"<double>\",\n            \"Code\": \"<string>\"\n          },\n          {\n            \"Value\": \"<double>\",\n            \"Code\": \"<string>\"\n          }\n        ]\n      },\n      \"CreatedUtc\": \"<dateTime>\",\n      \"EnterpriseId\": \"<uuid>\",\n      \"Id\": \"<uuid>\",\n      \"OriginalAmount\": {\n        \"Breakdown\": {\n          \"Items\": [\n            {\n              \"NetValue\": \"<double>\",\n              \"TaxValue\": \"<double>\",\n              \"TaxRateCode\": \"<string>\"\n            },\n            {\n              \"NetValue\": \"<double>\",\n              \"TaxValue\": \"<double>\",\n              \"TaxRateCode\": \"<string>\"\n            }\n          ]\n        },\n        \"Currency\": \"<string>\",\n        \"GrossValue\": \"<double>\",\n        \"NetValue\": \"<double>\",\n        \"TaxValues\": [\n          {\n            \"Value\": \"<double>\",\n            \"Code\": \"<string>\"\n          },\n          {\n            \"Value\": \"<double>\",\n            \"Code\": \"<string>\"\n          }\n        ]\n      },\n      \"SettlementUtc\": \"<dateTime>\",\n      \"State\": \"Verifying\",\n      \"Type\": \"InvoicePayment\",\n      \"UpdatedUtc\": \"<dateTime>\",\n      \"PaymentRequestId\": \"<uuid>\",\n      \"BillId\": \"<uuid>\",\n      \"ReservationId\": \"<uuid>\",\n      \"AccountingCategoryId\": \"<uuid>\",\n      \"Notes\": \"<string>\",\n      \"SettlementId\": \"<string>\",\n      \"ConsumedUtc\": \"<dateTime>\",\n      \"ClosedUtc\": \"<dateTime>\",\n      \"ChargedUtc\": \"<dateTime>\",\n      \"Identifier\": \"<string>\",\n      \"Kind\": \"ChargebackReversal\",\n      \"Data\": {\n        \"Discriminator\": \"Alternative\",\n        \"CreditCard\": {\n          \"CreditCardId\": \"<uuid>\",\n          \"Transaction\": {\n            \"ChargedAmount\": {\n              \"Breakdown\": {\n                \"Items\": [\n                  {\n                    \"NetValue\": \"<double>\",\n                    \"TaxValue\": \"<double>\",\n                    \"TaxRateCode\": \"<string>\"\n                  },\n                  {\n                    \"NetValue\": \"<double>\",\n                    \"TaxValue\": \"<double>\",\n                    \"TaxRateCode\": \"<string>\"\n                  }\n                ]\n              },\n              \"Currency\": \"<string>\",\n              \"GrossValue\": \"<double>\",\n              \"NetValue\": \"<double>\",\n              \"TaxValues\": [\n                {\n                  \"Value\": \"<double>\",\n                  \"Code\": \"<string>\"\n                },\n                {\n                  \"Value\": \"<double>\",\n                  \"Code\": \"<string>\"\n                }\n              ],\n              \"Value\": \"<double>\",\n              \"Net\": \"<double>\",\n              \"Tax\": \"<double>\",\n              \"TaxRate\": \"<double>\"\n            },\n            \"PaymentId\": \"<uuid>\",\n            \"SettlementId\": \"<string>\",\n            \"SettledUtc\": \"<dateTime>\",\n            \"Fee\": {\n              \"Breakdown\": {\n                \"Items\": [\n                  {\n                    \"NetValue\": \"<double>\",\n                    \"TaxValue\": \"<double>\",\n                    \"TaxRateCode\": \"<string>\"\n                  },\n                  {\n                    \"NetValue\": \"<double>\",\n                    \"TaxValue\": \"<double>\",\n                    \"TaxRateCode\": \"<string>\"\n                  }\n                ]\n              },\n              \"Currency\": \"<string>\",\n              \"GrossValue\": \"<double>\",\n              \"NetValue\": \"<double>\",\n              \"TaxValues\": [\n                {\n                  \"Value\": \"<double>\",\n                  \"Code\": \"<string>\"\n                },\n                {\n                  \"Value\": \"<double>\",\n                  \"Code\": \"<string>\"\n                }\n              ],\n              \"Value\": \"<double>\",\n              \"Net\": \"<double>\",\n              \"Tax\": \"<double>\",\n              \"TaxRate\": \"<double>\"\n            },\n            \"AdjustedFee\": {\n              \"Breakdown\": {\n                \"Items\": [\n                  {\n                    \"NetValue\": \"<double>\",\n                    \"TaxValue\": \"<double>\",\n                    \"TaxRateCode\": \"<string>\"\n                  },\n                  {\n                    \"NetValue\": \"<double>\",\n                    \"TaxValue\": \"<double>\",\n                    \"TaxRateCode\": \"<string>\"\n                  }\n                ]\n              },\n              \"Currency\": \"<string>\",\n              \"GrossValue\": \"<double>\",\n              \"NetValue\": \"<double>\",\n              \"TaxValues\": [\n                {\n                  \"Value\": \"<double>\",\n                  \"Code\": \"<string>\"\n                },\n                {\n                  \"Value\": \"<double>\",\n                  \"Code\": \"<string>\"\n                }\n              ],\n              \"Value\": \"<double>\",\n              \"Net\": \"<double>\",\n              \"Tax\": \"<double>\",\n              \"TaxRate\": \"<double>\"\n            },\n            \"SettledAmount\": {\n              \"Breakdown\": {\n                \"Items\": [\n                  {\n                    \"NetValue\": \"<double>\",\n                    \"TaxValue\": \"<double>\",\n                    \"TaxRateCode\": \"<string>\"\n                  },\n                  {\n                    \"NetValue\": \"<double>\",\n                    \"TaxValue\": \"<double>\",\n                    \"TaxRateCode\": \"<string>\"\n                  }\n                ]\n              },\n              \"Currency\": \"<string>\",\n              \"GrossValue\": \"<double>\",\n              \"NetValue\": \"<double>\",\n              \"TaxValues\": [\n                {\n                  \"Value\": \"<double>\",\n                  \"Code\": \"<string>\"\n                },\n                {\n                  \"Value\": \"<double>\",\n                  \"Code\": \"<string>\"\n                }\n              ],\n              \"Value\": \"<double>\",\n              \"Net\": \"<double>\",\n              \"Tax\": \"<double>\",\n              \"TaxRate\": \"<double>\"\n            }\n          }\n        },\n        \"Invoice\": {\n          \"Type\": \"Balancing\",\n          \"InvoiceId\": \"<uuid>\"\n        },\n        \"External\": {\n          \"Type\": \"Reseller\",\n          \"ExternalIdentifier\": \"<string>\"\n        },\n        \"Ghost\": {\n          \"OriginalPaymentId\": \"<uuid>\"\n        },\n        \"Alternative\": {\n          \"Type\": \"SepaDirectDebit\"\n        }\n      },\n      \"PaymentOrigin\": \"Terminal\"\n    },\n    {\n      \"AccountId\": \"<uuid>\",\n      \"AccountingState\": \"Inactive\",\n      \"AccountType\": \"Customer\",\n      \"Amount\": {\n        \"Breakdown\": {\n          \"Items\": [\n            {\n              \"NetValue\": \"<double>\",\n              \"TaxValue\": \"<double>\",\n              \"TaxRateCode\": \"<string>\"\n            },\n            {\n              \"NetValue\": \"<double>\",\n              \"TaxValue\": \"<double>\",\n              \"TaxRateCode\": \"<string>\"\n            }\n          ]\n        },\n        \"Currency\": \"<string>\",\n        \"GrossValue\": \"<double>\",\n        \"NetValue\": \"<double>\",\n        \"TaxValues\": [\n          {\n            \"Value\": \"<double>\",\n            \"Code\": \"<string>\"\n          },\n          {\n            \"Value\": \"<double>\",\n            \"Code\": \"<string>\"\n          }\n        ]\n      },\n      \"CreatedUtc\": \"<dateTime>\",\n      \"EnterpriseId\": \"<uuid>\",\n      \"Id\": \"<uuid>\",\n      \"OriginalAmount\": {\n        \"Breakdown\": {\n          \"Items\": [\n            {\n              \"NetValue\": \"<double>\",\n              \"TaxValue\": \"<double>\",\n              \"TaxRateCode\": \"<string>\"\n            },\n            {\n              \"NetValue\": \"<double>\",\n              \"TaxValue\": \"<double>\",\n              \"TaxRateCode\": \"<string>\"\n            }\n          ]\n        },\n        \"Currency\": \"<string>\",\n        \"GrossValue\": \"<double>\",\n        \"NetValue\": \"<double>\",\n        \"TaxValues\": [\n          {\n            \"Value\": \"<double>\",\n            \"Code\": \"<string>\"\n          },\n          {\n            \"Value\": \"<double>\",\n            \"Code\": \"<string>\"\n          }\n        ]\n      },\n      \"SettlementUtc\": \"<dateTime>\",\n      \"State\": \"Pending\",\n      \"Type\": \"ExternalPayment\",\n      \"UpdatedUtc\": \"<dateTime>\",\n      \"PaymentRequestId\": \"<uuid>\",\n      \"BillId\": \"<uuid>\",\n      \"ReservationId\": \"<uuid>\",\n      \"AccountingCategoryId\": \"<uuid>\",\n      \"Notes\": \"<string>\",\n      \"SettlementId\": \"<string>\",\n      \"ConsumedUtc\": \"<dateTime>\",\n      \"ClosedUtc\": \"<dateTime>\",\n      \"ChargedUtc\": \"<dateTime>\",\n      \"Identifier\": \"<string>\",\n      \"Kind\": \"ChargebackReversal\",\n      \"Data\": {\n        \"Discriminator\": \"Invoice\",\n        \"CreditCard\": {\n          \"CreditCardId\": \"<uuid>\",\n          \"Transaction\": {\n            \"ChargedAmount\": {\n              \"Breakdown\": {\n                \"Items\": [\n                  {\n                    \"NetValue\": \"<double>\",\n                    \"TaxValue\": \"<double>\",\n                    \"TaxRateCode\": \"<string>\"\n                  },\n                  {\n                    \"NetValue\": \"<double>\",\n                    \"TaxValue\": \"<double>\",\n                    \"TaxRateCode\": \"<string>\"\n                  }\n                ]\n              },\n              \"Currency\": \"<string>\",\n              \"GrossValue\": \"<double>\",\n              \"NetValue\": \"<double>\",\n              \"TaxValues\": [\n                {\n                  \"Value\": \"<double>\",\n                  \"Code\": \"<string>\"\n                },\n                {\n                  \"Value\": \"<double>\",\n                  \"Code\": \"<string>\"\n                }\n              ],\n              \"Value\": \"<double>\",\n              \"Net\": \"<double>\",\n              \"Tax\": \"<double>\",\n              \"TaxRate\": \"<double>\"\n            },\n            \"PaymentId\": \"<uuid>\",\n            \"SettlementId\": \"<string>\",\n            \"SettledUtc\": \"<dateTime>\",\n            \"Fee\": {\n              \"Breakdown\": {\n                \"Items\": [\n                  {\n                    \"NetValue\": \"<double>\",\n                    \"TaxValue\": \"<double>\",\n                    \"TaxRateCode\": \"<string>\"\n                  },\n                  {\n                    \"NetValue\": \"<double>\",\n                    \"TaxValue\": \"<double>\",\n                    \"TaxRateCode\": \"<string>\"\n                  }\n                ]\n              },\n              \"Currency\": \"<string>\",\n              \"GrossValue\": \"<double>\",\n              \"NetValue\": \"<double>\",\n              \"TaxValues\": [\n                {\n                  \"Value\": \"<double>\",\n                  \"Code\": \"<string>\"\n                },\n                {\n                  \"Value\": \"<double>\",\n                  \"Code\": \"<string>\"\n                }\n              ],\n              \"Value\": \"<double>\",\n              \"Net\": \"<double>\",\n              \"Tax\": \"<double>\",\n              \"TaxRate\": \"<double>\"\n            },\n            \"AdjustedFee\": {\n              \"Breakdown\": {\n                \"Items\": [\n                  {\n                    \"NetValue\": \"<double>\",\n                    \"TaxValue\": \"<double>\",\n                    \"TaxRateCode\": \"<string>\"\n                  },\n                  {\n                    \"NetValue\": \"<double>\",\n                    \"TaxValue\": \"<double>\",\n                    \"TaxRateCode\": \"<string>\"\n                  }\n                ]\n              },\n              \"Currency\": \"<string>\",\n              \"GrossValue\": \"<double>\",\n              \"NetValue\": \"<double>\",\n              \"TaxValues\": [\n                {\n                  \"Value\": \"<double>\",\n                  \"Code\": \"<string>\"\n                },\n                {\n                  \"Value\": \"<double>\",\n                  \"Code\": \"<string>\"\n                }\n              ],\n              \"Value\": \"<double>\",\n              \"Net\": \"<double>\",\n              \"Tax\": \"<double>\",\n              \"TaxRate\": \"<double>\"\n            },\n            \"SettledAmount\": {\n              \"Breakdown\": {\n                \"Items\": [\n                  {\n                    \"NetValue\": \"<double>\",\n                    \"TaxValue\": \"<double>\",\n                    \"TaxRateCode\": \"<string>\"\n                  },\n                  {\n                    \"NetValue\": \"<double>\",\n                    \"TaxValue\": \"<double>\",\n                    \"TaxRateCode\": \"<string>\"\n                  }\n                ]\n              },\n              \"Currency\": \"<string>\",\n              \"GrossValue\": \"<double>\",\n              \"NetValue\": \"<double>\",\n              \"TaxValues\": [\n                {\n                  \"Value\": \"<double>\",\n                  \"Code\": \"<string>\"\n                },\n                {\n                  \"Value\": \"<double>\",\n                  \"Code\": \"<string>\"\n                }\n              ],\n              \"Value\": \"<double>\",\n              \"Net\": \"<double>\",\n              \"Tax\": \"<double>\",\n              \"TaxRate\": \"<double>\"\n            }\n          }\n        },\n        \"Invoice\": {\n          \"Type\": \"Receivable\",\n          \"InvoiceId\": \"<uuid>\"\n        },\n        \"External\": {\n          \"Type\": \"Voucher\",\n          \"ExternalIdentifier\": \"<string>\"\n        },\n        \"Ghost\": {\n          \"OriginalPaymentId\": \"<uuid>\"\n        },\n        \"Alternative\": {\n          \"Type\": \"PayPal\"\n        }\n      },\n      \"PaymentOrigin\": \"AutomaticPayment\"\n    }\n  ],\n  \"Cursor\": \"<uuid>\"\n}",
+                              "createdAt": "2026-07-28T02:12:09.000Z",
+                              "updatedAt": "2026-07-28T02:12:09.000Z",
+                              "uid": "35240-a1d02077-e444-4370-b8fc-33830b53592f"
+                            },
+                            {
+                              "id": "a4e86bc9-dcd0-40ef-a9e2-0f9e1ca3642d",
+                              "name": "Server has successfully fulfilled the request and there is no additional information to send back.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"PaymentIds\": [\n    \"<uuid>\"\n  ],\n  \"AccountIds\": [\n    \"<uuid>\"\n  ],\n  \"BillIds\": [\n    \"<uuid>\"\n  ],\n  \"ReservationIds\": [\n    \"<uuid>\"\n  ],\n  \"CreatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"ChargedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"ClosedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"SettlementUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"Currency\": \"<string>\",\n  \"AccountingStates\": [\n    \"Open\"\n  ],\n  \"States\": [\n    \"Verifying\"\n  ],\n  \"Type\": \"ExternalPayment\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/payments/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "payments",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:09.000Z",
+                              "updatedAt": "2026-07-28T02:12:09.000Z",
+                              "uid": "35240-a4e86bc9-dcd0-40ef-a9e2-0f9e1ca3642d"
+                            },
+                            {
+                              "id": "7717386e-c6d0-422b-a1dd-1c68a4b164f9",
+                              "name": "Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"PaymentIds\": [\n    \"<uuid>\"\n  ],\n  \"AccountIds\": [\n    \"<uuid>\"\n  ],\n  \"BillIds\": [\n    \"<uuid>\"\n  ],\n  \"ReservationIds\": [\n    \"<uuid>\"\n  ],\n  \"CreatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"ChargedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"ClosedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"SettlementUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"Currency\": \"<string>\",\n  \"AccountingStates\": [\n    \"Open\"\n  ],\n  \"States\": [\n    \"Verifying\"\n  ],\n  \"Type\": \"ExternalPayment\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/payments/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "payments",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:09.000Z",
+                              "updatedAt": "2026-07-28T02:12:09.000Z",
+                              "uid": "35240-7717386e-c6d0-422b-a1dd-1c68a4b164f9"
+                            },
+                            {
+                              "id": "2b5afb4e-b356-4958-83fc-9e2359be1a23",
+                              "name": "Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"PaymentIds\": [\n    \"<uuid>\"\n  ],\n  \"AccountIds\": [\n    \"<uuid>\"\n  ],\n  \"BillIds\": [\n    \"<uuid>\"\n  ],\n  \"ReservationIds\": [\n    \"<uuid>\"\n  ],\n  \"CreatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"ChargedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"ClosedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"SettlementUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"Currency\": \"<string>\",\n  \"AccountingStates\": [\n    \"Open\"\n  ],\n  \"States\": [\n    \"Verifying\"\n  ],\n  \"Type\": \"ExternalPayment\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/payments/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "payments",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:09.000Z",
+                              "updatedAt": "2026-07-28T02:12:09.000Z",
+                              "uid": "35240-2b5afb4e-b356-4958-83fc-9e2359be1a23"
+                            },
+                            {
+                              "id": "ff995cda-5699-45d3-80ff-9a9920fca064",
+                              "name": "Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"PaymentIds\": [\n    \"<uuid>\"\n  ],\n  \"AccountIds\": [\n    \"<uuid>\"\n  ],\n  \"BillIds\": [\n    \"<uuid>\"\n  ],\n  \"ReservationIds\": [\n    \"<uuid>\"\n  ],\n  \"CreatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"ChargedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"ClosedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"SettlementUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"Currency\": \"<string>\",\n  \"AccountingStates\": [\n    \"Open\"\n  ],\n  \"States\": [\n    \"Verifying\"\n  ],\n  \"Type\": \"ExternalPayment\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/payments/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "payments",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:09.000Z",
+                              "updatedAt": "2026-07-28T02:12:09.000Z",
+                              "uid": "35240-ff995cda-5699-45d3-80ff-9a9920fca064"
+                            },
+                            {
+                              "id": "397284d8-a4f1-4c6e-851b-1b523f9e438d",
+                              "name": "Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#r",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"PaymentIds\": [\n    \"<uuid>\"\n  ],\n  \"AccountIds\": [\n    \"<uuid>\"\n  ],\n  \"BillIds\": [\n    \"<uuid>\"\n  ],\n  \"ReservationIds\": [\n    \"<uuid>\"\n  ],\n  \"CreatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"ChargedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"ClosedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"SettlementUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"Currency\": \"<string>\",\n  \"AccountingStates\": [\n    \"Open\"\n  ],\n  \"States\": [\n    \"Verifying\"\n  ],\n  \"Type\": \"ExternalPayment\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/payments/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "payments",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Request Timeout",
+                              "code": 408,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:09.000Z",
+                              "updatedAt": "2026-07-28T02:12:09.000Z",
+                              "uid": "35240-397284d8-a4f1-4c6e-851b-1b523f9e438d"
+                            },
+                            {
+                              "id": "0456bf7f-8bd3-4bac-8373-5b92059835d9",
+                              "name": "Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitb",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"PaymentIds\": [\n    \"<uuid>\"\n  ],\n  \"AccountIds\": [\n    \"<uuid>\"\n  ],\n  \"BillIds\": [\n    \"<uuid>\"\n  ],\n  \"ReservationIds\": [\n    \"<uuid>\"\n  ],\n  \"CreatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"ChargedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"ClosedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"SettlementUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"Currency\": \"<string>\",\n  \"AccountingStates\": [\n    \"Open\"\n  ],\n  \"States\": [\n    \"Verifying\"\n  ],\n  \"Type\": \"ExternalPayment\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/payments/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "payments",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Too Many Requests",
+                              "code": 429,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:09.000Z",
+                              "updatedAt": "2026-07-28T02:12:09.000Z",
+                              "uid": "35240-0456bf7f-8bd3-4bac-8373-5b92059835d9"
+                            },
+                            {
+                              "id": "fe5115ad-9a6f-47f7-aa96-49cd8cedcc28",
+                              "name": "Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"PaymentIds\": [\n    \"<uuid>\"\n  ],\n  \"AccountIds\": [\n    \"<uuid>\"\n  ],\n  \"BillIds\": [\n    \"<uuid>\"\n  ],\n  \"ReservationIds\": [\n    \"<uuid>\"\n  ],\n  \"CreatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"ChargedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"ClosedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"SettlementUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"Currency\": \"<string>\",\n  \"AccountingStates\": [\n    \"Open\"\n  ],\n  \"States\": [\n    \"Verifying\"\n  ],\n  \"Type\": \"ExternalPayment\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/payments/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "payments",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:09.000Z",
+                              "updatedAt": "2026-07-28T02:12:09.000Z",
+                              "uid": "35240-fe5115ad-9a6f-47f7-aa96-49cd8cedcc28"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:12:08.000Z",
+                          "updatedAt": "2026-07-28T02:12:08.000Z",
+                          "uid": "35240-87764b2f-be01-4358-8e6d-bc1b1064ef4b"
+                        }
+                      ],
+                      "id": "118d1d9c-2331-4aa5-90a8-2504f45175cb",
+                      "createdAt": "2026-07-28T02:12:08.000Z",
+                      "updatedAt": "2026-07-28T02:12:08.000Z",
+                      "uid": "35240-118d1d9c-2331-4aa5-90a8-2504f45175cb"
+                    },
+                    {
+                      "name": "refund",
+                      "item": [
+                        {
+                          "name": "Mews Refund Payment",
+                          "id": "7d11d755-498c-4d85-bb8d-371980a59544",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AccountId\": \"<uuid>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"PaymentId\": \"<uuid>\",\n  \"Reason\": \"<string>\",\n  \"EnterpriseId\": \"<uuid>\",\n  \"ValueToRefund\": \"<double>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/connector/v1/payments/refund",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "connector",
+                                "v1",
+                                "payments",
+                                "refund"
+                              ]
+                            },
+                            "description": "Refunds a specified payment on a specified account. A reason must be provided. Optionally, specify an amount for a partial refund. This operation supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property/).\r\n                                                   \r\n* **Payment types**: Only `CreditCardPayment` and `AlternativePayment` can be refunded. Other payment types will fail.\r\n* **Refund information**: The refund is a payment itself. To get more information, use [Get all payments](https://mews-systems.gitbook.io/connector-api/operations/payments#get-all-payments) with the `RefundId` as the `PaymentId`.\r\n* **Potential failures**: This operation initiates the refund process, but refunds can fail if the payment is in a `Pending` state and fails processing. To check the status of a pending payment, including refunds, use [Get all payments](https://mews-systems.gitbook.io/connector-api/operations/payments#get-all-payments)."
+                          },
+                          "response": [
+                            {
+                              "id": "ae06b4d4-ceb9-4a14-b951-831ea6ba9566",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AccountId\": \"<uuid>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"PaymentId\": \"<uuid>\",\n  \"Reason\": \"<string>\",\n  \"EnterpriseId\": \"<uuid>\",\n  \"ValueToRefund\": \"<double>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/payments/refund",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "payments",
+                                    "refund"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Amount\": {\n    \"Currency\": \"<string>\",\n    \"Value\": \"<double>\"\n  },\n  \"PaymentId\": \"<uuid>\",\n  \"RefundId\": \"<uuid>\",\n  \"State\": \"Pending\",\n  \"Type\": \"CreditCardPayment\"\n}",
+                              "createdAt": "2026-07-28T02:12:09.000Z",
+                              "updatedAt": "2026-07-28T02:12:09.000Z",
+                              "uid": "35240-ae06b4d4-ceb9-4a14-b951-831ea6ba9566"
+                            },
+                            {
+                              "id": "593e2b06-6892-41ea-99e0-2ade7f26817e",
+                              "name": "Server has successfully fulfilled the request and there is no additional information to send back.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AccountId\": \"<uuid>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"PaymentId\": \"<uuid>\",\n  \"Reason\": \"<string>\",\n  \"EnterpriseId\": \"<uuid>\",\n  \"ValueToRefund\": \"<double>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/payments/refund",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "payments",
+                                    "refund"
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:09.000Z",
+                              "updatedAt": "2026-07-28T02:12:09.000Z",
+                              "uid": "35240-593e2b06-6892-41ea-99e0-2ade7f26817e"
+                            },
+                            {
+                              "id": "419cbbef-95c8-4bfb-b042-490c49ae2a8a",
+                              "name": "Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AccountId\": \"<uuid>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"PaymentId\": \"<uuid>\",\n  \"Reason\": \"<string>\",\n  \"EnterpriseId\": \"<uuid>\",\n  \"ValueToRefund\": \"<double>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/payments/refund",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "payments",
+                                    "refund"
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:09.000Z",
+                              "updatedAt": "2026-07-28T02:12:09.000Z",
+                              "uid": "35240-419cbbef-95c8-4bfb-b042-490c49ae2a8a"
+                            },
+                            {
+                              "id": "af9cc627-bf87-429c-b109-a4c6d2278c3e",
+                              "name": "Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AccountId\": \"<uuid>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"PaymentId\": \"<uuid>\",\n  \"Reason\": \"<string>\",\n  \"EnterpriseId\": \"<uuid>\",\n  \"ValueToRefund\": \"<double>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/payments/refund",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "payments",
+                                    "refund"
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:09.000Z",
+                              "updatedAt": "2026-07-28T02:12:09.000Z",
+                              "uid": "35240-af9cc627-bf87-429c-b109-a4c6d2278c3e"
+                            },
+                            {
+                              "id": "725bd2a0-c3c0-4266-b6ac-262a69f39107",
+                              "name": "Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AccountId\": \"<uuid>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"PaymentId\": \"<uuid>\",\n  \"Reason\": \"<string>\",\n  \"EnterpriseId\": \"<uuid>\",\n  \"ValueToRefund\": \"<double>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/payments/refund",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "payments",
+                                    "refund"
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:09.000Z",
+                              "updatedAt": "2026-07-28T02:12:09.000Z",
+                              "uid": "35240-725bd2a0-c3c0-4266-b6ac-262a69f39107"
+                            },
+                            {
+                              "id": "a13d6494-e0ff-4c6b-ad2a-4f02bfcd2f7f",
+                              "name": "Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#r",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AccountId\": \"<uuid>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"PaymentId\": \"<uuid>\",\n  \"Reason\": \"<string>\",\n  \"EnterpriseId\": \"<uuid>\",\n  \"ValueToRefund\": \"<double>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/payments/refund",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "payments",
+                                    "refund"
+                                  ]
+                                }
+                              },
+                              "status": "Request Timeout",
+                              "code": 408,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:09.000Z",
+                              "updatedAt": "2026-07-28T02:12:09.000Z",
+                              "uid": "35240-a13d6494-e0ff-4c6b-ad2a-4f02bfcd2f7f"
+                            },
+                            {
+                              "id": "cbf1a7db-99e1-4440-8a44-1f9cee894e5b",
+                              "name": "Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitb",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AccountId\": \"<uuid>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"PaymentId\": \"<uuid>\",\n  \"Reason\": \"<string>\",\n  \"EnterpriseId\": \"<uuid>\",\n  \"ValueToRefund\": \"<double>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/payments/refund",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "payments",
+                                    "refund"
+                                  ]
+                                }
+                              },
+                              "status": "Too Many Requests",
+                              "code": 429,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:09.000Z",
+                              "updatedAt": "2026-07-28T02:12:09.000Z",
+                              "uid": "35240-cbf1a7db-99e1-4440-8a44-1f9cee894e5b"
+                            },
+                            {
+                              "id": "bbde7ab4-8ca5-4777-aec5-016e2a3c8621",
+                              "name": "Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AccountId\": \"<uuid>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"PaymentId\": \"<uuid>\",\n  \"Reason\": \"<string>\",\n  \"EnterpriseId\": \"<uuid>\",\n  \"ValueToRefund\": \"<double>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/payments/refund",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "payments",
+                                    "refund"
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:09.000Z",
+                              "updatedAt": "2026-07-28T02:12:09.000Z",
+                              "uid": "35240-bbde7ab4-8ca5-4777-aec5-016e2a3c8621"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:12:08.000Z",
+                          "updatedAt": "2026-07-28T02:12:08.000Z",
+                          "uid": "35240-7d11d755-498c-4d85-bb8d-371980a59544"
+                        }
+                      ],
+                      "id": "923e2d00-5d6b-4176-ae7b-29b2ab6a7369",
+                      "createdAt": "2026-07-28T02:12:08.000Z",
+                      "updatedAt": "2026-07-28T02:12:08.000Z",
+                      "uid": "35240-923e2d00-5d6b-4176-ae7b-29b2ab6a7369"
+                    },
+                    {
+                      "name": "addCreditCard",
+                      "item": [
+                        {
+                          "name": "Mews Add Credit Card Payment",
+                          "id": "7e5767ae-6911-493d-832f-befc98d7e22e",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Amount\": {\n    \"Currency\": \"<string>\",\n    \"TaxCodes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"NetValue\": \"<double>\",\n    \"GrossValue\": \"<double>\"\n  },\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"CreditCard\": {\n    \"Name\": \"<string>\",\n    \"Number\": \"<string>\",\n    \"Type\": \"<string>\",\n    \"Expiration\": \"<string>\"\n  },\n  \"CustomerId\": \"<uuid>\",\n  \"BillId\": \"<uuid>\",\n  \"AccountingCategoryId\": \"<uuid>\",\n  \"ReservationId\": \"<uuid>\",\n  \"Notes\": \"<string>\",\n  \"ReceiptIdentifier\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/connector/v1/payments/addCreditCard",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "connector",
+                                "v1",
+                                "payments",
+                                "addCreditCard"
+                              ]
+                            },
+                            "description": "Adds a new credit card payment to a bill of the specified customer. Note that the payment is added to open bill of the customer, either to the specified one or the default one. This operation only serves to record a credit card payment that has already been taken outside of Mews or Mews' payment terminal, and does not actually charge the customer's credit card. \nThe bill can then be closed manually by a Mews user, or automatically via API with the [Close bill](https://mews-systems.gitbook.io/connector-api/operations/bills/#close-bill) operation."
+                          },
+                          "response": [
+                            {
+                              "id": "dbc3f2ed-8c65-488a-aeb0-963e74ce928a",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Amount\": {\n    \"Currency\": \"<string>\",\n    \"TaxCodes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"NetValue\": \"<double>\",\n    \"GrossValue\": \"<double>\"\n  },\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"CreditCard\": {\n    \"Name\": \"<string>\",\n    \"Number\": \"<string>\",\n    \"Type\": \"<string>\",\n    \"Expiration\": \"<string>\"\n  },\n  \"CustomerId\": \"<uuid>\",\n  \"BillId\": \"<uuid>\",\n  \"AccountingCategoryId\": \"<uuid>\",\n  \"ReservationId\": \"<uuid>\",\n  \"Notes\": \"<string>\",\n  \"ReceiptIdentifier\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/payments/addCreditCard",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "payments",
+                                    "addCreditCard"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"CreditCardId\": \"<uuid>\"\n}",
+                              "createdAt": "2026-07-28T02:12:09.000Z",
+                              "updatedAt": "2026-07-28T02:12:09.000Z",
+                              "uid": "35240-dbc3f2ed-8c65-488a-aeb0-963e74ce928a"
+                            },
+                            {
+                              "id": "6d7170f2-19a5-4a32-8645-861ba983ee9c",
+                              "name": "Server has successfully fulfilled the request and there is no additional information to send back.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Amount\": {\n    \"Currency\": \"<string>\",\n    \"TaxCodes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"NetValue\": \"<double>\",\n    \"GrossValue\": \"<double>\"\n  },\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"CreditCard\": {\n    \"Name\": \"<string>\",\n    \"Number\": \"<string>\",\n    \"Type\": \"<string>\",\n    \"Expiration\": \"<string>\"\n  },\n  \"CustomerId\": \"<uuid>\",\n  \"BillId\": \"<uuid>\",\n  \"AccountingCategoryId\": \"<uuid>\",\n  \"ReservationId\": \"<uuid>\",\n  \"Notes\": \"<string>\",\n  \"ReceiptIdentifier\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/payments/addCreditCard",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "payments",
+                                    "addCreditCard"
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:09.000Z",
+                              "updatedAt": "2026-07-28T02:12:09.000Z",
+                              "uid": "35240-6d7170f2-19a5-4a32-8645-861ba983ee9c"
+                            },
+                            {
+                              "id": "06faa21f-f6aa-4d96-85d7-4386d7f33243",
+                              "name": "Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Amount\": {\n    \"Currency\": \"<string>\",\n    \"TaxCodes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"NetValue\": \"<double>\",\n    \"GrossValue\": \"<double>\"\n  },\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"CreditCard\": {\n    \"Name\": \"<string>\",\n    \"Number\": \"<string>\",\n    \"Type\": \"<string>\",\n    \"Expiration\": \"<string>\"\n  },\n  \"CustomerId\": \"<uuid>\",\n  \"BillId\": \"<uuid>\",\n  \"AccountingCategoryId\": \"<uuid>\",\n  \"ReservationId\": \"<uuid>\",\n  \"Notes\": \"<string>\",\n  \"ReceiptIdentifier\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/payments/addCreditCard",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "payments",
+                                    "addCreditCard"
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:09.000Z",
+                              "updatedAt": "2026-07-28T02:12:09.000Z",
+                              "uid": "35240-06faa21f-f6aa-4d96-85d7-4386d7f33243"
+                            },
+                            {
+                              "id": "8c0fc896-2c5f-4999-9bca-e5feed53172b",
+                              "name": "Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Amount\": {\n    \"Currency\": \"<string>\",\n    \"TaxCodes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"NetValue\": \"<double>\",\n    \"GrossValue\": \"<double>\"\n  },\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"CreditCard\": {\n    \"Name\": \"<string>\",\n    \"Number\": \"<string>\",\n    \"Type\": \"<string>\",\n    \"Expiration\": \"<string>\"\n  },\n  \"CustomerId\": \"<uuid>\",\n  \"BillId\": \"<uuid>\",\n  \"AccountingCategoryId\": \"<uuid>\",\n  \"ReservationId\": \"<uuid>\",\n  \"Notes\": \"<string>\",\n  \"ReceiptIdentifier\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/payments/addCreditCard",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "payments",
+                                    "addCreditCard"
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:09.000Z",
+                              "updatedAt": "2026-07-28T02:12:09.000Z",
+                              "uid": "35240-8c0fc896-2c5f-4999-9bca-e5feed53172b"
+                            },
+                            {
+                              "id": "a363bd53-5b3c-45c1-9900-d969ab689be5",
+                              "name": "Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Amount\": {\n    \"Currency\": \"<string>\",\n    \"TaxCodes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"NetValue\": \"<double>\",\n    \"GrossValue\": \"<double>\"\n  },\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"CreditCard\": {\n    \"Name\": \"<string>\",\n    \"Number\": \"<string>\",\n    \"Type\": \"<string>\",\n    \"Expiration\": \"<string>\"\n  },\n  \"CustomerId\": \"<uuid>\",\n  \"BillId\": \"<uuid>\",\n  \"AccountingCategoryId\": \"<uuid>\",\n  \"ReservationId\": \"<uuid>\",\n  \"Notes\": \"<string>\",\n  \"ReceiptIdentifier\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/payments/addCreditCard",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "payments",
+                                    "addCreditCard"
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:09.000Z",
+                              "updatedAt": "2026-07-28T02:12:09.000Z",
+                              "uid": "35240-a363bd53-5b3c-45c1-9900-d969ab689be5"
+                            },
+                            {
+                              "id": "9b3b6b93-a9e3-4346-acb0-18c4b21effc6",
+                              "name": "Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#r",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Amount\": {\n    \"Currency\": \"<string>\",\n    \"TaxCodes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"NetValue\": \"<double>\",\n    \"GrossValue\": \"<double>\"\n  },\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"CreditCard\": {\n    \"Name\": \"<string>\",\n    \"Number\": \"<string>\",\n    \"Type\": \"<string>\",\n    \"Expiration\": \"<string>\"\n  },\n  \"CustomerId\": \"<uuid>\",\n  \"BillId\": \"<uuid>\",\n  \"AccountingCategoryId\": \"<uuid>\",\n  \"ReservationId\": \"<uuid>\",\n  \"Notes\": \"<string>\",\n  \"ReceiptIdentifier\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/payments/addCreditCard",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "payments",
+                                    "addCreditCard"
+                                  ]
+                                }
+                              },
+                              "status": "Request Timeout",
+                              "code": 408,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:09.000Z",
+                              "updatedAt": "2026-07-28T02:12:09.000Z",
+                              "uid": "35240-9b3b6b93-a9e3-4346-acb0-18c4b21effc6"
+                            },
+                            {
+                              "id": "b4861b60-47c7-4279-a20a-53b1c528b2ad",
+                              "name": "Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitb",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Amount\": {\n    \"Currency\": \"<string>\",\n    \"TaxCodes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"NetValue\": \"<double>\",\n    \"GrossValue\": \"<double>\"\n  },\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"CreditCard\": {\n    \"Name\": \"<string>\",\n    \"Number\": \"<string>\",\n    \"Type\": \"<string>\",\n    \"Expiration\": \"<string>\"\n  },\n  \"CustomerId\": \"<uuid>\",\n  \"BillId\": \"<uuid>\",\n  \"AccountingCategoryId\": \"<uuid>\",\n  \"ReservationId\": \"<uuid>\",\n  \"Notes\": \"<string>\",\n  \"ReceiptIdentifier\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/payments/addCreditCard",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "payments",
+                                    "addCreditCard"
+                                  ]
+                                }
+                              },
+                              "status": "Too Many Requests",
+                              "code": 429,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:09.000Z",
+                              "updatedAt": "2026-07-28T02:12:09.000Z",
+                              "uid": "35240-b4861b60-47c7-4279-a20a-53b1c528b2ad"
+                            },
+                            {
+                              "id": "c1c263c9-0002-4384-abb5-5cd3b7e8b552",
+                              "name": "Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Amount\": {\n    \"Currency\": \"<string>\",\n    \"TaxCodes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"NetValue\": \"<double>\",\n    \"GrossValue\": \"<double>\"\n  },\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"CreditCard\": {\n    \"Name\": \"<string>\",\n    \"Number\": \"<string>\",\n    \"Type\": \"<string>\",\n    \"Expiration\": \"<string>\"\n  },\n  \"CustomerId\": \"<uuid>\",\n  \"BillId\": \"<uuid>\",\n  \"AccountingCategoryId\": \"<uuid>\",\n  \"ReservationId\": \"<uuid>\",\n  \"Notes\": \"<string>\",\n  \"ReceiptIdentifier\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/payments/addCreditCard",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "payments",
+                                    "addCreditCard"
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:09.000Z",
+                              "updatedAt": "2026-07-28T02:12:09.000Z",
+                              "uid": "35240-c1c263c9-0002-4384-abb5-5cd3b7e8b552"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:12:08.000Z",
+                          "updatedAt": "2026-07-28T02:12:08.000Z",
+                          "uid": "35240-7e5767ae-6911-493d-832f-befc98d7e22e"
+                        }
+                      ],
+                      "id": "af0bcdc7-26bf-475c-9b2c-6c360e082dd8",
+                      "createdAt": "2026-07-28T02:12:08.000Z",
+                      "updatedAt": "2026-07-28T02:12:08.000Z",
+                      "uid": "35240-af0bcdc7-26bf-475c-9b2c-6c360e082dd8"
+                    },
+                    {
+                      "name": "addExternal",
+                      "item": [
+                        {
+                          "name": "Mews Add External Payment",
+                          "id": "728dd21c-2ffc-4396-86c5-ea66f23e9a71",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AccountId\": \"<uuid>\",\n  \"Amount\": {\n    \"Currency\": \"<string>\",\n    \"TaxCodes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"NetValue\": \"<double>\",\n    \"GrossValue\": \"<double>\"\n  },\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"EnterpriseId\": \"<uuid>\",\n  \"CustomerId\": \"<uuid>\",\n  \"BillId\": \"<uuid>\",\n  \"AccountingCategoryId\": \"<uuid>\",\n  \"ReservationId\": \"<uuid>\",\n  \"Type\": \"CrossSettlement\",\n  \"ExternalIdentifier\": \"<string>\",\n  \"Notes\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/connector/v1/payments/addExternal",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "connector",
+                                "v1",
+                                "payments",
+                                "addExternal"
+                              ]
+                            },
+                            "description": "Adds a new external payment to a bill of the specified customer. An external payment represents a payment that is tracked outside of the system. Note this operation supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property/).\r\n\r\n**Prerequisites:** The external payment type must be enabled by the property in order to accept such payments in their Mews environment. Use [Get configuration](https://mews-systems.gitbook.io/connector-api/operations/configuration#get-configuration) to check which external payment types are supported."
+                          },
+                          "response": [
+                            {
+                              "id": "6b83eade-a02f-41f4-bd26-617b3a74efca",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AccountId\": \"<uuid>\",\n  \"Amount\": {\n    \"Currency\": \"<string>\",\n    \"TaxCodes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"NetValue\": \"<double>\",\n    \"GrossValue\": \"<double>\"\n  },\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"EnterpriseId\": \"<uuid>\",\n  \"CustomerId\": \"<uuid>\",\n  \"BillId\": \"<uuid>\",\n  \"AccountingCategoryId\": \"<uuid>\",\n  \"ReservationId\": \"<uuid>\",\n  \"Type\": \"CrossSettlement\",\n  \"ExternalIdentifier\": \"<string>\",\n  \"Notes\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/payments/addExternal",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "payments",
+                                    "addExternal"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"ExternalPaymentId\": \"<uuid>\"\n}",
+                              "createdAt": "2026-07-28T02:12:09.000Z",
+                              "updatedAt": "2026-07-28T02:12:09.000Z",
+                              "uid": "35240-6b83eade-a02f-41f4-bd26-617b3a74efca"
+                            },
+                            {
+                              "id": "595d0750-932d-4042-97f8-c93ecec221c5",
+                              "name": "Server has successfully fulfilled the request and there is no additional information to send back.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AccountId\": \"<uuid>\",\n  \"Amount\": {\n    \"Currency\": \"<string>\",\n    \"TaxCodes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"NetValue\": \"<double>\",\n    \"GrossValue\": \"<double>\"\n  },\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"EnterpriseId\": \"<uuid>\",\n  \"CustomerId\": \"<uuid>\",\n  \"BillId\": \"<uuid>\",\n  \"AccountingCategoryId\": \"<uuid>\",\n  \"ReservationId\": \"<uuid>\",\n  \"Type\": \"CrossSettlement\",\n  \"ExternalIdentifier\": \"<string>\",\n  \"Notes\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/payments/addExternal",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "payments",
+                                    "addExternal"
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:09.000Z",
+                              "updatedAt": "2026-07-28T02:12:09.000Z",
+                              "uid": "35240-595d0750-932d-4042-97f8-c93ecec221c5"
+                            },
+                            {
+                              "id": "edc028aa-bb2c-45cf-b584-70ebe5e876e7",
+                              "name": "Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AccountId\": \"<uuid>\",\n  \"Amount\": {\n    \"Currency\": \"<string>\",\n    \"TaxCodes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"NetValue\": \"<double>\",\n    \"GrossValue\": \"<double>\"\n  },\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"EnterpriseId\": \"<uuid>\",\n  \"CustomerId\": \"<uuid>\",\n  \"BillId\": \"<uuid>\",\n  \"AccountingCategoryId\": \"<uuid>\",\n  \"ReservationId\": \"<uuid>\",\n  \"Type\": \"CrossSettlement\",\n  \"ExternalIdentifier\": \"<string>\",\n  \"Notes\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/payments/addExternal",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "payments",
+                                    "addExternal"
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:09.000Z",
+                              "updatedAt": "2026-07-28T02:12:09.000Z",
+                              "uid": "35240-edc028aa-bb2c-45cf-b584-70ebe5e876e7"
+                            },
+                            {
+                              "id": "4a9b99d4-8266-4456-87e9-1e0c18ddbef3",
+                              "name": "Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AccountId\": \"<uuid>\",\n  \"Amount\": {\n    \"Currency\": \"<string>\",\n    \"TaxCodes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"NetValue\": \"<double>\",\n    \"GrossValue\": \"<double>\"\n  },\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"EnterpriseId\": \"<uuid>\",\n  \"CustomerId\": \"<uuid>\",\n  \"BillId\": \"<uuid>\",\n  \"AccountingCategoryId\": \"<uuid>\",\n  \"ReservationId\": \"<uuid>\",\n  \"Type\": \"CrossSettlement\",\n  \"ExternalIdentifier\": \"<string>\",\n  \"Notes\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/payments/addExternal",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "payments",
+                                    "addExternal"
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:09.000Z",
+                              "updatedAt": "2026-07-28T02:12:09.000Z",
+                              "uid": "35240-4a9b99d4-8266-4456-87e9-1e0c18ddbef3"
+                            },
+                            {
+                              "id": "f16cdc57-df09-4dfe-9b2b-204c1721a9b0",
+                              "name": "Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AccountId\": \"<uuid>\",\n  \"Amount\": {\n    \"Currency\": \"<string>\",\n    \"TaxCodes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"NetValue\": \"<double>\",\n    \"GrossValue\": \"<double>\"\n  },\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"EnterpriseId\": \"<uuid>\",\n  \"CustomerId\": \"<uuid>\",\n  \"BillId\": \"<uuid>\",\n  \"AccountingCategoryId\": \"<uuid>\",\n  \"ReservationId\": \"<uuid>\",\n  \"Type\": \"CrossSettlement\",\n  \"ExternalIdentifier\": \"<string>\",\n  \"Notes\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/payments/addExternal",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "payments",
+                                    "addExternal"
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:09.000Z",
+                              "updatedAt": "2026-07-28T02:12:09.000Z",
+                              "uid": "35240-f16cdc57-df09-4dfe-9b2b-204c1721a9b0"
+                            },
+                            {
+                              "id": "69f6ccae-e41f-4234-8b0d-950ea5856d6c",
+                              "name": "Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#r",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AccountId\": \"<uuid>\",\n  \"Amount\": {\n    \"Currency\": \"<string>\",\n    \"TaxCodes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"NetValue\": \"<double>\",\n    \"GrossValue\": \"<double>\"\n  },\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"EnterpriseId\": \"<uuid>\",\n  \"CustomerId\": \"<uuid>\",\n  \"BillId\": \"<uuid>\",\n  \"AccountingCategoryId\": \"<uuid>\",\n  \"ReservationId\": \"<uuid>\",\n  \"Type\": \"CrossSettlement\",\n  \"ExternalIdentifier\": \"<string>\",\n  \"Notes\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/payments/addExternal",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "payments",
+                                    "addExternal"
+                                  ]
+                                }
+                              },
+                              "status": "Request Timeout",
+                              "code": 408,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:09.000Z",
+                              "updatedAt": "2026-07-28T02:12:09.000Z",
+                              "uid": "35240-69f6ccae-e41f-4234-8b0d-950ea5856d6c"
+                            },
+                            {
+                              "id": "c5128624-faf3-4d4a-b35a-e1b0839bbd1f",
+                              "name": "Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitb",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AccountId\": \"<uuid>\",\n  \"Amount\": {\n    \"Currency\": \"<string>\",\n    \"TaxCodes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"NetValue\": \"<double>\",\n    \"GrossValue\": \"<double>\"\n  },\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"EnterpriseId\": \"<uuid>\",\n  \"CustomerId\": \"<uuid>\",\n  \"BillId\": \"<uuid>\",\n  \"AccountingCategoryId\": \"<uuid>\",\n  \"ReservationId\": \"<uuid>\",\n  \"Type\": \"CrossSettlement\",\n  \"ExternalIdentifier\": \"<string>\",\n  \"Notes\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/payments/addExternal",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "payments",
+                                    "addExternal"
+                                  ]
+                                }
+                              },
+                              "status": "Too Many Requests",
+                              "code": 429,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:09.000Z",
+                              "updatedAt": "2026-07-28T02:12:09.000Z",
+                              "uid": "35240-c5128624-faf3-4d4a-b35a-e1b0839bbd1f"
+                            },
+                            {
+                              "id": "799ae748-6f71-4e8a-8215-cc6b0e76105b",
+                              "name": "Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AccountId\": \"<uuid>\",\n  \"Amount\": {\n    \"Currency\": \"<string>\",\n    \"TaxCodes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"NetValue\": \"<double>\",\n    \"GrossValue\": \"<double>\"\n  },\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"EnterpriseId\": \"<uuid>\",\n  \"CustomerId\": \"<uuid>\",\n  \"BillId\": \"<uuid>\",\n  \"AccountingCategoryId\": \"<uuid>\",\n  \"ReservationId\": \"<uuid>\",\n  \"Type\": \"CrossSettlement\",\n  \"ExternalIdentifier\": \"<string>\",\n  \"Notes\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/payments/addExternal",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "payments",
+                                    "addExternal"
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:09.000Z",
+                              "updatedAt": "2026-07-28T02:12:09.000Z",
+                              "uid": "35240-799ae748-6f71-4e8a-8215-cc6b0e76105b"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:12:08.000Z",
+                          "updatedAt": "2026-07-28T02:12:08.000Z",
+                          "uid": "35240-728dd21c-2ffc-4396-86c5-ea66f23e9a71"
+                        }
+                      ],
+                      "id": "7f3d6490-600e-4d1a-8b0c-498119a29880",
+                      "createdAt": "2026-07-28T02:12:08.000Z",
+                      "updatedAt": "2026-07-28T02:12:08.000Z",
+                      "uid": "35240-7f3d6490-600e-4d1a-8b0c-498119a29880"
+                    },
+                    {
+                      "name": "addAlternative",
+                      "item": [
+                        {
+                          "name": "Mews Add Alternative Payment",
+                          "id": "184cd929-8244-42f9-aa40-25f12d3c1825",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Amount\": {\n    \"Currency\": \"<string>\",\n    \"TaxCodes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"NetValue\": \"<double>\",\n    \"GrossValue\": \"<double>\"\n  },\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"CustomerId\": \"<uuid>\",\n  \"Data\": {\n    \"Discriminator\": \"ApplePay\",\n    \"SepaDirectDebit\": {\n      \"Email\": \"<email>\",\n      \"Iban\": \"<string>\",\n      \"Name\": \"<string>\",\n      \"RemoteIpAddress\": \"<string>\",\n      \"UserAgent\": \"<string>\"\n    },\n    \"Ideal\": {\n      \"RedirectUrl\": \"<uri>\"\n    }\n  },\n  \"Method\": \"ApplePay\",\n  \"RedirectUrl\": \"<uri>\",\n  \"ReservationId\": \"<uuid>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/connector/v1/payments/addAlternative",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "connector",
+                                "v1",
+                                "payments",
+                                "addAlternative"
+                              ]
+                            },
+                            "description": "Adds a new alternative payment to a specified customer.\n**Pre-requisites:** The property must have the relevant type of alternative payment method enabled in their Mews subscriptions in order to accept such payments in their Mews environment. Please ask the property to confirm."
+                          },
+                          "response": [
+                            {
+                              "id": "627c2c00-7c11-4eca-a4ee-5bd28170e058",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Amount\": {\n    \"Currency\": \"<string>\",\n    \"TaxCodes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"NetValue\": \"<double>\",\n    \"GrossValue\": \"<double>\"\n  },\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"CustomerId\": \"<uuid>\",\n  \"Data\": {\n    \"Discriminator\": \"ApplePay\",\n    \"SepaDirectDebit\": {\n      \"Email\": \"<email>\",\n      \"Iban\": \"<string>\",\n      \"Name\": \"<string>\",\n      \"RemoteIpAddress\": \"<string>\",\n      \"UserAgent\": \"<string>\"\n    },\n    \"Ideal\": {\n      \"RedirectUrl\": \"<uri>\"\n    }\n  },\n  \"Method\": \"ApplePay\",\n  \"RedirectUrl\": \"<uri>\",\n  \"ReservationId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/payments/addAlternative",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "payments",
+                                    "addAlternative"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"PaymentId\": \"<uuid>\",\n  \"NextAction\": {\n    \"Discriminator\": \"RedirectToUrl\",\n    \"Value\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:09.000Z",
+                              "updatedAt": "2026-07-28T02:12:09.000Z",
+                              "uid": "35240-627c2c00-7c11-4eca-a4ee-5bd28170e058"
+                            },
+                            {
+                              "id": "0062e2db-75f4-4615-9605-e801cd4cb48b",
+                              "name": "Server has successfully fulfilled the request and there is no additional information to send back.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Amount\": {\n    \"Currency\": \"<string>\",\n    \"TaxCodes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"NetValue\": \"<double>\",\n    \"GrossValue\": \"<double>\"\n  },\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"CustomerId\": \"<uuid>\",\n  \"Data\": {\n    \"Discriminator\": \"ApplePay\",\n    \"SepaDirectDebit\": {\n      \"Email\": \"<email>\",\n      \"Iban\": \"<string>\",\n      \"Name\": \"<string>\",\n      \"RemoteIpAddress\": \"<string>\",\n      \"UserAgent\": \"<string>\"\n    },\n    \"Ideal\": {\n      \"RedirectUrl\": \"<uri>\"\n    }\n  },\n  \"Method\": \"ApplePay\",\n  \"RedirectUrl\": \"<uri>\",\n  \"ReservationId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/payments/addAlternative",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "payments",
+                                    "addAlternative"
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:09.000Z",
+                              "updatedAt": "2026-07-28T02:12:09.000Z",
+                              "uid": "35240-0062e2db-75f4-4615-9605-e801cd4cb48b"
+                            },
+                            {
+                              "id": "a9904fab-a223-4a59-894d-93a9afe6d640",
+                              "name": "Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Amount\": {\n    \"Currency\": \"<string>\",\n    \"TaxCodes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"NetValue\": \"<double>\",\n    \"GrossValue\": \"<double>\"\n  },\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"CustomerId\": \"<uuid>\",\n  \"Data\": {\n    \"Discriminator\": \"ApplePay\",\n    \"SepaDirectDebit\": {\n      \"Email\": \"<email>\",\n      \"Iban\": \"<string>\",\n      \"Name\": \"<string>\",\n      \"RemoteIpAddress\": \"<string>\",\n      \"UserAgent\": \"<string>\"\n    },\n    \"Ideal\": {\n      \"RedirectUrl\": \"<uri>\"\n    }\n  },\n  \"Method\": \"ApplePay\",\n  \"RedirectUrl\": \"<uri>\",\n  \"ReservationId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/payments/addAlternative",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "payments",
+                                    "addAlternative"
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:09.000Z",
+                              "updatedAt": "2026-07-28T02:12:09.000Z",
+                              "uid": "35240-a9904fab-a223-4a59-894d-93a9afe6d640"
+                            },
+                            {
+                              "id": "f27ad7ba-5aca-4ad3-a24c-200dec441b6b",
+                              "name": "Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Amount\": {\n    \"Currency\": \"<string>\",\n    \"TaxCodes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"NetValue\": \"<double>\",\n    \"GrossValue\": \"<double>\"\n  },\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"CustomerId\": \"<uuid>\",\n  \"Data\": {\n    \"Discriminator\": \"ApplePay\",\n    \"SepaDirectDebit\": {\n      \"Email\": \"<email>\",\n      \"Iban\": \"<string>\",\n      \"Name\": \"<string>\",\n      \"RemoteIpAddress\": \"<string>\",\n      \"UserAgent\": \"<string>\"\n    },\n    \"Ideal\": {\n      \"RedirectUrl\": \"<uri>\"\n    }\n  },\n  \"Method\": \"ApplePay\",\n  \"RedirectUrl\": \"<uri>\",\n  \"ReservationId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/payments/addAlternative",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "payments",
+                                    "addAlternative"
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:09.000Z",
+                              "updatedAt": "2026-07-28T02:12:09.000Z",
+                              "uid": "35240-f27ad7ba-5aca-4ad3-a24c-200dec441b6b"
+                            },
+                            {
+                              "id": "a530f9f6-29de-4e15-97da-e02df0881d77",
+                              "name": "Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Amount\": {\n    \"Currency\": \"<string>\",\n    \"TaxCodes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"NetValue\": \"<double>\",\n    \"GrossValue\": \"<double>\"\n  },\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"CustomerId\": \"<uuid>\",\n  \"Data\": {\n    \"Discriminator\": \"ApplePay\",\n    \"SepaDirectDebit\": {\n      \"Email\": \"<email>\",\n      \"Iban\": \"<string>\",\n      \"Name\": \"<string>\",\n      \"RemoteIpAddress\": \"<string>\",\n      \"UserAgent\": \"<string>\"\n    },\n    \"Ideal\": {\n      \"RedirectUrl\": \"<uri>\"\n    }\n  },\n  \"Method\": \"ApplePay\",\n  \"RedirectUrl\": \"<uri>\",\n  \"ReservationId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/payments/addAlternative",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "payments",
+                                    "addAlternative"
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:09.000Z",
+                              "updatedAt": "2026-07-28T02:12:09.000Z",
+                              "uid": "35240-a530f9f6-29de-4e15-97da-e02df0881d77"
+                            },
+                            {
+                              "id": "7b73b9ca-5450-4989-b02d-9c6c0e28a9e6",
+                              "name": "Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#r",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Amount\": {\n    \"Currency\": \"<string>\",\n    \"TaxCodes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"NetValue\": \"<double>\",\n    \"GrossValue\": \"<double>\"\n  },\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"CustomerId\": \"<uuid>\",\n  \"Data\": {\n    \"Discriminator\": \"ApplePay\",\n    \"SepaDirectDebit\": {\n      \"Email\": \"<email>\",\n      \"Iban\": \"<string>\",\n      \"Name\": \"<string>\",\n      \"RemoteIpAddress\": \"<string>\",\n      \"UserAgent\": \"<string>\"\n    },\n    \"Ideal\": {\n      \"RedirectUrl\": \"<uri>\"\n    }\n  },\n  \"Method\": \"ApplePay\",\n  \"RedirectUrl\": \"<uri>\",\n  \"ReservationId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/payments/addAlternative",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "payments",
+                                    "addAlternative"
+                                  ]
+                                }
+                              },
+                              "status": "Request Timeout",
+                              "code": 408,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:09.000Z",
+                              "updatedAt": "2026-07-28T02:12:09.000Z",
+                              "uid": "35240-7b73b9ca-5450-4989-b02d-9c6c0e28a9e6"
+                            },
+                            {
+                              "id": "3926ccad-085e-40b1-aca0-454757bac8ab",
+                              "name": "Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitb",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Amount\": {\n    \"Currency\": \"<string>\",\n    \"TaxCodes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"NetValue\": \"<double>\",\n    \"GrossValue\": \"<double>\"\n  },\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"CustomerId\": \"<uuid>\",\n  \"Data\": {\n    \"Discriminator\": \"ApplePay\",\n    \"SepaDirectDebit\": {\n      \"Email\": \"<email>\",\n      \"Iban\": \"<string>\",\n      \"Name\": \"<string>\",\n      \"RemoteIpAddress\": \"<string>\",\n      \"UserAgent\": \"<string>\"\n    },\n    \"Ideal\": {\n      \"RedirectUrl\": \"<uri>\"\n    }\n  },\n  \"Method\": \"ApplePay\",\n  \"RedirectUrl\": \"<uri>\",\n  \"ReservationId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/payments/addAlternative",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "payments",
+                                    "addAlternative"
+                                  ]
+                                }
+                              },
+                              "status": "Too Many Requests",
+                              "code": 429,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:09.000Z",
+                              "updatedAt": "2026-07-28T02:12:09.000Z",
+                              "uid": "35240-3926ccad-085e-40b1-aca0-454757bac8ab"
+                            },
+                            {
+                              "id": "cd67ee1e-7033-41c5-80ba-105a6f03a322",
+                              "name": "Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Amount\": {\n    \"Currency\": \"<string>\",\n    \"TaxCodes\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"NetValue\": \"<double>\",\n    \"GrossValue\": \"<double>\"\n  },\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"CustomerId\": \"<uuid>\",\n  \"Data\": {\n    \"Discriminator\": \"ApplePay\",\n    \"SepaDirectDebit\": {\n      \"Email\": \"<email>\",\n      \"Iban\": \"<string>\",\n      \"Name\": \"<string>\",\n      \"RemoteIpAddress\": \"<string>\",\n      \"UserAgent\": \"<string>\"\n    },\n    \"Ideal\": {\n      \"RedirectUrl\": \"<uri>\"\n    }\n  },\n  \"Method\": \"ApplePay\",\n  \"RedirectUrl\": \"<uri>\",\n  \"ReservationId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/payments/addAlternative",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "payments",
+                                    "addAlternative"
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:09.000Z",
+                              "updatedAt": "2026-07-28T02:12:09.000Z",
+                              "uid": "35240-cd67ee1e-7033-41c5-80ba-105a6f03a322"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:12:08.000Z",
+                          "updatedAt": "2026-07-28T02:12:08.000Z",
+                          "uid": "35240-184cd929-8244-42f9-aa40-25f12d3c1825"
+                        }
+                      ],
+                      "id": "38f4eefb-c224-477e-815f-e1fbbd20e8db",
+                      "createdAt": "2026-07-28T02:12:08.000Z",
+                      "updatedAt": "2026-07-28T02:12:08.000Z",
+                      "uid": "35240-38f4eefb-c224-477e-815f-e1fbbd20e8db"
+                    }
+                  ],
+                  "id": "b41609ae-49f6-4a73-b445-0e37ea2214ee",
+                  "createdAt": "2026-07-28T02:12:08.000Z",
+                  "updatedAt": "2026-07-28T02:12:08.000Z",
+                  "uid": "35240-b41609ae-49f6-4a73-b445-0e37ea2214ee"
+                }
+              ],
+              "id": "3973f256-d9d1-4dee-9f43-003ed06750d1",
+              "createdAt": "2026-07-28T02:12:08.000Z",
+              "updatedAt": "2026-07-28T02:12:08.000Z",
+              "uid": "35240-3973f256-d9d1-4dee-9f43-003ed06750d1"
+            }
+          ],
+          "id": "05054af0-192c-4db1-968b-debf83373f84",
+          "createdAt": "2026-07-28T02:12:08.000Z",
+          "updatedAt": "2026-07-28T02:12:08.000Z",
+          "uid": "35240-05054af0-192c-4db1-968b-debf83373f84"
+        }
+      ],
+      "id": "24ac39e4-1643-40c7-99dc-f00b6735c731",
+      "createdAt": "2026-07-28T02:12:08.000Z",
+      "updatedAt": "2026-07-28T02:12:08.000Z",
+      "uid": "35240-24ac39e4-1643-40c7-99dc-f00b6735c731"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "ClientToken",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.mews.com"
+    }
+  ]
+}

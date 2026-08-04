@@ -1,0 +1,2228 @@
+{
+  "info": {
+    "_postman_id": "00617939-f5ca-4729-a64e-32ce4b6e767d",
+    "name": "Mews Booking Engine API (Distributor) Account notes Routing rules API",
+    "description": "The Mews Booking Engine API (historically the Distributor API, served from /api/distributor/v1) lets developers build guest-facing booking engines that create reservations directly in Mews. It exposes enterprise configuration, availability, pricing, products, vouchers, payment cards, and reservation group creation for front-end client consumption.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:12:48.000Z",
+    "updatedAt": "2026-07-28T02:12:48.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-00617939-f5ca-4729-a64e-32ce4b6e767d"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "connector",
+          "item": [
+            {
+              "name": "v1",
+              "item": [
+                {
+                  "name": "routingRules",
+                  "item": [
+                    {
+                      "name": "getAll",
+                      "item": [
+                        {
+                          "name": "Mews Get All Routing Rules",
+                          "id": "8c687e36-a343-4d96-a7a0-bd98c74a7e4d",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"CompanyIds\": [\n    \"<uuid>\"\n  ],\n  \"RoutingRuleIds\": [\n    \"<uuid>\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/connector/v1/routingRules/getAll",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "connector",
+                                "v1",
+                                "routingRules",
+                                "getAll"
+                              ]
+                            },
+                            "description": "Use [Get all billing automations](https://mews-systems.gitbook.io/connector-api/operations/billingautomations#get-all-billing-automations)."
+                          },
+                          "response": [
+                            {
+                              "id": "b47b31f7-334b-42f4-9e10-6a003e6f41a0",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"CompanyIds\": [\n    \"<uuid>\"\n  ],\n  \"RoutingRuleIds\": [\n    \"<uuid>\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/routingRules/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "routingRules",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"RoutingRules\": [\n    {\n      \"Applicability\": \"PrepaidOnly\",\n      \"CompanyId\": \"<uuid>\",\n      \"CompanyRelation\": \"PartnerCompany\",\n      \"CreatedUtc\": \"<dateTime>\",\n      \"EnterpriseId\": \"<uuid>\",\n      \"Id\": \"<uuid>\",\n      \"RouteType\": \"AllStayItems\",\n      \"ServiceId\": \"<uuid>\",\n      \"UpdatedUtc\": \"<dateTime>\",\n      \"SelectedStayItems\": {\n        \"Nights\": \"<boolean>\",\n        \"CityTax\": \"<boolean>\",\n        \"ProductCategoryIds\": [\n          \"<uuid>\",\n          \"<uuid>\"\n        ]\n      }\n    },\n    {\n      \"Applicability\": \"Always\",\n      \"CompanyId\": \"<uuid>\",\n      \"CompanyRelation\": \"PartnerCompany\",\n      \"CreatedUtc\": \"<dateTime>\",\n      \"EnterpriseId\": \"<uuid>\",\n      \"Id\": \"<uuid>\",\n      \"RouteType\": \"AllStayItems\",\n      \"ServiceId\": \"<uuid>\",\n      \"UpdatedUtc\": \"<dateTime>\",\n      \"SelectedStayItems\": {\n        \"Nights\": \"<boolean>\",\n        \"CityTax\": \"<boolean>\",\n        \"ProductCategoryIds\": [\n          \"<uuid>\",\n          \"<uuid>\"\n        ]\n      }\n    }\n  ],\n  \"Cursor\": \"<uuid>\"\n}",
+                              "createdAt": "2026-07-28T02:12:48.000Z",
+                              "updatedAt": "2026-07-28T02:12:48.000Z",
+                              "uid": "35240-b47b31f7-334b-42f4-9e10-6a003e6f41a0"
+                            },
+                            {
+                              "id": "d7e91513-17ac-4cd5-bf5d-e3992de01006",
+                              "name": "Server has successfully fulfilled the request and there is no additional information to send back.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"CompanyIds\": [\n    \"<uuid>\"\n  ],\n  \"RoutingRuleIds\": [\n    \"<uuid>\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/routingRules/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "routingRules",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:48.000Z",
+                              "updatedAt": "2026-07-28T02:12:48.000Z",
+                              "uid": "35240-d7e91513-17ac-4cd5-bf5d-e3992de01006"
+                            },
+                            {
+                              "id": "bc8a59c3-b5c6-4f07-a245-05da2fb918cd",
+                              "name": "Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"CompanyIds\": [\n    \"<uuid>\"\n  ],\n  \"RoutingRuleIds\": [\n    \"<uuid>\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/routingRules/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "routingRules",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:48.000Z",
+                              "updatedAt": "2026-07-28T02:12:48.000Z",
+                              "uid": "35240-bc8a59c3-b5c6-4f07-a245-05da2fb918cd"
+                            },
+                            {
+                              "id": "587214a1-7ded-4ed8-946e-b191bb2435da",
+                              "name": "Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"CompanyIds\": [\n    \"<uuid>\"\n  ],\n  \"RoutingRuleIds\": [\n    \"<uuid>\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/routingRules/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "routingRules",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:48.000Z",
+                              "updatedAt": "2026-07-28T02:12:48.000Z",
+                              "uid": "35240-587214a1-7ded-4ed8-946e-b191bb2435da"
+                            },
+                            {
+                              "id": "73b087db-a9f2-4ab7-aa60-b0100cc7a750",
+                              "name": "Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"CompanyIds\": [\n    \"<uuid>\"\n  ],\n  \"RoutingRuleIds\": [\n    \"<uuid>\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/routingRules/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "routingRules",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:48.000Z",
+                              "updatedAt": "2026-07-28T02:12:48.000Z",
+                              "uid": "35240-73b087db-a9f2-4ab7-aa60-b0100cc7a750"
+                            },
+                            {
+                              "id": "fd6a4a6d-046a-4876-9511-8d412042f290",
+                              "name": "Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#r",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"CompanyIds\": [\n    \"<uuid>\"\n  ],\n  \"RoutingRuleIds\": [\n    \"<uuid>\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/routingRules/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "routingRules",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Request Timeout",
+                              "code": 408,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:48.000Z",
+                              "updatedAt": "2026-07-28T02:12:48.000Z",
+                              "uid": "35240-fd6a4a6d-046a-4876-9511-8d412042f290"
+                            },
+                            {
+                              "id": "52dce81f-f34b-40b5-bb2f-505bdbb702b0",
+                              "name": "Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitb",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"CompanyIds\": [\n    \"<uuid>\"\n  ],\n  \"RoutingRuleIds\": [\n    \"<uuid>\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/routingRules/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "routingRules",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Too Many Requests",
+                              "code": 429,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:48.000Z",
+                              "updatedAt": "2026-07-28T02:12:48.000Z",
+                              "uid": "35240-52dce81f-f34b-40b5-bb2f-505bdbb702b0"
+                            },
+                            {
+                              "id": "348a8081-82ad-4511-8a02-323267a16445",
+                              "name": "Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"CompanyIds\": [\n    \"<uuid>\"\n  ],\n  \"RoutingRuleIds\": [\n    \"<uuid>\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/routingRules/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "routingRules",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:48.000Z",
+                              "updatedAt": "2026-07-28T02:12:48.000Z",
+                              "uid": "35240-348a8081-82ad-4511-8a02-323267a16445"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:12:48.000Z",
+                          "updatedAt": "2026-07-28T02:12:48.000Z",
+                          "uid": "35240-8c687e36-a343-4d96-a7a0-bd98c74a7e4d"
+                        }
+                      ],
+                      "id": "e646508d-3e27-4d93-8432-54ce7d0b8f63",
+                      "createdAt": "2026-07-28T02:12:48.000Z",
+                      "updatedAt": "2026-07-28T02:12:48.000Z",
+                      "uid": "35240-e646508d-3e27-4d93-8432-54ce7d0b8f63"
+                    },
+                    {
+                      "name": "add",
+                      "item": [
+                        {
+                          "name": "Mews Add Routing Rules",
+                          "id": "e7f8e3e3-25ef-43f1-aaaa-b86b8920a632",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"RoutingRules\": [\n    {\n      \"Applicability\": \"Always\",\n      \"CompanyId\": \"<uuid>\",\n      \"CompanyRelation\": \"PartnerCompany\",\n      \"RouteType\": \"SelectedStayItems\",\n      \"ServiceId\": \"<uuid>\",\n      \"AssignmentTargetType\": \"CompanyAsDetails\",\n      \"SelectedStayItems\": {\n        \"Nights\": \"<boolean>\",\n        \"CityTax\": \"<boolean>\",\n        \"ProductCategoryIds\": [\n          \"<uuid>\",\n          \"<uuid>\"\n        ]\n      }\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/connector/v1/routingRules/add",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "connector",
+                                "v1",
+                                "routingRules",
+                                "add"
+                              ]
+                            },
+                            "description": "Use [Add billing automations](https://mews-systems.gitbook.io/connector-api/operations/billingautomations#add-billing-automations)."
+                          },
+                          "response": [
+                            {
+                              "id": "c7521f82-4831-4091-8910-55bda7095cb3",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"RoutingRules\": [\n    {\n      \"Applicability\": \"Always\",\n      \"CompanyId\": \"<uuid>\",\n      \"CompanyRelation\": \"PartnerCompany\",\n      \"RouteType\": \"SelectedStayItems\",\n      \"ServiceId\": \"<uuid>\",\n      \"AssignmentTargetType\": \"CompanyAsDetails\",\n      \"SelectedStayItems\": {\n        \"Nights\": \"<boolean>\",\n        \"CityTax\": \"<boolean>\",\n        \"ProductCategoryIds\": [\n          \"<uuid>\",\n          \"<uuid>\"\n        ]\n      }\n    }\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/routingRules/add",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "routingRules",
+                                    "add"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"RoutingRules\": [\n    {\n      \"Applicability\": \"PrepaidOnly\",\n      \"CompanyId\": \"<uuid>\",\n      \"CompanyRelation\": \"TravelAgency\",\n      \"CreatedUtc\": \"<dateTime>\",\n      \"EnterpriseId\": \"<uuid>\",\n      \"Id\": \"<uuid>\",\n      \"RouteType\": \"SelectedStayItems\",\n      \"ServiceId\": \"<uuid>\",\n      \"UpdatedUtc\": \"<dateTime>\",\n      \"SelectedStayItems\": {\n        \"Nights\": \"<boolean>\",\n        \"CityTax\": \"<boolean>\",\n        \"ProductCategoryIds\": [\n          \"<uuid>\",\n          \"<uuid>\"\n        ]\n      }\n    },\n    {\n      \"Applicability\": \"Always\",\n      \"CompanyId\": \"<uuid>\",\n      \"CompanyRelation\": \"TravelAgency\",\n      \"CreatedUtc\": \"<dateTime>\",\n      \"EnterpriseId\": \"<uuid>\",\n      \"Id\": \"<uuid>\",\n      \"RouteType\": \"AllStayItems\",\n      \"ServiceId\": \"<uuid>\",\n      \"UpdatedUtc\": \"<dateTime>\",\n      \"SelectedStayItems\": {\n        \"Nights\": \"<boolean>\",\n        \"CityTax\": \"<boolean>\",\n        \"ProductCategoryIds\": [\n          \"<uuid>\",\n          \"<uuid>\"\n        ]\n      }\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:12:48.000Z",
+                              "updatedAt": "2026-07-28T02:12:48.000Z",
+                              "uid": "35240-c7521f82-4831-4091-8910-55bda7095cb3"
+                            },
+                            {
+                              "id": "8adcdaf4-1789-4ebc-b6a6-4bc053d3a655",
+                              "name": "Server has successfully fulfilled the request and there is no additional information to send back.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"RoutingRules\": [\n    {\n      \"Applicability\": \"Always\",\n      \"CompanyId\": \"<uuid>\",\n      \"CompanyRelation\": \"PartnerCompany\",\n      \"RouteType\": \"SelectedStayItems\",\n      \"ServiceId\": \"<uuid>\",\n      \"AssignmentTargetType\": \"CompanyAsDetails\",\n      \"SelectedStayItems\": {\n        \"Nights\": \"<boolean>\",\n        \"CityTax\": \"<boolean>\",\n        \"ProductCategoryIds\": [\n          \"<uuid>\",\n          \"<uuid>\"\n        ]\n      }\n    }\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/routingRules/add",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "routingRules",
+                                    "add"
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:48.000Z",
+                              "updatedAt": "2026-07-28T02:12:48.000Z",
+                              "uid": "35240-8adcdaf4-1789-4ebc-b6a6-4bc053d3a655"
+                            },
+                            {
+                              "id": "1bda3417-6920-437a-80e7-d7a70b416de5",
+                              "name": "Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"RoutingRules\": [\n    {\n      \"Applicability\": \"Always\",\n      \"CompanyId\": \"<uuid>\",\n      \"CompanyRelation\": \"PartnerCompany\",\n      \"RouteType\": \"SelectedStayItems\",\n      \"ServiceId\": \"<uuid>\",\n      \"AssignmentTargetType\": \"CompanyAsDetails\",\n      \"SelectedStayItems\": {\n        \"Nights\": \"<boolean>\",\n        \"CityTax\": \"<boolean>\",\n        \"ProductCategoryIds\": [\n          \"<uuid>\",\n          \"<uuid>\"\n        ]\n      }\n    }\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/routingRules/add",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "routingRules",
+                                    "add"
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:48.000Z",
+                              "updatedAt": "2026-07-28T02:12:48.000Z",
+                              "uid": "35240-1bda3417-6920-437a-80e7-d7a70b416de5"
+                            },
+                            {
+                              "id": "56650faf-d592-441a-97a8-269c6ec278d5",
+                              "name": "Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"RoutingRules\": [\n    {\n      \"Applicability\": \"Always\",\n      \"CompanyId\": \"<uuid>\",\n      \"CompanyRelation\": \"PartnerCompany\",\n      \"RouteType\": \"SelectedStayItems\",\n      \"ServiceId\": \"<uuid>\",\n      \"AssignmentTargetType\": \"CompanyAsDetails\",\n      \"SelectedStayItems\": {\n        \"Nights\": \"<boolean>\",\n        \"CityTax\": \"<boolean>\",\n        \"ProductCategoryIds\": [\n          \"<uuid>\",\n          \"<uuid>\"\n        ]\n      }\n    }\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/routingRules/add",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "routingRules",
+                                    "add"
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:48.000Z",
+                              "updatedAt": "2026-07-28T02:12:48.000Z",
+                              "uid": "35240-56650faf-d592-441a-97a8-269c6ec278d5"
+                            },
+                            {
+                              "id": "5d41d112-fd4e-4819-88f0-df8f8c8d409a",
+                              "name": "Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"RoutingRules\": [\n    {\n      \"Applicability\": \"Always\",\n      \"CompanyId\": \"<uuid>\",\n      \"CompanyRelation\": \"PartnerCompany\",\n      \"RouteType\": \"SelectedStayItems\",\n      \"ServiceId\": \"<uuid>\",\n      \"AssignmentTargetType\": \"CompanyAsDetails\",\n      \"SelectedStayItems\": {\n        \"Nights\": \"<boolean>\",\n        \"CityTax\": \"<boolean>\",\n        \"ProductCategoryIds\": [\n          \"<uuid>\",\n          \"<uuid>\"\n        ]\n      }\n    }\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/routingRules/add",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "routingRules",
+                                    "add"
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:48.000Z",
+                              "updatedAt": "2026-07-28T02:12:48.000Z",
+                              "uid": "35240-5d41d112-fd4e-4819-88f0-df8f8c8d409a"
+                            },
+                            {
+                              "id": "da534eb5-540a-41e0-9804-35fd2f8928f8",
+                              "name": "Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#r",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"RoutingRules\": [\n    {\n      \"Applicability\": \"Always\",\n      \"CompanyId\": \"<uuid>\",\n      \"CompanyRelation\": \"PartnerCompany\",\n      \"RouteType\": \"SelectedStayItems\",\n      \"ServiceId\": \"<uuid>\",\n      \"AssignmentTargetType\": \"CompanyAsDetails\",\n      \"SelectedStayItems\": {\n        \"Nights\": \"<boolean>\",\n        \"CityTax\": \"<boolean>\",\n        \"ProductCategoryIds\": [\n          \"<uuid>\",\n          \"<uuid>\"\n        ]\n      }\n    }\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/routingRules/add",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "routingRules",
+                                    "add"
+                                  ]
+                                }
+                              },
+                              "status": "Request Timeout",
+                              "code": 408,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:48.000Z",
+                              "updatedAt": "2026-07-28T02:12:48.000Z",
+                              "uid": "35240-da534eb5-540a-41e0-9804-35fd2f8928f8"
+                            },
+                            {
+                              "id": "ef93bb12-fab7-424a-ab4e-b4cfdd8029ca",
+                              "name": "Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitb",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"RoutingRules\": [\n    {\n      \"Applicability\": \"Always\",\n      \"CompanyId\": \"<uuid>\",\n      \"CompanyRelation\": \"PartnerCompany\",\n      \"RouteType\": \"SelectedStayItems\",\n      \"ServiceId\": \"<uuid>\",\n      \"AssignmentTargetType\": \"CompanyAsDetails\",\n      \"SelectedStayItems\": {\n        \"Nights\": \"<boolean>\",\n        \"CityTax\": \"<boolean>\",\n        \"ProductCategoryIds\": [\n          \"<uuid>\",\n          \"<uuid>\"\n        ]\n      }\n    }\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/routingRules/add",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "routingRules",
+                                    "add"
+                                  ]
+                                }
+                              },
+                              "status": "Too Many Requests",
+                              "code": 429,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:48.000Z",
+                              "updatedAt": "2026-07-28T02:12:48.000Z",
+                              "uid": "35240-ef93bb12-fab7-424a-ab4e-b4cfdd8029ca"
+                            },
+                            {
+                              "id": "48f3af41-dc78-4b5a-90ae-7b3939be735e",
+                              "name": "Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"RoutingRules\": [\n    {\n      \"Applicability\": \"Always\",\n      \"CompanyId\": \"<uuid>\",\n      \"CompanyRelation\": \"PartnerCompany\",\n      \"RouteType\": \"SelectedStayItems\",\n      \"ServiceId\": \"<uuid>\",\n      \"AssignmentTargetType\": \"CompanyAsDetails\",\n      \"SelectedStayItems\": {\n        \"Nights\": \"<boolean>\",\n        \"CityTax\": \"<boolean>\",\n        \"ProductCategoryIds\": [\n          \"<uuid>\",\n          \"<uuid>\"\n        ]\n      }\n    }\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/routingRules/add",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "routingRules",
+                                    "add"
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:48.000Z",
+                              "updatedAt": "2026-07-28T02:12:48.000Z",
+                              "uid": "35240-48f3af41-dc78-4b5a-90ae-7b3939be735e"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:12:48.000Z",
+                          "updatedAt": "2026-07-28T02:12:48.000Z",
+                          "uid": "35240-e7f8e3e3-25ef-43f1-aaaa-b86b8920a632"
+                        }
+                      ],
+                      "id": "b71a38a6-5dbf-4875-9027-78729b6c46ad",
+                      "createdAt": "2026-07-28T02:12:48.000Z",
+                      "updatedAt": "2026-07-28T02:12:48.000Z",
+                      "uid": "35240-b71a38a6-5dbf-4875-9027-78729b6c46ad"
+                    },
+                    {
+                      "name": "update",
+                      "item": [
+                        {
+                          "name": "Mews Update Routing Rules",
+                          "id": "53bad48b-8092-4e6e-b293-28af97b4e3d5",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"RoutingRuleUpdates\": [\n    {\n      \"RoutingRuleId\": \"<uuid>\",\n      \"CompanyId\": {\n        \"Value\": \"<uuid>\"\n      },\n      \"ServiceId\": {\n        \"Value\": \"<uuid>\"\n      },\n      \"CompanyRelation\": \"TravelAgency\",\n      \"Applicability\": \"Always\",\n      \"RouteType\": \"SelectedStayItems\",\n      \"AssignmentTargetType\": \"CompanyAsOwner\",\n      \"SelectedStayItems\": {\n        \"Nights\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"CityTax\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"ProductCategoryIds\": {\n          \"Value\": [\n            \"<uuid>\",\n            \"<uuid>\"\n          ]\n        }\n      }\n    }\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/connector/v1/routingRules/update",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "connector",
+                                "v1",
+                                "routingRules",
+                                "update"
+                              ]
+                            },
+                            "description": "Use [Update billing automations](https://mews-systems.gitbook.io/connector-api/operations/billingautomations#update-billing-automations) and [Update billing automations assignments](https://mews-systems.gitbook.io/connector-api/operations/billingautomations#update-billing-automations-assignments)."
+                          },
+                          "response": [
+                            {
+                              "id": "1461f4e4-9132-4ed8-888b-429b49ccde59",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"RoutingRuleUpdates\": [\n    {\n      \"RoutingRuleId\": \"<uuid>\",\n      \"CompanyId\": {\n        \"Value\": \"<uuid>\"\n      },\n      \"ServiceId\": {\n        \"Value\": \"<uuid>\"\n      },\n      \"CompanyRelation\": \"TravelAgency\",\n      \"Applicability\": \"Always\",\n      \"RouteType\": \"SelectedStayItems\",\n      \"AssignmentTargetType\": \"CompanyAsOwner\",\n      \"SelectedStayItems\": {\n        \"Nights\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"CityTax\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"ProductCategoryIds\": {\n          \"Value\": [\n            \"<uuid>\",\n            \"<uuid>\"\n          ]\n        }\n      }\n    }\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/routingRules/update",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "routingRules",
+                                    "update"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"RoutingRules\": [\n    {\n      \"Applicability\": \"Always\",\n      \"CompanyId\": \"<uuid>\",\n      \"CompanyRelation\": \"TravelAgency\",\n      \"CreatedUtc\": \"<dateTime>\",\n      \"EnterpriseId\": \"<uuid>\",\n      \"Id\": \"<uuid>\",\n      \"RouteType\": \"SelectedStayItems\",\n      \"ServiceId\": \"<uuid>\",\n      \"UpdatedUtc\": \"<dateTime>\",\n      \"SelectedStayItems\": {\n        \"Nights\": \"<boolean>\",\n        \"CityTax\": \"<boolean>\",\n        \"ProductCategoryIds\": [\n          \"<uuid>\",\n          \"<uuid>\"\n        ]\n      }\n    },\n    {\n      \"Applicability\": \"Always\",\n      \"CompanyId\": \"<uuid>\",\n      \"CompanyRelation\": \"TravelAgency\",\n      \"CreatedUtc\": \"<dateTime>\",\n      \"EnterpriseId\": \"<uuid>\",\n      \"Id\": \"<uuid>\",\n      \"RouteType\": \"SelectedStayItems\",\n      \"ServiceId\": \"<uuid>\",\n      \"UpdatedUtc\": \"<dateTime>\",\n      \"SelectedStayItems\": {\n        \"Nights\": \"<boolean>\",\n        \"CityTax\": \"<boolean>\",\n        \"ProductCategoryIds\": [\n          \"<uuid>\",\n          \"<uuid>\"\n        ]\n      }\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:12:48.000Z",
+                              "updatedAt": "2026-07-28T02:12:48.000Z",
+                              "uid": "35240-1461f4e4-9132-4ed8-888b-429b49ccde59"
+                            },
+                            {
+                              "id": "0b8c005b-d0b6-435a-9e4d-216b5c9e65c5",
+                              "name": "Server has successfully fulfilled the request and there is no additional information to send back.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"RoutingRuleUpdates\": [\n    {\n      \"RoutingRuleId\": \"<uuid>\",\n      \"CompanyId\": {\n        \"Value\": \"<uuid>\"\n      },\n      \"ServiceId\": {\n        \"Value\": \"<uuid>\"\n      },\n      \"CompanyRelation\": \"TravelAgency\",\n      \"Applicability\": \"Always\",\n      \"RouteType\": \"SelectedStayItems\",\n      \"AssignmentTargetType\": \"CompanyAsOwner\",\n      \"SelectedStayItems\": {\n        \"Nights\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"CityTax\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"ProductCategoryIds\": {\n          \"Value\": [\n            \"<uuid>\",\n            \"<uuid>\"\n          ]\n        }\n      }\n    }\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/routingRules/update",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "routingRules",
+                                    "update"
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:48.000Z",
+                              "updatedAt": "2026-07-28T02:12:48.000Z",
+                              "uid": "35240-0b8c005b-d0b6-435a-9e4d-216b5c9e65c5"
+                            },
+                            {
+                              "id": "5290d52c-9776-4ce9-b9cd-13f20d4ce12b",
+                              "name": "Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"RoutingRuleUpdates\": [\n    {\n      \"RoutingRuleId\": \"<uuid>\",\n      \"CompanyId\": {\n        \"Value\": \"<uuid>\"\n      },\n      \"ServiceId\": {\n        \"Value\": \"<uuid>\"\n      },\n      \"CompanyRelation\": \"TravelAgency\",\n      \"Applicability\": \"Always\",\n      \"RouteType\": \"SelectedStayItems\",\n      \"AssignmentTargetType\": \"CompanyAsOwner\",\n      \"SelectedStayItems\": {\n        \"Nights\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"CityTax\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"ProductCategoryIds\": {\n          \"Value\": [\n            \"<uuid>\",\n            \"<uuid>\"\n          ]\n        }\n      }\n    }\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/routingRules/update",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "routingRules",
+                                    "update"
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:48.000Z",
+                              "updatedAt": "2026-07-28T02:12:48.000Z",
+                              "uid": "35240-5290d52c-9776-4ce9-b9cd-13f20d4ce12b"
+                            },
+                            {
+                              "id": "0daa4fc5-25a5-434b-84aa-82d7749afc53",
+                              "name": "Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"RoutingRuleUpdates\": [\n    {\n      \"RoutingRuleId\": \"<uuid>\",\n      \"CompanyId\": {\n        \"Value\": \"<uuid>\"\n      },\n      \"ServiceId\": {\n        \"Value\": \"<uuid>\"\n      },\n      \"CompanyRelation\": \"TravelAgency\",\n      \"Applicability\": \"Always\",\n      \"RouteType\": \"SelectedStayItems\",\n      \"AssignmentTargetType\": \"CompanyAsOwner\",\n      \"SelectedStayItems\": {\n        \"Nights\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"CityTax\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"ProductCategoryIds\": {\n          \"Value\": [\n            \"<uuid>\",\n            \"<uuid>\"\n          ]\n        }\n      }\n    }\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/routingRules/update",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "routingRules",
+                                    "update"
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:48.000Z",
+                              "updatedAt": "2026-07-28T02:12:48.000Z",
+                              "uid": "35240-0daa4fc5-25a5-434b-84aa-82d7749afc53"
+                            },
+                            {
+                              "id": "ec759cb9-0597-4137-8ba3-f0215eecf8b3",
+                              "name": "Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"RoutingRuleUpdates\": [\n    {\n      \"RoutingRuleId\": \"<uuid>\",\n      \"CompanyId\": {\n        \"Value\": \"<uuid>\"\n      },\n      \"ServiceId\": {\n        \"Value\": \"<uuid>\"\n      },\n      \"CompanyRelation\": \"TravelAgency\",\n      \"Applicability\": \"Always\",\n      \"RouteType\": \"SelectedStayItems\",\n      \"AssignmentTargetType\": \"CompanyAsOwner\",\n      \"SelectedStayItems\": {\n        \"Nights\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"CityTax\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"ProductCategoryIds\": {\n          \"Value\": [\n            \"<uuid>\",\n            \"<uuid>\"\n          ]\n        }\n      }\n    }\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/routingRules/update",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "routingRules",
+                                    "update"
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:48.000Z",
+                              "updatedAt": "2026-07-28T02:12:48.000Z",
+                              "uid": "35240-ec759cb9-0597-4137-8ba3-f0215eecf8b3"
+                            },
+                            {
+                              "id": "443cd1cd-6c10-42c5-bab7-9844636d0538",
+                              "name": "Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#r",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"RoutingRuleUpdates\": [\n    {\n      \"RoutingRuleId\": \"<uuid>\",\n      \"CompanyId\": {\n        \"Value\": \"<uuid>\"\n      },\n      \"ServiceId\": {\n        \"Value\": \"<uuid>\"\n      },\n      \"CompanyRelation\": \"TravelAgency\",\n      \"Applicability\": \"Always\",\n      \"RouteType\": \"SelectedStayItems\",\n      \"AssignmentTargetType\": \"CompanyAsOwner\",\n      \"SelectedStayItems\": {\n        \"Nights\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"CityTax\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"ProductCategoryIds\": {\n          \"Value\": [\n            \"<uuid>\",\n            \"<uuid>\"\n          ]\n        }\n      }\n    }\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/routingRules/update",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "routingRules",
+                                    "update"
+                                  ]
+                                }
+                              },
+                              "status": "Request Timeout",
+                              "code": 408,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:48.000Z",
+                              "updatedAt": "2026-07-28T02:12:48.000Z",
+                              "uid": "35240-443cd1cd-6c10-42c5-bab7-9844636d0538"
+                            },
+                            {
+                              "id": "b8503c0e-d6fb-49dd-a795-c5b0fa28e255",
+                              "name": "Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitb",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"RoutingRuleUpdates\": [\n    {\n      \"RoutingRuleId\": \"<uuid>\",\n      \"CompanyId\": {\n        \"Value\": \"<uuid>\"\n      },\n      \"ServiceId\": {\n        \"Value\": \"<uuid>\"\n      },\n      \"CompanyRelation\": \"TravelAgency\",\n      \"Applicability\": \"Always\",\n      \"RouteType\": \"SelectedStayItems\",\n      \"AssignmentTargetType\": \"CompanyAsOwner\",\n      \"SelectedStayItems\": {\n        \"Nights\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"CityTax\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"ProductCategoryIds\": {\n          \"Value\": [\n            \"<uuid>\",\n            \"<uuid>\"\n          ]\n        }\n      }\n    }\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/routingRules/update",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "routingRules",
+                                    "update"
+                                  ]
+                                }
+                              },
+                              "status": "Too Many Requests",
+                              "code": 429,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:48.000Z",
+                              "updatedAt": "2026-07-28T02:12:48.000Z",
+                              "uid": "35240-b8503c0e-d6fb-49dd-a795-c5b0fa28e255"
+                            },
+                            {
+                              "id": "f1f88a26-0fa0-4448-a6bb-25f7cb44db2f",
+                              "name": "Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"RoutingRuleUpdates\": [\n    {\n      \"RoutingRuleId\": \"<uuid>\",\n      \"CompanyId\": {\n        \"Value\": \"<uuid>\"\n      },\n      \"ServiceId\": {\n        \"Value\": \"<uuid>\"\n      },\n      \"CompanyRelation\": \"TravelAgency\",\n      \"Applicability\": \"Always\",\n      \"RouteType\": \"SelectedStayItems\",\n      \"AssignmentTargetType\": \"CompanyAsOwner\",\n      \"SelectedStayItems\": {\n        \"Nights\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"CityTax\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"ProductCategoryIds\": {\n          \"Value\": [\n            \"<uuid>\",\n            \"<uuid>\"\n          ]\n        }\n      }\n    }\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/routingRules/update",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "routingRules",
+                                    "update"
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:48.000Z",
+                              "updatedAt": "2026-07-28T02:12:48.000Z",
+                              "uid": "35240-f1f88a26-0fa0-4448-a6bb-25f7cb44db2f"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:12:48.000Z",
+                          "updatedAt": "2026-07-28T02:12:48.000Z",
+                          "uid": "35240-53bad48b-8092-4e6e-b293-28af97b4e3d5"
+                        }
+                      ],
+                      "id": "62450cca-dd33-4e72-b376-b45deae1a766",
+                      "createdAt": "2026-07-28T02:12:48.000Z",
+                      "updatedAt": "2026-07-28T02:12:48.000Z",
+                      "uid": "35240-62450cca-dd33-4e72-b376-b45deae1a766"
+                    },
+                    {
+                      "name": "delete",
+                      "item": [
+                        {
+                          "name": "Mews Delete Routing Rules",
+                          "id": "14ce6609-9a8e-4da8-874d-a621e4a0332f",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"RoutingRuleIds\": [\n    \"<uuid>\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/connector/v1/routingRules/delete",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "connector",
+                                "v1",
+                                "routingRules",
+                                "delete"
+                              ]
+                            },
+                            "description": "Use [Delete billing automations](https://mews-systems.gitbook.io/connector-api/operations/billingautomations#delete-billing-automations)."
+                          },
+                          "response": [
+                            {
+                              "id": "e1329d57-3e5f-4753-bbe3-3d61f6b6dcd5",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"RoutingRuleIds\": [\n    \"<uuid>\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/routingRules/delete",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "routingRules",
+                                    "delete"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{}",
+                              "createdAt": "2026-07-28T02:12:48.000Z",
+                              "updatedAt": "2026-07-28T02:12:48.000Z",
+                              "uid": "35240-e1329d57-3e5f-4753-bbe3-3d61f6b6dcd5"
+                            },
+                            {
+                              "id": "53184bf2-4157-42d1-b541-98d4a943f73f",
+                              "name": "Server has successfully fulfilled the request and there is no additional information to send back.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"RoutingRuleIds\": [\n    \"<uuid>\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/routingRules/delete",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "routingRules",
+                                    "delete"
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:48.000Z",
+                              "updatedAt": "2026-07-28T02:12:48.000Z",
+                              "uid": "35240-53184bf2-4157-42d1-b541-98d4a943f73f"
+                            },
+                            {
+                              "id": "61f68f12-97df-4764-bad8-dfce2347df97",
+                              "name": "Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"RoutingRuleIds\": [\n    \"<uuid>\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/routingRules/delete",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "routingRules",
+                                    "delete"
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:48.000Z",
+                              "updatedAt": "2026-07-28T02:12:48.000Z",
+                              "uid": "35240-61f68f12-97df-4764-bad8-dfce2347df97"
+                            },
+                            {
+                              "id": "5c72f3ee-c7a4-4361-9ae8-079a69abfa75",
+                              "name": "Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"RoutingRuleIds\": [\n    \"<uuid>\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/routingRules/delete",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "routingRules",
+                                    "delete"
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:48.000Z",
+                              "updatedAt": "2026-07-28T02:12:48.000Z",
+                              "uid": "35240-5c72f3ee-c7a4-4361-9ae8-079a69abfa75"
+                            },
+                            {
+                              "id": "a99707bd-bfb4-4e87-8701-7a781461e4c1",
+                              "name": "Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"RoutingRuleIds\": [\n    \"<uuid>\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/routingRules/delete",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "routingRules",
+                                    "delete"
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:48.000Z",
+                              "updatedAt": "2026-07-28T02:12:48.000Z",
+                              "uid": "35240-a99707bd-bfb4-4e87-8701-7a781461e4c1"
+                            },
+                            {
+                              "id": "0a4797ad-a085-42d4-89a1-1e23eb13bee1",
+                              "name": "Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#r",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"RoutingRuleIds\": [\n    \"<uuid>\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/routingRules/delete",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "routingRules",
+                                    "delete"
+                                  ]
+                                }
+                              },
+                              "status": "Request Timeout",
+                              "code": 408,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:48.000Z",
+                              "updatedAt": "2026-07-28T02:12:48.000Z",
+                              "uid": "35240-0a4797ad-a085-42d4-89a1-1e23eb13bee1"
+                            },
+                            {
+                              "id": "dc7c136a-4a0f-4e9f-b2aa-90d94bc36e84",
+                              "name": "Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitb",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"RoutingRuleIds\": [\n    \"<uuid>\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/routingRules/delete",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "routingRules",
+                                    "delete"
+                                  ]
+                                }
+                              },
+                              "status": "Too Many Requests",
+                              "code": 429,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:48.000Z",
+                              "updatedAt": "2026-07-28T02:12:48.000Z",
+                              "uid": "35240-dc7c136a-4a0f-4e9f-b2aa-90d94bc36e84"
+                            },
+                            {
+                              "id": "706cd892-2aef-4735-8235-14ccd26d3cc9",
+                              "name": "Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"RoutingRuleIds\": [\n    \"<uuid>\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/routingRules/delete",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "routingRules",
+                                    "delete"
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:48.000Z",
+                              "updatedAt": "2026-07-28T02:12:48.000Z",
+                              "uid": "35240-706cd892-2aef-4735-8235-14ccd26d3cc9"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:12:48.000Z",
+                          "updatedAt": "2026-07-28T02:12:48.000Z",
+                          "uid": "35240-14ce6609-9a8e-4da8-874d-a621e4a0332f"
+                        }
+                      ],
+                      "id": "d64e31c3-a5e7-480a-be8a-2733dbd9c6e9",
+                      "createdAt": "2026-07-28T02:12:48.000Z",
+                      "updatedAt": "2026-07-28T02:12:48.000Z",
+                      "uid": "35240-d64e31c3-a5e7-480a-be8a-2733dbd9c6e9"
+                    }
+                  ],
+                  "id": "35429820-d918-4e27-8177-9bd260431b5e",
+                  "createdAt": "2026-07-28T02:12:48.000Z",
+                  "updatedAt": "2026-07-28T02:12:48.000Z",
+                  "uid": "35240-35429820-d918-4e27-8177-9bd260431b5e"
+                }
+              ],
+              "id": "9e424379-0dd5-48c4-99f7-958d74cbf07d",
+              "createdAt": "2026-07-28T02:12:48.000Z",
+              "updatedAt": "2026-07-28T02:12:48.000Z",
+              "uid": "35240-9e424379-0dd5-48c4-99f7-958d74cbf07d"
+            }
+          ],
+          "id": "a40f925b-3373-4464-8b6a-0637de0125d4",
+          "createdAt": "2026-07-28T02:12:48.000Z",
+          "updatedAt": "2026-07-28T02:12:48.000Z",
+          "uid": "35240-a40f925b-3373-4464-8b6a-0637de0125d4"
+        }
+      ],
+      "id": "eaf5b2cf-04dd-420d-9077-1c29c359db4a",
+      "createdAt": "2026-07-28T02:12:48.000Z",
+      "updatedAt": "2026-07-28T02:12:48.000Z",
+      "uid": "35240-eaf5b2cf-04dd-420d-9077-1c29c359db4a"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "ClientToken",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.mews.com"
+    }
+  ]
+}

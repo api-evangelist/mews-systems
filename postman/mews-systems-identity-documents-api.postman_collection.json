@@ -1,0 +1,2766 @@
+{
+  "info": {
+    "_postman_id": "44211e98-76ce-45fa-a885-47c96fb4d3bc",
+    "name": "Mews Booking Engine API (Distributor) Account notes Identity documents API",
+    "description": "The Mews Booking Engine API (historically the Distributor API, served from /api/distributor/v1) lets developers build guest-facing booking engines that create reservations directly in Mews. It exposes enterprise configuration, availability, pricing, products, vouchers, payment cards, and reservation group creation for front-end client consumption.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:10:53.000Z",
+    "updatedAt": "2026-07-28T02:10:53.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-44211e98-76ce-45fa-a885-47c96fb4d3bc"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "connector",
+          "item": [
+            {
+              "name": "v1",
+              "item": [
+                {
+                  "name": "identityDocuments",
+                  "item": [
+                    {
+                      "name": "getAll",
+                      "item": [
+                        {
+                          "name": "Mews Get All Identity Documents",
+                          "id": "297cc461-8992-4189-ae25-7bcc9eba51a7",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"CustomerIds\": [\n    \"<uuid>\"\n  ],\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"ChainIds\": [\n    \"<uuid>\"\n  ],\n  \"IdentityDocumentIds\": [\n    \"<uuid>\"\n  ],\n  \"Types\": [\n    \"Visa\",\n    \"Passport\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/connector/v1/identityDocuments/getAll",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "connector",
+                                "v1",
+                                "identityDocuments",
+                                "getAll"
+                              ]
+                            },
+                            "description": "Returns all identity documents for the specified customers, with additional filtering options available. This operation supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property/)."
+                          },
+                          "response": [
+                            {
+                              "id": "8e87eef0-64f7-4b74-ab52-c4310b1496b1",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"CustomerIds\": [\n    \"<uuid>\"\n  ],\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"ChainIds\": [\n    \"<uuid>\"\n  ],\n  \"IdentityDocumentIds\": [\n    \"<uuid>\"\n  ],\n  \"Types\": [\n    \"Visa\",\n    \"Passport\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/identityDocuments/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "identityDocuments",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"IdentityDocuments\": [\n    {\n      \"CustomerId\": \"<uuid>\",\n      \"Id\": \"<uuid>\",\n      \"Number\": \"<string>\",\n      \"Type\": \"Visa\",\n      \"ExpirationDate\": \"<date>\",\n      \"IssuanceDate\": \"<date>\",\n      \"IssuingCountryCode\": \"<string>\",\n      \"IssuingCountrySubdivisionCode\": \"<string>\",\n      \"IssuingCity\": \"<string>\",\n      \"IdentityDocumentSupportNumber\": \"<string>\"\n    },\n    {\n      \"CustomerId\": \"<uuid>\",\n      \"Id\": \"<uuid>\",\n      \"Number\": \"<string>\",\n      \"Type\": \"Passport\",\n      \"ExpirationDate\": \"<date>\",\n      \"IssuanceDate\": \"<date>\",\n      \"IssuingCountryCode\": \"<string>\",\n      \"IssuingCountrySubdivisionCode\": \"<string>\",\n      \"IssuingCity\": \"<string>\",\n      \"IdentityDocumentSupportNumber\": \"<string>\"\n    }\n  ],\n  \"Cursor\": \"<uuid>\"\n}",
+                              "createdAt": "2026-07-28T02:10:54.000Z",
+                              "updatedAt": "2026-07-28T02:10:54.000Z",
+                              "uid": "35240-8e87eef0-64f7-4b74-ab52-c4310b1496b1"
+                            },
+                            {
+                              "id": "fe4d39e1-df8c-4501-a1a2-7ae3c1561c68",
+                              "name": "Server has successfully fulfilled the request and there is no additional information to send back.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"CustomerIds\": [\n    \"<uuid>\"\n  ],\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"ChainIds\": [\n    \"<uuid>\"\n  ],\n  \"IdentityDocumentIds\": [\n    \"<uuid>\"\n  ],\n  \"Types\": [\n    \"Visa\",\n    \"Passport\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/identityDocuments/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "identityDocuments",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:10:54.000Z",
+                              "updatedAt": "2026-07-28T02:10:54.000Z",
+                              "uid": "35240-fe4d39e1-df8c-4501-a1a2-7ae3c1561c68"
+                            },
+                            {
+                              "id": "f14d2377-da22-4589-b526-77c7ae511132",
+                              "name": "Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"CustomerIds\": [\n    \"<uuid>\"\n  ],\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"ChainIds\": [\n    \"<uuid>\"\n  ],\n  \"IdentityDocumentIds\": [\n    \"<uuid>\"\n  ],\n  \"Types\": [\n    \"Visa\",\n    \"Passport\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/identityDocuments/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "identityDocuments",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:10:54.000Z",
+                              "updatedAt": "2026-07-28T02:10:54.000Z",
+                              "uid": "35240-f14d2377-da22-4589-b526-77c7ae511132"
+                            },
+                            {
+                              "id": "fcb61c90-b369-40cc-bf54-6d5445d5dbba",
+                              "name": "Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"CustomerIds\": [\n    \"<uuid>\"\n  ],\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"ChainIds\": [\n    \"<uuid>\"\n  ],\n  \"IdentityDocumentIds\": [\n    \"<uuid>\"\n  ],\n  \"Types\": [\n    \"Visa\",\n    \"Passport\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/identityDocuments/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "identityDocuments",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:10:54.000Z",
+                              "updatedAt": "2026-07-28T02:10:54.000Z",
+                              "uid": "35240-fcb61c90-b369-40cc-bf54-6d5445d5dbba"
+                            },
+                            {
+                              "id": "aeeeb32b-baa1-4354-a004-438f621004d4",
+                              "name": "Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"CustomerIds\": [\n    \"<uuid>\"\n  ],\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"ChainIds\": [\n    \"<uuid>\"\n  ],\n  \"IdentityDocumentIds\": [\n    \"<uuid>\"\n  ],\n  \"Types\": [\n    \"Visa\",\n    \"Passport\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/identityDocuments/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "identityDocuments",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:10:54.000Z",
+                              "updatedAt": "2026-07-28T02:10:54.000Z",
+                              "uid": "35240-aeeeb32b-baa1-4354-a004-438f621004d4"
+                            },
+                            {
+                              "id": "e94d0ec1-354d-4184-bf38-6d9446e7ce17",
+                              "name": "Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#r",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"CustomerIds\": [\n    \"<uuid>\"\n  ],\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"ChainIds\": [\n    \"<uuid>\"\n  ],\n  \"IdentityDocumentIds\": [\n    \"<uuid>\"\n  ],\n  \"Types\": [\n    \"Visa\",\n    \"Passport\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/identityDocuments/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "identityDocuments",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Request Timeout",
+                              "code": 408,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:10:54.000Z",
+                              "updatedAt": "2026-07-28T02:10:54.000Z",
+                              "uid": "35240-e94d0ec1-354d-4184-bf38-6d9446e7ce17"
+                            },
+                            {
+                              "id": "dedc77f8-c917-4df9-9b76-1849691e08a9",
+                              "name": "Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitb",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"CustomerIds\": [\n    \"<uuid>\"\n  ],\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"ChainIds\": [\n    \"<uuid>\"\n  ],\n  \"IdentityDocumentIds\": [\n    \"<uuid>\"\n  ],\n  \"Types\": [\n    \"Visa\",\n    \"Passport\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/identityDocuments/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "identityDocuments",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Too Many Requests",
+                              "code": 429,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:10:54.000Z",
+                              "updatedAt": "2026-07-28T02:10:54.000Z",
+                              "uid": "35240-dedc77f8-c917-4df9-9b76-1849691e08a9"
+                            },
+                            {
+                              "id": "8edc0d47-0b9e-40f9-81fd-885bfdc073be",
+                              "name": "Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"CustomerIds\": [\n    \"<uuid>\"\n  ],\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"ChainIds\": [\n    \"<uuid>\"\n  ],\n  \"IdentityDocumentIds\": [\n    \"<uuid>\"\n  ],\n  \"Types\": [\n    \"Visa\",\n    \"Passport\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/identityDocuments/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "identityDocuments",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:10:54.000Z",
+                              "updatedAt": "2026-07-28T02:10:54.000Z",
+                              "uid": "35240-8edc0d47-0b9e-40f9-81fd-885bfdc073be"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:10:54.000Z",
+                          "updatedAt": "2026-07-28T02:10:54.000Z",
+                          "uid": "35240-297cc461-8992-4189-ae25-7bcc9eba51a7"
+                        }
+                      ],
+                      "id": "7b49fd66-0a4e-402e-8b3a-a91c1211fd1d",
+                      "createdAt": "2026-07-28T02:10:54.000Z",
+                      "updatedAt": "2026-07-28T02:10:54.000Z",
+                      "uid": "35240-7b49fd66-0a4e-402e-8b3a-a91c1211fd1d"
+                    },
+                    {
+                      "name": "delete",
+                      "item": [
+                        {
+                          "name": "Mews Delete Identity Documents",
+                          "id": "4415e365-aaaf-4f20-97e5-1ce9c84da33b",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"IdentityDocumentIds\": [\n    \"<uuid>\"\n  ],\n  \"ChainId\": \"<uuid>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/connector/v1/identityDocuments/delete",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "connector",
+                                "v1",
+                                "identityDocuments",
+                                "delete"
+                              ]
+                            },
+                            "description": "Deletes specified identity documents. This operation supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property/)."
+                          },
+                          "response": [
+                            {
+                              "id": "f65a7556-0e6d-4d1a-a45e-9c9305e1d716",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"IdentityDocumentIds\": [\n    \"<uuid>\"\n  ],\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/identityDocuments/delete",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "identityDocuments",
+                                    "delete"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{}",
+                              "createdAt": "2026-07-28T02:10:54.000Z",
+                              "updatedAt": "2026-07-28T02:10:54.000Z",
+                              "uid": "35240-f65a7556-0e6d-4d1a-a45e-9c9305e1d716"
+                            },
+                            {
+                              "id": "76675ceb-52ac-4aaa-abc0-130ffe5da003",
+                              "name": "Server has successfully fulfilled the request and there is no additional information to send back.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"IdentityDocumentIds\": [\n    \"<uuid>\"\n  ],\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/identityDocuments/delete",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "identityDocuments",
+                                    "delete"
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:10:54.000Z",
+                              "updatedAt": "2026-07-28T02:10:54.000Z",
+                              "uid": "35240-76675ceb-52ac-4aaa-abc0-130ffe5da003"
+                            },
+                            {
+                              "id": "bdf2cf54-0d22-4773-96cc-ec40ec849c53",
+                              "name": "Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"IdentityDocumentIds\": [\n    \"<uuid>\"\n  ],\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/identityDocuments/delete",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "identityDocuments",
+                                    "delete"
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:10:54.000Z",
+                              "updatedAt": "2026-07-28T02:10:54.000Z",
+                              "uid": "35240-bdf2cf54-0d22-4773-96cc-ec40ec849c53"
+                            },
+                            {
+                              "id": "3048d325-dbaa-41fb-a0b4-751a5470ed9a",
+                              "name": "Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"IdentityDocumentIds\": [\n    \"<uuid>\"\n  ],\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/identityDocuments/delete",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "identityDocuments",
+                                    "delete"
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:10:54.000Z",
+                              "updatedAt": "2026-07-28T02:10:54.000Z",
+                              "uid": "35240-3048d325-dbaa-41fb-a0b4-751a5470ed9a"
+                            },
+                            {
+                              "id": "9727f431-6351-4343-aa3f-727c17d99e27",
+                              "name": "Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"IdentityDocumentIds\": [\n    \"<uuid>\"\n  ],\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/identityDocuments/delete",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "identityDocuments",
+                                    "delete"
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:10:54.000Z",
+                              "updatedAt": "2026-07-28T02:10:54.000Z",
+                              "uid": "35240-9727f431-6351-4343-aa3f-727c17d99e27"
+                            },
+                            {
+                              "id": "76a62a1d-ddb6-4dfc-b5aa-c7ecfad2a0aa",
+                              "name": "Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#r",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"IdentityDocumentIds\": [\n    \"<uuid>\"\n  ],\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/identityDocuments/delete",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "identityDocuments",
+                                    "delete"
+                                  ]
+                                }
+                              },
+                              "status": "Request Timeout",
+                              "code": 408,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:10:54.000Z",
+                              "updatedAt": "2026-07-28T02:10:54.000Z",
+                              "uid": "35240-76a62a1d-ddb6-4dfc-b5aa-c7ecfad2a0aa"
+                            },
+                            {
+                              "id": "67fd0ab6-4d09-4ead-bca4-ab68c483dd7e",
+                              "name": "Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitb",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"IdentityDocumentIds\": [\n    \"<uuid>\"\n  ],\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/identityDocuments/delete",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "identityDocuments",
+                                    "delete"
+                                  ]
+                                }
+                              },
+                              "status": "Too Many Requests",
+                              "code": 429,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:10:54.000Z",
+                              "updatedAt": "2026-07-28T02:10:54.000Z",
+                              "uid": "35240-67fd0ab6-4d09-4ead-bca4-ab68c483dd7e"
+                            },
+                            {
+                              "id": "33473562-3513-4361-89c5-e292fbf37702",
+                              "name": "Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"IdentityDocumentIds\": [\n    \"<uuid>\"\n  ],\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/identityDocuments/delete",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "identityDocuments",
+                                    "delete"
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:10:54.000Z",
+                              "updatedAt": "2026-07-28T02:10:54.000Z",
+                              "uid": "35240-33473562-3513-4361-89c5-e292fbf37702"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:10:54.000Z",
+                          "updatedAt": "2026-07-28T02:10:54.000Z",
+                          "uid": "35240-4415e365-aaaf-4f20-97e5-1ce9c84da33b"
+                        }
+                      ],
+                      "id": "9407812f-ae5f-4f30-9949-645c3850924f",
+                      "createdAt": "2026-07-28T02:10:54.000Z",
+                      "updatedAt": "2026-07-28T02:10:54.000Z",
+                      "uid": "35240-9407812f-ae5f-4f30-9949-645c3850924f"
+                    },
+                    {
+                      "name": "clear",
+                      "item": [
+                        {
+                          "name": "Mews Clear Identity Documents",
+                          "id": "8a1f3540-a1ef-4e3e-96e7-0dfd6fb4f869",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"CustomerIds\": [\n    \"<uuid>\"\n  ],\n  \"ChainId\": \"<uuid>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/connector/v1/identityDocuments/clear",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "connector",
+                                "v1",
+                                "identityDocuments",
+                                "clear"
+                              ]
+                            },
+                            "description": "Deletes all identity documents for the specified customers. This operation supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property/)."
+                          },
+                          "response": [
+                            {
+                              "id": "d4f99a52-cdbf-40c5-8b7b-35a9125f3ccb",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"CustomerIds\": [\n    \"<uuid>\"\n  ],\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/identityDocuments/clear",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "identityDocuments",
+                                    "clear"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{}",
+                              "createdAt": "2026-07-28T02:10:54.000Z",
+                              "updatedAt": "2026-07-28T02:10:54.000Z",
+                              "uid": "35240-d4f99a52-cdbf-40c5-8b7b-35a9125f3ccb"
+                            },
+                            {
+                              "id": "2ee7a379-a313-48db-b121-d92ccabec0d3",
+                              "name": "Server has successfully fulfilled the request and there is no additional information to send back.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"CustomerIds\": [\n    \"<uuid>\"\n  ],\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/identityDocuments/clear",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "identityDocuments",
+                                    "clear"
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:10:54.000Z",
+                              "updatedAt": "2026-07-28T02:10:54.000Z",
+                              "uid": "35240-2ee7a379-a313-48db-b121-d92ccabec0d3"
+                            },
+                            {
+                              "id": "d64e1bbf-0c96-461e-8f66-0c90da9b582e",
+                              "name": "Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"CustomerIds\": [\n    \"<uuid>\"\n  ],\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/identityDocuments/clear",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "identityDocuments",
+                                    "clear"
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:10:54.000Z",
+                              "updatedAt": "2026-07-28T02:10:54.000Z",
+                              "uid": "35240-d64e1bbf-0c96-461e-8f66-0c90da9b582e"
+                            },
+                            {
+                              "id": "a5835b1d-6b34-43d9-aea9-76fa9cf02d62",
+                              "name": "Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"CustomerIds\": [\n    \"<uuid>\"\n  ],\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/identityDocuments/clear",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "identityDocuments",
+                                    "clear"
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:10:54.000Z",
+                              "updatedAt": "2026-07-28T02:10:54.000Z",
+                              "uid": "35240-a5835b1d-6b34-43d9-aea9-76fa9cf02d62"
+                            },
+                            {
+                              "id": "931a7b5d-4cbd-431f-9a3d-cc86cac21079",
+                              "name": "Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"CustomerIds\": [\n    \"<uuid>\"\n  ],\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/identityDocuments/clear",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "identityDocuments",
+                                    "clear"
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:10:54.000Z",
+                              "updatedAt": "2026-07-28T02:10:54.000Z",
+                              "uid": "35240-931a7b5d-4cbd-431f-9a3d-cc86cac21079"
+                            },
+                            {
+                              "id": "7144f968-f64f-4d96-8f59-982c507e50a8",
+                              "name": "Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#r",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"CustomerIds\": [\n    \"<uuid>\"\n  ],\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/identityDocuments/clear",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "identityDocuments",
+                                    "clear"
+                                  ]
+                                }
+                              },
+                              "status": "Request Timeout",
+                              "code": 408,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:10:54.000Z",
+                              "updatedAt": "2026-07-28T02:10:54.000Z",
+                              "uid": "35240-7144f968-f64f-4d96-8f59-982c507e50a8"
+                            },
+                            {
+                              "id": "fb3d4601-23bf-4e72-b310-d2ca00d9392d",
+                              "name": "Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitb",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"CustomerIds\": [\n    \"<uuid>\"\n  ],\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/identityDocuments/clear",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "identityDocuments",
+                                    "clear"
+                                  ]
+                                }
+                              },
+                              "status": "Too Many Requests",
+                              "code": 429,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:10:54.000Z",
+                              "updatedAt": "2026-07-28T02:10:54.000Z",
+                              "uid": "35240-fb3d4601-23bf-4e72-b310-d2ca00d9392d"
+                            },
+                            {
+                              "id": "dea41c14-6ce4-426e-bc6a-3ca42b05efda",
+                              "name": "Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"CustomerIds\": [\n    \"<uuid>\"\n  ],\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/identityDocuments/clear",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "identityDocuments",
+                                    "clear"
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:10:54.000Z",
+                              "updatedAt": "2026-07-28T02:10:54.000Z",
+                              "uid": "35240-dea41c14-6ce4-426e-bc6a-3ca42b05efda"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:10:54.000Z",
+                          "updatedAt": "2026-07-28T02:10:54.000Z",
+                          "uid": "35240-8a1f3540-a1ef-4e3e-96e7-0dfd6fb4f869"
+                        }
+                      ],
+                      "id": "c5a3b637-136c-4d8e-ad70-c6888ff360c8",
+                      "createdAt": "2026-07-28T02:10:54.000Z",
+                      "updatedAt": "2026-07-28T02:10:54.000Z",
+                      "uid": "35240-c5a3b637-136c-4d8e-ad70-c6888ff360c8"
+                    },
+                    {
+                      "name": "update",
+                      "item": [
+                        {
+                          "name": "Mews Update Identity Documents",
+                          "id": "f9e9b669-3548-4a11-a01e-fff64f0ec894",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"IdentityDocuments\": [\n    {\n      \"Id\": \"<uuid>\",\n      \"Type\": {\n        \"Value\": \"Visa\"\n      },\n      \"Number\": {\n        \"Value\": \"<string>\"\n      },\n      \"ExpirationDate\": {\n        \"Value\": \"<string>\"\n      },\n      \"IssuanceDate\": {\n        \"Value\": \"<string>\"\n      },\n      \"IssuingCountryCode\": {\n        \"Value\": \"<string>\"\n      },\n      \"IssuingCountrySubdivisionCode\": {\n        \"Value\": \"<string>\"\n      },\n      \"IssuingCity\": {\n        \"Value\": \"<string>\"\n      },\n      \"IdentityDocumentSupportNumber\": {\n        \"Value\": \"<string>\"\n      }\n    }\n  ],\n  \"ChainId\": \"<uuid>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/connector/v1/identityDocuments/update",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "connector",
+                                "v1",
+                                "identityDocuments",
+                                "update"
+                              ]
+                            },
+                            "description": "Updates specified identity documents. This operation supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property/)."
+                          },
+                          "response": [
+                            {
+                              "id": "c34b2d3a-e90e-4524-925a-89ada23aa5e6",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"IdentityDocuments\": [\n    {\n      \"Id\": \"<uuid>\",\n      \"Type\": {\n        \"Value\": \"Visa\"\n      },\n      \"Number\": {\n        \"Value\": \"<string>\"\n      },\n      \"ExpirationDate\": {\n        \"Value\": \"<string>\"\n      },\n      \"IssuanceDate\": {\n        \"Value\": \"<string>\"\n      },\n      \"IssuingCountryCode\": {\n        \"Value\": \"<string>\"\n      },\n      \"IssuingCountrySubdivisionCode\": {\n        \"Value\": \"<string>\"\n      },\n      \"IssuingCity\": {\n        \"Value\": \"<string>\"\n      },\n      \"IdentityDocumentSupportNumber\": {\n        \"Value\": \"<string>\"\n      }\n    }\n  ],\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/identityDocuments/update",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "identityDocuments",
+                                    "update"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"IdentityDocuments\": [\n    {\n      \"CustomerId\": \"<uuid>\",\n      \"Id\": \"<uuid>\",\n      \"Number\": \"<string>\",\n      \"Type\": \"DriversLicense\",\n      \"ExpirationDate\": \"<date>\",\n      \"IssuanceDate\": \"<date>\",\n      \"IssuingCountryCode\": \"<string>\",\n      \"IssuingCountrySubdivisionCode\": \"<string>\",\n      \"IssuingCity\": \"<string>\",\n      \"IdentityDocumentSupportNumber\": \"<string>\"\n    },\n    {\n      \"CustomerId\": \"<uuid>\",\n      \"Id\": \"<uuid>\",\n      \"Number\": \"<string>\",\n      \"Type\": \"Visa\",\n      \"ExpirationDate\": \"<date>\",\n      \"IssuanceDate\": \"<date>\",\n      \"IssuingCountryCode\": \"<string>\",\n      \"IssuingCountrySubdivisionCode\": \"<string>\",\n      \"IssuingCity\": \"<string>\",\n      \"IdentityDocumentSupportNumber\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:10:54.000Z",
+                              "updatedAt": "2026-07-28T02:10:54.000Z",
+                              "uid": "35240-c34b2d3a-e90e-4524-925a-89ada23aa5e6"
+                            },
+                            {
+                              "id": "fd853013-5c85-4f5f-bc98-22da2817fd89",
+                              "name": "Server has successfully fulfilled the request and there is no additional information to send back.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"IdentityDocuments\": [\n    {\n      \"Id\": \"<uuid>\",\n      \"Type\": {\n        \"Value\": \"Visa\"\n      },\n      \"Number\": {\n        \"Value\": \"<string>\"\n      },\n      \"ExpirationDate\": {\n        \"Value\": \"<string>\"\n      },\n      \"IssuanceDate\": {\n        \"Value\": \"<string>\"\n      },\n      \"IssuingCountryCode\": {\n        \"Value\": \"<string>\"\n      },\n      \"IssuingCountrySubdivisionCode\": {\n        \"Value\": \"<string>\"\n      },\n      \"IssuingCity\": {\n        \"Value\": \"<string>\"\n      },\n      \"IdentityDocumentSupportNumber\": {\n        \"Value\": \"<string>\"\n      }\n    }\n  ],\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/identityDocuments/update",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "identityDocuments",
+                                    "update"
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:10:54.000Z",
+                              "updatedAt": "2026-07-28T02:10:54.000Z",
+                              "uid": "35240-fd853013-5c85-4f5f-bc98-22da2817fd89"
+                            },
+                            {
+                              "id": "cec95880-4609-4065-beab-fb75d44bcb13",
+                              "name": "Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"IdentityDocuments\": [\n    {\n      \"Id\": \"<uuid>\",\n      \"Type\": {\n        \"Value\": \"Visa\"\n      },\n      \"Number\": {\n        \"Value\": \"<string>\"\n      },\n      \"ExpirationDate\": {\n        \"Value\": \"<string>\"\n      },\n      \"IssuanceDate\": {\n        \"Value\": \"<string>\"\n      },\n      \"IssuingCountryCode\": {\n        \"Value\": \"<string>\"\n      },\n      \"IssuingCountrySubdivisionCode\": {\n        \"Value\": \"<string>\"\n      },\n      \"IssuingCity\": {\n        \"Value\": \"<string>\"\n      },\n      \"IdentityDocumentSupportNumber\": {\n        \"Value\": \"<string>\"\n      }\n    }\n  ],\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/identityDocuments/update",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "identityDocuments",
+                                    "update"
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:10:54.000Z",
+                              "updatedAt": "2026-07-28T02:10:54.000Z",
+                              "uid": "35240-cec95880-4609-4065-beab-fb75d44bcb13"
+                            },
+                            {
+                              "id": "8e6f8212-cf01-48aa-bbd3-b9e751b3a024",
+                              "name": "Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"IdentityDocuments\": [\n    {\n      \"Id\": \"<uuid>\",\n      \"Type\": {\n        \"Value\": \"Visa\"\n      },\n      \"Number\": {\n        \"Value\": \"<string>\"\n      },\n      \"ExpirationDate\": {\n        \"Value\": \"<string>\"\n      },\n      \"IssuanceDate\": {\n        \"Value\": \"<string>\"\n      },\n      \"IssuingCountryCode\": {\n        \"Value\": \"<string>\"\n      },\n      \"IssuingCountrySubdivisionCode\": {\n        \"Value\": \"<string>\"\n      },\n      \"IssuingCity\": {\n        \"Value\": \"<string>\"\n      },\n      \"IdentityDocumentSupportNumber\": {\n        \"Value\": \"<string>\"\n      }\n    }\n  ],\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/identityDocuments/update",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "identityDocuments",
+                                    "update"
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:10:54.000Z",
+                              "updatedAt": "2026-07-28T02:10:54.000Z",
+                              "uid": "35240-8e6f8212-cf01-48aa-bbd3-b9e751b3a024"
+                            },
+                            {
+                              "id": "a41b203d-3c48-4b48-be60-b2d59bff1f3b",
+                              "name": "Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"IdentityDocuments\": [\n    {\n      \"Id\": \"<uuid>\",\n      \"Type\": {\n        \"Value\": \"Visa\"\n      },\n      \"Number\": {\n        \"Value\": \"<string>\"\n      },\n      \"ExpirationDate\": {\n        \"Value\": \"<string>\"\n      },\n      \"IssuanceDate\": {\n        \"Value\": \"<string>\"\n      },\n      \"IssuingCountryCode\": {\n        \"Value\": \"<string>\"\n      },\n      \"IssuingCountrySubdivisionCode\": {\n        \"Value\": \"<string>\"\n      },\n      \"IssuingCity\": {\n        \"Value\": \"<string>\"\n      },\n      \"IdentityDocumentSupportNumber\": {\n        \"Value\": \"<string>\"\n      }\n    }\n  ],\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/identityDocuments/update",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "identityDocuments",
+                                    "update"
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:10:54.000Z",
+                              "updatedAt": "2026-07-28T02:10:54.000Z",
+                              "uid": "35240-a41b203d-3c48-4b48-be60-b2d59bff1f3b"
+                            },
+                            {
+                              "id": "f480a710-549e-4237-9cea-277689f23d08",
+                              "name": "Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#r",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"IdentityDocuments\": [\n    {\n      \"Id\": \"<uuid>\",\n      \"Type\": {\n        \"Value\": \"Visa\"\n      },\n      \"Number\": {\n        \"Value\": \"<string>\"\n      },\n      \"ExpirationDate\": {\n        \"Value\": \"<string>\"\n      },\n      \"IssuanceDate\": {\n        \"Value\": \"<string>\"\n      },\n      \"IssuingCountryCode\": {\n        \"Value\": \"<string>\"\n      },\n      \"IssuingCountrySubdivisionCode\": {\n        \"Value\": \"<string>\"\n      },\n      \"IssuingCity\": {\n        \"Value\": \"<string>\"\n      },\n      \"IdentityDocumentSupportNumber\": {\n        \"Value\": \"<string>\"\n      }\n    }\n  ],\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/identityDocuments/update",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "identityDocuments",
+                                    "update"
+                                  ]
+                                }
+                              },
+                              "status": "Request Timeout",
+                              "code": 408,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:10:54.000Z",
+                              "updatedAt": "2026-07-28T02:10:54.000Z",
+                              "uid": "35240-f480a710-549e-4237-9cea-277689f23d08"
+                            },
+                            {
+                              "id": "689e8252-d06b-42d6-85c7-a6054d8e7090",
+                              "name": "Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitb",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"IdentityDocuments\": [\n    {\n      \"Id\": \"<uuid>\",\n      \"Type\": {\n        \"Value\": \"Visa\"\n      },\n      \"Number\": {\n        \"Value\": \"<string>\"\n      },\n      \"ExpirationDate\": {\n        \"Value\": \"<string>\"\n      },\n      \"IssuanceDate\": {\n        \"Value\": \"<string>\"\n      },\n      \"IssuingCountryCode\": {\n        \"Value\": \"<string>\"\n      },\n      \"IssuingCountrySubdivisionCode\": {\n        \"Value\": \"<string>\"\n      },\n      \"IssuingCity\": {\n        \"Value\": \"<string>\"\n      },\n      \"IdentityDocumentSupportNumber\": {\n        \"Value\": \"<string>\"\n      }\n    }\n  ],\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/identityDocuments/update",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "identityDocuments",
+                                    "update"
+                                  ]
+                                }
+                              },
+                              "status": "Too Many Requests",
+                              "code": 429,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:10:54.000Z",
+                              "updatedAt": "2026-07-28T02:10:54.000Z",
+                              "uid": "35240-689e8252-d06b-42d6-85c7-a6054d8e7090"
+                            },
+                            {
+                              "id": "a8c1ed93-b000-4a8c-a900-f7c94e749922",
+                              "name": "Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"IdentityDocuments\": [\n    {\n      \"Id\": \"<uuid>\",\n      \"Type\": {\n        \"Value\": \"Visa\"\n      },\n      \"Number\": {\n        \"Value\": \"<string>\"\n      },\n      \"ExpirationDate\": {\n        \"Value\": \"<string>\"\n      },\n      \"IssuanceDate\": {\n        \"Value\": \"<string>\"\n      },\n      \"IssuingCountryCode\": {\n        \"Value\": \"<string>\"\n      },\n      \"IssuingCountrySubdivisionCode\": {\n        \"Value\": \"<string>\"\n      },\n      \"IssuingCity\": {\n        \"Value\": \"<string>\"\n      },\n      \"IdentityDocumentSupportNumber\": {\n        \"Value\": \"<string>\"\n      }\n    }\n  ],\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/identityDocuments/update",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "identityDocuments",
+                                    "update"
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:10:54.000Z",
+                              "updatedAt": "2026-07-28T02:10:54.000Z",
+                              "uid": "35240-a8c1ed93-b000-4a8c-a900-f7c94e749922"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:10:54.000Z",
+                          "updatedAt": "2026-07-28T02:10:54.000Z",
+                          "uid": "35240-f9e9b669-3548-4a11-a01e-fff64f0ec894"
+                        }
+                      ],
+                      "id": "c5b04e3e-a24e-40bc-9200-f4a56727004e",
+                      "createdAt": "2026-07-28T02:10:54.000Z",
+                      "updatedAt": "2026-07-28T02:10:54.000Z",
+                      "uid": "35240-c5b04e3e-a24e-40bc-9200-f4a56727004e"
+                    },
+                    {
+                      "name": "add",
+                      "item": [
+                        {
+                          "name": "Mews Add Identity Documents",
+                          "id": "bd2b9060-7b44-4142-9508-e347fe5fefd0",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"IdentityDocuments\": [\n    {\n      \"CustomerId\": \"<uuid>\",\n      \"Number\": \"<string>\",\n      \"Type\": \"Passport\",\n      \"ExpirationDate\": \"<date>\",\n      \"IssuanceDate\": \"<date>\",\n      \"IssuingCountryCode\": \"<string>\",\n      \"IssuingCountrySubdivisionCode\": \"<string>\",\n      \"IssuingCity\": \"<string>\",\n      \"IdentityDocumentSupportNumber\": \"<string>\"\n    }\n  ],\n  \"ChainId\": \"<uuid>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/connector/v1/identityDocuments/add",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "connector",
+                                "v1",
+                                "identityDocuments",
+                                "add"
+                              ]
+                            },
+                            "description": "Adds identity documents. This operation supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property/)."
+                          },
+                          "response": [
+                            {
+                              "id": "170bcf69-3069-47d2-ac4f-26fbe7111e6d",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"IdentityDocuments\": [\n    {\n      \"CustomerId\": \"<uuid>\",\n      \"Number\": \"<string>\",\n      \"Type\": \"Passport\",\n      \"ExpirationDate\": \"<date>\",\n      \"IssuanceDate\": \"<date>\",\n      \"IssuingCountryCode\": \"<string>\",\n      \"IssuingCountrySubdivisionCode\": \"<string>\",\n      \"IssuingCity\": \"<string>\",\n      \"IdentityDocumentSupportNumber\": \"<string>\"\n    }\n  ],\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/identityDocuments/add",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "identityDocuments",
+                                    "add"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"IdentityDocuments\": [\n    {\n      \"CustomerId\": \"<uuid>\",\n      \"Id\": \"<uuid>\",\n      \"Number\": \"<string>\",\n      \"Type\": \"DriversLicense\",\n      \"ExpirationDate\": \"<date>\",\n      \"IssuanceDate\": \"<date>\",\n      \"IssuingCountryCode\": \"<string>\",\n      \"IssuingCountrySubdivisionCode\": \"<string>\",\n      \"IssuingCity\": \"<string>\",\n      \"IdentityDocumentSupportNumber\": \"<string>\"\n    },\n    {\n      \"CustomerId\": \"<uuid>\",\n      \"Id\": \"<uuid>\",\n      \"Number\": \"<string>\",\n      \"Type\": \"Visa\",\n      \"ExpirationDate\": \"<date>\",\n      \"IssuanceDate\": \"<date>\",\n      \"IssuingCountryCode\": \"<string>\",\n      \"IssuingCountrySubdivisionCode\": \"<string>\",\n      \"IssuingCity\": \"<string>\",\n      \"IdentityDocumentSupportNumber\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:10:54.000Z",
+                              "updatedAt": "2026-07-28T02:10:54.000Z",
+                              "uid": "35240-170bcf69-3069-47d2-ac4f-26fbe7111e6d"
+                            },
+                            {
+                              "id": "8f9cf2ba-0f6b-497b-a684-ef7ebc253257",
+                              "name": "Server has successfully fulfilled the request and there is no additional information to send back.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"IdentityDocuments\": [\n    {\n      \"CustomerId\": \"<uuid>\",\n      \"Number\": \"<string>\",\n      \"Type\": \"Passport\",\n      \"ExpirationDate\": \"<date>\",\n      \"IssuanceDate\": \"<date>\",\n      \"IssuingCountryCode\": \"<string>\",\n      \"IssuingCountrySubdivisionCode\": \"<string>\",\n      \"IssuingCity\": \"<string>\",\n      \"IdentityDocumentSupportNumber\": \"<string>\"\n    }\n  ],\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/identityDocuments/add",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "identityDocuments",
+                                    "add"
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:10:54.000Z",
+                              "updatedAt": "2026-07-28T02:10:54.000Z",
+                              "uid": "35240-8f9cf2ba-0f6b-497b-a684-ef7ebc253257"
+                            },
+                            {
+                              "id": "50325339-c237-471d-840c-cf6971f19318",
+                              "name": "Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"IdentityDocuments\": [\n    {\n      \"CustomerId\": \"<uuid>\",\n      \"Number\": \"<string>\",\n      \"Type\": \"Passport\",\n      \"ExpirationDate\": \"<date>\",\n      \"IssuanceDate\": \"<date>\",\n      \"IssuingCountryCode\": \"<string>\",\n      \"IssuingCountrySubdivisionCode\": \"<string>\",\n      \"IssuingCity\": \"<string>\",\n      \"IdentityDocumentSupportNumber\": \"<string>\"\n    }\n  ],\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/identityDocuments/add",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "identityDocuments",
+                                    "add"
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:10:54.000Z",
+                              "updatedAt": "2026-07-28T02:10:54.000Z",
+                              "uid": "35240-50325339-c237-471d-840c-cf6971f19318"
+                            },
+                            {
+                              "id": "f540eef7-c772-40a1-b018-7af7231e196a",
+                              "name": "Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"IdentityDocuments\": [\n    {\n      \"CustomerId\": \"<uuid>\",\n      \"Number\": \"<string>\",\n      \"Type\": \"Passport\",\n      \"ExpirationDate\": \"<date>\",\n      \"IssuanceDate\": \"<date>\",\n      \"IssuingCountryCode\": \"<string>\",\n      \"IssuingCountrySubdivisionCode\": \"<string>\",\n      \"IssuingCity\": \"<string>\",\n      \"IdentityDocumentSupportNumber\": \"<string>\"\n    }\n  ],\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/identityDocuments/add",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "identityDocuments",
+                                    "add"
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:10:54.000Z",
+                              "updatedAt": "2026-07-28T02:10:54.000Z",
+                              "uid": "35240-f540eef7-c772-40a1-b018-7af7231e196a"
+                            },
+                            {
+                              "id": "92877232-00e6-4cf1-a7fe-709cfd93a9ac",
+                              "name": "Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"IdentityDocuments\": [\n    {\n      \"CustomerId\": \"<uuid>\",\n      \"Number\": \"<string>\",\n      \"Type\": \"Passport\",\n      \"ExpirationDate\": \"<date>\",\n      \"IssuanceDate\": \"<date>\",\n      \"IssuingCountryCode\": \"<string>\",\n      \"IssuingCountrySubdivisionCode\": \"<string>\",\n      \"IssuingCity\": \"<string>\",\n      \"IdentityDocumentSupportNumber\": \"<string>\"\n    }\n  ],\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/identityDocuments/add",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "identityDocuments",
+                                    "add"
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:10:54.000Z",
+                              "updatedAt": "2026-07-28T02:10:54.000Z",
+                              "uid": "35240-92877232-00e6-4cf1-a7fe-709cfd93a9ac"
+                            },
+                            {
+                              "id": "6ca5c48a-6889-46a7-933c-ff5980f8021c",
+                              "name": "Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#r",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"IdentityDocuments\": [\n    {\n      \"CustomerId\": \"<uuid>\",\n      \"Number\": \"<string>\",\n      \"Type\": \"Passport\",\n      \"ExpirationDate\": \"<date>\",\n      \"IssuanceDate\": \"<date>\",\n      \"IssuingCountryCode\": \"<string>\",\n      \"IssuingCountrySubdivisionCode\": \"<string>\",\n      \"IssuingCity\": \"<string>\",\n      \"IdentityDocumentSupportNumber\": \"<string>\"\n    }\n  ],\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/identityDocuments/add",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "identityDocuments",
+                                    "add"
+                                  ]
+                                }
+                              },
+                              "status": "Request Timeout",
+                              "code": 408,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:10:54.000Z",
+                              "updatedAt": "2026-07-28T02:10:54.000Z",
+                              "uid": "35240-6ca5c48a-6889-46a7-933c-ff5980f8021c"
+                            },
+                            {
+                              "id": "3d0c5366-33bd-4196-bb8d-0bfbb510b425",
+                              "name": "Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitb",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"IdentityDocuments\": [\n    {\n      \"CustomerId\": \"<uuid>\",\n      \"Number\": \"<string>\",\n      \"Type\": \"Passport\",\n      \"ExpirationDate\": \"<date>\",\n      \"IssuanceDate\": \"<date>\",\n      \"IssuingCountryCode\": \"<string>\",\n      \"IssuingCountrySubdivisionCode\": \"<string>\",\n      \"IssuingCity\": \"<string>\",\n      \"IdentityDocumentSupportNumber\": \"<string>\"\n    }\n  ],\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/identityDocuments/add",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "identityDocuments",
+                                    "add"
+                                  ]
+                                }
+                              },
+                              "status": "Too Many Requests",
+                              "code": 429,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:10:54.000Z",
+                              "updatedAt": "2026-07-28T02:10:54.000Z",
+                              "uid": "35240-3d0c5366-33bd-4196-bb8d-0bfbb510b425"
+                            },
+                            {
+                              "id": "019853ed-054f-4ec9-a819-579163317ba7",
+                              "name": "Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"IdentityDocuments\": [\n    {\n      \"CustomerId\": \"<uuid>\",\n      \"Number\": \"<string>\",\n      \"Type\": \"Passport\",\n      \"ExpirationDate\": \"<date>\",\n      \"IssuanceDate\": \"<date>\",\n      \"IssuingCountryCode\": \"<string>\",\n      \"IssuingCountrySubdivisionCode\": \"<string>\",\n      \"IssuingCity\": \"<string>\",\n      \"IdentityDocumentSupportNumber\": \"<string>\"\n    }\n  ],\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/identityDocuments/add",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "identityDocuments",
+                                    "add"
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:10:54.000Z",
+                              "updatedAt": "2026-07-28T02:10:54.000Z",
+                              "uid": "35240-019853ed-054f-4ec9-a819-579163317ba7"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:10:54.000Z",
+                          "updatedAt": "2026-07-28T02:10:54.000Z",
+                          "uid": "35240-bd2b9060-7b44-4142-9508-e347fe5fefd0"
+                        }
+                      ],
+                      "id": "d0b2e491-e2c7-4f39-8474-c52ee13c6ee7",
+                      "createdAt": "2026-07-28T02:10:54.000Z",
+                      "updatedAt": "2026-07-28T02:10:54.000Z",
+                      "uid": "35240-d0b2e491-e2c7-4f39-8474-c52ee13c6ee7"
+                    }
+                  ],
+                  "id": "8e7f09c8-346b-4e8d-9a3c-b84f71282b31",
+                  "createdAt": "2026-07-28T02:10:54.000Z",
+                  "updatedAt": "2026-07-28T02:10:54.000Z",
+                  "uid": "35240-8e7f09c8-346b-4e8d-9a3c-b84f71282b31"
+                }
+              ],
+              "id": "8ba37b11-3bcf-42e5-a206-c237b6d3e901",
+              "createdAt": "2026-07-28T02:10:54.000Z",
+              "updatedAt": "2026-07-28T02:10:54.000Z",
+              "uid": "35240-8ba37b11-3bcf-42e5-a206-c237b6d3e901"
+            }
+          ],
+          "id": "d63cf272-5133-4986-9153-511c1b701d19",
+          "createdAt": "2026-07-28T02:10:54.000Z",
+          "updatedAt": "2026-07-28T02:10:54.000Z",
+          "uid": "35240-d63cf272-5133-4986-9153-511c1b701d19"
+        }
+      ],
+      "id": "cf585c29-fa40-41b7-9f97-c0ba682cacf7",
+      "createdAt": "2026-07-28T02:10:54.000Z",
+      "updatedAt": "2026-07-28T02:10:54.000Z",
+      "uid": "35240-cf585c29-fa40-41b7-9f97-c0ba682cacf7"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "ClientToken",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.mews.com"
+    }
+  ]
+}

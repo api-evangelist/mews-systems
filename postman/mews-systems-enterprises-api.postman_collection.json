@@ -1,0 +1,614 @@
+{
+  "info": {
+    "_postman_id": "25166c6d-cc2f-41fb-9096-f056db8a8fd2",
+    "name": "Mews Booking Engine API (Distributor) Account notes Enterprises API",
+    "description": "The Mews Booking Engine API (historically the Distributor API, served from /api/distributor/v1) lets developers build guest-facing booking engines that create reservations directly in Mews. It exposes enterprise configuration, availability, pricing, products, vouchers, payment cards, and reservation group creation for front-end client consumption.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:10:39.000Z",
+    "updatedAt": "2026-07-28T02:10:40.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-25166c6d-cc2f-41fb-9096-f056db8a8fd2"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "connector",
+          "item": [
+            {
+              "name": "v1",
+              "item": [
+                {
+                  "name": "enterprises",
+                  "item": [
+                    {
+                      "name": "getAll",
+                      "item": [
+                        {
+                          "name": "Mews Get All Enterprises",
+                          "id": "f92519fa-7069-494b-83ee-d8b10eb25ab0",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"ExternalIdentifiers\": [\n    \"<string>\"\n  ],\n  \"LinkedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/connector/v1/enterprises/getAll",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "connector",
+                                "v1",
+                                "enterprises",
+                                "getAll"
+                              ]
+                            },
+                            "description": "Returns all enterprises within scope of the `Access Token`, optionally filtered by enterprise identifiers and external identifiers. Note this operation uses [Pagination](https://mews-systems.gitbook.io/connector-api/guidelines/pagination/) and supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property/)."
+                          },
+                          "response": [
+                            {
+                              "id": "f6034f85-4a47-4da6-9a25-6480a296eb69",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"ExternalIdentifiers\": [\n    \"<string>\"\n  ],\n  \"LinkedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/enterprises/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "enterprises",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Enterprises\": [\n    {\n      \"AccommodationEnvironmentCode\": \"<string>\",\n      \"AccountingEditableHistoryInterval\": \"<string>\",\n      \"AccountingEnvironmentCode\": \"<string>\",\n      \"Address\": {\n        \"Id\": \"<uuid>\",\n        \"Line1\": \"<string>\",\n        \"Line2\": \"<string>\",\n        \"City\": \"<string>\",\n        \"PostalCode\": \"<string>\",\n        \"CountryCode\": \"<string>\",\n        \"CountrySubdivisionCode\": \"<string>\",\n        \"Latitude\": \"<double>\",\n        \"Longitude\": \"<double>\"\n      },\n      \"AddressId\": \"<uuid>\",\n      \"ChainId\": \"<uuid>\",\n      \"ChainName\": \"<string>\",\n      \"CreatedUtc\": \"<dateTime>\",\n      \"DefaultLanguageCode\": \"<string>\",\n      \"EditableHistoryInterval\": \"<string>\",\n      \"GroupNames\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"Id\": \"<uuid>\",\n      \"LegalEnvironmentCode\": \"<string>\",\n      \"LinkedUtc\": \"<dateTime>\",\n      \"Name\": \"<string>\",\n      \"OperationalEditableHistoryInterval\": \"<string>\",\n      \"Pricing\": \"Net\",\n      \"Subscription\": {\n        \"TaxIdentifier\": \"<string>\"\n      },\n      \"TaxEnvironmentCode\": \"<string>\",\n      \"TimeZoneIdentifier\": \"<string>\",\n      \"UpdatedUtc\": \"<dateTime>\",\n      \"ExternalIdentifier\": \"<string>\",\n      \"HoldingKey\": \"<string>\",\n      \"ShortName\": \"<string>\",\n      \"BusinessDayClosingOffset\": \"<string>\",\n      \"WebsiteUrl\": \"<uri>\",\n      \"Email\": \"<email>\",\n      \"Phone\": \"<string>\",\n      \"LogoImageId\": \"<uuid>\",\n      \"CoverImageId\": \"<uuid>\",\n      \"TaxPrecision\": \"<integer>\"\n    },\n    {\n      \"AccommodationEnvironmentCode\": \"<string>\",\n      \"AccountingEditableHistoryInterval\": \"<string>\",\n      \"AccountingEnvironmentCode\": \"<string>\",\n      \"Address\": {\n        \"Id\": \"<uuid>\",\n        \"Line1\": \"<string>\",\n        \"Line2\": \"<string>\",\n        \"City\": \"<string>\",\n        \"PostalCode\": \"<string>\",\n        \"CountryCode\": \"<string>\",\n        \"CountrySubdivisionCode\": \"<string>\",\n        \"Latitude\": \"<double>\",\n        \"Longitude\": \"<double>\"\n      },\n      \"AddressId\": \"<uuid>\",\n      \"ChainId\": \"<uuid>\",\n      \"ChainName\": \"<string>\",\n      \"CreatedUtc\": \"<dateTime>\",\n      \"DefaultLanguageCode\": \"<string>\",\n      \"EditableHistoryInterval\": \"<string>\",\n      \"GroupNames\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"Id\": \"<uuid>\",\n      \"LegalEnvironmentCode\": \"<string>\",\n      \"LinkedUtc\": \"<dateTime>\",\n      \"Name\": \"<string>\",\n      \"OperationalEditableHistoryInterval\": \"<string>\",\n      \"Pricing\": \"Gross\",\n      \"Subscription\": {\n        \"TaxIdentifier\": \"<string>\"\n      },\n      \"TaxEnvironmentCode\": \"<string>\",\n      \"TimeZoneIdentifier\": \"<string>\",\n      \"UpdatedUtc\": \"<dateTime>\",\n      \"ExternalIdentifier\": \"<string>\",\n      \"HoldingKey\": \"<string>\",\n      \"ShortName\": \"<string>\",\n      \"BusinessDayClosingOffset\": \"<string>\",\n      \"WebsiteUrl\": \"<uri>\",\n      \"Email\": \"<email>\",\n      \"Phone\": \"<string>\",\n      \"LogoImageId\": \"<uuid>\",\n      \"CoverImageId\": \"<uuid>\",\n      \"TaxPrecision\": \"<integer>\"\n    }\n  ],\n  \"Cursor\": \"<uuid>\"\n}",
+                              "createdAt": "2026-07-28T02:10:40.000Z",
+                              "updatedAt": "2026-07-28T02:10:40.000Z",
+                              "uid": "35240-f6034f85-4a47-4da6-9a25-6480a296eb69"
+                            },
+                            {
+                              "id": "448f5558-a9cc-4086-9255-c4ebc5bf19a2",
+                              "name": "Server has successfully fulfilled the request and there is no additional information to send back.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"ExternalIdentifiers\": [\n    \"<string>\"\n  ],\n  \"LinkedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/enterprises/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "enterprises",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:10:40.000Z",
+                              "updatedAt": "2026-07-28T02:10:40.000Z",
+                              "uid": "35240-448f5558-a9cc-4086-9255-c4ebc5bf19a2"
+                            },
+                            {
+                              "id": "7c608e26-23a9-4cf8-a0aa-625ba3490fbd",
+                              "name": "Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"ExternalIdentifiers\": [\n    \"<string>\"\n  ],\n  \"LinkedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/enterprises/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "enterprises",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:10:40.000Z",
+                              "updatedAt": "2026-07-28T02:10:40.000Z",
+                              "uid": "35240-7c608e26-23a9-4cf8-a0aa-625ba3490fbd"
+                            },
+                            {
+                              "id": "b6698dc1-734d-4165-b02a-e7834d77c723",
+                              "name": "Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"ExternalIdentifiers\": [\n    \"<string>\"\n  ],\n  \"LinkedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/enterprises/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "enterprises",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:10:40.000Z",
+                              "updatedAt": "2026-07-28T02:10:40.000Z",
+                              "uid": "35240-b6698dc1-734d-4165-b02a-e7834d77c723"
+                            },
+                            {
+                              "id": "3d481c42-36c6-43c9-808c-d603ceaba89a",
+                              "name": "Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"ExternalIdentifiers\": [\n    \"<string>\"\n  ],\n  \"LinkedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/enterprises/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "enterprises",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:10:40.000Z",
+                              "updatedAt": "2026-07-28T02:10:40.000Z",
+                              "uid": "35240-3d481c42-36c6-43c9-808c-d603ceaba89a"
+                            },
+                            {
+                              "id": "e7e93a21-7a4b-4d48-b7dc-4fc9813650f2",
+                              "name": "Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#r",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"ExternalIdentifiers\": [\n    \"<string>\"\n  ],\n  \"LinkedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/enterprises/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "enterprises",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Request Timeout",
+                              "code": 408,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:10:40.000Z",
+                              "updatedAt": "2026-07-28T02:10:40.000Z",
+                              "uid": "35240-e7e93a21-7a4b-4d48-b7dc-4fc9813650f2"
+                            },
+                            {
+                              "id": "21e9f62d-181d-4297-920e-701d7e305795",
+                              "name": "Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitb",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"ExternalIdentifiers\": [\n    \"<string>\"\n  ],\n  \"LinkedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/enterprises/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "enterprises",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Too Many Requests",
+                              "code": 429,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:10:40.000Z",
+                              "updatedAt": "2026-07-28T02:10:40.000Z",
+                              "uid": "35240-21e9f62d-181d-4297-920e-701d7e305795"
+                            },
+                            {
+                              "id": "c8c7c35a-9058-4f5f-9278-ee44435115ad",
+                              "name": "Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"ExternalIdentifiers\": [\n    \"<string>\"\n  ],\n  \"LinkedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/enterprises/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "enterprises",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:10:40.000Z",
+                              "updatedAt": "2026-07-28T02:10:40.000Z",
+                              "uid": "35240-c8c7c35a-9058-4f5f-9278-ee44435115ad"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:10:40.000Z",
+                          "updatedAt": "2026-07-28T02:10:40.000Z",
+                          "uid": "35240-f92519fa-7069-494b-83ee-d8b10eb25ab0"
+                        }
+                      ],
+                      "id": "003205f2-d9df-49f6-a12c-e67aa3b4074c",
+                      "createdAt": "2026-07-28T02:10:40.000Z",
+                      "updatedAt": "2026-07-28T02:10:40.000Z",
+                      "uid": "35240-003205f2-d9df-49f6-a12c-e67aa3b4074c"
+                    }
+                  ],
+                  "id": "8b639f68-2a4b-4a97-a086-126f7e2933ad",
+                  "createdAt": "2026-07-28T02:10:40.000Z",
+                  "updatedAt": "2026-07-28T02:10:40.000Z",
+                  "uid": "35240-8b639f68-2a4b-4a97-a086-126f7e2933ad"
+                }
+              ],
+              "id": "957c410b-c6f4-4e90-a01b-3bd03ac80605",
+              "createdAt": "2026-07-28T02:10:40.000Z",
+              "updatedAt": "2026-07-28T02:10:40.000Z",
+              "uid": "35240-957c410b-c6f4-4e90-a01b-3bd03ac80605"
+            }
+          ],
+          "id": "2db9b80c-e82f-47a7-969a-339fd39245b0",
+          "createdAt": "2026-07-28T02:10:40.000Z",
+          "updatedAt": "2026-07-28T02:10:40.000Z",
+          "uid": "35240-2db9b80c-e82f-47a7-969a-339fd39245b0"
+        }
+      ],
+      "id": "eb29d25b-bd66-49a7-8585-59e23976a5d0",
+      "createdAt": "2026-07-28T02:10:40.000Z",
+      "updatedAt": "2026-07-28T02:10:40.000Z",
+      "uid": "35240-eb29d25b-bd66-49a7-8585-59e23976a5d0"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "ClientToken",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.mews.com"
+    }
+  ]
+}

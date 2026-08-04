@@ -1,0 +1,614 @@
+{
+  "info": {
+    "_postman_id": "892e1a75-c2cf-43b6-908d-1e5c4018660b",
+    "name": "Mews Booking Engine API (Distributor) Account notes Counters API",
+    "description": "The Mews Booking Engine API (historically the Distributor API, served from /api/distributor/v1) lets developers build guest-facing booking engines that create reservations directly in Mews. It exposes enterprise configuration, availability, pricing, products, vouchers, payment cards, and reservation group creation for front-end client consumption.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:09:59.000Z",
+    "updatedAt": "2026-07-28T02:09:59.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-892e1a75-c2cf-43b6-908d-1e5c4018660b"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "connector",
+          "item": [
+            {
+              "name": "v1",
+              "item": [
+                {
+                  "name": "counters",
+                  "item": [
+                    {
+                      "name": "getAll",
+                      "item": [
+                        {
+                          "name": "Mews Get All Counters",
+                          "id": "b2199028-14cb-4d29-a4d0-45c824460479",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"CounterIds\": [\n    \"<uuid>\"\n  ],\n  \"Type\": \"BillCounter\",\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/connector/v1/counters/getAll",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "connector",
+                                "v1",
+                                "counters",
+                                "getAll"
+                              ]
+                            },
+                            "description": "Returns all counters of an enterprise associated with the connector integration.\nNote this operation uses [Pagination](https://mews-systems.gitbook.io/connector-api/guidelines/pagination/) and supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property)."
+                          },
+                          "response": [
+                            {
+                              "id": "f6b43b25-6f6a-400c-973e-714143c54fc4",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"CounterIds\": [\n    \"<uuid>\"\n  ],\n  \"Type\": \"BillCounter\",\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/counters/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "counters",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"BillCounters\": [\n    {\n      \"CreatedUtc\": \"<dateTime>\",\n      \"EnterpriseId\": \"<uuid>\",\n      \"Format\": \"<string>\",\n      \"Id\": \"<uuid>\",\n      \"IsDefault\": \"<boolean>\",\n      \"Name\": \"<string>\",\n      \"Type\": \"PaymentConfirmationBillCounter\",\n      \"UpdatedUtc\": \"<dateTime>\",\n      \"Value\": \"<long>\"\n    },\n    {\n      \"CreatedUtc\": \"<dateTime>\",\n      \"EnterpriseId\": \"<uuid>\",\n      \"Format\": \"<string>\",\n      \"Id\": \"<uuid>\",\n      \"IsDefault\": \"<boolean>\",\n      \"Name\": \"<string>\",\n      \"Type\": \"RegistrationCardCounter\",\n      \"UpdatedUtc\": \"<dateTime>\",\n      \"Value\": \"<long>\"\n    }\n  ],\n  \"BillPreviewCounters\": [\n    {\n      \"CreatedUtc\": \"<dateTime>\",\n      \"EnterpriseId\": \"<uuid>\",\n      \"Format\": \"<string>\",\n      \"Id\": \"<uuid>\",\n      \"IsDefault\": \"<boolean>\",\n      \"Name\": \"<string>\",\n      \"Type\": \"RegistrationCardCounter\",\n      \"UpdatedUtc\": \"<dateTime>\",\n      \"Value\": \"<long>\"\n    },\n    {\n      \"CreatedUtc\": \"<dateTime>\",\n      \"EnterpriseId\": \"<uuid>\",\n      \"Format\": \"<string>\",\n      \"Id\": \"<uuid>\",\n      \"IsDefault\": \"<boolean>\",\n      \"Name\": \"<string>\",\n      \"Type\": \"ProformaCounter\",\n      \"UpdatedUtc\": \"<dateTime>\",\n      \"Value\": \"<long>\"\n    }\n  ],\n  \"Counters\": [\n    {\n      \"CreatedUtc\": \"<dateTime>\",\n      \"EnterpriseId\": \"<uuid>\",\n      \"Format\": \"<string>\",\n      \"Id\": \"<uuid>\",\n      \"IsDefault\": \"<boolean>\",\n      \"Name\": \"<string>\",\n      \"Type\": \"BillCounter\",\n      \"UpdatedUtc\": \"<dateTime>\",\n      \"Value\": \"<long>\"\n    },\n    {\n      \"CreatedUtc\": \"<dateTime>\",\n      \"EnterpriseId\": \"<uuid>\",\n      \"Format\": \"<string>\",\n      \"Id\": \"<uuid>\",\n      \"IsDefault\": \"<boolean>\",\n      \"Name\": \"<string>\",\n      \"Type\": \"CreditNoteBillCounter\",\n      \"UpdatedUtc\": \"<dateTime>\",\n      \"Value\": \"<long>\"\n    }\n  ],\n  \"ProformaCounters\": [\n    {\n      \"CreatedUtc\": \"<dateTime>\",\n      \"EnterpriseId\": \"<uuid>\",\n      \"Format\": \"<string>\",\n      \"Id\": \"<uuid>\",\n      \"IsDefault\": \"<boolean>\",\n      \"Name\": \"<string>\",\n      \"Type\": \"CreditNoteBillCounter\",\n      \"UpdatedUtc\": \"<dateTime>\",\n      \"Value\": \"<long>\"\n    },\n    {\n      \"CreatedUtc\": \"<dateTime>\",\n      \"EnterpriseId\": \"<uuid>\",\n      \"Format\": \"<string>\",\n      \"Id\": \"<uuid>\",\n      \"IsDefault\": \"<boolean>\",\n      \"Name\": \"<string>\",\n      \"Type\": \"CreditNoteBillCounter\",\n      \"UpdatedUtc\": \"<dateTime>\",\n      \"Value\": \"<long>\"\n    }\n  ],\n  \"RegistrationCardCounters\": [\n    {\n      \"CreatedUtc\": \"<dateTime>\",\n      \"EnterpriseId\": \"<uuid>\",\n      \"Format\": \"<string>\",\n      \"Id\": \"<uuid>\",\n      \"IsDefault\": \"<boolean>\",\n      \"Name\": \"<string>\",\n      \"Type\": \"RegistrationCardCounter\",\n      \"UpdatedUtc\": \"<dateTime>\",\n      \"Value\": \"<long>\"\n    },\n    {\n      \"CreatedUtc\": \"<dateTime>\",\n      \"EnterpriseId\": \"<uuid>\",\n      \"Format\": \"<string>\",\n      \"Id\": \"<uuid>\",\n      \"IsDefault\": \"<boolean>\",\n      \"Name\": \"<string>\",\n      \"Type\": \"AccountingCounter\",\n      \"UpdatedUtc\": \"<dateTime>\",\n      \"Value\": \"<long>\"\n    }\n  ],\n  \"ServiceOrderCounters\": [\n    {\n      \"CreatedUtc\": \"<dateTime>\",\n      \"EnterpriseId\": \"<uuid>\",\n      \"Format\": \"<string>\",\n      \"Id\": \"<uuid>\",\n      \"IsDefault\": \"<boolean>\",\n      \"Name\": \"<string>\",\n      \"Type\": \"BillCounter\",\n      \"UpdatedUtc\": \"<dateTime>\",\n      \"Value\": \"<long>\"\n    },\n    {\n      \"CreatedUtc\": \"<dateTime>\",\n      \"EnterpriseId\": \"<uuid>\",\n      \"Format\": \"<string>\",\n      \"Id\": \"<uuid>\",\n      \"IsDefault\": \"<boolean>\",\n      \"Name\": \"<string>\",\n      \"Type\": \"AccountingCounter\",\n      \"UpdatedUtc\": \"<dateTime>\",\n      \"Value\": \"<long>\"\n    }\n  ],\n  \"Cursor\": \"<uuid>\"\n}",
+                              "createdAt": "2026-07-28T02:09:59.000Z",
+                              "updatedAt": "2026-07-28T02:09:59.000Z",
+                              "uid": "35240-f6b43b25-6f6a-400c-973e-714143c54fc4"
+                            },
+                            {
+                              "id": "bb2d190e-e2a6-46b2-b133-2dda0b2568fe",
+                              "name": "Server has successfully fulfilled the request and there is no additional information to send back.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"CounterIds\": [\n    \"<uuid>\"\n  ],\n  \"Type\": \"BillCounter\",\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/counters/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "counters",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:59.000Z",
+                              "updatedAt": "2026-07-28T02:09:59.000Z",
+                              "uid": "35240-bb2d190e-e2a6-46b2-b133-2dda0b2568fe"
+                            },
+                            {
+                              "id": "9b398b64-4b63-4127-96a7-384b7ce00bb9",
+                              "name": "Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"CounterIds\": [\n    \"<uuid>\"\n  ],\n  \"Type\": \"BillCounter\",\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/counters/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "counters",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:59.000Z",
+                              "updatedAt": "2026-07-28T02:09:59.000Z",
+                              "uid": "35240-9b398b64-4b63-4127-96a7-384b7ce00bb9"
+                            },
+                            {
+                              "id": "99890569-0ff0-4140-9743-150f0324de1d",
+                              "name": "Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"CounterIds\": [\n    \"<uuid>\"\n  ],\n  \"Type\": \"BillCounter\",\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/counters/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "counters",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:59.000Z",
+                              "updatedAt": "2026-07-28T02:09:59.000Z",
+                              "uid": "35240-99890569-0ff0-4140-9743-150f0324de1d"
+                            },
+                            {
+                              "id": "48128bf1-dd8c-482d-beb9-7e1985387487",
+                              "name": "Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"CounterIds\": [\n    \"<uuid>\"\n  ],\n  \"Type\": \"BillCounter\",\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/counters/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "counters",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:59.000Z",
+                              "updatedAt": "2026-07-28T02:09:59.000Z",
+                              "uid": "35240-48128bf1-dd8c-482d-beb9-7e1985387487"
+                            },
+                            {
+                              "id": "4d1e2006-944f-47f7-84a8-4255e87f1433",
+                              "name": "Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#r",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"CounterIds\": [\n    \"<uuid>\"\n  ],\n  \"Type\": \"BillCounter\",\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/counters/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "counters",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Request Timeout",
+                              "code": 408,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:59.000Z",
+                              "updatedAt": "2026-07-28T02:09:59.000Z",
+                              "uid": "35240-4d1e2006-944f-47f7-84a8-4255e87f1433"
+                            },
+                            {
+                              "id": "cd1c5f6e-6df3-4550-a937-9c172b53fe3b",
+                              "name": "Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitb",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"CounterIds\": [\n    \"<uuid>\"\n  ],\n  \"Type\": \"BillCounter\",\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/counters/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "counters",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Too Many Requests",
+                              "code": 429,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:59.000Z",
+                              "updatedAt": "2026-07-28T02:09:59.000Z",
+                              "uid": "35240-cd1c5f6e-6df3-4550-a937-9c172b53fe3b"
+                            },
+                            {
+                              "id": "c6d84f75-9db9-4807-9222-e58a6c71ea5a",
+                              "name": "Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"CounterIds\": [\n    \"<uuid>\"\n  ],\n  \"Type\": \"BillCounter\",\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/counters/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "counters",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:59.000Z",
+                              "updatedAt": "2026-07-28T02:09:59.000Z",
+                              "uid": "35240-c6d84f75-9db9-4807-9222-e58a6c71ea5a"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:09:59.000Z",
+                          "updatedAt": "2026-07-28T02:09:59.000Z",
+                          "uid": "35240-b2199028-14cb-4d29-a4d0-45c824460479"
+                        }
+                      ],
+                      "id": "1632c696-af1e-490b-a461-07e47502747b",
+                      "createdAt": "2026-07-28T02:09:59.000Z",
+                      "updatedAt": "2026-07-28T02:09:59.000Z",
+                      "uid": "35240-1632c696-af1e-490b-a461-07e47502747b"
+                    }
+                  ],
+                  "id": "a4f2cb91-d8f1-4cb1-a4a6-0a11fcea694e",
+                  "createdAt": "2026-07-28T02:09:59.000Z",
+                  "updatedAt": "2026-07-28T02:09:59.000Z",
+                  "uid": "35240-a4f2cb91-d8f1-4cb1-a4a6-0a11fcea694e"
+                }
+              ],
+              "id": "0a7c212a-5027-4f9b-9975-e9b34e4b2add",
+              "createdAt": "2026-07-28T02:09:59.000Z",
+              "updatedAt": "2026-07-28T02:09:59.000Z",
+              "uid": "35240-0a7c212a-5027-4f9b-9975-e9b34e4b2add"
+            }
+          ],
+          "id": "cd0c3127-97fc-413d-bf76-e44e0f43417b",
+          "createdAt": "2026-07-28T02:09:59.000Z",
+          "updatedAt": "2026-07-28T02:09:59.000Z",
+          "uid": "35240-cd0c3127-97fc-413d-bf76-e44e0f43417b"
+        }
+      ],
+      "id": "37fd43d7-96d7-4c6a-9dab-fd955debad81",
+      "createdAt": "2026-07-28T02:09:59.000Z",
+      "updatedAt": "2026-07-28T02:09:59.000Z",
+      "uid": "35240-37fd43d7-96d7-4c6a-9dab-fd955debad81"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "ClientToken",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.mews.com"
+    }
+  ]
+}

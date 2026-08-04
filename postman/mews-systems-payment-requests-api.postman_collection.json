@@ -1,0 +1,1690 @@
+{
+  "info": {
+    "_postman_id": "c7711b62-c7e7-4ebf-b437-519986a7fbf2",
+    "name": "Mews Booking Engine API (Distributor) Account notes Payment requests API",
+    "description": "The Mews Booking Engine API (historically the Distributor API, served from /api/distributor/v1) lets developers build guest-facing booking engines that create reservations directly in Mews. It exposes enterprise configuration, availability, pricing, products, vouchers, payment cards, and reservation group creation for front-end client consumption.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:12:05.000Z",
+    "updatedAt": "2026-07-28T02:12:05.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-c7711b62-c7e7-4ebf-b437-519986a7fbf2"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "connector",
+          "item": [
+            {
+              "name": "v1",
+              "item": [
+                {
+                  "name": "paymentRequests",
+                  "item": [
+                    {
+                      "name": "getAll",
+                      "item": [
+                        {
+                          "name": "Mews Get All Payment Requests",
+                          "id": "db8c517c-8ad2-40ba-8b48-451da0611baf",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"PaymentRequestIds\": [\n    \"<uuid>\"\n  ],\n  \"AccountIds\": [\n    \"<uuid>\"\n  ],\n  \"ReservationIds\": [\n    \"<uuid>\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"States\": [\n    \"Canceled\",\n    \"Completed\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/connector/v1/paymentRequests/getAll",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "connector",
+                                "v1",
+                                "paymentRequests",
+                                "getAll"
+                              ]
+                            },
+                            "description": "Get all payment requests belonging to the specified customer accounts. \nNote this operation uses [Pagination](https://mews-systems.gitbook.io/connector-api/guidelines/pagination/) and supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property)."
+                          },
+                          "response": [
+                            {
+                              "id": "14210b1b-2bcd-49dd-affa-97f278ba9074",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"PaymentRequestIds\": [\n    \"<uuid>\"\n  ],\n  \"AccountIds\": [\n    \"<uuid>\"\n  ],\n  \"ReservationIds\": [\n    \"<uuid>\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"States\": [\n    \"Canceled\",\n    \"Completed\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/paymentRequests/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "paymentRequests",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"PaymentRequests\": [\n    {\n      \"AccountId\": \"<uuid>\",\n      \"Amount\": {\n        \"Breakdown\": {\n          \"Items\": [\n            {\n              \"NetValue\": \"<double>\",\n              \"TaxValue\": \"<double>\",\n              \"TaxRateCode\": \"<string>\"\n            },\n            {\n              \"NetValue\": \"<double>\",\n              \"TaxValue\": \"<double>\",\n              \"TaxRateCode\": \"<string>\"\n            }\n          ]\n        },\n        \"Currency\": \"<string>\",\n        \"GrossValue\": \"<double>\",\n        \"NetValue\": \"<double>\",\n        \"TaxValues\": [\n          {\n            \"Value\": \"<double>\",\n            \"Code\": \"<string>\"\n          },\n          {\n            \"Value\": \"<double>\",\n            \"Code\": \"<string>\"\n          }\n        ]\n      },\n      \"CreatedUtc\": \"<dateTime>\",\n      \"Description\": \"<string>\",\n      \"EnterpriseId\": \"<uuid>\",\n      \"ExpirationUtc\": \"<dateTime>\",\n      \"Id\": \"<uuid>\",\n      \"Reason\": \"Fee\",\n      \"State\": \"Completed\",\n      \"Type\": \"Payment\",\n      \"UpdatedUtc\": \"<dateTime>\",\n      \"CustomerId\": \"<uuid>\",\n      \"ReservationGroupId\": \"<uuid>\",\n      \"ReservationId\": \"<uuid>\",\n      \"Notes\": \"<string>\"\n    },\n    {\n      \"AccountId\": \"<uuid>\",\n      \"Amount\": {\n        \"Breakdown\": {\n          \"Items\": [\n            {\n              \"NetValue\": \"<double>\",\n              \"TaxValue\": \"<double>\",\n              \"TaxRateCode\": \"<string>\"\n            },\n            {\n              \"NetValue\": \"<double>\",\n              \"TaxValue\": \"<double>\",\n              \"TaxRateCode\": \"<string>\"\n            }\n          ]\n        },\n        \"Currency\": \"<string>\",\n        \"GrossValue\": \"<double>\",\n        \"NetValue\": \"<double>\",\n        \"TaxValues\": [\n          {\n            \"Value\": \"<double>\",\n            \"Code\": \"<string>\"\n          },\n          {\n            \"Value\": \"<double>\",\n            \"Code\": \"<string>\"\n          }\n        ]\n      },\n      \"CreatedUtc\": \"<dateTime>\",\n      \"Description\": \"<string>\",\n      \"EnterpriseId\": \"<uuid>\",\n      \"ExpirationUtc\": \"<dateTime>\",\n      \"Id\": \"<uuid>\",\n      \"Reason\": \"Prepayment\",\n      \"State\": \"Canceled\",\n      \"Type\": \"Payment\",\n      \"UpdatedUtc\": \"<dateTime>\",\n      \"CustomerId\": \"<uuid>\",\n      \"ReservationGroupId\": \"<uuid>\",\n      \"ReservationId\": \"<uuid>\",\n      \"Notes\": \"<string>\"\n    }\n  ],\n  \"Cursor\": \"<uuid>\"\n}",
+                              "createdAt": "2026-07-28T02:12:06.000Z",
+                              "updatedAt": "2026-07-28T02:12:06.000Z",
+                              "uid": "35240-14210b1b-2bcd-49dd-affa-97f278ba9074"
+                            },
+                            {
+                              "id": "0f2a9d4c-5de6-4b72-8966-e1d61aa96c3a",
+                              "name": "Server has successfully fulfilled the request and there is no additional information to send back.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"PaymentRequestIds\": [\n    \"<uuid>\"\n  ],\n  \"AccountIds\": [\n    \"<uuid>\"\n  ],\n  \"ReservationIds\": [\n    \"<uuid>\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"States\": [\n    \"Canceled\",\n    \"Completed\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/paymentRequests/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "paymentRequests",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:06.000Z",
+                              "updatedAt": "2026-07-28T02:12:06.000Z",
+                              "uid": "35240-0f2a9d4c-5de6-4b72-8966-e1d61aa96c3a"
+                            },
+                            {
+                              "id": "3f6fc1c6-3906-4ed3-9a81-26e7046e465b",
+                              "name": "Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"PaymentRequestIds\": [\n    \"<uuid>\"\n  ],\n  \"AccountIds\": [\n    \"<uuid>\"\n  ],\n  \"ReservationIds\": [\n    \"<uuid>\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"States\": [\n    \"Canceled\",\n    \"Completed\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/paymentRequests/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "paymentRequests",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:06.000Z",
+                              "updatedAt": "2026-07-28T02:12:06.000Z",
+                              "uid": "35240-3f6fc1c6-3906-4ed3-9a81-26e7046e465b"
+                            },
+                            {
+                              "id": "bd1a9ed9-d50e-40a9-b26d-00116bf1021f",
+                              "name": "Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"PaymentRequestIds\": [\n    \"<uuid>\"\n  ],\n  \"AccountIds\": [\n    \"<uuid>\"\n  ],\n  \"ReservationIds\": [\n    \"<uuid>\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"States\": [\n    \"Canceled\",\n    \"Completed\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/paymentRequests/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "paymentRequests",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:06.000Z",
+                              "updatedAt": "2026-07-28T02:12:06.000Z",
+                              "uid": "35240-bd1a9ed9-d50e-40a9-b26d-00116bf1021f"
+                            },
+                            {
+                              "id": "1e433a9c-5960-440f-a5f0-fa90bf05b0be",
+                              "name": "Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"PaymentRequestIds\": [\n    \"<uuid>\"\n  ],\n  \"AccountIds\": [\n    \"<uuid>\"\n  ],\n  \"ReservationIds\": [\n    \"<uuid>\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"States\": [\n    \"Canceled\",\n    \"Completed\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/paymentRequests/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "paymentRequests",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:06.000Z",
+                              "updatedAt": "2026-07-28T02:12:06.000Z",
+                              "uid": "35240-1e433a9c-5960-440f-a5f0-fa90bf05b0be"
+                            },
+                            {
+                              "id": "be09a90b-7771-4497-8bbe-b408955eccbd",
+                              "name": "Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#r",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"PaymentRequestIds\": [\n    \"<uuid>\"\n  ],\n  \"AccountIds\": [\n    \"<uuid>\"\n  ],\n  \"ReservationIds\": [\n    \"<uuid>\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"States\": [\n    \"Canceled\",\n    \"Completed\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/paymentRequests/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "paymentRequests",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Request Timeout",
+                              "code": 408,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:06.000Z",
+                              "updatedAt": "2026-07-28T02:12:06.000Z",
+                              "uid": "35240-be09a90b-7771-4497-8bbe-b408955eccbd"
+                            },
+                            {
+                              "id": "f8862bd9-8c19-4935-8440-b4537c0f4ee7",
+                              "name": "Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitb",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"PaymentRequestIds\": [\n    \"<uuid>\"\n  ],\n  \"AccountIds\": [\n    \"<uuid>\"\n  ],\n  \"ReservationIds\": [\n    \"<uuid>\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"States\": [\n    \"Canceled\",\n    \"Completed\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/paymentRequests/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "paymentRequests",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Too Many Requests",
+                              "code": 429,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:06.000Z",
+                              "updatedAt": "2026-07-28T02:12:06.000Z",
+                              "uid": "35240-f8862bd9-8c19-4935-8440-b4537c0f4ee7"
+                            },
+                            {
+                              "id": "62f79e03-79d5-4d05-8862-ce28a8173b92",
+                              "name": "Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"PaymentRequestIds\": [\n    \"<uuid>\"\n  ],\n  \"AccountIds\": [\n    \"<uuid>\"\n  ],\n  \"ReservationIds\": [\n    \"<uuid>\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"States\": [\n    \"Canceled\",\n    \"Completed\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/paymentRequests/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "paymentRequests",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:06.000Z",
+                              "updatedAt": "2026-07-28T02:12:06.000Z",
+                              "uid": "35240-62f79e03-79d5-4d05-8862-ce28a8173b92"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:12:06.000Z",
+                          "updatedAt": "2026-07-28T02:12:06.000Z",
+                          "uid": "35240-db8c517c-8ad2-40ba-8b48-451da0611baf"
+                        }
+                      ],
+                      "id": "8035f3bb-5715-4e10-872d-2ed775857fc7",
+                      "createdAt": "2026-07-28T02:12:06.000Z",
+                      "updatedAt": "2026-07-28T02:12:06.000Z",
+                      "uid": "35240-8035f3bb-5715-4e10-872d-2ed775857fc7"
+                    },
+                    {
+                      "name": "add",
+                      "item": [
+                        {
+                          "name": "Mews Add Payment Requests",
+                          "id": "1a2e31b5-0994-4451-9b2f-08efdacf3907",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"PaymentRequests\": [\n    {\n      \"AccountId\": \"<uuid>\",\n      \"Amount\": {\n        \"Currency\": \"<string>\",\n        \"Value\": \"<double>\"\n      },\n      \"Description\": \"<string>\",\n      \"ExpirationUtc\": \"<dateTime>\",\n      \"Reason\": \"RecurringPayment\",\n      \"Type\": \"Preauthorization\",\n      \"Notes\": \"<string>\",\n      \"ReservationId\": \"<uuid>\",\n      \"BillId\": \"<uuid>\"\n    }\n  ],\n  \"EnterpriseId\": \"<uuid>\",\n  \"SendPaymentRequestEmails\": \"<boolean>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/connector/v1/paymentRequests/add",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "connector",
+                                "v1",
+                                "paymentRequests",
+                                "add"
+                              ]
+                            },
+                            "description": "Creates a payment request to the specified [Customer](https://mews-systems.gitbook.io/connector-api/operations/customers/#customer). Note this operation supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property)."
+                          },
+                          "response": [
+                            {
+                              "id": "9bf355dd-cf2a-45e1-b033-621aed67b223",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"PaymentRequests\": [\n    {\n      \"AccountId\": \"<uuid>\",\n      \"Amount\": {\n        \"Currency\": \"<string>\",\n        \"Value\": \"<double>\"\n      },\n      \"Description\": \"<string>\",\n      \"ExpirationUtc\": \"<dateTime>\",\n      \"Reason\": \"RecurringPayment\",\n      \"Type\": \"Preauthorization\",\n      \"Notes\": \"<string>\",\n      \"ReservationId\": \"<uuid>\",\n      \"BillId\": \"<uuid>\"\n    }\n  ],\n  \"EnterpriseId\": \"<uuid>\",\n  \"SendPaymentRequestEmails\": \"<boolean>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/paymentRequests/add",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "paymentRequests",
+                                    "add"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"PaymentRequests\": [\n    {\n      \"AccountId\": \"<uuid>\",\n      \"Amount\": {\n        \"Breakdown\": {\n          \"Items\": [\n            {\n              \"NetValue\": \"<double>\",\n              \"TaxValue\": \"<double>\",\n              \"TaxRateCode\": \"<string>\"\n            },\n            {\n              \"NetValue\": \"<double>\",\n              \"TaxValue\": \"<double>\",\n              \"TaxRateCode\": \"<string>\"\n            }\n          ]\n        },\n        \"Currency\": \"<string>\",\n        \"GrossValue\": \"<double>\",\n        \"NetValue\": \"<double>\",\n        \"TaxValues\": [\n          {\n            \"Value\": \"<double>\",\n            \"Code\": \"<string>\"\n          },\n          {\n            \"Value\": \"<double>\",\n            \"Code\": \"<string>\"\n          }\n        ]\n      },\n      \"CreatedUtc\": \"<dateTime>\",\n      \"Description\": \"<string>\",\n      \"EnterpriseId\": \"<uuid>\",\n      \"ExpirationUtc\": \"<dateTime>\",\n      \"Id\": \"<uuid>\",\n      \"Reason\": \"Other\",\n      \"State\": \"Pending\",\n      \"Type\": \"Preauthorization\",\n      \"UpdatedUtc\": \"<dateTime>\",\n      \"CustomerId\": \"<uuid>\",\n      \"ReservationGroupId\": \"<uuid>\",\n      \"ReservationId\": \"<uuid>\",\n      \"Notes\": \"<string>\"\n    },\n    {\n      \"AccountId\": \"<uuid>\",\n      \"Amount\": {\n        \"Breakdown\": {\n          \"Items\": [\n            {\n              \"NetValue\": \"<double>\",\n              \"TaxValue\": \"<double>\",\n              \"TaxRateCode\": \"<string>\"\n            },\n            {\n              \"NetValue\": \"<double>\",\n              \"TaxValue\": \"<double>\",\n              \"TaxRateCode\": \"<string>\"\n            }\n          ]\n        },\n        \"Currency\": \"<string>\",\n        \"GrossValue\": \"<double>\",\n        \"NetValue\": \"<double>\",\n        \"TaxValues\": [\n          {\n            \"Value\": \"<double>\",\n            \"Code\": \"<string>\"\n          },\n          {\n            \"Value\": \"<double>\",\n            \"Code\": \"<string>\"\n          }\n        ]\n      },\n      \"CreatedUtc\": \"<dateTime>\",\n      \"Description\": \"<string>\",\n      \"EnterpriseId\": \"<uuid>\",\n      \"ExpirationUtc\": \"<dateTime>\",\n      \"Id\": \"<uuid>\",\n      \"Reason\": \"RecurringPayment\",\n      \"State\": \"Canceled\",\n      \"Type\": \"Payment\",\n      \"UpdatedUtc\": \"<dateTime>\",\n      \"CustomerId\": \"<uuid>\",\n      \"ReservationGroupId\": \"<uuid>\",\n      \"ReservationId\": \"<uuid>\",\n      \"Notes\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:12:06.000Z",
+                              "updatedAt": "2026-07-28T02:12:06.000Z",
+                              "uid": "35240-9bf355dd-cf2a-45e1-b033-621aed67b223"
+                            },
+                            {
+                              "id": "f659a1f3-78c7-497a-bf10-ac1819ac7053",
+                              "name": "Server has successfully fulfilled the request and there is no additional information to send back.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"PaymentRequests\": [\n    {\n      \"AccountId\": \"<uuid>\",\n      \"Amount\": {\n        \"Currency\": \"<string>\",\n        \"Value\": \"<double>\"\n      },\n      \"Description\": \"<string>\",\n      \"ExpirationUtc\": \"<dateTime>\",\n      \"Reason\": \"RecurringPayment\",\n      \"Type\": \"Preauthorization\",\n      \"Notes\": \"<string>\",\n      \"ReservationId\": \"<uuid>\",\n      \"BillId\": \"<uuid>\"\n    }\n  ],\n  \"EnterpriseId\": \"<uuid>\",\n  \"SendPaymentRequestEmails\": \"<boolean>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/paymentRequests/add",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "paymentRequests",
+                                    "add"
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:06.000Z",
+                              "updatedAt": "2026-07-28T02:12:06.000Z",
+                              "uid": "35240-f659a1f3-78c7-497a-bf10-ac1819ac7053"
+                            },
+                            {
+                              "id": "7195019f-d150-47f0-b9d2-ca1dd742e93b",
+                              "name": "Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"PaymentRequests\": [\n    {\n      \"AccountId\": \"<uuid>\",\n      \"Amount\": {\n        \"Currency\": \"<string>\",\n        \"Value\": \"<double>\"\n      },\n      \"Description\": \"<string>\",\n      \"ExpirationUtc\": \"<dateTime>\",\n      \"Reason\": \"RecurringPayment\",\n      \"Type\": \"Preauthorization\",\n      \"Notes\": \"<string>\",\n      \"ReservationId\": \"<uuid>\",\n      \"BillId\": \"<uuid>\"\n    }\n  ],\n  \"EnterpriseId\": \"<uuid>\",\n  \"SendPaymentRequestEmails\": \"<boolean>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/paymentRequests/add",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "paymentRequests",
+                                    "add"
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:06.000Z",
+                              "updatedAt": "2026-07-28T02:12:06.000Z",
+                              "uid": "35240-7195019f-d150-47f0-b9d2-ca1dd742e93b"
+                            },
+                            {
+                              "id": "5b0c127a-958b-457d-9f4f-3d2ae580a55e",
+                              "name": "Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"PaymentRequests\": [\n    {\n      \"AccountId\": \"<uuid>\",\n      \"Amount\": {\n        \"Currency\": \"<string>\",\n        \"Value\": \"<double>\"\n      },\n      \"Description\": \"<string>\",\n      \"ExpirationUtc\": \"<dateTime>\",\n      \"Reason\": \"RecurringPayment\",\n      \"Type\": \"Preauthorization\",\n      \"Notes\": \"<string>\",\n      \"ReservationId\": \"<uuid>\",\n      \"BillId\": \"<uuid>\"\n    }\n  ],\n  \"EnterpriseId\": \"<uuid>\",\n  \"SendPaymentRequestEmails\": \"<boolean>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/paymentRequests/add",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "paymentRequests",
+                                    "add"
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:06.000Z",
+                              "updatedAt": "2026-07-28T02:12:06.000Z",
+                              "uid": "35240-5b0c127a-958b-457d-9f4f-3d2ae580a55e"
+                            },
+                            {
+                              "id": "b2a8f533-08a6-45e9-bb36-54e0bf137b33",
+                              "name": "Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"PaymentRequests\": [\n    {\n      \"AccountId\": \"<uuid>\",\n      \"Amount\": {\n        \"Currency\": \"<string>\",\n        \"Value\": \"<double>\"\n      },\n      \"Description\": \"<string>\",\n      \"ExpirationUtc\": \"<dateTime>\",\n      \"Reason\": \"RecurringPayment\",\n      \"Type\": \"Preauthorization\",\n      \"Notes\": \"<string>\",\n      \"ReservationId\": \"<uuid>\",\n      \"BillId\": \"<uuid>\"\n    }\n  ],\n  \"EnterpriseId\": \"<uuid>\",\n  \"SendPaymentRequestEmails\": \"<boolean>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/paymentRequests/add",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "paymentRequests",
+                                    "add"
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:06.000Z",
+                              "updatedAt": "2026-07-28T02:12:06.000Z",
+                              "uid": "35240-b2a8f533-08a6-45e9-bb36-54e0bf137b33"
+                            },
+                            {
+                              "id": "7888a69a-93cb-40bf-b33a-1971e1431ee8",
+                              "name": "Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#r",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"PaymentRequests\": [\n    {\n      \"AccountId\": \"<uuid>\",\n      \"Amount\": {\n        \"Currency\": \"<string>\",\n        \"Value\": \"<double>\"\n      },\n      \"Description\": \"<string>\",\n      \"ExpirationUtc\": \"<dateTime>\",\n      \"Reason\": \"RecurringPayment\",\n      \"Type\": \"Preauthorization\",\n      \"Notes\": \"<string>\",\n      \"ReservationId\": \"<uuid>\",\n      \"BillId\": \"<uuid>\"\n    }\n  ],\n  \"EnterpriseId\": \"<uuid>\",\n  \"SendPaymentRequestEmails\": \"<boolean>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/paymentRequests/add",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "paymentRequests",
+                                    "add"
+                                  ]
+                                }
+                              },
+                              "status": "Request Timeout",
+                              "code": 408,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:06.000Z",
+                              "updatedAt": "2026-07-28T02:12:06.000Z",
+                              "uid": "35240-7888a69a-93cb-40bf-b33a-1971e1431ee8"
+                            },
+                            {
+                              "id": "4979a540-b889-40d7-bdc4-65da01eb04cd",
+                              "name": "Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitb",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"PaymentRequests\": [\n    {\n      \"AccountId\": \"<uuid>\",\n      \"Amount\": {\n        \"Currency\": \"<string>\",\n        \"Value\": \"<double>\"\n      },\n      \"Description\": \"<string>\",\n      \"ExpirationUtc\": \"<dateTime>\",\n      \"Reason\": \"RecurringPayment\",\n      \"Type\": \"Preauthorization\",\n      \"Notes\": \"<string>\",\n      \"ReservationId\": \"<uuid>\",\n      \"BillId\": \"<uuid>\"\n    }\n  ],\n  \"EnterpriseId\": \"<uuid>\",\n  \"SendPaymentRequestEmails\": \"<boolean>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/paymentRequests/add",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "paymentRequests",
+                                    "add"
+                                  ]
+                                }
+                              },
+                              "status": "Too Many Requests",
+                              "code": 429,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:06.000Z",
+                              "updatedAt": "2026-07-28T02:12:06.000Z",
+                              "uid": "35240-4979a540-b889-40d7-bdc4-65da01eb04cd"
+                            },
+                            {
+                              "id": "68d1448b-fe38-4e8a-800f-1ad5ae34ce0e",
+                              "name": "Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"PaymentRequests\": [\n    {\n      \"AccountId\": \"<uuid>\",\n      \"Amount\": {\n        \"Currency\": \"<string>\",\n        \"Value\": \"<double>\"\n      },\n      \"Description\": \"<string>\",\n      \"ExpirationUtc\": \"<dateTime>\",\n      \"Reason\": \"RecurringPayment\",\n      \"Type\": \"Preauthorization\",\n      \"Notes\": \"<string>\",\n      \"ReservationId\": \"<uuid>\",\n      \"BillId\": \"<uuid>\"\n    }\n  ],\n  \"EnterpriseId\": \"<uuid>\",\n  \"SendPaymentRequestEmails\": \"<boolean>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/paymentRequests/add",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "paymentRequests",
+                                    "add"
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:06.000Z",
+                              "updatedAt": "2026-07-28T02:12:06.000Z",
+                              "uid": "35240-68d1448b-fe38-4e8a-800f-1ad5ae34ce0e"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:12:06.000Z",
+                          "updatedAt": "2026-07-28T02:12:06.000Z",
+                          "uid": "35240-1a2e31b5-0994-4451-9b2f-08efdacf3907"
+                        }
+                      ],
+                      "id": "b8e33500-e194-4182-a925-7d37741f506a",
+                      "createdAt": "2026-07-28T02:12:06.000Z",
+                      "updatedAt": "2026-07-28T02:12:06.000Z",
+                      "uid": "35240-b8e33500-e194-4182-a925-7d37741f506a"
+                    },
+                    {
+                      "name": "cancel",
+                      "item": [
+                        {
+                          "name": "Mews Cancel Payment Requests",
+                          "id": "74994e60-d241-4597-932c-eb32b34ab5d3",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"PaymentRequestIds\": [\n    \"<uuid>\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/connector/v1/paymentRequests/cancel",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "connector",
+                                "v1",
+                                "paymentRequests",
+                                "cancel"
+                              ]
+                            },
+                            "description": "Cancels specified payment requests. Only payment requests which are in `Pending` state can be canceled."
+                          },
+                          "response": [
+                            {
+                              "id": "5654dfae-815b-42ce-a69f-6b91bb1dbcf4",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"PaymentRequestIds\": [\n    \"<uuid>\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/paymentRequests/cancel",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "paymentRequests",
+                                    "cancel"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"PaymentRequests\": [\n    {\n      \"AccountId\": \"<uuid>\",\n      \"Amount\": {\n        \"Breakdown\": {\n          \"Items\": [\n            {\n              \"NetValue\": \"<double>\",\n              \"TaxValue\": \"<double>\",\n              \"TaxRateCode\": \"<string>\"\n            },\n            {\n              \"NetValue\": \"<double>\",\n              \"TaxValue\": \"<double>\",\n              \"TaxRateCode\": \"<string>\"\n            }\n          ]\n        },\n        \"Currency\": \"<string>\",\n        \"GrossValue\": \"<double>\",\n        \"NetValue\": \"<double>\",\n        \"TaxValues\": [\n          {\n            \"Value\": \"<double>\",\n            \"Code\": \"<string>\"\n          },\n          {\n            \"Value\": \"<double>\",\n            \"Code\": \"<string>\"\n          }\n        ]\n      },\n      \"CreatedUtc\": \"<dateTime>\",\n      \"Description\": \"<string>\",\n      \"EnterpriseId\": \"<uuid>\",\n      \"ExpirationUtc\": \"<dateTime>\",\n      \"Id\": \"<uuid>\",\n      \"Reason\": \"RecurringPayment\",\n      \"State\": \"Completed\",\n      \"Type\": \"Payment\",\n      \"UpdatedUtc\": \"<dateTime>\",\n      \"CustomerId\": \"<uuid>\",\n      \"ReservationGroupId\": \"<uuid>\",\n      \"ReservationId\": \"<uuid>\",\n      \"Notes\": \"<string>\"\n    },\n    {\n      \"AccountId\": \"<uuid>\",\n      \"Amount\": {\n        \"Breakdown\": {\n          \"Items\": [\n            {\n              \"NetValue\": \"<double>\",\n              \"TaxValue\": \"<double>\",\n              \"TaxRateCode\": \"<string>\"\n            },\n            {\n              \"NetValue\": \"<double>\",\n              \"TaxValue\": \"<double>\",\n              \"TaxRateCode\": \"<string>\"\n            }\n          ]\n        },\n        \"Currency\": \"<string>\",\n        \"GrossValue\": \"<double>\",\n        \"NetValue\": \"<double>\",\n        \"TaxValues\": [\n          {\n            \"Value\": \"<double>\",\n            \"Code\": \"<string>\"\n          },\n          {\n            \"Value\": \"<double>\",\n            \"Code\": \"<string>\"\n          }\n        ]\n      },\n      \"CreatedUtc\": \"<dateTime>\",\n      \"Description\": \"<string>\",\n      \"EnterpriseId\": \"<uuid>\",\n      \"ExpirationUtc\": \"<dateTime>\",\n      \"Id\": \"<uuid>\",\n      \"Reason\": \"PaymentCardMissing\",\n      \"State\": \"Pending\",\n      \"Type\": \"Payment\",\n      \"UpdatedUtc\": \"<dateTime>\",\n      \"CustomerId\": \"<uuid>\",\n      \"ReservationGroupId\": \"<uuid>\",\n      \"ReservationId\": \"<uuid>\",\n      \"Notes\": \"<string>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:12:06.000Z",
+                              "updatedAt": "2026-07-28T02:12:06.000Z",
+                              "uid": "35240-5654dfae-815b-42ce-a69f-6b91bb1dbcf4"
+                            },
+                            {
+                              "id": "0a94bd32-1361-4378-9557-3c11b801c460",
+                              "name": "Server has successfully fulfilled the request and there is no additional information to send back.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"PaymentRequestIds\": [\n    \"<uuid>\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/paymentRequests/cancel",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "paymentRequests",
+                                    "cancel"
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:06.000Z",
+                              "updatedAt": "2026-07-28T02:12:06.000Z",
+                              "uid": "35240-0a94bd32-1361-4378-9557-3c11b801c460"
+                            },
+                            {
+                              "id": "b1c87ae3-f2eb-4aca-a91e-f043202b9594",
+                              "name": "Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"PaymentRequestIds\": [\n    \"<uuid>\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/paymentRequests/cancel",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "paymentRequests",
+                                    "cancel"
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:06.000Z",
+                              "updatedAt": "2026-07-28T02:12:06.000Z",
+                              "uid": "35240-b1c87ae3-f2eb-4aca-a91e-f043202b9594"
+                            },
+                            {
+                              "id": "78d0158b-94d2-48f2-b13c-5412709d8518",
+                              "name": "Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"PaymentRequestIds\": [\n    \"<uuid>\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/paymentRequests/cancel",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "paymentRequests",
+                                    "cancel"
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:06.000Z",
+                              "updatedAt": "2026-07-28T02:12:06.000Z",
+                              "uid": "35240-78d0158b-94d2-48f2-b13c-5412709d8518"
+                            },
+                            {
+                              "id": "c359829b-b97c-457a-8140-e46d2edc5b3e",
+                              "name": "Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"PaymentRequestIds\": [\n    \"<uuid>\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/paymentRequests/cancel",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "paymentRequests",
+                                    "cancel"
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:06.000Z",
+                              "updatedAt": "2026-07-28T02:12:06.000Z",
+                              "uid": "35240-c359829b-b97c-457a-8140-e46d2edc5b3e"
+                            },
+                            {
+                              "id": "342b31bb-c6e3-4281-ac85-b492b59df73b",
+                              "name": "Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#r",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"PaymentRequestIds\": [\n    \"<uuid>\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/paymentRequests/cancel",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "paymentRequests",
+                                    "cancel"
+                                  ]
+                                }
+                              },
+                              "status": "Request Timeout",
+                              "code": 408,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:06.000Z",
+                              "updatedAt": "2026-07-28T02:12:06.000Z",
+                              "uid": "35240-342b31bb-c6e3-4281-ac85-b492b59df73b"
+                            },
+                            {
+                              "id": "e6b2bedf-f73d-4cdd-b706-2f8d0235e043",
+                              "name": "Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitb",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"PaymentRequestIds\": [\n    \"<uuid>\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/paymentRequests/cancel",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "paymentRequests",
+                                    "cancel"
+                                  ]
+                                }
+                              },
+                              "status": "Too Many Requests",
+                              "code": 429,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:06.000Z",
+                              "updatedAt": "2026-07-28T02:12:06.000Z",
+                              "uid": "35240-e6b2bedf-f73d-4cdd-b706-2f8d0235e043"
+                            },
+                            {
+                              "id": "48df4ce6-449b-4c09-a0b3-0f3970c1bda8",
+                              "name": "Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"PaymentRequestIds\": [\n    \"<uuid>\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/paymentRequests/cancel",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "paymentRequests",
+                                    "cancel"
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:12:06.000Z",
+                              "updatedAt": "2026-07-28T02:12:06.000Z",
+                              "uid": "35240-48df4ce6-449b-4c09-a0b3-0f3970c1bda8"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:12:06.000Z",
+                          "updatedAt": "2026-07-28T02:12:06.000Z",
+                          "uid": "35240-74994e60-d241-4597-932c-eb32b34ab5d3"
+                        }
+                      ],
+                      "id": "69f83b99-a5f2-4a9e-93da-698ea391b854",
+                      "createdAt": "2026-07-28T02:12:06.000Z",
+                      "updatedAt": "2026-07-28T02:12:06.000Z",
+                      "uid": "35240-69f83b99-a5f2-4a9e-93da-698ea391b854"
+                    }
+                  ],
+                  "id": "1dc8803c-ff91-43d8-8a09-18bb5d469fe3",
+                  "createdAt": "2026-07-28T02:12:06.000Z",
+                  "updatedAt": "2026-07-28T02:12:06.000Z",
+                  "uid": "35240-1dc8803c-ff91-43d8-8a09-18bb5d469fe3"
+                }
+              ],
+              "id": "19db4e96-8367-48ac-80cc-99244ef96ad6",
+              "createdAt": "2026-07-28T02:12:06.000Z",
+              "updatedAt": "2026-07-28T02:12:06.000Z",
+              "uid": "35240-19db4e96-8367-48ac-80cc-99244ef96ad6"
+            }
+          ],
+          "id": "d87b4669-56ef-43cc-861d-9f0f9f5f76a0",
+          "createdAt": "2026-07-28T02:12:06.000Z",
+          "updatedAt": "2026-07-28T02:12:06.000Z",
+          "uid": "35240-d87b4669-56ef-43cc-861d-9f0f9f5f76a0"
+        }
+      ],
+      "id": "f776549e-af53-417d-961d-b09a431754ec",
+      "createdAt": "2026-07-28T02:12:06.000Z",
+      "updatedAt": "2026-07-28T02:12:06.000Z",
+      "uid": "35240-f776549e-af53-417d-961d-b09a431754ec"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "ClientToken",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.mews.com"
+    }
+  ]
+}

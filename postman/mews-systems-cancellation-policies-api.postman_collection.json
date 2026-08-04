@@ -1,0 +1,1690 @@
+{
+  "info": {
+    "_postman_id": "baaef53a-423f-4f8f-9a43-d9ba5a7223b3",
+    "name": "Mews Booking Engine API (Distributor) Account notes Cancellation policies API",
+    "description": "The Mews Booking Engine API (historically the Distributor API, served from /api/distributor/v1) lets developers build guest-facing booking engines that create reservations directly in Mews. It exposes enterprise configuration, availability, pricing, products, vouchers, payment cards, and reservation group creation for front-end client consumption.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:09:46.000Z",
+    "updatedAt": "2026-07-28T02:09:47.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-baaef53a-423f-4f8f-9a43-d9ba5a7223b3"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "connector",
+          "item": [
+            {
+              "name": "v1",
+              "item": [
+                {
+                  "name": "cancellationPolicies",
+                  "item": [
+                    {
+                      "name": "getAll",
+                      "item": [
+                        {
+                          "name": "Mews Get All Cancellation Policies",
+                          "id": "288c1397-ceb5-4e9b-abf6-245c21d32115",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"ServiceIds\": [\n    \"<uuid>\"\n  ],\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"CancellationPolicyIds\": [\n    \"<uuid>\"\n  ],\n  \"RateGroupIds\": [\n    \"<uuid>\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"ActivityStates\": [\n    \"Active\",\n    \"Active\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/connector/v1/cancellationPolicies/getAll",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "connector",
+                                "v1",
+                                "cancellationPolicies",
+                                "getAll"
+                              ]
+                            },
+                            "description": "> ### Restricted!\n> This operation is currently in beta-test and as such it is subject to change.\nReturns all cancellation policies, filtered by services, rate groups and other filters. \nNote this operation uses [Pagination](https://mews-systems.gitbook.io/connector-api/guidelines/pagination/) and supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property)."
+                          },
+                          "response": [
+                            {
+                              "id": "3a2da25a-7749-4396-af34-234dfc1cb05d",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"ServiceIds\": [\n    \"<uuid>\"\n  ],\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"CancellationPolicyIds\": [\n    \"<uuid>\"\n  ],\n  \"RateGroupIds\": [\n    \"<uuid>\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"ActivityStates\": [\n    \"Active\",\n    \"Active\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/cancellationPolicies/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "cancellationPolicies",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"CancellationPolicies\": [\n    {\n      \"AbsoluteFee\": {\n        \"Currency\": \"<string>\",\n        \"Value\": \"<double>\"\n      },\n      \"Applicability\": \"Start\",\n      \"ApplicabilityOffset\": \"<string>\",\n      \"CreatedUtc\": \"<dateTime>\",\n      \"FeeExtent\": [\n        \"TimeUnits\",\n        \"TimeUnits\"\n      ],\n      \"Id\": \"<uuid>\",\n      \"IsActive\": \"<boolean>\",\n      \"RateGroupId\": \"<uuid>\",\n      \"RelativeFee\": \"<double>\",\n      \"UpdatedUtc\": \"<dateTime>\",\n      \"FeeMaximumTimeUnits\": \"<integer>\"\n    },\n    {\n      \"AbsoluteFee\": {\n        \"Currency\": \"<string>\",\n        \"Value\": \"<double>\"\n      },\n      \"Applicability\": \"Creation\",\n      \"ApplicabilityOffset\": \"<string>\",\n      \"CreatedUtc\": \"<dateTime>\",\n      \"FeeExtent\": [\n        \"TimeUnits\",\n        \"Products\"\n      ],\n      \"Id\": \"<uuid>\",\n      \"IsActive\": \"<boolean>\",\n      \"RateGroupId\": \"<uuid>\",\n      \"RelativeFee\": \"<double>\",\n      \"UpdatedUtc\": \"<dateTime>\",\n      \"FeeMaximumTimeUnits\": \"<integer>\"\n    }\n  ],\n  \"Cursor\": \"<uuid>\"\n}",
+                              "createdAt": "2026-07-28T02:09:47.000Z",
+                              "updatedAt": "2026-07-28T02:09:47.000Z",
+                              "uid": "35240-3a2da25a-7749-4396-af34-234dfc1cb05d"
+                            },
+                            {
+                              "id": "d194d804-a60d-4b07-8495-7cc52fcd0c65",
+                              "name": "Server has successfully fulfilled the request and there is no additional information to send back.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"ServiceIds\": [\n    \"<uuid>\"\n  ],\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"CancellationPolicyIds\": [\n    \"<uuid>\"\n  ],\n  \"RateGroupIds\": [\n    \"<uuid>\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"ActivityStates\": [\n    \"Active\",\n    \"Active\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/cancellationPolicies/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "cancellationPolicies",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:47.000Z",
+                              "updatedAt": "2026-07-28T02:09:47.000Z",
+                              "uid": "35240-d194d804-a60d-4b07-8495-7cc52fcd0c65"
+                            },
+                            {
+                              "id": "ae29de93-9550-42d7-9967-e704a731987e",
+                              "name": "Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"ServiceIds\": [\n    \"<uuid>\"\n  ],\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"CancellationPolicyIds\": [\n    \"<uuid>\"\n  ],\n  \"RateGroupIds\": [\n    \"<uuid>\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"ActivityStates\": [\n    \"Active\",\n    \"Active\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/cancellationPolicies/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "cancellationPolicies",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:47.000Z",
+                              "updatedAt": "2026-07-28T02:09:47.000Z",
+                              "uid": "35240-ae29de93-9550-42d7-9967-e704a731987e"
+                            },
+                            {
+                              "id": "e0c6c7a9-73ce-4e45-86d2-e4cb77606557",
+                              "name": "Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"ServiceIds\": [\n    \"<uuid>\"\n  ],\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"CancellationPolicyIds\": [\n    \"<uuid>\"\n  ],\n  \"RateGroupIds\": [\n    \"<uuid>\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"ActivityStates\": [\n    \"Active\",\n    \"Active\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/cancellationPolicies/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "cancellationPolicies",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:47.000Z",
+                              "updatedAt": "2026-07-28T02:09:47.000Z",
+                              "uid": "35240-e0c6c7a9-73ce-4e45-86d2-e4cb77606557"
+                            },
+                            {
+                              "id": "701a316f-c3d4-41ff-8ebf-db4ab63da5b4",
+                              "name": "Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"ServiceIds\": [\n    \"<uuid>\"\n  ],\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"CancellationPolicyIds\": [\n    \"<uuid>\"\n  ],\n  \"RateGroupIds\": [\n    \"<uuid>\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"ActivityStates\": [\n    \"Active\",\n    \"Active\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/cancellationPolicies/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "cancellationPolicies",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:47.000Z",
+                              "updatedAt": "2026-07-28T02:09:47.000Z",
+                              "uid": "35240-701a316f-c3d4-41ff-8ebf-db4ab63da5b4"
+                            },
+                            {
+                              "id": "dd9fad8e-65fa-4b81-bab9-2fa113cfac26",
+                              "name": "Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#r",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"ServiceIds\": [\n    \"<uuid>\"\n  ],\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"CancellationPolicyIds\": [\n    \"<uuid>\"\n  ],\n  \"RateGroupIds\": [\n    \"<uuid>\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"ActivityStates\": [\n    \"Active\",\n    \"Active\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/cancellationPolicies/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "cancellationPolicies",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Request Timeout",
+                              "code": 408,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:47.000Z",
+                              "updatedAt": "2026-07-28T02:09:47.000Z",
+                              "uid": "35240-dd9fad8e-65fa-4b81-bab9-2fa113cfac26"
+                            },
+                            {
+                              "id": "fbf6345b-831f-488e-a18e-3ee260818008",
+                              "name": "Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitb",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"ServiceIds\": [\n    \"<uuid>\"\n  ],\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"CancellationPolicyIds\": [\n    \"<uuid>\"\n  ],\n  \"RateGroupIds\": [\n    \"<uuid>\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"ActivityStates\": [\n    \"Active\",\n    \"Active\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/cancellationPolicies/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "cancellationPolicies",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Too Many Requests",
+                              "code": 429,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:47.000Z",
+                              "updatedAt": "2026-07-28T02:09:47.000Z",
+                              "uid": "35240-fbf6345b-831f-488e-a18e-3ee260818008"
+                            },
+                            {
+                              "id": "48e9634d-97bf-43d3-b29c-d64519a2bf84",
+                              "name": "Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"ServiceIds\": [\n    \"<uuid>\"\n  ],\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"CancellationPolicyIds\": [\n    \"<uuid>\"\n  ],\n  \"RateGroupIds\": [\n    \"<uuid>\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"ActivityStates\": [\n    \"Active\",\n    \"Active\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/cancellationPolicies/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "cancellationPolicies",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:47.000Z",
+                              "updatedAt": "2026-07-28T02:09:47.000Z",
+                              "uid": "35240-48e9634d-97bf-43d3-b29c-d64519a2bf84"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:09:47.000Z",
+                          "updatedAt": "2026-07-28T02:09:47.000Z",
+                          "uid": "35240-288c1397-ceb5-4e9b-abf6-245c21d32115"
+                        }
+                      ],
+                      "id": "20153944-1f3a-4bb0-85d0-c3dc24e641c9",
+                      "createdAt": "2026-07-28T02:09:47.000Z",
+                      "updatedAt": "2026-07-28T02:09:47.000Z",
+                      "uid": "35240-20153944-1f3a-4bb0-85d0-c3dc24e641c9"
+                    },
+                    {
+                      "name": "getByReservations",
+                      "item": [
+                        {
+                          "name": "Mews Get Cancellation Policies by Reservations",
+                          "id": "a5ad5d2b-db89-4894-8aa4-b56bab7e2bda",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ReservationIds\": [\n    \"<uuid>\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/connector/v1/cancellationPolicies/getByReservations",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "connector",
+                                "v1",
+                                "cancellationPolicies",
+                                "getByReservations"
+                              ]
+                            },
+                            "description": "Gets cancellation policies for enterprise grouped by reservation for granular cancellation policies flow. This operation supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property/)."
+                          },
+                          "response": [
+                            {
+                              "id": "3db4e25e-fb74-4bef-aa3f-31ed56438b4c",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ReservationIds\": [\n    \"<uuid>\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/cancellationPolicies/getByReservations",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "cancellationPolicies",
+                                    "getByReservations"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"CancellationPolicies\": [\n    {\n      \"Policies\": [\n        {\n          \"AbsoluteFee\": {\n            \"Currency\": \"<string>\",\n            \"Value\": \"<double>\"\n          },\n          \"Applicability\": \"Start\",\n          \"ApplicabilityOffset\": \"<string>\",\n          \"FeeExtents\": [\n            \"Products\",\n            \"Nothing\"\n          ],\n          \"RelativeFee\": \"<double>\",\n          \"FeeMaximumTimeUnits\": \"<integer>\"\n        },\n        {\n          \"AbsoluteFee\": {\n            \"Currency\": \"<string>\",\n            \"Value\": \"<double>\"\n          },\n          \"Applicability\": \"Start\",\n          \"ApplicabilityOffset\": \"<string>\",\n          \"FeeExtents\": [\n            \"Nothing\",\n            \"TimeUnits\"\n          ],\n          \"RelativeFee\": \"<double>\",\n          \"FeeMaximumTimeUnits\": \"<integer>\"\n        }\n      ],\n      \"ReservationId\": \"<uuid>\"\n    },\n    {\n      \"Policies\": [\n        {\n          \"AbsoluteFee\": {\n            \"Currency\": \"<string>\",\n            \"Value\": \"<double>\"\n          },\n          \"Applicability\": \"Start\",\n          \"ApplicabilityOffset\": \"<string>\",\n          \"FeeExtents\": [\n            \"TimeUnits\",\n            \"Everything\"\n          ],\n          \"RelativeFee\": \"<double>\",\n          \"FeeMaximumTimeUnits\": \"<integer>\"\n        },\n        {\n          \"AbsoluteFee\": {\n            \"Currency\": \"<string>\",\n            \"Value\": \"<double>\"\n          },\n          \"Applicability\": \"Creation\",\n          \"ApplicabilityOffset\": \"<string>\",\n          \"FeeExtents\": [\n            \"Products\",\n            \"Nothing\"\n          ],\n          \"RelativeFee\": \"<double>\",\n          \"FeeMaximumTimeUnits\": \"<integer>\"\n        }\n      ],\n      \"ReservationId\": \"<uuid>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:09:47.000Z",
+                              "updatedAt": "2026-07-28T02:09:47.000Z",
+                              "uid": "35240-3db4e25e-fb74-4bef-aa3f-31ed56438b4c"
+                            },
+                            {
+                              "id": "0c1b40cf-2c9c-44e4-bf44-7d31acadd630",
+                              "name": "Server has successfully fulfilled the request and there is no additional information to send back.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ReservationIds\": [\n    \"<uuid>\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/cancellationPolicies/getByReservations",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "cancellationPolicies",
+                                    "getByReservations"
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:47.000Z",
+                              "updatedAt": "2026-07-28T02:09:47.000Z",
+                              "uid": "35240-0c1b40cf-2c9c-44e4-bf44-7d31acadd630"
+                            },
+                            {
+                              "id": "802c36c3-267a-47b3-a472-2adb1c78faad",
+                              "name": "Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ReservationIds\": [\n    \"<uuid>\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/cancellationPolicies/getByReservations",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "cancellationPolicies",
+                                    "getByReservations"
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:47.000Z",
+                              "updatedAt": "2026-07-28T02:09:47.000Z",
+                              "uid": "35240-802c36c3-267a-47b3-a472-2adb1c78faad"
+                            },
+                            {
+                              "id": "c143f01c-2ec9-4b36-8e63-5c6b3780994c",
+                              "name": "Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ReservationIds\": [\n    \"<uuid>\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/cancellationPolicies/getByReservations",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "cancellationPolicies",
+                                    "getByReservations"
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:47.000Z",
+                              "updatedAt": "2026-07-28T02:09:47.000Z",
+                              "uid": "35240-c143f01c-2ec9-4b36-8e63-5c6b3780994c"
+                            },
+                            {
+                              "id": "7ec45daf-10fb-41ad-a41e-71a9eeac5f57",
+                              "name": "Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ReservationIds\": [\n    \"<uuid>\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/cancellationPolicies/getByReservations",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "cancellationPolicies",
+                                    "getByReservations"
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:47.000Z",
+                              "updatedAt": "2026-07-28T02:09:47.000Z",
+                              "uid": "35240-7ec45daf-10fb-41ad-a41e-71a9eeac5f57"
+                            },
+                            {
+                              "id": "ab8a38a6-45ed-4fec-a157-baa6c27944c1",
+                              "name": "Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#r",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ReservationIds\": [\n    \"<uuid>\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/cancellationPolicies/getByReservations",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "cancellationPolicies",
+                                    "getByReservations"
+                                  ]
+                                }
+                              },
+                              "status": "Request Timeout",
+                              "code": 408,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:47.000Z",
+                              "updatedAt": "2026-07-28T02:09:47.000Z",
+                              "uid": "35240-ab8a38a6-45ed-4fec-a157-baa6c27944c1"
+                            },
+                            {
+                              "id": "9ae4297f-3e79-4c8a-9fc4-b784fbdca0da",
+                              "name": "Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitb",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ReservationIds\": [\n    \"<uuid>\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/cancellationPolicies/getByReservations",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "cancellationPolicies",
+                                    "getByReservations"
+                                  ]
+                                }
+                              },
+                              "status": "Too Many Requests",
+                              "code": 429,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:47.000Z",
+                              "updatedAt": "2026-07-28T02:09:47.000Z",
+                              "uid": "35240-9ae4297f-3e79-4c8a-9fc4-b784fbdca0da"
+                            },
+                            {
+                              "id": "d7c241d0-24b1-4fc8-af98-f96157dbf35c",
+                              "name": "Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ReservationIds\": [\n    \"<uuid>\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/cancellationPolicies/getByReservations",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "cancellationPolicies",
+                                    "getByReservations"
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:47.000Z",
+                              "updatedAt": "2026-07-28T02:09:47.000Z",
+                              "uid": "35240-d7c241d0-24b1-4fc8-af98-f96157dbf35c"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:09:47.000Z",
+                          "updatedAt": "2026-07-28T02:09:47.000Z",
+                          "uid": "35240-a5ad5d2b-db89-4894-8aa4-b56bab7e2bda"
+                        }
+                      ],
+                      "id": "92ccab7e-2000-42bb-ac60-281ff10d18f5",
+                      "createdAt": "2026-07-28T02:09:47.000Z",
+                      "updatedAt": "2026-07-28T02:09:47.000Z",
+                      "uid": "35240-92ccab7e-2000-42bb-ac60-281ff10d18f5"
+                    },
+                    {
+                      "name": "getByRates",
+                      "item": [
+                        {
+                          "name": "Mews Get Cancellation Policies by Rates",
+                          "id": "e8b281f1-fc2a-4078-8812-a5f8b91081af",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"RateIds\": [\n    \"<uuid>\"\n  ],\n  \"ReservationEndUtc\": \"<dateTime>\",\n  \"ReservationStartUtc\": \"<dateTime>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/connector/v1/cancellationPolicies/getByRates",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "connector",
+                                "v1",
+                                "cancellationPolicies",
+                                "getByRates"
+                              ]
+                            },
+                            "description": "Gets cancellation policies for enterprise grouped by rate for granular cancellation policies flow. This operation supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property/)."
+                          },
+                          "response": [
+                            {
+                              "id": "a9c2c20c-cd5a-442b-98d1-3c1df30043d0",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"RateIds\": [\n    \"<uuid>\"\n  ],\n  \"ReservationEndUtc\": \"<dateTime>\",\n  \"ReservationStartUtc\": \"<dateTime>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/cancellationPolicies/getByRates",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "cancellationPolicies",
+                                    "getByRates"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"CancellationPolicies\": [\n    {\n      \"Policies\": [\n        {\n          \"AbsoluteFee\": {\n            \"Currency\": \"<string>\",\n            \"Value\": \"<double>\"\n          },\n          \"Applicability\": \"Creation\",\n          \"ApplicabilityOffset\": \"<string>\",\n          \"FeeExtents\": [\n            \"TimeUnits\",\n            \"Everything\"\n          ],\n          \"RelativeFee\": \"<double>\",\n          \"FeeMaximumTimeUnits\": \"<integer>\"\n        },\n        {\n          \"AbsoluteFee\": {\n            \"Currency\": \"<string>\",\n            \"Value\": \"<double>\"\n          },\n          \"Applicability\": \"Creation\",\n          \"ApplicabilityOffset\": \"<string>\",\n          \"FeeExtents\": [\n            \"Nothing\",\n            \"TimeUnits\"\n          ],\n          \"RelativeFee\": \"<double>\",\n          \"FeeMaximumTimeUnits\": \"<integer>\"\n        }\n      ],\n      \"RateId\": \"<uuid>\"\n    },\n    {\n      \"Policies\": [\n        {\n          \"AbsoluteFee\": {\n            \"Currency\": \"<string>\",\n            \"Value\": \"<double>\"\n          },\n          \"Applicability\": \"StartDate\",\n          \"ApplicabilityOffset\": \"<string>\",\n          \"FeeExtents\": [\n            \"TimeUnits\",\n            \"TimeUnits\"\n          ],\n          \"RelativeFee\": \"<double>\",\n          \"FeeMaximumTimeUnits\": \"<integer>\"\n        },\n        {\n          \"AbsoluteFee\": {\n            \"Currency\": \"<string>\",\n            \"Value\": \"<double>\"\n          },\n          \"Applicability\": \"StartDate\",\n          \"ApplicabilityOffset\": \"<string>\",\n          \"FeeExtents\": [\n            \"Everything\",\n            \"Everything\"\n          ],\n          \"RelativeFee\": \"<double>\",\n          \"FeeMaximumTimeUnits\": \"<integer>\"\n        }\n      ],\n      \"RateId\": \"<uuid>\"\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:09:47.000Z",
+                              "updatedAt": "2026-07-28T02:09:47.000Z",
+                              "uid": "35240-a9c2c20c-cd5a-442b-98d1-3c1df30043d0"
+                            },
+                            {
+                              "id": "f4330ad9-2aac-4f28-b201-f2167c9854f1",
+                              "name": "Server has successfully fulfilled the request and there is no additional information to send back.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"RateIds\": [\n    \"<uuid>\"\n  ],\n  \"ReservationEndUtc\": \"<dateTime>\",\n  \"ReservationStartUtc\": \"<dateTime>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/cancellationPolicies/getByRates",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "cancellationPolicies",
+                                    "getByRates"
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:47.000Z",
+                              "updatedAt": "2026-07-28T02:09:47.000Z",
+                              "uid": "35240-f4330ad9-2aac-4f28-b201-f2167c9854f1"
+                            },
+                            {
+                              "id": "7a13f74f-4667-4b6e-93b2-bbac62c5ead8",
+                              "name": "Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"RateIds\": [\n    \"<uuid>\"\n  ],\n  \"ReservationEndUtc\": \"<dateTime>\",\n  \"ReservationStartUtc\": \"<dateTime>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/cancellationPolicies/getByRates",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "cancellationPolicies",
+                                    "getByRates"
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:47.000Z",
+                              "updatedAt": "2026-07-28T02:09:47.000Z",
+                              "uid": "35240-7a13f74f-4667-4b6e-93b2-bbac62c5ead8"
+                            },
+                            {
+                              "id": "ff4f1c57-9590-48c9-b745-2fd0bed1d253",
+                              "name": "Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"RateIds\": [\n    \"<uuid>\"\n  ],\n  \"ReservationEndUtc\": \"<dateTime>\",\n  \"ReservationStartUtc\": \"<dateTime>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/cancellationPolicies/getByRates",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "cancellationPolicies",
+                                    "getByRates"
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:47.000Z",
+                              "updatedAt": "2026-07-28T02:09:47.000Z",
+                              "uid": "35240-ff4f1c57-9590-48c9-b745-2fd0bed1d253"
+                            },
+                            {
+                              "id": "11b9ec21-6c08-401b-a186-7e6fa5249f71",
+                              "name": "Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"RateIds\": [\n    \"<uuid>\"\n  ],\n  \"ReservationEndUtc\": \"<dateTime>\",\n  \"ReservationStartUtc\": \"<dateTime>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/cancellationPolicies/getByRates",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "cancellationPolicies",
+                                    "getByRates"
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:47.000Z",
+                              "updatedAt": "2026-07-28T02:09:47.000Z",
+                              "uid": "35240-11b9ec21-6c08-401b-a186-7e6fa5249f71"
+                            },
+                            {
+                              "id": "912f0014-6e46-4464-8e29-c93dd5d3c74b",
+                              "name": "Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#r",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"RateIds\": [\n    \"<uuid>\"\n  ],\n  \"ReservationEndUtc\": \"<dateTime>\",\n  \"ReservationStartUtc\": \"<dateTime>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/cancellationPolicies/getByRates",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "cancellationPolicies",
+                                    "getByRates"
+                                  ]
+                                }
+                              },
+                              "status": "Request Timeout",
+                              "code": 408,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:47.000Z",
+                              "updatedAt": "2026-07-28T02:09:47.000Z",
+                              "uid": "35240-912f0014-6e46-4464-8e29-c93dd5d3c74b"
+                            },
+                            {
+                              "id": "767689b6-05ec-430c-9efc-1035092aa646",
+                              "name": "Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitb",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"RateIds\": [\n    \"<uuid>\"\n  ],\n  \"ReservationEndUtc\": \"<dateTime>\",\n  \"ReservationStartUtc\": \"<dateTime>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/cancellationPolicies/getByRates",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "cancellationPolicies",
+                                    "getByRates"
+                                  ]
+                                }
+                              },
+                              "status": "Too Many Requests",
+                              "code": 429,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:47.000Z",
+                              "updatedAt": "2026-07-28T02:09:47.000Z",
+                              "uid": "35240-767689b6-05ec-430c-9efc-1035092aa646"
+                            },
+                            {
+                              "id": "0880e097-a32f-4f50-be69-6d2b4afc0183",
+                              "name": "Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"RateIds\": [\n    \"<uuid>\"\n  ],\n  \"ReservationEndUtc\": \"<dateTime>\",\n  \"ReservationStartUtc\": \"<dateTime>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/cancellationPolicies/getByRates",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "cancellationPolicies",
+                                    "getByRates"
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:47.000Z",
+                              "updatedAt": "2026-07-28T02:09:47.000Z",
+                              "uid": "35240-0880e097-a32f-4f50-be69-6d2b4afc0183"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:09:47.000Z",
+                          "updatedAt": "2026-07-28T02:09:47.000Z",
+                          "uid": "35240-e8b281f1-fc2a-4078-8812-a5f8b91081af"
+                        }
+                      ],
+                      "id": "cc3dd1f2-173b-412d-affe-d50879b12d13",
+                      "createdAt": "2026-07-28T02:09:47.000Z",
+                      "updatedAt": "2026-07-28T02:09:47.000Z",
+                      "uid": "35240-cc3dd1f2-173b-412d-affe-d50879b12d13"
+                    }
+                  ],
+                  "id": "ffcccd62-23eb-46d1-9382-f91d0c4b204f",
+                  "createdAt": "2026-07-28T02:09:47.000Z",
+                  "updatedAt": "2026-07-28T02:09:47.000Z",
+                  "uid": "35240-ffcccd62-23eb-46d1-9382-f91d0c4b204f"
+                }
+              ],
+              "id": "1e35f88c-ba24-4dca-b5ff-0bd35701aee7",
+              "createdAt": "2026-07-28T02:09:47.000Z",
+              "updatedAt": "2026-07-28T02:09:47.000Z",
+              "uid": "35240-1e35f88c-ba24-4dca-b5ff-0bd35701aee7"
+            }
+          ],
+          "id": "d855a617-50b2-442d-bf77-b612f3e52ab2",
+          "createdAt": "2026-07-28T02:09:47.000Z",
+          "updatedAt": "2026-07-28T02:09:47.000Z",
+          "uid": "35240-d855a617-50b2-442d-bf77-b612f3e52ab2"
+        }
+      ],
+      "id": "fa76eea4-425f-4125-8c75-a0b803ac17b5",
+      "createdAt": "2026-07-28T02:09:47.000Z",
+      "updatedAt": "2026-07-28T02:09:47.000Z",
+      "uid": "35240-fa76eea4-425f-4125-8c75-a0b803ac17b5"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "ClientToken",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.mews.com"
+    }
+  ]
+}

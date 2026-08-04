@@ -1,0 +1,2228 @@
+{
+  "info": {
+    "_postman_id": "1bfae44e-4b76-4ade-8654-067eec0ea409",
+    "name": "Mews Booking Engine API (Distributor) Account notes API",
+    "description": "The Mews Booking Engine API (historically the Distributor API, served from /api/distributor/v1) lets developers build guest-facing booking engines that create reservations directly in Mews. It exposes enterprise configuration, availability, pricing, products, vouchers, payment cards, and reservation group creation for front-end client consumption.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:09:28.000Z",
+    "updatedAt": "2026-07-28T02:09:28.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-1bfae44e-4b76-4ade-8654-067eec0ea409"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "connector",
+          "item": [
+            {
+              "name": "v1",
+              "item": [
+                {
+                  "name": "accountNotes",
+                  "item": [
+                    {
+                      "name": "getAll",
+                      "item": [
+                        {
+                          "name": "Mews Get All Account Notes",
+                          "id": "e030e83e-9ff5-4f18-a410-1cd3f8e99d3c",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"ChainIds\": [\n    \"<uuid>\"\n  ],\n  \"AccountNoteIds\": [\n    \"<uuid>\"\n  ],\n  \"AccountIds\": [\n    \"<uuid>\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"ActivityStates\": [\n    \"Deleted\",\n    \"Active\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/connector/v1/accountNotes/getAll",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "connector",
+                                "v1",
+                                "accountNotes",
+                                "getAll"
+                              ]
+                            },
+                            "description": "Returns all account notes of an account, optionally filtered by activity state, account identifiers, specific account note identifiers or other filter parameters.\nNote this operation uses [Pagination](https://mews-systems.gitbook.io/connector-api/guidelines/pagination/) and supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property)."
+                          },
+                          "response": [
+                            {
+                              "id": "b2444415-60e9-405e-8dcc-99fcd7cad556",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"ChainIds\": [\n    \"<uuid>\"\n  ],\n  \"AccountNoteIds\": [\n    \"<uuid>\"\n  ],\n  \"AccountIds\": [\n    \"<uuid>\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"ActivityStates\": [\n    \"Deleted\",\n    \"Active\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/accountNotes/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "accountNotes",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"AccountNotes\": [\n    {\n      \"AccountId\": \"<uuid>\",\n      \"AccountType\": \"Customer\",\n      \"Classifications\": [\n        \"Housekeeping\",\n        \"Complaints\"\n      ],\n      \"Content\": \"<string>\",\n      \"CreatorProfile\": {\n        \"Discriminator\": \"Static\",\n        \"EnterpriseProfile\": {\n          \"ProfileId\": \"<uuid>\"\n        }\n      },\n      \"Id\": \"<uuid>\",\n      \"IsActive\": \"<boolean>\",\n      \"UpdaterProfile\": {\n        \"Discriminator\": \"Integration\",\n        \"EnterpriseProfile\": {\n          \"ProfileId\": \"<uuid>\"\n        }\n      }\n    },\n    {\n      \"AccountId\": \"<uuid>\",\n      \"AccountType\": \"Customer\",\n      \"Classifications\": [\n        \"Maintenance\",\n        \"Complaints\"\n      ],\n      \"Content\": \"<string>\",\n      \"CreatorProfile\": {\n        \"Discriminator\": \"Personal\",\n        \"EnterpriseProfile\": {\n          \"ProfileId\": \"<uuid>\"\n        }\n      },\n      \"Id\": \"<uuid>\",\n      \"IsActive\": \"<boolean>\",\n      \"UpdaterProfile\": {\n        \"Discriminator\": \"Integration\",\n        \"EnterpriseProfile\": {\n          \"ProfileId\": \"<uuid>\"\n        }\n      }\n    }\n  ],\n  \"Cursor\": \"<uuid>\"\n}",
+                              "createdAt": "2026-07-28T02:09:29.000Z",
+                              "updatedAt": "2026-07-28T02:09:29.000Z",
+                              "uid": "35240-b2444415-60e9-405e-8dcc-99fcd7cad556"
+                            },
+                            {
+                              "id": "740913a5-03f8-49f0-bcae-796e7ae78545",
+                              "name": "Server has successfully fulfilled the request and there is no additional information to send back.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"ChainIds\": [\n    \"<uuid>\"\n  ],\n  \"AccountNoteIds\": [\n    \"<uuid>\"\n  ],\n  \"AccountIds\": [\n    \"<uuid>\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"ActivityStates\": [\n    \"Deleted\",\n    \"Active\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/accountNotes/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "accountNotes",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:29.000Z",
+                              "updatedAt": "2026-07-28T02:09:29.000Z",
+                              "uid": "35240-740913a5-03f8-49f0-bcae-796e7ae78545"
+                            },
+                            {
+                              "id": "cadaf0a4-839e-4731-8754-905bdcd7b3df",
+                              "name": "Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"ChainIds\": [\n    \"<uuid>\"\n  ],\n  \"AccountNoteIds\": [\n    \"<uuid>\"\n  ],\n  \"AccountIds\": [\n    \"<uuid>\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"ActivityStates\": [\n    \"Deleted\",\n    \"Active\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/accountNotes/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "accountNotes",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:29.000Z",
+                              "updatedAt": "2026-07-28T02:09:29.000Z",
+                              "uid": "35240-cadaf0a4-839e-4731-8754-905bdcd7b3df"
+                            },
+                            {
+                              "id": "d6cf8f21-fbbe-43f8-9f39-429097b9726f",
+                              "name": "Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"ChainIds\": [\n    \"<uuid>\"\n  ],\n  \"AccountNoteIds\": [\n    \"<uuid>\"\n  ],\n  \"AccountIds\": [\n    \"<uuid>\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"ActivityStates\": [\n    \"Deleted\",\n    \"Active\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/accountNotes/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "accountNotes",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:29.000Z",
+                              "updatedAt": "2026-07-28T02:09:29.000Z",
+                              "uid": "35240-d6cf8f21-fbbe-43f8-9f39-429097b9726f"
+                            },
+                            {
+                              "id": "56c2c9cb-7e2d-4843-8bf8-85465b562cf9",
+                              "name": "Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"ChainIds\": [\n    \"<uuid>\"\n  ],\n  \"AccountNoteIds\": [\n    \"<uuid>\"\n  ],\n  \"AccountIds\": [\n    \"<uuid>\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"ActivityStates\": [\n    \"Deleted\",\n    \"Active\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/accountNotes/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "accountNotes",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:29.000Z",
+                              "updatedAt": "2026-07-28T02:09:29.000Z",
+                              "uid": "35240-56c2c9cb-7e2d-4843-8bf8-85465b562cf9"
+                            },
+                            {
+                              "id": "5b33ff08-62d0-4e74-b3ed-f15ec9f69780",
+                              "name": "Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#r",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"ChainIds\": [\n    \"<uuid>\"\n  ],\n  \"AccountNoteIds\": [\n    \"<uuid>\"\n  ],\n  \"AccountIds\": [\n    \"<uuid>\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"ActivityStates\": [\n    \"Deleted\",\n    \"Active\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/accountNotes/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "accountNotes",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Request Timeout",
+                              "code": 408,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:29.000Z",
+                              "updatedAt": "2026-07-28T02:09:29.000Z",
+                              "uid": "35240-5b33ff08-62d0-4e74-b3ed-f15ec9f69780"
+                            },
+                            {
+                              "id": "b6305c3a-7f05-46e9-baaf-6a696f7ede8a",
+                              "name": "Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitb",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"ChainIds\": [\n    \"<uuid>\"\n  ],\n  \"AccountNoteIds\": [\n    \"<uuid>\"\n  ],\n  \"AccountIds\": [\n    \"<uuid>\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"ActivityStates\": [\n    \"Deleted\",\n    \"Active\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/accountNotes/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "accountNotes",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Too Many Requests",
+                              "code": 429,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:29.000Z",
+                              "updatedAt": "2026-07-28T02:09:29.000Z",
+                              "uid": "35240-b6305c3a-7f05-46e9-baaf-6a696f7ede8a"
+                            },
+                            {
+                              "id": "216685a7-4d0f-428c-859f-9b9a1e640cd7",
+                              "name": "Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"ChainIds\": [\n    \"<uuid>\"\n  ],\n  \"AccountNoteIds\": [\n    \"<uuid>\"\n  ],\n  \"AccountIds\": [\n    \"<uuid>\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"ActivityStates\": [\n    \"Deleted\",\n    \"Active\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/accountNotes/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "accountNotes",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:29.000Z",
+                              "updatedAt": "2026-07-28T02:09:29.000Z",
+                              "uid": "35240-216685a7-4d0f-428c-859f-9b9a1e640cd7"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:09:28.000Z",
+                          "updatedAt": "2026-07-28T02:09:28.000Z",
+                          "uid": "35240-e030e83e-9ff5-4f18-a410-1cd3f8e99d3c"
+                        }
+                      ],
+                      "id": "1e4bf306-5054-4038-a95e-057db6f39612",
+                      "createdAt": "2026-07-28T02:09:28.000Z",
+                      "updatedAt": "2026-07-28T02:09:28.000Z",
+                      "uid": "35240-1e4bf306-5054-4038-a95e-057db6f39612"
+                    },
+                    {
+                      "name": "add",
+                      "item": [
+                        {
+                          "name": "Mews Add Account Notes",
+                          "id": "dfb30913-7b9a-4c7b-a16b-b4e2b52adf17",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AccountNotes\": [\n    {\n      \"AccountId\": \"<uuid>\",\n      \"Classifications\": [\n        \"FoodAndBeverage\"\n      ],\n      \"Content\": \"<string>\"\n    }\n  ],\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ChainId\": \"<uuid>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/connector/v1/accountNotes/add",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "connector",
+                                "v1",
+                                "accountNotes",
+                                "add"
+                              ]
+                            },
+                            "description": "Adds account notes to an account of the enterprise chain. Note this operation supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property)."
+                          },
+                          "response": [
+                            {
+                              "id": "609ff4d1-7d10-4f00-a8ca-9955267a651b",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AccountNotes\": [\n    {\n      \"AccountId\": \"<uuid>\",\n      \"Classifications\": [\n        \"FoodAndBeverage\"\n      ],\n      \"Content\": \"<string>\"\n    }\n  ],\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/accountNotes/add",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "accountNotes",
+                                    "add"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"AccountNotes\": [\n    {\n      \"AccountId\": \"<uuid>\",\n      \"AccountType\": \"Customer\",\n      \"Classifications\": [\n        \"Accounting\",\n        \"Maintenance\"\n      ],\n      \"Content\": \"<string>\",\n      \"CreatorProfile\": {\n        \"Discriminator\": \"Enterprise\",\n        \"EnterpriseProfile\": {\n          \"ProfileId\": \"<uuid>\"\n        }\n      },\n      \"Id\": \"<uuid>\",\n      \"IsActive\": \"<boolean>\",\n      \"UpdaterProfile\": {\n        \"Discriminator\": \"Enterprise\",\n        \"EnterpriseProfile\": {\n          \"ProfileId\": \"<uuid>\"\n        }\n      }\n    },\n    {\n      \"AccountId\": \"<uuid>\",\n      \"AccountType\": \"Company\",\n      \"Classifications\": [\n        \"Accounting\",\n        \"Housekeeping\"\n      ],\n      \"Content\": \"<string>\",\n      \"CreatorProfile\": {\n        \"Discriminator\": \"Static\",\n        \"EnterpriseProfile\": {\n          \"ProfileId\": \"<uuid>\"\n        }\n      },\n      \"Id\": \"<uuid>\",\n      \"IsActive\": \"<boolean>\",\n      \"UpdaterProfile\": {\n        \"Discriminator\": \"Integration\",\n        \"EnterpriseProfile\": {\n          \"ProfileId\": \"<uuid>\"\n        }\n      }\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:09:29.000Z",
+                              "updatedAt": "2026-07-28T02:09:29.000Z",
+                              "uid": "35240-609ff4d1-7d10-4f00-a8ca-9955267a651b"
+                            },
+                            {
+                              "id": "6f9fdbdc-76cd-4dbe-921b-91f04ec4cce2",
+                              "name": "Server has successfully fulfilled the request and there is no additional information to send back.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AccountNotes\": [\n    {\n      \"AccountId\": \"<uuid>\",\n      \"Classifications\": [\n        \"FoodAndBeverage\"\n      ],\n      \"Content\": \"<string>\"\n    }\n  ],\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/accountNotes/add",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "accountNotes",
+                                    "add"
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:29.000Z",
+                              "updatedAt": "2026-07-28T02:09:29.000Z",
+                              "uid": "35240-6f9fdbdc-76cd-4dbe-921b-91f04ec4cce2"
+                            },
+                            {
+                              "id": "c751487d-3f46-4782-9281-7a0f8fcd7f8c",
+                              "name": "Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AccountNotes\": [\n    {\n      \"AccountId\": \"<uuid>\",\n      \"Classifications\": [\n        \"FoodAndBeverage\"\n      ],\n      \"Content\": \"<string>\"\n    }\n  ],\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/accountNotes/add",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "accountNotes",
+                                    "add"
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:29.000Z",
+                              "updatedAt": "2026-07-28T02:09:29.000Z",
+                              "uid": "35240-c751487d-3f46-4782-9281-7a0f8fcd7f8c"
+                            },
+                            {
+                              "id": "d83c2a06-b941-4a3f-bffc-d40a6b3fcbf6",
+                              "name": "Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AccountNotes\": [\n    {\n      \"AccountId\": \"<uuid>\",\n      \"Classifications\": [\n        \"FoodAndBeverage\"\n      ],\n      \"Content\": \"<string>\"\n    }\n  ],\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/accountNotes/add",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "accountNotes",
+                                    "add"
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:29.000Z",
+                              "updatedAt": "2026-07-28T02:09:29.000Z",
+                              "uid": "35240-d83c2a06-b941-4a3f-bffc-d40a6b3fcbf6"
+                            },
+                            {
+                              "id": "de974d6f-63be-4ace-b8c0-915eb5e89651",
+                              "name": "Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AccountNotes\": [\n    {\n      \"AccountId\": \"<uuid>\",\n      \"Classifications\": [\n        \"FoodAndBeverage\"\n      ],\n      \"Content\": \"<string>\"\n    }\n  ],\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/accountNotes/add",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "accountNotes",
+                                    "add"
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:29.000Z",
+                              "updatedAt": "2026-07-28T02:09:29.000Z",
+                              "uid": "35240-de974d6f-63be-4ace-b8c0-915eb5e89651"
+                            },
+                            {
+                              "id": "2ac8ce32-0e25-4feb-ab9d-542dbc8cfa58",
+                              "name": "Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#r",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AccountNotes\": [\n    {\n      \"AccountId\": \"<uuid>\",\n      \"Classifications\": [\n        \"FoodAndBeverage\"\n      ],\n      \"Content\": \"<string>\"\n    }\n  ],\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/accountNotes/add",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "accountNotes",
+                                    "add"
+                                  ]
+                                }
+                              },
+                              "status": "Request Timeout",
+                              "code": 408,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:29.000Z",
+                              "updatedAt": "2026-07-28T02:09:29.000Z",
+                              "uid": "35240-2ac8ce32-0e25-4feb-ab9d-542dbc8cfa58"
+                            },
+                            {
+                              "id": "817e909a-09be-4a62-bebd-5aa769acb9be",
+                              "name": "Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitb",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AccountNotes\": [\n    {\n      \"AccountId\": \"<uuid>\",\n      \"Classifications\": [\n        \"FoodAndBeverage\"\n      ],\n      \"Content\": \"<string>\"\n    }\n  ],\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/accountNotes/add",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "accountNotes",
+                                    "add"
+                                  ]
+                                }
+                              },
+                              "status": "Too Many Requests",
+                              "code": 429,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:29.000Z",
+                              "updatedAt": "2026-07-28T02:09:29.000Z",
+                              "uid": "35240-817e909a-09be-4a62-bebd-5aa769acb9be"
+                            },
+                            {
+                              "id": "cb75be4f-ab52-44eb-9746-583bc05bcd6a",
+                              "name": "Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AccountNotes\": [\n    {\n      \"AccountId\": \"<uuid>\",\n      \"Classifications\": [\n        \"FoodAndBeverage\"\n      ],\n      \"Content\": \"<string>\"\n    }\n  ],\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/accountNotes/add",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "accountNotes",
+                                    "add"
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:29.000Z",
+                              "updatedAt": "2026-07-28T02:09:29.000Z",
+                              "uid": "35240-cb75be4f-ab52-44eb-9746-583bc05bcd6a"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:09:28.000Z",
+                          "updatedAt": "2026-07-28T02:09:28.000Z",
+                          "uid": "35240-dfb30913-7b9a-4c7b-a16b-b4e2b52adf17"
+                        }
+                      ],
+                      "id": "f6ce576c-0a06-4606-aba5-2152abd7b0c3",
+                      "createdAt": "2026-07-28T02:09:28.000Z",
+                      "updatedAt": "2026-07-28T02:09:28.000Z",
+                      "uid": "35240-f6ce576c-0a06-4606-aba5-2152abd7b0c3"
+                    },
+                    {
+                      "name": "update",
+                      "item": [
+                        {
+                          "name": "Mews Update Account Notes",
+                          "id": "fbcb2f5f-bcaf-469b-b574-7444d2b45ad2",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AccountNoteUpdates\": [\n    {\n      \"AccountNoteId\": \"<uuid>\",\n      \"Classifications\": {\n        \"General\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"FoodAndBeverage\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"FrontOffice\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Reservations\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Housekeeping\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Maintenance\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"PreviousStay\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"FamilyRelations\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Gifts\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Accounting\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Complaints\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Other\": {\n          \"Value\": \"<boolean>\"\n        }\n      },\n      \"Content\": {\n        \"Value\": \"<string>\"\n      }\n    }\n  ],\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ChainId\": \"<uuid>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/connector/v1/accountNotes/update",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "connector",
+                                "v1",
+                                "accountNotes",
+                                "update"
+                              ]
+                            },
+                            "description": "Updates information about the specified account notes."
+                          },
+                          "response": [
+                            {
+                              "id": "e98262a7-5a34-4113-9604-909f8e2f80fc",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AccountNoteUpdates\": [\n    {\n      \"AccountNoteId\": \"<uuid>\",\n      \"Classifications\": {\n        \"General\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"FoodAndBeverage\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"FrontOffice\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Reservations\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Housekeeping\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Maintenance\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"PreviousStay\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"FamilyRelations\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Gifts\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Accounting\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Complaints\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Other\": {\n          \"Value\": \"<boolean>\"\n        }\n      },\n      \"Content\": {\n        \"Value\": \"<string>\"\n      }\n    }\n  ],\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/accountNotes/update",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "accountNotes",
+                                    "update"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"AccountNotes\": [\n    {\n      \"AccountId\": \"<uuid>\",\n      \"AccountType\": \"Customer\",\n      \"Classifications\": [\n        \"Accounting\",\n        \"General\"\n      ],\n      \"Content\": \"<string>\",\n      \"CreatorProfile\": {\n        \"Discriminator\": \"Platform\",\n        \"EnterpriseProfile\": {\n          \"ProfileId\": \"<uuid>\"\n        }\n      },\n      \"Id\": \"<uuid>\",\n      \"IsActive\": \"<boolean>\",\n      \"UpdaterProfile\": {\n        \"Discriminator\": \"Personal\",\n        \"EnterpriseProfile\": {\n          \"ProfileId\": \"<uuid>\"\n        }\n      }\n    },\n    {\n      \"AccountId\": \"<uuid>\",\n      \"AccountType\": \"Customer\",\n      \"Classifications\": [\n        \"Other\",\n        \"Housekeeping\"\n      ],\n      \"Content\": \"<string>\",\n      \"CreatorProfile\": {\n        \"Discriminator\": \"Static\",\n        \"EnterpriseProfile\": {\n          \"ProfileId\": \"<uuid>\"\n        }\n      },\n      \"Id\": \"<uuid>\",\n      \"IsActive\": \"<boolean>\",\n      \"UpdaterProfile\": {\n        \"Discriminator\": \"Static\",\n        \"EnterpriseProfile\": {\n          \"ProfileId\": \"<uuid>\"\n        }\n      }\n    }\n  ]\n}",
+                              "createdAt": "2026-07-28T02:09:29.000Z",
+                              "updatedAt": "2026-07-28T02:09:29.000Z",
+                              "uid": "35240-e98262a7-5a34-4113-9604-909f8e2f80fc"
+                            },
+                            {
+                              "id": "0e7dc831-42d7-4eae-88e7-aaacc0232a45",
+                              "name": "Server has successfully fulfilled the request and there is no additional information to send back.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AccountNoteUpdates\": [\n    {\n      \"AccountNoteId\": \"<uuid>\",\n      \"Classifications\": {\n        \"General\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"FoodAndBeverage\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"FrontOffice\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Reservations\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Housekeeping\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Maintenance\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"PreviousStay\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"FamilyRelations\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Gifts\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Accounting\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Complaints\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Other\": {\n          \"Value\": \"<boolean>\"\n        }\n      },\n      \"Content\": {\n        \"Value\": \"<string>\"\n      }\n    }\n  ],\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/accountNotes/update",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "accountNotes",
+                                    "update"
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:29.000Z",
+                              "updatedAt": "2026-07-28T02:09:29.000Z",
+                              "uid": "35240-0e7dc831-42d7-4eae-88e7-aaacc0232a45"
+                            },
+                            {
+                              "id": "b3ee10b5-4360-4f08-b195-92eaa6202e80",
+                              "name": "Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AccountNoteUpdates\": [\n    {\n      \"AccountNoteId\": \"<uuid>\",\n      \"Classifications\": {\n        \"General\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"FoodAndBeverage\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"FrontOffice\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Reservations\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Housekeeping\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Maintenance\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"PreviousStay\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"FamilyRelations\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Gifts\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Accounting\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Complaints\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Other\": {\n          \"Value\": \"<boolean>\"\n        }\n      },\n      \"Content\": {\n        \"Value\": \"<string>\"\n      }\n    }\n  ],\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/accountNotes/update",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "accountNotes",
+                                    "update"
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:29.000Z",
+                              "updatedAt": "2026-07-28T02:09:29.000Z",
+                              "uid": "35240-b3ee10b5-4360-4f08-b195-92eaa6202e80"
+                            },
+                            {
+                              "id": "0650e6dc-ff34-4445-9560-9ed909df83cb",
+                              "name": "Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AccountNoteUpdates\": [\n    {\n      \"AccountNoteId\": \"<uuid>\",\n      \"Classifications\": {\n        \"General\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"FoodAndBeverage\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"FrontOffice\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Reservations\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Housekeeping\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Maintenance\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"PreviousStay\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"FamilyRelations\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Gifts\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Accounting\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Complaints\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Other\": {\n          \"Value\": \"<boolean>\"\n        }\n      },\n      \"Content\": {\n        \"Value\": \"<string>\"\n      }\n    }\n  ],\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/accountNotes/update",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "accountNotes",
+                                    "update"
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:29.000Z",
+                              "updatedAt": "2026-07-28T02:09:29.000Z",
+                              "uid": "35240-0650e6dc-ff34-4445-9560-9ed909df83cb"
+                            },
+                            {
+                              "id": "9f309e84-2610-4ddb-8a4c-a2a784890cf8",
+                              "name": "Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AccountNoteUpdates\": [\n    {\n      \"AccountNoteId\": \"<uuid>\",\n      \"Classifications\": {\n        \"General\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"FoodAndBeverage\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"FrontOffice\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Reservations\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Housekeeping\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Maintenance\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"PreviousStay\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"FamilyRelations\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Gifts\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Accounting\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Complaints\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Other\": {\n          \"Value\": \"<boolean>\"\n        }\n      },\n      \"Content\": {\n        \"Value\": \"<string>\"\n      }\n    }\n  ],\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/accountNotes/update",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "accountNotes",
+                                    "update"
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:29.000Z",
+                              "updatedAt": "2026-07-28T02:09:29.000Z",
+                              "uid": "35240-9f309e84-2610-4ddb-8a4c-a2a784890cf8"
+                            },
+                            {
+                              "id": "9182fcab-3aba-4ce7-902b-ac891eb20a4f",
+                              "name": "Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#r",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AccountNoteUpdates\": [\n    {\n      \"AccountNoteId\": \"<uuid>\",\n      \"Classifications\": {\n        \"General\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"FoodAndBeverage\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"FrontOffice\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Reservations\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Housekeeping\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Maintenance\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"PreviousStay\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"FamilyRelations\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Gifts\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Accounting\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Complaints\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Other\": {\n          \"Value\": \"<boolean>\"\n        }\n      },\n      \"Content\": {\n        \"Value\": \"<string>\"\n      }\n    }\n  ],\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/accountNotes/update",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "accountNotes",
+                                    "update"
+                                  ]
+                                }
+                              },
+                              "status": "Request Timeout",
+                              "code": 408,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:29.000Z",
+                              "updatedAt": "2026-07-28T02:09:29.000Z",
+                              "uid": "35240-9182fcab-3aba-4ce7-902b-ac891eb20a4f"
+                            },
+                            {
+                              "id": "6bbcfedc-3581-452c-8e65-558ca337fda4",
+                              "name": "Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitb",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AccountNoteUpdates\": [\n    {\n      \"AccountNoteId\": \"<uuid>\",\n      \"Classifications\": {\n        \"General\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"FoodAndBeverage\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"FrontOffice\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Reservations\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Housekeeping\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Maintenance\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"PreviousStay\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"FamilyRelations\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Gifts\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Accounting\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Complaints\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Other\": {\n          \"Value\": \"<boolean>\"\n        }\n      },\n      \"Content\": {\n        \"Value\": \"<string>\"\n      }\n    }\n  ],\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/accountNotes/update",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "accountNotes",
+                                    "update"
+                                  ]
+                                }
+                              },
+                              "status": "Too Many Requests",
+                              "code": 429,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:29.000Z",
+                              "updatedAt": "2026-07-28T02:09:29.000Z",
+                              "uid": "35240-6bbcfedc-3581-452c-8e65-558ca337fda4"
+                            },
+                            {
+                              "id": "d05120d1-1fc9-41ea-8c5c-6dfa71c95800",
+                              "name": "Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AccountNoteUpdates\": [\n    {\n      \"AccountNoteId\": \"<uuid>\",\n      \"Classifications\": {\n        \"General\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"FoodAndBeverage\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"FrontOffice\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Reservations\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Housekeeping\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Maintenance\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"PreviousStay\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"FamilyRelations\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Gifts\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Accounting\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Complaints\": {\n          \"Value\": \"<boolean>\"\n        },\n        \"Other\": {\n          \"Value\": \"<boolean>\"\n        }\n      },\n      \"Content\": {\n        \"Value\": \"<string>\"\n      }\n    }\n  ],\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/accountNotes/update",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "accountNotes",
+                                    "update"
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:29.000Z",
+                              "updatedAt": "2026-07-28T02:09:29.000Z",
+                              "uid": "35240-d05120d1-1fc9-41ea-8c5c-6dfa71c95800"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:09:28.000Z",
+                          "updatedAt": "2026-07-28T02:09:28.000Z",
+                          "uid": "35240-fbcb2f5f-bcaf-469b-b574-7444d2b45ad2"
+                        }
+                      ],
+                      "id": "1ba1e463-05da-48c9-92c4-5f8aeee467e5",
+                      "createdAt": "2026-07-28T02:09:28.000Z",
+                      "updatedAt": "2026-07-28T02:09:28.000Z",
+                      "uid": "35240-1ba1e463-05da-48c9-92c4-5f8aeee467e5"
+                    },
+                    {
+                      "name": "delete",
+                      "item": [
+                        {
+                          "name": "Mews Delete Account Notes",
+                          "id": "c2cddf6b-ee48-414e-bd7c-d56e0e2441c8",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AccountNoteIds\": [\n    \"<uuid>\"\n  ],\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ChainId\": \"<uuid>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/connector/v1/accountNotes/delete",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "connector",
+                                "v1",
+                                "accountNotes",
+                                "delete"
+                              ]
+                            },
+                            "description": "Deletes specified account notes."
+                          },
+                          "response": [
+                            {
+                              "id": "881b0fea-8f68-461f-a55a-8b60a17c6238",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AccountNoteIds\": [\n    \"<uuid>\"\n  ],\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/accountNotes/delete",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "accountNotes",
+                                    "delete"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{}",
+                              "createdAt": "2026-07-28T02:09:29.000Z",
+                              "updatedAt": "2026-07-28T02:09:29.000Z",
+                              "uid": "35240-881b0fea-8f68-461f-a55a-8b60a17c6238"
+                            },
+                            {
+                              "id": "cc36f4a2-5c29-4fa5-9725-f8ebf21e61b1",
+                              "name": "Server has successfully fulfilled the request and there is no additional information to send back.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AccountNoteIds\": [\n    \"<uuid>\"\n  ],\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/accountNotes/delete",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "accountNotes",
+                                    "delete"
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:29.000Z",
+                              "updatedAt": "2026-07-28T02:09:29.000Z",
+                              "uid": "35240-cc36f4a2-5c29-4fa5-9725-f8ebf21e61b1"
+                            },
+                            {
+                              "id": "e124db2d-be8b-479e-a192-167ddd1e2be8",
+                              "name": "Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AccountNoteIds\": [\n    \"<uuid>\"\n  ],\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/accountNotes/delete",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "accountNotes",
+                                    "delete"
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:29.000Z",
+                              "updatedAt": "2026-07-28T02:09:29.000Z",
+                              "uid": "35240-e124db2d-be8b-479e-a192-167ddd1e2be8"
+                            },
+                            {
+                              "id": "24a17bec-9329-4f03-b703-17c4e41acaf8",
+                              "name": "Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AccountNoteIds\": [\n    \"<uuid>\"\n  ],\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/accountNotes/delete",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "accountNotes",
+                                    "delete"
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:29.000Z",
+                              "updatedAt": "2026-07-28T02:09:29.000Z",
+                              "uid": "35240-24a17bec-9329-4f03-b703-17c4e41acaf8"
+                            },
+                            {
+                              "id": "386be7a4-d061-4b4d-a89b-86b67f0c5b4c",
+                              "name": "Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AccountNoteIds\": [\n    \"<uuid>\"\n  ],\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/accountNotes/delete",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "accountNotes",
+                                    "delete"
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:29.000Z",
+                              "updatedAt": "2026-07-28T02:09:29.000Z",
+                              "uid": "35240-386be7a4-d061-4b4d-a89b-86b67f0c5b4c"
+                            },
+                            {
+                              "id": "da734ac9-f4b0-40aa-95c3-6ee190d872f4",
+                              "name": "Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#r",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AccountNoteIds\": [\n    \"<uuid>\"\n  ],\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/accountNotes/delete",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "accountNotes",
+                                    "delete"
+                                  ]
+                                }
+                              },
+                              "status": "Request Timeout",
+                              "code": 408,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:29.000Z",
+                              "updatedAt": "2026-07-28T02:09:29.000Z",
+                              "uid": "35240-da734ac9-f4b0-40aa-95c3-6ee190d872f4"
+                            },
+                            {
+                              "id": "97615438-a0f8-40b0-aec9-c9be825fe7f4",
+                              "name": "Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitb",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AccountNoteIds\": [\n    \"<uuid>\"\n  ],\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/accountNotes/delete",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "accountNotes",
+                                    "delete"
+                                  ]
+                                }
+                              },
+                              "status": "Too Many Requests",
+                              "code": 429,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:29.000Z",
+                              "updatedAt": "2026-07-28T02:09:29.000Z",
+                              "uid": "35240-97615438-a0f8-40b0-aec9-c9be825fe7f4"
+                            },
+                            {
+                              "id": "7e601106-ebe6-4edc-a8c5-c26e90e378a1",
+                              "name": "Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"AccountNoteIds\": [\n    \"<uuid>\"\n  ],\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"ChainId\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/accountNotes/delete",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "accountNotes",
+                                    "delete"
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:29.000Z",
+                              "updatedAt": "2026-07-28T02:09:29.000Z",
+                              "uid": "35240-7e601106-ebe6-4edc-a8c5-c26e90e378a1"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:09:28.000Z",
+                          "updatedAt": "2026-07-28T02:09:28.000Z",
+                          "uid": "35240-c2cddf6b-ee48-414e-bd7c-d56e0e2441c8"
+                        }
+                      ],
+                      "id": "68064baa-7d8f-4f33-94a9-669f4900b252",
+                      "createdAt": "2026-07-28T02:09:28.000Z",
+                      "updatedAt": "2026-07-28T02:09:28.000Z",
+                      "uid": "35240-68064baa-7d8f-4f33-94a9-669f4900b252"
+                    }
+                  ],
+                  "id": "ea509cbf-79e9-48d4-8c91-209f0dcb7a36",
+                  "createdAt": "2026-07-28T02:09:28.000Z",
+                  "updatedAt": "2026-07-28T02:09:28.000Z",
+                  "uid": "35240-ea509cbf-79e9-48d4-8c91-209f0dcb7a36"
+                }
+              ],
+              "id": "4bbc7a78-4bf9-403a-ae31-2319719a9514",
+              "createdAt": "2026-07-28T02:09:28.000Z",
+              "updatedAt": "2026-07-28T02:09:28.000Z",
+              "uid": "35240-4bbc7a78-4bf9-403a-ae31-2319719a9514"
+            }
+          ],
+          "id": "5ebcbd02-16d3-4748-a915-744fa7f79f4a",
+          "createdAt": "2026-07-28T02:09:28.000Z",
+          "updatedAt": "2026-07-28T02:09:28.000Z",
+          "uid": "35240-5ebcbd02-16d3-4748-a915-744fa7f79f4a"
+        }
+      ],
+      "id": "d129138b-1fa1-4f28-95af-eb015eb8a8e8",
+      "createdAt": "2026-07-28T02:09:28.000Z",
+      "updatedAt": "2026-07-28T02:09:28.000Z",
+      "uid": "35240-d129138b-1fa1-4f28-95af-eb015eb8a8e8"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "ClientToken",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.mews.com"
+    }
+  ]
+}

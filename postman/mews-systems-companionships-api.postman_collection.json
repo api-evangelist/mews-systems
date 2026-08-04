@@ -1,0 +1,614 @@
+{
+  "info": {
+    "_postman_id": "c7a6579f-acc6-4bfb-8a70-09dc3dcb6dab",
+    "name": "Mews Booking Engine API (Distributor) Account notes Companionships API",
+    "description": "The Mews Booking Engine API (historically the Distributor API, served from /api/distributor/v1) lets developers build guest-facing booking engines that create reservations directly in Mews. It exposes enterprise configuration, availability, pricing, products, vouchers, payment cards, and reservation group creation for front-end client consumption.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:09:55.000Z",
+    "updatedAt": "2026-07-28T02:09:55.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-c7a6579f-acc6-4bfb-8a70-09dc3dcb6dab"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "connector",
+          "item": [
+            {
+              "name": "v1",
+              "item": [
+                {
+                  "name": "companionships",
+                  "item": [
+                    {
+                      "name": "getAll",
+                      "item": [
+                        {
+                          "name": "Mews Get All Companionships",
+                          "id": "8750cf19-3d6c-45e5-8081-1100d1759680",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Extent\": {\n    \"Reservations\": \"<boolean>\",\n    \"ReservationGroups\": \"<boolean>\",\n    \"Customers\": \"<boolean>\"\n  },\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"CompanionshipIds\": [\n    \"<uuid>\"\n  ],\n  \"ReservationIds\": [\n    \"<uuid>\"\n  ],\n  \"CustomerIds\": [\n    \"<uuid>\"\n  ],\n  \"ReservationGroupIds\": [\n    \"<uuid>\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/connector/v1/companionships/getAll",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "connector",
+                                "v1",
+                                "companionships",
+                                "getAll"
+                              ]
+                            },
+                            "description": "Returns all companionships based on customers, reservations or reservation groups. One of them must be specified in the request.\nNote this operation uses [Pagination](https://mews-systems.gitbook.io/connector-api/guidelines/pagination/) and supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property)."
+                          },
+                          "response": [
+                            {
+                              "id": "eb24c46a-8d89-4949-8acd-e09d4e26ba50",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Extent\": {\n    \"Reservations\": \"<boolean>\",\n    \"ReservationGroups\": \"<boolean>\",\n    \"Customers\": \"<boolean>\"\n  },\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"CompanionshipIds\": [\n    \"<uuid>\"\n  ],\n  \"ReservationIds\": [\n    \"<uuid>\"\n  ],\n  \"CustomerIds\": [\n    \"<uuid>\"\n  ],\n  \"ReservationGroupIds\": [\n    \"<uuid>\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/companionships/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "companionships",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Companionships\": [\n    {\n      \"Id\": \"<uuid>\",\n      \"CustomerId\": \"<uuid>\",\n      \"ReservationGroupId\": \"<uuid>\",\n      \"ReservationId\": \"<uuid>\"\n    },\n    {\n      \"Id\": \"<uuid>\",\n      \"CustomerId\": \"<uuid>\",\n      \"ReservationGroupId\": \"<uuid>\",\n      \"ReservationId\": \"<uuid>\"\n    }\n  ],\n  \"Reservations\": [\n    {\n      \"AssignedResourceLocked\": \"<boolean>\",\n      \"CompanionIds\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"CreatedUtc\": \"<string>\",\n      \"CustomerId\": \"<uuid>\",\n      \"EndUtc\": \"<string>\",\n      \"GroupId\": \"<uuid>\",\n      \"Id\": \"<uuid>\",\n      \"Number\": \"<string>\",\n      \"Options\": {\n        \"AllCompanionsCheckedIn\": \"<boolean>\",\n        \"AnyCompanionCheckedIn\": \"<boolean>\",\n        \"OwnerCheckedIn\": \"<boolean>\"\n      },\n      \"Origin\": \"CommanderRoomingList\",\n      \"OwnerId\": \"<uuid>\",\n      \"PersonCounts\": [\n        {\n          \"AgeCategoryId\": \"<uuid>\",\n          \"Count\": \"<integer>\"\n        },\n        {\n          \"AgeCategoryId\": \"<uuid>\",\n          \"Count\": \"<integer>\"\n        }\n      ],\n      \"RateId\": \"<uuid>\",\n      \"RequestedCategoryId\": \"<uuid>\",\n      \"ServiceId\": \"<uuid>\",\n      \"StartUtc\": \"<string>\",\n      \"State\": \"Canceled\",\n      \"UpdatedUtc\": \"<string>\",\n      \"ChannelNumber\": \"<string>\",\n      \"ChannelManagerNumber\": \"<string>\",\n      \"ChannelManagerGroupNumber\": \"<string>\",\n      \"ChannelManager\": \"<string>\",\n      \"OriginDetails\": \"<string>\",\n      \"Purpose\": \"Student\",\n      \"CancelledUtc\": \"<string>\",\n      \"ReleasedUtc\": \"<string>\",\n      \"AssignedSpaceId\": \"<uuid>\",\n      \"AssignedSpaceLocked\": \"<boolean>\",\n      \"AssignedResourceId\": \"<uuid>\",\n      \"BusinessSegmentId\": \"<uuid>\",\n      \"CompanyId\": \"<uuid>\",\n      \"TravelAgencyId\": \"<uuid>\",\n      \"AvailabilityBlockId\": \"<uuid>\",\n      \"VoucherId\": \"<uuid>\",\n      \"CreditCardId\": \"<uuid>\",\n      \"CancellationReason\": \"Other\",\n      \"AdultCount\": \"<integer>\",\n      \"ChildCount\": \"<integer>\",\n      \"BookerId\": \"<uuid>\",\n      \"ChannelManagerId\": \"<string>\"\n    },\n    {\n      \"AssignedResourceLocked\": \"<boolean>\",\n      \"CompanionIds\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"CreatedUtc\": \"<string>\",\n      \"CustomerId\": \"<uuid>\",\n      \"EndUtc\": \"<string>\",\n      \"GroupId\": \"<uuid>\",\n      \"Id\": \"<uuid>\",\n      \"Number\": \"<string>\",\n      \"Options\": {\n        \"AllCompanionsCheckedIn\": \"<boolean>\",\n        \"AnyCompanionCheckedIn\": \"<boolean>\",\n        \"OwnerCheckedIn\": \"<boolean>\"\n      },\n      \"Origin\": \"CommanderInPerson\",\n      \"OwnerId\": \"<uuid>\",\n      \"PersonCounts\": [\n        {\n          \"AgeCategoryId\": \"<uuid>\",\n          \"Count\": \"<integer>\"\n        },\n        {\n          \"AgeCategoryId\": \"<uuid>\",\n          \"Count\": \"<integer>\"\n        }\n      ],\n      \"RateId\": \"<uuid>\",\n      \"RequestedCategoryId\": \"<uuid>\",\n      \"ServiceId\": \"<uuid>\",\n      \"StartUtc\": \"<string>\",\n      \"State\": \"Started\",\n      \"UpdatedUtc\": \"<string>\",\n      \"ChannelNumber\": \"<string>\",\n      \"ChannelManagerNumber\": \"<string>\",\n      \"ChannelManagerGroupNumber\": \"<string>\",\n      \"ChannelManager\": \"<string>\",\n      \"OriginDetails\": \"<string>\",\n      \"Purpose\": \"Business\",\n      \"CancelledUtc\": \"<string>\",\n      \"ReleasedUtc\": \"<string>\",\n      \"AssignedSpaceId\": \"<uuid>\",\n      \"AssignedSpaceLocked\": \"<boolean>\",\n      \"AssignedResourceId\": \"<uuid>\",\n      \"BusinessSegmentId\": \"<uuid>\",\n      \"CompanyId\": \"<uuid>\",\n      \"TravelAgencyId\": \"<uuid>\",\n      \"AvailabilityBlockId\": \"<uuid>\",\n      \"VoucherId\": \"<uuid>\",\n      \"CreditCardId\": \"<uuid>\",\n      \"CancellationReason\": \"Update\",\n      \"AdultCount\": \"<integer>\",\n      \"ChildCount\": \"<integer>\",\n      \"BookerId\": \"<uuid>\",\n      \"ChannelManagerId\": \"<string>\"\n    }\n  ],\n  \"ReservationGroups\": [\n    {\n      \"Id\": \"<uuid>\",\n      \"Name\": \"<string>\"\n    },\n    {\n      \"Id\": \"<uuid>\",\n      \"Name\": \"<string>\"\n    }\n  ],\n  \"Customers\": [\n    {\n      \"ChainId\": \"<uuid>\",\n      \"Classifications\": [\n        \"Returning\",\n        \"LoyaltyProgram\"\n      ],\n      \"CreatedUtc\": \"<dateTime>\",\n      \"CreatorProfileId\": \"<uuid>\",\n      \"Id\": \"<uuid>\",\n      \"IsActive\": \"<boolean>\",\n      \"LastName\": \"<string>\",\n      \"Number\": \"<string>\",\n      \"Options\": [\n        \"IdPhotosConsent\",\n        \"Invoiceable\"\n      ],\n      \"PreferredSpaceFeatures\": [\n        \"TwinBeds\",\n        \"ElevatorAccess\"\n      ],\n      \"UpdatedUtc\": \"<dateTime>\",\n      \"UpdaterProfileId\": \"<uuid>\",\n      \"Title\": \"Mister\",\n      \"Sex\": \"Female\",\n      \"FirstName\": \"<string>\",\n      \"SecondLastName\": \"<string>\",\n      \"NationalityCode\": \"<string>\",\n      \"PreferredLanguageCode\": \"<string>\",\n      \"LanguageCode\": \"<string>\",\n      \"BirthDate\": \"<string>\",\n      \"BirthCountryCode\": \"<string>\",\n      \"BirthCountrySubdivisionCode\": \"<string>\",\n      \"BirthPlace\": \"<string>\",\n      \"Occupation\": \"<string>\",\n      \"Email\": \"<string>\",\n      \"HasOtaEmail\": \"<boolean>\",\n      \"Phone\": \"<string>\",\n      \"TaxIdentificationNumber\": \"<string>\",\n      \"LoyaltyCode\": \"<string>\",\n      \"AccountingCode\": \"<string>\",\n      \"BillingCode\": \"<string>\",\n      \"Notes\": \"<string>\",\n      \"CarRegistrationNumber\": \"<string>\",\n      \"DietaryRequirements\": \"<string>\",\n      \"Passport\": {\n        \"Id\": \"<uuid>\",\n        \"CustomerId\": \"<uuid>\",\n        \"Type\": \"Passport\",\n        \"Number\": \"<string>\",\n        \"Expiration\": \"<date>\",\n        \"Issuance\": \"<date>\",\n        \"IssuingCountryCode\": \"<string>\",\n        \"IssuingCountrySubdivisionCode\": \"<string>\",\n        \"IssuingCity\": \"<string>\",\n        \"IdentityDocumentSupportNumber\": \"<string>\"\n      },\n      \"IdentityCard\": {\n        \"Id\": \"<uuid>\",\n        \"CustomerId\": \"<uuid>\",\n        \"Type\": \"DriversLicense\",\n        \"Number\": \"<string>\",\n        \"Expiration\": \"<date>\",\n        \"Issuance\": \"<date>\",\n        \"IssuingCountryCode\": \"<string>\",\n        \"IssuingCountrySubdivisionCode\": \"<string>\",\n        \"IssuingCity\": \"<string>\",\n        \"IdentityDocumentSupportNumber\": \"<string>\"\n      },\n      \"Visa\": {\n        \"Id\": \"<uuid>\",\n        \"CustomerId\": \"<uuid>\",\n        \"Type\": \"Passport\",\n        \"Number\": \"<string>\",\n        \"Expiration\": \"<date>\",\n        \"Issuance\": \"<date>\",\n        \"IssuingCountryCode\": \"<string>\",\n        \"IssuingCountrySubdivisionCode\": \"<string>\",\n        \"IssuingCity\": \"<string>\",\n        \"IdentityDocumentSupportNumber\": \"<string>\"\n      },\n      \"DriversLicense\": {\n        \"Id\": \"<uuid>\",\n        \"CustomerId\": \"<uuid>\",\n        \"Type\": \"Visa\",\n        \"Number\": \"<string>\",\n        \"Expiration\": \"<date>\",\n        \"Issuance\": \"<date>\",\n        \"IssuingCountryCode\": \"<string>\",\n        \"IssuingCountrySubdivisionCode\": \"<string>\",\n        \"IssuingCity\": \"<string>\",\n        \"IdentityDocumentSupportNumber\": \"<string>\"\n      },\n      \"Address\": {\n        \"Id\": \"<uuid>\",\n        \"Line1\": \"<string>\",\n        \"Line2\": \"<string>\",\n        \"City\": \"<string>\",\n        \"PostalCode\": \"<string>\",\n        \"CountryCode\": \"<string>\",\n        \"CountrySubdivisionCode\": \"<string>\",\n        \"Latitude\": \"<double>\",\n        \"Longitude\": \"<double>\"\n      },\n      \"AddressId\": \"<uuid>\",\n      \"ItalianDestinationCode\": \"<string>\",\n      \"ItalianFiscalCode\": \"<string>\",\n      \"ItalianLotteryCode\": \"<string>\",\n      \"CompanyId\": \"<uuid>\",\n      \"MergeTargetId\": \"<uuid>\",\n      \"ActivityState\": \"<string>\"\n    },\n    {\n      \"ChainId\": \"<uuid>\",\n      \"Classifications\": [\n        \"PreviousComplaint\",\n        \"FriendOrFamily\"\n      ],\n      \"CreatedUtc\": \"<dateTime>\",\n      \"CreatorProfileId\": \"<uuid>\",\n      \"Id\": \"<uuid>\",\n      \"IsActive\": \"<boolean>\",\n      \"LastName\": \"<string>\",\n      \"Number\": \"<string>\",\n      \"Options\": [\n        \"None\",\n        \"SendMarketingPostalMail\"\n      ],\n      \"PreferredSpaceFeatures\": [\n        \"HighFloor\",\n        \"DoubleBed\"\n      ],\n      \"UpdatedUtc\": \"<dateTime>\",\n      \"UpdaterProfileId\": \"<uuid>\",\n      \"Title\": \"Mister\",\n      \"Sex\": \"Male\",\n      \"FirstName\": \"<string>\",\n      \"SecondLastName\": \"<string>\",\n      \"NationalityCode\": \"<string>\",\n      \"PreferredLanguageCode\": \"<string>\",\n      \"LanguageCode\": \"<string>\",\n      \"BirthDate\": \"<string>\",\n      \"BirthCountryCode\": \"<string>\",\n      \"BirthCountrySubdivisionCode\": \"<string>\",\n      \"BirthPlace\": \"<string>\",\n      \"Occupation\": \"<string>\",\n      \"Email\": \"<string>\",\n      \"HasOtaEmail\": \"<boolean>\",\n      \"Phone\": \"<string>\",\n      \"TaxIdentificationNumber\": \"<string>\",\n      \"LoyaltyCode\": \"<string>\",\n      \"AccountingCode\": \"<string>\",\n      \"BillingCode\": \"<string>\",\n      \"Notes\": \"<string>\",\n      \"CarRegistrationNumber\": \"<string>\",\n      \"DietaryRequirements\": \"<string>\",\n      \"Passport\": {\n        \"Id\": \"<uuid>\",\n        \"CustomerId\": \"<uuid>\",\n        \"Type\": \"Visa\",\n        \"Number\": \"<string>\",\n        \"Expiration\": \"<date>\",\n        \"Issuance\": \"<date>\",\n        \"IssuingCountryCode\": \"<string>\",\n        \"IssuingCountrySubdivisionCode\": \"<string>\",\n        \"IssuingCity\": \"<string>\",\n        \"IdentityDocumentSupportNumber\": \"<string>\"\n      },\n      \"IdentityCard\": {\n        \"Id\": \"<uuid>\",\n        \"CustomerId\": \"<uuid>\",\n        \"Type\": \"IdentityCard\",\n        \"Number\": \"<string>\",\n        \"Expiration\": \"<date>\",\n        \"Issuance\": \"<date>\",\n        \"IssuingCountryCode\": \"<string>\",\n        \"IssuingCountrySubdivisionCode\": \"<string>\",\n        \"IssuingCity\": \"<string>\",\n        \"IdentityDocumentSupportNumber\": \"<string>\"\n      },\n      \"Visa\": {\n        \"Id\": \"<uuid>\",\n        \"CustomerId\": \"<uuid>\",\n        \"Type\": \"Visa\",\n        \"Number\": \"<string>\",\n        \"Expiration\": \"<date>\",\n        \"Issuance\": \"<date>\",\n        \"IssuingCountryCode\": \"<string>\",\n        \"IssuingCountrySubdivisionCode\": \"<string>\",\n        \"IssuingCity\": \"<string>\",\n        \"IdentityDocumentSupportNumber\": \"<string>\"\n      },\n      \"DriversLicense\": {\n        \"Id\": \"<uuid>\",\n        \"CustomerId\": \"<uuid>\",\n        \"Type\": \"DriversLicense\",\n        \"Number\": \"<string>\",\n        \"Expiration\": \"<date>\",\n        \"Issuance\": \"<date>\",\n        \"IssuingCountryCode\": \"<string>\",\n        \"IssuingCountrySubdivisionCode\": \"<string>\",\n        \"IssuingCity\": \"<string>\",\n        \"IdentityDocumentSupportNumber\": \"<string>\"\n      },\n      \"Address\": {\n        \"Id\": \"<uuid>\",\n        \"Line1\": \"<string>\",\n        \"Line2\": \"<string>\",\n        \"City\": \"<string>\",\n        \"PostalCode\": \"<string>\",\n        \"CountryCode\": \"<string>\",\n        \"CountrySubdivisionCode\": \"<string>\",\n        \"Latitude\": \"<double>\",\n        \"Longitude\": \"<double>\"\n      },\n      \"AddressId\": \"<uuid>\",\n      \"ItalianDestinationCode\": \"<string>\",\n      \"ItalianFiscalCode\": \"<string>\",\n      \"ItalianLotteryCode\": \"<string>\",\n      \"CompanyId\": \"<uuid>\",\n      \"MergeTargetId\": \"<uuid>\",\n      \"ActivityState\": \"<string>\"\n    }\n  ],\n  \"Cursor\": \"<uuid>\"\n}",
+                              "createdAt": "2026-07-28T02:09:56.000Z",
+                              "updatedAt": "2026-07-28T02:09:56.000Z",
+                              "uid": "35240-eb24c46a-8d89-4949-8acd-e09d4e26ba50"
+                            },
+                            {
+                              "id": "374e6211-79db-46ef-822f-9b328bf13bc9",
+                              "name": "Server has successfully fulfilled the request and there is no additional information to send back.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Extent\": {\n    \"Reservations\": \"<boolean>\",\n    \"ReservationGroups\": \"<boolean>\",\n    \"Customers\": \"<boolean>\"\n  },\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"CompanionshipIds\": [\n    \"<uuid>\"\n  ],\n  \"ReservationIds\": [\n    \"<uuid>\"\n  ],\n  \"CustomerIds\": [\n    \"<uuid>\"\n  ],\n  \"ReservationGroupIds\": [\n    \"<uuid>\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/companionships/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "companionships",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:56.000Z",
+                              "updatedAt": "2026-07-28T02:09:56.000Z",
+                              "uid": "35240-374e6211-79db-46ef-822f-9b328bf13bc9"
+                            },
+                            {
+                              "id": "06d2178f-547d-46e2-9c54-1d45de1865c1",
+                              "name": "Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Extent\": {\n    \"Reservations\": \"<boolean>\",\n    \"ReservationGroups\": \"<boolean>\",\n    \"Customers\": \"<boolean>\"\n  },\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"CompanionshipIds\": [\n    \"<uuid>\"\n  ],\n  \"ReservationIds\": [\n    \"<uuid>\"\n  ],\n  \"CustomerIds\": [\n    \"<uuid>\"\n  ],\n  \"ReservationGroupIds\": [\n    \"<uuid>\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/companionships/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "companionships",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:56.000Z",
+                              "updatedAt": "2026-07-28T02:09:56.000Z",
+                              "uid": "35240-06d2178f-547d-46e2-9c54-1d45de1865c1"
+                            },
+                            {
+                              "id": "79f8fde5-2eca-4455-a325-5640b2dd08a6",
+                              "name": "Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Extent\": {\n    \"Reservations\": \"<boolean>\",\n    \"ReservationGroups\": \"<boolean>\",\n    \"Customers\": \"<boolean>\"\n  },\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"CompanionshipIds\": [\n    \"<uuid>\"\n  ],\n  \"ReservationIds\": [\n    \"<uuid>\"\n  ],\n  \"CustomerIds\": [\n    \"<uuid>\"\n  ],\n  \"ReservationGroupIds\": [\n    \"<uuid>\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/companionships/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "companionships",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:56.000Z",
+                              "updatedAt": "2026-07-28T02:09:56.000Z",
+                              "uid": "35240-79f8fde5-2eca-4455-a325-5640b2dd08a6"
+                            },
+                            {
+                              "id": "ff0093c8-9ea0-48d4-aad1-cb362852ba1d",
+                              "name": "Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Extent\": {\n    \"Reservations\": \"<boolean>\",\n    \"ReservationGroups\": \"<boolean>\",\n    \"Customers\": \"<boolean>\"\n  },\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"CompanionshipIds\": [\n    \"<uuid>\"\n  ],\n  \"ReservationIds\": [\n    \"<uuid>\"\n  ],\n  \"CustomerIds\": [\n    \"<uuid>\"\n  ],\n  \"ReservationGroupIds\": [\n    \"<uuid>\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/companionships/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "companionships",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:56.000Z",
+                              "updatedAt": "2026-07-28T02:09:56.000Z",
+                              "uid": "35240-ff0093c8-9ea0-48d4-aad1-cb362852ba1d"
+                            },
+                            {
+                              "id": "ec218127-7487-49d9-b2c7-e00a5ff7f8e5",
+                              "name": "Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#r",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Extent\": {\n    \"Reservations\": \"<boolean>\",\n    \"ReservationGroups\": \"<boolean>\",\n    \"Customers\": \"<boolean>\"\n  },\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"CompanionshipIds\": [\n    \"<uuid>\"\n  ],\n  \"ReservationIds\": [\n    \"<uuid>\"\n  ],\n  \"CustomerIds\": [\n    \"<uuid>\"\n  ],\n  \"ReservationGroupIds\": [\n    \"<uuid>\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/companionships/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "companionships",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Request Timeout",
+                              "code": 408,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:56.000Z",
+                              "updatedAt": "2026-07-28T02:09:56.000Z",
+                              "uid": "35240-ec218127-7487-49d9-b2c7-e00a5ff7f8e5"
+                            },
+                            {
+                              "id": "b68e9abd-fd6a-4466-a246-0814a639efb2",
+                              "name": "Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitb",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Extent\": {\n    \"Reservations\": \"<boolean>\",\n    \"ReservationGroups\": \"<boolean>\",\n    \"Customers\": \"<boolean>\"\n  },\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"CompanionshipIds\": [\n    \"<uuid>\"\n  ],\n  \"ReservationIds\": [\n    \"<uuid>\"\n  ],\n  \"CustomerIds\": [\n    \"<uuid>\"\n  ],\n  \"ReservationGroupIds\": [\n    \"<uuid>\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/companionships/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "companionships",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Too Many Requests",
+                              "code": 429,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:56.000Z",
+                              "updatedAt": "2026-07-28T02:09:56.000Z",
+                              "uid": "35240-b68e9abd-fd6a-4466-a246-0814a639efb2"
+                            },
+                            {
+                              "id": "9890f50e-4d25-41d7-8c77-ffe6565f69a7",
+                              "name": "Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Extent\": {\n    \"Reservations\": \"<boolean>\",\n    \"ReservationGroups\": \"<boolean>\",\n    \"Customers\": \"<boolean>\"\n  },\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"CompanionshipIds\": [\n    \"<uuid>\"\n  ],\n  \"ReservationIds\": [\n    \"<uuid>\"\n  ],\n  \"CustomerIds\": [\n    \"<uuid>\"\n  ],\n  \"ReservationGroupIds\": [\n    \"<uuid>\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/companionships/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "companionships",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:09:56.000Z",
+                              "updatedAt": "2026-07-28T02:09:56.000Z",
+                              "uid": "35240-9890f50e-4d25-41d7-8c77-ffe6565f69a7"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:09:56.000Z",
+                          "updatedAt": "2026-07-28T02:09:56.000Z",
+                          "uid": "35240-8750cf19-3d6c-45e5-8081-1100d1759680"
+                        }
+                      ],
+                      "id": "662da657-75da-470b-82f9-d96222fd135a",
+                      "createdAt": "2026-07-28T02:09:56.000Z",
+                      "updatedAt": "2026-07-28T02:09:56.000Z",
+                      "uid": "35240-662da657-75da-470b-82f9-d96222fd135a"
+                    }
+                  ],
+                  "id": "cf967c1a-15d4-430a-ae75-402149f5867f",
+                  "createdAt": "2026-07-28T02:09:56.000Z",
+                  "updatedAt": "2026-07-28T02:09:56.000Z",
+                  "uid": "35240-cf967c1a-15d4-430a-ae75-402149f5867f"
+                }
+              ],
+              "id": "64d287d3-0306-4b4c-a3a5-647c344f366e",
+              "createdAt": "2026-07-28T02:09:56.000Z",
+              "updatedAt": "2026-07-28T02:09:56.000Z",
+              "uid": "35240-64d287d3-0306-4b4c-a3a5-647c344f366e"
+            }
+          ],
+          "id": "48e282dd-3a2b-4b1b-a82f-e2ae8e18dafb",
+          "createdAt": "2026-07-28T02:09:56.000Z",
+          "updatedAt": "2026-07-28T02:09:56.000Z",
+          "uid": "35240-48e282dd-3a2b-4b1b-a82f-e2ae8e18dafb"
+        }
+      ],
+      "id": "741ee313-7b00-4521-8083-f7d0722a1cad",
+      "createdAt": "2026-07-28T02:09:56.000Z",
+      "updatedAt": "2026-07-28T02:09:56.000Z",
+      "uid": "35240-741ee313-7b00-4521-8083-f7d0722a1cad"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "ClientToken",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.mews.com"
+    }
+  ]
+}

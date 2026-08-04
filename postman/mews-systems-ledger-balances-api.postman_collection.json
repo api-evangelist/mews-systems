@@ -1,0 +1,614 @@
+{
+  "info": {
+    "_postman_id": "678bb724-d1a5-4fc5-9dfc-a98f31cb6f09",
+    "name": "Mews Booking Engine API (Distributor) Account notes Ledger balances API",
+    "description": "The Mews Booking Engine API (historically the Distributor API, served from /api/distributor/v1) lets developers build guest-facing booking engines that create reservations directly in Mews. It exposes enterprise configuration, availability, pricing, products, vouchers, payment cards, and reservation group creation for front-end client consumption.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T02:10:56.000Z",
+    "updatedAt": "2026-07-28T02:10:57.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-678bb724-d1a5-4fc5-9dfc-a98f31cb6f09"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "connector",
+          "item": [
+            {
+              "name": "v1",
+              "item": [
+                {
+                  "name": "ledgerBalances",
+                  "item": [
+                    {
+                      "name": "getAll",
+                      "item": [
+                        {
+                          "name": "Mews Get All Ledger Balances",
+                          "id": "4b5e330f-dba0-4177-9f1b-8acf4557e97c",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Date\": {\n    \"End\": \"<date>\",\n    \"Start\": \"<date>\"\n  },\n  \"LedgerTypes\": [\n    \"Payment\"\n  ],\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/connector/v1/ledgerBalances/getAll",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "connector",
+                                "v1",
+                                "ledgerBalances",
+                                "getAll"
+                              ]
+                            },
+                            "description": "Returns opening and closing balances of specified ledgers for each day in the specified date interval. Note this operation supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property/)."
+                          },
+                          "response": [
+                            {
+                              "id": "dd66be79-e330-49dd-b16b-8d0bfb3e2c71",
+                              "name": "OK",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Date\": {\n    \"End\": \"<date>\",\n    \"Start\": \"<date>\"\n  },\n  \"LedgerTypes\": [\n    \"Payment\"\n  ],\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/ledgerBalances/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "ledgerBalances",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"LedgerBalances\": [\n    {\n      \"ClosingBalance\": {\n        \"Breakdown\": {\n          \"Items\": [\n            {\n              \"NetValue\": \"<double>\",\n              \"TaxValue\": \"<double>\",\n              \"TaxRateCode\": \"<string>\"\n            },\n            {\n              \"NetValue\": \"<double>\",\n              \"TaxValue\": \"<double>\",\n              \"TaxRateCode\": \"<string>\"\n            }\n          ]\n        },\n        \"Currency\": \"<string>\",\n        \"GrossValue\": \"<double>\",\n        \"NetValue\": \"<double>\",\n        \"TaxValues\": [\n          {\n            \"Value\": \"<double>\",\n            \"Code\": \"<string>\"\n          },\n          {\n            \"Value\": \"<double>\",\n            \"Code\": \"<string>\"\n          }\n        ]\n      },\n      \"Date\": \"<date>\",\n      \"EnterpriseId\": \"<uuid>\",\n      \"LedgerType\": \"Guest\",\n      \"OpeningBalance\": {\n        \"Breakdown\": {\n          \"Items\": [\n            {\n              \"NetValue\": \"<double>\",\n              \"TaxValue\": \"<double>\",\n              \"TaxRateCode\": \"<string>\"\n            },\n            {\n              \"NetValue\": \"<double>\",\n              \"TaxValue\": \"<double>\",\n              \"TaxRateCode\": \"<string>\"\n            }\n          ]\n        },\n        \"Currency\": \"<string>\",\n        \"GrossValue\": \"<double>\",\n        \"NetValue\": \"<double>\",\n        \"TaxValues\": [\n          {\n            \"Value\": \"<double>\",\n            \"Code\": \"<string>\"\n          },\n          {\n            \"Value\": \"<double>\",\n            \"Code\": \"<string>\"\n          }\n        ]\n      }\n    },\n    {\n      \"ClosingBalance\": {\n        \"Breakdown\": {\n          \"Items\": [\n            {\n              \"NetValue\": \"<double>\",\n              \"TaxValue\": \"<double>\",\n              \"TaxRateCode\": \"<string>\"\n            },\n            {\n              \"NetValue\": \"<double>\",\n              \"TaxValue\": \"<double>\",\n              \"TaxRateCode\": \"<string>\"\n            }\n          ]\n        },\n        \"Currency\": \"<string>\",\n        \"GrossValue\": \"<double>\",\n        \"NetValue\": \"<double>\",\n        \"TaxValues\": [\n          {\n            \"Value\": \"<double>\",\n            \"Code\": \"<string>\"\n          },\n          {\n            \"Value\": \"<double>\",\n            \"Code\": \"<string>\"\n          }\n        ]\n      },\n      \"Date\": \"<date>\",\n      \"EnterpriseId\": \"<uuid>\",\n      \"LedgerType\": \"Payment\",\n      \"OpeningBalance\": {\n        \"Breakdown\": {\n          \"Items\": [\n            {\n              \"NetValue\": \"<double>\",\n              \"TaxValue\": \"<double>\",\n              \"TaxRateCode\": \"<string>\"\n            },\n            {\n              \"NetValue\": \"<double>\",\n              \"TaxValue\": \"<double>\",\n              \"TaxRateCode\": \"<string>\"\n            }\n          ]\n        },\n        \"Currency\": \"<string>\",\n        \"GrossValue\": \"<double>\",\n        \"NetValue\": \"<double>\",\n        \"TaxValues\": [\n          {\n            \"Value\": \"<double>\",\n            \"Code\": \"<string>\"\n          },\n          {\n            \"Value\": \"<double>\",\n            \"Code\": \"<string>\"\n          }\n        ]\n      }\n    }\n  ],\n  \"Cursor\": \"<uuid>\"\n}",
+                              "createdAt": "2026-07-28T02:10:57.000Z",
+                              "updatedAt": "2026-07-28T02:10:57.000Z",
+                              "uid": "35240-dd66be79-e330-49dd-b16b-8d0bfb3e2c71"
+                            },
+                            {
+                              "id": "9ecc3cbc-a8ae-49c7-8632-69e12a71e8c3",
+                              "name": "Server has successfully fulfilled the request and there is no additional information to send back.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Date\": {\n    \"End\": \"<date>\",\n    \"Start\": \"<date>\"\n  },\n  \"LedgerTypes\": [\n    \"Payment\"\n  ],\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/ledgerBalances/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "ledgerBalances",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:10:57.000Z",
+                              "updatedAt": "2026-07-28T02:10:57.000Z",
+                              "uid": "35240-9ecc3cbc-a8ae-49c7-8632-69e12a71e8c3"
+                            },
+                            {
+                              "id": "9a33d20f-024b-41e1-b3b6-4ce17ea9dad4",
+                              "name": "Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Date\": {\n    \"End\": \"<date>\",\n    \"Start\": \"<date>\"\n  },\n  \"LedgerTypes\": [\n    \"Payment\"\n  ],\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/ledgerBalances/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "ledgerBalances",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:10:57.000Z",
+                              "updatedAt": "2026-07-28T02:10:57.000Z",
+                              "uid": "35240-9a33d20f-024b-41e1-b3b6-4ce17ea9dad4"
+                            },
+                            {
+                              "id": "94e9be6c-2678-4789-8691-9fa96e3d5b9b",
+                              "name": "Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Date\": {\n    \"End\": \"<date>\",\n    \"Start\": \"<date>\"\n  },\n  \"LedgerTypes\": [\n    \"Payment\"\n  ],\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/ledgerBalances/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "ledgerBalances",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:10:57.000Z",
+                              "updatedAt": "2026-07-28T02:10:57.000Z",
+                              "uid": "35240-94e9be6c-2678-4789-8691-9fa96e3d5b9b"
+                            },
+                            {
+                              "id": "6793e29f-a4a6-4184-8e50-fcc10e363f51",
+                              "name": "Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Date\": {\n    \"End\": \"<date>\",\n    \"Start\": \"<date>\"\n  },\n  \"LedgerTypes\": [\n    \"Payment\"\n  ],\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/ledgerBalances/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "ledgerBalances",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:10:57.000Z",
+                              "updatedAt": "2026-07-28T02:10:57.000Z",
+                              "uid": "35240-6793e29f-a4a6-4184-8e50-fcc10e363f51"
+                            },
+                            {
+                              "id": "320d22d0-7725-4d4d-8324-1273241f83cf",
+                              "name": "Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#r",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Date\": {\n    \"End\": \"<date>\",\n    \"Start\": \"<date>\"\n  },\n  \"LedgerTypes\": [\n    \"Payment\"\n  ],\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/ledgerBalances/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "ledgerBalances",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Request Timeout",
+                              "code": 408,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:10:57.000Z",
+                              "updatedAt": "2026-07-28T02:10:57.000Z",
+                              "uid": "35240-320d22d0-7725-4d4d-8324-1273241f83cf"
+                            },
+                            {
+                              "id": "d3a6894e-a034-4cab-b7f0-b4cfc3c57ad3",
+                              "name": "Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitb",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Date\": {\n    \"End\": \"<date>\",\n    \"Start\": \"<date>\"\n  },\n  \"LedgerTypes\": [\n    \"Payment\"\n  ],\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/ledgerBalances/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "ledgerBalances",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Too Many Requests",
+                              "code": 429,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:10:57.000Z",
+                              "updatedAt": "2026-07-28T02:10:57.000Z",
+                              "uid": "35240-d3a6894e-a034-4cab-b7f0-b4cfc3c57ad3"
+                            },
+                            {
+                              "id": "318b6e30-673c-459a-84bf-3920586e7434",
+                              "name": "Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: apikey",
+                                    "key": "ClientToken",
+                                    "value": "<API Key>"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Date\": {\n    \"End\": \"<date>\",\n    \"Start\": \"<date>\"\n  },\n  \"LedgerTypes\": [\n    \"Payment\"\n  ],\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ]\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/connector/v1/ledgerBalances/getAll",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "connector",
+                                    "v1",
+                                    "ledgerBalances",
+                                    "getAll"
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"Message\": \"<string>\",\n  \"RequestId\": \"<string>\",\n  \"Details\": {\n    \"nullable\": true,\n    \"example\": \"string\"\n  }\n}",
+                              "createdAt": "2026-07-28T02:10:57.000Z",
+                              "updatedAt": "2026-07-28T02:10:57.000Z",
+                              "uid": "35240-318b6e30-673c-459a-84bf-3920586e7434"
+                            }
+                          ],
+                          "createdAt": "2026-07-28T02:10:57.000Z",
+                          "updatedAt": "2026-07-28T02:10:57.000Z",
+                          "uid": "35240-4b5e330f-dba0-4177-9f1b-8acf4557e97c"
+                        }
+                      ],
+                      "id": "3fffe230-3921-4c7c-9176-d80ce9a1c6ec",
+                      "createdAt": "2026-07-28T02:10:57.000Z",
+                      "updatedAt": "2026-07-28T02:10:57.000Z",
+                      "uid": "35240-3fffe230-3921-4c7c-9176-d80ce9a1c6ec"
+                    }
+                  ],
+                  "id": "b6ee2b19-5b04-435e-81a2-0fca6853a255",
+                  "createdAt": "2026-07-28T02:10:57.000Z",
+                  "updatedAt": "2026-07-28T02:10:57.000Z",
+                  "uid": "35240-b6ee2b19-5b04-435e-81a2-0fca6853a255"
+                }
+              ],
+              "id": "9c734e15-7044-44ce-87ca-3c175cb09bdd",
+              "createdAt": "2026-07-28T02:10:57.000Z",
+              "updatedAt": "2026-07-28T02:10:57.000Z",
+              "uid": "35240-9c734e15-7044-44ce-87ca-3c175cb09bdd"
+            }
+          ],
+          "id": "da942a93-9b34-448d-92d5-be53d755b4e4",
+          "createdAt": "2026-07-28T02:10:57.000Z",
+          "updatedAt": "2026-07-28T02:10:57.000Z",
+          "uid": "35240-da942a93-9b34-448d-92d5-be53d755b4e4"
+        }
+      ],
+      "id": "67e453fe-e87b-49b9-b730-23c262921576",
+      "createdAt": "2026-07-28T02:10:57.000Z",
+      "updatedAt": "2026-07-28T02:10:57.000Z",
+      "uid": "35240-67e453fe-e87b-49b9-b730-23c262921576"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "ClientToken",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.mews.com"
+    }
+  ]
+}
