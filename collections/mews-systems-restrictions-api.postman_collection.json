@@ -1,0 +1,1635 @@
+{
+  "item": [
+    {
+      "id": "7f4868a8-c286-47e6-a786-8fa62f87af88",
+      "name": "Restrictions",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "744b9985-4a83-4ce1-87a0-9d5ad0f1cd02",
+          "name": "Mews Set Restrictions",
+          "request": {
+            "name": "Mews Set Restrictions",
+            "description": {
+              "content": "Adds new restrictions with the specified conditions. For improved efficiency, multiple similar restrictions will be merged into a single restriction. A quota of 150,000 restrictions per service applies, although it is unlikely to be exceeded because of the merging algorithm. For more information about the merging algorithm, see [Restrictions concepts](https://mews-systems.gitbook.io/connector-api/concepts/restrictions).\r\n\r\nCare is needed to specify `StartUtc` and `EndUtc` in the correct format - see [Datetimes](https://mews-systems.gitbook.io/connector-api/guidelines/serialization#datetimes).\r\n\r\nOnly restrictions created through the API are affected by this operation, *not* restrictions created by the user within **Mews Operations**. Similarly, if a user creates a restriction in **Mews Operations**, this will *not* affect restrictions created through the API.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "connector",
+                "v1",
+                "restrictions",
+                "set"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Data\": [\n    {\n      \"Days\": {\n        \"Friday\": \"<boolean>\",\n        \"Monday\": \"<boolean>\",\n        \"Saturday\": \"<boolean>\",\n        \"Sunday\": \"<boolean>\",\n        \"Thursday\": \"<boolean>\",\n        \"Tuesday\": \"<boolean>\",\n        \"Wednesday\": \"<boolean>\"\n      },\n      \"Type\": \"<string>\",\n      \"ExactRateId\": \"<string>\",\n      \"BaseRateId\": \"<string>\",\n      \"RateGroupId\": \"<string>\",\n      \"ResourceCategoryId\": \"<string>\",\n      \"ResourceCategoryType\": \"<string>\",\n      \"StartUtc\": \"<dateTime>\",\n      \"EndUtc\": \"<dateTime>\",\n      \"MinAdvance\": \"<dateTime>\",\n      \"MaxAdvance\": \"<dateTime>\",\n      \"MinLength\": \"<dateTime>\",\n      \"MaxLength\": \"<dateTime>\",\n      \"MinPrice\": {\n        \"Currency\": \"<currency>\",\n        \"Value\": \"<double>\"\n      },\n      \"MaxPrice\": {\n        \"Currency\": \"<currency>\",\n        \"Value\": \"<double>\"\n      }\n    }\n  ],\n  \"ServiceId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ad329e6b-bb93-409b-9e24-da3b3234a8b9",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "restrictions",
+                    "set"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"ServiceId\": \"bd26d8db-86da-4f96-9efc-e5a4654a4a94\",\n  \"Data\": [\n    {\n      \"Type\": \"Start\",\n      \"ExactRateId\": \"ed4b660b-19d0-434b-9360-a4de2ea42eda\",\n      \"ResourceCategoryId\": \"773d5e42-de1e-43a0-9ce6-f940faf2303f\",\n      \"StartUtc\": \"2023-02-15T00:00:00Z\",\n      \"EndUtc\": \"2023-02-22T00:00:00Z\",\n      \"Days\": {\n        \"Monday\": false,\n        \"Tuesday\": false,\n        \"Wednesday\": false,\n        \"Thursday\": false,\n        \"Friday\": true,\n        \"Saturday\": true,\n        \"Sunday\": true\n      },\n      \"MinLength\": \"P0M2DT0H0M0S\",\n      \"MaxLength\": \"P0M7DT0H0M0S\"\n    },\n    {\n      \"Type\": \"Start\",\n      \"BaseRateId\": \"e5b538b1-36e6-43a0-9f5c-103204c7f68e\",\n      \"StartUtc\": \"2023-02-23T00:00:00Z\",\n      \"EndUtc\": \"2023-03-03T00:00:00Z\",\n      \"Days\": {\n        \"Monday\": true,\n        \"Tuesday\": true,\n        \"Wednesday\": true,\n        \"Thursday\": true,\n        \"Friday\": true,\n        \"Saturday\": false,\n        \"Sunday\": false\n      },\n      \"MinAdvance\": \"P0Y0M1DT0H0M0S\",\n      \"MaxAdvance\": \"P0Y0M3DT0H0M0S\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f05c4981-1738-4687-aac2-35383dc13086",
+              "name": "Server has successfully fulfilled the request and there is no additional information to send back.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "restrictions",
+                    "set"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"ServiceId\": \"bd26d8db-86da-4f96-9efc-e5a4654a4a94\",\n  \"Data\": [\n    {\n      \"Type\": \"Start\",\n      \"ExactRateId\": \"ed4b660b-19d0-434b-9360-a4de2ea42eda\",\n      \"ResourceCategoryId\": \"773d5e42-de1e-43a0-9ce6-f940faf2303f\",\n      \"StartUtc\": \"2023-02-15T00:00:00Z\",\n      \"EndUtc\": \"2023-02-22T00:00:00Z\",\n      \"Days\": {\n        \"Monday\": false,\n        \"Tuesday\": false,\n        \"Wednesday\": false,\n        \"Thursday\": false,\n        \"Friday\": true,\n        \"Saturday\": true,\n        \"Sunday\": true\n      },\n      \"MinLength\": \"P0M2DT0H0M0S\",\n      \"MaxLength\": \"P0M7DT0H0M0S\"\n    },\n    {\n      \"Type\": \"Start\",\n      \"BaseRateId\": \"e5b538b1-36e6-43a0-9f5c-103204c7f68e\",\n      \"StartUtc\": \"2023-02-23T00:00:00Z\",\n      \"EndUtc\": \"2023-03-03T00:00:00Z\",\n      \"Days\": {\n        \"Monday\": true,\n        \"Tuesday\": true,\n        \"Wednesday\": true,\n        \"Thursday\": true,\n        \"Friday\": true,\n        \"Saturday\": false,\n        \"Sunday\": false\n      },\n      \"MinAdvance\": \"P0Y0M1DT0H0M0S\",\n      \"MaxAdvance\": \"P0Y0M3DT0H0M0S\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dbf054a8-f705-4c7b-a529-807e864126ec",
+              "name": "Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "restrictions",
+                    "set"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"ServiceId\": \"bd26d8db-86da-4f96-9efc-e5a4654a4a94\",\n  \"Data\": [\n    {\n      \"Type\": \"Start\",\n      \"ExactRateId\": \"ed4b660b-19d0-434b-9360-a4de2ea42eda\",\n      \"ResourceCategoryId\": \"773d5e42-de1e-43a0-9ce6-f940faf2303f\",\n      \"StartUtc\": \"2023-02-15T00:00:00Z\",\n      \"EndUtc\": \"2023-02-22T00:00:00Z\",\n      \"Days\": {\n        \"Monday\": false,\n        \"Tuesday\": false,\n        \"Wednesday\": false,\n        \"Thursday\": false,\n        \"Friday\": true,\n        \"Saturday\": true,\n        \"Sunday\": true\n      },\n      \"MinLength\": \"P0M2DT0H0M0S\",\n      \"MaxLength\": \"P0M7DT0H0M0S\"\n    },\n    {\n      \"Type\": \"Start\",\n      \"BaseRateId\": \"e5b538b1-36e6-43a0-9f5c-103204c7f68e\",\n      \"StartUtc\": \"2023-02-23T00:00:00Z\",\n      \"EndUtc\": \"2023-03-03T00:00:00Z\",\n      \"Days\": {\n        \"Monday\": true,\n        \"Tuesday\": true,\n        \"Wednesday\": true,\n        \"Thursday\": true,\n        \"Friday\": true,\n        \"Saturday\": false,\n        \"Sunday\": false\n      },\n      \"MinAdvance\": \"P0Y0M1DT0H0M0S\",\n      \"MaxAdvance\": \"P0Y0M3DT0H0M0S\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6ce8cbd8-141b-45cd-acde-cd7affb50567",
+              "name": "Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "restrictions",
+                    "set"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"ServiceId\": \"bd26d8db-86da-4f96-9efc-e5a4654a4a94\",\n  \"Data\": [\n    {\n      \"Type\": \"Start\",\n      \"ExactRateId\": \"ed4b660b-19d0-434b-9360-a4de2ea42eda\",\n      \"ResourceCategoryId\": \"773d5e42-de1e-43a0-9ce6-f940faf2303f\",\n      \"StartUtc\": \"2023-02-15T00:00:00Z\",\n      \"EndUtc\": \"2023-02-22T00:00:00Z\",\n      \"Days\": {\n        \"Monday\": false,\n        \"Tuesday\": false,\n        \"Wednesday\": false,\n        \"Thursday\": false,\n        \"Friday\": true,\n        \"Saturday\": true,\n        \"Sunday\": true\n      },\n      \"MinLength\": \"P0M2DT0H0M0S\",\n      \"MaxLength\": \"P0M7DT0H0M0S\"\n    },\n    {\n      \"Type\": \"Start\",\n      \"BaseRateId\": \"e5b538b1-36e6-43a0-9f5c-103204c7f68e\",\n      \"StartUtc\": \"2023-02-23T00:00:00Z\",\n      \"EndUtc\": \"2023-03-03T00:00:00Z\",\n      \"Days\": {\n        \"Monday\": true,\n        \"Tuesday\": true,\n        \"Wednesday\": true,\n        \"Thursday\": true,\n        \"Friday\": true,\n        \"Saturday\": false,\n        \"Sunday\": false\n      },\n      \"MinAdvance\": \"P0Y0M1DT0H0M0S\",\n      \"MaxAdvance\": \"P0Y0M3DT0H0M0S\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9e39b61d-368b-477b-b33d-ca9b0964e714",
+              "name": "Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "restrictions",
+                    "set"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"ServiceId\": \"bd26d8db-86da-4f96-9efc-e5a4654a4a94\",\n  \"Data\": [\n    {\n      \"Type\": \"Start\",\n      \"ExactRateId\": \"ed4b660b-19d0-434b-9360-a4de2ea42eda\",\n      \"ResourceCategoryId\": \"773d5e42-de1e-43a0-9ce6-f940faf2303f\",\n      \"StartUtc\": \"2023-02-15T00:00:00Z\",\n      \"EndUtc\": \"2023-02-22T00:00:00Z\",\n      \"Days\": {\n        \"Monday\": false,\n        \"Tuesday\": false,\n        \"Wednesday\": false,\n        \"Thursday\": false,\n        \"Friday\": true,\n        \"Saturday\": true,\n        \"Sunday\": true\n      },\n      \"MinLength\": \"P0M2DT0H0M0S\",\n      \"MaxLength\": \"P0M7DT0H0M0S\"\n    },\n    {\n      \"Type\": \"Start\",\n      \"BaseRateId\": \"e5b538b1-36e6-43a0-9f5c-103204c7f68e\",\n      \"StartUtc\": \"2023-02-23T00:00:00Z\",\n      \"EndUtc\": \"2023-03-03T00:00:00Z\",\n      \"Days\": {\n        \"Monday\": true,\n        \"Tuesday\": true,\n        \"Wednesday\": true,\n        \"Thursday\": true,\n        \"Friday\": true,\n        \"Saturday\": false,\n        \"Sunday\": false\n      },\n      \"MinAdvance\": \"P0Y0M1DT0H0M0S\",\n      \"MaxAdvance\": \"P0Y0M3DT0H0M0S\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dff142aa-f0e8-43f3-8eff-7e6a101dd1b5",
+              "name": "Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-timeouts)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "restrictions",
+                    "set"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"ServiceId\": \"bd26d8db-86da-4f96-9efc-e5a4654a4a94\",\n  \"Data\": [\n    {\n      \"Type\": \"Start\",\n      \"ExactRateId\": \"ed4b660b-19d0-434b-9360-a4de2ea42eda\",\n      \"ResourceCategoryId\": \"773d5e42-de1e-43a0-9ce6-f940faf2303f\",\n      \"StartUtc\": \"2023-02-15T00:00:00Z\",\n      \"EndUtc\": \"2023-02-22T00:00:00Z\",\n      \"Days\": {\n        \"Monday\": false,\n        \"Tuesday\": false,\n        \"Wednesday\": false,\n        \"Thursday\": false,\n        \"Friday\": true,\n        \"Saturday\": true,\n        \"Sunday\": true\n      },\n      \"MinLength\": \"P0M2DT0H0M0S\",\n      \"MaxLength\": \"P0M7DT0H0M0S\"\n    },\n    {\n      \"Type\": \"Start\",\n      \"BaseRateId\": \"e5b538b1-36e6-43a0-9f5c-103204c7f68e\",\n      \"StartUtc\": \"2023-02-23T00:00:00Z\",\n      \"EndUtc\": \"2023-03-03T00:00:00Z\",\n      \"Days\": {\n        \"Monday\": true,\n        \"Tuesday\": true,\n        \"Wednesday\": true,\n        \"Thursday\": true,\n        \"Friday\": true,\n        \"Saturday\": false,\n        \"Sunday\": false\n      },\n      \"MinAdvance\": \"P0Y0M1DT0H0M0S\",\n      \"MaxAdvance\": \"P0Y0M3DT0H0M0S\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Request Timeout",
+              "code": 408,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e8799510-bb90-49a3-b2a9-4218e29589cd",
+              "name": "The request cannot be completed because the data has changed, causing conflict between the state on the client and the server. To get around this error, try refreshing the data on the client and resubmitting the request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "restrictions",
+                    "set"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"ServiceId\": \"bd26d8db-86da-4f96-9efc-e5a4654a4a94\",\n  \"Data\": [\n    {\n      \"Type\": \"Start\",\n      \"ExactRateId\": \"ed4b660b-19d0-434b-9360-a4de2ea42eda\",\n      \"ResourceCategoryId\": \"773d5e42-de1e-43a0-9ce6-f940faf2303f\",\n      \"StartUtc\": \"2023-02-15T00:00:00Z\",\n      \"EndUtc\": \"2023-02-22T00:00:00Z\",\n      \"Days\": {\n        \"Monday\": false,\n        \"Tuesday\": false,\n        \"Wednesday\": false,\n        \"Thursday\": false,\n        \"Friday\": true,\n        \"Saturday\": true,\n        \"Sunday\": true\n      },\n      \"MinLength\": \"P0M2DT0H0M0S\",\n      \"MaxLength\": \"P0M7DT0H0M0S\"\n    },\n    {\n      \"Type\": \"Start\",\n      \"BaseRateId\": \"e5b538b1-36e6-43a0-9f5c-103204c7f68e\",\n      \"StartUtc\": \"2023-02-23T00:00:00Z\",\n      \"EndUtc\": \"2023-03-03T00:00:00Z\",\n      \"Days\": {\n        \"Monday\": true,\n        \"Tuesday\": true,\n        \"Wednesday\": true,\n        \"Thursday\": true,\n        \"Friday\": true,\n        \"Saturday\": false,\n        \"Sunday\": false\n      },\n      \"MinAdvance\": \"P0Y0M1DT0H0M0S\",\n      \"MaxAdvance\": \"P0Y0M3DT0H0M0S\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f5536e6d-28b0-4c9f-a643-e7e37644ab0d",
+              "name": "Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-limits).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "restrictions",
+                    "set"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"ServiceId\": \"bd26d8db-86da-4f96-9efc-e5a4654a4a94\",\n  \"Data\": [\n    {\n      \"Type\": \"Start\",\n      \"ExactRateId\": \"ed4b660b-19d0-434b-9360-a4de2ea42eda\",\n      \"ResourceCategoryId\": \"773d5e42-de1e-43a0-9ce6-f940faf2303f\",\n      \"StartUtc\": \"2023-02-15T00:00:00Z\",\n      \"EndUtc\": \"2023-02-22T00:00:00Z\",\n      \"Days\": {\n        \"Monday\": false,\n        \"Tuesday\": false,\n        \"Wednesday\": false,\n        \"Thursday\": false,\n        \"Friday\": true,\n        \"Saturday\": true,\n        \"Sunday\": true\n      },\n      \"MinLength\": \"P0M2DT0H0M0S\",\n      \"MaxLength\": \"P0M7DT0H0M0S\"\n    },\n    {\n      \"Type\": \"Start\",\n      \"BaseRateId\": \"e5b538b1-36e6-43a0-9f5c-103204c7f68e\",\n      \"StartUtc\": \"2023-02-23T00:00:00Z\",\n      \"EndUtc\": \"2023-03-03T00:00:00Z\",\n      \"Days\": {\n        \"Monday\": true,\n        \"Tuesday\": true,\n        \"Wednesday\": true,\n        \"Thursday\": true,\n        \"Friday\": true,\n        \"Saturday\": false,\n        \"Sunday\": false\n      },\n      \"MinAdvance\": \"P0Y0M1DT0H0M0S\",\n      \"MaxAdvance\": \"P0Y0M3DT0H0M0S\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e51bd1fb-291d-40d7-bc2c-a459edc05d27",
+              "name": "Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.com/MewsSystems/gitbook-connector-api).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "restrictions",
+                    "set"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"ServiceId\": \"bd26d8db-86da-4f96-9efc-e5a4654a4a94\",\n  \"Data\": [\n    {\n      \"Type\": \"Start\",\n      \"ExactRateId\": \"ed4b660b-19d0-434b-9360-a4de2ea42eda\",\n      \"ResourceCategoryId\": \"773d5e42-de1e-43a0-9ce6-f940faf2303f\",\n      \"StartUtc\": \"2023-02-15T00:00:00Z\",\n      \"EndUtc\": \"2023-02-22T00:00:00Z\",\n      \"Days\": {\n        \"Monday\": false,\n        \"Tuesday\": false,\n        \"Wednesday\": false,\n        \"Thursday\": false,\n        \"Friday\": true,\n        \"Saturday\": true,\n        \"Sunday\": true\n      },\n      \"MinLength\": \"P0M2DT0H0M0S\",\n      \"MaxLength\": \"P0M7DT0H0M0S\"\n    },\n    {\n      \"Type\": \"Start\",\n      \"BaseRateId\": \"e5b538b1-36e6-43a0-9f5c-103204c7f68e\",\n      \"StartUtc\": \"2023-02-23T00:00:00Z\",\n      \"EndUtc\": \"2023-03-03T00:00:00Z\",\n      \"Days\": {\n        \"Monday\": true,\n        \"Tuesday\": true,\n        \"Wednesday\": true,\n        \"Thursday\": true,\n        \"Friday\": true,\n        \"Saturday\": false,\n        \"Sunday\": false\n      },\n      \"MinAdvance\": \"P0Y0M1DT0H0M0S\",\n      \"MaxAdvance\": \"P0Y0M3DT0H0M0S\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "966175a0-7a16-49c9-a7f6-8a9c3f1dd107",
+          "name": "Mews Clear Restrictions",
+          "request": {
+            "name": "Mews Clear Restrictions",
+            "description": {
+              "content": "Deletes restrictions that exactly match the specified conditions, using a splicing algorithm. This operation is intended to be used alongside [Set restrictions](https://mews-systems.gitbook.io/connector-api/operations/restrictions#set-restrictions). The specified conditions must be met exactly. The time interval, however, does not need to correspond to an existing restriction in the system, instead the API uses a splicing algorithm to work out how to divide up any existing restrictions to meet the specified time interval. For details about matching conditions and the splicing algorithm, see [Concepts > Restrictions](https://mews-systems.gitbook.io/connector-api/concepts/restrictions).\r\n\r\nOnly restrictions created through the API are affected by this operation, *not* restrictions created by the user within **Mews Operations**. Similarly, if a user creates a restriction in **Mews Operations**, this will *not* affect restrictions created through the API.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "connector",
+                "v1",
+                "restrictions",
+                "clear"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Data\": [\n    {\n      \"Days\": {\n        \"Friday\": \"<boolean>\",\n        \"Monday\": \"<boolean>\",\n        \"Saturday\": \"<boolean>\",\n        \"Sunday\": \"<boolean>\",\n        \"Thursday\": \"<boolean>\",\n        \"Tuesday\": \"<boolean>\",\n        \"Wednesday\": \"<boolean>\"\n      },\n      \"Type\": \"<string>\",\n      \"ExactRateId\": \"<string>\",\n      \"BaseRateId\": \"<string>\",\n      \"RateGroupId\": \"<string>\",\n      \"ResourceCategoryId\": \"<string>\",\n      \"ResourceCategoryType\": \"<string>\",\n      \"StartUtc\": \"<dateTime>\",\n      \"EndUtc\": \"<dateTime>\"\n    }\n  ],\n  \"ServiceId\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "e84ce29a-9f9e-4ed7-8ee6-0d1c01477e48",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "restrictions",
+                    "clear"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"ServiceId\": \"bd26d8db-86da-4f96-9efc-e5a4654a4a94\",\n  \"Data\": [\n    {\n      \"Type\": \"Start\",\n      \"ExactRateId\": \"ed4b660b-19d0-434b-9360-a4de2ea42eda\",\n      \"ResourceCategoryId\": \"773d5e42-de1e-43a0-9ce6-f940faf2303f\",\n      \"StartUtc\": \"2023-02-15T00:00:00Z\",\n      \"EndUtc\": \"2023-02-22T00:00:00Z\",\n      \"Days\": {\n        \"Monday\": false,\n        \"Tuesday\": false,\n        \"Wednesday\": false,\n        \"Thursday\": false,\n        \"Friday\": true,\n        \"Saturday\": true,\n        \"Sunday\": true\n      }\n    },\n    {\n      \"Type\": \"Start\",\n      \"BaseRateId\": \"e5b538b1-36e6-43a0-9f5c-103204c7f68e\",\n      \"StartUtc\": \"2023-02-23T00:00:00Z\",\n      \"EndUtc\": \"2023-03-03T00:00:00Z\",\n      \"Days\": {\n        \"Monday\": true,\n        \"Tuesday\": true,\n        \"Wednesday\": true,\n        \"Thursday\": true,\n        \"Friday\": true,\n        \"Saturday\": false,\n        \"Sunday\": false\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "445e2af7-bcc3-4d7c-bf15-75189228ac69",
+              "name": "Server has successfully fulfilled the request and there is no additional information to send back.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "restrictions",
+                    "clear"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"ServiceId\": \"bd26d8db-86da-4f96-9efc-e5a4654a4a94\",\n  \"Data\": [\n    {\n      \"Type\": \"Start\",\n      \"ExactRateId\": \"ed4b660b-19d0-434b-9360-a4de2ea42eda\",\n      \"ResourceCategoryId\": \"773d5e42-de1e-43a0-9ce6-f940faf2303f\",\n      \"StartUtc\": \"2023-02-15T00:00:00Z\",\n      \"EndUtc\": \"2023-02-22T00:00:00Z\",\n      \"Days\": {\n        \"Monday\": false,\n        \"Tuesday\": false,\n        \"Wednesday\": false,\n        \"Thursday\": false,\n        \"Friday\": true,\n        \"Saturday\": true,\n        \"Sunday\": true\n      }\n    },\n    {\n      \"Type\": \"Start\",\n      \"BaseRateId\": \"e5b538b1-36e6-43a0-9f5c-103204c7f68e\",\n      \"StartUtc\": \"2023-02-23T00:00:00Z\",\n      \"EndUtc\": \"2023-03-03T00:00:00Z\",\n      \"Days\": {\n        \"Monday\": true,\n        \"Tuesday\": true,\n        \"Wednesday\": true,\n        \"Thursday\": true,\n        \"Friday\": true,\n        \"Saturday\": false,\n        \"Sunday\": false\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "629c2232-3966-4468-84ba-cf544e9c6e02",
+              "name": "Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "restrictions",
+                    "clear"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"ServiceId\": \"bd26d8db-86da-4f96-9efc-e5a4654a4a94\",\n  \"Data\": [\n    {\n      \"Type\": \"Start\",\n      \"ExactRateId\": \"ed4b660b-19d0-434b-9360-a4de2ea42eda\",\n      \"ResourceCategoryId\": \"773d5e42-de1e-43a0-9ce6-f940faf2303f\",\n      \"StartUtc\": \"2023-02-15T00:00:00Z\",\n      \"EndUtc\": \"2023-02-22T00:00:00Z\",\n      \"Days\": {\n        \"Monday\": false,\n        \"Tuesday\": false,\n        \"Wednesday\": false,\n        \"Thursday\": false,\n        \"Friday\": true,\n        \"Saturday\": true,\n        \"Sunday\": true\n      }\n    },\n    {\n      \"Type\": \"Start\",\n      \"BaseRateId\": \"e5b538b1-36e6-43a0-9f5c-103204c7f68e\",\n      \"StartUtc\": \"2023-02-23T00:00:00Z\",\n      \"EndUtc\": \"2023-03-03T00:00:00Z\",\n      \"Days\": {\n        \"Monday\": true,\n        \"Tuesday\": true,\n        \"Wednesday\": true,\n        \"Thursday\": true,\n        \"Friday\": true,\n        \"Saturday\": false,\n        \"Sunday\": false\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "82fedf90-15b0-4e9d-9404-03136b3c2e8e",
+              "name": "Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "restrictions",
+                    "clear"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"ServiceId\": \"bd26d8db-86da-4f96-9efc-e5a4654a4a94\",\n  \"Data\": [\n    {\n      \"Type\": \"Start\",\n      \"ExactRateId\": \"ed4b660b-19d0-434b-9360-a4de2ea42eda\",\n      \"ResourceCategoryId\": \"773d5e42-de1e-43a0-9ce6-f940faf2303f\",\n      \"StartUtc\": \"2023-02-15T00:00:00Z\",\n      \"EndUtc\": \"2023-02-22T00:00:00Z\",\n      \"Days\": {\n        \"Monday\": false,\n        \"Tuesday\": false,\n        \"Wednesday\": false,\n        \"Thursday\": false,\n        \"Friday\": true,\n        \"Saturday\": true,\n        \"Sunday\": true\n      }\n    },\n    {\n      \"Type\": \"Start\",\n      \"BaseRateId\": \"e5b538b1-36e6-43a0-9f5c-103204c7f68e\",\n      \"StartUtc\": \"2023-02-23T00:00:00Z\",\n      \"EndUtc\": \"2023-03-03T00:00:00Z\",\n      \"Days\": {\n        \"Monday\": true,\n        \"Tuesday\": true,\n        \"Wednesday\": true,\n        \"Thursday\": true,\n        \"Friday\": true,\n        \"Saturday\": false,\n        \"Sunday\": false\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b9994ec1-0a8e-4f0e-9e76-1d75e193cb27",
+              "name": "Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "restrictions",
+                    "clear"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"ServiceId\": \"bd26d8db-86da-4f96-9efc-e5a4654a4a94\",\n  \"Data\": [\n    {\n      \"Type\": \"Start\",\n      \"ExactRateId\": \"ed4b660b-19d0-434b-9360-a4de2ea42eda\",\n      \"ResourceCategoryId\": \"773d5e42-de1e-43a0-9ce6-f940faf2303f\",\n      \"StartUtc\": \"2023-02-15T00:00:00Z\",\n      \"EndUtc\": \"2023-02-22T00:00:00Z\",\n      \"Days\": {\n        \"Monday\": false,\n        \"Tuesday\": false,\n        \"Wednesday\": false,\n        \"Thursday\": false,\n        \"Friday\": true,\n        \"Saturday\": true,\n        \"Sunday\": true\n      }\n    },\n    {\n      \"Type\": \"Start\",\n      \"BaseRateId\": \"e5b538b1-36e6-43a0-9f5c-103204c7f68e\",\n      \"StartUtc\": \"2023-02-23T00:00:00Z\",\n      \"EndUtc\": \"2023-03-03T00:00:00Z\",\n      \"Days\": {\n        \"Monday\": true,\n        \"Tuesday\": true,\n        \"Wednesday\": true,\n        \"Thursday\": true,\n        \"Friday\": true,\n        \"Saturday\": false,\n        \"Sunday\": false\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3285ad39-ad1d-4498-a78f-be29a1184e26",
+              "name": "Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-timeouts)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "restrictions",
+                    "clear"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"ServiceId\": \"bd26d8db-86da-4f96-9efc-e5a4654a4a94\",\n  \"Data\": [\n    {\n      \"Type\": \"Start\",\n      \"ExactRateId\": \"ed4b660b-19d0-434b-9360-a4de2ea42eda\",\n      \"ResourceCategoryId\": \"773d5e42-de1e-43a0-9ce6-f940faf2303f\",\n      \"StartUtc\": \"2023-02-15T00:00:00Z\",\n      \"EndUtc\": \"2023-02-22T00:00:00Z\",\n      \"Days\": {\n        \"Monday\": false,\n        \"Tuesday\": false,\n        \"Wednesday\": false,\n        \"Thursday\": false,\n        \"Friday\": true,\n        \"Saturday\": true,\n        \"Sunday\": true\n      }\n    },\n    {\n      \"Type\": \"Start\",\n      \"BaseRateId\": \"e5b538b1-36e6-43a0-9f5c-103204c7f68e\",\n      \"StartUtc\": \"2023-02-23T00:00:00Z\",\n      \"EndUtc\": \"2023-03-03T00:00:00Z\",\n      \"Days\": {\n        \"Monday\": true,\n        \"Tuesday\": true,\n        \"Wednesday\": true,\n        \"Thursday\": true,\n        \"Friday\": true,\n        \"Saturday\": false,\n        \"Sunday\": false\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Request Timeout",
+              "code": 408,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b2b33d1f-3b25-498b-a7c1-fe10870e330e",
+              "name": "The request cannot be completed because the data has changed, causing conflict between the state on the client and the server. To get around this error, try refreshing the data on the client and resubmitting the request.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "restrictions",
+                    "clear"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"ServiceId\": \"bd26d8db-86da-4f96-9efc-e5a4654a4a94\",\n  \"Data\": [\n    {\n      \"Type\": \"Start\",\n      \"ExactRateId\": \"ed4b660b-19d0-434b-9360-a4de2ea42eda\",\n      \"ResourceCategoryId\": \"773d5e42-de1e-43a0-9ce6-f940faf2303f\",\n      \"StartUtc\": \"2023-02-15T00:00:00Z\",\n      \"EndUtc\": \"2023-02-22T00:00:00Z\",\n      \"Days\": {\n        \"Monday\": false,\n        \"Tuesday\": false,\n        \"Wednesday\": false,\n        \"Thursday\": false,\n        \"Friday\": true,\n        \"Saturday\": true,\n        \"Sunday\": true\n      }\n    },\n    {\n      \"Type\": \"Start\",\n      \"BaseRateId\": \"e5b538b1-36e6-43a0-9f5c-103204c7f68e\",\n      \"StartUtc\": \"2023-02-23T00:00:00Z\",\n      \"EndUtc\": \"2023-03-03T00:00:00Z\",\n      \"Days\": {\n        \"Monday\": true,\n        \"Tuesday\": true,\n        \"Wednesday\": true,\n        \"Thursday\": true,\n        \"Friday\": true,\n        \"Saturday\": false,\n        \"Sunday\": false\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4fc7ad6e-2a58-40f4-9024-36d255a55c1a",
+              "name": "Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-limits).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "restrictions",
+                    "clear"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"ServiceId\": \"bd26d8db-86da-4f96-9efc-e5a4654a4a94\",\n  \"Data\": [\n    {\n      \"Type\": \"Start\",\n      \"ExactRateId\": \"ed4b660b-19d0-434b-9360-a4de2ea42eda\",\n      \"ResourceCategoryId\": \"773d5e42-de1e-43a0-9ce6-f940faf2303f\",\n      \"StartUtc\": \"2023-02-15T00:00:00Z\",\n      \"EndUtc\": \"2023-02-22T00:00:00Z\",\n      \"Days\": {\n        \"Monday\": false,\n        \"Tuesday\": false,\n        \"Wednesday\": false,\n        \"Thursday\": false,\n        \"Friday\": true,\n        \"Saturday\": true,\n        \"Sunday\": true\n      }\n    },\n    {\n      \"Type\": \"Start\",\n      \"BaseRateId\": \"e5b538b1-36e6-43a0-9f5c-103204c7f68e\",\n      \"StartUtc\": \"2023-02-23T00:00:00Z\",\n      \"EndUtc\": \"2023-03-03T00:00:00Z\",\n      \"Days\": {\n        \"Monday\": true,\n        \"Tuesday\": true,\n        \"Wednesday\": true,\n        \"Thursday\": true,\n        \"Friday\": true,\n        \"Saturday\": false,\n        \"Sunday\": false\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "93e4c7bb-0d65-4278-b66c-46e0ef53f053",
+              "name": "Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.com/MewsSystems/gitbook-connector-api).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "restrictions",
+                    "clear"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"ServiceId\": \"bd26d8db-86da-4f96-9efc-e5a4654a4a94\",\n  \"Data\": [\n    {\n      \"Type\": \"Start\",\n      \"ExactRateId\": \"ed4b660b-19d0-434b-9360-a4de2ea42eda\",\n      \"ResourceCategoryId\": \"773d5e42-de1e-43a0-9ce6-f940faf2303f\",\n      \"StartUtc\": \"2023-02-15T00:00:00Z\",\n      \"EndUtc\": \"2023-02-22T00:00:00Z\",\n      \"Days\": {\n        \"Monday\": false,\n        \"Tuesday\": false,\n        \"Wednesday\": false,\n        \"Thursday\": false,\n        \"Friday\": true,\n        \"Saturday\": true,\n        \"Sunday\": true\n      }\n    },\n    {\n      \"Type\": \"Start\",\n      \"BaseRateId\": \"e5b538b1-36e6-43a0-9f5c-103204c7f68e\",\n      \"StartUtc\": \"2023-02-23T00:00:00Z\",\n      \"EndUtc\": \"2023-03-03T00:00:00Z\",\n      \"Days\": {\n        \"Monday\": true,\n        \"Tuesday\": true,\n        \"Wednesday\": true,\n        \"Thursday\": true,\n        \"Friday\": true,\n        \"Saturday\": false,\n        \"Sunday\": false\n      }\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2c4239a4-4057-4218-b76f-33c4bd0ec684",
+          "name": "Mews Get All Restrictions",
+          "request": {
+            "name": "Mews Get All Restrictions",
+            "description": {
+              "content": "Returns all restrictions of the default service provided by the enterprise.\nNote this operation uses [Pagination](https://mews-systems.gitbook.io/connector-api/guidelines/pagination/) and supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "connector",
+                "v1",
+                "restrictions",
+                "getAll"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"ServiceIds\": [\n    \"<uuid>\"\n  ],\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"TimeFilter\": \"<string>\",\n  \"StartUtc\": \"<string>\",\n  \"EndUtc\": \"<string>\",\n  \"CollidingUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"CreatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"RestrictionIds\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"ResourceCategoryIds\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"RateIds\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"ExactRateIds\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"BaseRateIds\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"Origin\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a74dedb2-1010-4ac2-b741-e1f67a36cc20",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "restrictions",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"EnterpriseIds\": [\n    \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n    \"4d0201db-36f5-428b-8d11-4f0a65e960cc\"\n  ],\n  \"ServiceIds\": [\n    \"bd26d8db-86da-4f96-9efc-e5a4654a4a94\"\n  ],\n  \"ResourceCategoryIds\": [\n    \"34c29e73-c8db-4e93-b51b-981e42655e03\"\n  ],\n  \"RateIds\": [\n    \"ed4b660b-19d0-434b-9360-a4de2ea42eda\"\n  ],\n  \"Origin\": \"Integration\",\n  \"CollidingUtc\": {\n    \"StartUtc\": \"2020-02-15T00:00:00Z\",\n    \"EndUtc\": \"2020-02-20T00:00:00Z\"\n  },\n  \"CreatedUtc\": {\n    \"StartUtc\": \"2020-02-05T00:00:00Z\",\n    \"EndUtc\": \"2020-02-15T00:00:00Z\"\n  },\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"2020-02-05T00:00:00Z\",\n    \"EndUtc\": \"2020-02-15T00:00:00Z\"\n  },\n  \"Limitation\": {\n    \"Count\": 10\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Restrictions\": [\n    {\n      \"Id\": \"40c24757-c16e-4094-91d3-4ca952e488a1\",\n      \"ServiceId\": \"bd26d8db-86da-4f96-9efc-e5a4654a4a94\",\n      \"ExternalIdentifier\": \"5678\",\n      \"Origin\": \"Integration\",\n      \"Conditions\": {\n        \"Type\": \"Stay\",\n        \"ExactRateId\": \"7c7e89d6-69c0-4cce-9d42-35443f2193f3\",\n        \"BaseRateId\": null,\n        \"RateGroupId\": null,\n        \"ResourceCategoryId\": \"86336EAC-4168-46B1-A544-2A47251BF864\",\n        \"ResourceCategoryType\": null,\n        \"StartUtc\": \"2018-10-09T00:00:00Z\",\n        \"EndUtc\": \"2018-10-31T00:00:00Z\",\n        \"Days\": [\n          \"Saturday\",\n          \"Sunday\"\n        ]\n      },\n      \"Exceptions\": {\n        \"MinAdvance\": null,\n        \"MaxAdvance\": null,\n        \"MinLength\": \"P0M2DT0H0M0S\",\n        \"MaxLength\": \"P0M7DT0H0M0S\",\n        \"MinPrice\": {\n          \"Value\": 50,\n          \"Currency\": \"EUR\"\n        },\n        \"MaxPrice\": {\n          \"Value\": 150,\n          \"Currency\": \"EUR\"\n        }\n      }\n    },\n    {\n      \"Id\": \"b40ac4a8-f5da-457d-88fe-7a895e1580ab\",\n      \"ServiceId\": \"bd26d8db-86da-4f96-9efc-e5a4654a4a94\",\n      \"ExternalIdentifier\": \"5678\",\n      \"Origin\": \"Integration\",\n      \"Conditions\": {\n        \"Type\": \"Start\",\n        \"ExactRateId\": null,\n        \"BaseRateId\": \"e5b538b1-36e6-43a0-9f5c-103204c7f68e\",\n        \"RateGroupId\": null,\n        \"ResourceCategoryId\": null,\n        \"ResourceCategoryType\": \"Room\",\n        \"StartUtc\": \"2018-10-01T00:00:00Z\",\n        \"EndUtc\": \"2018-10-31T00:00:00Z\",\n        \"Days\": [\n          \"Monday\",\n          \"Tuesday\",\n          \"Wednesday\",\n          \"Thursday\",\n          \"Friday\"\n        ]\n      },\n      \"Exceptions\": {\n        \"MinAdvance\": \"P0M1DT0H0M0S\",\n        \"MaxAdvance\": \"P0M3DT0H0M0S\",\n        \"MinLength\": null,\n        \"MaxLength\": null,\n        \"MinPrice\": null,\n        \"MaxPrice\": null\n      }\n    }\n  ],\n  \"Cursor\": \"b40ac4a8-f5da-457d-88fe-7a895e1580ab\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6ce5231e-7dbe-4788-9797-04561176c03f",
+              "name": "Server has successfully fulfilled the request and there is no additional information to send back.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "restrictions",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"EnterpriseIds\": [\n    \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n    \"4d0201db-36f5-428b-8d11-4f0a65e960cc\"\n  ],\n  \"ServiceIds\": [\n    \"bd26d8db-86da-4f96-9efc-e5a4654a4a94\"\n  ],\n  \"ResourceCategoryIds\": [\n    \"34c29e73-c8db-4e93-b51b-981e42655e03\"\n  ],\n  \"RateIds\": [\n    \"ed4b660b-19d0-434b-9360-a4de2ea42eda\"\n  ],\n  \"Origin\": \"Integration\",\n  \"CollidingUtc\": {\n    \"StartUtc\": \"2020-02-15T00:00:00Z\",\n    \"EndUtc\": \"2020-02-20T00:00:00Z\"\n  },\n  \"CreatedUtc\": {\n    \"StartUtc\": \"2020-02-05T00:00:00Z\",\n    \"EndUtc\": \"2020-02-15T00:00:00Z\"\n  },\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"2020-02-05T00:00:00Z\",\n    \"EndUtc\": \"2020-02-15T00:00:00Z\"\n  },\n  \"Limitation\": {\n    \"Count\": 10\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cc90c9f5-a782-4fa1-b4c2-5832e52dde87",
+              "name": "Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "restrictions",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"EnterpriseIds\": [\n    \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n    \"4d0201db-36f5-428b-8d11-4f0a65e960cc\"\n  ],\n  \"ServiceIds\": [\n    \"bd26d8db-86da-4f96-9efc-e5a4654a4a94\"\n  ],\n  \"ResourceCategoryIds\": [\n    \"34c29e73-c8db-4e93-b51b-981e42655e03\"\n  ],\n  \"RateIds\": [\n    \"ed4b660b-19d0-434b-9360-a4de2ea42eda\"\n  ],\n  \"Origin\": \"Integration\",\n  \"CollidingUtc\": {\n    \"StartUtc\": \"2020-02-15T00:00:00Z\",\n    \"EndUtc\": \"2020-02-20T00:00:00Z\"\n  },\n  \"CreatedUtc\": {\n    \"StartUtc\": \"2020-02-05T00:00:00Z\",\n    \"EndUtc\": \"2020-02-15T00:00:00Z\"\n  },\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"2020-02-05T00:00:00Z\",\n    \"EndUtc\": \"2020-02-15T00:00:00Z\"\n  },\n  \"Limitation\": {\n    \"Count\": 10\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2bf52641-d995-4f78-96e2-03d908806a69",
+              "name": "Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "restrictions",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"EnterpriseIds\": [\n    \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n    \"4d0201db-36f5-428b-8d11-4f0a65e960cc\"\n  ],\n  \"ServiceIds\": [\n    \"bd26d8db-86da-4f96-9efc-e5a4654a4a94\"\n  ],\n  \"ResourceCategoryIds\": [\n    \"34c29e73-c8db-4e93-b51b-981e42655e03\"\n  ],\n  \"RateIds\": [\n    \"ed4b660b-19d0-434b-9360-a4de2ea42eda\"\n  ],\n  \"Origin\": \"Integration\",\n  \"CollidingUtc\": {\n    \"StartUtc\": \"2020-02-15T00:00:00Z\",\n    \"EndUtc\": \"2020-02-20T00:00:00Z\"\n  },\n  \"CreatedUtc\": {\n    \"StartUtc\": \"2020-02-05T00:00:00Z\",\n    \"EndUtc\": \"2020-02-15T00:00:00Z\"\n  },\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"2020-02-05T00:00:00Z\",\n    \"EndUtc\": \"2020-02-15T00:00:00Z\"\n  },\n  \"Limitation\": {\n    \"Count\": 10\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "09b156bf-c164-4bf9-9fed-375ee084492f",
+              "name": "Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "restrictions",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"EnterpriseIds\": [\n    \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n    \"4d0201db-36f5-428b-8d11-4f0a65e960cc\"\n  ],\n  \"ServiceIds\": [\n    \"bd26d8db-86da-4f96-9efc-e5a4654a4a94\"\n  ],\n  \"ResourceCategoryIds\": [\n    \"34c29e73-c8db-4e93-b51b-981e42655e03\"\n  ],\n  \"RateIds\": [\n    \"ed4b660b-19d0-434b-9360-a4de2ea42eda\"\n  ],\n  \"Origin\": \"Integration\",\n  \"CollidingUtc\": {\n    \"StartUtc\": \"2020-02-15T00:00:00Z\",\n    \"EndUtc\": \"2020-02-20T00:00:00Z\"\n  },\n  \"CreatedUtc\": {\n    \"StartUtc\": \"2020-02-05T00:00:00Z\",\n    \"EndUtc\": \"2020-02-15T00:00:00Z\"\n  },\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"2020-02-05T00:00:00Z\",\n    \"EndUtc\": \"2020-02-15T00:00:00Z\"\n  },\n  \"Limitation\": {\n    \"Count\": 10\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "63674931-225c-4078-997b-e3201437a41c",
+              "name": "Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-timeouts)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "restrictions",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"EnterpriseIds\": [\n    \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n    \"4d0201db-36f5-428b-8d11-4f0a65e960cc\"\n  ],\n  \"ServiceIds\": [\n    \"bd26d8db-86da-4f96-9efc-e5a4654a4a94\"\n  ],\n  \"ResourceCategoryIds\": [\n    \"34c29e73-c8db-4e93-b51b-981e42655e03\"\n  ],\n  \"RateIds\": [\n    \"ed4b660b-19d0-434b-9360-a4de2ea42eda\"\n  ],\n  \"Origin\": \"Integration\",\n  \"CollidingUtc\": {\n    \"StartUtc\": \"2020-02-15T00:00:00Z\",\n    \"EndUtc\": \"2020-02-20T00:00:00Z\"\n  },\n  \"CreatedUtc\": {\n    \"StartUtc\": \"2020-02-05T00:00:00Z\",\n    \"EndUtc\": \"2020-02-15T00:00:00Z\"\n  },\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"2020-02-05T00:00:00Z\",\n    \"EndUtc\": \"2020-02-15T00:00:00Z\"\n  },\n  \"Limitation\": {\n    \"Count\": 10\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Request Timeout",
+              "code": 408,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "98e81dbc-e395-438e-905f-1b64a9c1f718",
+              "name": "Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-limits).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "restrictions",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"EnterpriseIds\": [\n    \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n    \"4d0201db-36f5-428b-8d11-4f0a65e960cc\"\n  ],\n  \"ServiceIds\": [\n    \"bd26d8db-86da-4f96-9efc-e5a4654a4a94\"\n  ],\n  \"ResourceCategoryIds\": [\n    \"34c29e73-c8db-4e93-b51b-981e42655e03\"\n  ],\n  \"RateIds\": [\n    \"ed4b660b-19d0-434b-9360-a4de2ea42eda\"\n  ],\n  \"Origin\": \"Integration\",\n  \"CollidingUtc\": {\n    \"StartUtc\": \"2020-02-15T00:00:00Z\",\n    \"EndUtc\": \"2020-02-20T00:00:00Z\"\n  },\n  \"CreatedUtc\": {\n    \"StartUtc\": \"2020-02-05T00:00:00Z\",\n    \"EndUtc\": \"2020-02-15T00:00:00Z\"\n  },\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"2020-02-05T00:00:00Z\",\n    \"EndUtc\": \"2020-02-15T00:00:00Z\"\n  },\n  \"Limitation\": {\n    \"Count\": 10\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4e6cfec9-b510-4752-90df-0dd483aff99e",
+              "name": "Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.com/MewsSystems/gitbook-connector-api).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "restrictions",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"EnterpriseIds\": [\n    \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n    \"4d0201db-36f5-428b-8d11-4f0a65e960cc\"\n  ],\n  \"ServiceIds\": [\n    \"bd26d8db-86da-4f96-9efc-e5a4654a4a94\"\n  ],\n  \"ResourceCategoryIds\": [\n    \"34c29e73-c8db-4e93-b51b-981e42655e03\"\n  ],\n  \"RateIds\": [\n    \"ed4b660b-19d0-434b-9360-a4de2ea42eda\"\n  ],\n  \"Origin\": \"Integration\",\n  \"CollidingUtc\": {\n    \"StartUtc\": \"2020-02-15T00:00:00Z\",\n    \"EndUtc\": \"2020-02-20T00:00:00Z\"\n  },\n  \"CreatedUtc\": {\n    \"StartUtc\": \"2020-02-05T00:00:00Z\",\n    \"EndUtc\": \"2020-02-15T00:00:00Z\"\n  },\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"2020-02-05T00:00:00Z\",\n    \"EndUtc\": \"2020-02-15T00:00:00Z\"\n  },\n  \"Limitation\": {\n    \"Count\": 10\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.mews.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "ClientToken"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "645db2b6-ca08-4a88-b1e6-e60796a3f11f",
+    "name": "Mews Booking Engine API (Distributor) Account notes Restrictions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Mews Booking Engine API (historically the Distributor API, served from /api/distributor/v1) lets developers build guest-facing booking engines that create reservations directly in Mews. It exposes enterprise configuration, availability, pricing, products, vouchers, payment cards, and reservation group creation for front-end client consumption.",
+      "type": "text/plain"
+    }
+  }
+}

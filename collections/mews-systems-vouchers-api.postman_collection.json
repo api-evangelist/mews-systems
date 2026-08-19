@@ -1,0 +1,2124 @@
+{
+  "item": [
+    {
+      "id": "b4e63128-70e7-4ad2-ade7-31afb635b210",
+      "name": "Vouchers",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f9976b21-0ca3-48cc-9fa7-afc6e1a4888e",
+          "name": "Mews Validate",
+          "request": {
+            "name": "Mews Validate",
+            "description": {
+              "content": "Validate via the Mews Booking Engine (Distributor) API vouchers resource.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "distributor",
+                "v1",
+                "vouchers",
+                "validate"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"Client\": \"<string>\",\n  \"FullAmounts\": \"<boolean>\",\n  \"HotelId\": \"<uuid>\",\n  \"VoucherCode\": \"<string>\",\n  \"LanguageCode\": \"<string>\",\n  \"CultureCode\": \"<string>\",\n  \"Session\": \"<string>\",\n  \"ServiceIds\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "6d50756b-0b7f-4c26-b10d-60a460f71da9",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "distributor",
+                    "v1",
+                    "vouchers",
+                    "validate"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"Client\": \"string\",\n  \"LanguageCode\": \"string\",\n  \"CultureCode\": \"string\",\n  \"FullAmounts\": true,\n  \"Session\": \"string\",\n  \"HotelId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"VoucherCode\": \"string\",\n  \"ServiceIds\": [\n    \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"IsValid\": true\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "812bf652-3dbb-4982-9187-37032cb27b68",
+          "name": "Mews Get All Vouchers",
+          "request": {
+            "name": "Mews Get All Vouchers",
+            "description": {
+              "content": "Returns all rate vouchers filtered by [Service](https://mews-systems.gitbook.io/connector-api/operations/services/#service), voucher code or voucher identifier. Note this operation uses [Pagination](https://mews-systems.gitbook.io/connector-api/guidelines/pagination/) and supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "connector",
+                "v1",
+                "vouchers",
+                "getAll"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"Extent\": {\n    \"Vouchers\": \"<boolean>\",\n    \"VoucherCodes\": \"<boolean>\",\n    \"VoucherAssignments\": \"<boolean>\",\n    \"Companies\": \"<boolean>\",\n    \"Rates\": \"<boolean>\"\n  },\n  \"Limitation\": {\n    \"Count\": \"<integer>\",\n    \"Cursor\": \"<uuid>\"\n  },\n  \"ServiceIds\": [\n    \"<uuid>\"\n  ],\n  \"EnterpriseIds\": [\n    \"<uuid>\"\n  ],\n  \"VoucherIds\": [\n    \"<uuid>\"\n  ],\n  \"CompanyIds\": [\n    \"<uuid>\"\n  ],\n  \"VoucherCodeValues\": [\n    \"<string>\"\n  ],\n  \"ActivityStates\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"<dateTime>\",\n    \"EndUtc\": \"<dateTime>\"\n  },\n  \"ExternalIdentifiers\": [\n    \"<string>\"\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "18146b52-2ce3-43aa-91be-38957d1b85f3",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "vouchers",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"Extent\": {\n    \"Vouchers\": true,\n    \"VoucherCodes\": true,\n    \"VoucherAssignments\": true,\n    \"Companies\": false,\n    \"Rates\": false\n  },\n  \"ServiceIds\": [\n    \"bd26d8db-86da-4f96-9efc-e5a4654a4a94\",\n    \"8c1bd738-a505-4b29-aa71-9ecc2982b843\"\n  ],\n  \"VoucherIds\": [\n    \"fe568bbd-1ecb-4bb2-bf77-96c3698de20d\"\n  ],\n  \"VoucherCodeValues\": [\n    \"TEST-VOUCHER-CODE\"\n  ],\n  \"ActivityStates\": [\n    \"Active\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"2023-10-10T00:00:00Z\",\n    \"EndUtc\": \"2023-10-17T00:00:00Z\"\n  },\n  \"ExternalIdentifiers\": [\n    \"Voucher-001\",\n    \"Voucher-002\"\n  ],\n  \"EnterpriseIds\": [\n    \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n    \"4d0201db-36f5-428b-8d11-4f0a65e960cc\"\n  ],\n  \"Limitation\": {\n    \"Count\": 100\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Vouchers\": [\n    {\n      \"Id\": \"fe568bbd-1ecb-4bb2-bf77-96c3698de20d\",\n      \"ServiceId\": \"bd26d8db-86da-4f96-9efc-e5a4654a4a94\",\n      \"EnterpriseId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n      \"Name\": \"Weekend Voucher\",\n      \"CreatedUtc\": \"2018-11-29T08:17:05Z\",\n      \"UpdatedUtc\": \"2020-10-30T13:38:49Z\",\n      \"Type\": \"Public\",\n      \"ActivityState\": \"Active\",\n      \"CompanyId\": \"c6f5c82d-621a-4c8a-903b-1b0a9a23b71f\",\n      \"TravelAgencyId\": null,\n      \"OccupiableIntervalStartUtc\": null,\n      \"OccupiableIntervalEndUtc\": null,\n      \"ExternalIdentifier\": \"VCHR-278\",\n      \"IsActive\": true\n    }\n  ],\n  \"VoucherCodes\": [\n    {\n      \"Id\": \"11111111-1111-1111-1111-111111111111\",\n      \"VoucherId\": \"fe568bbd-1ecb-4bb2-bf77-96c3698de20d\",\n      \"Value\": \"TEST-VOUCHER-CODE\",\n      \"ValidityStartUtc\": null,\n      \"ValidityEndUtc\": null,\n      \"CreatedUtc\": \"2020-10-30T13:37:16Z\",\n      \"UpdatedUtc\": \"2020-10-30T13:37:16Z\",\n      \"ActivityState\": \"Active\",\n      \"IsActive\": true\n    },\n    {\n      \"Id\": \"22222222-2222-2222-2222-222222222222\",\n      \"VoucherId\": \"fe568bbd-1ecb-4bb2-bf77-96c3698de20d\",\n      \"Value\": \"05400269B23A59C649E4\",\n      \"ValidityStartUtc\": \"2020-10-09T22:00:00Z\",\n      \"ValidityEndUtc\": \"2020-10-09T22:00:00Z\",\n      \"CreatedUtc\": \"2020-10-09T15:08:14Z\",\n      \"UpdatedUtc\": \"2020-10-09T15:08:14Z\",\n      \"ActivityState\": \"Active\",\n      \"IsActive\": true\n    }\n  ],\n  \"VoucherAssignments\": [\n    {\n      \"VoucherId\": \"fe568bbd-1ecb-4bb2-bf77-96c3698de20d\",\n      \"RateId\": \"ed4b660b-19d0-434b-9360-a4de2ea42eda\"\n    },\n    {\n      \"VoucherId\": \"fe568bbd-1ecb-4bb2-bf77-96c3698de20d\",\n      \"RateId\": \"b7e6a1c2-4f3a-4e2b-9c1d-2a5e7b8c9d0f\"\n    }\n  ],\n  \"Rates\": null,\n  \"Companies\": null,\n  \"Cursor\": \"fe568bbd-1ecb-4bb2-bf77-96c3698de20d\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c67bf6f8-ae01-4984-8a78-af476abc0be8",
+              "name": "Server has successfully fulfilled the request and there is no additional information to send back.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "vouchers",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"Extent\": {\n    \"Vouchers\": true,\n    \"VoucherCodes\": true,\n    \"VoucherAssignments\": true,\n    \"Companies\": false,\n    \"Rates\": false\n  },\n  \"ServiceIds\": [\n    \"bd26d8db-86da-4f96-9efc-e5a4654a4a94\",\n    \"8c1bd738-a505-4b29-aa71-9ecc2982b843\"\n  ],\n  \"VoucherIds\": [\n    \"fe568bbd-1ecb-4bb2-bf77-96c3698de20d\"\n  ],\n  \"VoucherCodeValues\": [\n    \"TEST-VOUCHER-CODE\"\n  ],\n  \"ActivityStates\": [\n    \"Active\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"2023-10-10T00:00:00Z\",\n    \"EndUtc\": \"2023-10-17T00:00:00Z\"\n  },\n  \"ExternalIdentifiers\": [\n    \"Voucher-001\",\n    \"Voucher-002\"\n  ],\n  \"EnterpriseIds\": [\n    \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n    \"4d0201db-36f5-428b-8d11-4f0a65e960cc\"\n  ],\n  \"Limitation\": {\n    \"Count\": 100\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "67bae2e2-a59f-4db7-8190-b23dc5a15e87",
+              "name": "Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "vouchers",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"Extent\": {\n    \"Vouchers\": true,\n    \"VoucherCodes\": true,\n    \"VoucherAssignments\": true,\n    \"Companies\": false,\n    \"Rates\": false\n  },\n  \"ServiceIds\": [\n    \"bd26d8db-86da-4f96-9efc-e5a4654a4a94\",\n    \"8c1bd738-a505-4b29-aa71-9ecc2982b843\"\n  ],\n  \"VoucherIds\": [\n    \"fe568bbd-1ecb-4bb2-bf77-96c3698de20d\"\n  ],\n  \"VoucherCodeValues\": [\n    \"TEST-VOUCHER-CODE\"\n  ],\n  \"ActivityStates\": [\n    \"Active\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"2023-10-10T00:00:00Z\",\n    \"EndUtc\": \"2023-10-17T00:00:00Z\"\n  },\n  \"ExternalIdentifiers\": [\n    \"Voucher-001\",\n    \"Voucher-002\"\n  ],\n  \"EnterpriseIds\": [\n    \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n    \"4d0201db-36f5-428b-8d11-4f0a65e960cc\"\n  ],\n  \"Limitation\": {\n    \"Count\": 100\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e7893b72-eecb-4255-90ae-9b9e2af7651f",
+              "name": "Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "vouchers",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"Extent\": {\n    \"Vouchers\": true,\n    \"VoucherCodes\": true,\n    \"VoucherAssignments\": true,\n    \"Companies\": false,\n    \"Rates\": false\n  },\n  \"ServiceIds\": [\n    \"bd26d8db-86da-4f96-9efc-e5a4654a4a94\",\n    \"8c1bd738-a505-4b29-aa71-9ecc2982b843\"\n  ],\n  \"VoucherIds\": [\n    \"fe568bbd-1ecb-4bb2-bf77-96c3698de20d\"\n  ],\n  \"VoucherCodeValues\": [\n    \"TEST-VOUCHER-CODE\"\n  ],\n  \"ActivityStates\": [\n    \"Active\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"2023-10-10T00:00:00Z\",\n    \"EndUtc\": \"2023-10-17T00:00:00Z\"\n  },\n  \"ExternalIdentifiers\": [\n    \"Voucher-001\",\n    \"Voucher-002\"\n  ],\n  \"EnterpriseIds\": [\n    \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n    \"4d0201db-36f5-428b-8d11-4f0a65e960cc\"\n  ],\n  \"Limitation\": {\n    \"Count\": 100\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "856c977a-dddb-4a3b-8eca-bcf446fa0daa",
+              "name": "Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "vouchers",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"Extent\": {\n    \"Vouchers\": true,\n    \"VoucherCodes\": true,\n    \"VoucherAssignments\": true,\n    \"Companies\": false,\n    \"Rates\": false\n  },\n  \"ServiceIds\": [\n    \"bd26d8db-86da-4f96-9efc-e5a4654a4a94\",\n    \"8c1bd738-a505-4b29-aa71-9ecc2982b843\"\n  ],\n  \"VoucherIds\": [\n    \"fe568bbd-1ecb-4bb2-bf77-96c3698de20d\"\n  ],\n  \"VoucherCodeValues\": [\n    \"TEST-VOUCHER-CODE\"\n  ],\n  \"ActivityStates\": [\n    \"Active\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"2023-10-10T00:00:00Z\",\n    \"EndUtc\": \"2023-10-17T00:00:00Z\"\n  },\n  \"ExternalIdentifiers\": [\n    \"Voucher-001\",\n    \"Voucher-002\"\n  ],\n  \"EnterpriseIds\": [\n    \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n    \"4d0201db-36f5-428b-8d11-4f0a65e960cc\"\n  ],\n  \"Limitation\": {\n    \"Count\": 100\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "598adccb-4c7d-413f-8c1e-84edce69faa2",
+              "name": "Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-timeouts)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "vouchers",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"Extent\": {\n    \"Vouchers\": true,\n    \"VoucherCodes\": true,\n    \"VoucherAssignments\": true,\n    \"Companies\": false,\n    \"Rates\": false\n  },\n  \"ServiceIds\": [\n    \"bd26d8db-86da-4f96-9efc-e5a4654a4a94\",\n    \"8c1bd738-a505-4b29-aa71-9ecc2982b843\"\n  ],\n  \"VoucherIds\": [\n    \"fe568bbd-1ecb-4bb2-bf77-96c3698de20d\"\n  ],\n  \"VoucherCodeValues\": [\n    \"TEST-VOUCHER-CODE\"\n  ],\n  \"ActivityStates\": [\n    \"Active\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"2023-10-10T00:00:00Z\",\n    \"EndUtc\": \"2023-10-17T00:00:00Z\"\n  },\n  \"ExternalIdentifiers\": [\n    \"Voucher-001\",\n    \"Voucher-002\"\n  ],\n  \"EnterpriseIds\": [\n    \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n    \"4d0201db-36f5-428b-8d11-4f0a65e960cc\"\n  ],\n  \"Limitation\": {\n    \"Count\": 100\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Request Timeout",
+              "code": 408,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "79a5b4f5-d8bf-4749-8801-856897dd219e",
+              "name": "Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-limits).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "vouchers",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"Extent\": {\n    \"Vouchers\": true,\n    \"VoucherCodes\": true,\n    \"VoucherAssignments\": true,\n    \"Companies\": false,\n    \"Rates\": false\n  },\n  \"ServiceIds\": [\n    \"bd26d8db-86da-4f96-9efc-e5a4654a4a94\",\n    \"8c1bd738-a505-4b29-aa71-9ecc2982b843\"\n  ],\n  \"VoucherIds\": [\n    \"fe568bbd-1ecb-4bb2-bf77-96c3698de20d\"\n  ],\n  \"VoucherCodeValues\": [\n    \"TEST-VOUCHER-CODE\"\n  ],\n  \"ActivityStates\": [\n    \"Active\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"2023-10-10T00:00:00Z\",\n    \"EndUtc\": \"2023-10-17T00:00:00Z\"\n  },\n  \"ExternalIdentifiers\": [\n    \"Voucher-001\",\n    \"Voucher-002\"\n  ],\n  \"EnterpriseIds\": [\n    \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n    \"4d0201db-36f5-428b-8d11-4f0a65e960cc\"\n  ],\n  \"Limitation\": {\n    \"Count\": 100\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "88dd7d14-99fa-4a8d-9d9b-f85c7cd1759b",
+              "name": "Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.com/MewsSystems/gitbook-connector-api).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "vouchers",
+                    "getAll"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"Extent\": {\n    \"Vouchers\": true,\n    \"VoucherCodes\": true,\n    \"VoucherAssignments\": true,\n    \"Companies\": false,\n    \"Rates\": false\n  },\n  \"ServiceIds\": [\n    \"bd26d8db-86da-4f96-9efc-e5a4654a4a94\",\n    \"8c1bd738-a505-4b29-aa71-9ecc2982b843\"\n  ],\n  \"VoucherIds\": [\n    \"fe568bbd-1ecb-4bb2-bf77-96c3698de20d\"\n  ],\n  \"VoucherCodeValues\": [\n    \"TEST-VOUCHER-CODE\"\n  ],\n  \"ActivityStates\": [\n    \"Active\"\n  ],\n  \"UpdatedUtc\": {\n    \"StartUtc\": \"2023-10-10T00:00:00Z\",\n    \"EndUtc\": \"2023-10-17T00:00:00Z\"\n  },\n  \"ExternalIdentifiers\": [\n    \"Voucher-001\",\n    \"Voucher-002\"\n  ],\n  \"EnterpriseIds\": [\n    \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n    \"4d0201db-36f5-428b-8d11-4f0a65e960cc\"\n  ],\n  \"Limitation\": {\n    \"Count\": 100\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "10dc62dc-1ad9-4921-88df-dfe6de99764f",
+          "name": "Mews Add Vouchers",
+          "request": {
+            "name": "Mews Add Vouchers",
+            "description": {
+              "content": "Adds the specified vouchers to the specified [Services](https://mews-systems.gitbook.io/connector-api/operations/services/#service). Note this operation supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "connector",
+                "v1",
+                "vouchers",
+                "add"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"VoucherParameters\": [\n    {\n      \"Name\": \"<string>\",\n      \"ServiceId\": \"<uuid>\",\n      \"Type\": \"<string>\",\n      \"CompanyId\": \"<uuid>\",\n      \"AssignedRateIds\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ],\n      \"OccupiableIntervalStartUtc\": \"<dateTime>\",\n      \"OccupiableIntervalEndUtc\": \"<dateTime>\",\n      \"ExternalIdentifier\": \"<string>\"\n    }\n  ],\n  \"EnterpriseId\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "549c9c46-dacc-47b7-8ff3-8f0801b16f65",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "vouchers",
+                    "add"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"VoucherParameters\": [\n    {\n      \"ServiceId\": \"bd26d8db-86da-4f96-9efc-e5a4654a4a94\",\n      \"Name\": \"Weekend Voucher\",\n      \"Type\": \"Public\",\n      \"AssignedRateIds\": [\n        \"ed4b660b-19d0-434b-9360-a4de2ea42eda\",\n        \"b7e6a1c2-4f3a-4e2b-9c1d-2a5e7b8c9d0f\"\n      ]\n    },\n    {\n      \"ServiceId\": \"bd26d8db-86da-4f96-9efc-e5a4654a4a94\",\n      \"Name\": \"Sample company voucher\",\n      \"Type\": \"PartnerCompany\",\n      \"CompanyId\": \"c6f5c82d-621a-4c8a-903b-1b0a9a23b71f\",\n      \"AssignedRateIds\": [\n        \"ed4b660b-19d0-434b-9360-a4de2ea42eda\",\n        \"b7e6a1c2-4f3a-4e2b-9c1d-2a5e7b8c9d0f\"\n      ],\n      \"OccupiableIntervalStartUtc\": \"2023-12-31T22:00:00Z\",\n      \"OccupiableIntervalEndUtc\": \"2024-01-01T22:00:00Z\",\n      \"ExternalIdentifier\": \"VCHR-278\"\n    }\n  ],\n  \"EnterpriseId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Vouchers\": [\n    {\n      \"Id\": \"fe568bbd-1ecb-4bb2-bf77-96c3698de20d\",\n      \"ServiceId\": \"bd26d8db-86da-4f96-9efc-e5a4654a4a94\",\n      \"EnterpriseId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n      \"Name\": \"Weekend Voucher\",\n      \"CreatedUtc\": \"2018-11-29T08:17:05Z\",\n      \"UpdatedUtc\": \"2020-10-30T13:38:49Z\",\n      \"Type\": \"Public\",\n      \"ActivityState\": \"Active\",\n      \"CompanyId\": \"c6f5c82d-621a-4c8a-903b-1b0a9a23b71f\",\n      \"TravelAgencyId\": null,\n      \"OccupiableIntervalStartUtc\": null,\n      \"OccupiableIntervalEndUtc\": null,\n      \"ExternalIdentifier\": \"VCHR-278\",\n      \"IsActive\": true\n    },\n    {\n      \"Id\": \"f4a9942c-2616-4074-b1f4-4b959515e933\",\n      \"ServiceId\": \"bd26d8db-86da-4f96-9efc-e5a4654a4a94\",\n      \"EnterpriseId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n      \"Name\": \"Sample company voucher\",\n      \"CreatedUtc\": \"2023-12-01T08:17:05Z\",\n      \"UpdatedUtc\": \"2023-12-02T13:38:49Z\",\n      \"Type\": \"PartnerCompany\",\n      \"ActivityState\": \"Active\",\n      \"CompanyId\": \"c6f5c82d-621a-4c8a-903b-1b0a9a23b71f\",\n      \"TravelAgencyId\": null,\n      \"OccupiableIntervalStartUtc\": \"2023-12-31T22:00:00Z\",\n      \"OccupiableIntervalEndUtc\": \"2024-01-01T22:00:00Z\",\n      \"ExternalIdentifier\": \"VCHR-278\",\n      \"IsActive\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fd50fc52-0147-4790-b36e-4b33903f0b4c",
+              "name": "Server has successfully fulfilled the request and there is no additional information to send back.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "vouchers",
+                    "add"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"VoucherParameters\": [\n    {\n      \"ServiceId\": \"bd26d8db-86da-4f96-9efc-e5a4654a4a94\",\n      \"Name\": \"Weekend Voucher\",\n      \"Type\": \"Public\",\n      \"AssignedRateIds\": [\n        \"ed4b660b-19d0-434b-9360-a4de2ea42eda\",\n        \"b7e6a1c2-4f3a-4e2b-9c1d-2a5e7b8c9d0f\"\n      ]\n    },\n    {\n      \"ServiceId\": \"bd26d8db-86da-4f96-9efc-e5a4654a4a94\",\n      \"Name\": \"Sample company voucher\",\n      \"Type\": \"PartnerCompany\",\n      \"CompanyId\": \"c6f5c82d-621a-4c8a-903b-1b0a9a23b71f\",\n      \"AssignedRateIds\": [\n        \"ed4b660b-19d0-434b-9360-a4de2ea42eda\",\n        \"b7e6a1c2-4f3a-4e2b-9c1d-2a5e7b8c9d0f\"\n      ],\n      \"OccupiableIntervalStartUtc\": \"2023-12-31T22:00:00Z\",\n      \"OccupiableIntervalEndUtc\": \"2024-01-01T22:00:00Z\",\n      \"ExternalIdentifier\": \"VCHR-278\"\n    }\n  ],\n  \"EnterpriseId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6f816dda-f7bd-4a0d-8119-65b1fed5955d",
+              "name": "Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "vouchers",
+                    "add"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"VoucherParameters\": [\n    {\n      \"ServiceId\": \"bd26d8db-86da-4f96-9efc-e5a4654a4a94\",\n      \"Name\": \"Weekend Voucher\",\n      \"Type\": \"Public\",\n      \"AssignedRateIds\": [\n        \"ed4b660b-19d0-434b-9360-a4de2ea42eda\",\n        \"b7e6a1c2-4f3a-4e2b-9c1d-2a5e7b8c9d0f\"\n      ]\n    },\n    {\n      \"ServiceId\": \"bd26d8db-86da-4f96-9efc-e5a4654a4a94\",\n      \"Name\": \"Sample company voucher\",\n      \"Type\": \"PartnerCompany\",\n      \"CompanyId\": \"c6f5c82d-621a-4c8a-903b-1b0a9a23b71f\",\n      \"AssignedRateIds\": [\n        \"ed4b660b-19d0-434b-9360-a4de2ea42eda\",\n        \"b7e6a1c2-4f3a-4e2b-9c1d-2a5e7b8c9d0f\"\n      ],\n      \"OccupiableIntervalStartUtc\": \"2023-12-31T22:00:00Z\",\n      \"OccupiableIntervalEndUtc\": \"2024-01-01T22:00:00Z\",\n      \"ExternalIdentifier\": \"VCHR-278\"\n    }\n  ],\n  \"EnterpriseId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7eb42efc-034c-4909-83a0-e109b12164f7",
+              "name": "Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "vouchers",
+                    "add"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"VoucherParameters\": [\n    {\n      \"ServiceId\": \"bd26d8db-86da-4f96-9efc-e5a4654a4a94\",\n      \"Name\": \"Weekend Voucher\",\n      \"Type\": \"Public\",\n      \"AssignedRateIds\": [\n        \"ed4b660b-19d0-434b-9360-a4de2ea42eda\",\n        \"b7e6a1c2-4f3a-4e2b-9c1d-2a5e7b8c9d0f\"\n      ]\n    },\n    {\n      \"ServiceId\": \"bd26d8db-86da-4f96-9efc-e5a4654a4a94\",\n      \"Name\": \"Sample company voucher\",\n      \"Type\": \"PartnerCompany\",\n      \"CompanyId\": \"c6f5c82d-621a-4c8a-903b-1b0a9a23b71f\",\n      \"AssignedRateIds\": [\n        \"ed4b660b-19d0-434b-9360-a4de2ea42eda\",\n        \"b7e6a1c2-4f3a-4e2b-9c1d-2a5e7b8c9d0f\"\n      ],\n      \"OccupiableIntervalStartUtc\": \"2023-12-31T22:00:00Z\",\n      \"OccupiableIntervalEndUtc\": \"2024-01-01T22:00:00Z\",\n      \"ExternalIdentifier\": \"VCHR-278\"\n    }\n  ],\n  \"EnterpriseId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a124ea04-327f-4ba9-94bf-1c0ad4a9ad3d",
+              "name": "Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "vouchers",
+                    "add"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"VoucherParameters\": [\n    {\n      \"ServiceId\": \"bd26d8db-86da-4f96-9efc-e5a4654a4a94\",\n      \"Name\": \"Weekend Voucher\",\n      \"Type\": \"Public\",\n      \"AssignedRateIds\": [\n        \"ed4b660b-19d0-434b-9360-a4de2ea42eda\",\n        \"b7e6a1c2-4f3a-4e2b-9c1d-2a5e7b8c9d0f\"\n      ]\n    },\n    {\n      \"ServiceId\": \"bd26d8db-86da-4f96-9efc-e5a4654a4a94\",\n      \"Name\": \"Sample company voucher\",\n      \"Type\": \"PartnerCompany\",\n      \"CompanyId\": \"c6f5c82d-621a-4c8a-903b-1b0a9a23b71f\",\n      \"AssignedRateIds\": [\n        \"ed4b660b-19d0-434b-9360-a4de2ea42eda\",\n        \"b7e6a1c2-4f3a-4e2b-9c1d-2a5e7b8c9d0f\"\n      ],\n      \"OccupiableIntervalStartUtc\": \"2023-12-31T22:00:00Z\",\n      \"OccupiableIntervalEndUtc\": \"2024-01-01T22:00:00Z\",\n      \"ExternalIdentifier\": \"VCHR-278\"\n    }\n  ],\n  \"EnterpriseId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b86c4603-bbef-4af7-a5d7-910a22d12ca5",
+              "name": "Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-timeouts)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "vouchers",
+                    "add"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"VoucherParameters\": [\n    {\n      \"ServiceId\": \"bd26d8db-86da-4f96-9efc-e5a4654a4a94\",\n      \"Name\": \"Weekend Voucher\",\n      \"Type\": \"Public\",\n      \"AssignedRateIds\": [\n        \"ed4b660b-19d0-434b-9360-a4de2ea42eda\",\n        \"b7e6a1c2-4f3a-4e2b-9c1d-2a5e7b8c9d0f\"\n      ]\n    },\n    {\n      \"ServiceId\": \"bd26d8db-86da-4f96-9efc-e5a4654a4a94\",\n      \"Name\": \"Sample company voucher\",\n      \"Type\": \"PartnerCompany\",\n      \"CompanyId\": \"c6f5c82d-621a-4c8a-903b-1b0a9a23b71f\",\n      \"AssignedRateIds\": [\n        \"ed4b660b-19d0-434b-9360-a4de2ea42eda\",\n        \"b7e6a1c2-4f3a-4e2b-9c1d-2a5e7b8c9d0f\"\n      ],\n      \"OccupiableIntervalStartUtc\": \"2023-12-31T22:00:00Z\",\n      \"OccupiableIntervalEndUtc\": \"2024-01-01T22:00:00Z\",\n      \"ExternalIdentifier\": \"VCHR-278\"\n    }\n  ],\n  \"EnterpriseId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Request Timeout",
+              "code": 408,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "000d6a1b-8e98-45bb-b9f2-2168db9178d9",
+              "name": "Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-limits).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "vouchers",
+                    "add"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"VoucherParameters\": [\n    {\n      \"ServiceId\": \"bd26d8db-86da-4f96-9efc-e5a4654a4a94\",\n      \"Name\": \"Weekend Voucher\",\n      \"Type\": \"Public\",\n      \"AssignedRateIds\": [\n        \"ed4b660b-19d0-434b-9360-a4de2ea42eda\",\n        \"b7e6a1c2-4f3a-4e2b-9c1d-2a5e7b8c9d0f\"\n      ]\n    },\n    {\n      \"ServiceId\": \"bd26d8db-86da-4f96-9efc-e5a4654a4a94\",\n      \"Name\": \"Sample company voucher\",\n      \"Type\": \"PartnerCompany\",\n      \"CompanyId\": \"c6f5c82d-621a-4c8a-903b-1b0a9a23b71f\",\n      \"AssignedRateIds\": [\n        \"ed4b660b-19d0-434b-9360-a4de2ea42eda\",\n        \"b7e6a1c2-4f3a-4e2b-9c1d-2a5e7b8c9d0f\"\n      ],\n      \"OccupiableIntervalStartUtc\": \"2023-12-31T22:00:00Z\",\n      \"OccupiableIntervalEndUtc\": \"2024-01-01T22:00:00Z\",\n      \"ExternalIdentifier\": \"VCHR-278\"\n    }\n  ],\n  \"EnterpriseId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fed526c3-cc7c-4463-8120-a0154fecefb5",
+              "name": "Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.com/MewsSystems/gitbook-connector-api).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "vouchers",
+                    "add"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"VoucherParameters\": [\n    {\n      \"ServiceId\": \"bd26d8db-86da-4f96-9efc-e5a4654a4a94\",\n      \"Name\": \"Weekend Voucher\",\n      \"Type\": \"Public\",\n      \"AssignedRateIds\": [\n        \"ed4b660b-19d0-434b-9360-a4de2ea42eda\",\n        \"b7e6a1c2-4f3a-4e2b-9c1d-2a5e7b8c9d0f\"\n      ]\n    },\n    {\n      \"ServiceId\": \"bd26d8db-86da-4f96-9efc-e5a4654a4a94\",\n      \"Name\": \"Sample company voucher\",\n      \"Type\": \"PartnerCompany\",\n      \"CompanyId\": \"c6f5c82d-621a-4c8a-903b-1b0a9a23b71f\",\n      \"AssignedRateIds\": [\n        \"ed4b660b-19d0-434b-9360-a4de2ea42eda\",\n        \"b7e6a1c2-4f3a-4e2b-9c1d-2a5e7b8c9d0f\"\n      ],\n      \"OccupiableIntervalStartUtc\": \"2023-12-31T22:00:00Z\",\n      \"OccupiableIntervalEndUtc\": \"2024-01-01T22:00:00Z\",\n      \"ExternalIdentifier\": \"VCHR-278\"\n    }\n  ],\n  \"EnterpriseId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "29105c42-3277-400c-a4cd-17153bf078ba",
+          "name": "Mews Update Vouchers",
+          "request": {
+            "name": "Mews Update Vouchers",
+            "description": {
+              "content": "Updates information about the specified vouchers. Note this operation supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "connector",
+                "v1",
+                "vouchers",
+                "update"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"VoucherUpdates\": [\n    {\n      \"VoucherId\": \"<uuid>\",\n      \"Name\": {\n        \"Value\": \"<string>\"\n      },\n      \"Type\": {\n        \"Value\": \"<string>\"\n      },\n      \"CompanyId\": {\n        \"Value\": \"<uuid>\"\n      },\n      \"AssignedRateIds\": {\n        \"Value\": [\n          \"<uuid>\",\n          \"<uuid>\"\n        ]\n      },\n      \"OccupiableIntervalStartUtc\": {\n        \"Value\": \"<string>\"\n      },\n      \"OccupiableIntervalEndUtc\": {\n        \"Value\": \"<string>\"\n      },\n      \"ExternalIdentifier\": {\n        \"Value\": \"<string>\"\n      }\n    }\n  ],\n  \"EnterpriseId\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "28213b69-4d5c-4bd3-8ee4-aaf9a50dc432",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "vouchers",
+                    "update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"VoucherUpdates\": [\n    {\n      \"VoucherId\": \"fe568bbd-1ecb-4bb2-bf77-96c3698de20d\",\n      \"Name\": {\n        \"Value\": \"Weekend Voucher\"\n      },\n      \"Type\": {\n        \"Value\": \"Public\"\n      },\n      \"AssignedRateIds\": {\n        \"Value\": [\n          \"ed4b660b-19d0-434b-9360-a4de2ea42eda\",\n          \"b7e6a1c2-4f3a-4e2b-9c1d-2a5e7b8c9d0f\"\n        ]\n      }\n    },\n    {\n      \"VoucherId\": \"f4a9942c-2616-4074-b1f4-4b959515e933\",\n      \"Name\": {\n        \"Value\": \"Sample company voucher\"\n      },\n      \"Type\": {\n        \"Value\": \"PartnerCompany\"\n      },\n      \"CompanyId\": {\n        \"Value\": \"c6f5c82d-621a-4c8a-903b-1b0a9a23b71f\"\n      },\n      \"AssignedRateIds\": {\n        \"Value\": [\n          \"ed4b660b-19d0-434b-9360-a4de2ea42eda\",\n          \"b7e6a1c2-4f3a-4e2b-9c1d-2a5e7b8c9d0f\"\n        ]\n      },\n      \"OccupiableIntervalStartUtc\": {\n        \"Value\": \"2023-12-31T22:00:00Z\"\n      },\n      \"OccupiableIntervalEndUtc\": {\n        \"Value\": \"2024-01-01T22:00:00Z\"\n      },\n      \"ExternalIdentifier\": {\n        \"Value\": \"VCHR-278\"\n      }\n    }\n  ],\n  \"EnterpriseId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Vouchers\": [\n    {\n      \"Id\": \"fe568bbd-1ecb-4bb2-bf77-96c3698de20d\",\n      \"ServiceId\": \"bd26d8db-86da-4f96-9efc-e5a4654a4a94\",\n      \"EnterpriseId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n      \"Name\": \"Weekend Voucher\",\n      \"CreatedUtc\": \"2018-11-29T08:17:05Z\",\n      \"UpdatedUtc\": \"2020-10-30T13:38:49Z\",\n      \"Type\": \"Public\",\n      \"ActivityState\": \"Active\",\n      \"CompanyId\": \"c6f5c82d-621a-4c8a-903b-1b0a9a23b71f\",\n      \"TravelAgencyId\": null,\n      \"OccupiableIntervalStartUtc\": null,\n      \"OccupiableIntervalEndUtc\": null,\n      \"ExternalIdentifier\": \"VCHR-278\",\n      \"IsActive\": true\n    },\n    {\n      \"Id\": \"f4a9942c-2616-4074-b1f4-4b959515e933\",\n      \"ServiceId\": \"bd26d8db-86da-4f96-9efc-e5a4654a4a94\",\n      \"EnterpriseId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\",\n      \"Name\": \"Sample company voucher\",\n      \"CreatedUtc\": \"2023-12-01T08:17:05Z\",\n      \"UpdatedUtc\": \"2023-12-02T13:38:49Z\",\n      \"Type\": \"PartnerCompany\",\n      \"ActivityState\": \"Active\",\n      \"CompanyId\": \"c6f5c82d-621a-4c8a-903b-1b0a9a23b71f\",\n      \"TravelAgencyId\": null,\n      \"OccupiableIntervalStartUtc\": \"2023-12-31T22:00:00Z\",\n      \"OccupiableIntervalEndUtc\": \"2024-01-01T22:00:00Z\",\n      \"ExternalIdentifier\": \"VCHR-278\",\n      \"IsActive\": true\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "27acd78c-6930-40c1-89b9-136c8c022fab",
+              "name": "Server has successfully fulfilled the request and there is no additional information to send back.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "vouchers",
+                    "update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"VoucherUpdates\": [\n    {\n      \"VoucherId\": \"fe568bbd-1ecb-4bb2-bf77-96c3698de20d\",\n      \"Name\": {\n        \"Value\": \"Weekend Voucher\"\n      },\n      \"Type\": {\n        \"Value\": \"Public\"\n      },\n      \"AssignedRateIds\": {\n        \"Value\": [\n          \"ed4b660b-19d0-434b-9360-a4de2ea42eda\",\n          \"b7e6a1c2-4f3a-4e2b-9c1d-2a5e7b8c9d0f\"\n        ]\n      }\n    },\n    {\n      \"VoucherId\": \"f4a9942c-2616-4074-b1f4-4b959515e933\",\n      \"Name\": {\n        \"Value\": \"Sample company voucher\"\n      },\n      \"Type\": {\n        \"Value\": \"PartnerCompany\"\n      },\n      \"CompanyId\": {\n        \"Value\": \"c6f5c82d-621a-4c8a-903b-1b0a9a23b71f\"\n      },\n      \"AssignedRateIds\": {\n        \"Value\": [\n          \"ed4b660b-19d0-434b-9360-a4de2ea42eda\",\n          \"b7e6a1c2-4f3a-4e2b-9c1d-2a5e7b8c9d0f\"\n        ]\n      },\n      \"OccupiableIntervalStartUtc\": {\n        \"Value\": \"2023-12-31T22:00:00Z\"\n      },\n      \"OccupiableIntervalEndUtc\": {\n        \"Value\": \"2024-01-01T22:00:00Z\"\n      },\n      \"ExternalIdentifier\": {\n        \"Value\": \"VCHR-278\"\n      }\n    }\n  ],\n  \"EnterpriseId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c2fc6c6d-93a6-4b32-9159-de1afdf6f641",
+              "name": "Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "vouchers",
+                    "update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"VoucherUpdates\": [\n    {\n      \"VoucherId\": \"fe568bbd-1ecb-4bb2-bf77-96c3698de20d\",\n      \"Name\": {\n        \"Value\": \"Weekend Voucher\"\n      },\n      \"Type\": {\n        \"Value\": \"Public\"\n      },\n      \"AssignedRateIds\": {\n        \"Value\": [\n          \"ed4b660b-19d0-434b-9360-a4de2ea42eda\",\n          \"b7e6a1c2-4f3a-4e2b-9c1d-2a5e7b8c9d0f\"\n        ]\n      }\n    },\n    {\n      \"VoucherId\": \"f4a9942c-2616-4074-b1f4-4b959515e933\",\n      \"Name\": {\n        \"Value\": \"Sample company voucher\"\n      },\n      \"Type\": {\n        \"Value\": \"PartnerCompany\"\n      },\n      \"CompanyId\": {\n        \"Value\": \"c6f5c82d-621a-4c8a-903b-1b0a9a23b71f\"\n      },\n      \"AssignedRateIds\": {\n        \"Value\": [\n          \"ed4b660b-19d0-434b-9360-a4de2ea42eda\",\n          \"b7e6a1c2-4f3a-4e2b-9c1d-2a5e7b8c9d0f\"\n        ]\n      },\n      \"OccupiableIntervalStartUtc\": {\n        \"Value\": \"2023-12-31T22:00:00Z\"\n      },\n      \"OccupiableIntervalEndUtc\": {\n        \"Value\": \"2024-01-01T22:00:00Z\"\n      },\n      \"ExternalIdentifier\": {\n        \"Value\": \"VCHR-278\"\n      }\n    }\n  ],\n  \"EnterpriseId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ee2c5339-3349-4439-b9e1-2af8bc554a69",
+              "name": "Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "vouchers",
+                    "update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"VoucherUpdates\": [\n    {\n      \"VoucherId\": \"fe568bbd-1ecb-4bb2-bf77-96c3698de20d\",\n      \"Name\": {\n        \"Value\": \"Weekend Voucher\"\n      },\n      \"Type\": {\n        \"Value\": \"Public\"\n      },\n      \"AssignedRateIds\": {\n        \"Value\": [\n          \"ed4b660b-19d0-434b-9360-a4de2ea42eda\",\n          \"b7e6a1c2-4f3a-4e2b-9c1d-2a5e7b8c9d0f\"\n        ]\n      }\n    },\n    {\n      \"VoucherId\": \"f4a9942c-2616-4074-b1f4-4b959515e933\",\n      \"Name\": {\n        \"Value\": \"Sample company voucher\"\n      },\n      \"Type\": {\n        \"Value\": \"PartnerCompany\"\n      },\n      \"CompanyId\": {\n        \"Value\": \"c6f5c82d-621a-4c8a-903b-1b0a9a23b71f\"\n      },\n      \"AssignedRateIds\": {\n        \"Value\": [\n          \"ed4b660b-19d0-434b-9360-a4de2ea42eda\",\n          \"b7e6a1c2-4f3a-4e2b-9c1d-2a5e7b8c9d0f\"\n        ]\n      },\n      \"OccupiableIntervalStartUtc\": {\n        \"Value\": \"2023-12-31T22:00:00Z\"\n      },\n      \"OccupiableIntervalEndUtc\": {\n        \"Value\": \"2024-01-01T22:00:00Z\"\n      },\n      \"ExternalIdentifier\": {\n        \"Value\": \"VCHR-278\"\n      }\n    }\n  ],\n  \"EnterpriseId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "58cfbc64-6a1f-4e0a-bc5c-6e14a80c3c0d",
+              "name": "Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "vouchers",
+                    "update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"VoucherUpdates\": [\n    {\n      \"VoucherId\": \"fe568bbd-1ecb-4bb2-bf77-96c3698de20d\",\n      \"Name\": {\n        \"Value\": \"Weekend Voucher\"\n      },\n      \"Type\": {\n        \"Value\": \"Public\"\n      },\n      \"AssignedRateIds\": {\n        \"Value\": [\n          \"ed4b660b-19d0-434b-9360-a4de2ea42eda\",\n          \"b7e6a1c2-4f3a-4e2b-9c1d-2a5e7b8c9d0f\"\n        ]\n      }\n    },\n    {\n      \"VoucherId\": \"f4a9942c-2616-4074-b1f4-4b959515e933\",\n      \"Name\": {\n        \"Value\": \"Sample company voucher\"\n      },\n      \"Type\": {\n        \"Value\": \"PartnerCompany\"\n      },\n      \"CompanyId\": {\n        \"Value\": \"c6f5c82d-621a-4c8a-903b-1b0a9a23b71f\"\n      },\n      \"AssignedRateIds\": {\n        \"Value\": [\n          \"ed4b660b-19d0-434b-9360-a4de2ea42eda\",\n          \"b7e6a1c2-4f3a-4e2b-9c1d-2a5e7b8c9d0f\"\n        ]\n      },\n      \"OccupiableIntervalStartUtc\": {\n        \"Value\": \"2023-12-31T22:00:00Z\"\n      },\n      \"OccupiableIntervalEndUtc\": {\n        \"Value\": \"2024-01-01T22:00:00Z\"\n      },\n      \"ExternalIdentifier\": {\n        \"Value\": \"VCHR-278\"\n      }\n    }\n  ],\n  \"EnterpriseId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fa8122c5-7aa7-4547-85ee-f29adc4be2ca",
+              "name": "Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-timeouts)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "vouchers",
+                    "update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"VoucherUpdates\": [\n    {\n      \"VoucherId\": \"fe568bbd-1ecb-4bb2-bf77-96c3698de20d\",\n      \"Name\": {\n        \"Value\": \"Weekend Voucher\"\n      },\n      \"Type\": {\n        \"Value\": \"Public\"\n      },\n      \"AssignedRateIds\": {\n        \"Value\": [\n          \"ed4b660b-19d0-434b-9360-a4de2ea42eda\",\n          \"b7e6a1c2-4f3a-4e2b-9c1d-2a5e7b8c9d0f\"\n        ]\n      }\n    },\n    {\n      \"VoucherId\": \"f4a9942c-2616-4074-b1f4-4b959515e933\",\n      \"Name\": {\n        \"Value\": \"Sample company voucher\"\n      },\n      \"Type\": {\n        \"Value\": \"PartnerCompany\"\n      },\n      \"CompanyId\": {\n        \"Value\": \"c6f5c82d-621a-4c8a-903b-1b0a9a23b71f\"\n      },\n      \"AssignedRateIds\": {\n        \"Value\": [\n          \"ed4b660b-19d0-434b-9360-a4de2ea42eda\",\n          \"b7e6a1c2-4f3a-4e2b-9c1d-2a5e7b8c9d0f\"\n        ]\n      },\n      \"OccupiableIntervalStartUtc\": {\n        \"Value\": \"2023-12-31T22:00:00Z\"\n      },\n      \"OccupiableIntervalEndUtc\": {\n        \"Value\": \"2024-01-01T22:00:00Z\"\n      },\n      \"ExternalIdentifier\": {\n        \"Value\": \"VCHR-278\"\n      }\n    }\n  ],\n  \"EnterpriseId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Request Timeout",
+              "code": 408,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f1fb1f03-7acd-46b2-a0ef-5fd58a282efd",
+              "name": "Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-limits).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "vouchers",
+                    "update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"VoucherUpdates\": [\n    {\n      \"VoucherId\": \"fe568bbd-1ecb-4bb2-bf77-96c3698de20d\",\n      \"Name\": {\n        \"Value\": \"Weekend Voucher\"\n      },\n      \"Type\": {\n        \"Value\": \"Public\"\n      },\n      \"AssignedRateIds\": {\n        \"Value\": [\n          \"ed4b660b-19d0-434b-9360-a4de2ea42eda\",\n          \"b7e6a1c2-4f3a-4e2b-9c1d-2a5e7b8c9d0f\"\n        ]\n      }\n    },\n    {\n      \"VoucherId\": \"f4a9942c-2616-4074-b1f4-4b959515e933\",\n      \"Name\": {\n        \"Value\": \"Sample company voucher\"\n      },\n      \"Type\": {\n        \"Value\": \"PartnerCompany\"\n      },\n      \"CompanyId\": {\n        \"Value\": \"c6f5c82d-621a-4c8a-903b-1b0a9a23b71f\"\n      },\n      \"AssignedRateIds\": {\n        \"Value\": [\n          \"ed4b660b-19d0-434b-9360-a4de2ea42eda\",\n          \"b7e6a1c2-4f3a-4e2b-9c1d-2a5e7b8c9d0f\"\n        ]\n      },\n      \"OccupiableIntervalStartUtc\": {\n        \"Value\": \"2023-12-31T22:00:00Z\"\n      },\n      \"OccupiableIntervalEndUtc\": {\n        \"Value\": \"2024-01-01T22:00:00Z\"\n      },\n      \"ExternalIdentifier\": {\n        \"Value\": \"VCHR-278\"\n      }\n    }\n  ],\n  \"EnterpriseId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "aaef3bd5-fbc3-4c0f-bd50-f8ab846886b4",
+              "name": "Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.com/MewsSystems/gitbook-connector-api).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "vouchers",
+                    "update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"VoucherUpdates\": [\n    {\n      \"VoucherId\": \"fe568bbd-1ecb-4bb2-bf77-96c3698de20d\",\n      \"Name\": {\n        \"Value\": \"Weekend Voucher\"\n      },\n      \"Type\": {\n        \"Value\": \"Public\"\n      },\n      \"AssignedRateIds\": {\n        \"Value\": [\n          \"ed4b660b-19d0-434b-9360-a4de2ea42eda\",\n          \"b7e6a1c2-4f3a-4e2b-9c1d-2a5e7b8c9d0f\"\n        ]\n      }\n    },\n    {\n      \"VoucherId\": \"f4a9942c-2616-4074-b1f4-4b959515e933\",\n      \"Name\": {\n        \"Value\": \"Sample company voucher\"\n      },\n      \"Type\": {\n        \"Value\": \"PartnerCompany\"\n      },\n      \"CompanyId\": {\n        \"Value\": \"c6f5c82d-621a-4c8a-903b-1b0a9a23b71f\"\n      },\n      \"AssignedRateIds\": {\n        \"Value\": [\n          \"ed4b660b-19d0-434b-9360-a4de2ea42eda\",\n          \"b7e6a1c2-4f3a-4e2b-9c1d-2a5e7b8c9d0f\"\n        ]\n      },\n      \"OccupiableIntervalStartUtc\": {\n        \"Value\": \"2023-12-31T22:00:00Z\"\n      },\n      \"OccupiableIntervalEndUtc\": {\n        \"Value\": \"2024-01-01T22:00:00Z\"\n      },\n      \"ExternalIdentifier\": {\n        \"Value\": \"VCHR-278\"\n      }\n    }\n  ],\n  \"EnterpriseId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "275a227a-65cf-408c-94e5-64c03cf6dfe1",
+          "name": "Mews Delete Vouchers",
+          "request": {
+            "name": "Mews Delete Vouchers",
+            "description": {
+              "content": "Delete specified vouchers. Note this operation supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property).",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "connector",
+                "v1",
+                "vouchers",
+                "delete"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"AccessToken\": \"<string>\",\n  \"Client\": \"<string>\",\n  \"ClientToken\": \"<string>\",\n  \"VoucherIds\": [\n    \"<uuid>\"\n  ],\n  \"EnterpriseId\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "d6ff35ea-5873-4b71-80af-2d9aa36cd204",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "vouchers",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"VoucherIds\": [\n    \"fe568bbd-1ecb-4bb2-bf77-96c3698de20d\",\n    \"f4a9942c-2616-4074-b1f4-4b959515e933\"\n  ],\n  \"EnterpriseId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "df5f44a6-8b5c-4f26-922a-ec7f71576877",
+              "name": "Server has successfully fulfilled the request and there is no additional information to send back.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "vouchers",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"VoucherIds\": [\n    \"fe568bbd-1ecb-4bb2-bf77-96c3698de20d\",\n    \"f4a9942c-2616-4074-b1f4-4b959515e933\"\n  ],\n  \"EnterpriseId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "No Content",
+              "code": 204,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c22e2f23-a27d-4764-8362-55ab573e1e94",
+              "name": "Error caused by the client app, e.g. in case of malformed request or invalid identifier of a resource. In most cases, such an error signifies a bug in the client app (consumer of the API).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "vouchers",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"VoucherIds\": [\n    \"fe568bbd-1ecb-4bb2-bf77-96c3698de20d\",\n    \"f4a9942c-2616-4074-b1f4-4b959515e933\"\n  ],\n  \"EnterpriseId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d40582b8-2a00-4501-bd62-70dd8681ec5e",
+              "name": "Error caused by usage of invalid ClientToken, AccessToken, or you may not have the necessary permission to use the endpoint.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "vouchers",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"VoucherIds\": [\n    \"fe568bbd-1ecb-4bb2-bf77-96c3698de20d\",\n    \"f4a9942c-2616-4074-b1f4-4b959515e933\"\n  ],\n  \"EnterpriseId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "91f61904-430b-44fe-83a3-f4c264c8d4bc",
+              "name": "Server error that should be reported to the end user of the client app. Happens for example when the server-side validation fails or when a business-logic check is violated.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "vouchers",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"VoucherIds\": [\n    \"fe568bbd-1ecb-4bb2-bf77-96c3698de20d\",\n    \"f4a9942c-2616-4074-b1f4-4b959515e933\"\n  ],\n  \"EnterpriseId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "05c069e1-780d-4ff4-be03-6f2543d31ab8",
+              "name": "Error caused by heavy request that takes too long to process (typically tens of seconds). To get around this, request data in smaller batches. For more information, see [Request timeouts](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-timeouts)",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "vouchers",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"VoucherIds\": [\n    \"fe568bbd-1ecb-4bb2-bf77-96c3698de20d\",\n    \"f4a9942c-2616-4074-b1f4-4b959515e933\"\n  ],\n  \"EnterpriseId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Request Timeout",
+              "code": 408,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "71c5d5a4-573f-4532-96c9-eecba62ae51e",
+              "name": "Error caused by too many requests sent in a given amount of time. Response contains `Retry-After` header indicating how long the user agent should wait before making a follow-up request. For more information, see [Request limits](https://mews-systems.gitbook.io/connector-api/guidelines/requests#request-limits).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "vouchers",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"VoucherIds\": [\n    \"fe568bbd-1ecb-4bb2-bf77-96c3698de20d\",\n    \"f4a9942c-2616-4074-b1f4-4b959515e933\"\n  ],\n  \"EnterpriseId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "095f3396-3801-49ce-9876-0d95e0532774",
+              "name": "Unexpected error on the Mews side. This may be due to a software fault. If such a situation occurs, the error will be logged and the development team notified, however you can raise an issue through GitHub on our [documentation repository](https://github.com/MewsSystems/gitbook-connector-api).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "connector",
+                    "v1",
+                    "vouchers",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: apikey",
+                      "type": "text/plain"
+                    },
+                    "key": "ClientToken",
+                    "value": "<API Key>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"ClientToken\": \"E0D439EE522F44368DC78E1BFB03710C-D24FB11DBE31D4621C4817E028D9E1D\",\n  \"AccessToken\": \"C66EF7B239D24632943D115EDE9CB810-EA00F8FD8294692C940F6B5A8F9453D\",\n  \"Client\": \"Sample Client 1.0.0\",\n  \"VoucherIds\": [\n    \"fe568bbd-1ecb-4bb2-bf77-96c3698de20d\",\n    \"f4a9942c-2616-4074-b1f4-4b959515e933\"\n  ],\n  \"EnterpriseId\": \"3fa85f64-5717-4562-b3fc-2c963f66afa6\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"Message\": \"string\",\n  \"RequestId\": \"3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111\",\n  \"Details\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.mews.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "ClientToken"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "61f34194-b469-4383-9b2f-517c2bb6e083",
+    "name": "Mews Booking Engine API (Distributor) Account notes Vouchers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Mews Booking Engine API (historically the Distributor API, served from /api/distributor/v1) lets developers build guest-facing booking engines that create reservations directly in Mews. It exposes enterprise configuration, availability, pricing, products, vouchers, payment cards, and reservation group creation for front-end client consumption.",
+      "type": "text/plain"
+    }
+  }
+}
