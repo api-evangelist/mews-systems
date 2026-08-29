@@ -1,4 +1,4 @@
-openapi: 3.0.4
+openapi: 3.2.0
 info:
   title: Mews Booking Engine API (Distributor) Account notes Images API
   version: v1
@@ -152,66 +152,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ImageSizeParameters:
-      title: Image size parameters
-      required:
-      - ImageId
-      type: object
-      properties:
-        ImageId:
-          type: string
-          description: Unique identifier of the image.
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Width:
-          type: integer
-          description: Desired width of the image.
-          format: int32
-          nullable: true
-          example: 1
-        Height:
-          type: integer
-          description: Desired height of the image.
-          format: int32
-          nullable: true
-          example: 1
-        ResizeMode:
-          allOf:
-          - $ref: '#/components/schemas/ImageResizeModeEnum'
-          description: 'Mode how the image should be resized to the desired width and height.
-
-
-            Cover (Resize to fit within the specified size, so the result might be smaller than requested.)
-
-
-            CoverExact (Resize and pad to exactly fit within the specified size.)
-
-
-            Fit (Resize to fit within the specified size, so the result might be smaller than requested.)
-
-
-            FitExact (Resize and pad to exactly fit within the specified size.)'
-          nullable: true
-          example: string
-      additionalProperties: false
-      x-schema-id: ImageSizeParameters
-    ConnectorApiExceptionResult:
-      title: ConnectorApiExceptionResult
-      type: object
-      properties:
-        Message:
-          type: string
-          nullable: true
-          example: string
-        RequestId:
-          type: string
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Details:
-          nullable: true
-          example: string
-      additionalProperties: false
-      x-schema-id: ConnectorApiExceptionResult
     ImageResizeModeEnum:
       title: Image resize mode
       enum:
@@ -243,6 +183,81 @@ components:
       - Resize and pad to exactly fit within the specified size.
       - Resize to fit within the specified size, so the result might be smaller than requested.
       - Resize and pad to exactly fit within the specified size.
+    ImageSizeParameters:
+      title: Image size parameters
+      required:
+      - ImageId
+      type: object
+      properties:
+        ImageId:
+          type: string
+          description: Unique identifier of the image.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Width:
+          type:
+          - integer
+          - 'null'
+          description: Desired width of the image.
+          format: int32
+          example: 1
+        Height:
+          type:
+          - integer
+          - 'null'
+          description: Desired height of the image.
+          format: int32
+          example: 1
+        ResizeMode:
+          allOf:
+          - $ref: '#/components/schemas/ImageResizeModeEnum'
+          description: 'Mode how the image should be resized to the desired width and height.
+
+
+            Cover (Resize to fit within the specified size, so the result might be smaller than requested.)
+
+
+            CoverExact (Resize and pad to exactly fit within the specified size.)
+
+
+            Fit (Resize to fit within the specified size, so the result might be smaller than requested.)
+
+
+            FitExact (Resize and pad to exactly fit within the specified size.)'
+          example: string
+      additionalProperties: false
+      x-schema-id: ImageSizeParameters
+    ConnectorApiExceptionResult:
+      title: ConnectorApiExceptionResult
+      type: object
+      properties:
+        Message:
+          type:
+          - string
+          - 'null'
+          example: string
+        RequestId:
+          type:
+          - string
+          - 'null'
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Details:
+          example: string
+      additionalProperties: false
+      x-schema-id: ConnectorApiExceptionResult
+    ImageUrlResult:
+      title: ImageUrlResult
+      required:
+      - ImageUrls
+      type: object
+      properties:
+        ImageUrls:
+          type: array
+          items:
+            $ref: '#/components/schemas/ImageUrl'
+          description: URLs of the images.
+      additionalProperties: false
+      x-schema-id: ImageUrlResult
     ImageUrlParameters:
       title: ImageUrlParameters
       required:
@@ -293,19 +308,6 @@ components:
           example: https://api.mews.com/api/connector/v1
       additionalProperties: false
       x-schema-id: ImageUrl
-    ImageUrlResult:
-      title: ImageUrlResult
-      required:
-      - ImageUrls
-      type: object
-      properties:
-        ImageUrls:
-          type: array
-          items:
-            $ref: '#/components/schemas/ImageUrl'
-          description: URLs of the images.
-      additionalProperties: false
-      x-schema-id: ImageUrlResult
   securitySchemes:
     MewsClientToken:
       type: apiKey

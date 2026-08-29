@@ -1,4 +1,4 @@
-openapi: 3.0.4
+openapi: 3.2.0
 info:
   title: Mews Booking Engine API (Distributor) Account notes Rules API
   version: v1
@@ -204,82 +204,168 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    BusinessSegment:
-      title: Business segment
-      required:
-      - CreatedUtc
-      - Id
-      - IsActive
-      - Name
-      - ServiceId
-      - UpdatedUtc
+    RateGroupOld:
+      title: Rate group (ver 2017-04-12)
       type: object
       properties:
         Id:
           type: string
-          description: Unique identifier of the business segment.
+          description: Unique identifier of the rate group.
           format: uuid
           example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
         ServiceId:
           type: string
-          description: Unique identifier of the `Service`.
+          description: Unique identifier of the Service that the rate group belongs to.
           format: uuid
           example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
         IsActive:
           type: boolean
-          description: Whether the business segment is still active.
+          description: Whether the rate group is still active.
           example: true
         Name:
-          minLength: 1
-          type: string
-          description: Name of the business segment.
+          type:
+          - string
+          - 'null'
+          description: Name of the rate group.
           example: Example Name
-        CreatedUtc:
-          minLength: 1
-          type: string
-          description: Creation date and time of the business segment in UTC timezone in ISO 8601 format.
-          format: date-time
-          example: '2026-06-02T14:30:00Z'
-        UpdatedUtc:
-          minLength: 1
-          type: string
-          description: Last update date and time of the business segment in UTC timezone in ISO 8601 format.
-          format: date-time
-          example: '2026-06-02T14:30:00Z'
+        ExternalIdentifier:
+          maxLength: 255
+          type:
+          - string
+          - 'null'
+          description: External identifier of the rate group.
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
       additionalProperties: false
-      x-schema-id: BusinessSegment
-    RuleExtent:
-      title: Rule extent
+      x-schema-id: RateGroupOld
+    RuleFilterParameters:
+      title: RuleFilterParameters
+      required:
+      - AccessToken
+      - Client
+      - ClientToken
+      - Extent
+      - Limitation
+      - ServiceIds
       type: object
       properties:
-        RuleActions:
-          type: boolean
-          description: Whether the response should contain rule actions.
-          nullable: true
-          example: true
-        Rates:
-          type: boolean
-          description: Whether the response should contain rates.
-          nullable: true
-          example: true
-        RateGroups:
-          type: boolean
-          description: Whether the response should contain rate groups.
-          nullable: true
-          example: true
-        ResourceCategories:
-          type: boolean
-          description: Whether the response should contain rate resource categories.
-          nullable: true
-          example: true
-        BusinessSegments:
-          type: boolean
-          description: Whether the response should contain business segments.
-          nullable: true
-          example: true
+        ClientToken:
+          minLength: 1
+          type: string
+          description: Token identifying the client application.
+          example: string
+        AccessToken:
+          minLength: 1
+          type: string
+          description: Access token of the client application.
+          example: string
+        Client:
+          minLength: 1
+          type: string
+          description: Name and version of the client application.
+          example: string
+        Limitation:
+          allOf:
+          - $ref: '#/components/schemas/Limitation'
+          description: Limitation on the quantity of data returned and optional Cursor for the starting point of data.
+          example: string
+        EnterpriseIds:
+          maxItems: 1000
+          minItems: 1
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: uuid
+          description: Unique identifiers of the Enterprises. If not specified, the operation returns data for all enterprises within scope of the Access Token.
+        Ids:
+          maxItems: 1000
+          minItems: 1
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: uuid
+          description: Unique identifiers of the `Rule`.
+        ServiceIds:
+          maxItems: 1000
+          minItems: 1
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Unique identifiers of the `Service`.
+        UpdatedUtc:
+          title: Time interval
+          allOf:
+          - $ref: '#/components/schemas/TimeFilterInterval'
+          description: Interval in which `Rule` was updated.
+          x-max-interval-in-months: 3
+          example: string
+        Extent:
+          title: Rule extent
+          allOf:
+          - $ref: '#/components/schemas/RuleExtent'
+          description: Extent of data to be returned.
+          example: string
       additionalProperties: false
-      description: ''
-      x-schema-id: RuleExtent
+      x-schema-id: RuleFilterParameters
+    RuleResult:
+      title: RuleResult
+      required:
+      - Rules
+      type: object
+      properties:
+        Rules:
+          type: array
+          items:
+            $ref: '#/components/schemas/Rule'
+          description: Rules used with reservation creations and modifications.
+        RuleActions:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/RuleAction'
+          description: Rule actions applied in rules.
+        Rates:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/RateForExtent'
+          description: Rates used in conditions.
+        RateGroups:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/RateGroupOld'
+          description: Rate groups used in conditions.
+        ResourceCategories:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ResourceCategory'
+          description: Resource categories used in conditions.
+        BusinessSegments:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/BusinessSegment'
+          description: Business segments used in conditions.
+        Cursor:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the item one newer in time order than the items to be returned. If Cursor is not specified, i.e. null, then the latest or most recent items will be returned.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      additionalProperties: false
+      x-schema-id: RuleResult
     Rule:
       title: Rule
       required:
@@ -320,6 +406,25 @@ components:
           example: '2026-06-02T14:30:00Z'
       additionalProperties: false
       x-schema-id: Rule
+    TimeFilterInterval:
+      title: Time interval
+      type: object
+      properties:
+        StartUtc:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+        EndUtc:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+      additionalProperties: false
+      description: "When a time interval is used for **filtering** (for example in parameters such as `CreatedUtc.StartUtc` / `CreatedUtc.EndUtc`), the following rules apply:\n\n- **Start equals End (equality mode)**  \n  If `StartUtc` and `EndUtc` are exactly the same timestamp, the filter is treated as an equality check for that precise moment in time:\n  \n  ```\n  CreatedUtc == StartUtc\n  ```\n  \n  This does not represent an interval; only records with `CreatedUtc` equal to that exact instant are returned.\n\n- **Start differs from End (interval mode)**  \n  If `StartUtc` and `EndUtc` are different, the filter is evaluated as a half-open interval:\n  \n  ```\n  StartUtc <= CreatedUtc < EndUtc\n  ```\n  \n  In other words, the start is inclusive and the end is exclusive.\n\nMake sure your integration takes inclusive Start / exclusive End behavior of time intervals into account so that no records at the boundaries are omitted."
+      x-schema-id: TimeFilterInterval
     RuleConditionType:
       title: Condition type
       enum:
@@ -327,113 +432,6 @@ components:
       - NotEquals
       type: string
       description: Type of condition.
-    TimeFilterInterval:
-      title: Time interval
-      type: object
-      properties:
-        StartUtc:
-          type: string
-          format: date-time
-          nullable: true
-          example: '2026-06-02T14:30:00Z'
-        EndUtc:
-          type: string
-          format: date-time
-          nullable: true
-          example: '2026-06-02T14:30:00Z'
-      additionalProperties: false
-      description: "When a time interval is used for **filtering** (for example in parameters such as `CreatedUtc.StartUtc` / `CreatedUtc.EndUtc`), the following rules apply:\r\n\r\n- **Start equals End (equality mode)**  \r\n  If `StartUtc` and `EndUtc` are exactly the same timestamp, the filter is treated as an equality check for that precise moment in time:\r\n  \r\n  ```\r\n  CreatedUtc == StartUtc\r\n  ```\r\n  \r\n  This does not represent an interval; only records with `CreatedUtc` equal to that exact instant are returned.\r\n\r\n- **Start differs from End (interval mode)**  \r\n  If `StartUtc` and `EndUtc` are different, the filter is evaluated as a half-open interval:\r\n  \r\n  ```\r\n  StartUtc <= CreatedUtc < EndUtc\r\n  ```\r\n  \r\n  In other words, the start is inclusive and the end is exclusive.\r\n\r\nMake sure your integration takes inclusive Start / exclusive End behavior of time intervals into account so that no records at the boundaries are omitted."
-      x-schema-id: TimeFilterInterval
-    ResourceCategoryType:
-      title: Resource category type
-      enum:
-      - Room
-      - Bed
-      - Dorm
-      - Apartment
-      - Suite
-      - Villa
-      - Site
-      - Office
-      - MeetingRoom
-      - ParkingSpot
-      - Desk
-      - TeamArea
-      - Membership
-      - Tent
-      - CaravanOrRV
-      - UnequippedCampsite
-      - Bike
-      - ExtraBed
-      - Cot
-      - Crib
-      - ConferenceRoom
-      - Rooftop
-      - Garden
-      - Restaurant
-      - Amphitheater
-      - PrivateSpaces
-      type: string
-      description: Type of the category.
-    RuleActionType:
-      title: Product action type
-      enum:
-      - Add
-      - Delete
-      type: string
-      description: Action of rule.
-      x-enumDescriptions:
-      - Adds specified item.
-      - Deletes specified item.
-    RuleResult:
-      title: RuleResult
-      required:
-      - Rules
-      type: object
-      properties:
-        Rules:
-          type: array
-          items:
-            $ref: '#/components/schemas/Rule'
-          description: Rules used with reservation creations and modifications.
-        RuleActions:
-          type: array
-          items:
-            $ref: '#/components/schemas/RuleAction'
-          description: Rule actions applied in rules.
-          nullable: true
-        Rates:
-          type: array
-          items:
-            $ref: '#/components/schemas/RateForExtent'
-          description: Rates used in conditions.
-          nullable: true
-        RateGroups:
-          type: array
-          items:
-            $ref: '#/components/schemas/RateGroupOld'
-          description: Rate groups used in conditions.
-          nullable: true
-        ResourceCategories:
-          type: array
-          items:
-            $ref: '#/components/schemas/ResourceCategory'
-          description: Resource categories used in conditions.
-          nullable: true
-        BusinessSegments:
-          type: array
-          items:
-            $ref: '#/components/schemas/BusinessSegment'
-          description: Business segments used in conditions.
-          nullable: true
-        Cursor:
-          type: string
-          description: Unique identifier of the item one newer in time order than the items to be returned. If Cursor is not specified, i.e. null, then the latest or most recent items will be returned.
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-      additionalProperties: false
-      x-schema-id: RuleResult
     RuleActionProductData:
       title: Rule action product data
       required:
@@ -450,31 +448,43 @@ components:
           example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
       additionalProperties: false
       x-schema-id: RuleActionProductData
-    RateTypeEnum:
-      title: Rate type
+    ResourceClassification:
+      title: Resource classification
       enum:
-      - Public
-      - Private
-      - AvailabilityBlock
+      - StandardSingle
+      - StandardDouble
+      - SuperiorTwin
+      - SuperiorDouble
+      - JuniorSuite
+      - SharedOrDorm
+      - Other
+      - SuperiorSingle
+      - Triple
+      - Family
+      - StandardTwin
+      - Studio
+      - SuperiorTripleRoom
+      - OneBedroomApartment
+      - ThreeBedroomsApartment
+      - TwoBedroomsApartment
       type: string
-      description: '
-
-
-        Public
-
-
-        Private
-
-
-        AvailabilityBlock'
-      x-enumNames:
-      - Public
-      - Private
-      - AvailabilityBlock
-      x-enumDescriptions:
-      - ''
-      - ''
-      - ''
+      description: Classification of the resource category.
+    RuleCondition:
+      title: Rule condition
+      required:
+      - ConditionType
+      - Value
+      type: object
+      properties:
+        Value:
+          minLength: 1
+          type: string
+          description: Value of the condition depending on the property. E.g. `ReservationOrigin` in case of origin condition or unique identifier of a rate in case of rate condition.
+          example: string
+        ConditionType:
+          $ref: '#/components/schemas/RuleConditionType'
+      additionalProperties: false
+      x-schema-id: RuleCondition
     ResourceCategory:
       title: Resource category
       required:
@@ -553,51 +563,135 @@ components:
           example: 1
         ExternalIdentifier:
           maxLength: 255
-          type: string
+          type:
+          - string
+          - 'null'
           description: Identifier of the resource category from external system.
-          nullable: true
           example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
         AccountingCategoryId:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Unique identifier of the accounting category.
           format: uuid
-          nullable: true
           example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
       additionalProperties: false
       x-schema-id: ResourceCategory
-    RuleCondition:
-      title: Rule condition
-      required:
-      - ConditionType
-      - Value
+    RuleConditions:
+      title: Rule conditions
       type: object
       properties:
-        Value:
-          minLength: 1
-          type: string
-          description: Value of the condition depending on the property. E.g. `ReservationOrigin` in case of origin condition or unique identifier of a rate in case of rate condition.
-          example: string
-        ConditionType:
-          $ref: '#/components/schemas/RuleConditionType'
-      additionalProperties: false
-      x-schema-id: RuleCondition
-    ConnectorApiExceptionResult:
-      title: ConnectorApiExceptionResult
-      type: object
-      properties:
-        Message:
-          type: string
-          nullable: true
-          example: string
-        RequestId:
-          type: string
-          nullable: true
+        RateId:
+          title: Rule condition
+          allOf:
+          - $ref: '#/components/schemas/RuleCondition'
+          description: Condition based on `Rate`.
           example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Details:
-          nullable: true
+        RateGroupId:
+          title: Rule condition
+          allOf:
+          - $ref: '#/components/schemas/RuleCondition'
+          description: Condition based on `RateGroup`.
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        BusinessSegmentId:
+          title: Rule condition
+          allOf:
+          - $ref: '#/components/schemas/RuleCondition'
+          description: Condition based on `BusinessSegment`.
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        ResourceCategoryId:
+          title: Rule condition
+          allOf:
+          - $ref: '#/components/schemas/RuleCondition'
+          description: Condition based on `ResourceCategory`.
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        ResourceCategoryType:
+          title: Rule condition
+          allOf:
+          - $ref: '#/components/schemas/RuleCondition'
+          description: Condition based on `ResourceCategoryType`.
           example: string
+        Origin:
+          title: Rule condition
+          allOf:
+          - $ref: '#/components/schemas/RuleCondition'
+          description: Condition based on `ReservationOrigin`.
+          example: string
+        TravelAgencyId:
+          title: Rule condition
+          allOf:
+          - $ref: '#/components/schemas/RuleCondition'
+          description: Condition based on `Company`.
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        MinimumTimeUnitCount:
+          type:
+          - integer
+          - 'null'
+          description: Condition based on minimum amount of time units.
+          format: int32
+          example: 1
+        MaximumTimeUnitCount:
+          type:
+          - integer
+          - 'null'
+          description: Condition based on maximum amount of time units.
+          format: int32
+          example: 1
       additionalProperties: false
-      x-schema-id: ConnectorApiExceptionResult
+      description: ''
+      x-schema-id: RuleConditions
+    RuleAction:
+      title: Rule action
+      required:
+      - Id
+      - RuleId
+      type: object
+      properties:
+        Id:
+          type: string
+          description: Unique identifier of the rule action.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        RuleId:
+          type: string
+          description: Unique identifier of the rule.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Data:
+          title: Rule action data
+          type:
+          - object
+          - 'null'
+          properties:
+            Discriminator:
+              $ref: '#/components/schemas/RuleActionDiscriminator'
+            Value:
+              oneOf:
+              - $ref: '#/components/schemas/RuleActionProductData'
+          description: Additional information about action.
+          x-coproduct: true
+          x-schema-id: RuleActionDataCoproductOfRuleActionDiscriminator
+      additionalProperties: false
+      x-schema-id: RuleAction
+    Limitation:
+      title: Limitation
+      required:
+      - Count
+      type: object
+      properties:
+        Count:
+          type: integer
+          format: int32
+          example: 1
+        Cursor:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      additionalProperties: false
+      description: Limitation on the quantity of data returned.
+      x-schema-id: Limitation
     RateForExtent:
       title: Rate for extent
       required:
@@ -629,20 +723,22 @@ components:
           format: uuid
           example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
         BaseRateId:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Unique identifier of the base `Rate`.
           format: uuid
-          nullable: true
           example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
         IsBaseRate:
           type: boolean
           description: Whether the rate is a base rate.
           example: true
         BusinessSegmentId:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Unique identifier of the `Business Segment`.
           format: uuid
-          nullable: true
           example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
         IsActive:
           type: boolean
@@ -680,9 +776,10 @@ components:
           - ''
           example: string
         Name:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Name of the rate (in the default language).
-          nullable: true
           deprecated: true
           x-deprecatedMessage: Use `Names` instead
           example: Example Name
@@ -694,9 +791,10 @@ components:
           description: All translations of the name.
           x-schema-id: LocalizedStrings
         ShortName:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Short name of the rate (in the default language).
-          nullable: true
           example: Example Name
         UpdatedUtc:
           minLength: 1
@@ -706,251 +804,85 @@ components:
           example: '2026-06-02T14:30:00Z'
         ExternalNames:
           title: Localized text
-          type: object
+          type:
+          - object
+          - 'null'
           additionalProperties:
             type: string
           description: All translations of the external name of the rate.
-          nullable: true
           x-schema-id: LocalizedStrings
         Description:
           title: Localized text
-          type: object
+          type:
+          - object
+          - 'null'
           additionalProperties:
             type: string
           description: All translations of the description of the rate.
-          nullable: true
           x-schema-id: LocalizedStrings
         ExternalIdentifier:
           maxLength: 255
-          type: string
+          type:
+          - string
+          - 'null'
           description: Identifier of the rate from external system.
-          nullable: true
           example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
       additionalProperties: false
       description: '`Rate` entity, without some of the details, e.g. pricing.'
       x-schema-id: RateForExtent
-    RuleConditions:
-      title: Rule conditions
+    RuleActionType:
+      title: Product action type
+      enum:
+      - Add
+      - Delete
+      type: string
+      description: Action of rule.
+      x-enumDescriptions:
+      - Adds specified item.
+      - Deletes specified item.
+    RateTypeEnum:
+      title: Rate type
+      enum:
+      - Public
+      - Private
+      - AvailabilityBlock
+      type: string
+      description: '
+
+
+        Public
+
+
+        Private
+
+
+        AvailabilityBlock'
+      x-enumNames:
+      - Public
+      - Private
+      - AvailabilityBlock
+      x-enumDescriptions:
+      - ''
+      - ''
+      - ''
+    ConnectorApiExceptionResult:
+      title: ConnectorApiExceptionResult
       type: object
       properties:
-        RateId:
-          title: Rule condition
-          allOf:
-          - $ref: '#/components/schemas/RuleCondition'
-          description: Condition based on `Rate`.
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        RateGroupId:
-          title: Rule condition
-          allOf:
-          - $ref: '#/components/schemas/RuleCondition'
-          description: Condition based on `RateGroup`.
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        BusinessSegmentId:
-          title: Rule condition
-          allOf:
-          - $ref: '#/components/schemas/RuleCondition'
-          description: Condition based on `BusinessSegment`.
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        ResourceCategoryId:
-          title: Rule condition
-          allOf:
-          - $ref: '#/components/schemas/RuleCondition'
-          description: Condition based on `ResourceCategory`.
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        ResourceCategoryType:
-          title: Rule condition
-          allOf:
-          - $ref: '#/components/schemas/RuleCondition'
-          description: Condition based on `ResourceCategoryType`.
-          nullable: true
+        Message:
+          type:
+          - string
+          - 'null'
           example: string
-        Origin:
-          title: Rule condition
-          allOf:
-          - $ref: '#/components/schemas/RuleCondition'
-          description: Condition based on `ReservationOrigin`.
-          nullable: true
-          example: string
-        TravelAgencyId:
-          title: Rule condition
-          allOf:
-          - $ref: '#/components/schemas/RuleCondition'
-          description: Condition based on `Company`.
-          nullable: true
+        RequestId:
+          type:
+          - string
+          - 'null'
           example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        MinimumTimeUnitCount:
-          type: integer
-          description: Condition based on minimum amount of time units.
-          format: int32
-          nullable: true
-          example: 1
-        MaximumTimeUnitCount:
-          type: integer
-          description: Condition based on maximum amount of time units.
-          format: int32
-          nullable: true
-          example: 1
-      additionalProperties: false
-      description: ''
-      x-schema-id: RuleConditions
-    Limitation:
-      title: Limitation
-      required:
-      - Count
-      type: object
-      properties:
-        Count:
-          type: integer
-          format: int32
-          example: 1
-        Cursor:
-          type: string
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-      additionalProperties: false
-      description: Limitation on the quantity of data returned.
-      x-schema-id: Limitation
-    RateGroupOld:
-      title: Rate group (ver 2017-04-12)
-      type: object
-      properties:
-        Id:
-          type: string
-          description: Unique identifier of the rate group.
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        ServiceId:
-          type: string
-          description: Unique identifier of the Service that the rate group belongs to.
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        IsActive:
-          type: boolean
-          description: Whether the rate group is still active.
-          example: true
-        Name:
-          type: string
-          description: Name of the rate group.
-          nullable: true
-          example: Example Name
-        ExternalIdentifier:
-          maxLength: 255
-          type: string
-          description: External identifier of the rate group.
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-      additionalProperties: false
-      x-schema-id: RateGroupOld
-    RuleAction:
-      title: Rule action
-      required:
-      - Id
-      - RuleId
-      type: object
-      properties:
-        Id:
-          type: string
-          description: Unique identifier of the rule action.
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        RuleId:
-          type: string
-          description: Unique identifier of the rule.
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Data:
-          title: Rule action data
-          type: object
-          properties:
-            Discriminator:
-              $ref: '#/components/schemas/RuleActionDiscriminator'
-            Value:
-              oneOf:
-              - $ref: '#/components/schemas/RuleActionProductData'
-          description: Additional information about action.
-          nullable: true
-          x-coproduct: true
-          x-schema-id: RuleActionDataCoproductOfRuleActionDiscriminator
-      additionalProperties: false
-      x-schema-id: RuleAction
-    RuleFilterParameters:
-      title: RuleFilterParameters
-      required:
-      - AccessToken
-      - Client
-      - ClientToken
-      - Extent
-      - Limitation
-      - ServiceIds
-      type: object
-      properties:
-        ClientToken:
-          minLength: 1
-          type: string
-          description: Token identifying the client application.
-          example: string
-        AccessToken:
-          minLength: 1
-          type: string
-          description: Access token of the client application.
-          example: string
-        Client:
-          minLength: 1
-          type: string
-          description: Name and version of the client application.
-          example: string
-        Limitation:
-          allOf:
-          - $ref: '#/components/schemas/Limitation'
-          description: Limitation on the quantity of data returned and optional Cursor for the starting point of data.
-          example: string
-        EnterpriseIds:
-          maxItems: 1000
-          minItems: 1
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Unique identifiers of the Enterprises. If not specified, the operation returns data for all enterprises within scope of the Access Token.
-          nullable: true
-        Ids:
-          maxItems: 1000
-          minItems: 1
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Unique identifiers of the `Rule`.
-          nullable: true
-        ServiceIds:
-          maxItems: 1000
-          minItems: 1
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Unique identifiers of the `Service`.
-        UpdatedUtc:
-          title: Time interval
-          allOf:
-          - $ref: '#/components/schemas/TimeFilterInterval'
-          description: Interval in which `Rule` was updated.
-          nullable: true
-          x-max-interval-in-months: 3
-          example: string
-        Extent:
-          title: Rule extent
-          allOf:
-          - $ref: '#/components/schemas/RuleExtent'
-          description: Extent of data to be returned.
+        Details:
           example: string
       additionalProperties: false
-      x-schema-id: RuleFilterParameters
+      x-schema-id: ConnectorApiExceptionResult
     RuleActionDiscriminator:
       title: Rule action discriminator
       enum:
@@ -958,27 +890,118 @@ components:
       type: string
       x-enumDescriptions:
       - Data specific to a product.
-    ResourceClassification:
-      title: Resource classification
+    ResourceCategoryType:
+      title: Resource category type
       enum:
-      - StandardSingle
-      - StandardDouble
-      - SuperiorTwin
-      - SuperiorDouble
-      - JuniorSuite
-      - SharedOrDorm
-      - Other
-      - SuperiorSingle
-      - Triple
-      - Family
-      - StandardTwin
-      - Studio
-      - SuperiorTripleRoom
-      - OneBedroomApartment
-      - ThreeBedroomsApartment
-      - TwoBedroomsApartment
+      - Room
+      - Bed
+      - Dorm
+      - Apartment
+      - Suite
+      - Villa
+      - Site
+      - Office
+      - MeetingRoom
+      - ParkingSpot
+      - Desk
+      - TeamArea
+      - Membership
+      - Tent
+      - CaravanOrRV
+      - UnequippedCampsite
+      - Bike
+      - ExtraBed
+      - Cot
+      - Crib
+      - ConferenceRoom
+      - Rooftop
+      - Garden
+      - Restaurant
+      - Amphitheater
+      - PrivateSpaces
       type: string
-      description: Classification of the resource category.
+      description: Type of the category.
+    BusinessSegment:
+      title: Business segment
+      required:
+      - CreatedUtc
+      - Id
+      - IsActive
+      - Name
+      - ServiceId
+      - UpdatedUtc
+      type: object
+      properties:
+        Id:
+          type: string
+          description: Unique identifier of the business segment.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        ServiceId:
+          type: string
+          description: Unique identifier of the `Service`.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        IsActive:
+          type: boolean
+          description: Whether the business segment is still active.
+          example: true
+        Name:
+          minLength: 1
+          type: string
+          description: Name of the business segment.
+          example: Example Name
+        CreatedUtc:
+          minLength: 1
+          type: string
+          description: Creation date and time of the business segment in UTC timezone in ISO 8601 format.
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+        UpdatedUtc:
+          minLength: 1
+          type: string
+          description: Last update date and time of the business segment in UTC timezone in ISO 8601 format.
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+      additionalProperties: false
+      x-schema-id: BusinessSegment
+    RuleExtent:
+      title: Rule extent
+      type: object
+      properties:
+        RuleActions:
+          type:
+          - boolean
+          - 'null'
+          description: Whether the response should contain rule actions.
+          example: true
+        Rates:
+          type:
+          - boolean
+          - 'null'
+          description: Whether the response should contain rates.
+          example: true
+        RateGroups:
+          type:
+          - boolean
+          - 'null'
+          description: Whether the response should contain rate groups.
+          example: true
+        ResourceCategories:
+          type:
+          - boolean
+          - 'null'
+          description: Whether the response should contain rate resource categories.
+          example: true
+        BusinessSegments:
+          type:
+          - boolean
+          - 'null'
+          description: Whether the response should contain business segments.
+          example: true
+      additionalProperties: false
+      description: ''
+      x-schema-id: RuleExtent
   securitySchemes:
     MewsClientToken:
       type: apiKey

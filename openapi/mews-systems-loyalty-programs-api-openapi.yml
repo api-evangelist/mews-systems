@@ -1,4 +1,4 @@
-openapi: 3.0.4
+openapi: 3.2.0
 info:
   title: Mews Booking Engine API (Distributor) Account notes Loyalty programs API
   version: v1
@@ -588,89 +588,160 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    LoyaltyProgramUpdateParameters:
-      title: Loyalty program update parameters
-      required:
-      - LoyaltyProgramId
-      type: object
-      properties:
-        LoyaltyProgramId:
-          type: string
-          description: Unique identifier of the loyalty program.
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Name:
-          title: String update value
-          allOf:
-          - $ref: '#/components/schemas/StringUpdateValue'
-          description: Name of the loyalty program (or `null` if the name should not be updated).
-          nullable: true
-          example: Example Name
-        Type:
-          title: Loyalty program type update value
-          allOf:
-          - $ref: '#/components/schemas/LoyaltyProgramTypeUpdateValue'
-          description: Type of the loyalty program (or `null` if the type should not be updated).
-          nullable: true
-          example: string
-        Subscription:
-          title: Loyalty program subscription update value
-          allOf:
-          - $ref: '#/components/schemas/LoyaltyProgramSubscriptionUpdateValue'
-          description: Subscription of the loyalty program (or `null` if the subscription should not be updated).
-          nullable: true
-          example: string
-      additionalProperties: false
-      x-schema-id: LoyaltyProgramUpdateParameters
-    LoyaltyProgramAddParameters:
-      title: Loyalty program parameters
-      required:
-      - Code
-      - Name
-      - Subscription
-      - Type
-      type: object
-      properties:
-        Name:
-          maxLength: 100
-          minLength: 1
-          type: string
-          description: Name of the loyalty program.
-          example: Example Name
-        Code:
-          maxLength: 50
-          minLength: 1
-          type: string
-          description: Code of the loyalty program.
-          example: string
-        Type:
-          $ref: '#/components/schemas/LoyaltyProgramType'
-        Subscription:
-          $ref: '#/components/schemas/LoyaltyProgramSubscription'
-      additionalProperties: false
-      x-schema-id: LoyaltyProgramAddParameters
-    Unit:
-      type: object
-      additionalProperties: false
-    LoyaltyProgramSubscriptionUpdateValue:
-      title: Loyalty program subscription update value
+    StringUpdateValue:
+      title: String update value
       type: object
       properties:
         Value:
-          title: Loyalty program subscription
-          allOf:
-          - $ref: '#/components/schemas/LoyaltyProgramSubscription'
+          type:
+          - string
+          - 'null'
           description: Value which is to be updated.
-          x-enumNames:
-          - Free
-          - Paid
-          x-enumDescriptions:
-          - ''
-          - ''
-          x-schema-id: LoyaltyProgramSubscription
           example: string
       additionalProperties: false
-      x-schema-id: LoyaltyProgramSubscriptionUpdateValue
+      x-schema-id: StringUpdateValue
+    LoyaltyProgramResult:
+      title: LoyaltyProgramResult
+      required:
+      - LoyaltyPrograms
+      type: object
+      properties:
+        LoyaltyPrograms:
+          maxItems: 1000
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/LoyaltyProgram'
+          description: The loyalty programs of the enterprise.
+        Cursor:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the item one newer in time order than the items to be returned. If Cursor is not specified, i.e. null, then the latest or most recent items will be returned.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      additionalProperties: false
+      x-schema-id: LoyaltyProgramResult
+    TimeFilterInterval:
+      title: Time interval
+      type: object
+      properties:
+        StartUtc:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+        EndUtc:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+      additionalProperties: false
+      description: "When a time interval is used for **filtering** (for example in parameters such as `CreatedUtc.StartUtc` / `CreatedUtc.EndUtc`), the following rules apply:\n\n- **Start equals End (equality mode)**  \n  If `StartUtc` and `EndUtc` are exactly the same timestamp, the filter is treated as an equality check for that precise moment in time:\n  \n  ```\n  CreatedUtc == StartUtc\n  ```\n  \n  This does not represent an interval; only records with `CreatedUtc` equal to that exact instant are returned.\n\n- **Start differs from End (interval mode)**  \n  If `StartUtc` and `EndUtc` are different, the filter is evaluated as a half-open interval:\n  \n  ```\n  StartUtc <= CreatedUtc < EndUtc\n  ```\n  \n  In other words, the start is inclusive and the end is exclusive.\n\nMake sure your integration takes inclusive Start / exclusive End behavior of time intervals into account so that no records at the boundaries are omitted."
+      x-schema-id: TimeFilterInterval
+    LoyaltyProgramSubscription:
+      title: Loyalty program subscription
+      enum:
+      - Free
+      - Paid
+      type: string
+      description: 'Subscription of the loyalty program.
+
+
+        Free
+
+
+        Paid'
+      x-enumNames:
+      - Free
+      - Paid
+      x-enumDescriptions:
+      - ''
+      - ''
+      x-schema-id: LoyaltyProgramSubscription
+    LoyaltyProgramFilterParameters:
+      title: LoyaltyProgramFilterParameters
+      required:
+      - AccessToken
+      - Client
+      - ClientToken
+      - Limitation
+      type: object
+      properties:
+        ClientToken:
+          minLength: 1
+          type: string
+          description: Token identifying the client application.
+          example: string
+        AccessToken:
+          minLength: 1
+          type: string
+          description: Access token of the client application.
+          example: string
+        Client:
+          minLength: 1
+          type: string
+          description: Name and version of the client application.
+          example: string
+        ChainIds:
+          maxItems: 1000
+          minItems: 1
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: uuid
+          description: Unique identifiers of the chain. If not specified, the operation returns data for all chains within scope of the Access Token.
+        CreatedUtc:
+          title: Time interval
+          allOf:
+          - $ref: '#/components/schemas/TimeFilterInterval'
+          description: Interval of `LoyaltyProgram` creation date and time.
+          x-max-interval-in-months: 3
+          example: string
+        UpdatedUtc:
+          title: Time interval
+          allOf:
+          - $ref: '#/components/schemas/TimeFilterInterval'
+          description: Interval of `LoyaltyProgram` last update date and time.
+          x-max-interval-in-months: 3
+          example: string
+        LoyaltyProgramIds:
+          maxItems: 1000
+          minItems: 1
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: uuid
+          description: Unique identifiers of `LoyaltyProgram`.
+        ActivityStates:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ActivityStates'
+          description: Whether to return only active, only deleted or both records.
+        Codes:
+          maxItems: 1000
+          minItems: 1
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Codes of `LoyaltyProgram`.
+        Limitation:
+          allOf:
+          - $ref: '#/components/schemas/Limitation'
+          description: Limitation on the quantity of data returned.
+          example: string
+      additionalProperties: false
+      x-schema-id: LoyaltyProgramFilterParameters
     LoyaltyProgramDeleteParameters:
       title: LoyaltyProgramDeleteParameters
       required:
@@ -705,6 +776,38 @@ components:
           description: Unique identifier of the loyalty programs to be deleted.
       additionalProperties: false
       x-schema-id: LoyaltyProgramDeleteParameters
+    LoyaltyProgramType:
+      title: Loyalty program type
+      enum:
+      - Hotel
+      - ExternalPartner
+      - SoftBrand
+      - Unknown
+      type: string
+      description: 'Type of the loyalty program.
+
+
+        Hotel
+
+
+        ExternalPartner
+
+
+        SoftBrand
+
+
+        Unknown'
+      x-enumNames:
+      - Hotel
+      - ExternalPartner
+      - SoftBrand
+      - Unknown
+      x-enumDescriptions:
+      - ''
+      - ''
+      - ''
+      - ''
+      x-schema-id: LoyaltyProgramType
     MultipleLoyaltyProgramAddParameters:
       title: MultipleLoyaltyProgramAddParameters
       required:
@@ -730,10 +833,11 @@ components:
           description: Name and version of the client application.
           example: string
         ChainId:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Unique identifier of the chain. Required when using [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property), ignored otherwise.
           format: uuid
-          nullable: true
           example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
         LoyaltyPrograms:
           maxItems: 1000
@@ -744,26 +848,156 @@ components:
           description: Loyalty programs to be added.
       additionalProperties: false
       x-schema-id: MultipleLoyaltyProgramAddParameters
-    LoyaltyProgramSubscription:
-      title: Loyalty program subscription
-      enum:
-      - Free
-      - Paid
-      type: string
-      description: 'Subscription of the loyalty program.
-
-
-        Free
-
-
-        Paid'
-      x-enumNames:
-      - Free
-      - Paid
-      x-enumDescriptions:
-      - ''
-      - ''
-      x-schema-id: LoyaltyProgramSubscription
+    LoyaltyProgramSubscriptionUpdateValue:
+      title: Loyalty program subscription update value
+      type: object
+      properties:
+        Value:
+          title: Loyalty program subscription
+          allOf:
+          - $ref: '#/components/schemas/LoyaltyProgramSubscription'
+          description: Value which is to be updated.
+          x-enumNames:
+          - Free
+          - Paid
+          x-enumDescriptions:
+          - ''
+          - ''
+          x-schema-id: LoyaltyProgramSubscription
+          example: string
+      additionalProperties: false
+      x-schema-id: LoyaltyProgramSubscriptionUpdateValue
+    LoyaltyProgramAdditionResult:
+      title: LoyaltyProgramAdditionResult
+      required:
+      - LoyaltyPrograms
+      type: object
+      properties:
+        LoyaltyPrograms:
+          maxItems: 1000
+          type: array
+          items:
+            $ref: '#/components/schemas/LoyaltyProgram'
+          description: Added loyalty programs.
+      additionalProperties: false
+      x-schema-id: LoyaltyProgramAdditionResult
+    LoyaltyProgramUpdateResult:
+      title: LoyaltyProgramUpdateResult
+      required:
+      - LoyaltyPrograms
+      type: object
+      properties:
+        LoyaltyPrograms:
+          maxItems: 1000
+          type: array
+          items:
+            $ref: '#/components/schemas/LoyaltyProgram'
+          description: Updated loyalty programs.
+      additionalProperties: false
+      x-schema-id: LoyaltyProgramUpdateResult
+    Limitation:
+      title: Limitation
+      required:
+      - Count
+      type: object
+      properties:
+        Count:
+          type: integer
+          format: int32
+          example: 1
+        Cursor:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      additionalProperties: false
+      description: Limitation on the quantity of data returned.
+      x-schema-id: Limitation
+    LoyaltyProgramAddParameters:
+      title: Loyalty program parameters
+      required:
+      - Code
+      - Name
+      - Subscription
+      - Type
+      type: object
+      properties:
+        Name:
+          maxLength: 100
+          minLength: 1
+          type: string
+          description: Name of the loyalty program.
+          example: Example Name
+        Code:
+          maxLength: 50
+          minLength: 1
+          type: string
+          description: Code of the loyalty program.
+          example: string
+        Type:
+          $ref: '#/components/schemas/LoyaltyProgramType'
+        Subscription:
+          $ref: '#/components/schemas/LoyaltyProgramSubscription'
+      additionalProperties: false
+      x-schema-id: LoyaltyProgramAddParameters
+    LoyaltyProgramUpdateParameters:
+      title: Loyalty program update parameters
+      required:
+      - LoyaltyProgramId
+      type: object
+      properties:
+        LoyaltyProgramId:
+          type: string
+          description: Unique identifier of the loyalty program.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Name:
+          title: String update value
+          allOf:
+          - $ref: '#/components/schemas/StringUpdateValue'
+          description: Name of the loyalty program (or `null` if the name should not be updated).
+          example: Example Name
+        Type:
+          title: Loyalty program type update value
+          allOf:
+          - $ref: '#/components/schemas/LoyaltyProgramTypeUpdateValue'
+          description: Type of the loyalty program (or `null` if the type should not be updated).
+          example: string
+        Subscription:
+          title: Loyalty program subscription update value
+          allOf:
+          - $ref: '#/components/schemas/LoyaltyProgramSubscriptionUpdateValue'
+          description: Subscription of the loyalty program (or `null` if the subscription should not be updated).
+          example: string
+      additionalProperties: false
+      x-schema-id: LoyaltyProgramUpdateParameters
+    LoyaltyProgramTypeUpdateValue:
+      title: Loyalty program type update value
+      type: object
+      properties:
+        Value:
+          title: Loyalty program type
+          allOf:
+          - $ref: '#/components/schemas/LoyaltyProgramType'
+          description: Value which is to be updated.
+          x-enumNames:
+          - Hotel
+          - ExternalPartner
+          - SoftBrand
+          - Unknown
+          x-enumDescriptions:
+          - ''
+          - ''
+          - ''
+          - ''
+          x-schema-id: LoyaltyProgramType
+          example: string
+      additionalProperties: false
+      x-schema-id: LoyaltyProgramTypeUpdateValue
+    Unit:
+      type: object
+      additionalProperties: false
     LoyaltyProgram:
       title: Loyalty program
       required:
@@ -801,167 +1035,6 @@ components:
           $ref: '#/components/schemas/LoyaltyProgramSubscription'
       additionalProperties: false
       x-schema-id: LoyaltyProgram
-    TimeFilterInterval:
-      title: Time interval
-      type: object
-      properties:
-        StartUtc:
-          type: string
-          format: date-time
-          nullable: true
-          example: '2026-06-02T14:30:00Z'
-        EndUtc:
-          type: string
-          format: date-time
-          nullable: true
-          example: '2026-06-02T14:30:00Z'
-      additionalProperties: false
-      description: "When a time interval is used for **filtering** (for example in parameters such as `CreatedUtc.StartUtc` / `CreatedUtc.EndUtc`), the following rules apply:\r\n\r\n- **Start equals End (equality mode)**  \r\n  If `StartUtc` and `EndUtc` are exactly the same timestamp, the filter is treated as an equality check for that precise moment in time:\r\n  \r\n  ```\r\n  CreatedUtc == StartUtc\r\n  ```\r\n  \r\n  This does not represent an interval; only records with `CreatedUtc` equal to that exact instant are returned.\r\n\r\n- **Start differs from End (interval mode)**  \r\n  If `StartUtc` and `EndUtc` are different, the filter is evaluated as a half-open interval:\r\n  \r\n  ```\r\n  StartUtc <= CreatedUtc < EndUtc\r\n  ```\r\n  \r\n  In other words, the start is inclusive and the end is exclusive.\r\n\r\nMake sure your integration takes inclusive Start / exclusive End behavior of time intervals into account so that no records at the boundaries are omitted."
-      x-schema-id: TimeFilterInterval
-    LoyaltyProgramFilterParameters:
-      title: LoyaltyProgramFilterParameters
-      required:
-      - AccessToken
-      - Client
-      - ClientToken
-      - Limitation
-      type: object
-      properties:
-        ClientToken:
-          minLength: 1
-          type: string
-          description: Token identifying the client application.
-          example: string
-        AccessToken:
-          minLength: 1
-          type: string
-          description: Access token of the client application.
-          example: string
-        Client:
-          minLength: 1
-          type: string
-          description: Name and version of the client application.
-          example: string
-        ChainIds:
-          maxItems: 1000
-          minItems: 1
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Unique identifiers of the chain. If not specified, the operation returns data for all chains within scope of the Access Token.
-          nullable: true
-        CreatedUtc:
-          title: Time interval
-          allOf:
-          - $ref: '#/components/schemas/TimeFilterInterval'
-          description: Interval of `LoyaltyProgram` creation date and time.
-          nullable: true
-          x-max-interval-in-months: 3
-          example: string
-        UpdatedUtc:
-          title: Time interval
-          allOf:
-          - $ref: '#/components/schemas/TimeFilterInterval'
-          description: Interval of `LoyaltyProgram` last update date and time.
-          nullable: true
-          x-max-interval-in-months: 3
-          example: string
-        LoyaltyProgramIds:
-          maxItems: 1000
-          minItems: 1
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Unique identifiers of `LoyaltyProgram`.
-          nullable: true
-        ActivityStates:
-          type: array
-          items:
-            $ref: '#/components/schemas/ActivityStates'
-          description: Whether to return only active, only deleted or both records.
-          nullable: true
-        Codes:
-          maxItems: 1000
-          minItems: 1
-          type: array
-          items:
-            type: string
-          description: Codes of `LoyaltyProgram`.
-          nullable: true
-        Limitation:
-          allOf:
-          - $ref: '#/components/schemas/Limitation'
-          description: Limitation on the quantity of data returned.
-          example: string
-      additionalProperties: false
-      x-schema-id: LoyaltyProgramFilterParameters
-    ActivityStates:
-      title: Activity state
-      enum:
-      - Deleted
-      - Active
-      type: string
-      description: Activity states used for filtering.
-    LoyaltyProgramUpdateResult:
-      title: LoyaltyProgramUpdateResult
-      required:
-      - LoyaltyPrograms
-      type: object
-      properties:
-        LoyaltyPrograms:
-          maxItems: 1000
-          type: array
-          items:
-            $ref: '#/components/schemas/LoyaltyProgram'
-          description: Updated loyalty programs.
-      additionalProperties: false
-      x-schema-id: LoyaltyProgramUpdateResult
-    LoyaltyProgramTypeUpdateValue:
-      title: Loyalty program type update value
-      type: object
-      properties:
-        Value:
-          title: Loyalty program type
-          allOf:
-          - $ref: '#/components/schemas/LoyaltyProgramType'
-          description: Value which is to be updated.
-          x-enumNames:
-          - Hotel
-          - ExternalPartner
-          - SoftBrand
-          - Unknown
-          x-enumDescriptions:
-          - ''
-          - ''
-          - ''
-          - ''
-          x-schema-id: LoyaltyProgramType
-          example: string
-      additionalProperties: false
-      x-schema-id: LoyaltyProgramTypeUpdateValue
-    LoyaltyProgramResult:
-      title: LoyaltyProgramResult
-      required:
-      - LoyaltyPrograms
-      type: object
-      properties:
-        LoyaltyPrograms:
-          maxItems: 1000
-          minItems: 1
-          type: array
-          items:
-            $ref: '#/components/schemas/LoyaltyProgram'
-          description: The loyalty programs of the enterprise.
-        Cursor:
-          type: string
-          description: Unique identifier of the item one newer in time order than the items to be returned. If Cursor is not specified, i.e. null, then the latest or most recent items will be returned.
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-      additionalProperties: false
-      x-schema-id: LoyaltyProgramResult
     MultipleLoyaltyProgramUpdateParameters:
       title: MultipleLoyaltyProgramUpdateParameters
       required:
@@ -987,10 +1060,11 @@ components:
           description: Name and version of the client application.
           example: string
         ChainId:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Unique identifier of the chain. Required when using [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property), ignored otherwise.
           format: uuid
-          nullable: true
           example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
         LoyaltyProgramUpdates:
           maxItems: 1000
@@ -1006,93 +1080,26 @@ components:
       type: object
       properties:
         Message:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           example: string
         RequestId:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
         Details:
-          nullable: true
           example: string
       additionalProperties: false
       x-schema-id: ConnectorApiExceptionResult
-    Limitation:
-      title: Limitation
-      required:
-      - Count
-      type: object
-      properties:
-        Count:
-          type: integer
-          format: int32
-          example: 1
-        Cursor:
-          type: string
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-      additionalProperties: false
-      description: Limitation on the quantity of data returned.
-      x-schema-id: Limitation
-    LoyaltyProgramType:
-      title: Loyalty program type
+    ActivityStates:
+      title: Activity state
       enum:
-      - Hotel
-      - ExternalPartner
-      - SoftBrand
-      - Unknown
+      - Deleted
+      - Active
       type: string
-      description: 'Type of the loyalty program.
-
-
-        Hotel
-
-
-        ExternalPartner
-
-
-        SoftBrand
-
-
-        Unknown'
-      x-enumNames:
-      - Hotel
-      - ExternalPartner
-      - SoftBrand
-      - Unknown
-      x-enumDescriptions:
-      - ''
-      - ''
-      - ''
-      - ''
-      x-schema-id: LoyaltyProgramType
-    LoyaltyProgramAdditionResult:
-      title: LoyaltyProgramAdditionResult
-      required:
-      - LoyaltyPrograms
-      type: object
-      properties:
-        LoyaltyPrograms:
-          maxItems: 1000
-          type: array
-          items:
-            $ref: '#/components/schemas/LoyaltyProgram'
-          description: Added loyalty programs.
-      additionalProperties: false
-      x-schema-id: LoyaltyProgramAdditionResult
-    StringUpdateValue:
-      title: String update value
-      type: object
-      properties:
-        Value:
-          type: string
-          description: Value which is to be updated.
-          nullable: true
-          example: string
-      additionalProperties: false
-      x-schema-id: StringUpdateValue
+      description: Activity states used for filtering.
   securitySchemes:
     MewsClientToken:
       type: apiKey

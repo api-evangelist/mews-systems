@@ -1,4 +1,4 @@
-openapi: 3.0.4
+openapi: 3.2.0
 info:
   title: Mews Booking Engine API (Distributor) Account notes Availability adjustments API
   version: v1
@@ -190,25 +190,25 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    AvailabilityAdjustmentResult:
-      title: AvailabilityAdjustmentResult
-      required:
-      - AvailabilityAdjustments
-      type: object
-      properties:
-        AvailabilityAdjustments:
-          type: array
-          items:
-            $ref: '#/components/schemas/AvailabilityAdjustment'
-          description: Availability adjustments.
-        Cursor:
-          type: string
-          description: Unique identifier of the item one newer in time order than the items to be returned. If Cursor is not specified, i.e. null, then the latest or most recent items will be returned.
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-      additionalProperties: false
-      x-schema-id: AvailabilityAdjustmentResult
+    ActivityStateEnum:
+      title: Activity state
+      enum:
+      - Deleted
+      - Active
+      type: string
+      description: '
+
+
+        Deleted
+
+
+        Active'
+      x-enumNames:
+      - Deleted
+      - Active
+      x-enumDescriptions:
+      - ''
+      - ''
     AvailabilityAdjustmentParameters:
       title: AvailabilityAdjustmentParameters
       required:
@@ -241,54 +241,58 @@ components:
         EnterpriseIds:
           maxItems: 1000
           minItems: 1
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
             format: uuid
           description: Unique identifiers of the Enterprises. If not specified, the operation returns data for all enterprises within scope of the Access Token.
-          nullable: true
         AvailabilityAdjustmentIds:
           maxItems: 1000
           minItems: 1
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
             format: uuid
           description: Unique identifiers of the requested [Availability adjustments](https://mews-systems.gitbook.io/connector-api/operations/#availability-adjustment).
-          nullable: true
         UpdatedUtc:
           title: Time interval
           allOf:
           - $ref: '#/components/schemas/TimeFilterInterval'
           description: Interval in which the availability adjustments were updated.
-          nullable: true
           x-max-interval-in-months: 3
           example: string
         ActivityStates:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             $ref: '#/components/schemas/ActivityState'
           description: Whether to return only active, only deleted, or both types of record. If not specified, only active records will be returned.
-          nullable: true
       additionalProperties: false
       x-schema-id: AvailabilityAdjustmentParameters
-    ConnectorApiExceptionResult:
-      title: ConnectorApiExceptionResult
+    PaxCount:
+      title: PaxCount
+      required:
+      - PersonCount
+      - UnitCount
       type: object
       properties:
-        Message:
-          type: string
-          nullable: true
-          example: string
-        RequestId:
-          type: string
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Details:
-          nullable: true
-          example: string
+        PersonCount:
+          type: integer
+          description: Predicted guest count that will be assigned to the Resource. The guest count must fit within the Resource Category maximum capacity.
+          format: int32
+          example: 1
+        UnitCount:
+          type: integer
+          description: Positive number of adjustments that are assigned to `PersonCount`. The sum of all `UnitCount` in `PaxCounts` should match the adjustment value applied to the interval.
+          format: int32
+          example: 1
       additionalProperties: false
-      x-schema-id: ConnectorApiExceptionResult
+      x-schema-id: PaxCount
     Limitation:
       title: Limitation
       required:
@@ -300,36 +304,77 @@ components:
           format: int32
           example: 1
         Cursor:
-          type: string
+          type:
+          - string
+          - 'null'
           format: uuid
-          nullable: true
           example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
       additionalProperties: false
       description: Limitation on the quantity of data returned.
       x-schema-id: Limitation
+    AvailabilityAdjustmentResult:
+      title: AvailabilityAdjustmentResult
+      required:
+      - AvailabilityAdjustments
+      type: object
+      properties:
+        AvailabilityAdjustments:
+          type: array
+          items:
+            $ref: '#/components/schemas/AvailabilityAdjustment'
+          description: Availability adjustments.
+        Cursor:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the item one newer in time order than the items to be returned. If Cursor is not specified, i.e. null, then the latest or most recent items will be returned.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      additionalProperties: false
+      x-schema-id: AvailabilityAdjustmentResult
+    TimeFilterInterval:
+      title: Time interval
+      type: object
+      properties:
+        StartUtc:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+        EndUtc:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+      additionalProperties: false
+      description: "When a time interval is used for **filtering** (for example in parameters such as `CreatedUtc.StartUtc` / `CreatedUtc.EndUtc`), the following rules apply:\n\n- **Start equals End (equality mode)**  \n  If `StartUtc` and `EndUtc` are exactly the same timestamp, the filter is treated as an equality check for that precise moment in time:\n  \n  ```\n  CreatedUtc == StartUtc\n  ```\n  \n  This does not represent an interval; only records with `CreatedUtc` equal to that exact instant are returned.\n\n- **Start differs from End (interval mode)**  \n  If `StartUtc` and `EndUtc` are different, the filter is evaluated as a half-open interval:\n  \n  ```\n  StartUtc <= CreatedUtc < EndUtc\n  ```\n  \n  In other words, the start is inclusive and the end is exclusive.\n\nMake sure your integration takes inclusive Start / exclusive End behavior of time intervals into account so that no records at the boundaries are omitted."
+      x-schema-id: TimeFilterInterval
+    ConnectorApiExceptionResult:
+      title: ConnectorApiExceptionResult
+      type: object
+      properties:
+        Message:
+          type:
+          - string
+          - 'null'
+          example: string
+        RequestId:
+          type:
+          - string
+          - 'null'
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Details:
+          example: string
+      additionalProperties: false
+      x-schema-id: ConnectorApiExceptionResult
     ActivityState:
       title: Activity state
       enum:
       - Deleted
       - Active
       type: string
-    TimeFilterInterval:
-      title: Time interval
-      type: object
-      properties:
-        StartUtc:
-          type: string
-          format: date-time
-          nullable: true
-          example: '2026-06-02T14:30:00Z'
-        EndUtc:
-          type: string
-          format: date-time
-          nullable: true
-          example: '2026-06-02T14:30:00Z'
-      additionalProperties: false
-      description: "When a time interval is used for **filtering** (for example in parameters such as `CreatedUtc.StartUtc` / `CreatedUtc.EndUtc`), the following rules apply:\r\n\r\n- **Start equals End (equality mode)**  \r\n  If `StartUtc` and `EndUtc` are exactly the same timestamp, the filter is treated as an equality check for that precise moment in time:\r\n  \r\n  ```\r\n  CreatedUtc == StartUtc\r\n  ```\r\n  \r\n  This does not represent an interval; only records with `CreatedUtc` equal to that exact instant are returned.\r\n\r\n- **Start differs from End (interval mode)**  \r\n  If `StartUtc` and `EndUtc` are different, the filter is evaluated as a half-open interval:\r\n  \r\n  ```\r\n  StartUtc <= CreatedUtc < EndUtc\r\n  ```\r\n  \r\n  In other words, the start is inclusive and the end is exclusive.\r\n\r\nMake sure your integration takes inclusive Start / exclusive End behavior of time intervals into account so that no records at the boundaries are omitted."
-      x-schema-id: TimeFilterInterval
     AvailabilityAdjustment:
       title: Availability adjustment
       required:
@@ -349,10 +394,11 @@ components:
           format: uuid
           example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
         AvailabilityBlockId:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Unique identifier of the [Availability block](https://mews-systems.gitbook.io/connector-api/operations/availabilityblocks/#availability-block) which the availability adjustment belongs to.
           format: uuid
-          nullable: true
           example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
         ResourceCategoryId:
           type: string
@@ -360,15 +406,17 @@ components:
           format: uuid
           example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
         StartUtc:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Start of the interval in UTC timezone in ISO 8601 format.
-          nullable: true
           deprecated: true
           example: string
         EndUtc:
-          type: string
+          type:
+          - string
+          - 'null'
           description: End of the interval in UTC timezone in ISO 8601 format.
-          nullable: true
           deprecated: true
           example: string
         FirstTimeUnitStartUtc:
@@ -409,10 +457,11 @@ components:
           x-deprecatedMessage: Use `IsActive` instead.
           example: string
         ReleaseOverrideUtc:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Exact moment the availability adjustment is released if set; overrides the release strategy of the associated availability block.
           format: date-time
-          nullable: true
           example: '2026-06-02T14:30:00Z'
         UpdatedUtc:
           minLength: 1
@@ -426,57 +475,21 @@ components:
           example: true
         PaxCounts:
           maxItems: 5
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             $ref: '#/components/schemas/PaxCount'
           description: Collection of predicted occupancy of availability adjustments. Relates to how many adjustments are assigned to each count of guests.
-          nullable: true
         FirstTimeUnitReleaseUtc:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Exact moment the first time unit of the availability adjustment is released based on `ReleaseOverrideUtc` or the `ReleaseStrategy` of the associated availability block, or the `OperationalEditableHistoryInterval` of the associated enterprise if not set, or `null` if `AvailabilityBlockId` is `null`.
           format: date-time
-          nullable: true
           example: '2026-06-02T14:30:00Z'
       additionalProperties: false
       x-schema-id: AvailabilityAdjustment
-    PaxCount:
-      title: PaxCount
-      required:
-      - PersonCount
-      - UnitCount
-      type: object
-      properties:
-        PersonCount:
-          type: integer
-          description: Predicted guest count that will be assigned to the Resource. The guest count must fit within the Resource Category maximum capacity.
-          format: int32
-          example: 1
-        UnitCount:
-          type: integer
-          description: Positive number of adjustments that are assigned to `PersonCount`. The sum of all `UnitCount` in `PaxCounts` should match the adjustment value applied to the interval.
-          format: int32
-          example: 1
-      additionalProperties: false
-      x-schema-id: PaxCount
-    ActivityStateEnum:
-      title: Activity state
-      enum:
-      - Deleted
-      - Active
-      type: string
-      description: '
-
-
-        Deleted
-
-
-        Active'
-      x-enumNames:
-      - Deleted
-      - Active
-      x-enumDescriptions:
-      - ''
-      - ''
   securitySchemes:
     MewsClientToken:
       type: apiKey

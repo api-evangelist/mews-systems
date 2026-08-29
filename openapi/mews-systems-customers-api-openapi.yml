@@ -1,4 +1,4 @@
-openapi: 3.0.4
+openapi: 3.2.0
 info:
   title: Mews Booking Engine API (Distributor) Account notes Customers API
   version: v1
@@ -1149,7 +1149,7 @@ paths:
       tags:
       - Customers
       summary: Mews Add Customer File
-      description: "Attaches the specified file to the customer profile. \r\n\r\nAllowed MIME types: `application/pdf`, `image/bmp`, `image/gif`, `image/jpeg`, `image/png`, `image/tiff`.\r\n\r\nNote this operation supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/guidelines/multi-property)."
+      description: "Attaches the specified file to the customer profile. \n\nAllowed MIME types: `application/pdf`, `image/bmp`, `image/gif`, `image/jpeg`, `image/png`, `image/tiff`.\n\nNote this operation supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/guidelines/multi-property)."
       operationId: customers_addFile
       requestBody:
         content:
@@ -1419,270 +1419,18 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ReservationPersonCount:
-      title: Age category parameters
-      required:
-      - AgeCategoryId
-      - Count
+    StringUpdateValue:
+      title: String update value
       type: object
       properties:
-        AgeCategoryId:
-          type: string
-          description: Unique identifier of the [Age category](https://mews-systems.gitbook.io/connector-api/operations/agecategories#age-category).
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Count:
-          type: integer
-          description: Number of people of a given age category. Only positive value is accepted.
-          format: int32
-          example: 1
-      additionalProperties: false
-      x-schema-id: ReservationPersonCount
-    Unit:
-      type: object
-      additionalProperties: false
-    CustomerFilterParameters:
-      title: CustomerFilterParameters
-      required:
-      - AccessToken
-      - Client
-      - ClientToken
-      - Extent
-      - Limitation
-      type: object
-      properties:
-        ClientToken:
-          minLength: 1
-          type: string
-          description: Token identifying the client application.
-          example: string
-        AccessToken:
-          minLength: 1
-          type: string
-          description: Access token of the client application.
-          example: string
-        Client:
-          minLength: 1
-          type: string
-          description: Name and version of the client application.
-          example: string
-        ChainIds:
-          maxItems: 1000
-          minItems: 1
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Unique identifiers of the chains. Required when using Portfolio Access Tokens, ignored otherwise.
-          nullable: true
-        CreatedUtc:
-          title: Time interval
-          allOf:
-          - $ref: '#/components/schemas/TimeFilterInterval'
-          description: Interval in which Customer was created.
-          nullable: true
-          x-max-interval-in-months: 3
-          example: string
-        UpdatedUtc:
-          title: Time interval
-          allOf:
-          - $ref: '#/components/schemas/TimeFilterInterval'
-          description: Interval in which Customer was updated.
-          nullable: true
-          x-max-interval-in-months: 3
-          example: string
-        Extent:
-          title: Customer extent
-          allOf:
-          - $ref: '#/components/schemas/CustomerExtent'
-          description: Extent of data to be returned.
-          example: string
-        DeletedUtc:
-          title: Time interval
-          allOf:
-          - $ref: '#/components/schemas/TimeFilterInterval'
-          description: Interval in which Customer was deleted. `ActivityStates` value `Deleted` should be provided with this filter to get expected results.
-          nullable: true
-          x-max-interval-in-months: 3
-          example: string
-        ActivityStates:
-          type: array
-          items:
-            $ref: '#/components/schemas/ActivityStates'
-          description: Whether to return only active, only deleted or both records.
-          nullable: true
-        CustomerIds:
-          maxItems: 1000
-          minItems: 1
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Unique identifiers of Customers. Required if no other filter is provided.
-          nullable: true
-        CompanyIds:
-          maxItems: 1
-          minItems: 1
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Unique identifier of the Company the customer is associated with.
-          nullable: true
-        Emails:
-          maxItems: 1000
-          minItems: 1
-          type: array
-          items:
-            type: string
-          description: Emails of the [Customers](https://mews-systems.gitbook.io/connector-api/operations/#customer).
-          nullable: true
-        FirstNames:
-          maxItems: 1000
-          minItems: 1
-          type: array
-          items:
-            type: string
-          description: First names of the [Customers](https://mews-systems.gitbook.io/connector-api/operations/#customer).
-          nullable: true
-        LastNames:
-          maxItems: 1000
-          minItems: 1
-          type: array
-          items:
-            type: string
-          description: Last names of the [Customers](https://mews-systems.gitbook.io/connector-api/operations/#customer).
-          nullable: true
-        LoyaltyCodes:
-          maxItems: 1000
-          minItems: 1
-          type: array
-          items:
-            type: string
-          description: Loyalty codes of the [Customers](https://mews-systems.gitbook.io/connector-api/operations/#customer).
-          nullable: true
-        Limitation:
-          allOf:
-          - $ref: '#/components/schemas/Limitation'
-          description: Limitation on the quantity of data returned.
+        Value:
+          type:
+          - string
+          - 'null'
+          description: Value which is to be updated.
           example: string
       additionalProperties: false
-      x-schema-id: CustomerFilterParameters
-    CustomerAddFileResult:
-      title: CustomerAddFileResult
-      required:
-      - FileId
-      type: object
-      properties:
-        FileId:
-          type: string
-          description: Unique identifier of the uploaded file.
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-      additionalProperties: false
-      x-schema-id: CustomerAddFileResult
-    SexEnum:
-      title: Sex
-      enum:
-      - Male
-      - Female
-      type: string
-      description: '
-
-
-        Male
-
-
-        Female'
-      x-enumNames:
-      - Male
-      - Female
-      x-enumDescriptions:
-      - ''
-      - ''
-    ProductOrderItemData:
-      title: Product order item data
-      required:
-      - ProductId
-      type: object
-      properties:
-        ProductId:
-          type: string
-          description: Unique identifier of the `Product`.
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        AgeCategoryId:
-          type: string
-          description: Unique identifier of the `AgeCategory`.
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-      additionalProperties: false
-      x-schema-id: ProductOrderItemData
-    CustomerSearchResult:
-      title: CustomerSearchResult
-      required:
-      - Customers
-      type: object
-      properties:
-        Customers:
-          type: array
-          items:
-            $ref: '#/components/schemas/ChargeableCustomer'
-          description: The customer search results.
-        Documents:
-          type: array
-          items:
-            $ref: '#/components/schemas/IdentityDocument'
-          description: The identity documents of customers.
-          nullable: true
-          deprecated: true
-          x-deprecatedMessage: Use [Get all identity documents](https://mews-systems.gitbook.io/connector-api/operations/identitydocuments#get-all-identity-documents) to fetch identity documents.
-      additionalProperties: false
-      x-schema-id: CustomerSearchResult
-    CustomerSearchParameters:
-      title: CustomerSearchParameters
-      required:
-      - AccessToken
-      - Client
-      - ClientToken
-      type: object
-      properties:
-        ClientToken:
-          minLength: 1
-          type: string
-          description: Token identifying the client application.
-          example: string
-        AccessToken:
-          minLength: 1
-          type: string
-          description: Access token of the client application.
-          example: string
-        Client:
-          minLength: 1
-          type: string
-          description: Name and version of the client application.
-          example: string
-        Name:
-          type: string
-          description: Name to search by (applies to first name, last name, and full name).
-          nullable: true
-          example: Example Name
-        ResourceId:
-          type: string
-          description: Identifier of [Resource](https://mews-systems.gitbook.io/connector-api/operations/resources/#resource) to search by (members of reservation assigned there will be returned).
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Extent:
-          title: Customer extent
-          allOf:
-          - $ref: '#/components/schemas/CustomerExtent'
-          description: Extent of data to be returned.
-          nullable: true
-          example: string
-      additionalProperties: false
-      x-schema-id: CustomerSearchParameters
+      x-schema-id: StringUpdateValue
     Amount:
       title: Amount
       required:
@@ -1723,858 +1471,25 @@ components:
       additionalProperties: false
       description: ''
       x-schema-id: Amount
-    PaymentType:
-      title: Payment item data discriminator
-      enum:
-      - CreditCard
-      - Invoice
-      - Cash
-      - Unspecified
-      - BadDebts
-      - WireTransfer
-      - ExchangeRateDifference
-      - ExchangeRoundingDifference
-      - BankCharges
-      - Cheque
-      - Other
-      type: string
-      x-enumDescriptions:
-      - '[Credit card payment item data](https://mews-systems.gitbook.io/connector-api/operations/accountingitems#credit-card-payment-item-data)'
-      - '[Invoice payment item data](https://mews-systems.gitbook.io/connector-api/operations/accountingitems#invoice-payment-item-data)'
-      - No additional data.
-      - No additional data.
-      - No additional data.
-      - No additional data.
-      - No additional data.
-      - No additional data.
-      - No additional data.
-      - No additional data.
-      - No additional data.
-    CustomerItemResult:
-      title: CustomerItemResult
-      type: object
-      properties:
-        Customers:
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomerItems'
-          description: The customers with their items.
-          nullable: true
-      additionalProperties: false
-      x-schema-id: CustomerItemResult
-    IdentityDocumentTypeEnum:
-      title: Document type
-      enum:
-      - IdentityCard
-      - Passport
-      - Visa
-      - DriversLicense
-      type: string
-      description: '
-
-
-        IdentityCard
-
-
-        Passport
-
-
-        Visa
-
-
-        DriversLicense'
-      x-enumNames:
-      - IdentityCard
-      - Passport
-      - Visa
-      - DriversLicense
-      x-enumDescriptions:
-      - ''
-      - ''
-      - ''
-      - ''
-    AddressParameters:
-      title: Address parameters
-      type: object
-      properties:
-        Line1:
-          type: string
-          description: First line of the address.
-          nullable: true
-          example: string
-        Line2:
-          type: string
-          description: Second line of the address.
-          nullable: true
-          example: string
-        City:
-          type: string
-          description: The city.
-          nullable: true
-          example: string
-        PostalCode:
-          type: string
-          description: Postal code.
-          format: postal-code
-          nullable: true
-          example: string
-        CountryCode:
-          type: string
-          description: ISO 3166-1 code of the Country.
-          nullable: true
-          example: string
-        CountrySubdivisionCode:
-          type: string
-          description: ISO 3166-2 code of the administrative division, e.g. DE-BW
-          nullable: true
-          example: string
-      additionalProperties: false
-      description: New address details.
-      x-schema-id: AddressParameters
-    TimeFilterInterval:
-      title: Time interval
-      type: object
-      properties:
-        StartUtc:
-          type: string
-          format: date-time
-          nullable: true
-          example: '2026-06-02T14:30:00Z'
-        EndUtc:
-          type: string
-          format: date-time
-          nullable: true
-          example: '2026-06-02T14:30:00Z'
-      additionalProperties: false
-      description: "When a time interval is used for **filtering** (for example in parameters such as `CreatedUtc.StartUtc` / `CreatedUtc.EndUtc`), the following rules apply:\r\n\r\n- **Start equals End (equality mode)**  \r\n  If `StartUtc` and `EndUtc` are exactly the same timestamp, the filter is treated as an equality check for that precise moment in time:\r\n  \r\n  ```\r\n  CreatedUtc == StartUtc\r\n  ```\r\n  \r\n  This does not represent an interval; only records with `CreatedUtc` equal to that exact instant are returned.\r\n\r\n- **Start differs from End (interval mode)**  \r\n  If `StartUtc` and `EndUtc` are different, the filter is evaluated as a half-open interval:\r\n  \r\n  ```\r\n  StartUtc <= CreatedUtc < EndUtc\r\n  ```\r\n  \r\n  In other words, the start is inclusive and the end is exclusive.\r\n\r\nMake sure your integration takes inclusive Start / exclusive End behavior of time intervals into account so that no records at the boundaries are omitted."
-      x-schema-id: TimeFilterInterval
-    CustomerRelationshipFilterParameters:
-      title: CustomerRelationshipFilterParameters
-      required:
-      - AccessToken
-      - Client
-      - ClientToken
-      - CustomerIds
-      - Limitation
-      type: object
-      properties:
-        ClientToken:
-          minLength: 1
-          type: string
-          description: Token identifying the client application.
-          example: string
-        AccessToken:
-          minLength: 1
-          type: string
-          description: Access token of the client application.
-          example: string
-        Client:
-          minLength: 1
-          type: string
-          description: Name and version of the client application.
-          example: string
-        Limitation:
-          allOf:
-          - $ref: '#/components/schemas/Limitation'
-          description: Limitation on the quantity of data returned and optional Cursor for the starting point of data.
-          example: string
-        ChainIds:
-          maxItems: 1000
-          minItems: 1
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Unique identifiers of `Chain`. If not specified, the operation returns data for all chains within scope of the Access Token.
-          nullable: true
-        CustomerIds:
-          maxItems: 100
-          minItems: 1
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Unique identifiers of `Customer`.
-      additionalProperties: false
-      x-schema-id: CustomerRelationshipFilterParameters
-    Customer:
-      title: Customer
-      required:
-      - ChainId
-      - Classifications
-      - CreatedUtc
-      - CreatorProfileId
-      - Id
-      - IsActive
-      - LastName
-      - Number
-      - Options
-      - PreferredSpaceFeatures
-      - UpdatedUtc
-      - UpdaterProfileId
-      type: object
-      properties:
-        Id:
-          type: string
-          description: Unique identifier of the customer.
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        ChainId:
-          type: string
-          description: Unique identifier of the chain.
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Number:
-          maxLength: 19
-          minLength: 1
-          type: string
-          description: Unique number of the customer (max 19 digits).
-          example: '1001'
-        Title:
-          allOf:
-          - $ref: '#/components/schemas/Title'
-          description: 'Title of the customer.
-
-
-            Mister (Mr.)
-
-
-            Miss (Ms.)
-
-
-            Misses (Mrs.)'
-          nullable: true
-          example: string
-        Sex:
-          allOf:
-          - $ref: '#/components/schemas/SexEnum'
-          description: 'Sex of the customer.
-
-
-            Male
-
-
-            Female'
-          nullable: true
-          example: string
-        FirstName:
-          type: string
-          description: First name of the customer.
-          nullable: true
-          example: Example Name
-        LastName:
-          minLength: 1
-          type: string
-          description: Last name of the customer.
-          example: Example Name
-        SecondLastName:
-          type: string
-          description: Second last name of the customer.
-          nullable: true
-          example: Example Name
-        NationalityCode:
-          type: string
-          description: ISO 3166-1 code of the [Country](https://mews-systems.gitbook.io/connector-api/operations/countries/#country).
-          nullable: true
-          example: string
-        PreferredLanguageCode:
-          type: string
-          description: 'Language and culture code of the customer''s preferred language, according to their profile. For example: `en-GB`, `fr-CA`.'
-          nullable: true
-          example: string
-        LanguageCode:
-          type: string
-          description: Language and culture code of the customer's language, based on multiple sources. These sources include the preferred language specified in internal data based on previous bookings, and the preferred language of the customer specified in their profile. If neither of these sources are present, we use the native language based on the customer's nationality. The format is, for example, `en-US` or `fr-FR`.
-          nullable: true
-          example: string
-        BirthDate:
-          type: string
-          description: Date of birth in ISO 8601 format.
-          nullable: true
-          example: string
-        BirthCountryCode:
-          type: string
-          description: ISO 3166-1 alpha-2 code of the birth country.
-          nullable: true
-          example: string
-        BirthCountrySubdivisionCode:
-          type: string
-          description: ISO 3166-2 code of the administrative division, e.g. ES-C.
-          nullable: true
-          example: string
-        BirthPlace:
-          type: string
-          description: Place of birth.
-          nullable: true
-          example: string
-        Occupation:
-          type: string
-          description: Occupation of the customer.
-          nullable: true
-          example: string
-        Email:
-          type: string
-          description: Email address of the customer.
-          nullable: true
-          example: partner@example.com
-        HasOtaEmail:
-          type: boolean
-          description: Whether the customer's email address is a temporary email address from an OTA. For more details, see the [product documentation](https://help.mews.com/s/article/how-to-maintain-ota-guest-profiles-with-verified-email-addresses-obtained-from-the-guest-portal).
-          example: true
-        Phone:
-          type: string
-          description: Phone number of the customer (possibly mobile).
-          nullable: true
-          example: string
-        TaxIdentificationNumber:
-          type: string
-          description: Tax identification number of the customer.
-          nullable: true
-          example: '1001'
-        LoyaltyCode:
-          type: string
-          description: Loyalty code of the customer.
-          nullable: true
-          example: string
-        AccountingCode:
-          type: string
-          description: Accounting code of the customer.
-          nullable: true
-          example: string
-        BillingCode:
-          type: string
-          description: Billing code of the customer.
-          nullable: true
-          example: string
-        Notes:
-          type: string
-          description: Internal notes about the customer.
-          nullable: true
-          example: string
-        CarRegistrationNumber:
-          maxLength: 255
-          type: string
-          description: Registration number of the customer's car.
-          nullable: true
-          example: '1001'
-        DietaryRequirements:
-          maxLength: 255
-          type: string
-          description: Customer's dietary requirements, e.g. Vegan, Halal.
-          nullable: true
-          example: string
-        CreatedUtc:
-          minLength: 1
-          type: string
-          description: Creation date and time of the customer in UTC timezone in ISO 8601 format.
-          format: date-time
-          example: '2026-06-02T14:30:00Z'
-        UpdatedUtc:
-          minLength: 1
-          type: string
-          description: Last update date and time of the customer in UTC timezone in ISO 8601 format.
-          format: date-time
-          example: '2026-06-02T14:30:00Z'
-        Passport:
-          title: Identity document
-          allOf:
-          - $ref: '#/components/schemas/IdentityDocument'
-          nullable: true
-          deprecated: true
-          x-deprecatedMessage: Use [Get all identity documents](https://mews-systems.gitbook.io/connector-api/operations/identitydocuments#get-all-identity-documents) to fetch identity documents.
-          example: string
-        IdentityCard:
-          title: Identity document
-          allOf:
-          - $ref: '#/components/schemas/IdentityDocument'
-          nullable: true
-          deprecated: true
-          x-deprecatedMessage: Use [Get all identity documents](https://mews-systems.gitbook.io/connector-api/operations/identitydocuments#get-all-identity-documents) to fetch identity documents.
-          example: string
-        Visa:
-          title: Identity document
-          allOf:
-          - $ref: '#/components/schemas/IdentityDocument'
-          nullable: true
-          deprecated: true
-          x-deprecatedMessage: Use [Get all identity documents](https://mews-systems.gitbook.io/connector-api/operations/identitydocuments#get-all-identity-documents) to fetch identity documents.
-          example: string
-        DriversLicense:
-          title: Identity document
-          allOf:
-          - $ref: '#/components/schemas/IdentityDocument'
-          nullable: true
-          deprecated: true
-          x-deprecatedMessage: Use [Get all identity documents](https://mews-systems.gitbook.io/connector-api/operations/identitydocuments#get-all-identity-documents) to fetch identity documents.
-          example: string
-        Address:
-          title: Address
-          allOf:
-          - $ref: '#/components/schemas/OldAddress'
-          description: ''
-          nullable: true
-          deprecated: true
-          x-deprecatedMessage: Use `AddressId` instead.
-          example: string
-        AddressId:
-          type: string
-          description: Unique identifier of the `Address` of the customer.
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Classifications:
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomerClassificationEnum'
-          description: Classifications of the customer.
-        Options:
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomerOptionsEnum'
-          description: Options of the customer.
-        ItalianDestinationCode:
-          type: string
-          description: Value of Italian destination code.
-          nullable: true
-          example: string
-        ItalianFiscalCode:
-          type: string
-          description: Value of Italian fiscal code.
-          nullable: true
-          example: string
-        ItalianLotteryCode:
-          type: string
-          description: Italian lottery code.
-          nullable: true
-          example: string
-        CompanyId:
-          type: string
-          description: Unique identifier of [Company](https://mews-systems.gitbook.io/connector-api/operations/companies/#company) the customer is associated with.
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        MergeTargetId:
-          type: string
-          description: Unique identifier of the account ([Customer](https://mews-systems.gitbook.io/connector-api/operations/#customer)) to which this customer is linked.
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        ActivityState:
-          type: string
-          description: '[Activity State](https://mews-systems.gitbook.io/connector-api/operations/#activity-state) of customer record, i.e. whether active or deleted.'
-          nullable: true
-          deprecated: true
-          x-deprecatedMessage: Use `IsActive` instead.
-          example: string
-        IsActive:
-          type: boolean
-          description: Whether the customer record is still active.
-          example: true
-        PreferredSpaceFeatures:
-          type: array
-          items:
-            $ref: '#/components/schemas/ResourceFeatureClassification'
-          description: A list of room preferences, such as view type, bed type, and amenities.
-        CreatorProfileId:
-          type: string
-          description: Unique identifier of the user who created the customer.
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        UpdaterProfileId:
-          type: string
-          description: Unique identifier of the user who last updated the customer.
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-      additionalProperties: false
-      x-schema-id: Customer
-    CustomerAddParameters:
-      title: CustomerAddParameters
-      required:
-      - AccessToken
-      - Client
-      - ClientToken
-      - LastName
-      - OverwriteExisting
-      type: object
-      properties:
-        ClientToken:
-          minLength: 1
-          type: string
-          description: Token identifying the client application.
-          example: string
-        AccessToken:
-          minLength: 1
-          type: string
-          description: Access token of the client application.
-          example: string
-        Client:
-          minLength: 1
-          type: string
-          description: Name and version of the client application.
-          example: string
-        Title:
-          anyOf:
-          - $ref: '#/components/schemas/Title'
-          description: Title prefix of the customer.
-          nullable: true
-          example: string
-        FirstName:
-          type: string
-          description: First name of the customer.
-          nullable: true
-          example: Example Name
-        LastName:
-          minLength: 1
-          type: string
-          description: Last name of the customer.
-          example: Example Name
-        SecondLastName:
-          type: string
-          description: Second last name of the customer.
-          nullable: true
-          example: Example Name
-        NationalityCode:
-          type: string
-          description: ISO 3166-1 code of the `Country`.
-          nullable: true
-          example: string
-        PreferredLanguageCode:
-          type: string
-          description: 'Language and culture code of the customer''s preferred language, according to their profile. For example: `en-GB`, `fr-CA`.'
-          nullable: true
-          example: string
-        Sex:
-          anyOf:
-          - $ref: '#/components/schemas/Sex'
-          description: Sex of the customer.
-          nullable: true
-          example: string
-        BirthDate:
-          type: string
-          description: Date of birth in ISO 8601 format.
-          format: date
-          nullable: true
-          example: '2026-06-02'
-        BirthCountryCode:
-          type: string
-          description: Country of birth.
-          nullable: true
-          example: string
-        BirthCountrySubdivisionCode:
-          type: string
-          description: Province of birth.
-          nullable: true
-          example: string
-        BirthPlace:
-          type: string
-          description: Place of birth.
-          nullable: true
-          example: string
-        Occupation:
-          type: string
-          description: Occupation of the customer.
-          nullable: true
-          example: string
-        Email:
-          type: string
-          description: Email address of the customer.
-          format: email
-          nullable: true
-          example: partner@example.com
-        Phone:
-          type: string
-          description: Phone number of the customer (possibly mobile).
-          format: tel
-          nullable: true
-          example: string
-        LoyaltyCode:
-          type: string
-          description: Loyalty code of the customer.
-          nullable: true
-          example: string
-        Notes:
-          type: string
-          description: Internal notes about the customer.
-          nullable: true
-          example: string
-        CarRegistrationNumber:
-          maxLength: 255
-          type: string
-          description: Registration number of the customer's car.
-          nullable: true
-          example: '1001'
-        DietaryRequirements:
-          maxLength: 255
-          type: string
-          description: Customer's dietary requirements, e.g. Vegan, Halal.
-          nullable: true
-          example: string
-        TaxIdentificationNumber:
-          type: string
-          description: Tax identification number of the customer.
-          nullable: true
-          example: '1001'
-        CompanyId:
-          type: string
-          description: Unique identifier of `Company` the customer is associated with.
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Address:
-          title: Address parameters
-          allOf:
-          - $ref: '#/components/schemas/AddressParameters'
-          description: Address of the customer.
-          nullable: true
-          example: string
-        IdentityCard:
-          title: Identity document parameters
-          allOf:
-          - $ref: '#/components/schemas/DocumentParameters'
-          description: Identity card details of the customer.
-          nullable: true
-          deprecated: true
-          x-deprecatedMessage: Use [Add identity documents](https://mews-systems.gitbook.io/connector-api/operations/identitydocuments#add-identity-documents) to add document.
-          example: string
-        Passport:
-          title: Identity document parameters
-          allOf:
-          - $ref: '#/components/schemas/DocumentParameters'
-          description: Passport details of the customer.
-          nullable: true
-          deprecated: true
-          x-deprecatedMessage: Use [Add identity documents](https://mews-systems.gitbook.io/connector-api/operations/identitydocuments#add-identity-documents) to add document.
-          example: string
-        Visa:
-          title: Identity document parameters
-          allOf:
-          - $ref: '#/components/schemas/DocumentParameters'
-          description: Visa details of the customer.
-          nullable: true
-          deprecated: true
-          x-deprecatedMessage: Use [Add identity documents](https://mews-systems.gitbook.io/connector-api/operations/identitydocuments#add-identity-documents) to add document.
-          example: string
-        DriversLicense:
-          title: Identity document parameters
-          allOf:
-          - $ref: '#/components/schemas/DocumentParameters'
-          description: Drivers license details of the customer.
-          nullable: true
-          deprecated: true
-          x-deprecatedMessage: Use [Add identity documents](https://mews-systems.gitbook.io/connector-api/operations/identitydocuments#add-identity-documents) to add document.
-          example: string
-        Classifications:
-          uniqueItems: true
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomerClassificationEnum'
-          description: Classifications of the customer.
-          nullable: true
-        Options:
-          uniqueItems: true
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomerOptionEnum'
-          description: Options of the customer.
-          nullable: true
-        ChainId:
-          type: string
-          description: Unique identifier of the chain. Required when using `PortfolioAccessTokens`, ignored otherwise.
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        OverwriteExisting:
-          type: boolean
-          description: Whether an existing customer should be overwritten in case of duplicity. This applies only to basic personal information (`Title`, `FirstName`, `LastName`, ...).
-          example: true
-        ItalianDestinationCode:
-          type: string
-          description: Value of Italian destination code.
-          nullable: true
-          example: string
-        ItalianFiscalCode:
-          type: string
-          description: Value of Italian fiscal code.
-          nullable: true
-          example: string
-        ItalianLotteryCode:
-          maxLength: 15
-          minLength: 2
-          type: string
-          description: Value of Italian lottery code.
-          nullable: true
-          example: string
-      additionalProperties: false
-      x-schema-id: CustomerAddParameters
-    RebateOrderItemData:
-      title: Rebate order item data
-      required:
-      - RebatedItemId
-      type: object
-      properties:
-        RebatedItemId:
-          type: string
-          description: Unique identifier of `OrderItem` which has been rebated by current item.
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-      additionalProperties: false
-      x-schema-id: RebateOrderItemData
-    CustomerRelationshipResult:
-      title: CustomerRelationshipResult
-      required:
-      - CustomerRelationships
-      type: object
-      properties:
-        CustomerRelationships:
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomerRelationship'
-          description: The relationships for the customers.
-        Cursor:
-          type: string
-          description: Unique identifier of the item one newer in time order than the items to be returned. If Cursor is not specified, i.e. null, then the latest or most recent items will be returned.
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-      additionalProperties: false
-      x-schema-id: CustomerRelationshipResult
-    Sex:
+    SexEnum:
       title: Sex
       enum:
       - Male
       - Female
       type: string
-    ActivityStates:
-      title: Activity state
-      enum:
-      - Deleted
-      - Active
-      type: string
-      description: Activity states used for filtering.
-    CustomerOptionsEnum:
-      title: Customer option
-      enum:
-      - None
-      - SendMarketingEmails
-      - Invoiceable
-      - BillAddressObjection
-      - SendMarketingPostalMail
-      - SendPartnerMarketingEmails
-      - SendPartnerMarketingPostalMail
-      - WithdrawCardConsent
-      - GuestPhotoConsent
-      - IdPhotosConsent
-      type: string
       description: '
 
 
-        None
+        Male
 
 
-        SendMarketingEmails
-
-
-        Invoiceable
-
-
-        BillAddressObjection
-
-
-        SendMarketingPostalMail
-
-
-        SendPartnerMarketingEmails
-
-
-        SendPartnerMarketingPostalMail
-
-
-        WithdrawCardConsent
-
-
-        GuestPhotoConsent
-
-
-        IdPhotosConsent'
+        Female'
       x-enumNames:
-      - None
-      - SendMarketingEmails
-      - Invoiceable
-      - BillAddressObjection
-      - SendMarketingPostalMail
-      - SendPartnerMarketingEmails
-      - SendPartnerMarketingPostalMail
-      - WithdrawCardConsent
-      - GuestPhotoConsent
-      - IdPhotosConsent
+      - Male
+      - Female
       x-enumDescriptions:
       - ''
       - ''
-      - ''
-      - ''
-      - ''
-      - ''
-      - ''
-      - ''
-      - ''
-      - ''
-    ResourceFeatureClassification:
-      title: Resource feature classification
-      enum:
-      - SeaView
-      - RiverView
-      - OceanView
-      - TwinBeds
-      - DoubleBed
-      - RollawayBed
-      - UpperBed
-      - LowerBed
-      - Balcony
-      - AccessibleBathroom
-      - AccessibleRoom
-      - ElevatorAccess
-      - HighFloor
-      - Kitchenette
-      - AirConditioning
-      - PrivateJacuzzi
-      - PrivateSauna
-      - EnsuiteRoom
-      - PrivateBathroom
-      - SharedBathroom
-      type: string
-      description: Classification of `ResourceFeature`.
-    CustomerItems:
-      title: Customer items
-      required:
-      - CustomerId
-      - Items
-      - OrderItems
-      - PaymentItems
-      type: object
-      properties:
-        CustomerId:
-          type: string
-          description: Unique identifier of the `Customer`.
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Items:
-          type: array
-          items:
-            $ref: '#/components/schemas/AccountingItem'
-          deprecated: true
-          x-deprecatedMessage: Use `OrderItems` and `PaymentItems` instead.
-        OrderItems:
-          type: array
-          items:
-            $ref: '#/components/schemas/OrderItemOld'
-          description: The open order items (consumed items such as nights or products).
-        PaymentItems:
-          type: array
-          items:
-            $ref: '#/components/schemas/PaymentItemOld'
-          description: The open payment items (such as cash, credit card payments or invoices).
-      additionalProperties: false
-      x-schema-id: CustomerItems
     CustomerFileParameters:
       title: CustomerFileParameters
       required:
@@ -2603,10 +1518,11 @@ components:
           description: Name and version of the client application.
           example: string
         ChainId:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Unique identifier of the chain. Required when using [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property), ignored otherwise.
           format: uuid
-          nullable: true
           example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
         CustomerId:
           type: string
@@ -2630,963 +1546,48 @@ components:
           example: string
       additionalProperties: false
       x-schema-id: CustomerFileParameters
-    PaymentItemOld:
-      title: Payment item
+    CustomerRelationshipResult:
+      title: CustomerRelationshipResult
       required:
-      - AccountId
-      - AccountingState
-      - Amount
-      - ConsumedUtc
-      - Data
-      - Id
-      - OriginalAmount
-      - State
+      - CustomerRelationships
       type: object
       properties:
-        Id:
-          type: string
-          description: Unique identifier of the item.
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        AccountId:
-          type: string
-          description: Unique identifier of the account (for example `Customer`) the item belongs to.
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        BillId:
-          type: string
-          description: Unique identifier of the `Bill` the item is assigned to.
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        AccountingCategoryId:
-          type: string
-          description: Unique identifier of the `AccountingCategory` the item belongs to.
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Amount:
-          title: Extended amount
-          allOf:
-          - $ref: '#/components/schemas/ExtendedAmount'
-          description: Item's amount, negative amount represents either rebate or a payment.
-          example: string
-        OriginalAmount:
-          title: Extended amount
-          allOf:
-          - $ref: '#/components/schemas/ExtendedAmount'
-          description: Amount of item; note a negative amount represents a rebate or payment. Contains the earliest known value in conversion chain.
-          example: string
-        AmountDefault:
-          title: Extended amount
-          allOf:
-          - $ref: '#/components/schemas/ExtendedAmount'
-          description: Item's amount in property's default currency, negative amount represents either rebate or a payment.
-          nullable: true
-          deprecated: true
-          example: string
-        Notes:
-          type: string
-          description: Additional notes.
-          nullable: true
-          example: string
-        SettlementId:
-          type: string
-          description: Identifier of the settled payment from the external system (ApplePay/GooglePay).
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        ConsumedUtc:
-          minLength: 1
-          type: string
-          description: Date and time of the item consumption in UTC timezone in ISO 8601 format.
-          example: string
-        ClosedUtc:
-          type: string
-          description: Date and time of the item bill closure in UTC timezone in ISO 8601 format.
-          nullable: true
-          example: string
-        AccountingState:
-          minLength: 1
-          type: string
-          description: Accounting state of the item.
-          example: string
-        State:
-          minLength: 1
-          type: string
-          description: Payment state of the item.
-          example: string
-        Identifier:
-          type: string
-          description: External payment identifier.
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Data:
-          title: Payment item data
-          type: object
-          properties:
-            Discriminator:
-              $ref: '#/components/schemas/PaymentType'
-            Value:
-              oneOf:
-              - $ref: '#/components/schemas/PaymentCardPaymentData'
-              - $ref: '#/components/schemas/InvoicePaymentData'
-              description: Based on payment item data discriminator or `null` for types without any additional data.
-              nullable: true
-          description: Additional data specific to particular payment item.
-          x-coproduct: true
-          x-schema-id: PaymentItemOldDataCoproductOfPaymentType
-      additionalProperties: false
-      description: ''
-      x-schema-id: PaymentItemOld
-    CustomerOptionEnum:
-      title: Customer option
-      enum:
-      - SendMarketingEmails
-      - Invoiceable
-      - BillAddressObjection
-      - SendMarketingPostalMail
-      - SendPartnerMarketingEmails
-      - SendPartnerMarketingPostalMail
-      - WithdrawCardConsent
-      - GuestPhotoConsent
-      - IdPhotosConsent
-      type: string
-      description: '
-
-
-        SendMarketingEmails
-
-
-        Invoiceable
-
-
-        BillAddressObjection
-
-
-        SendMarketingPostalMail
-
-
-        SendPartnerMarketingEmails
-
-
-        SendPartnerMarketingPostalMail
-
-
-        WithdrawCardConsent
-
-
-        GuestPhotoConsent (Whether to ask for consent to take a guest photo.)
-
-
-        IdPhotosConsent (Whether to ask for consent to take identity document photos.)'
-      x-enumNames:
-      - SendMarketingEmails
-      - Invoiceable
-      - BillAddressObjection
-      - SendMarketingPostalMail
-      - SendPartnerMarketingEmails
-      - SendPartnerMarketingPostalMail
-      - WithdrawCardConsent
-      - GuestPhotoConsent
-      - IdPhotosConsent
-      x-enumDescriptions:
-      - ''
-      - ''
-      - ''
-      - ''
-      - ''
-      - ''
-      - ''
-      - Whether to ask for consent to take a guest photo.
-      - Whether to ask for consent to take identity document photos.
-    TaxBreakdownItem:
-      title: Tax breakdown item
-      required:
-      - NetValue
-      - TaxValue
-      type: object
-      properties:
-        TaxRateCode:
-          type: string
-          description: Tax rate code for the item. `null` for untaxed amounts.
-          nullable: true
-          example: string
-        NetValue:
-          type: number
-          description: The net value that the tax is calculated from.
-          format: double
-          example: 100.0
-        TaxValue:
-          type: number
-          description: The value of the tax.
-          format: double
-          example: 100.0
-      additionalProperties: false
-      x-schema-id: TaxBreakdownItem
-    PaymentCardPaymentData:
-      title: Credit card payment item data
-      type: object
-      properties:
-        PaymentCardId:
-          type: string
-          description: Unique identifier of the `CreditCard`.
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-      additionalProperties: false
-      x-schema-id: PaymentCardPaymentData
-    InvoicePaymentData:
-      title: Invoice payment item data
-      required:
-      - InvoiceId
-      type: object
-      properties:
-        InvoiceId:
-          type: string
-          description: Unique identifier of the invoice `Bill`.
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-      additionalProperties: false
-      x-schema-id: InvoicePaymentData
-    OrderItemTypeOld:
-      title: Order item data discriminator
-      enum:
-      - CancellationFee
-      - Rebate
-      - Deposit
-      - ExchangeRateDifference
-      - CustomItem
-      - Surcharge
-      - SurchargeDiscount
-      - SpaceOrder
-      - ProductOrder
-      - Other
-      - TaxCorrection
-      - ResourceUpgradeFee
-      - InvoiceFee
-      type: string
-      x-enumDescriptions:
-      - No additional data.
-      - '[Rebate order item data](https://mews-systems.gitbook.io/connector-api/operations/accountingitems#rebate-order-item-data)'
-      - No additional data.
-      - No additional data.
-      - No additional data.
-      - No additional data.
-      - No additional data.
-      - No additional data.
-      - '[Product order item data](https://mews-systems.gitbook.io/connector-api/operations/accountingitems#product-order-item-data)'
-      - No additional data.
-      - No additional data.
-      - No additional data.
-      - No additional data.
-    IdentityDocument:
-      title: Identity document
-      type: object
-      properties:
-        Id:
-          type: string
-          description: Unique identifier of the document.
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        CustomerId:
-          type: string
-          description: Identifier of the `Customer`.
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Type:
-          title: Document type
-          allOf:
-          - $ref: '#/components/schemas/IdentityDocumentTypeEnum'
-          description: 'Type of the document.
-
-
-            IdentityCard
-
-
-            Passport
-
-
-            Visa
-
-
-            DriversLicense'
-          x-enumNames:
-          - IdentityCard
-          - Passport
-          - Visa
-          - DriversLicense
-          x-enumDescriptions:
-          - ''
-          - ''
-          - ''
-          - ''
-          example: string
-        Number:
-          type: string
-          description: Number of the document (e.g. passport number).
-          nullable: true
-          example: '1001'
-        Expiration:
-          type: string
-          description: Expiration date in ISO 8601 format.
-          format: date
-          nullable: true
-          example: '2026-06-02'
-        Issuance:
-          type: string
-          description: Date of issuance in ISO 8601 format.
-          format: date
-          nullable: true
-          example: '2026-06-02'
-        IssuingCountryCode:
-          type: string
-          description: ISO 3166-1 code of the `Country`.
-          nullable: true
-          example: string
-        IssuingCountrySubdivisionCode:
-          type: string
-          description: Identifier of the country subdivision where the document was issued (province, state or region).
-          nullable: true
-          example: string
-        IssuingCity:
-          type: string
-          description: City where the document was issued.
-          nullable: true
-          example: string
-        IdentityDocumentSupportNumber:
-          type: string
-          description: Identity document support number. Only required for Spanish identity cards in Spanish hotels.
-          nullable: true
-          example: '1001'
-      additionalProperties: false
-      x-schema-id: IdentityDocument
-    OrderItemOld:
-      title: Order item
-      required:
-      - AccountId
-      - AccountingState
-      - Amount
-      - CreatedUtc
-      - CreatorProfileId
-      - Data
-      - Id
-      - OrderId
-      - OriginalAmount
-      - RevenueType
-      - UnitAmount
-      - UpdatedUtc
-      - UpdaterProfileId
-      type: object
-      properties:
-        Id:
-          type: string
-          description: Unique identifier of the item.
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        AccountId:
-          type: string
-          description: Unique identifier of the account (for example `Customer`) the item belongs to.
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        OrderId:
-          type: string
-          description: Unique identifier of the order (or `Reservation` which is a special type of order) the item belongs to.
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        BillId:
-          type: string
-          description: Unique identifier of the `Bill` the item is assigned to.
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        AccountingCategoryId:
-          type: string
-          description: Unique identifier of the `AccountingCategory` the item belongs to.
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        UnitCount:
-          type: integer
-          description: Unit count of item, i.e. the number of sub-items or units, if applicable.
-          format: int32
-          example: 1
-        UnitAmount:
-          title: Amount
-          allOf:
-          - $ref: '#/components/schemas/Amount'
-          description: Unit amount of item, i.e. the amount of each individual sub-item or unit, if applicable.
-          example: string
-        Amount:
-          title: Extended amount
-          allOf:
-          - $ref: '#/components/schemas/ExtendedAmount'
-          description: Amount of item; note a negative amount represents a rebate or payment.
-          example: string
-        OriginalAmount:
-          title: Extended amount
-          allOf:
-          - $ref: '#/components/schemas/ExtendedAmount'
-          description: Amount of item; note a negative amount represents a rebate or payment. Contains the earliest known value in conversion chain.
-          example: string
-        RevenueType:
-          minLength: 1
-          type: string
-          description: Revenue type of the item.
-          example: string
-        CreatorProfileId:
-          type: string
-          description: Unique identifier of the user who created the item.
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        UpdaterProfileId:
-          type: string
-          description: Unique identifier of the user who updated the item.
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        CreatedUtc:
-          minLength: 1
-          type: string
-          description: Creation date and time of the item in UTC timezone in ISO 8601 format.
-          format: date
-          example: '2026-06-02'
-        UpdatedUtc:
-          minLength: 1
-          type: string
-          description: Last update date and time of the item in UTC timezone in ISO 8601 format.
-          format: date
-          example: '2026-06-02'
-        ConsumedUtc:
-          type: string
-          description: Date and time of the item consumption in UTC timezone in ISO 8601 format.
-          format: date
-          nullable: true
-          example: '2026-06-02'
-        CanceledUtc:
-          type: string
-          description: Cancellation date and time of the item in UTC timezone in ISO 8601 format.
-          format: date
-          nullable: true
-          example: '2026-06-02'
-        ClosedUtc:
-          type: string
-          description: Date and time of the item bill closure in UTC timezone in ISO 8601 format.
-          format: date
-          nullable: true
-          example: '2026-06-02'
-        StartUtc:
-          type: string
-          description: Start date and time of the item in UTC timezone in ISO 8601 format.
-          format: date
-          nullable: true
-          example: '2026-06-02'
-        AccountingState:
-          minLength: 1
-          type: string
-          description: Accounting state of the item.
-          example: string
-        Data:
-          title: Order item data
-          type: object
-          properties:
-            Discriminator:
-              $ref: '#/components/schemas/OrderItemTypeOld'
-            Value:
-              oneOf:
-              - $ref: '#/components/schemas/RebateOrderItemData'
-              - $ref: '#/components/schemas/ProductOrderItemData'
-              description: Based on order item discriminator or `null` for types without any additional data.
-              nullable: true
-          description: Additional data specific to particular order item.
-          x-coproduct: true
-          x-schema-id: OrderItemOldDataCoproductOfOrderItemTypeOld
-      additionalProperties: false
-      x-schema-id: OrderItemOld
-    TaxValue:
-      title: Tax value
-      required:
-      - Value
-      type: object
-      properties:
-        Code:
-          type: string
-          description: Code corresponding to tax type.
-          nullable: true
-          example: string
-        Value:
-          type: number
-          description: Amount of tax applied.
-          format: double
-          example: 100.0
-      additionalProperties: false
-      x-schema-id: TaxValue
-    CustomerMergeParameters:
-      title: CustomerMergeParameters
-      required:
-      - AccessToken
-      - Client
-      - ClientToken
-      - SourceCustomerId
-      - TargetCustomerId
-      type: object
-      properties:
-        ClientToken:
-          minLength: 1
-          type: string
-          description: Token identifying the client application.
-          example: string
-        AccessToken:
-          minLength: 1
-          type: string
-          description: Access token of the client application.
-          example: string
-        Client:
-          minLength: 1
-          type: string
-          description: Name and version of the client application.
-          example: string
-        SourceCustomerId:
-          type: string
-          description: Unique identifier of the source [Customer](https://mews-systems.gitbook.io/connector-api/operations/#customer).
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        TargetCustomerId:
-          type: string
-          description: Unique identifier of the target [Customer](https://mews-systems.gitbook.io/connector-api/operations/#customer).
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-      additionalProperties: false
-      x-schema-id: CustomerMergeParameters
-    CustomerItemParameters:
-      title: CustomerItemParameters
-      required:
-      - AccessToken
-      - Client
-      - ClientToken
-      - CustomerIds
-      type: object
-      properties:
-        ClientToken:
-          minLength: 1
-          type: string
-          description: Token identifying the client application.
-          example: string
-        AccessToken:
-          minLength: 1
-          type: string
-          description: Access token of the client application.
-          example: string
-        Client:
-          minLength: 1
-          type: string
-          description: Name and version of the client application.
-          example: string
-        CustomerIds:
-          maxItems: 1000
-          minItems: 1
+        CustomerRelationships:
           type: array
           items:
-            type: string
-            format: uuid
-          description: Unique identifiers of `Customer`.
-        Currency:
-          type: string
-          description: ISO-4217 code of the [Currency](https://mews-systems.gitbook.io/connector-api/operations/currencies/#currency) the item costs should be converted to.
-          format: date-time
-          nullable: true
-          example: '2026-06-02T14:30:00Z'
-      additionalProperties: false
-      x-schema-id: CustomerItemParameters
-    TaxBreakdown:
-      title: Tax breakdown
-      required:
-      - Items
-      type: object
-      properties:
-        Items:
-          type: array
-          items:
-            $ref: '#/components/schemas/TaxBreakdownItem'
-          description: Tax breakdown items per each tax rate applied.
-      additionalProperties: false
-      x-schema-id: TaxBreakdown
-    OldAddress:
-      title: Address
-      type: object
-      properties:
-        Id:
-          type: string
-          description: Unique identifier of the address.
+            $ref: '#/components/schemas/CustomerRelationship'
+          description: The relationships for the customers.
+        Cursor:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the item one newer in time order than the items to be returned. If Cursor is not specified, i.e. null, then the latest or most recent items will be returned.
           format: uuid
           example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Line1:
-          type: string
-          description: First line of the address.
-          nullable: true
-          example: string
-        Line2:
-          type: string
-          description: Second line of the address.
-          nullable: true
-          example: string
-        City:
-          type: string
-          description: The city.
-          nullable: true
-          example: string
-        PostalCode:
-          type: string
-          description: Postal code.
-          nullable: true
-          example: string
-        CountryCode:
-          type: string
-          description: ISO 3166-1 code of the `Country`.
-          nullable: true
-          example: string
-        CountrySubdivisionCode:
-          type: string
-          description: ISO 3166-2 code of the administrative division, e.g. `DE-BW`.
-          nullable: true
-          example: string
-        Latitude:
-          type: number
-          description: The latitude.
-          format: double
-          nullable: true
-          example: 100.0
-        Longitude:
-          type: number
-          description: The longitude.
-          format: double
-          nullable: true
-          example: 100.0
       additionalProperties: false
-      description: ''
-      x-schema-id: OldAddress
-    ChargeableCustomer:
-      title: Customer search result
+      x-schema-id: CustomerRelationshipResult
+    CustomerSearchResult:
+      title: CustomerSearchResult
       required:
-      - Customer
-      type: object
-      properties:
-        Customer:
-          allOf:
-          - $ref: '#/components/schemas/Customer'
-          description: The found customer.
-          example: string
-        Reservation:
-          title: Reservation (ver 2017-04-12)
-          allOf:
-          - $ref: '#/components/schemas/ReservationOld'
-          description: Reservation of the customer in case they are currently staying in the property.
-          nullable: true
-          example: string
-      additionalProperties: false
-      x-schema-id: ChargeableCustomer
-    ReservationOptions:
-      title: Reservation options
-      required:
-      - AllCompanionsCheckedIn
-      - AnyCompanionCheckedIn
-      - OwnerCheckedIn
-      type: object
-      properties:
-        OwnerCheckedIn:
-          type: boolean
-          description: Owner of the reservation checked in.
-          example: true
-        AllCompanionsCheckedIn:
-          type: boolean
-          description: All companions of the reservation checked in.
-          example: true
-        AnyCompanionCheckedIn:
-          type: boolean
-          description: Any companion of the reservation checked in.
-          example: true
-      additionalProperties: false
-      x-schema-id: ReservationOptions
-    CustomerUpdateParameters:
-      title: CustomerUpdateParameters
-      required:
-      - AccessToken
-      - Client
-      - ClientToken
-      - CustomerId
-      type: object
-      properties:
-        ClientToken:
-          minLength: 1
-          type: string
-          description: Token identifying the client application.
-          example: string
-        AccessToken:
-          minLength: 1
-          type: string
-          description: Access token of the client application.
-          example: string
-        Client:
-          minLength: 1
-          type: string
-          description: Name and version of the client application.
-          example: string
-        ChainId:
-          type: string
-          description: Unique identifier of the chain. Required when using `PortfolioAccessTokens`, ignored otherwise.
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        CustomerId:
-          type: string
-          description: Unique identifier of the `Customer` to be updated.
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Title:
-          allOf:
-          - $ref: '#/components/schemas/Title'
-          description: 'New title.
-
-
-            Mister (Mr.)
-
-
-            Miss (Ms.)
-
-
-            Misses (Mrs.)'
-          nullable: true
-          example: string
-        FirstName:
-          type: string
-          description: New first name.
-          nullable: true
-          example: Example Name
-        LastName:
-          type: string
-          description: New last name.
-          nullable: true
-          example: Example Name
-        SecondLastName:
-          type: string
-          description: New second last name.
-          nullable: true
-          example: Example Name
-        NationalityCode:
-          type: string
-          description: New nationality code as ISO 3166-1 code of the `Country`.
-          nullable: true
-          example: string
-        PreferredLanguageCode:
-          type: string
-          description: 'Language and culture code of the customer''s preferred language, according to their profile. For example: `en-GB`, `fr-CA`.'
-          nullable: true
-          example: string
-        Sex:
-          allOf:
-          - $ref: '#/components/schemas/SexEnum'
-          description: 'Sex of the customer.
-
-
-            Male
-
-
-            Female'
-          nullable: true
-          example: string
-        BirthDate:
-          type: string
-          description: New birth date in ISO 8601 format.
-          format: date
-          nullable: true
-          example: '2026-06-02'
-        BirthCountryCode:
-          type: string
-          description: Country of birth.
-          nullable: true
-          example: string
-        BirthCountrySubdivisionCode:
-          type: string
-          description: Province of birth.
-          nullable: true
-          example: string
-        BirthPlace:
-          type: string
-          description: New birth place.
-          nullable: true
-          example: string
-        Occupation:
-          type: string
-          description: Occupation of the customer.
-          nullable: true
-          example: string
-        Email:
-          type: string
-          description: New email address.
-          format: email
-          nullable: true
-          example: partner@example.com
-        Phone:
-          type: string
-          description: New phone number.
-          format: tel
-          nullable: true
-          example: string
-        LoyaltyCode:
-          type: string
-          description: Loyalty code of the customer.
-          nullable: true
-          example: string
-        Notes:
-          type: string
-          description: Internal notes about the customer. Old value will be overwritten.
-          nullable: true
-          example: string
-        CarRegistrationNumber:
-          maxLength: 255
-          type: string
-          description: New registration number of the customer's car.
-          nullable: true
-          example: '1001'
-        DietaryRequirements:
-          maxLength: 255
-          type: string
-          description: Customer's dietary requirements, e.g. Vegan, Halal.
-          nullable: true
-          example: string
-        TaxIdentificationNumber:
-          type: string
-          description: New tax identification number of the customer.
-          nullable: true
-          example: '1001'
-        CompanyId:
-          type: string
-          description: Unique identifier of `Company` the customer is associated with.
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Address:
-          title: Address parameters
-          allOf:
-          - $ref: '#/components/schemas/AddressParameters'
-          description: New address details.
-          nullable: true
-          example: string
-        IdentityCard:
-          title: Identity document parameters
-          allOf:
-          - $ref: '#/components/schemas/DocumentParameters'
-          description: New identity card details.
-          nullable: true
-          deprecated: true
-          x-deprecatedMessage: Use [Update identity documents](https://mews-systems.gitbook.io/connector-api/operations/identitydocuments#update-identity-documents) to update document.
-          example: string
-        Passport:
-          title: Identity document parameters
-          allOf:
-          - $ref: '#/components/schemas/DocumentParameters'
-          description: New passport details.
-          nullable: true
-          deprecated: true
-          x-deprecatedMessage: Use [Update identity documents](https://mews-systems.gitbook.io/connector-api/operations/identitydocuments#update-identity-documents) to update document.
-          example: string
-        Visa:
-          title: Identity document parameters
-          allOf:
-          - $ref: '#/components/schemas/DocumentParameters'
-          description: New visa details.
-          nullable: true
-          deprecated: true
-          x-deprecatedMessage: Use [Update identity documents](https://mews-systems.gitbook.io/connector-api/operations/identitydocuments#update-identity-documents) to update document.
-          example: string
-        DriversLicense:
-          title: Identity document parameters
-          allOf:
-          - $ref: '#/components/schemas/DocumentParameters'
-          description: New drivers license details.
-          nullable: true
-          deprecated: true
-          x-deprecatedMessage: Use [Update identity documents](https://mews-systems.gitbook.io/connector-api/operations/identitydocuments#update-identity-documents) to update document.
-          example: string
-        Classifications:
-          uniqueItems: true
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomerClassificationEnum'
-          description: New classifications of the customer.
-          nullable: true
-        Options:
-          uniqueItems: true
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomerOptionEnum'
-          description: Options of the customer.
-          nullable: true
-        ItalianDestinationCode:
-          title: String update value
-          allOf:
-          - $ref: '#/components/schemas/StringUpdateValue'
-          description: New Italian destination code of customer.
-          nullable: true
-          example: string
-        ItalianFiscalCode:
-          title: String update value
-          allOf:
-          - $ref: '#/components/schemas/StringUpdateValue'
-          description: New Italian fiscal code of customer.
-          nullable: true
-          example: string
-        ItalianLotteryCode:
-          title: String update value
-          maxLength: 15
-          minLength: 2
-          allOf:
-          - $ref: '#/components/schemas/StringUpdateValue'
-          description: New Italian lottery code of customer.
-          nullable: true
-          example: string
-      additionalProperties: false
-      x-schema-id: CustomerUpdateParameters
-    Title:
-      title: Title
-      enum:
-      - Mister
-      - Miss
-      - Misses
-      type: string
-      description: "Type of the title prefix of the customer.\r\n\r\nNote that the value should not be used as-is, but localized. For example, the value `Misses` should be displayed as `Mrs.` in English and `Fr.` in German.\n\nMister (Mr.)\n\nMiss (Ms.)\n\nMisses (Mrs.)"
-      x-enumNames:
-      - Mister
-      - Miss
-      - Misses
-      x-enumDescriptions:
-      - Mr.
-      - Ms.
-      - Mrs.
-      x-schema-id: Title
-      x-showDescription: true
-    CustomerExtent:
-      title: Customer extent
+      - Customers
       type: object
       properties:
         Customers:
-          type: boolean
-          description: Whether the response should contain information about customers.
-          nullable: true
-          example: true
+          type: array
+          items:
+            $ref: '#/components/schemas/ChargeableCustomer'
+          description: The customer search results.
         Documents:
-          type: boolean
-          description: Whether the response should contain identity documents of customers.
-          nullable: true
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/IdentityDocument'
+          description: The identity documents of customers.
           deprecated: true
-          x-deprecatedMessage: Use [Get all identity documents](https://mews-systems.gitbook.io/connector-api/operations/identitydocuments#get-all-identity-documents) instead.
-          example: true
-        Addresses:
-          type: boolean
-          description: Whether the response should contain addresses of customers.
-          nullable: true
-          example: true
+          x-deprecatedMessage: Use [Get all identity documents](https://mews-systems.gitbook.io/connector-api/operations/identitydocuments#get-all-identity-documents) to fetch identity documents.
       additionalProperties: false
-      description: ''
-      x-schema-id: CustomerExtent
+      x-schema-id: CustomerSearchResult
     AccountingItem:
       title: Accounting item
       type: object
@@ -3600,124 +1601,171 @@ components:
           format: uuid
           example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
         CustomerId:
-          type: string
+          type:
+          - string
+          - 'null'
           format: uuid
-          nullable: true
           deprecated: true
           x-deprecatedMessage: Use `AccountId` instead.
           example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
         OrderId:
-          type: string
+          type:
+          - string
+          - 'null'
           format: uuid
-          nullable: true
           example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
         ServiceId:
-          type: string
+          type:
+          - string
+          - 'null'
           format: uuid
-          nullable: true
           example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
         ProductId:
-          type: string
+          type:
+          - string
+          - 'null'
           format: uuid
-          nullable: true
           example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
         BillId:
-          type: string
+          type:
+          - string
+          - 'null'
           format: uuid
-          nullable: true
           example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
         InvoiceId:
-          type: string
+          type:
+          - string
+          - 'null'
           format: uuid
-          nullable: true
           example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
         AccountingCategoryId:
-          type: string
+          type:
+          - string
+          - 'null'
           format: uuid
-          nullable: true
           example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
         CreditCardId:
-          type: string
+          type:
+          - string
+          - 'null'
           format: uuid
-          nullable: true
           example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
         Type:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           example: string
         SubType:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           example: string
         Name:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           example: Example Name
         Notes:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           example: string
         ConsumptionUtc:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           example: string
         ClosedUtc:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           example: string
         State:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           example: string
         SubState:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           example: string
         Amount:
           title: Extended amount
           allOf:
           - $ref: '#/components/schemas/ExtendedAmount'
           description: ''
-          nullable: true
           example: string
         TaxExemptionReasonCode:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Code of tax exemption reason. **Restricted!** This property is currently intended for Mews' internal usage and may be subject to change.
-          nullable: true
           example: string
       additionalProperties: false
       x-schema-id: AccountingItem
-    ReservationOldOrigin:
-      title: Reservation origin (ver 2017-04-12)
+    ResourceFeatureClassification:
+      title: Resource feature classification
       enum:
-      - Distributor
-      - ChannelManager
-      - Import
-      - Connector
-      - Navigator
-      - CommanderInPerson
-      - CommanderChannel
-      - CommanderPhone
-      - CommanderEmail
-      - CommanderWebsite
-      - CommanderMessage
-      - CommanderCallCenter
-      - CommanderRoomingList
+      - SeaView
+      - RiverView
+      - OceanView
+      - TwinBeds
+      - DoubleBed
+      - RollawayBed
+      - UpperBed
+      - LowerBed
+      - Balcony
+      - AccessibleBathroom
+      - AccessibleRoom
+      - ElevatorAccess
+      - HighFloor
+      - Kitchenette
+      - AirConditioning
+      - PrivateJacuzzi
+      - PrivateSauna
+      - EnsuiteRoom
+      - PrivateBathroom
+      - SharedBathroom
       type: string
-      x-enumDescriptions:
-      - From the Mews Booking Engine or Booking Engine API.
-      - From a channel manager.
-      - From an import process.
-      - From the Mews Connector API.
-      - From Mews Guest Services.
-      - From Mews Operations, in person.
-      - From Mews Operations, via channel.
-      - From Mews Operations, via telephone.
-      - From Mews Operations, via email.
-      - From Mews Operations, via website.
-      - From Mews Operations, via message person.
-      - From Mews Operations, via call center.
-      - From Mews Operations, via rooming list.
+      description: Classification of `ResourceFeature`.
+    TimeFilterInterval:
+      title: Time interval
+      type: object
+      properties:
+        StartUtc:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+        EndUtc:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+      additionalProperties: false
+      description: "When a time interval is used for **filtering** (for example in parameters such as `CreatedUtc.StartUtc` / `CreatedUtc.EndUtc`), the following rules apply:\n\n- **Start equals End (equality mode)**  \n  If `StartUtc` and `EndUtc` are exactly the same timestamp, the filter is treated as an equality check for that precise moment in time:\n  \n  ```\n  CreatedUtc == StartUtc\n  ```\n  \n  This does not represent an interval; only records with `CreatedUtc` equal to that exact instant are returned.\n\n- **Start differs from End (interval mode)**  \n  If `StartUtc` and `EndUtc` are different, the filter is evaluated as a half-open interval:\n  \n  ```\n  StartUtc <= CreatedUtc < EndUtc\n  ```\n  \n  In other words, the start is inclusive and the end is exclusive.\n\nMake sure your integration takes inclusive Start / exclusive End behavior of time intervals into account so that no records at the boundaries are omitted."
+      x-schema-id: TimeFilterInterval
+    ReservationPurpose:
+      title: Reservation purpose
+      enum:
+      - Leisure
+      - Business
+      - Student
+      type: string
+    ServiceOrderStateOld:
+      title: Service order state (ver 2017-04-12)
+      enum:
+      - Enquired
+      - Confirmed
+      - Started
+      - Processed
+      - Canceled
+      - Optional
+      - Requested
+      type: string
     ExtendedAmount:
       title: Extended amount
       required:
@@ -3756,24 +1804,28 @@ components:
           description: Information about individual tax amounts.
           example: string
         Value:
-          type: number
+          type:
+          - number
+          - 'null'
           format: double
-          nullable: true
           example: 100.0
         Net:
-          type: number
+          type:
+          - number
+          - 'null'
           format: double
-          nullable: true
           example: 100.0
         Tax:
-          type: number
+          type:
+          - number
+          - 'null'
           format: double
-          nullable: true
           example: 100.0
         TaxRate:
-          type: number
+          type:
+          - number
+          - 'null'
           format: double
-          nullable: true
           example: 100.0
       additionalProperties: false
       description: ''
@@ -3911,374 +1963,465 @@ components:
       - ''
       - ''
       - ''
-    ServiceOrderStateOld:
-      title: Service order state (ver 2017-04-12)
-      enum:
-      - Enquired
-      - Confirmed
-      - Started
-      - Processed
-      - Canceled
-      - Optional
-      - Requested
-      type: string
-    CustomerResult:
-      title: CustomerResult
+    CustomerFilterParameters:
+      title: CustomerFilterParameters
       required:
-      - Customers
+      - AccessToken
+      - Client
+      - ClientToken
+      - Extent
+      - Limitation
       type: object
       properties:
-        Customers:
-          type: array
-          items:
-            $ref: '#/components/schemas/Customer'
-          description: The customers.
-        Documents:
-          type: array
-          items:
-            $ref: '#/components/schemas/IdentityDocument'
-          description: The identity documents of customers.
-          nullable: true
-          deprecated: true
-          x-deprecatedMessage: Use [Get all identity documents](https://mews-systems.gitbook.io/connector-api/operations/identitydocuments#get-all-identity-documents) to fetch identity documents.
-        Cursor:
-          type: string
-          description: Unique identifier of the last and hence oldest customer item returned. This can be used in [Limitation](https://mews-systems.gitbook.io/connector-api/guidelines/pagination/#limitation) in a subsequent request to fetch the next batch of older customers. If [Limitation](https://mews-systems.gitbook.io/connector-api/guidelines/pagination/#limitation) is specified in the request message, then Cursor will always be included in the response message; this is true even when using Extents set to false so that no actual data is returned.
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-      additionalProperties: false
-      x-schema-id: CustomerResult
-    CustomerRelationshipTypeEnum:
-      title: Customer relationship type
-      enum:
-      - Spouse
-      - Child
-      - Parent
-      - OtherFamily
-      - Friend
-      - Colleague
-      - Other
-      type: string
-      description: '
-
-
-        Spouse
-
-
-        Child
-
-
-        Parent
-
-
-        OtherFamily (Any familial relationship that doesn''t fit for the options provided)
-
-
-        Friend
-
-
-        Colleague
-
-
-        Other'
-      x-enumNames:
-      - Spouse
-      - Child
-      - Parent
-      - OtherFamily
-      - Friend
-      - Colleague
-      - Other
-      x-enumDescriptions:
-      - ''
-      - ''
-      - ''
-      - Any familial relationship that doesn't fit for the options provided
-      - ''
-      - ''
-      - ''
-      x-extensible: true
-    ConnectorApiExceptionResult:
-      title: ConnectorApiExceptionResult
-      type: object
-      properties:
-        Message:
-          type: string
-          nullable: true
-          example: string
-        RequestId:
-          type: string
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Details:
-          nullable: true
-          example: string
-      additionalProperties: false
-      x-schema-id: ConnectorApiExceptionResult
-    ReservationOld:
-      title: Reservation (ver 2017-04-12)
-      required:
-      - AssignedResourceLocked
-      - CompanionIds
-      - CreatedUtc
-      - CustomerId
-      - EndUtc
-      - GroupId
-      - Id
-      - Number
-      - Options
-      - Origin
-      - OwnerId
-      - PersonCounts
-      - RateId
-      - RequestedCategoryId
-      - ServiceId
-      - StartUtc
-      - State
-      - UpdatedUtc
-      type: object
-      properties:
-        Id:
-          type: string
-          description: Unique identifier of the reservation.
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        ServiceId:
-          type: string
-          description: Unique identifier of the Service that is reserved.
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        GroupId:
-          type: string
-          description: Unique identifier of the Reservation group.
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Number:
+        ClientToken:
           minLength: 1
           type: string
-          description: Confirmation number of the reservation in Mews.
-          example: '1001'
-        ChannelNumber:
-          type: string
-          description: Number of the reservation within the Channel (i.e. OTA, GDS, CRS, etc) in case the reservation group originates there (e.g. Booking.com confirmation number).
-          nullable: true
-          example: '1001'
-        ChannelManagerNumber:
-          type: string
-          description: Unique number of the reservation within the reservation group.
-          nullable: true
-          example: '1001'
-        ChannelManagerGroupNumber:
-          type: string
-          description: Number of the reservation group within a Channel manager that transferred the reservation from Channel to Mews.
-          nullable: true
-          example: '1001'
-        ChannelManager:
-          type: string
-          description: Name of the Channel manager (e.g. AvailPro, SiteMinder, TravelClick, etc).
-          nullable: true
+          description: Token identifying the client application.
           example: string
-        State:
-          $ref: '#/components/schemas/ServiceOrderStateOld'
-        Origin:
-          $ref: '#/components/schemas/ReservationOldOrigin'
-        OriginDetails:
-          type: string
-          description: Details about the reservation origin.
-          nullable: true
-          example: string
-        Purpose:
-          anyOf:
-          - $ref: '#/components/schemas/ReservationPurpose'
-          description: Purpose of the reservation.
-          nullable: true
-          example: string
-        CreatedUtc:
+        AccessToken:
           minLength: 1
           type: string
-          description: Creation date and time of the reservation in UTC timezone in ISO 8601 format.
+          description: Access token of the client application.
           example: string
-        UpdatedUtc:
+        Client:
           minLength: 1
           type: string
-          description: Last update date and time of the reservation in UTC timezone in ISO 8601 format.
+          description: Name and version of the client application.
           example: string
-        CancelledUtc:
-          type: string
-          description: Cancellation date and time in UTC timezone in ISO 8601 format.
-          nullable: true
-          example: string
-        StartUtc:
-          minLength: 1
-          type: string
-          description: Start of the reservation in UTC timezone in ISO 8601 format. This is either the scheduled reservation start time, or the actual customer check-in time if this is earlier than the scheduled start time.
-          example: string
-        EndUtc:
-          minLength: 1
-          type: string
-          description: End of the reservation (departure) in UTC timezone in ISO 8601 format.
-          example: string
-        ReleasedUtc:
-          type: string
-          description: Date when the optional reservation is released in UTC timezone in ISO 8601 format.
-          nullable: true
-          example: string
-        RequestedCategoryId:
-          type: string
-          description: Identifier of the requested Resource category.
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        AssignedSpaceId:
-          type: string
-          description: Identifier of the assigned Space.
-          format: uuid
-          nullable: true
-          deprecated: true
-          x-deprecatedMessage: Use `AssignedResourceId` instead.
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        AssignedSpaceLocked:
-          type: boolean
-          description: Whether the reservation is locked to the assigned Space and cannot be moved.
-          deprecated: true
-          x-deprecatedMessage: Use `AssignedResourceLocked` instead.
-          example: true
-        AssignedResourceId:
-          type: string
-          description: Identifier of the assigned Resource.
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        AssignedResourceLocked:
-          type: boolean
-          description: Whether the reservation is locked to the assigned Resource and cannot be moved.
-          example: true
-        BusinessSegmentId:
-          type: string
-          description: Identifier of the reservation Business segment.
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        CompanyId:
-          type: string
-          description: Identifier of the Company on behalf of which the reservation was made.
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        TravelAgencyId:
-          type: string
-          description: Identifier of the Company that mediated the reservation.
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        AvailabilityBlockId:
-          type: string
-          description: Unique identifier of the Availability block the reservation is assigned to.
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        RateId:
-          type: string
-          description: Identifier of the reservation Rate.
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        VoucherId:
-          type: string
-          description: Unique identifier of the Voucher that has been used to create reservation.
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        CreditCardId:
-          type: string
-          description: Unique identifier of the Credit card.
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        CancellationReason:
-          anyOf:
-          - $ref: '#/components/schemas/CancellationReason'
-          description: Cancellation reason of the reservation.
-          nullable: true
-          example: string
-        AdultCount:
-          type: integer
-          description: Count of adults the reservation was booked for.
-          format: int32
-          deprecated: true
-          x-deprecatedMessage: Use `PersonCounts` instead.
-          example: 1
-        ChildCount:
-          type: integer
-          description: Count of children the reservation was booked for.
-          format: int32
-          deprecated: true
-          x-deprecatedMessage: Use `PersonCounts` instead.
-          example: 1
-        PersonCounts:
-          type: array
-          items:
-            $ref: '#/components/schemas/ReservationPersonCount'
-          description: Number of people per age category the reservation was booked for.
-        OwnerId:
-          type: string
-          description: Unique identifier of the Customer or Company who owns the reservation.
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        CustomerId:
-          type: string
-          description: Unique identifier of the Customer who owns the reservation.
-          format: uuid
-          deprecated: true
-          x-deprecatedMessage: Use `OwnerId` instead.
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        BookerId:
-          type: string
-          description: Unique identifier of the Customer on whose behalf the reservation was made.
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        CompanionIds:
-          type: array
+        ChainIds:
+          maxItems: 1000
+          minItems: 1
+          type:
+          - array
+          - 'null'
           items:
             type: string
             format: uuid
-          description: Unique identifiers of the `Customer`s that will use the resource.
-          deprecated: true
-          x-deprecatedMessage: Use `companionships/getAll` instead.
-        ChannelManagerId:
-          type: string
-          description: Channel Manager number.
-          nullable: true
-          deprecated: true
-          x-deprecatedMessage: Use `ChannelManagerNumber` instead.
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Options:
-          title: Reservation options
+          description: Unique identifiers of the chains. Required when using Portfolio Access Tokens, ignored otherwise.
+        CreatedUtc:
+          title: Time interval
           allOf:
-          - $ref: '#/components/schemas/ReservationOptions'
-          description: Options of the reservation.
+          - $ref: '#/components/schemas/TimeFilterInterval'
+          description: Interval in which Customer was created.
+          x-max-interval-in-months: 3
+          example: string
+        UpdatedUtc:
+          title: Time interval
+          allOf:
+          - $ref: '#/components/schemas/TimeFilterInterval'
+          description: Interval in which Customer was updated.
+          x-max-interval-in-months: 3
+          example: string
+        Extent:
+          title: Customer extent
+          allOf:
+          - $ref: '#/components/schemas/CustomerExtent'
+          description: Extent of data to be returned.
+          example: string
+        DeletedUtc:
+          title: Time interval
+          allOf:
+          - $ref: '#/components/schemas/TimeFilterInterval'
+          description: Interval in which Customer was deleted. `ActivityStates` value `Deleted` should be provided with this filter to get expected results.
+          x-max-interval-in-months: 3
+          example: string
+        ActivityStates:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/ActivityStates'
+          description: Whether to return only active, only deleted or both records.
+        CustomerIds:
+          maxItems: 1000
+          minItems: 1
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: uuid
+          description: Unique identifiers of Customers. Required if no other filter is provided.
+        CompanyIds:
+          maxItems: 1
+          minItems: 1
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: uuid
+          description: Unique identifier of the Company the customer is associated with.
+        Emails:
+          maxItems: 1000
+          minItems: 1
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Emails of the [Customers](https://mews-systems.gitbook.io/connector-api/operations/#customer).
+        FirstNames:
+          maxItems: 1000
+          minItems: 1
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: First names of the [Customers](https://mews-systems.gitbook.io/connector-api/operations/#customer).
+        LastNames:
+          maxItems: 1000
+          minItems: 1
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Last names of the [Customers](https://mews-systems.gitbook.io/connector-api/operations/#customer).
+        LoyaltyCodes:
+          maxItems: 1000
+          minItems: 1
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Loyalty codes of the [Customers](https://mews-systems.gitbook.io/connector-api/operations/#customer).
+        Limitation:
+          allOf:
+          - $ref: '#/components/schemas/Limitation'
+          description: Limitation on the quantity of data returned.
           example: string
       additionalProperties: false
-      description: ''
-      x-schema-id: ReservationOld
-    Limitation:
-      title: Limitation
+      x-schema-id: CustomerFilterParameters
+    TaxBreakdownItem:
+      title: Tax breakdown item
       required:
-      - Count
+      - NetValue
+      - TaxValue
       type: object
       properties:
-        Count:
-          type: integer
-          format: int32
-          example: 1
-        Cursor:
-          type: string
+        TaxRateCode:
+          type:
+          - string
+          - 'null'
+          description: Tax rate code for the item. `null` for untaxed amounts.
+          example: string
+        NetValue:
+          type: number
+          description: The net value that the tax is calculated from.
+          format: double
+          example: 100.0
+        TaxValue:
+          type: number
+          description: The value of the tax.
+          format: double
+          example: 100.0
+      additionalProperties: false
+      x-schema-id: TaxBreakdownItem
+    PaymentType:
+      title: Payment item data discriminator
+      enum:
+      - CreditCard
+      - Invoice
+      - Cash
+      - Unspecified
+      - BadDebts
+      - WireTransfer
+      - ExchangeRateDifference
+      - ExchangeRoundingDifference
+      - BankCharges
+      - Cheque
+      - Other
+      type: string
+      x-enumDescriptions:
+      - '[Credit card payment item data](https://mews-systems.gitbook.io/connector-api/operations/accountingitems#credit-card-payment-item-data)'
+      - '[Invoice payment item data](https://mews-systems.gitbook.io/connector-api/operations/accountingitems#invoice-payment-item-data)'
+      - No additional data.
+      - No additional data.
+      - No additional data.
+      - No additional data.
+      - No additional data.
+      - No additional data.
+      - No additional data.
+      - No additional data.
+      - No additional data.
+    PaymentCardPaymentData:
+      title: Credit card payment item data
+      type: object
+      properties:
+        PaymentCardId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the `CreditCard`.
           format: uuid
-          nullable: true
           example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
       additionalProperties: false
-      description: Limitation on the quantity of data returned.
-      x-schema-id: Limitation
+      x-schema-id: PaymentCardPaymentData
+    CustomerAddParameters:
+      title: CustomerAddParameters
+      required:
+      - AccessToken
+      - Client
+      - ClientToken
+      - LastName
+      - OverwriteExisting
+      type: object
+      properties:
+        ClientToken:
+          minLength: 1
+          type: string
+          description: Token identifying the client application.
+          example: string
+        AccessToken:
+          minLength: 1
+          type: string
+          description: Access token of the client application.
+          example: string
+        Client:
+          minLength: 1
+          type: string
+          description: Name and version of the client application.
+          example: string
+        Title:
+          anyOf:
+          - $ref: '#/components/schemas/Title'
+          description: Title prefix of the customer.
+          example: string
+        FirstName:
+          type:
+          - string
+          - 'null'
+          description: First name of the customer.
+          example: Example Name
+        LastName:
+          minLength: 1
+          type: string
+          description: Last name of the customer.
+          example: Example Name
+        SecondLastName:
+          type:
+          - string
+          - 'null'
+          description: Second last name of the customer.
+          example: Example Name
+        NationalityCode:
+          type:
+          - string
+          - 'null'
+          description: ISO 3166-1 code of the `Country`.
+          example: string
+        PreferredLanguageCode:
+          type:
+          - string
+          - 'null'
+          description: 'Language and culture code of the customer''s preferred language, according to their profile. For example: `en-GB`, `fr-CA`.'
+          example: string
+        Sex:
+          anyOf:
+          - $ref: '#/components/schemas/Sex'
+          description: Sex of the customer.
+          example: string
+        BirthDate:
+          type:
+          - string
+          - 'null'
+          description: Date of birth in ISO 8601 format.
+          format: date
+          example: '2026-06-02'
+        BirthCountryCode:
+          type:
+          - string
+          - 'null'
+          description: Country of birth.
+          example: string
+        BirthCountrySubdivisionCode:
+          type:
+          - string
+          - 'null'
+          description: Province of birth.
+          example: string
+        BirthPlace:
+          type:
+          - string
+          - 'null'
+          description: Place of birth.
+          example: string
+        Occupation:
+          type:
+          - string
+          - 'null'
+          description: Occupation of the customer.
+          example: string
+        Email:
+          type:
+          - string
+          - 'null'
+          description: Email address of the customer.
+          format: email
+          example: partner@example.com
+        Phone:
+          type:
+          - string
+          - 'null'
+          description: Phone number of the customer (possibly mobile).
+          format: tel
+          example: string
+        LoyaltyCode:
+          type:
+          - string
+          - 'null'
+          description: Loyalty code of the customer.
+          example: string
+        Notes:
+          type:
+          - string
+          - 'null'
+          description: Internal notes about the customer.
+          example: string
+        CarRegistrationNumber:
+          maxLength: 255
+          type:
+          - string
+          - 'null'
+          description: Registration number of the customer's car.
+          example: '1001'
+        DietaryRequirements:
+          maxLength: 255
+          type:
+          - string
+          - 'null'
+          description: Customer's dietary requirements, e.g. Vegan, Halal.
+          example: string
+        TaxIdentificationNumber:
+          type:
+          - string
+          - 'null'
+          description: Tax identification number of the customer.
+          example: '1001'
+        CompanyId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of `Company` the customer is associated with.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Address:
+          title: Address parameters
+          allOf:
+          - $ref: '#/components/schemas/AddressParameters'
+          description: Address of the customer.
+          example: string
+        IdentityCard:
+          title: Identity document parameters
+          allOf:
+          - $ref: '#/components/schemas/DocumentParameters'
+          description: Identity card details of the customer.
+          deprecated: true
+          x-deprecatedMessage: Use [Add identity documents](https://mews-systems.gitbook.io/connector-api/operations/identitydocuments#add-identity-documents) to add document.
+          example: string
+        Passport:
+          title: Identity document parameters
+          allOf:
+          - $ref: '#/components/schemas/DocumentParameters'
+          description: Passport details of the customer.
+          deprecated: true
+          x-deprecatedMessage: Use [Add identity documents](https://mews-systems.gitbook.io/connector-api/operations/identitydocuments#add-identity-documents) to add document.
+          example: string
+        Visa:
+          title: Identity document parameters
+          allOf:
+          - $ref: '#/components/schemas/DocumentParameters'
+          description: Visa details of the customer.
+          deprecated: true
+          x-deprecatedMessage: Use [Add identity documents](https://mews-systems.gitbook.io/connector-api/operations/identitydocuments#add-identity-documents) to add document.
+          example: string
+        DriversLicense:
+          title: Identity document parameters
+          allOf:
+          - $ref: '#/components/schemas/DocumentParameters'
+          description: Drivers license details of the customer.
+          deprecated: true
+          x-deprecatedMessage: Use [Add identity documents](https://mews-systems.gitbook.io/connector-api/operations/identitydocuments#add-identity-documents) to add document.
+          example: string
+        Classifications:
+          uniqueItems: true
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/CustomerClassificationEnum'
+          description: Classifications of the customer.
+        Options:
+          uniqueItems: true
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/CustomerOptionEnum'
+          description: Options of the customer.
+        ChainId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the chain. Required when using `PortfolioAccessTokens`, ignored otherwise.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        OverwriteExisting:
+          type: boolean
+          description: Whether an existing customer should be overwritten in case of duplicity. This applies only to basic personal information (`Title`, `FirstName`, `LastName`, ...).
+          example: true
+        ItalianDestinationCode:
+          type:
+          - string
+          - 'null'
+          description: Value of Italian destination code.
+          example: string
+        ItalianFiscalCode:
+          type:
+          - string
+          - 'null'
+          description: Value of Italian fiscal code.
+          example: string
+        ItalianLotteryCode:
+          maxLength: 15
+          minLength: 2
+          type:
+          - string
+          - 'null'
+          description: Value of Italian lottery code.
+          example: string
+      additionalProperties: false
+      x-schema-id: CustomerAddParameters
+    CustomerExtent:
+      title: Customer extent
+      type: object
+      properties:
+        Customers:
+          type:
+          - boolean
+          - 'null'
+          description: Whether the response should contain information about customers.
+          example: true
+        Documents:
+          type:
+          - boolean
+          - 'null'
+          description: Whether the response should contain identity documents of customers.
+          deprecated: true
+          x-deprecatedMessage: Use [Get all identity documents](https://mews-systems.gitbook.io/connector-api/operations/identitydocuments#get-all-identity-documents) instead.
+          example: true
+        Addresses:
+          type:
+          - boolean
+          - 'null'
+          description: Whether the response should contain addresses of customers.
+          example: true
+      additionalProperties: false
+      description: ''
+      x-schema-id: CustomerExtent
     CustomerRelationship:
       title: CustomerRelationship
       required:
@@ -4343,63 +2486,1626 @@ components:
           example: string
       additionalProperties: false
       x-schema-id: CustomerRelationship
-    ReservationPurpose:
-      title: Reservation purpose
-      enum:
-      - Leisure
-      - Business
-      - Student
-      type: string
-    StringUpdateValue:
-      title: String update value
+    AddressParameters:
+      title: Address parameters
       type: object
       properties:
-        Value:
-          type: string
-          description: Value which is to be updated.
-          nullable: true
+        Line1:
+          type:
+          - string
+          - 'null'
+          description: First line of the address.
+          example: string
+        Line2:
+          type:
+          - string
+          - 'null'
+          description: Second line of the address.
+          example: string
+        City:
+          type:
+          - string
+          - 'null'
+          description: The city.
+          example: string
+        PostalCode:
+          type:
+          - string
+          - 'null'
+          description: Postal code.
+          format: postal-code
+          example: string
+        CountryCode:
+          type:
+          - string
+          - 'null'
+          description: ISO 3166-1 code of the Country.
+          example: string
+        CountrySubdivisionCode:
+          type:
+          - string
+          - 'null'
+          description: ISO 3166-2 code of the administrative division, e.g. DE-BW
           example: string
       additionalProperties: false
-      x-schema-id: StringUpdateValue
-    DocumentParameters:
-      title: Identity document parameters
+      description: New address details.
+      x-schema-id: AddressParameters
+    PaymentItemOld:
+      title: Payment item
+      required:
+      - AccountId
+      - AccountingState
+      - Amount
+      - ConsumedUtc
+      - Data
+      - Id
+      - OriginalAmount
+      - State
       type: object
       properties:
-        Number:
+        Id:
           type: string
+          description: Unique identifier of the item.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        AccountId:
+          type: string
+          description: Unique identifier of the account (for example `Customer`) the item belongs to.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        BillId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the `Bill` the item is assigned to.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        AccountingCategoryId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the `AccountingCategory` the item belongs to.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Amount:
+          title: Extended amount
+          allOf:
+          - $ref: '#/components/schemas/ExtendedAmount'
+          description: Item's amount, negative amount represents either rebate or a payment.
+          example: string
+        OriginalAmount:
+          title: Extended amount
+          allOf:
+          - $ref: '#/components/schemas/ExtendedAmount'
+          description: Amount of item; note a negative amount represents a rebate or payment. Contains the earliest known value in conversion chain.
+          example: string
+        AmountDefault:
+          title: Extended amount
+          allOf:
+          - $ref: '#/components/schemas/ExtendedAmount'
+          description: Item's amount in property's default currency, negative amount represents either rebate or a payment.
+          deprecated: true
+          example: string
+        Notes:
+          type:
+          - string
+          - 'null'
+          description: Additional notes.
+          example: string
+        SettlementId:
+          type:
+          - string
+          - 'null'
+          description: Identifier of the settled payment from the external system (ApplePay/GooglePay).
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        ConsumedUtc:
+          minLength: 1
+          type: string
+          description: Date and time of the item consumption in UTC timezone in ISO 8601 format.
+          example: string
+        ClosedUtc:
+          type:
+          - string
+          - 'null'
+          description: Date and time of the item bill closure in UTC timezone in ISO 8601 format.
+          example: string
+        AccountingState:
+          minLength: 1
+          type: string
+          description: Accounting state of the item.
+          example: string
+        State:
+          minLength: 1
+          type: string
+          description: Payment state of the item.
+          example: string
+        Identifier:
+          type:
+          - string
+          - 'null'
+          description: External payment identifier.
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Data:
+          title: Payment item data
+          type: object
+          properties:
+            Discriminator:
+              $ref: '#/components/schemas/PaymentType'
+            Value:
+              oneOf:
+              - $ref: '#/components/schemas/PaymentCardPaymentData'
+              - $ref: '#/components/schemas/InvoicePaymentData'
+              description: Based on payment item data discriminator or `null` for types without any additional data.
+          description: Additional data specific to particular payment item.
+          x-coproduct: true
+          x-schema-id: PaymentItemOldDataCoproductOfPaymentType
+      additionalProperties: false
+      description: ''
+      x-schema-id: PaymentItemOld
+    IdentityDocument:
+      title: Identity document
+      type: object
+      properties:
+        Id:
+          type: string
+          description: Unique identifier of the document.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        CustomerId:
+          type: string
+          description: Identifier of the `Customer`.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Type:
+          title: Document type
+          allOf:
+          - $ref: '#/components/schemas/IdentityDocumentTypeEnum'
+          description: 'Type of the document.
+
+
+            IdentityCard
+
+
+            Passport
+
+
+            Visa
+
+
+            DriversLicense'
+          x-enumNames:
+          - IdentityCard
+          - Passport
+          - Visa
+          - DriversLicense
+          x-enumDescriptions:
+          - ''
+          - ''
+          - ''
+          - ''
+          example: string
+        Number:
+          type:
+          - string
+          - 'null'
           description: Number of the document (e.g. passport number).
-          nullable: true
           example: '1001'
         Expiration:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Expiration date in ISO 8601 format.
           format: date
-          nullable: true
           example: '2026-06-02'
         Issuance:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Date of issuance in ISO 8601 format.
           format: date
-          nullable: true
           example: '2026-06-02'
         IssuingCountryCode:
-          type: string
+          type:
+          - string
+          - 'null'
           description: ISO 3166-1 code of the `Country`.
-          nullable: true
           example: string
         IssuingCountrySubdivisionCode:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Identifier of the country subdivision where the document was issued (province, state or region).
-          nullable: true
           example: string
         IssuingCity:
+          type:
+          - string
+          - 'null'
+          description: City where the document was issued.
+          example: string
+        IdentityDocumentSupportNumber:
+          type:
+          - string
+          - 'null'
+          description: Identity document support number. Only required for Spanish identity cards in Spanish hotels.
+          example: '1001'
+      additionalProperties: false
+      x-schema-id: IdentityDocument
+    Customer:
+      title: Customer
+      required:
+      - ChainId
+      - Classifications
+      - CreatedUtc
+      - CreatorProfileId
+      - Id
+      - IsActive
+      - LastName
+      - Number
+      - Options
+      - PreferredSpaceFeatures
+      - UpdatedUtc
+      - UpdaterProfileId
+      type: object
+      properties:
+        Id:
           type: string
-          description: City from which document issued
-          nullable: true
+          description: Unique identifier of the customer.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        ChainId:
+          type: string
+          description: Unique identifier of the chain.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Number:
+          maxLength: 19
+          minLength: 1
+          type: string
+          description: Unique number of the customer (max 19 digits).
+          example: '1001'
+        Title:
+          allOf:
+          - $ref: '#/components/schemas/Title'
+          description: 'Title of the customer.
+
+
+            Mister (Mr.)
+
+
+            Miss (Ms.)
+
+
+            Misses (Mrs.)'
+          example: string
+        Sex:
+          allOf:
+          - $ref: '#/components/schemas/SexEnum'
+          description: 'Sex of the customer.
+
+
+            Male
+
+
+            Female'
+          example: string
+        FirstName:
+          type:
+          - string
+          - 'null'
+          description: First name of the customer.
+          example: Example Name
+        LastName:
+          minLength: 1
+          type: string
+          description: Last name of the customer.
+          example: Example Name
+        SecondLastName:
+          type:
+          - string
+          - 'null'
+          description: Second last name of the customer.
+          example: Example Name
+        NationalityCode:
+          type:
+          - string
+          - 'null'
+          description: ISO 3166-1 code of the [Country](https://mews-systems.gitbook.io/connector-api/operations/countries/#country).
+          example: string
+        PreferredLanguageCode:
+          type:
+          - string
+          - 'null'
+          description: 'Language and culture code of the customer''s preferred language, according to their profile. For example: `en-GB`, `fr-CA`.'
+          example: string
+        LanguageCode:
+          type:
+          - string
+          - 'null'
+          description: Language and culture code of the customer's language, based on multiple sources. These sources include the preferred language specified in internal data based on previous bookings, and the preferred language of the customer specified in their profile. If neither of these sources are present, we use the native language based on the customer's nationality. The format is, for example, `en-US` or `fr-FR`.
+          example: string
+        BirthDate:
+          type:
+          - string
+          - 'null'
+          description: Date of birth in ISO 8601 format.
+          example: string
+        BirthCountryCode:
+          type:
+          - string
+          - 'null'
+          description: ISO 3166-1 alpha-2 code of the birth country.
+          example: string
+        BirthCountrySubdivisionCode:
+          type:
+          - string
+          - 'null'
+          description: ISO 3166-2 code of the administrative division, e.g. ES-C.
+          example: string
+        BirthPlace:
+          type:
+          - string
+          - 'null'
+          description: Place of birth.
+          example: string
+        Occupation:
+          type:
+          - string
+          - 'null'
+          description: Occupation of the customer.
+          example: string
+        Email:
+          type:
+          - string
+          - 'null'
+          description: Email address of the customer.
+          example: partner@example.com
+        HasOtaEmail:
+          type: boolean
+          description: Whether the customer's email address is a temporary email address from an OTA. For more details, see the [product documentation](https://help.mews.com/s/article/how-to-maintain-ota-guest-profiles-with-verified-email-addresses-obtained-from-the-guest-portal).
+          example: true
+        Phone:
+          type:
+          - string
+          - 'null'
+          description: Phone number of the customer (possibly mobile).
+          example: string
+        TaxIdentificationNumber:
+          type:
+          - string
+          - 'null'
+          description: Tax identification number of the customer.
+          example: '1001'
+        LoyaltyCode:
+          type:
+          - string
+          - 'null'
+          description: Loyalty code of the customer.
+          example: string
+        AccountingCode:
+          type:
+          - string
+          - 'null'
+          description: Accounting code of the customer.
+          example: string
+        BillingCode:
+          type:
+          - string
+          - 'null'
+          description: Billing code of the customer.
+          example: string
+        Notes:
+          type:
+          - string
+          - 'null'
+          description: Internal notes about the customer.
+          example: string
+        CarRegistrationNumber:
+          maxLength: 255
+          type:
+          - string
+          - 'null'
+          description: Registration number of the customer's car.
+          example: '1001'
+        DietaryRequirements:
+          maxLength: 255
+          type:
+          - string
+          - 'null'
+          description: Customer's dietary requirements, e.g. Vegan, Halal.
+          example: string
+        CreatedUtc:
+          minLength: 1
+          type: string
+          description: Creation date and time of the customer in UTC timezone in ISO 8601 format.
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+        UpdatedUtc:
+          minLength: 1
+          type: string
+          description: Last update date and time of the customer in UTC timezone in ISO 8601 format.
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+        Passport:
+          title: Identity document
+          allOf:
+          - $ref: '#/components/schemas/IdentityDocument'
+          deprecated: true
+          x-deprecatedMessage: Use [Get all identity documents](https://mews-systems.gitbook.io/connector-api/operations/identitydocuments#get-all-identity-documents) to fetch identity documents.
+          example: string
+        IdentityCard:
+          title: Identity document
+          allOf:
+          - $ref: '#/components/schemas/IdentityDocument'
+          deprecated: true
+          x-deprecatedMessage: Use [Get all identity documents](https://mews-systems.gitbook.io/connector-api/operations/identitydocuments#get-all-identity-documents) to fetch identity documents.
+          example: string
+        Visa:
+          title: Identity document
+          allOf:
+          - $ref: '#/components/schemas/IdentityDocument'
+          deprecated: true
+          x-deprecatedMessage: Use [Get all identity documents](https://mews-systems.gitbook.io/connector-api/operations/identitydocuments#get-all-identity-documents) to fetch identity documents.
+          example: string
+        DriversLicense:
+          title: Identity document
+          allOf:
+          - $ref: '#/components/schemas/IdentityDocument'
+          deprecated: true
+          x-deprecatedMessage: Use [Get all identity documents](https://mews-systems.gitbook.io/connector-api/operations/identitydocuments#get-all-identity-documents) to fetch identity documents.
+          example: string
+        Address:
+          title: Address
+          allOf:
+          - $ref: '#/components/schemas/OldAddress'
+          description: ''
+          deprecated: true
+          x-deprecatedMessage: Use `AddressId` instead.
+          example: string
+        AddressId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the `Address` of the customer.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Classifications:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomerClassificationEnum'
+          description: Classifications of the customer.
+        Options:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomerOptionsEnum'
+          description: Options of the customer.
+        ItalianDestinationCode:
+          type:
+          - string
+          - 'null'
+          description: Value of Italian destination code.
+          example: string
+        ItalianFiscalCode:
+          type:
+          - string
+          - 'null'
+          description: Value of Italian fiscal code.
+          example: string
+        ItalianLotteryCode:
+          type:
+          - string
+          - 'null'
+          description: Italian lottery code.
+          example: string
+        CompanyId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of [Company](https://mews-systems.gitbook.io/connector-api/operations/companies/#company) the customer is associated with.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        MergeTargetId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the account ([Customer](https://mews-systems.gitbook.io/connector-api/operations/#customer)) to which this customer is linked.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        ActivityState:
+          type:
+          - string
+          - 'null'
+          description: '[Activity State](https://mews-systems.gitbook.io/connector-api/operations/#activity-state) of customer record, i.e. whether active or deleted.'
+          deprecated: true
+          x-deprecatedMessage: Use `IsActive` instead.
+          example: string
+        IsActive:
+          type: boolean
+          description: Whether the customer record is still active.
+          example: true
+        PreferredSpaceFeatures:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceFeatureClassification'
+          description: A list of room preferences, such as view type, bed type, and amenities.
+        CreatorProfileId:
+          type: string
+          description: Unique identifier of the user who created the customer.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        UpdaterProfileId:
+          type: string
+          description: Unique identifier of the user who last updated the customer.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      additionalProperties: false
+      x-schema-id: Customer
+    OrderItemOld:
+      title: Order item
+      required:
+      - AccountId
+      - AccountingState
+      - Amount
+      - CreatedUtc
+      - CreatorProfileId
+      - Data
+      - Id
+      - OrderId
+      - OriginalAmount
+      - RevenueType
+      - UnitAmount
+      - UpdatedUtc
+      - UpdaterProfileId
+      type: object
+      properties:
+        Id:
+          type: string
+          description: Unique identifier of the item.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        AccountId:
+          type: string
+          description: Unique identifier of the account (for example `Customer`) the item belongs to.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        OrderId:
+          type: string
+          description: Unique identifier of the order (or `Reservation` which is a special type of order) the item belongs to.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        BillId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the `Bill` the item is assigned to.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        AccountingCategoryId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the `AccountingCategory` the item belongs to.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        UnitCount:
+          type: integer
+          description: Unit count of item, i.e. the number of sub-items or units, if applicable.
+          format: int32
+          example: 1
+        UnitAmount:
+          title: Amount
+          allOf:
+          - $ref: '#/components/schemas/Amount'
+          description: Unit amount of item, i.e. the amount of each individual sub-item or unit, if applicable.
+          example: string
+        Amount:
+          title: Extended amount
+          allOf:
+          - $ref: '#/components/schemas/ExtendedAmount'
+          description: Amount of item; note a negative amount represents a rebate or payment.
+          example: string
+        OriginalAmount:
+          title: Extended amount
+          allOf:
+          - $ref: '#/components/schemas/ExtendedAmount'
+          description: Amount of item; note a negative amount represents a rebate or payment. Contains the earliest known value in conversion chain.
+          example: string
+        RevenueType:
+          minLength: 1
+          type: string
+          description: Revenue type of the item.
+          example: string
+        CreatorProfileId:
+          type: string
+          description: Unique identifier of the user who created the item.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        UpdaterProfileId:
+          type: string
+          description: Unique identifier of the user who updated the item.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        CreatedUtc:
+          minLength: 1
+          type: string
+          description: Creation date and time of the item in UTC timezone in ISO 8601 format.
+          format: date
+          example: '2026-06-02'
+        UpdatedUtc:
+          minLength: 1
+          type: string
+          description: Last update date and time of the item in UTC timezone in ISO 8601 format.
+          format: date
+          example: '2026-06-02'
+        ConsumedUtc:
+          type:
+          - string
+          - 'null'
+          description: Date and time of the item consumption in UTC timezone in ISO 8601 format.
+          format: date
+          example: '2026-06-02'
+        CanceledUtc:
+          type:
+          - string
+          - 'null'
+          description: Cancellation date and time of the item in UTC timezone in ISO 8601 format.
+          format: date
+          example: '2026-06-02'
+        ClosedUtc:
+          type:
+          - string
+          - 'null'
+          description: Date and time of the item bill closure in UTC timezone in ISO 8601 format.
+          format: date
+          example: '2026-06-02'
+        StartUtc:
+          type:
+          - string
+          - 'null'
+          description: Start date and time of the item in UTC timezone in ISO 8601 format.
+          format: date
+          example: '2026-06-02'
+        AccountingState:
+          minLength: 1
+          type: string
+          description: Accounting state of the item.
+          example: string
+        Data:
+          title: Order item data
+          type: object
+          properties:
+            Discriminator:
+              $ref: '#/components/schemas/OrderItemTypeOld'
+            Value:
+              oneOf:
+              - $ref: '#/components/schemas/RebateOrderItemData'
+              - $ref: '#/components/schemas/ProductOrderItemData'
+              description: Based on order item discriminator or `null` for types without any additional data.
+          description: Additional data specific to particular order item.
+          x-coproduct: true
+          x-schema-id: OrderItemOldDataCoproductOfOrderItemTypeOld
+      additionalProperties: false
+      x-schema-id: OrderItemOld
+    CustomerSearchParameters:
+      title: CustomerSearchParameters
+      required:
+      - AccessToken
+      - Client
+      - ClientToken
+      type: object
+      properties:
+        ClientToken:
+          minLength: 1
+          type: string
+          description: Token identifying the client application.
+          example: string
+        AccessToken:
+          minLength: 1
+          type: string
+          description: Access token of the client application.
+          example: string
+        Client:
+          minLength: 1
+          type: string
+          description: Name and version of the client application.
+          example: string
+        Name:
+          type:
+          - string
+          - 'null'
+          description: Name to search by (applies to first name, last name, and full name).
+          example: Example Name
+        ResourceId:
+          type:
+          - string
+          - 'null'
+          description: Identifier of [Resource](https://mews-systems.gitbook.io/connector-api/operations/resources/#resource) to search by (members of reservation assigned there will be returned).
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Extent:
+          title: Customer extent
+          allOf:
+          - $ref: '#/components/schemas/CustomerExtent'
+          description: Extent of data to be returned.
+          example: string
+      additionalProperties: false
+      x-schema-id: CustomerSearchParameters
+    CustomerRelationshipFilterParameters:
+      title: CustomerRelationshipFilterParameters
+      required:
+      - AccessToken
+      - Client
+      - ClientToken
+      - CustomerIds
+      - Limitation
+      type: object
+      properties:
+        ClientToken:
+          minLength: 1
+          type: string
+          description: Token identifying the client application.
+          example: string
+        AccessToken:
+          minLength: 1
+          type: string
+          description: Access token of the client application.
+          example: string
+        Client:
+          minLength: 1
+          type: string
+          description: Name and version of the client application.
+          example: string
+        Limitation:
+          allOf:
+          - $ref: '#/components/schemas/Limitation'
+          description: Limitation on the quantity of data returned and optional Cursor for the starting point of data.
+          example: string
+        ChainIds:
+          maxItems: 1000
+          minItems: 1
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: uuid
+          description: Unique identifiers of `Chain`. If not specified, the operation returns data for all chains within scope of the Access Token.
+        CustomerIds:
+          maxItems: 100
+          minItems: 1
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Unique identifiers of `Customer`.
+      additionalProperties: false
+      x-schema-id: CustomerRelationshipFilterParameters
+    OldAddress:
+      title: Address
+      type: object
+      properties:
+        Id:
+          type: string
+          description: Unique identifier of the address.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Line1:
+          type:
+          - string
+          - 'null'
+          description: First line of the address.
+          example: string
+        Line2:
+          type:
+          - string
+          - 'null'
+          description: Second line of the address.
+          example: string
+        City:
+          type:
+          - string
+          - 'null'
+          description: The city.
+          example: string
+        PostalCode:
+          type:
+          - string
+          - 'null'
+          description: Postal code.
+          example: string
+        CountryCode:
+          type:
+          - string
+          - 'null'
+          description: ISO 3166-1 code of the `Country`.
+          example: string
+        CountrySubdivisionCode:
+          type:
+          - string
+          - 'null'
+          description: ISO 3166-2 code of the administrative division, e.g. `DE-BW`.
+          example: string
+        Latitude:
+          type:
+          - number
+          - 'null'
+          description: The latitude.
+          format: double
+          example: 100.0
+        Longitude:
+          type:
+          - number
+          - 'null'
+          description: The longitude.
+          format: double
+          example: 100.0
+      additionalProperties: false
+      description: ''
+      x-schema-id: OldAddress
+    ReservationOld:
+      title: Reservation (ver 2017-04-12)
+      required:
+      - AssignedResourceLocked
+      - CompanionIds
+      - CreatedUtc
+      - CustomerId
+      - EndUtc
+      - GroupId
+      - Id
+      - Number
+      - Options
+      - Origin
+      - OwnerId
+      - PersonCounts
+      - RateId
+      - RequestedCategoryId
+      - ServiceId
+      - StartUtc
+      - State
+      - UpdatedUtc
+      type: object
+      properties:
+        Id:
+          type: string
+          description: Unique identifier of the reservation.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        ServiceId:
+          type: string
+          description: Unique identifier of the Service that is reserved.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        GroupId:
+          type: string
+          description: Unique identifier of the Reservation group.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Number:
+          minLength: 1
+          type: string
+          description: Confirmation number of the reservation in Mews.
+          example: '1001'
+        ChannelNumber:
+          type:
+          - string
+          - 'null'
+          description: Number of the reservation within the Channel (i.e. OTA, GDS, CRS, etc) in case the reservation group originates there (e.g. Booking.com confirmation number).
+          example: '1001'
+        ChannelManagerNumber:
+          type:
+          - string
+          - 'null'
+          description: Unique number of the reservation within the reservation group.
+          example: '1001'
+        ChannelManagerGroupNumber:
+          type:
+          - string
+          - 'null'
+          description: Number of the reservation group within a Channel manager that transferred the reservation from Channel to Mews.
+          example: '1001'
+        ChannelManager:
+          type:
+          - string
+          - 'null'
+          description: Name of the Channel manager (e.g. AvailPro, SiteMinder, TravelClick, etc).
+          example: string
+        State:
+          $ref: '#/components/schemas/ServiceOrderStateOld'
+        Origin:
+          $ref: '#/components/schemas/ReservationOldOrigin'
+        OriginDetails:
+          type:
+          - string
+          - 'null'
+          description: Details about the reservation origin.
+          example: string
+        Purpose:
+          anyOf:
+          - $ref: '#/components/schemas/ReservationPurpose'
+          description: Purpose of the reservation.
+          example: string
+        CreatedUtc:
+          minLength: 1
+          type: string
+          description: Creation date and time of the reservation in UTC timezone in ISO 8601 format.
+          example: string
+        UpdatedUtc:
+          minLength: 1
+          type: string
+          description: Last update date and time of the reservation in UTC timezone in ISO 8601 format.
+          example: string
+        CancelledUtc:
+          type:
+          - string
+          - 'null'
+          description: Cancellation date and time in UTC timezone in ISO 8601 format.
+          example: string
+        StartUtc:
+          minLength: 1
+          type: string
+          description: Start of the reservation in UTC timezone in ISO 8601 format. This is either the scheduled reservation start time, or the actual customer check-in time if this is earlier than the scheduled start time.
+          example: string
+        EndUtc:
+          minLength: 1
+          type: string
+          description: End of the reservation (departure) in UTC timezone in ISO 8601 format.
+          example: string
+        ReleasedUtc:
+          type:
+          - string
+          - 'null'
+          description: Date when the optional reservation is released in UTC timezone in ISO 8601 format.
+          example: string
+        RequestedCategoryId:
+          type: string
+          description: Identifier of the requested Resource category.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        AssignedSpaceId:
+          type:
+          - string
+          - 'null'
+          description: Identifier of the assigned Space.
+          format: uuid
+          deprecated: true
+          x-deprecatedMessage: Use `AssignedResourceId` instead.
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        AssignedSpaceLocked:
+          type: boolean
+          description: Whether the reservation is locked to the assigned Space and cannot be moved.
+          deprecated: true
+          x-deprecatedMessage: Use `AssignedResourceLocked` instead.
+          example: true
+        AssignedResourceId:
+          type:
+          - string
+          - 'null'
+          description: Identifier of the assigned Resource.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        AssignedResourceLocked:
+          type: boolean
+          description: Whether the reservation is locked to the assigned Resource and cannot be moved.
+          example: true
+        BusinessSegmentId:
+          type:
+          - string
+          - 'null'
+          description: Identifier of the reservation Business segment.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        CompanyId:
+          type:
+          - string
+          - 'null'
+          description: Identifier of the Company on behalf of which the reservation was made.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        TravelAgencyId:
+          type:
+          - string
+          - 'null'
+          description: Identifier of the Company that mediated the reservation.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        AvailabilityBlockId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the Availability block the reservation is assigned to.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        RateId:
+          type: string
+          description: Identifier of the reservation Rate.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        VoucherId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the Voucher that has been used to create reservation.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        CreditCardId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the Credit card.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        CancellationReason:
+          anyOf:
+          - $ref: '#/components/schemas/CancellationReason'
+          description: Cancellation reason of the reservation.
+          example: string
+        AdultCount:
+          type: integer
+          description: Count of adults the reservation was booked for.
+          format: int32
+          deprecated: true
+          x-deprecatedMessage: Use `PersonCounts` instead.
+          example: 1
+        ChildCount:
+          type: integer
+          description: Count of children the reservation was booked for.
+          format: int32
+          deprecated: true
+          x-deprecatedMessage: Use `PersonCounts` instead.
+          example: 1
+        PersonCounts:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReservationPersonCount'
+          description: Number of people per age category the reservation was booked for.
+        OwnerId:
+          type: string
+          description: Unique identifier of the Customer or Company who owns the reservation.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        CustomerId:
+          type: string
+          description: Unique identifier of the Customer who owns the reservation.
+          format: uuid
+          deprecated: true
+          x-deprecatedMessage: Use `OwnerId` instead.
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        BookerId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the Customer on whose behalf the reservation was made.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        CompanionIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Unique identifiers of the `Customer`s that will use the resource.
+          deprecated: true
+          x-deprecatedMessage: Use `companionships/getAll` instead.
+        ChannelManagerId:
+          type:
+          - string
+          - 'null'
+          description: Channel Manager number.
+          deprecated: true
+          x-deprecatedMessage: Use `ChannelManagerNumber` instead.
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Options:
+          title: Reservation options
+          allOf:
+          - $ref: '#/components/schemas/ReservationOptions'
+          description: Options of the reservation.
           example: string
       additionalProperties: false
       description: ''
-      x-schema-id: DocumentParameters
+      x-schema-id: ReservationOld
+    Title:
+      title: Title
+      enum:
+      - Mister
+      - Miss
+      - Misses
+      type: string
+      description: 'Type of the title prefix of the customer.
+
+
+        Note that the value should not be used as-is, but localized. For example, the value `Misses` should be displayed as `Mrs.` in English and `Fr.` in German.
+
+
+        Mister (Mr.)
+
+
+        Miss (Ms.)
+
+
+        Misses (Mrs.)'
+      x-enumNames:
+      - Mister
+      - Miss
+      - Misses
+      x-enumDescriptions:
+      - Mr.
+      - Ms.
+      - Mrs.
+      x-schema-id: Title
+      x-showDescription: true
+    CustomerMergeParameters:
+      title: CustomerMergeParameters
+      required:
+      - AccessToken
+      - Client
+      - ClientToken
+      - SourceCustomerId
+      - TargetCustomerId
+      type: object
+      properties:
+        ClientToken:
+          minLength: 1
+          type: string
+          description: Token identifying the client application.
+          example: string
+        AccessToken:
+          minLength: 1
+          type: string
+          description: Access token of the client application.
+          example: string
+        Client:
+          minLength: 1
+          type: string
+          description: Name and version of the client application.
+          example: string
+        SourceCustomerId:
+          type: string
+          description: Unique identifier of the source [Customer](https://mews-systems.gitbook.io/connector-api/operations/#customer).
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        TargetCustomerId:
+          type: string
+          description: Unique identifier of the target [Customer](https://mews-systems.gitbook.io/connector-api/operations/#customer).
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      additionalProperties: false
+      x-schema-id: CustomerMergeParameters
+    ReservationOptions:
+      title: Reservation options
+      required:
+      - AllCompanionsCheckedIn
+      - AnyCompanionCheckedIn
+      - OwnerCheckedIn
+      type: object
+      properties:
+        OwnerCheckedIn:
+          type: boolean
+          description: Owner of the reservation checked in.
+          example: true
+        AllCompanionsCheckedIn:
+          type: boolean
+          description: All companions of the reservation checked in.
+          example: true
+        AnyCompanionCheckedIn:
+          type: boolean
+          description: Any companion of the reservation checked in.
+          example: true
+      additionalProperties: false
+      x-schema-id: ReservationOptions
+    TaxBreakdown:
+      title: Tax breakdown
+      required:
+      - Items
+      type: object
+      properties:
+        Items:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaxBreakdownItem'
+          description: Tax breakdown items per each tax rate applied.
+      additionalProperties: false
+      x-schema-id: TaxBreakdown
+    Sex:
+      title: Sex
+      enum:
+      - Male
+      - Female
+      type: string
+    RebateOrderItemData:
+      title: Rebate order item data
+      required:
+      - RebatedItemId
+      type: object
+      properties:
+        RebatedItemId:
+          type: string
+          description: Unique identifier of `OrderItem` which has been rebated by current item.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      additionalProperties: false
+      x-schema-id: RebateOrderItemData
+    Limitation:
+      title: Limitation
+      required:
+      - Count
+      type: object
+      properties:
+        Count:
+          type: integer
+          format: int32
+          example: 1
+        Cursor:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      additionalProperties: false
+      description: Limitation on the quantity of data returned.
+      x-schema-id: Limitation
+    CustomerItemResult:
+      title: CustomerItemResult
+      type: object
+      properties:
+        Customers:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/CustomerItems'
+          description: The customers with their items.
+      additionalProperties: false
+      x-schema-id: CustomerItemResult
+    ProductOrderItemData:
+      title: Product order item data
+      required:
+      - ProductId
+      type: object
+      properties:
+        ProductId:
+          type: string
+          description: Unique identifier of the `Product`.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        AgeCategoryId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the `AgeCategory`.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      additionalProperties: false
+      x-schema-id: ProductOrderItemData
+    ReservationOldOrigin:
+      title: Reservation origin (ver 2017-04-12)
+      enum:
+      - Distributor
+      - ChannelManager
+      - Import
+      - Connector
+      - Navigator
+      - CommanderInPerson
+      - CommanderChannel
+      - CommanderPhone
+      - CommanderEmail
+      - CommanderWebsite
+      - CommanderMessage
+      - CommanderCallCenter
+      - CommanderRoomingList
+      type: string
+      x-enumDescriptions:
+      - From the Mews Booking Engine or Booking Engine API.
+      - From a channel manager.
+      - From an import process.
+      - From the Mews Connector API.
+      - From Mews Guest Services.
+      - From Mews Operations, in person.
+      - From Mews Operations, via channel.
+      - From Mews Operations, via telephone.
+      - From Mews Operations, via email.
+      - From Mews Operations, via website.
+      - From Mews Operations, via message person.
+      - From Mews Operations, via call center.
+      - From Mews Operations, via rooming list.
+    CustomerRelationshipTypeEnum:
+      title: Customer relationship type
+      enum:
+      - Spouse
+      - Child
+      - Parent
+      - OtherFamily
+      - Friend
+      - Colleague
+      - Other
+      type: string
+      description: '
+
+
+        Spouse
+
+
+        Child
+
+
+        Parent
+
+
+        OtherFamily (Any familial relationship that doesn''t fit for the options provided)
+
+
+        Friend
+
+
+        Colleague
+
+
+        Other'
+      x-enumNames:
+      - Spouse
+      - Child
+      - Parent
+      - OtherFamily
+      - Friend
+      - Colleague
+      - Other
+      x-enumDescriptions:
+      - ''
+      - ''
+      - ''
+      - Any familial relationship that doesn't fit for the options provided
+      - ''
+      - ''
+      - ''
+      x-extensible: true
+    CustomerUpdateParameters:
+      title: CustomerUpdateParameters
+      required:
+      - AccessToken
+      - Client
+      - ClientToken
+      - CustomerId
+      type: object
+      properties:
+        ClientToken:
+          minLength: 1
+          type: string
+          description: Token identifying the client application.
+          example: string
+        AccessToken:
+          minLength: 1
+          type: string
+          description: Access token of the client application.
+          example: string
+        Client:
+          minLength: 1
+          type: string
+          description: Name and version of the client application.
+          example: string
+        ChainId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the chain. Required when using `PortfolioAccessTokens`, ignored otherwise.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        CustomerId:
+          type: string
+          description: Unique identifier of the `Customer` to be updated.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Title:
+          allOf:
+          - $ref: '#/components/schemas/Title'
+          description: 'New title.
+
+
+            Mister (Mr.)
+
+
+            Miss (Ms.)
+
+
+            Misses (Mrs.)'
+          example: string
+        FirstName:
+          type:
+          - string
+          - 'null'
+          description: New first name.
+          example: Example Name
+        LastName:
+          type:
+          - string
+          - 'null'
+          description: New last name.
+          example: Example Name
+        SecondLastName:
+          type:
+          - string
+          - 'null'
+          description: New second last name.
+          example: Example Name
+        NationalityCode:
+          type:
+          - string
+          - 'null'
+          description: New nationality code as ISO 3166-1 code of the `Country`.
+          example: string
+        PreferredLanguageCode:
+          type:
+          - string
+          - 'null'
+          description: 'Language and culture code of the customer''s preferred language, according to their profile. For example: `en-GB`, `fr-CA`.'
+          example: string
+        Sex:
+          allOf:
+          - $ref: '#/components/schemas/SexEnum'
+          description: 'Sex of the customer.
+
+
+            Male
+
+
+            Female'
+          example: string
+        BirthDate:
+          type:
+          - string
+          - 'null'
+          description: New birth date in ISO 8601 format.
+          format: date
+          example: '2026-06-02'
+        BirthCountryCode:
+          type:
+          - string
+          - 'null'
+          description: Country of birth.
+          example: string
+        BirthCountrySubdivisionCode:
+          type:
+          - string
+          - 'null'
+          description: Province of birth.
+          example: string
+        BirthPlace:
+          type:
+          - string
+          - 'null'
+          description: New birth place.
+          example: string
+        Occupation:
+          type:
+          - string
+          - 'null'
+          description: Occupation of the customer.
+          example: string
+        Email:
+          type:
+          - string
+          - 'null'
+          description: New email address.
+          format: email
+          example: partner@example.com
+        Phone:
+          type:
+          - string
+          - 'null'
+          description: New phone number.
+          format: tel
+          example: string
+        LoyaltyCode:
+          type:
+          - string
+          - 'null'
+          description: Loyalty code of the customer.
+          example: string
+        Notes:
+          type:
+          - string
+          - 'null'
+          description: Internal notes about the customer. Old value will be overwritten.
+          example: string
+        CarRegistrationNumber:
+          maxLength: 255
+          type:
+          - string
+          - 'null'
+          description: New registration number of the customer's car.
+          example: '1001'
+        DietaryRequirements:
+          maxLength: 255
+          type:
+          - string
+          - 'null'
+          description: Customer's dietary requirements, e.g. Vegan, Halal.
+          example: string
+        TaxIdentificationNumber:
+          type:
+          - string
+          - 'null'
+          description: New tax identification number of the customer.
+          example: '1001'
+        CompanyId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of `Company` the customer is associated with.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Address:
+          title: Address parameters
+          allOf:
+          - $ref: '#/components/schemas/AddressParameters'
+          description: New address details.
+          example: string
+        IdentityCard:
+          title: Identity document parameters
+          allOf:
+          - $ref: '#/components/schemas/DocumentParameters'
+          description: New identity card details.
+          deprecated: true
+          x-deprecatedMessage: Use [Update identity documents](https://mews-systems.gitbook.io/connector-api/operations/identitydocuments#update-identity-documents) to update document.
+          example: string
+        Passport:
+          title: Identity document parameters
+          allOf:
+          - $ref: '#/components/schemas/DocumentParameters'
+          description: New passport details.
+          deprecated: true
+          x-deprecatedMessage: Use [Update identity documents](https://mews-systems.gitbook.io/connector-api/operations/identitydocuments#update-identity-documents) to update document.
+          example: string
+        Visa:
+          title: Identity document parameters
+          allOf:
+          - $ref: '#/components/schemas/DocumentParameters'
+          description: New visa details.
+          deprecated: true
+          x-deprecatedMessage: Use [Update identity documents](https://mews-systems.gitbook.io/connector-api/operations/identitydocuments#update-identity-documents) to update document.
+          example: string
+        DriversLicense:
+          title: Identity document parameters
+          allOf:
+          - $ref: '#/components/schemas/DocumentParameters'
+          description: New drivers license details.
+          deprecated: true
+          x-deprecatedMessage: Use [Update identity documents](https://mews-systems.gitbook.io/connector-api/operations/identitydocuments#update-identity-documents) to update document.
+          example: string
+        Classifications:
+          uniqueItems: true
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/CustomerClassificationEnum'
+          description: New classifications of the customer.
+        Options:
+          uniqueItems: true
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/CustomerOptionEnum'
+          description: Options of the customer.
+        ItalianDestinationCode:
+          title: String update value
+          allOf:
+          - $ref: '#/components/schemas/StringUpdateValue'
+          description: New Italian destination code of customer.
+          example: string
+        ItalianFiscalCode:
+          title: String update value
+          allOf:
+          - $ref: '#/components/schemas/StringUpdateValue'
+          description: New Italian fiscal code of customer.
+          example: string
+        ItalianLotteryCode:
+          title: String update value
+          maxLength: 15
+          minLength: 2
+          allOf:
+          - $ref: '#/components/schemas/StringUpdateValue'
+          description: New Italian lottery code of customer.
+          example: string
+      additionalProperties: false
+      x-schema-id: CustomerUpdateParameters
     CancellationReason:
       enum:
       - Other
@@ -4418,6 +4124,454 @@ components:
       - BookingAbandoned
       - RequestedByBooker
       type: string
+    CustomerResult:
+      title: CustomerResult
+      required:
+      - Customers
+      type: object
+      properties:
+        Customers:
+          type: array
+          items:
+            $ref: '#/components/schemas/Customer'
+          description: The customers.
+        Documents:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/IdentityDocument'
+          description: The identity documents of customers.
+          deprecated: true
+          x-deprecatedMessage: Use [Get all identity documents](https://mews-systems.gitbook.io/connector-api/operations/identitydocuments#get-all-identity-documents) to fetch identity documents.
+        Cursor:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the last and hence oldest customer item returned. This can be used in [Limitation](https://mews-systems.gitbook.io/connector-api/guidelines/pagination/#limitation) in a subsequent request to fetch the next batch of older customers. If [Limitation](https://mews-systems.gitbook.io/connector-api/guidelines/pagination/#limitation) is specified in the request message, then Cursor will always be included in the response message; this is true even when using Extents set to false so that no actual data is returned.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      additionalProperties: false
+      x-schema-id: CustomerResult
+    IdentityDocumentTypeEnum:
+      title: Document type
+      enum:
+      - IdentityCard
+      - Passport
+      - Visa
+      - DriversLicense
+      type: string
+      description: '
+
+
+        IdentityCard
+
+
+        Passport
+
+
+        Visa
+
+
+        DriversLicense'
+      x-enumNames:
+      - IdentityCard
+      - Passport
+      - Visa
+      - DriversLicense
+      x-enumDescriptions:
+      - ''
+      - ''
+      - ''
+      - ''
+    CustomerOptionEnum:
+      title: Customer option
+      enum:
+      - SendMarketingEmails
+      - Invoiceable
+      - BillAddressObjection
+      - SendMarketingPostalMail
+      - SendPartnerMarketingEmails
+      - SendPartnerMarketingPostalMail
+      - WithdrawCardConsent
+      - GuestPhotoConsent
+      - IdPhotosConsent
+      type: string
+      description: '
+
+
+        SendMarketingEmails
+
+
+        Invoiceable
+
+
+        BillAddressObjection
+
+
+        SendMarketingPostalMail
+
+
+        SendPartnerMarketingEmails
+
+
+        SendPartnerMarketingPostalMail
+
+
+        WithdrawCardConsent
+
+
+        GuestPhotoConsent (Whether to ask for consent to take a guest photo.)
+
+
+        IdPhotosConsent (Whether to ask for consent to take identity document photos.)'
+      x-enumNames:
+      - SendMarketingEmails
+      - Invoiceable
+      - BillAddressObjection
+      - SendMarketingPostalMail
+      - SendPartnerMarketingEmails
+      - SendPartnerMarketingPostalMail
+      - WithdrawCardConsent
+      - GuestPhotoConsent
+      - IdPhotosConsent
+      x-enumDescriptions:
+      - ''
+      - ''
+      - ''
+      - ''
+      - ''
+      - ''
+      - ''
+      - Whether to ask for consent to take a guest photo.
+      - Whether to ask for consent to take identity document photos.
+    TaxValue:
+      title: Tax value
+      required:
+      - Value
+      type: object
+      properties:
+        Code:
+          type:
+          - string
+          - 'null'
+          description: Code corresponding to tax type.
+          example: string
+        Value:
+          type: number
+          description: Amount of tax applied.
+          format: double
+          example: 100.0
+      additionalProperties: false
+      x-schema-id: TaxValue
+    Unit:
+      type: object
+      additionalProperties: false
+    CustomerAddFileResult:
+      title: CustomerAddFileResult
+      required:
+      - FileId
+      type: object
+      properties:
+        FileId:
+          type: string
+          description: Unique identifier of the uploaded file.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      additionalProperties: false
+      x-schema-id: CustomerAddFileResult
+    ReservationPersonCount:
+      title: Age category parameters
+      required:
+      - AgeCategoryId
+      - Count
+      type: object
+      properties:
+        AgeCategoryId:
+          type: string
+          description: Unique identifier of the [Age category](https://mews-systems.gitbook.io/connector-api/operations/agecategories#age-category).
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Count:
+          type: integer
+          description: Number of people of a given age category. Only positive value is accepted.
+          format: int32
+          example: 1
+      additionalProperties: false
+      x-schema-id: ReservationPersonCount
+    CustomerItems:
+      title: Customer items
+      required:
+      - CustomerId
+      - Items
+      - OrderItems
+      - PaymentItems
+      type: object
+      properties:
+        CustomerId:
+          type: string
+          description: Unique identifier of the `Customer`.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Items:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccountingItem'
+          deprecated: true
+          x-deprecatedMessage: Use `OrderItems` and `PaymentItems` instead.
+        OrderItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrderItemOld'
+          description: The open order items (consumed items such as nights or products).
+        PaymentItems:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentItemOld'
+          description: The open payment items (such as cash, credit card payments or invoices).
+      additionalProperties: false
+      x-schema-id: CustomerItems
+    InvoicePaymentData:
+      title: Invoice payment item data
+      required:
+      - InvoiceId
+      type: object
+      properties:
+        InvoiceId:
+          type: string
+          description: Unique identifier of the invoice `Bill`.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      additionalProperties: false
+      x-schema-id: InvoicePaymentData
+    ConnectorApiExceptionResult:
+      title: ConnectorApiExceptionResult
+      type: object
+      properties:
+        Message:
+          type:
+          - string
+          - 'null'
+          example: string
+        RequestId:
+          type:
+          - string
+          - 'null'
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Details:
+          example: string
+      additionalProperties: false
+      x-schema-id: ConnectorApiExceptionResult
+    ChargeableCustomer:
+      title: Customer search result
+      required:
+      - Customer
+      type: object
+      properties:
+        Customer:
+          allOf:
+          - $ref: '#/components/schemas/Customer'
+          description: The found customer.
+          example: string
+        Reservation:
+          title: Reservation (ver 2017-04-12)
+          allOf:
+          - $ref: '#/components/schemas/ReservationOld'
+          description: Reservation of the customer in case they are currently staying in the property.
+          example: string
+      additionalProperties: false
+      x-schema-id: ChargeableCustomer
+    CustomerItemParameters:
+      title: CustomerItemParameters
+      required:
+      - AccessToken
+      - Client
+      - ClientToken
+      - CustomerIds
+      type: object
+      properties:
+        ClientToken:
+          minLength: 1
+          type: string
+          description: Token identifying the client application.
+          example: string
+        AccessToken:
+          minLength: 1
+          type: string
+          description: Access token of the client application.
+          example: string
+        Client:
+          minLength: 1
+          type: string
+          description: Name and version of the client application.
+          example: string
+        CustomerIds:
+          maxItems: 1000
+          minItems: 1
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Unique identifiers of `Customer`.
+        Currency:
+          type:
+          - string
+          - 'null'
+          description: ISO-4217 code of the [Currency](https://mews-systems.gitbook.io/connector-api/operations/currencies/#currency) the item costs should be converted to.
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+      additionalProperties: false
+      x-schema-id: CustomerItemParameters
+    CustomerOptionsEnum:
+      title: Customer option
+      enum:
+      - None
+      - SendMarketingEmails
+      - Invoiceable
+      - BillAddressObjection
+      - SendMarketingPostalMail
+      - SendPartnerMarketingEmails
+      - SendPartnerMarketingPostalMail
+      - WithdrawCardConsent
+      - GuestPhotoConsent
+      - IdPhotosConsent
+      type: string
+      description: '
+
+
+        None
+
+
+        SendMarketingEmails
+
+
+        Invoiceable
+
+
+        BillAddressObjection
+
+
+        SendMarketingPostalMail
+
+
+        SendPartnerMarketingEmails
+
+
+        SendPartnerMarketingPostalMail
+
+
+        WithdrawCardConsent
+
+
+        GuestPhotoConsent
+
+
+        IdPhotosConsent'
+      x-enumNames:
+      - None
+      - SendMarketingEmails
+      - Invoiceable
+      - BillAddressObjection
+      - SendMarketingPostalMail
+      - SendPartnerMarketingEmails
+      - SendPartnerMarketingPostalMail
+      - WithdrawCardConsent
+      - GuestPhotoConsent
+      - IdPhotosConsent
+      x-enumDescriptions:
+      - ''
+      - ''
+      - ''
+      - ''
+      - ''
+      - ''
+      - ''
+      - ''
+      - ''
+      - ''
+    ActivityStates:
+      title: Activity state
+      enum:
+      - Deleted
+      - Active
+      type: string
+      description: Activity states used for filtering.
+    OrderItemTypeOld:
+      title: Order item data discriminator
+      enum:
+      - CancellationFee
+      - Rebate
+      - Deposit
+      - ExchangeRateDifference
+      - CustomItem
+      - Surcharge
+      - SurchargeDiscount
+      - SpaceOrder
+      - ProductOrder
+      - Other
+      - TaxCorrection
+      - ResourceUpgradeFee
+      - InvoiceFee
+      type: string
+      x-enumDescriptions:
+      - No additional data.
+      - '[Rebate order item data](https://mews-systems.gitbook.io/connector-api/operations/accountingitems#rebate-order-item-data)'
+      - No additional data.
+      - No additional data.
+      - No additional data.
+      - No additional data.
+      - No additional data.
+      - No additional data.
+      - '[Product order item data](https://mews-systems.gitbook.io/connector-api/operations/accountingitems#product-order-item-data)'
+      - No additional data.
+      - No additional data.
+      - No additional data.
+      - No additional data.
+    DocumentParameters:
+      title: Identity document parameters
+      type: object
+      properties:
+        Number:
+          type:
+          - string
+          - 'null'
+          description: Number of the document (e.g. passport number).
+          example: '1001'
+        Expiration:
+          type:
+          - string
+          - 'null'
+          description: Expiration date in ISO 8601 format.
+          format: date
+          example: '2026-06-02'
+        Issuance:
+          type:
+          - string
+          - 'null'
+          description: Date of issuance in ISO 8601 format.
+          format: date
+          example: '2026-06-02'
+        IssuingCountryCode:
+          type:
+          - string
+          - 'null'
+          description: ISO 3166-1 code of the `Country`.
+          example: string
+        IssuingCountrySubdivisionCode:
+          type:
+          - string
+          - 'null'
+          description: Identifier of the country subdivision where the document was issued (province, state or region).
+          example: string
+        IssuingCity:
+          type:
+          - string
+          - 'null'
+          description: City from which document issued
+          example: string
+      additionalProperties: false
+      description: ''
+      x-schema-id: DocumentParameters
   securitySchemes:
     MewsClientToken:
       type: apiKey

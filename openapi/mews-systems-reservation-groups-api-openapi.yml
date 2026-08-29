@@ -1,4 +1,4 @@
-openapi: 3.0.4
+openapi: 3.2.0
 info:
   title: Mews Booking Engine API (Distributor) Account notes Reservation Groups API
   version: v1
@@ -343,112 +343,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    PaymentRequestState:
-      enum:
-      - Pending
-      - Completed
-      - Canceled
-      - Expired
-      type: string
-    PaymentRequest:
-      title: PaymentRequest
-      required:
-      - Id
-      - ReservationGroupId
-      - State
-      type: object
-      properties:
-        Id:
-          type: string
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        ReservationGroupId:
-          type: string
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        State:
-          $ref: '#/components/schemas/PaymentRequestState'
-      additionalProperties: false
-      x-schema-id: PaymentRequest
-    ReservationGroup_2:
-      title: Reservation Group
-      required:
-      - EnterpriseId
-      - Id
-      type: object
-      properties:
-        Id:
-          type: string
-          description: Unique identifier of the reservation group.
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Name:
-          type: string
-          description: Name of the reservation group, might be empty or same for multiple groups.
-          nullable: true
-          example: Example Name
-        ChannelManager:
-          type: string
-          description: Name of the corresponding channel manager.
-          nullable: true
-          example: string
-        ChannelManagerGroupNumber:
-          type: string
-          description: Identifier of the channel manager.
-          nullable: true
-          example: '1001'
-        EnterpriseId:
-          type: string
-          description: Unique identifier of the `Enterprise` the reservation group belongs to.
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-      additionalProperties: false
-      x-schema-id: ReservationGroup
-    Rate:
-      title: Rate
-      required:
-      - CurrencyCode
-      - Description
-      - Id
-      - IsPrivate
-      - Name
-      - Ordering
-      - RateGroupId
-      type: object
-      properties:
-        Id:
-          type: string
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        RateGroupId:
-          type: string
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Ordering:
-          type: integer
-          format: int32
-          example: 1
-        Name:
-          type: object
-          additionalProperties:
-            type: string
-            nullable: true
-        Description:
-          type: object
-          additionalProperties:
-            type: string
-            nullable: true
-        IsPrivate:
-          type: boolean
-          example: true
-        CurrencyCode:
-          maxLength: 3
-          minLength: 1
-          type: string
-          format: currency
-          example: EUR
-      additionalProperties: false
-      x-schema-id: Rate
     Amount:
       title: Amount
       required:
@@ -483,148 +377,45 @@ components:
           example: string
       additionalProperties: false
       x-schema-id: Amount
-    CreditCardData:
-      title: CreditCardData
+    PaymentRequest:
+      title: PaymentRequest
       required:
-      - Expiration
+      - Id
+      - ReservationGroupId
+      - State
       type: object
       properties:
-        PaymentGatewayData:
-          minLength: 11
+        Id:
           type: string
-          nullable: true
-          example: string
-        ObfuscatedCreditCardNumber:
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        ReservationGroupId:
           type: string
-          nullable: true
-          example: '1001'
-        Expiration:
-          minLength: 1
-          type: string
-          format: date
-          example: '2026-06-02'
-        HolderName:
-          type: string
-          nullable: true
-          example: Example Name
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        State:
+          $ref: '#/components/schemas/PaymentRequestState'
       additionalProperties: false
-      x-schema-id: CreditCardData
+      x-schema-id: PaymentRequest
     TimeFilterInterval:
       title: Time interval
       type: object
       properties:
         StartUtc:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
           example: '2026-06-02T14:30:00Z'
         EndUtc:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
           example: '2026-06-02T14:30:00Z'
       additionalProperties: false
-      description: "When a time interval is used for **filtering** (for example in parameters such as `CreatedUtc.StartUtc` / `CreatedUtc.EndUtc`), the following rules apply:\r\n\r\n- **Start equals End (equality mode)**  \r\n  If `StartUtc` and `EndUtc` are exactly the same timestamp, the filter is treated as an equality check for that precise moment in time:\r\n  \r\n  ```\r\n  CreatedUtc == StartUtc\r\n  ```\r\n  \r\n  This does not represent an interval; only records with `CreatedUtc` equal to that exact instant are returned.\r\n\r\n- **Start differs from End (interval mode)**  \r\n  If `StartUtc` and `EndUtc` are different, the filter is evaluated as a half-open interval:\r\n  \r\n  ```\r\n  StartUtc <= CreatedUtc < EndUtc\r\n  ```\r\n  \r\n  In other words, the start is inclusive and the end is exclusive.\r\n\r\nMake sure your integration takes inclusive Start / exclusive End behavior of time intervals into account so that no records at the boundaries are omitted."
+      description: "When a time interval is used for **filtering** (for example in parameters such as `CreatedUtc.StartUtc` / `CreatedUtc.EndUtc`), the following rules apply:\n\n- **Start equals End (equality mode)**  \n  If `StartUtc` and `EndUtc` are exactly the same timestamp, the filter is treated as an equality check for that precise moment in time:\n  \n  ```\n  CreatedUtc == StartUtc\n  ```\n  \n  This does not represent an interval; only records with `CreatedUtc` equal to that exact instant are returned.\n\n- **Start differs from End (interval mode)**  \n  If `StartUtc` and `EndUtc` are different, the filter is evaluated as a half-open interval:\n  \n  ```\n  StartUtc <= CreatedUtc < EndUtc\n  ```\n  \n  In other words, the start is inclusive and the end is exclusive.\n\nMake sure your integration takes inclusive Start / exclusive End behavior of time intervals into account so that no records at the boundaries are omitted."
       x-schema-id: TimeFilterInterval
-    Customer:
-      title: Customer
-      required:
-      - LastName
-      type: object
-      properties:
-        Email:
-          type: string
-          format: email
-          nullable: true
-          example: partner@example.com
-        FirstName:
-          type: string
-          nullable: true
-          example: Example Name
-        LastName:
-          minLength: 1
-          type: string
-          example: Example Name
-        Telephone:
-          type: string
-          format: tel
-          nullable: true
-          example: string
-        NationalityCode:
-          maxLength: 2
-          type: string
-          nullable: true
-          example: string
-        SendMarketingEmails:
-          type: boolean
-          nullable: true
-          example: true
-      additionalProperties: false
-      x-schema-id: Customer
-    CreateReservationGroupParameters:
-      title: CreateReservationGroupParameters
-      required:
-      - Client
-      - Customer
-      - FullAmounts
-      - HotelId
-      - Reservations
-      type: object
-      properties:
-        Client:
-          minLength: 1
-          type: string
-          example: string
-        LanguageCode:
-          type: string
-          nullable: true
-          example: string
-        CultureCode:
-          type: string
-          nullable: true
-          example: string
-        FullAmounts:
-          type: boolean
-          example: true
-        Session:
-          type: string
-          nullable: true
-          example: string
-        HotelId:
-          type: string
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        ConfigurationId:
-          type: string
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        AvailabilityBlockId:
-          type: string
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Customer:
-          allOf:
-          - $ref: '#/components/schemas/Customer'
-          example: string
-        Booker:
-          allOf:
-          - $ref: '#/components/schemas/Customer'
-          nullable: true
-          example: string
-        Reservations:
-          minItems: 1
-          type: array
-          items:
-            $ref: '#/components/schemas/Reservation'
-        CreditCardData:
-          allOf:
-          - $ref: '#/components/schemas/CreditCardData'
-          nullable: true
-          example: string
-      additionalProperties: false
-      x-schema-id: CreateReservationGroupParameters
     TaxBreakdownItem:
       title: TaxBreakdownItem
       required:
@@ -633,8 +424,9 @@ components:
       type: object
       properties:
         TaxRateCode:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           example: string
         NetValue:
           type: number
@@ -646,128 +438,6 @@ components:
           example: 100.0
       additionalProperties: false
       x-schema-id: TaxBreakdownItem
-    TaxValue:
-      title: TaxValue
-      required:
-      - TaxRateCode
-      - Value
-      type: object
-      properties:
-        TaxRateCode:
-          minLength: 1
-          type: string
-          example: string
-        Value:
-          type: number
-          format: double
-          example: 100.0
-      additionalProperties: false
-      x-schema-id: TaxValue
-    TaxBreakdown:
-      title: TaxBreakdown
-      required:
-      - Items
-      type: object
-      properties:
-        Items:
-          type: array
-          items:
-            $ref: '#/components/schemas/TaxBreakdownItem'
-      additionalProperties: false
-      x-schema-id: TaxBreakdown
-    ReservationGroupExtent:
-      title: ReservationGroupExtent
-      required:
-      - PaymentRequests
-      - Payments
-      type: object
-      properties:
-        PaymentRequests:
-          type: boolean
-          example: true
-        Payments:
-          type: boolean
-          example: true
-      additionalProperties: false
-      x-schema-id: ReservationGroupExtent
-    ConnectorApiExceptionResult:
-      title: ConnectorApiExceptionResult
-      type: object
-      properties:
-        Message:
-          type: string
-          nullable: true
-          example: string
-        RequestId:
-          type: string
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Details:
-          nullable: true
-          example: string
-      additionalProperties: false
-      x-schema-id: ConnectorApiExceptionResult
-    ReservationGroupParameters:
-      title: ReservationGroupParameters
-      required:
-      - Client
-      - FullAmounts
-      - HotelId
-      - ReservationGroupId
-      type: object
-      properties:
-        Client:
-          minLength: 1
-          type: string
-          example: string
-        LanguageCode:
-          type: string
-          nullable: true
-          example: string
-        CultureCode:
-          type: string
-          nullable: true
-          example: string
-        FullAmounts:
-          type: boolean
-          example: true
-        Session:
-          type: string
-          nullable: true
-          example: string
-        HotelId:
-          type: string
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        ReservationGroupId:
-          type: string
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Extent:
-          allOf:
-          - $ref: '#/components/schemas/ReservationGroupExtent'
-          nullable: true
-          example: string
-      additionalProperties: false
-      x-schema-id: ReservationGroupParameters
-    Limitation:
-      title: Limitation
-      required:
-      - Count
-      type: object
-      properties:
-        Count:
-          type: integer
-          format: int32
-          example: 1
-        Cursor:
-          type: string
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-      additionalProperties: false
-      description: Limitation on the quantity of data returned.
-      x-schema-id: Limitation
     PaymentState:
       enum:
       - Charged
@@ -776,185 +446,6 @@ components:
       - Failed
       - Verifying
       type: string
-    Reservation:
-      title: Reservation
-      required:
-      - Amount
-      - Cost
-      - EndUtc
-      - Id
-      - Number
-      - OccupancyData
-      - RateId
-      - RoomCategoryId
-      - StartUtc
-      type: object
-      properties:
-        Id:
-          type: string
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Identifier:
-          type: string
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Number:
-          minLength: 1
-          type: string
-          example: '1001'
-        StartUtc:
-          minLength: 1
-          type: string
-          format: date-time
-          example: '2026-06-02T14:30:00Z'
-        EndUtc:
-          minLength: 1
-          type: string
-          format: date-time
-          example: '2026-06-02T14:30:00Z'
-        VoucherCode:
-          type: string
-          nullable: true
-          example: string
-        AvailabilityBlockId:
-          type: string
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        RoomCategoryId:
-          type: string
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        RateId:
-          type: string
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Rate:
-          allOf:
-          - $ref: '#/components/schemas/Rate'
-          nullable: true
-          example: string
-        ProductIds:
-          type: array
-          items:
-            type: string
-            format: uuid
-          nullable: true
-        AdultCount:
-          type: integer
-          format: int32
-          nullable: true
-          deprecated: true
-          example: 1
-        ChildCount:
-          type: integer
-          format: int32
-          nullable: true
-          deprecated: true
-          example: 1
-        OccupancyData:
-          type: array
-          items:
-            $ref: '#/components/schemas/OccupancyData'
-        Notes:
-          type: string
-          nullable: true
-          example: string
-        Cost:
-          example: string
-        Amount:
-          example: string
-      additionalProperties: false
-      x-schema-id: Reservation
-    OccupancyData:
-      title: OccupancyData
-      required:
-      - AgeCategoryId
-      - PersonCount
-      type: object
-      properties:
-        AgeCategoryId:
-          type: string
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        PersonCount:
-          type: integer
-          format: int32
-          example: 1
-      additionalProperties: false
-      x-schema-id: OccupancyData
-    ReservationGroupResult:
-      title: ReservationGroupResult
-      required:
-      - ReservationGroups
-      type: object
-      properties:
-        ReservationGroups:
-          maxItems: 1000
-          type: array
-          items:
-            $ref: '#/components/schemas/ReservationGroup_2'
-          description: The filtered reservation groups.
-        Cursor:
-          type: string
-          description: Unique identifier of the last and hence oldest reservation group returned. This can be used in `Limitation` in a subsequent request to fetch the next batch of older reservation groups.
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-      additionalProperties: false
-      x-schema-id: ReservationGroupResult
-    ReservationGroup:
-      title: ReservationGroup
-      required:
-      - CreditCardAvailable
-      - Id
-      - Reservations
-      - TotalAmount
-      - TotalCost
-      type: object
-      properties:
-        Id:
-          type: string
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        CustomerId:
-          type: string
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Reservations:
-          type: array
-          items:
-            $ref: '#/components/schemas/Reservation'
-        PaymentRequestId:
-          type: string
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        TotalCost:
-          example: string
-        TotalAmount:
-          example: string
-        PaymentCardId:
-          type: string
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        CreditCardAvailable:
-          type: boolean
-          example: true
-        PaymentRequests:
-          type: array
-          items:
-            $ref: '#/components/schemas/PaymentRequest'
-          nullable: true
-        Payments:
-          type: array
-          items:
-            $ref: '#/components/schemas/Payment'
-          nullable: true
-      additionalProperties: false
-      x-schema-id: ReservationGroup
     ReservationGroupFilterParameters:
       title: ReservationGroupFilterParameters
       required:
@@ -987,31 +478,541 @@ components:
         EnterpriseIds:
           maxItems: 1000
           minItems: 1
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
             format: uuid
           description: Unique identifiers of the Enterprises. If not specified, the operation returns data for all enterprises within scope of the Access Token.
-          nullable: true
         ReservationGroupIds:
           maxItems: 1000
           minItems: 1
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
             format: uuid
           description: Unique identifiers of the `ReservationGroup`. Required if no other filter is provided.
-          nullable: true
         UpdatedUtc:
           title: Time interval
           allOf:
           - $ref: '#/components/schemas/TimeFilterInterval'
           description: Interval in which the `ReservationGroup` was updated. Required if no other filter is provided.
-          nullable: true
           x-max-interval-in-months: 3
           example: string
       additionalProperties: false
       x-schema-id: ReservationGroupFilterParameters
+    Customer:
+      title: Customer
+      required:
+      - LastName
+      type: object
+      properties:
+        Email:
+          type:
+          - string
+          - 'null'
+          format: email
+          example: partner@example.com
+        FirstName:
+          type:
+          - string
+          - 'null'
+          example: Example Name
+        LastName:
+          minLength: 1
+          type: string
+          example: Example Name
+        Telephone:
+          type:
+          - string
+          - 'null'
+          format: tel
+          example: string
+        NationalityCode:
+          maxLength: 2
+          type:
+          - string
+          - 'null'
+          example: string
+        SendMarketingEmails:
+          type:
+          - boolean
+          - 'null'
+          example: true
+      additionalProperties: false
+      x-schema-id: Customer
+    ReservationGroup:
+      title: ReservationGroup
+      required:
+      - CreditCardAvailable
+      - Id
+      - Reservations
+      - TotalAmount
+      - TotalCost
+      type: object
+      properties:
+        Id:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        CustomerId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Reservations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Reservation'
+        PaymentRequestId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        TotalCost:
+          example: string
+        TotalAmount:
+          example: string
+        PaymentCardId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        CreditCardAvailable:
+          type: boolean
+          example: true
+        PaymentRequests:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/PaymentRequest'
+        Payments:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Payment'
+      additionalProperties: false
+      x-schema-id: ReservationGroup
+    Reservation:
+      title: Reservation
+      required:
+      - Amount
+      - Cost
+      - EndUtc
+      - Id
+      - Number
+      - OccupancyData
+      - RateId
+      - RoomCategoryId
+      - StartUtc
+      type: object
+      properties:
+        Id:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Identifier:
+          type:
+          - string
+          - 'null'
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Number:
+          minLength: 1
+          type: string
+          example: '1001'
+        StartUtc:
+          minLength: 1
+          type: string
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+        EndUtc:
+          minLength: 1
+          type: string
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+        VoucherCode:
+          type:
+          - string
+          - 'null'
+          example: string
+        AvailabilityBlockId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        RoomCategoryId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        RateId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Rate:
+          allOf:
+          - $ref: '#/components/schemas/Rate'
+          example: string
+        ProductIds:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: uuid
+        AdultCount:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          deprecated: true
+          example: 1
+        ChildCount:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          deprecated: true
+          example: 1
+        OccupancyData:
+          type: array
+          items:
+            $ref: '#/components/schemas/OccupancyData'
+        Notes:
+          type:
+          - string
+          - 'null'
+          example: string
+        Cost:
+          example: string
+        Amount:
+          example: string
+      additionalProperties: false
+      x-schema-id: Reservation
+    CreateReservationGroupParameters:
+      title: CreateReservationGroupParameters
+      required:
+      - Client
+      - Customer
+      - FullAmounts
+      - HotelId
+      - Reservations
+      type: object
+      properties:
+        Client:
+          minLength: 1
+          type: string
+          example: string
+        LanguageCode:
+          type:
+          - string
+          - 'null'
+          example: string
+        CultureCode:
+          type:
+          - string
+          - 'null'
+          example: string
+        FullAmounts:
+          type: boolean
+          example: true
+        Session:
+          type:
+          - string
+          - 'null'
+          example: string
+        HotelId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        ConfigurationId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        AvailabilityBlockId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Customer:
+          allOf:
+          - $ref: '#/components/schemas/Customer'
+          example: string
+        Booker:
+          allOf:
+          - $ref: '#/components/schemas/Customer'
+          example: string
+        Reservations:
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/Reservation'
+        CreditCardData:
+          allOf:
+          - $ref: '#/components/schemas/CreditCardData'
+          example: string
+      additionalProperties: false
+      x-schema-id: CreateReservationGroupParameters
+    CreditCardData:
+      title: CreditCardData
+      required:
+      - Expiration
+      type: object
+      properties:
+        PaymentGatewayData:
+          minLength: 11
+          type:
+          - string
+          - 'null'
+          example: string
+        ObfuscatedCreditCardNumber:
+          type:
+          - string
+          - 'null'
+          example: '1001'
+        Expiration:
+          minLength: 1
+          type: string
+          format: date
+          example: '2026-06-02'
+        HolderName:
+          type:
+          - string
+          - 'null'
+          example: Example Name
+      additionalProperties: false
+      x-schema-id: CreditCardData
+    TaxBreakdown:
+      title: TaxBreakdown
+      required:
+      - Items
+      type: object
+      properties:
+        Items:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaxBreakdownItem'
+      additionalProperties: false
+      x-schema-id: TaxBreakdown
+    ReservationGroupExtent:
+      title: ReservationGroupExtent
+      required:
+      - PaymentRequests
+      - Payments
+      type: object
+      properties:
+        PaymentRequests:
+          type: boolean
+          example: true
+        Payments:
+          type: boolean
+          example: true
+      additionalProperties: false
+      x-schema-id: ReservationGroupExtent
+    Limitation:
+      title: Limitation
+      required:
+      - Count
+      type: object
+      properties:
+        Count:
+          type: integer
+          format: int32
+          example: 1
+        Cursor:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      additionalProperties: false
+      description: Limitation on the quantity of data returned.
+      x-schema-id: Limitation
+    Rate:
+      title: Rate
+      required:
+      - CurrencyCode
+      - Description
+      - Id
+      - IsPrivate
+      - Name
+      - Ordering
+      - RateGroupId
+      type: object
+      properties:
+        Id:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        RateGroupId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Ordering:
+          type: integer
+          format: int32
+          example: 1
+        Name:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+        Description:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+        IsPrivate:
+          type: boolean
+          example: true
+        CurrencyCode:
+          maxLength: 3
+          minLength: 1
+          type: string
+          format: currency
+          example: EUR
+      additionalProperties: false
+      x-schema-id: Rate
+    ReservationGroupParameters:
+      title: ReservationGroupParameters
+      required:
+      - Client
+      - FullAmounts
+      - HotelId
+      - ReservationGroupId
+      type: object
+      properties:
+        Client:
+          minLength: 1
+          type: string
+          example: string
+        LanguageCode:
+          type:
+          - string
+          - 'null'
+          example: string
+        CultureCode:
+          type:
+          - string
+          - 'null'
+          example: string
+        FullAmounts:
+          type: boolean
+          example: true
+        Session:
+          type:
+          - string
+          - 'null'
+          example: string
+        HotelId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        ReservationGroupId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Extent:
+          allOf:
+          - $ref: '#/components/schemas/ReservationGroupExtent'
+          example: string
+      additionalProperties: false
+      x-schema-id: ReservationGroupParameters
+    ReservationGroupResult:
+      title: ReservationGroupResult
+      required:
+      - ReservationGroups
+      type: object
+      properties:
+        ReservationGroups:
+          maxItems: 1000
+          type: array
+          items:
+            $ref: '#/components/schemas/ReservationGroup_2'
+          description: The filtered reservation groups.
+        Cursor:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the last and hence oldest reservation group returned. This can be used in `Limitation` in a subsequent request to fetch the next batch of older reservation groups.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      additionalProperties: false
+      x-schema-id: ReservationGroupResult
+    ReservationGroup_2:
+      title: Reservation Group
+      required:
+      - EnterpriseId
+      - Id
+      type: object
+      properties:
+        Id:
+          type: string
+          description: Unique identifier of the reservation group.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Name:
+          type:
+          - string
+          - 'null'
+          description: Name of the reservation group, might be empty or same for multiple groups.
+          example: Example Name
+        ChannelManager:
+          type:
+          - string
+          - 'null'
+          description: Name of the corresponding channel manager.
+          example: string
+        ChannelManagerGroupNumber:
+          type:
+          - string
+          - 'null'
+          description: Identifier of the channel manager.
+          example: '1001'
+        EnterpriseId:
+          type: string
+          description: Unique identifier of the `Enterprise` the reservation group belongs to.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      additionalProperties: false
+      x-schema-id: ReservationGroup
+    PaymentRequestState:
+      enum:
+      - Pending
+      - Completed
+      - Canceled
+      - Expired
+      type: string
+    TaxValue:
+      title: TaxValue
+      required:
+      - TaxRateCode
+      - Value
+      type: object
+      properties:
+        TaxRateCode:
+          minLength: 1
+          type: string
+          example: string
+        Value:
+          type: number
+          format: double
+          example: 100.0
+      additionalProperties: false
+      x-schema-id: TaxValue
     Payment:
       title: Payment
       required:
@@ -1031,9 +1032,10 @@ components:
           format: uuid
           example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
         PaymentRequestId:
-          type: string
+          type:
+          - string
+          - 'null'
           format: uuid
-          nullable: true
           example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
         CreatedUtc:
           minLength: 1
@@ -1049,10 +1051,44 @@ components:
         ChargeAmount:
           allOf:
           - $ref: '#/components/schemas/Amount'
-          nullable: true
           example: string
       additionalProperties: false
       x-schema-id: Payment
+    OccupancyData:
+      title: OccupancyData
+      required:
+      - AgeCategoryId
+      - PersonCount
+      type: object
+      properties:
+        AgeCategoryId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        PersonCount:
+          type: integer
+          format: int32
+          example: 1
+      additionalProperties: false
+      x-schema-id: OccupancyData
+    ConnectorApiExceptionResult:
+      title: ConnectorApiExceptionResult
+      type: object
+      properties:
+        Message:
+          type:
+          - string
+          - 'null'
+          example: string
+        RequestId:
+          type:
+          - string
+          - 'null'
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Details:
+          example: string
+      additionalProperties: false
+      x-schema-id: ConnectorApiExceptionResult
   securitySchemes:
     MewsClientToken:
       type: apiKey

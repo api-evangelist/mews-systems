@@ -1,4 +1,4 @@
-openapi: 3.0.4
+openapi: 3.2.0
 info:
   title: Mews Booking Engine API (Distributor) Account notes Company contracts API
   version: v1
@@ -655,8 +655,90 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ContractAdditionResult:
-      title: ContractAdditionResult
+    StringUpdateValue:
+      title: String update value
+      type: object
+      properties:
+        Value:
+          type:
+          - string
+          - 'null'
+          description: Value which is to be updated.
+          example: string
+      additionalProperties: false
+      x-schema-id: StringUpdateValue
+    TravelAgencyContractOptions:
+      title: Travel agency contract options
+      required:
+      - IncludeCancellationFeeInCommissionEstimate
+      - SkipAutomaticSettlement
+      type: object
+      properties:
+        IncludeCancellationFeeInCommissionEstimate:
+          type: boolean
+          description: Cancellation fee will be considered when calculating the travel agency commission estimate.
+          example: true
+        SkipAutomaticSettlement:
+          type: boolean
+          description: Reservations from travel agencies will not be automatically charged.
+          example: true
+      additionalProperties: false
+      description: ''
+      x-schema-id: TravelAgencyContractOptions
+    MultipleCompanyContractAddParameters:
+      title: MultipleCompanyContractAddParameters
+      required:
+      - AccessToken
+      - Client
+      - ClientToken
+      - TravelAgencyContracts
+      type: object
+      properties:
+        ClientToken:
+          minLength: 1
+          type: string
+          description: Token identifying the client application.
+          example: string
+        AccessToken:
+          minLength: 1
+          type: string
+          description: Access token of the client application.
+          example: string
+        Client:
+          minLength: 1
+          type: string
+          description: Name and version of the client application.
+          example: string
+        TravelAgencyContracts:
+          maxItems: 1000
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/TravelAgencyContractAddParameters'
+          description: Information about travel agency contracts to be created.
+      additionalProperties: false
+      x-schema-id: MultipleCompanyContractAddParameters
+    TimeFilterInterval:
+      title: Time interval
+      type: object
+      properties:
+        StartUtc:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+        EndUtc:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+      additionalProperties: false
+      description: "When a time interval is used for **filtering** (for example in parameters such as `CreatedUtc.StartUtc` / `CreatedUtc.EndUtc`), the following rules apply:\n\n- **Start equals End (equality mode)**  \n  If `StartUtc` and `EndUtc` are exactly the same timestamp, the filter is treated as an equality check for that precise moment in time:\n  \n  ```\n  CreatedUtc == StartUtc\n  ```\n  \n  This does not represent an interval; only records with `CreatedUtc` equal to that exact instant are returned.\n\n- **Start differs from End (interval mode)**  \n  If `StartUtc` and `EndUtc` are different, the filter is evaluated as a half-open interval:\n  \n  ```\n  StartUtc <= CreatedUtc < EndUtc\n  ```\n  \n  In other words, the start is inclusive and the end is exclusive.\n\nMake sure your integration takes inclusive Start / exclusive End behavior of time intervals into account so that no records at the boundaries are omitted."
+      x-schema-id: TimeFilterInterval
+    ContractUpdateResult:
+      title: ContractUpdateResult
       required:
       - TravelAgencyContracts
       type: object
@@ -665,109 +747,81 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/TravelAgencyContract'
-          description: The added travel agency contracts.
+          description: The updated travel agency contracts.
       additionalProperties: false
-      x-schema-id: ContractAdditionResult
+      x-schema-id: ContractUpdateResult
+    ContractResult:
+      title: ContractResult
+      required:
+      - TravelAgencyContracts
+      type: object
+      properties:
+        TravelAgencyContracts:
+          type: array
+          items:
+            $ref: '#/components/schemas/TravelAgencyContract'
+          description: The travel agency contracts.
+        Cursor:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the last and hence oldest contract returned. This can be used in `Limitation` in a subsequent request to fetch the next batch of older messages.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      additionalProperties: false
+      x-schema-id: ContractResult
+    TravelAgencyContractOptionsParameters:
+      title: Travel agency contract update options
+      required:
+      - IncludeCancellationFeeInCommissionEstimate
+      - SkipAutomaticSettlement
+      type: object
+      properties:
+        IncludeCancellationFeeInCommissionEstimate:
+          title: Boolean update value
+          allOf:
+          - $ref: '#/components/schemas/BooleanUpdateValue'
+          description: Cancellation fee will be considered when calculating the travel agency commission estimate.
+          example: string
+        SkipAutomaticSettlement:
+          title: Boolean update value
+          allOf:
+          - $ref: '#/components/schemas/BooleanUpdateValue'
+          description: Reservations from travel agencies will not be automatically charged.
+          example: string
+      additionalProperties: false
+      x-schema-id: TravelAgencyContractOptionsParameters
+    Limitation:
+      title: Limitation
+      required:
+      - Count
+      type: object
+      properties:
+        Count:
+          type: integer
+          format: int32
+          example: 1
+        Cursor:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      additionalProperties: false
+      description: Limitation on the quantity of data returned.
+      x-schema-id: Limitation
     BooleanNullableUpdateValue:
       title: Boolean update value
       type: object
       properties:
         Value:
-          type: boolean
+          type:
+          - boolean
+          - 'null'
           description: Value which is to be updated.
-          nullable: true
           example: true
       additionalProperties: false
       x-schema-id: BooleanNullableUpdateValue
-    Unit:
-      type: object
-      additionalProperties: false
-    TravelAgencyContractAddParameters:
-      title: Travel agency contract parameters
-      required:
-      - CompanyId
-      - Options
-      - ServiceId
-      type: object
-      properties:
-        ServiceId:
-          type: string
-          description: Unique identifier of the `Service` the travel agency contract is created to.
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        CompanyId:
-          type: string
-          description: Unique identifier of the `Company` the travel agency contract is issued to.
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        CommissionIncluded:
-          type: boolean
-          description: Whether commission of the travel agency is included in the rate.
-          nullable: true
-          example: true
-        Commission:
-          type: number
-          description: Commission of the travel agency. Value must be between 0 and 1.
-          format: double
-          nullable: true
-          example: 100.0
-        ChannelManagerBusinessSegmentId:
-          type: string
-          description: Unique identifier of the `BusinessSegment` used for incoming reservations originating from Channel Managers, for this particular contract.
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        ChannelManagerAbsoluteAdjustment:
-          type: number
-          description: Flat fee added to (or subtracted from) the reservation price when coming from Channel Managers.
-          format: double
-          nullable: true
-          example: 100.0
-        ChannelManagerRelativeAdjustment:
-          type: number
-          description: Percentage of the reservation price added to (or subtracted from) price when coming from Channel Managers. Value must be between -1 and 1.
-          format: double
-          nullable: true
-          example: 100.0
-        Options:
-          title: Travel agency contract options
-          allOf:
-          - $ref: '#/components/schemas/TravelAgencyContractOptions'
-          description: Options of the travel agency contract.
-          example: string
-        AccountingCode:
-          type: string
-          description: Accounting code of the travel agency contract.
-          nullable: true
-          example: string
-        InvoiceDueInterval:
-          type: string
-          description: The maximum time, when the invoice has to be be paid in ISO 8601 duration format.
-          nullable: true
-          example: string
-        ContactPerson:
-          type: string
-          description: Contact person of the travel agency.
-          nullable: true
-          example: string
-        ContactEmail:
-          type: string
-          description: Contact email of the travel agency.
-          format: email
-          nullable: true
-          example: partner@example.com
-        AdditionalContactInfo:
-          type: string
-          description: Additional contact info of the travel agency.
-          nullable: true
-          example: string
-        Notes:
-          type: string
-          description: Additional notes of the travel agency contract.
-          nullable: true
-          example: string
-      additionalProperties: false
-      x-schema-id: TravelAgencyContractAddParameters
     MultipleCompanyContractDeleteParameters:
       title: MultipleCompanyContractDeleteParameters
       required:
@@ -794,10 +848,11 @@ components:
           description: Name and version of the client application.
           example: string
         EnterpriseId:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Unique identifier of the enterprise. Required when using [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property), ignored otherwise.
           format: uuid
-          nullable: true
           example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
         TravelAgencyContractIds:
           maxItems: 1000
@@ -833,63 +888,54 @@ components:
           allOf:
           - $ref: '#/components/schemas/BooleanNullableUpdateValue'
           description: Whether commission of the travel agency is included in the rate.
-          nullable: true
           example: string
         Commission:
           title: Decimal update value
           allOf:
           - $ref: '#/components/schemas/DecimalNullableUpdateValue'
           description: Commission of the travel agency.
-          nullable: true
           example: string
         ChannelManagerBusinessSegmentId:
           title: Guid update value
           allOf:
           - $ref: '#/components/schemas/GuidNullableUpdateValue'
           description: Unique identifier of the `BusinessSegment` used for incoming reservations originating from Channel Managers, for this particular contract.
-          nullable: true
           example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
         ChannelManagerAbsoluteAdjustment:
           title: Decimal update value
           allOf:
           - $ref: '#/components/schemas/DecimalNullableUpdateValue'
           description: Flat fee added to (or subtracted from) the reservation price when coming from Channel Managers.
-          nullable: true
           example: string
         ChannelManagerRelativeAdjustment:
           title: Decimal update value
           allOf:
           - $ref: '#/components/schemas/DecimalNullableUpdateValue'
           description: Percentage of the reservation price added to (or subtracted from) price when coming from Channel Managers.
-          nullable: true
           example: string
         Options:
           title: Travel agency contract update options
           allOf:
           - $ref: '#/components/schemas/TravelAgencyContractOptionsParameters'
           description: Options of the travel agency contract.
-          nullable: true
           example: string
         AccountingCode:
           title: String update value
           allOf:
           - $ref: '#/components/schemas/StringUpdateValue'
           description: Accounting code of the travel agency contract.
-          nullable: true
           example: string
         InvoiceDueInterval:
           title: String update value
           allOf:
           - $ref: '#/components/schemas/StringUpdateValue'
           description: The maximum time, when the invoice has to be be paid in ISO 8601 duration format.
-          nullable: true
           example: string
         ContactPerson:
           title: String update value
           allOf:
           - $ref: '#/components/schemas/StringUpdateValue'
           description: Contact person of the travel agency.
-          nullable: true
           example: string
         ContactEmail:
           title: String update value
@@ -897,67 +943,21 @@ components:
           - $ref: '#/components/schemas/StringUpdateValue'
           description: Contact email of the travel agency.
           format: email
-          nullable: true
           example: partner@example.com
         AdditionalContactInfo:
           title: String update value
           allOf:
           - $ref: '#/components/schemas/StringUpdateValue'
           description: Additional contact info of the travel agency.
-          nullable: true
           example: string
         Notes:
           title: String update value
           allOf:
           - $ref: '#/components/schemas/StringUpdateValue'
           description: Additional notes of the travel agency contract.
-          nullable: true
           example: string
       additionalProperties: false
       x-schema-id: TravelAgencyContractUpdateParameters
-    TimeFilterInterval:
-      title: Time interval
-      type: object
-      properties:
-        StartUtc:
-          type: string
-          format: date-time
-          nullable: true
-          example: '2026-06-02T14:30:00Z'
-        EndUtc:
-          type: string
-          format: date-time
-          nullable: true
-          example: '2026-06-02T14:30:00Z'
-      additionalProperties: false
-      description: "When a time interval is used for **filtering** (for example in parameters such as `CreatedUtc.StartUtc` / `CreatedUtc.EndUtc`), the following rules apply:\r\n\r\n- **Start equals End (equality mode)**  \r\n  If `StartUtc` and `EndUtc` are exactly the same timestamp, the filter is treated as an equality check for that precise moment in time:\r\n  \r\n  ```\r\n  CreatedUtc == StartUtc\r\n  ```\r\n  \r\n  This does not represent an interval; only records with `CreatedUtc` equal to that exact instant are returned.\r\n\r\n- **Start differs from End (interval mode)**  \r\n  If `StartUtc` and `EndUtc` are different, the filter is evaluated as a half-open interval:\r\n  \r\n  ```\r\n  StartUtc <= CreatedUtc < EndUtc\r\n  ```\r\n  \r\n  In other words, the start is inclusive and the end is exclusive.\r\n\r\nMake sure your integration takes inclusive Start / exclusive End behavior of time intervals into account so that no records at the boundaries are omitted."
-      x-schema-id: TimeFilterInterval
-    ActivityStates:
-      title: Activity state
-      enum:
-      - Deleted
-      - Active
-      type: string
-      description: Activity states used for filtering.
-    ContractResult:
-      title: ContractResult
-      required:
-      - TravelAgencyContracts
-      type: object
-      properties:
-        TravelAgencyContracts:
-          type: array
-          items:
-            $ref: '#/components/schemas/TravelAgencyContract'
-          description: The travel agency contracts.
-        Cursor:
-          type: string
-          description: Unique identifier of the last and hence oldest contract returned. This can be used in `Limitation` in a subsequent request to fetch the next batch of older messages.
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-      additionalProperties: false
-      x-schema-id: ContractResult
     MultipleCompanyContractUpdateParameters:
       title: MultipleCompanyContractUpdateParameters
       required:
@@ -991,6 +991,116 @@ components:
           description: Information about travel agency contracts to be updated.
       additionalProperties: false
       x-schema-id: MultipleCompanyContractUpdateParameters
+    ContractAdditionResult:
+      title: ContractAdditionResult
+      required:
+      - TravelAgencyContracts
+      type: object
+      properties:
+        TravelAgencyContracts:
+          type: array
+          items:
+            $ref: '#/components/schemas/TravelAgencyContract'
+          description: The added travel agency contracts.
+      additionalProperties: false
+      x-schema-id: ContractAdditionResult
+    TravelAgencyContractAddParameters:
+      title: Travel agency contract parameters
+      required:
+      - CompanyId
+      - Options
+      - ServiceId
+      type: object
+      properties:
+        ServiceId:
+          type: string
+          description: Unique identifier of the `Service` the travel agency contract is created to.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        CompanyId:
+          type: string
+          description: Unique identifier of the `Company` the travel agency contract is issued to.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        CommissionIncluded:
+          type:
+          - boolean
+          - 'null'
+          description: Whether commission of the travel agency is included in the rate.
+          example: true
+        Commission:
+          type:
+          - number
+          - 'null'
+          description: Commission of the travel agency. Value must be between 0 and 1.
+          format: double
+          example: 100.0
+        ChannelManagerBusinessSegmentId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the `BusinessSegment` used for incoming reservations originating from Channel Managers, for this particular contract.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        ChannelManagerAbsoluteAdjustment:
+          type:
+          - number
+          - 'null'
+          description: Flat fee added to (or subtracted from) the reservation price when coming from Channel Managers.
+          format: double
+          example: 100.0
+        ChannelManagerRelativeAdjustment:
+          type:
+          - number
+          - 'null'
+          description: Percentage of the reservation price added to (or subtracted from) price when coming from Channel Managers. Value must be between -1 and 1.
+          format: double
+          example: 100.0
+        Options:
+          title: Travel agency contract options
+          allOf:
+          - $ref: '#/components/schemas/TravelAgencyContractOptions'
+          description: Options of the travel agency contract.
+          example: string
+        AccountingCode:
+          type:
+          - string
+          - 'null'
+          description: Accounting code of the travel agency contract.
+          example: string
+        InvoiceDueInterval:
+          type:
+          - string
+          - 'null'
+          description: The maximum time, when the invoice has to be be paid in ISO 8601 duration format.
+          example: string
+        ContactPerson:
+          type:
+          - string
+          - 'null'
+          description: Contact person of the travel agency.
+          example: string
+        ContactEmail:
+          type:
+          - string
+          - 'null'
+          description: Contact email of the travel agency.
+          format: email
+          example: partner@example.com
+        AdditionalContactInfo:
+          type:
+          - string
+          - 'null'
+          description: Additional contact info of the travel agency.
+          example: string
+        Notes:
+          type:
+          - string
+          - 'null'
+          description: Additional notes of the travel agency contract.
+          example: string
+      additionalProperties: false
+      x-schema-id: TravelAgencyContractAddParameters
     BooleanUpdateValue:
       title: Boolean update value
       type: object
@@ -1001,6 +1111,22 @@ components:
           example: true
       additionalProperties: false
       x-schema-id: BooleanUpdateValue
+    Unit:
+      type: object
+      additionalProperties: false
+    GuidNullableUpdateValue:
+      title: Guid update value
+      type: object
+      properties:
+        Value:
+          type:
+          - string
+          - 'null'
+          description: Value which is to be updated.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      additionalProperties: false
+      x-schema-id: GuidNullableUpdateValue
     CompanyContractFilterParameters:
       title: CompanyContractFilterParameters
       required:
@@ -1033,64 +1159,87 @@ components:
         EnterpriseIds:
           maxItems: 1000
           minItems: 1
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
             format: uuid
           description: Unique identifiers of the Enterprises. If not specified, the operation returns data for all enterprises within scope of the Access Token.
-          nullable: true
         CompanyContractIds:
           maxItems: 1000
           minItems: 1
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
             format: uuid
           description: Unique identifier of the Travel agency contracts to fetch.
-          nullable: true
         CompanyIds:
           maxItems: 1000
           minItems: 1
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
             format: uuid
           description: Unique identifiers of `Company` assigned with Travel agency contracts.
-          nullable: true
         ServiceIds:
           maxItems: 1000
           minItems: 1
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
             format: uuid
           description: Unique identifiers of `Service` where the Travel agency contracts belong to.
-          nullable: true
         UpdatedUtc:
           title: Time interval
           allOf:
           - $ref: '#/components/schemas/TimeFilterInterval'
           description: Interval in which the Travel agency contracts were updated.
-          nullable: true
           x-max-interval-in-months: 3
           example: string
         ActivityStates:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             $ref: '#/components/schemas/ActivityStates'
           description: Whether to return only active, only deleted or both records.
-          nullable: true
       additionalProperties: false
       x-schema-id: CompanyContractFilterParameters
+    ConnectorApiExceptionResult:
+      title: ConnectorApiExceptionResult
+      type: object
+      properties:
+        Message:
+          type:
+          - string
+          - 'null'
+          example: string
+        RequestId:
+          type:
+          - string
+          - 'null'
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Details:
+          example: string
+      additionalProperties: false
+      x-schema-id: ConnectorApiExceptionResult
     DecimalNullableUpdateValue:
       title: Decimal update value
       type: object
       properties:
         Value:
-          type: number
+          type:
+          - number
+          - 'null'
           description: Value which is to be updated.
           format: double
-          nullable: true
           example: 100.0
       additionalProperties: false
       x-schema-id: DecimalNullableUpdateValue
@@ -1126,27 +1275,31 @@ components:
           description: Whether the contract is still active.
           example: true
         CommissionIncluded:
-          type: boolean
+          type:
+          - boolean
+          - 'null'
           description: Whether commission of the travel agency is included in the rate. When `CommissionIncluded` is not provided in the response, that means commission is unspecified, when set to true it means the the commission is included in the rate and false means the commission in not included in the rate.
-          nullable: true
           example: true
         Commission:
-          type: number
+          type:
+          - number
+          - 'null'
           description: Commission of the travel agency.
           format: double
-          nullable: true
           example: 100.0
         ChannelManagerAbsoluteAdjustment:
-          type: number
+          type:
+          - number
+          - 'null'
           description: Flat fee added to (or subtracted from) the reservation price when coming from Channel Managers.
           format: double
-          nullable: true
           example: 100.0
         ChannelManagerRelativeAdjustment:
-          type: number
+          type:
+          - number
+          - 'null'
           description: Percentage of the reservation price added to (or subtracted from) price when coming from Channel Managers.
           format: double
-          nullable: true
           example: 100.0
         Options:
           title: Travel agency contract options
@@ -1155,41 +1308,48 @@ components:
           description: Options of the travel agency contract.
           example: string
         AccountingCode:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Accounting code of the travel agency contract.
-          nullable: true
           example: string
         InvoiceDueInterval:
-          type: string
+          type:
+          - string
+          - 'null'
           description: The maximum time, when the invoice has to be be paid in ISO 8601 duration format.
-          nullable: true
           example: string
         ChannelManagerBusinessSegmentId:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Unique identifier of the `BusinessSegment` used for incoming reservations originating from Channel Managers, for this particular contract.
           format: uuid
-          nullable: true
           example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
         ContactPerson:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Contact person of the travel agency.
-          nullable: true
           example: string
         ContactEmail:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Contact email of the travel agency.
           format: email
-          nullable: true
           example: partner@example.com
         AdditionalContactInfo:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Additional contact info of the travel agency.
-          nullable: true
           example: string
         Notes:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Additional notes of the travel agency contract.
-          nullable: true
           example: string
         CreatedUtc:
           minLength: 1
@@ -1205,149 +1365,13 @@ components:
           example: '2026-06-02T14:30:00Z'
       additionalProperties: false
       x-schema-id: TravelAgencyContract
-    ConnectorApiExceptionResult:
-      title: ConnectorApiExceptionResult
-      type: object
-      properties:
-        Message:
-          type: string
-          nullable: true
-          example: string
-        RequestId:
-          type: string
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Details:
-          nullable: true
-          example: string
-      additionalProperties: false
-      x-schema-id: ConnectorApiExceptionResult
-    Limitation:
-      title: Limitation
-      required:
-      - Count
-      type: object
-      properties:
-        Count:
-          type: integer
-          format: int32
-          example: 1
-        Cursor:
-          type: string
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-      additionalProperties: false
-      description: Limitation on the quantity of data returned.
-      x-schema-id: Limitation
-    GuidNullableUpdateValue:
-      title: Guid update value
-      type: object
-      properties:
-        Value:
-          type: string
-          description: Value which is to be updated.
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-      additionalProperties: false
-      x-schema-id: GuidNullableUpdateValue
-    MultipleCompanyContractAddParameters:
-      title: MultipleCompanyContractAddParameters
-      required:
-      - AccessToken
-      - Client
-      - ClientToken
-      - TravelAgencyContracts
-      type: object
-      properties:
-        ClientToken:
-          minLength: 1
-          type: string
-          description: Token identifying the client application.
-          example: string
-        AccessToken:
-          minLength: 1
-          type: string
-          description: Access token of the client application.
-          example: string
-        Client:
-          minLength: 1
-          type: string
-          description: Name and version of the client application.
-          example: string
-        TravelAgencyContracts:
-          maxItems: 1000
-          minItems: 1
-          type: array
-          items:
-            $ref: '#/components/schemas/TravelAgencyContractAddParameters'
-          description: Information about travel agency contracts to be created.
-      additionalProperties: false
-      x-schema-id: MultipleCompanyContractAddParameters
-    ContractUpdateResult:
-      title: ContractUpdateResult
-      required:
-      - TravelAgencyContracts
-      type: object
-      properties:
-        TravelAgencyContracts:
-          type: array
-          items:
-            $ref: '#/components/schemas/TravelAgencyContract'
-          description: The updated travel agency contracts.
-      additionalProperties: false
-      x-schema-id: ContractUpdateResult
-    TravelAgencyContractOptionsParameters:
-      title: Travel agency contract update options
-      required:
-      - IncludeCancellationFeeInCommissionEstimate
-      - SkipAutomaticSettlement
-      type: object
-      properties:
-        IncludeCancellationFeeInCommissionEstimate:
-          title: Boolean update value
-          allOf:
-          - $ref: '#/components/schemas/BooleanUpdateValue'
-          description: Cancellation fee will be considered when calculating the travel agency commission estimate.
-          example: string
-        SkipAutomaticSettlement:
-          title: Boolean update value
-          allOf:
-          - $ref: '#/components/schemas/BooleanUpdateValue'
-          description: Reservations from travel agencies will not be automatically charged.
-          example: string
-      additionalProperties: false
-      x-schema-id: TravelAgencyContractOptionsParameters
-    StringUpdateValue:
-      title: String update value
-      type: object
-      properties:
-        Value:
-          type: string
-          description: Value which is to be updated.
-          nullable: true
-          example: string
-      additionalProperties: false
-      x-schema-id: StringUpdateValue
-    TravelAgencyContractOptions:
-      title: Travel agency contract options
-      required:
-      - IncludeCancellationFeeInCommissionEstimate
-      - SkipAutomaticSettlement
-      type: object
-      properties:
-        IncludeCancellationFeeInCommissionEstimate:
-          type: boolean
-          description: Cancellation fee will be considered when calculating the travel agency commission estimate.
-          example: true
-        SkipAutomaticSettlement:
-          type: boolean
-          description: Reservations from travel agencies will not be automatically charged.
-          example: true
-      additionalProperties: false
-      description: ''
-      x-schema-id: TravelAgencyContractOptions
+    ActivityStates:
+      title: Activity state
+      enum:
+      - Deleted
+      - Active
+      type: string
+      description: Activity states used for filtering.
   securitySchemes:
     MewsClientToken:
       type: apiKey

@@ -1,4 +1,4 @@
-openapi: 3.0.4
+openapi: 3.2.0
 info:
   title: Mews Booking Engine API (Distributor) Account notes Billing automations API
   version: v1
@@ -879,40 +879,49 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    CompanyWithBillingAutomationRelationIEnumerableUpdateValue:
-      title: Company with billing automation relation array update value
+    StringUpdateValue:
+      title: String update value
       type: object
       properties:
         Value:
-          type: array
-          items:
-            $ref: '#/components/schemas/CompanyWithBillingAutomationRelation'
+          type:
+          - string
+          - 'null'
           description: Value which is to be updated.
-          nullable: true
+          example: string
       additionalProperties: false
-      x-schema-id: CompanyWithBillingAutomationRelationIEnumerableUpdateValue
-    Unit:
-      type: object
-      additionalProperties: false
-    BillingAutomationResult:
-      title: Billing automation result
-      type: object
-      properties:
-        BillingAutomations:
-          maxItems: 1000
-          type: array
-          items:
-            $ref: '#/components/schemas/BillingAutomation'
-          description: The list of filtered billing automations.
-          nullable: true
-        Cursor:
-          type: string
-          description: Unique identifier of the last returned billing automation. This can be used in Limitation in a subsequent request to fetch the next batch of billing automations.
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-      additionalProperties: false
-      x-schema-id: BillingAutomationResult
+      x-schema-id: StringUpdateValue
+    BillingAutomationBillAggregationTypeEnum:
+      title: Billing automation bill aggregation type
+      enum:
+      - OnePerReservation
+      - AggregateByCustomer
+      - AggregateAll
+      - AggregatePerReservationGroup
+      type: string
+      description: '
+
+
+        OnePerReservation (Create a separate bill for each reservation.)
+
+
+        AggregateByCustomer (Create a separate bill for each reservation owner.)
+
+
+        AggregateAll (Group all moved items on one bill.)
+
+
+        AggregatePerReservationGroup (Create a separate bill for each reservation group.)'
+      x-enumNames:
+      - OnePerReservation
+      - AggregateByCustomer
+      - AggregateAll
+      - AggregatePerReservationGroup
+      x-enumDescriptions:
+      - Create a separate bill for each reservation.
+      - Create a separate bill for each reservation owner.
+      - Group all moved items on one bill.
+      - Create a separate bill for each reservation group.
     BillingAutomationAssignmentUpdateParameters:
       title: Billing automation assignment update parameters
       required:
@@ -929,7 +938,6 @@ components:
           allOf:
           - $ref: '#/components/schemas/BillingAutomationItemTypesUpdateParameters'
           description: Type of items that are going to be routed (or `null` should it not be updated).
-          nullable: true
           example: string
         RateIds:
           title: Guid array update value
@@ -937,7 +945,6 @@ components:
           allOf:
           - $ref: '#/components/schemas/GuidIEnumerableUpdateValue'
           description: Unique identifiers of `Rates` that will be applied as billing automation condition (or `null` should it not be updated).
-          nullable: true
           example: string
         ProductCategoryIds:
           title: Guid array update value
@@ -945,7 +952,6 @@ components:
           allOf:
           - $ref: '#/components/schemas/GuidIEnumerableUpdateValue'
           description: Unique identifiers of `Product Categories` that will be applied as billing automation condition (or `null` should it not be updated).
-          nullable: true
           example: string
         ProductIds:
           title: Guid array update value
@@ -953,7 +959,6 @@ components:
           allOf:
           - $ref: '#/components/schemas/GuidIEnumerableUpdateValue'
           description: Unique identifiers of `Products` that will be applied as billing automation condition (or `null` should it not be updated).
-          nullable: true
           example: string
         AccountingCategories:
           title: Billing automation accounting category assignment array update value
@@ -961,75 +966,279 @@ components:
           allOf:
           - $ref: '#/components/schemas/BillingAutomationAccountingCategoryAssignmentIEnumerableUpdateValue'
           description: List of `Accounting Categories` with their `ItemTypes` that will be applied as billing automation condition (or `null` should it not be updated).
-          nullable: true
           example: string
       additionalProperties: false
       x-schema-id: BillingAutomationAssignmentUpdateParameters
-    CompanyRelationsParameters:
-      title: Company with relations parameters
+    BillingAutomationItemTypesParameters:
+      title: Billing automation item types parameters
+      required:
+      - AdditionalExpenses
+      - AllCustomItems
+      - AllProducts
+      - CityTax
+      - Deposits
+      - SpaceOrder
       type: object
       properties:
-        PartnerCompany:
+        SpaceOrder:
           type: boolean
-          description: Indicates whether the billing automation will apply if the company added to a reservation is a partner company.
+          description: Space order
           example: true
-        TravelAgency:
+        CityTax:
           type: boolean
-          description: Indicates whether the billing automation will apply if the company added to a reservation is a travel agency.
+          description: City tax
+          example: true
+        AllProducts:
+          type: boolean
+          description: All products
+          example: true
+        Deposits:
+          type: boolean
+          description: Deposits
+          example: true
+        AdditionalExpenses:
+          type: boolean
+          description: Additional expenses
+          example: true
+        AllCustomItems:
+          type: boolean
+          description: All custom items
           example: true
       additionalProperties: false
-      x-schema-id: CompanyRelationsParameters
-    BillingAutomationAssignmentAddParameters:
-      title: Billing automation assignment add parameters
-      required:
-      - RoutedItemTypes
-      - ServiceId
+      x-schema-id: BillingAutomationItemTypesParameters
+    BillingAutomationBillAggregationTypeUpdateValue:
+      title: Billing automation bill aggregation type update value
       type: object
       properties:
-        ServiceId:
-          type: string
-          description: Unique identifier of the related service.
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        RoutedItemTypes:
-          title: Billing automation item types parameters
+        Value:
+          title: Billing automation bill aggregation type
           allOf:
-          - $ref: '#/components/schemas/BillingAutomationItemTypesParameters'
-          description: Type of items that are going to be routed.
+          - $ref: '#/components/schemas/BillingAutomationBillAggregationTypeEnum'
+          description: Value which is to be updated.
+          x-enumNames:
+          - OnePerReservation
+          - AggregateByCustomer
+          - AggregateAll
+          - AggregatePerReservationGroup
+          x-enumDescriptions:
+          - Create a separate bill for each reservation.
+          - Create a separate bill for each reservation owner.
+          - Group all moved items on one bill.
+          - Create a separate bill for each reservation group.
           example: string
-        RateIds:
-          maxItems: 100
-          type: array
+      additionalProperties: false
+      x-schema-id: BillingAutomationBillAggregationTypeUpdateValue
+    BillingAutomationFilterParameters:
+      title: Billing automation filter parameters
+      required:
+      - AccessToken
+      - Client
+      - ClientToken
+      - Limitation
+      type: object
+      properties:
+        ClientToken:
+          minLength: 1
+          type: string
+          description: Token identifying the client application.
+          example: string
+        AccessToken:
+          minLength: 1
+          type: string
+          description: Access token of the client application.
+          example: string
+        Client:
+          minLength: 1
+          type: string
+          description: Name and version of the client application.
+          example: string
+        Limitation:
+          allOf:
+          - $ref: '#/components/schemas/Limitation'
+          description: Limitation on the quantity of data returned and optional Cursor for the starting point of data.
+          example: string
+        EnterpriseIds:
+          maxItems: 1000
+          minItems: 1
+          type:
+          - array
+          - 'null'
           items:
             type: string
             format: uuid
-          description: Unique identifiers of `Rates` that will be applied as billing automation condition.
-          nullable: true
-        ProductCategoryIds:
+          description: Unique identifiers of the Enterprises. If not specified, the operation returns data for all enterprises within scope of the Access Token.
+        CompanyIds:
           maxItems: 100
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
             format: uuid
-          description: Unique identifiers of `Product Categories` that will be applied as billing automation condition.
-          nullable: true
-        ProductIds:
+          description: Unique identifiers of `Company` associated with the billing automations.
+        BillingAutomationIds:
           maxItems: 100
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
             format: uuid
-          description: Unique identifiers of `Products` that will be applied as billing automation condition.
-          nullable: true
-        AccountingCategories:
-          maxItems: 100
-          type: array
+          description: Unique identifiers of specific `Billing automation` items.
+      additionalProperties: false
+      x-schema-id: BillingAutomationFilterParameters
+    BillingAutomationAccountingCategoryAssignmentIEnumerableUpdateValue:
+      title: Billing automation accounting category assignment array update value
+      type: object
+      properties:
+        Value:
+          type:
+          - array
+          - 'null'
           items:
             $ref: '#/components/schemas/BillingAutomationAccountingCategoryAssignment'
-          description: List of accounting categories that will be applied as billing automation condition.
-          nullable: true
+          description: Value which is to be updated.
       additionalProperties: false
-      x-schema-id: BillingAutomationAssignmentAddParameters
+      x-schema-id: BillingAutomationAccountingCategoryAssignmentIEnumerableUpdateValue
+    BillingAutomationUpdateParameters:
+      title: Billing automation update parameters
+      required:
+      - BillingAutomationId
+      type: object
+      properties:
+        BillingAutomationId:
+          type: string
+          description: Unique identifier of the billing automation.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Name:
+          title: String update value
+          maxLength: 255
+          allOf:
+          - $ref: '#/components/schemas/StringUpdateValue'
+          description: Name of the billing automation (or null should it not be updated).
+          example: Example Name
+        Description:
+          title: String update value
+          maxLength: 1000
+          allOf:
+          - $ref: '#/components/schemas/StringUpdateValue'
+          description: Description of the billing automation (or null should it not be updated).
+          example: string
+        Companies:
+          title: Company with billing automation relation array update value
+          maxLength: 1000
+          allOf:
+          - $ref: '#/components/schemas/CompanyWithBillingAutomationRelationIEnumerableUpdateValue'
+          description: List of companies with relations indicating whether the company should be considered as a travel agency or a company in the reservation. This list can only be empty if the `AssignmentTargetType` is `CompanyAsDetails` or `NoCompany`. Set to null if the value is not updated.
+          example: string
+        Prepayment:
+          title: Billing automation prepayment type update value
+          allOf:
+          - $ref: '#/components/schemas/BillingAutomationPrepaymentUpdateValue'
+          description: Type of prepayment (or null should it not be updated).
+          example: string
+        AssignmentTargetType:
+          title: Billing automation assignment target type update value
+          allOf:
+          - $ref: '#/components/schemas/BillingAutomationAssignmentTargetTypeUpdateValue'
+          description: Specifies the type of company assignment to the bill. If set to `NoCompany`, the `BillAggregationType` must be `AggregateByCustomer`. Set to null if the value is not updated.
+          example: string
+        BillAggregationType:
+          title: Billing automation bill aggregation type update value
+          allOf:
+          - $ref: '#/components/schemas/BillingAutomationBillAggregationTypeUpdateValue'
+          description: Defines the aggregation target type for billing automation. If not `AggregateByCustomer`, the `AssignmentTargetType` must be `CompanyAsOwner`. Set to null if the value is not updated.
+          example: string
+        OrderItemConsumptionPeriod:
+          title: Billing automation order item consumption period type update value
+          allOf:
+          - $ref: '#/components/schemas/BillingAutomationOrderItemConsumptionPeriodTypeUpdateValue'
+          description: Specifies the order item consumption period type for the billing automation. Required if the `TriggerType` is recurring. Can be null if the value is not updated.
+          example: string
+        ProcessingStartOffset:
+          title: String update value
+          maxLength: 20
+          allOf:
+          - $ref: '#/components/schemas/StringUpdateValue'
+          description: Processing start offset. Required if the billing automation `TriggerType` is recurring (or null should it not be updated).
+          example: string
+      additionalProperties: false
+      x-schema-id: BillingAutomationUpdateParameters
+    BillingAutomationModificationResult:
+      title: Billing automation modification result
+      type: object
+      properties:
+        BillingAutomations:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/BillingAutomation'
+          description: Billing automations affected by the operation.
+      additionalProperties: false
+      x-schema-id: BillingAutomationModificationResult
+    MultipleBillingAutomationUpdateParameters:
+      title: Multiple billing automation update parameters
+      required:
+      - AccessToken
+      - BillingAutomationUpdates
+      - Client
+      - ClientToken
+      type: object
+      properties:
+        ClientToken:
+          minLength: 1
+          type: string
+          description: Token identifying the client application.
+          example: string
+        AccessToken:
+          minLength: 1
+          type: string
+          description: Access token of the client application.
+          example: string
+        Client:
+          minLength: 1
+          type: string
+          description: Name and version of the client application.
+          example: string
+        EnterpriseId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the enterprise. Required when using [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property), ignored otherwise.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        BillingAutomationUpdates:
+          maxItems: 100
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/BillingAutomationUpdateParameters'
+          description: Details of the billing automations to be updated.
+      additionalProperties: false
+      x-schema-id: MultipleBillingAutomationUpdateParameters
+    BillingAutomationResult:
+      title: Billing automation result
+      type: object
+      properties:
+        BillingAutomations:
+          maxItems: 1000
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/BillingAutomation'
+          description: The list of filtered billing automations.
+        Cursor:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the last returned billing automation. This can be used in Limitation in a subsequent request to fetch the next batch of billing automations.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      additionalProperties: false
+      x-schema-id: BillingAutomationResult
     BillingAutomationAddParameters:
       title: Billing automation add parameters
       required:
@@ -1049,17 +1258,19 @@ components:
           example: Example Name
         Description:
           maxLength: 1000
-          type: string
+          type:
+          - string
+          - 'null'
           description: Description of the billing automation.
-          nullable: true
           example: string
         CompaniesWithRelations:
           maxItems: 1000
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             $ref: '#/components/schemas/CompanyWithBillingAutomationRelation'
           description: List of companies with relations indicating whether the company is considered a travel agency or a company in the reservation. Can only be empty if `AssignmentTargetType` is `CompanyAsDetails` or `NoCompany`.
-          nullable: true
         Prepayment:
           title: Billing automation prepayment type
           allOf:
@@ -1171,13 +1382,13 @@ components:
 
 
             MonthAfter (Only items with a consumption date within the next month will be routed.)'
-          nullable: true
           example: string
         ProcessingStartOffset:
           maxLength: 20
-          type: string
+          type:
+          - string
+          - 'null'
           description: Specifies the processing start offset. This is required if the billing automation `TriggerType` is set to `Reccuring`.
-          nullable: true
           example: string
         Assignments:
           maxItems: 20
@@ -1188,155 +1399,37 @@ components:
           description: List of billing automation assignments.
       additionalProperties: false
       x-schema-id: BillingAutomationAddParameters
-    BillingAutomationUpdateParameters:
-      title: Billing automation update parameters
+    AccountingCategoryRoutedItemTypes:
+      title: Accounting category routed item types
       required:
-      - BillingAutomationId
+      - CustomItems
+      - Products
       type: object
       properties:
-        BillingAutomationId:
-          type: string
-          description: Unique identifier of the billing automation.
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Name:
-          title: String update value
-          maxLength: 255
-          allOf:
-          - $ref: '#/components/schemas/StringUpdateValue'
-          description: Name of the billing automation (or null should it not be updated).
-          nullable: true
-          example: Example Name
-        Description:
-          title: String update value
-          maxLength: 1000
-          allOf:
-          - $ref: '#/components/schemas/StringUpdateValue'
-          description: Description of the billing automation (or null should it not be updated).
-          nullable: true
-          example: string
-        Companies:
-          title: Company with billing automation relation array update value
-          maxLength: 1000
-          allOf:
-          - $ref: '#/components/schemas/CompanyWithBillingAutomationRelationIEnumerableUpdateValue'
-          description: List of companies with relations indicating whether the company should be considered as a travel agency or a company in the reservation. This list can only be empty if the `AssignmentTargetType` is `CompanyAsDetails` or `NoCompany`. Set to null if the value is not updated.
-          nullable: true
-          example: string
-        Prepayment:
-          title: Billing automation prepayment type update value
-          allOf:
-          - $ref: '#/components/schemas/BillingAutomationPrepaymentUpdateValue'
-          description: Type of prepayment (or null should it not be updated).
-          nullable: true
-          example: string
-        AssignmentTargetType:
-          title: Billing automation assignment target type update value
-          allOf:
-          - $ref: '#/components/schemas/BillingAutomationAssignmentTargetTypeUpdateValue'
-          description: Specifies the type of company assignment to the bill. If set to `NoCompany`, the `BillAggregationType` must be `AggregateByCustomer`. Set to null if the value is not updated.
-          nullable: true
-          example: string
-        BillAggregationType:
-          title: Billing automation bill aggregation type update value
-          allOf:
-          - $ref: '#/components/schemas/BillingAutomationBillAggregationTypeUpdateValue'
-          description: Defines the aggregation target type for billing automation. If not `AggregateByCustomer`, the `AssignmentTargetType` must be `CompanyAsOwner`. Set to null if the value is not updated.
-          nullable: true
-          example: string
-        OrderItemConsumptionPeriod:
-          title: Billing automation order item consumption period type update value
-          allOf:
-          - $ref: '#/components/schemas/BillingAutomationOrderItemConsumptionPeriodTypeUpdateValue'
-          description: Specifies the order item consumption period type for the billing automation. Required if the `TriggerType` is recurring. Can be null if the value is not updated.
-          nullable: true
-          example: string
-        ProcessingStartOffset:
-          title: String update value
-          maxLength: 20
-          allOf:
-          - $ref: '#/components/schemas/StringUpdateValue'
-          description: Processing start offset. Required if the billing automation `TriggerType` is recurring (or null should it not be updated).
-          nullable: true
-          example: string
+        Products:
+          type: boolean
+          description: Specifies whether products under the given accounting category are routed.
+          example: true
+        CustomItems:
+          type: boolean
+          description: Specifies whether custom items under the given accounting category are routed.
+          example: true
       additionalProperties: false
-      x-schema-id: BillingAutomationUpdateParameters
-    BillingAutomationAccountingCategoryAssignmentIEnumerableUpdateValue:
-      title: Billing automation accounting category assignment array update value
+      x-schema-id: AccountingCategoryRoutedItemTypes
+    CompanyRelationsParameters:
+      title: Company with relations parameters
       type: object
       properties:
-        Value:
-          type: array
-          items:
-            $ref: '#/components/schemas/BillingAutomationAccountingCategoryAssignment'
-          description: Value which is to be updated.
-          nullable: true
+        PartnerCompany:
+          type: boolean
+          description: Indicates whether the billing automation will apply if the company added to a reservation is a partner company.
+          example: true
+        TravelAgency:
+          type: boolean
+          description: Indicates whether the billing automation will apply if the company added to a reservation is a travel agency.
+          example: true
       additionalProperties: false
-      x-schema-id: BillingAutomationAccountingCategoryAssignmentIEnumerableUpdateValue
-    BillingAutomationTriggerTypeEnum:
-      title: Billing automation trigger type
-      enum:
-      - Continuous
-      - Recurring
-      - Legacy
-      type: string
-      description: '
-
-
-        Continuous (Billing automation is continuously triggered by reservation actions, such as creation, updates, and rebates.)
-
-
-        Recurring (Billing automation is executed monthly.)
-
-
-        Legacy (Billing automation is executed on reservation creation only. Items added later are not transfered to any bill.)'
-      x-enumNames:
-      - Continuous
-      - Recurring
-      - Legacy
-      x-enumDescriptions:
-      - Billing automation is continuously triggered by reservation actions, such as creation, updates, and rebates.
-      - Billing automation is executed monthly.
-      - Billing automation is executed on reservation creation only. Items added later are not transfered to any bill.
-    MultipleBillingAutomationUpdateParameters:
-      title: Multiple billing automation update parameters
-      required:
-      - AccessToken
-      - BillingAutomationUpdates
-      - Client
-      - ClientToken
-      type: object
-      properties:
-        ClientToken:
-          minLength: 1
-          type: string
-          description: Token identifying the client application.
-          example: string
-        AccessToken:
-          minLength: 1
-          type: string
-          description: Access token of the client application.
-          example: string
-        Client:
-          minLength: 1
-          type: string
-          description: Name and version of the client application.
-          example: string
-        EnterpriseId:
-          type: string
-          description: Unique identifier of the enterprise. Required when using [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property), ignored otherwise.
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        BillingAutomationUpdates:
-          maxItems: 100
-          minItems: 1
-          type: array
-          items:
-            $ref: '#/components/schemas/BillingAutomationUpdateParameters'
-          description: Details of the billing automations to be updated.
-      additionalProperties: false
-      x-schema-id: MultipleBillingAutomationUpdateParameters
+      x-schema-id: CompanyRelationsParameters
     CompanyWithBillingAutomationRelation:
       title: Company with billing automation relation
       required:
@@ -1357,62 +1450,6 @@ components:
           example: string
       additionalProperties: false
       x-schema-id: CompanyWithBillingAutomationRelation
-    BillingAutomationFilterParameters:
-      title: Billing automation filter parameters
-      required:
-      - AccessToken
-      - Client
-      - ClientToken
-      - Limitation
-      type: object
-      properties:
-        ClientToken:
-          minLength: 1
-          type: string
-          description: Token identifying the client application.
-          example: string
-        AccessToken:
-          minLength: 1
-          type: string
-          description: Access token of the client application.
-          example: string
-        Client:
-          minLength: 1
-          type: string
-          description: Name and version of the client application.
-          example: string
-        Limitation:
-          allOf:
-          - $ref: '#/components/schemas/Limitation'
-          description: Limitation on the quantity of data returned and optional Cursor for the starting point of data.
-          example: string
-        EnterpriseIds:
-          maxItems: 1000
-          minItems: 1
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Unique identifiers of the Enterprises. If not specified, the operation returns data for all enterprises within scope of the Access Token.
-          nullable: true
-        CompanyIds:
-          maxItems: 100
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Unique identifiers of `Company` associated with the billing automations.
-          nullable: true
-        BillingAutomationIds:
-          maxItems: 100
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Unique identifiers of specific `Billing automation` items.
-          nullable: true
-      additionalProperties: false
-      x-schema-id: BillingAutomationFilterParameters
     BillingAutomationAccountingCategoryAssignment:
       title: Billing automation accounting category assignment
       required:
@@ -1433,60 +1470,27 @@ components:
           example: string
       additionalProperties: false
       x-schema-id: BillingAutomationAccountingCategoryAssignment
-    BooleanUpdateValue:
-      title: Boolean update value
+    GuidIEnumerableUpdateValue:
+      title: Guid array update value
       type: object
       properties:
         Value:
-          type: boolean
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: uuid
           description: Value which is to be updated.
-          example: true
       additionalProperties: false
-      x-schema-id: BooleanUpdateValue
-    BillingAutomationAssignmentTargetTypeEnum:
-      title: Billing automation assignment target type
-      enum:
-      - CompanyAsDetails
-      - CompanyAsOwner
-      - NoCompany
-      type: string
-      description: '
-
-
-        CompanyAsDetails (The company will be the associated account in the resulting routed bill, and the customer is the owner.)
-
-
-        CompanyAsOwner (The company will be the owner in the resulting routed bill, and the customer might be the associated account.)
-
-
-        NoCompany (The customer will be owner of the bill.)'
-      x-enumNames:
-      - CompanyAsDetails
-      - CompanyAsOwner
-      - NoCompany
-      x-enumDescriptions:
-      - The company will be the associated account in the resulting routed bill, and the customer is the owner.
-      - The company will be the owner in the resulting routed bill, and the customer might be the associated account.
-      - The customer will be owner of the bill.
-    BillingAutomationAssignment:
-      title: Billing automation assignment
+      x-schema-id: GuidIEnumerableUpdateValue
+    BillingAutomationAssignmentAddParameters:
+      title: Billing automation assignment add parameters
       required:
-      - BillingAutomationId
-      - Id
       - RoutedItemTypes
       - ServiceId
       type: object
       properties:
-        Id:
-          type: string
-          description: Unique identifier of the billing automation assignment.
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        BillingAutomationId:
-          type: string
-          description: Unique identifier of the billing automation.
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
         ServiceId:
           type: string
           description: Unique identifier of the related service.
@@ -1500,501 +1504,41 @@ components:
           example: string
         RateIds:
           maxItems: 100
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
             format: uuid
-          description: Unique identifiers of `Rates` used in billing automation conditions.
-          nullable: true
+          description: Unique identifiers of `Rates` that will be applied as billing automation condition.
         ProductCategoryIds:
           maxItems: 100
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
             format: uuid
-          description: Unique identifiers of `Product Categories` used in billing automation conditions.
-          nullable: true
+          description: Unique identifiers of `Product Categories` that will be applied as billing automation condition.
         ProductIds:
           maxItems: 100
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
             format: uuid
-          description: Unique identifiers of `Products` used in billing automation conditions.
-          nullable: true
-        AccountingCategoryAssignments:
+          description: Unique identifiers of `Products` that will be applied as billing automation condition.
+        AccountingCategories:
           maxItems: 100
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             $ref: '#/components/schemas/BillingAutomationAccountingCategoryAssignment'
-          description: List of accounting category assignments used in billing automation conditions.
-          nullable: true
+          description: List of accounting categories that will be applied as billing automation condition.
       additionalProperties: false
-      x-schema-id: BillingAutomationAssignment
-    BillingAutomationModificationResult:
-      title: Billing automation modification result
-      type: object
-      properties:
-        BillingAutomations:
-          type: array
-          items:
-            $ref: '#/components/schemas/BillingAutomation'
-          description: Billing automations affected by the operation.
-          nullable: true
-      additionalProperties: false
-      x-schema-id: BillingAutomationModificationResult
-    GuidIEnumerableUpdateValue:
-      title: Guid array update value
-      type: object
-      properties:
-        Value:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Value which is to be updated.
-          nullable: true
-      additionalProperties: false
-      x-schema-id: GuidIEnumerableUpdateValue
-    MultipleBillingAutomationAddParameters:
-      title: Multiple billing automation add parameters
-      required:
-      - AccessToken
-      - BillingAutomations
-      - Client
-      - ClientToken
-      type: object
-      properties:
-        ClientToken:
-          minLength: 1
-          type: string
-          description: Token identifying the client application.
-          example: string
-        AccessToken:
-          minLength: 1
-          type: string
-          description: Access token of the client application.
-          example: string
-        Client:
-          minLength: 1
-          type: string
-          description: Name and version of the client application.
-          example: string
-        EnterpriseId:
-          type: string
-          description: Unique identifier of the enterprise. Required when using [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property), ignored otherwise.
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        BillingAutomations:
-          maxItems: 100
-          minItems: 1
-          type: array
-          items:
-            $ref: '#/components/schemas/BillingAutomationAddParameters'
-          description: Parameters of the new billing automations to be created.
-      additionalProperties: false
-      x-schema-id: MultipleBillingAutomationAddParameters
-    BillingAutomationPrepaymentUpdateValue:
-      title: Billing automation prepayment type update value
-      type: object
-      properties:
-        Value:
-          title: Billing automation prepayment type
-          allOf:
-          - $ref: '#/components/schemas/BillingAutomationPrepaymentEnum'
-          description: Value which is to be updated.
-          x-enumNames:
-          - All
-          - Prepaid
-          x-enumDescriptions:
-          - All
-          - Prepaid
-          example: string
-      additionalProperties: false
-      x-schema-id: BillingAutomationPrepaymentUpdateValue
-    BillingAutomationPrepaymentEnum:
-      title: Billing automation prepayment type
-      enum:
-      - All
-      - Prepaid
-      type: string
-      description: '
-
-
-        All (All)
-
-
-        Prepaid (Prepaid)'
-      x-enumNames:
-      - All
-      - Prepaid
-      x-enumDescriptions:
-      - All
-      - Prepaid
-    BillingAutomationBillAggregationTypeUpdateValue:
-      title: Billing automation bill aggregation type update value
-      type: object
-      properties:
-        Value:
-          title: Billing automation bill aggregation type
-          allOf:
-          - $ref: '#/components/schemas/BillingAutomationBillAggregationTypeEnum'
-          description: Value which is to be updated.
-          x-enumNames:
-          - OnePerReservation
-          - AggregateByCustomer
-          - AggregateAll
-          - AggregatePerReservationGroup
-          x-enumDescriptions:
-          - Create a separate bill for each reservation.
-          - Create a separate bill for each reservation owner.
-          - Group all moved items on one bill.
-          - Create a separate bill for each reservation group.
-          example: string
-      additionalProperties: false
-      x-schema-id: BillingAutomationBillAggregationTypeUpdateValue
-    BillingAutomationDeleteParameters:
-      title: Billing automation delete parameters
-      required:
-      - AccessToken
-      - BillingAutomationIds
-      - Client
-      - ClientToken
-      type: object
-      properties:
-        ClientToken:
-          minLength: 1
-          type: string
-          description: Token identifying the client application.
-          example: string
-        AccessToken:
-          minLength: 1
-          type: string
-          description: Access token of the client application.
-          example: string
-        Client:
-          minLength: 1
-          type: string
-          description: Name and version of the client application.
-          example: string
-        EnterpriseId:
-          type: string
-          description: Unique identifier of the enterprise. Required when using [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property), ignored otherwise.
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        BillingAutomationIds:
-          maxItems: 100
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Unique identifier of the billing automations to be deleted.
-      additionalProperties: false
-      x-schema-id: BillingAutomationDeleteParameters
-    BillingAutomationItemTypesUpdateParameters:
-      title: Billing automation item types update parameters
-      type: object
-      properties:
-        SpaceOrder:
-          title: Boolean update value
-          allOf:
-          - $ref: '#/components/schemas/BooleanUpdateValue'
-          description: Space order (or `null` should it not be updated).
-          nullable: true
-          example: string
-        CityTax:
-          title: Boolean update value
-          allOf:
-          - $ref: '#/components/schemas/BooleanUpdateValue'
-          description: City tax (or `null` should it not be updated).
-          nullable: true
-          example: string
-        AllProducts:
-          title: Boolean update value
-          allOf:
-          - $ref: '#/components/schemas/BooleanUpdateValue'
-          description: Products (or `null` should it not be updated).
-          nullable: true
-          example: string
-        Deposits:
-          title: Boolean update value
-          allOf:
-          - $ref: '#/components/schemas/BooleanUpdateValue'
-          description: Deposits(or `null` should it not be updated).
-          nullable: true
-          example: string
-        AdditionalExpenses:
-          title: Boolean update value
-          allOf:
-          - $ref: '#/components/schemas/BooleanUpdateValue'
-          description: Additional expenses (or `null` should it not be updated).
-          nullable: true
-          example: string
-        AllCustomItems:
-          title: Boolean update value
-          allOf:
-          - $ref: '#/components/schemas/BooleanUpdateValue'
-          description: Custom items (or `null` should it not be updated).
-          nullable: true
-          example: string
-      additionalProperties: false
-      x-schema-id: BillingAutomationItemTypesUpdateParameters
-    BillingAutomationAssignmentsUpdateParameters:
-      title: Billing automation assignments update parameters
-      required:
-      - AccessToken
-      - BillingAutomationId
-      - Client
-      - ClientToken
-      type: object
-      properties:
-        ClientToken:
-          minLength: 1
-          type: string
-          description: Token identifying the client application.
-          example: string
-        AccessToken:
-          minLength: 1
-          type: string
-          description: Access token of the client application.
-          example: string
-        Client:
-          minLength: 1
-          type: string
-          description: Name and version of the client application.
-          example: string
-        EnterpriseId:
-          type: string
-          description: Unique identifier of the enterprise. Required when using [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property), ignored otherwise.
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        BillingAutomationId:
-          type: string
-          description: Unique identifier of the billing automation.
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        AssignmentsToAdd:
-          maxItems: 20
-          type: array
-          items:
-            $ref: '#/components/schemas/BillingAutomationAssignmentAddParameters'
-          description: Parameters for adding new assignments (or null if not being updated).
-          nullable: true
-        AssignmentsToUpdate:
-          maxItems: 20
-          type: array
-          items:
-            $ref: '#/components/schemas/BillingAutomationAssignmentUpdateParameters'
-          description: List of parameters for updating existing assignments (or null if not being updated).
-          nullable: true
-        AssignmentIdsToRemove:
-          maxItems: 100
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: List of unique identifiers for assignments to be removed (or null if not being updated).
-          nullable: true
-      additionalProperties: false
-      x-schema-id: BillingAutomationAssignmentsUpdateParameters
-    BillingAutomationOrderItemConsumptionPeriodTypeEnum:
-      title: Billing automation order item consumption period type
-      enum:
-      - MonthBefore
-      - SameMonthAndMonthBefore
-      - SameMonth
-      - SameMonthAndMonthAfter
-      - MonthAfter
-      type: string
-      description: '
-
-
-        MonthBefore (Only items with a consumption date within the previous month will be routed.)
-
-
-        SameMonthAndMonthBefore (Only items with a consumption date within this and the previous month will be routed.)
-
-
-        SameMonth (Only items with a consumption date within this month will be routed.)
-
-
-        SameMonthAndMonthAfter (Only items with a consumption date within this and the next month will be routed.)
-
-
-        MonthAfter (Only items with a consumption date within the next month will be routed.)'
-      x-enumNames:
-      - MonthBefore
-      - SameMonthAndMonthBefore
-      - SameMonth
-      - SameMonthAndMonthAfter
-      - MonthAfter
-      x-enumDescriptions:
-      - Only items with a consumption date within the previous month will be routed.
-      - Only items with a consumption date within this and the previous month will be routed.
-      - Only items with a consumption date within this month will be routed.
-      - Only items with a consumption date within this and the next month will be routed.
-      - Only items with a consumption date within the next month will be routed.
-    ConnectorApiExceptionResult:
-      title: ConnectorApiExceptionResult
-      type: object
-      properties:
-        Message:
-          type: string
-          nullable: true
-          example: string
-        RequestId:
-          type: string
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Details:
-          nullable: true
-          example: string
-      additionalProperties: false
-      x-schema-id: ConnectorApiExceptionResult
-    BillingAutomationOrderItemConsumptionPeriodTypeUpdateValue:
-      title: Billing automation order item consumption period type update value
-      type: object
-      properties:
-        Value:
-          title: Billing automation order item consumption period type
-          allOf:
-          - $ref: '#/components/schemas/BillingAutomationOrderItemConsumptionPeriodTypeEnum'
-          description: Value which is to be updated.
-          x-enumNames:
-          - MonthBefore
-          - SameMonthAndMonthBefore
-          - SameMonth
-          - SameMonthAndMonthAfter
-          - MonthAfter
-          x-enumDescriptions:
-          - Only items with a consumption date within the previous month will be routed.
-          - Only items with a consumption date within this and the previous month will be routed.
-          - Only items with a consumption date within this month will be routed.
-          - Only items with a consumption date within this and the next month will be routed.
-          - Only items with a consumption date within the next month will be routed.
-          example: string
-      additionalProperties: false
-      x-schema-id: BillingAutomationOrderItemConsumptionPeriodTypeUpdateValue
-    Limitation:
-      title: Limitation
-      required:
-      - Count
-      type: object
-      properties:
-        Count:
-          type: integer
-          format: int32
-          example: 1
-        Cursor:
-          type: string
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-      additionalProperties: false
-      description: Limitation on the quantity of data returned.
-      x-schema-id: Limitation
-    BillingAutomationAssignmentTargetTypeUpdateValue:
-      title: Billing automation assignment target type update value
-      type: object
-      properties:
-        Value:
-          title: Billing automation assignment target type
-          allOf:
-          - $ref: '#/components/schemas/BillingAutomationAssignmentTargetTypeEnum'
-          description: Value which is to be updated.
-          x-enumNames:
-          - CompanyAsDetails
-          - CompanyAsOwner
-          - NoCompany
-          x-enumDescriptions:
-          - The company will be the associated account in the resulting routed bill, and the customer is the owner.
-          - The company will be the owner in the resulting routed bill, and the customer might be the associated account.
-          - The customer will be owner of the bill.
-          example: string
-      additionalProperties: false
-      x-schema-id: BillingAutomationAssignmentTargetTypeUpdateValue
-    BillingAutomationItemTypesParameters:
-      title: Billing automation item types parameters
-      required:
-      - AdditionalExpenses
-      - AllCustomItems
-      - AllProducts
-      - CityTax
-      - Deposits
-      - SpaceOrder
-      type: object
-      properties:
-        SpaceOrder:
-          type: boolean
-          description: Space order
-          example: true
-        CityTax:
-          type: boolean
-          description: City tax
-          example: true
-        AllProducts:
-          type: boolean
-          description: All products
-          example: true
-        Deposits:
-          type: boolean
-          description: Deposits
-          example: true
-        AdditionalExpenses:
-          type: boolean
-          description: Additional expenses
-          example: true
-        AllCustomItems:
-          type: boolean
-          description: All custom items
-          example: true
-      additionalProperties: false
-      x-schema-id: BillingAutomationItemTypesParameters
-    BillingAutomationBillAggregationTypeEnum:
-      title: Billing automation bill aggregation type
-      enum:
-      - OnePerReservation
-      - AggregateByCustomer
-      - AggregateAll
-      - AggregatePerReservationGroup
-      type: string
-      description: '
-
-
-        OnePerReservation (Create a separate bill for each reservation.)
-
-
-        AggregateByCustomer (Create a separate bill for each reservation owner.)
-
-
-        AggregateAll (Group all moved items on one bill.)
-
-
-        AggregatePerReservationGroup (Create a separate bill for each reservation group.)'
-      x-enumNames:
-      - OnePerReservation
-      - AggregateByCustomer
-      - AggregateAll
-      - AggregatePerReservationGroup
-      x-enumDescriptions:
-      - Create a separate bill for each reservation.
-      - Create a separate bill for each reservation owner.
-      - Group all moved items on one bill.
-      - Create a separate bill for each reservation group.
-    StringUpdateValue:
-      title: String update value
-      type: object
-      properties:
-        Value:
-          type: string
-          description: Value which is to be updated.
-          nullable: true
-          example: string
-      additionalProperties: false
-      x-schema-id: StringUpdateValue
+      x-schema-id: BillingAutomationAssignmentAddParameters
     BillingAutomation:
       title: Billing automation
       required:
@@ -2028,9 +1572,10 @@ components:
           description: Name of the billing automation.
           example: Example Name
         Description:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Description of the billing automation.
-          nullable: true
           example: string
         CompaniesWithRelations:
           maxItems: 1000
@@ -2153,9 +1698,10 @@ components:
           format: uuid
           example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
         ProcessingStartOffset:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Processing start offset. Applicable only if the billing automation `TriggerType` is set to `Reccuring`.
-          nullable: true
           example: string
         OrderItemConsumptionPeriod:
           allOf:
@@ -2176,34 +1722,500 @@ components:
 
 
             MonthAfter (Only items with a consumption date within the next month will be routed.)'
-          nullable: true
           example: string
         Assignments:
           maxItems: 20
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             $ref: '#/components/schemas/BillingAutomationAssignment'
           description: List of billing automation assignments.
-          nullable: true
       additionalProperties: false
       x-schema-id: BillingAutomation
-    AccountingCategoryRoutedItemTypes:
-      title: Accounting category routed item types
+    Limitation:
+      title: Limitation
       required:
-      - CustomItems
-      - Products
+      - Count
       type: object
       properties:
-        Products:
+        Count:
+          type: integer
+          format: int32
+          example: 1
+        Cursor:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      additionalProperties: false
+      description: Limitation on the quantity of data returned.
+      x-schema-id: Limitation
+    MultipleBillingAutomationAddParameters:
+      title: Multiple billing automation add parameters
+      required:
+      - AccessToken
+      - BillingAutomations
+      - Client
+      - ClientToken
+      type: object
+      properties:
+        ClientToken:
+          minLength: 1
+          type: string
+          description: Token identifying the client application.
+          example: string
+        AccessToken:
+          minLength: 1
+          type: string
+          description: Access token of the client application.
+          example: string
+        Client:
+          minLength: 1
+          type: string
+          description: Name and version of the client application.
+          example: string
+        EnterpriseId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the enterprise. Required when using [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property), ignored otherwise.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        BillingAutomations:
+          maxItems: 100
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/BillingAutomationAddParameters'
+          description: Parameters of the new billing automations to be created.
+      additionalProperties: false
+      x-schema-id: MultipleBillingAutomationAddParameters
+    BillingAutomationItemTypesUpdateParameters:
+      title: Billing automation item types update parameters
+      type: object
+      properties:
+        SpaceOrder:
+          title: Boolean update value
+          allOf:
+          - $ref: '#/components/schemas/BooleanUpdateValue'
+          description: Space order (or `null` should it not be updated).
+          example: string
+        CityTax:
+          title: Boolean update value
+          allOf:
+          - $ref: '#/components/schemas/BooleanUpdateValue'
+          description: City tax (or `null` should it not be updated).
+          example: string
+        AllProducts:
+          title: Boolean update value
+          allOf:
+          - $ref: '#/components/schemas/BooleanUpdateValue'
+          description: Products (or `null` should it not be updated).
+          example: string
+        Deposits:
+          title: Boolean update value
+          allOf:
+          - $ref: '#/components/schemas/BooleanUpdateValue'
+          description: Deposits(or `null` should it not be updated).
+          example: string
+        AdditionalExpenses:
+          title: Boolean update value
+          allOf:
+          - $ref: '#/components/schemas/BooleanUpdateValue'
+          description: Additional expenses (or `null` should it not be updated).
+          example: string
+        AllCustomItems:
+          title: Boolean update value
+          allOf:
+          - $ref: '#/components/schemas/BooleanUpdateValue'
+          description: Custom items (or `null` should it not be updated).
+          example: string
+      additionalProperties: false
+      x-schema-id: BillingAutomationItemTypesUpdateParameters
+    BillingAutomationPrepaymentUpdateValue:
+      title: Billing automation prepayment type update value
+      type: object
+      properties:
+        Value:
+          title: Billing automation prepayment type
+          allOf:
+          - $ref: '#/components/schemas/BillingAutomationPrepaymentEnum'
+          description: Value which is to be updated.
+          x-enumNames:
+          - All
+          - Prepaid
+          x-enumDescriptions:
+          - All
+          - Prepaid
+          example: string
+      additionalProperties: false
+      x-schema-id: BillingAutomationPrepaymentUpdateValue
+    BillingAutomationOrderItemConsumptionPeriodTypeUpdateValue:
+      title: Billing automation order item consumption period type update value
+      type: object
+      properties:
+        Value:
+          title: Billing automation order item consumption period type
+          allOf:
+          - $ref: '#/components/schemas/BillingAutomationOrderItemConsumptionPeriodTypeEnum'
+          description: Value which is to be updated.
+          x-enumNames:
+          - MonthBefore
+          - SameMonthAndMonthBefore
+          - SameMonth
+          - SameMonthAndMonthAfter
+          - MonthAfter
+          x-enumDescriptions:
+          - Only items with a consumption date within the previous month will be routed.
+          - Only items with a consumption date within this and the previous month will be routed.
+          - Only items with a consumption date within this month will be routed.
+          - Only items with a consumption date within this and the next month will be routed.
+          - Only items with a consumption date within the next month will be routed.
+          example: string
+      additionalProperties: false
+      x-schema-id: BillingAutomationOrderItemConsumptionPeriodTypeUpdateValue
+    BillingAutomationPrepaymentEnum:
+      title: Billing automation prepayment type
+      enum:
+      - All
+      - Prepaid
+      type: string
+      description: '
+
+
+        All (All)
+
+
+        Prepaid (Prepaid)'
+      x-enumNames:
+      - All
+      - Prepaid
+      x-enumDescriptions:
+      - All
+      - Prepaid
+    BillingAutomationAssignmentTargetTypeEnum:
+      title: Billing automation assignment target type
+      enum:
+      - CompanyAsDetails
+      - CompanyAsOwner
+      - NoCompany
+      type: string
+      description: '
+
+
+        CompanyAsDetails (The company will be the associated account in the resulting routed bill, and the customer is the owner.)
+
+
+        CompanyAsOwner (The company will be the owner in the resulting routed bill, and the customer might be the associated account.)
+
+
+        NoCompany (The customer will be owner of the bill.)'
+      x-enumNames:
+      - CompanyAsDetails
+      - CompanyAsOwner
+      - NoCompany
+      x-enumDescriptions:
+      - The company will be the associated account in the resulting routed bill, and the customer is the owner.
+      - The company will be the owner in the resulting routed bill, and the customer might be the associated account.
+      - The customer will be owner of the bill.
+    BillingAutomationAssignmentsUpdateParameters:
+      title: Billing automation assignments update parameters
+      required:
+      - AccessToken
+      - BillingAutomationId
+      - Client
+      - ClientToken
+      type: object
+      properties:
+        ClientToken:
+          minLength: 1
+          type: string
+          description: Token identifying the client application.
+          example: string
+        AccessToken:
+          minLength: 1
+          type: string
+          description: Access token of the client application.
+          example: string
+        Client:
+          minLength: 1
+          type: string
+          description: Name and version of the client application.
+          example: string
+        EnterpriseId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the enterprise. Required when using [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property), ignored otherwise.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        BillingAutomationId:
+          type: string
+          description: Unique identifier of the billing automation.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        AssignmentsToAdd:
+          maxItems: 20
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/BillingAutomationAssignmentAddParameters'
+          description: Parameters for adding new assignments (or null if not being updated).
+        AssignmentsToUpdate:
+          maxItems: 20
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/BillingAutomationAssignmentUpdateParameters'
+          description: List of parameters for updating existing assignments (or null if not being updated).
+        AssignmentIdsToRemove:
+          maxItems: 100
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: uuid
+          description: List of unique identifiers for assignments to be removed (or null if not being updated).
+      additionalProperties: false
+      x-schema-id: BillingAutomationAssignmentsUpdateParameters
+    BooleanUpdateValue:
+      title: Boolean update value
+      type: object
+      properties:
+        Value:
           type: boolean
-          description: Specifies whether products under the given accounting category are routed.
-          example: true
-        CustomItems:
-          type: boolean
-          description: Specifies whether custom items under the given accounting category are routed.
+          description: Value which is to be updated.
           example: true
       additionalProperties: false
-      x-schema-id: AccountingCategoryRoutedItemTypes
+      x-schema-id: BooleanUpdateValue
+    BillingAutomationDeleteParameters:
+      title: Billing automation delete parameters
+      required:
+      - AccessToken
+      - BillingAutomationIds
+      - Client
+      - ClientToken
+      type: object
+      properties:
+        ClientToken:
+          minLength: 1
+          type: string
+          description: Token identifying the client application.
+          example: string
+        AccessToken:
+          minLength: 1
+          type: string
+          description: Access token of the client application.
+          example: string
+        Client:
+          minLength: 1
+          type: string
+          description: Name and version of the client application.
+          example: string
+        EnterpriseId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the enterprise. Required when using [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property), ignored otherwise.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        BillingAutomationIds:
+          maxItems: 100
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Unique identifier of the billing automations to be deleted.
+      additionalProperties: false
+      x-schema-id: BillingAutomationDeleteParameters
+    Unit:
+      type: object
+      additionalProperties: false
+    BillingAutomationAssignment:
+      title: Billing automation assignment
+      required:
+      - BillingAutomationId
+      - Id
+      - RoutedItemTypes
+      - ServiceId
+      type: object
+      properties:
+        Id:
+          type: string
+          description: Unique identifier of the billing automation assignment.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        BillingAutomationId:
+          type: string
+          description: Unique identifier of the billing automation.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        ServiceId:
+          type: string
+          description: Unique identifier of the related service.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        RoutedItemTypes:
+          title: Billing automation item types parameters
+          allOf:
+          - $ref: '#/components/schemas/BillingAutomationItemTypesParameters'
+          description: Type of items that are going to be routed.
+          example: string
+        RateIds:
+          maxItems: 100
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: uuid
+          description: Unique identifiers of `Rates` used in billing automation conditions.
+        ProductCategoryIds:
+          maxItems: 100
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: uuid
+          description: Unique identifiers of `Product Categories` used in billing automation conditions.
+        ProductIds:
+          maxItems: 100
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: uuid
+          description: Unique identifiers of `Products` used in billing automation conditions.
+        AccountingCategoryAssignments:
+          maxItems: 100
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/BillingAutomationAccountingCategoryAssignment'
+          description: List of accounting category assignments used in billing automation conditions.
+      additionalProperties: false
+      x-schema-id: BillingAutomationAssignment
+    BillingAutomationOrderItemConsumptionPeriodTypeEnum:
+      title: Billing automation order item consumption period type
+      enum:
+      - MonthBefore
+      - SameMonthAndMonthBefore
+      - SameMonth
+      - SameMonthAndMonthAfter
+      - MonthAfter
+      type: string
+      description: '
+
+
+        MonthBefore (Only items with a consumption date within the previous month will be routed.)
+
+
+        SameMonthAndMonthBefore (Only items with a consumption date within this and the previous month will be routed.)
+
+
+        SameMonth (Only items with a consumption date within this month will be routed.)
+
+
+        SameMonthAndMonthAfter (Only items with a consumption date within this and the next month will be routed.)
+
+
+        MonthAfter (Only items with a consumption date within the next month will be routed.)'
+      x-enumNames:
+      - MonthBefore
+      - SameMonthAndMonthBefore
+      - SameMonth
+      - SameMonthAndMonthAfter
+      - MonthAfter
+      x-enumDescriptions:
+      - Only items with a consumption date within the previous month will be routed.
+      - Only items with a consumption date within this and the previous month will be routed.
+      - Only items with a consumption date within this month will be routed.
+      - Only items with a consumption date within this and the next month will be routed.
+      - Only items with a consumption date within the next month will be routed.
+    BillingAutomationAssignmentTargetTypeUpdateValue:
+      title: Billing automation assignment target type update value
+      type: object
+      properties:
+        Value:
+          title: Billing automation assignment target type
+          allOf:
+          - $ref: '#/components/schemas/BillingAutomationAssignmentTargetTypeEnum'
+          description: Value which is to be updated.
+          x-enumNames:
+          - CompanyAsDetails
+          - CompanyAsOwner
+          - NoCompany
+          x-enumDescriptions:
+          - The company will be the associated account in the resulting routed bill, and the customer is the owner.
+          - The company will be the owner in the resulting routed bill, and the customer might be the associated account.
+          - The customer will be owner of the bill.
+          example: string
+      additionalProperties: false
+      x-schema-id: BillingAutomationAssignmentTargetTypeUpdateValue
+    CompanyWithBillingAutomationRelationIEnumerableUpdateValue:
+      title: Company with billing automation relation array update value
+      type: object
+      properties:
+        Value:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/CompanyWithBillingAutomationRelation'
+          description: Value which is to be updated.
+      additionalProperties: false
+      x-schema-id: CompanyWithBillingAutomationRelationIEnumerableUpdateValue
+    ConnectorApiExceptionResult:
+      title: ConnectorApiExceptionResult
+      type: object
+      properties:
+        Message:
+          type:
+          - string
+          - 'null'
+          example: string
+        RequestId:
+          type:
+          - string
+          - 'null'
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Details:
+          example: string
+      additionalProperties: false
+      x-schema-id: ConnectorApiExceptionResult
+    BillingAutomationTriggerTypeEnum:
+      title: Billing automation trigger type
+      enum:
+      - Continuous
+      - Recurring
+      - Legacy
+      type: string
+      description: '
+
+
+        Continuous (Billing automation is continuously triggered by reservation actions, such as creation, updates, and rebates.)
+
+
+        Recurring (Billing automation is executed monthly.)
+
+
+        Legacy (Billing automation is executed on reservation creation only. Items added later are not transfered to any bill.)'
+      x-enumNames:
+      - Continuous
+      - Recurring
+      - Legacy
+      x-enumDescriptions:
+      - Billing automation is continuously triggered by reservation actions, such as creation, updates, and rebates.
+      - Billing automation is executed monthly.
+      - Billing automation is executed on reservation creation only. Items added later are not transfered to any bill.
   securitySchemes:
     MewsClientToken:
       type: apiKey

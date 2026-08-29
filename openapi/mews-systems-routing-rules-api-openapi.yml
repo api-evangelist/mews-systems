@@ -1,4 +1,4 @@
-openapi: 3.0.4
+openapi: 3.2.0
 info:
   title: Mews Booking Engine API (Distributor) Account notes Routing rules API
   version: v1
@@ -678,140 +678,41 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    Unit:
-      type: object
-      additionalProperties: false
-    RoutingRule:
-      title: Routing rule
-      required:
-      - Applicability
-      - CompanyId
-      - CompanyRelation
-      - CreatedUtc
-      - EnterpriseId
-      - Id
-      - RouteType
-      - ServiceId
-      - UpdatedUtc
+    StringUpdateValue:
+      title: String update value
       type: object
       properties:
-        Id:
-          type: string
-          description: Unique identifier of the routing rule.
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        EnterpriseId:
-          type: string
-          description: Unique identifier of the Enterprise.
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        CompanyId:
-          type: string
-          description: Unique identifier of the Company routing rule is assigned to.
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        CompanyRelation:
-          $ref: '#/components/schemas/RoutingRuleCompanyRelation'
-        Applicability:
-          $ref: '#/components/schemas/RoutingRuleApplicability'
-        RouteType:
-          $ref: '#/components/schemas/RoutingRuleRouteType'
-        ServiceId:
-          type: string
-          description: Unique identifier of the Service routing rule is assigned to.
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        SelectedStayItems:
-          title: Selected stay items
-          allOf:
-          - $ref: '#/components/schemas/RoutingRuleStayItems'
-          description: Specific items to which the routing rule applies. Returns only if `RouteType` value is `SelectedStayItems`.
-          nullable: true
+        Value:
+          type:
+          - string
+          - 'null'
+          description: Value which is to be updated.
           example: string
-        CreatedUtc:
-          minLength: 1
-          type: string
-          description: Creation date and time of the routing rule in UTC timezone in ISO 8601 format.
-          format: date-time
-          example: '2026-06-02T14:30:00Z'
-        UpdatedUtc:
-          minLength: 1
-          type: string
-          description: Last update date and time of the routing rule in UTC timezone in ISO 8601 format.
-          format: date-time
-          example: '2026-06-02T14:30:00Z'
       additionalProperties: false
-      x-schema-id: RoutingRule
-    RoutingRuleUpdateParameters:
-      title: Routing rule update parameters
-      required:
-      - RoutingRuleId
+      x-schema-id: StringUpdateValue
+    RoutingRuleStayItems:
+      title: Selected stay items
       type: object
       properties:
-        RoutingRuleId:
-          type: string
-          description: Unique identifier of the routing rule.
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        CompanyId:
-          title: Guid update value
-          allOf:
-          - $ref: '#/components/schemas/GuidUpdateValue'
-          description: Unique identifier of the Company (or null should it not be updated).
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        ServiceId:
-          title: Guid update value
-          allOf:
-          - $ref: '#/components/schemas/GuidUpdateValue'
-          description: Unique identifier of the Service routing rule is assigned to (or null should it not be updated).
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        CompanyRelation:
-          title: String update value
-          allOf:
-          - $ref: '#/components/schemas/StringUpdateValue'
-          anyOf:
-          - $ref: '#/components/schemas/RoutingRuleCompanyRelation'
-          description: Company relation to the routing rule (or null should it not be updated).
-          nullable: true
-          example: string
-        Applicability:
-          title: String update value
-          allOf:
-          - $ref: '#/components/schemas/StringUpdateValue'
-          anyOf:
-          - $ref: '#/components/schemas/RoutingRuleApplicability'
-          description: Applicability that determines if routing rule apply to all future reservations with this company or travel agency attached or only future reservations that are prepaid in online travel agency (OTA) (or null should it not be updated).
-          nullable: true
-          example: string
-        RouteType:
-          title: String update value
-          allOf:
-          - $ref: '#/components/schemas/StringUpdateValue'
-          anyOf:
-          - $ref: '#/components/schemas/RoutingRuleRouteType'
-          description: What should be routed Route type (or null should it not be updated).
-          nullable: true
-          example: string
-        AssignmentTargetType:
-          title: String update value
-          allOf:
-          - $ref: '#/components/schemas/StringUpdateValue'
-          anyOf:
-          - $ref: '#/components/schemas/RoutingRuleAssignmentTargetType'
-          description: Relation of company to the bill Assignment target type (or null should it not be updated).
-          nullable: true
-          example: string
-        SelectedStayItems:
-          title: Selected stay items update parameters
-          allOf:
-          - $ref: '#/components/schemas/RoutingRuleStayItemsUpdateParameters'
-          description: To which stay items routing rule applies to. Required only if `RouteType` value is `SelectedStayItems`.
-          nullable: true
-          example: string
+        Nights:
+          type: boolean
+          description: Whether the routing rule applies to nights.
+          example: true
+        CityTax:
+          type: boolean
+          description: Whether the routing rule applies to city tax.
+          example: true
+        ProductCategoryIds:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: uuid
+          description: Product categories to which the routing rule applies to.
       additionalProperties: false
-      x-schema-id: RoutingRuleUpdateParameters
+      description: ''
+      x-schema-id: RoutingRuleStayItems
     RoutingRuleDeleteParameters:
       title: RoutingRuleDeleteParameters
       required:
@@ -860,187 +761,25 @@ components:
           description: Updated routing rules.
       additionalProperties: false
       x-schema-id: RoutingRuleUpdateResult
-    RoutingRuleStayItemsAddParameters:
-      title: Selected stay items parameters
-      type: object
-      properties:
-        Nights:
-          type: boolean
-          description: Whether the routing rule applies to nights.
-          example: true
-        CityTax:
-          type: boolean
-          description: Whether the routing rule applies to city tax.
-          example: true
-        ProductCategoryIds:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Product categories to which the routing rule applies to.
-          nullable: true
-      additionalProperties: false
-      description: ''
-      x-schema-id: RoutingRuleStayItemsAddParameters
-    MultipleRoutingRuleAddParameters:
-      title: MultipleRoutingRuleAddParameters
-      required:
-      - AccessToken
-      - Client
-      - ClientToken
-      - RoutingRules
-      type: object
-      properties:
-        ClientToken:
-          minLength: 1
-          type: string
-          description: Token identifying the client application.
-          example: string
-        AccessToken:
-          minLength: 1
-          type: string
-          description: Access token of the client application.
-          example: string
-        Client:
-          minLength: 1
-          type: string
-          description: Name and version of the client application.
-          example: string
-        RoutingRules:
-          maxItems: 1000
-          minItems: 1
-          type: array
-          items:
-            $ref: '#/components/schemas/RoutingRuleAddParameter'
-          description: Collection of Routing rules to be added.
-      additionalProperties: false
-      x-schema-id: MultipleRoutingRuleAddParameters
-    RoutingRuleResult:
-      title: RoutingRuleResult
-      required:
-      - RoutingRules
-      type: object
-      properties:
-        RoutingRules:
-          maxItems: 1000
-          type: array
-          items:
-            $ref: '#/components/schemas/RoutingRule'
-          description: Collection of routing rules.
-        Cursor:
-          type: string
-          description: Unique identifier of the item one newer in time order than the items to be returned. If Cursor is not specified, i.e. null, then the latest or most recent items will be returned.
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-      additionalProperties: false
-      x-schema-id: RoutingRuleResult
     TimeFilterInterval:
       title: Time interval
       type: object
       properties:
         StartUtc:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
           example: '2026-06-02T14:30:00Z'
         EndUtc:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
           example: '2026-06-02T14:30:00Z'
       additionalProperties: false
-      description: "When a time interval is used for **filtering** (for example in parameters such as `CreatedUtc.StartUtc` / `CreatedUtc.EndUtc`), the following rules apply:\r\n\r\n- **Start equals End (equality mode)**  \r\n  If `StartUtc` and `EndUtc` are exactly the same timestamp, the filter is treated as an equality check for that precise moment in time:\r\n  \r\n  ```\r\n  CreatedUtc == StartUtc\r\n  ```\r\n  \r\n  This does not represent an interval; only records with `CreatedUtc` equal to that exact instant are returned.\r\n\r\n- **Start differs from End (interval mode)**  \r\n  If `StartUtc` and `EndUtc` are different, the filter is evaluated as a half-open interval:\r\n  \r\n  ```\r\n  StartUtc <= CreatedUtc < EndUtc\r\n  ```\r\n  \r\n  In other words, the start is inclusive and the end is exclusive.\r\n\r\nMake sure your integration takes inclusive Start / exclusive End behavior of time intervals into account so that no records at the boundaries are omitted."
+      description: "When a time interval is used for **filtering** (for example in parameters such as `CreatedUtc.StartUtc` / `CreatedUtc.EndUtc`), the following rules apply:\n\n- **Start equals End (equality mode)**  \n  If `StartUtc` and `EndUtc` are exactly the same timestamp, the filter is treated as an equality check for that precise moment in time:\n  \n  ```\n  CreatedUtc == StartUtc\n  ```\n  \n  This does not represent an interval; only records with `CreatedUtc` equal to that exact instant are returned.\n\n- **Start differs from End (interval mode)**  \n  If `StartUtc` and `EndUtc` are different, the filter is evaluated as a half-open interval:\n  \n  ```\n  StartUtc <= CreatedUtc < EndUtc\n  ```\n  \n  In other words, the start is inclusive and the end is exclusive.\n\nMake sure your integration takes inclusive Start / exclusive End behavior of time intervals into account so that no records at the boundaries are omitted."
       x-schema-id: TimeFilterInterval
-    RoutingRuleAddParameter:
-      title: Routing rule parameters
-      required:
-      - Applicability
-      - CompanyId
-      - CompanyRelation
-      - RouteType
-      - ServiceId
-      type: object
-      properties:
-        CompanyId:
-          type: string
-          description: Unique identifier of the Company routing rule is assigned to.
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        ServiceId:
-          type: string
-          description: Unique identifier of the Service routing rule is assigned to.
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        CompanyRelation:
-          $ref: '#/components/schemas/RoutingRuleCompanyRelation'
-        Applicability:
-          $ref: '#/components/schemas/RoutingRuleApplicability'
-        RouteType:
-          $ref: '#/components/schemas/RoutingRuleRouteType'
-        AssignmentTargetType:
-          anyOf:
-          - $ref: '#/components/schemas/RoutingRuleAssignmentTargetType'
-          description: Relation of company to the bill. Defaults to `CompanyAsDetails`.
-          nullable: true
-          example: string
-        SelectedStayItems:
-          title: Selected stay items parameters
-          allOf:
-          - $ref: '#/components/schemas/RoutingRuleStayItemsAddParameters'
-          description: To which stay items routing rule applies to. Required only if `RouteType` value is `SelectedStayItems`.
-          nullable: true
-          example: string
-      additionalProperties: false
-      x-schema-id: RoutingRuleAddParameter
-    GuidUpdateValue:
-      title: Guid update value
-      type: object
-      properties:
-        Value:
-          type: string
-          description: Value which is to be updated.
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-      additionalProperties: false
-      x-schema-id: GuidUpdateValue
-    RoutingRuleAdditionResult:
-      title: RoutingRuleAdditionResult
-      required:
-      - RoutingRules
-      type: object
-      properties:
-        RoutingRules:
-          maxItems: 1000
-          type: array
-          items:
-            $ref: '#/components/schemas/RoutingRule'
-          description: Added routing rules.
-      additionalProperties: false
-      x-schema-id: RoutingRuleAdditionResult
-    BooleanUpdateValue:
-      title: Boolean update value
-      type: object
-      properties:
-        Value:
-          type: boolean
-          description: Value which is to be updated.
-          example: true
-      additionalProperties: false
-      x-schema-id: BooleanUpdateValue
-    GuidIEnumerableUpdateValue:
-      title: Guid array update value
-      type: object
-      properties:
-        Value:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Value which is to be updated.
-          nullable: true
-      additionalProperties: false
-      x-schema-id: GuidIEnumerableUpdateValue
     RoutingRuleRouteType:
       title: Route type
       enum:
@@ -1048,149 +787,26 @@ components:
       - SelectedStayItems
       type: string
       description: Determines to which stay items the routing rule applies.
-    RoutingRuleCompanyRelation:
-      title: Company relation
-      enum:
-      - PartnerCompany
-      - TravelAgency
-      type: string
-      description: Relation of the company to the routing rule.
-    RoutingRuleStayItems:
-      title: Selected stay items
-      type: object
-      properties:
-        Nights:
-          type: boolean
-          description: Whether the routing rule applies to nights.
-          example: true
-        CityTax:
-          type: boolean
-          description: Whether the routing rule applies to city tax.
-          example: true
-        ProductCategoryIds:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Product categories to which the routing rule applies to.
-          nullable: true
-      additionalProperties: false
-      description: ''
-      x-schema-id: RoutingRuleStayItems
-    RoutingRuleFilterParameters:
-      title: RoutingRuleFilterParameters
-      required:
-      - AccessToken
-      - Client
-      - ClientToken
-      - Limitation
-      type: object
-      properties:
-        ClientToken:
-          minLength: 1
-          type: string
-          description: Token identifying the client application.
-          example: string
-        AccessToken:
-          minLength: 1
-          type: string
-          description: Access token of the client application.
-          example: string
-        Client:
-          minLength: 1
-          type: string
-          description: Name and version of the client application.
-          example: string
-        Limitation:
-          allOf:
-          - $ref: '#/components/schemas/Limitation'
-          description: Limitation on the quantity of data returned and optional Cursor for the starting point of data.
-          example: string
-        EnterpriseIds:
-          maxItems: 1000
-          minItems: 1
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Unique identifiers of the Enterprises. If not specified, the operation returns data for all enterprises within scope of the Access Token.
-          nullable: true
-        CompanyIds:
-          maxItems: 1000
-          minItems: 1
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Unique identifier of the `Company`.
-          nullable: true
-        RoutingRuleIds:
-          maxItems: 1000
-          minItems: 1
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Unique identifier of the routing rules.
-          nullable: true
-        UpdatedUtc:
-          title: Time interval
-          allOf:
-          - $ref: '#/components/schemas/TimeFilterInterval'
-          description: Interval in which the routing rules were updated.
-          nullable: true
-          x-max-interval-in-months: 3
-          example: string
-      additionalProperties: false
-      x-schema-id: RoutingRuleFilterParameters
-    RoutingRuleApplicability:
-      title: Applicability
-      enum:
-      - Always
-      - PrepaidOnly
-      type: string
-      description: Determines if routing rule applies to all future reservations with this company or travel agency, or only future reservations that are prepaid.
     RoutingRuleAssignmentTargetType:
       title: Assignment target type
       enum:
       - CompanyAsDetails
       - CompanyAsOwner
       type: string
-    ConnectorApiExceptionResult:
-      title: ConnectorApiExceptionResult
+    GuidIEnumerableUpdateValue:
+      title: Guid array update value
       type: object
       properties:
-        Message:
-          type: string
-          nullable: true
-          example: string
-        RequestId:
-          type: string
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Details:
-          nullable: true
-          example: string
+        Value:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: uuid
+          description: Value which is to be updated.
       additionalProperties: false
-      x-schema-id: ConnectorApiExceptionResult
-    Limitation:
-      title: Limitation
-      required:
-      - Count
-      type: object
-      properties:
-        Count:
-          type: integer
-          format: int32
-          example: 1
-        Cursor:
-          type: string
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-      additionalProperties: false
-      description: Limitation on the quantity of data returned.
-      x-schema-id: Limitation
+      x-schema-id: GuidIEnumerableUpdateValue
     MultipleRoutingRuleUpdateParameters:
       title: MultipleRoutingRuleUpdateParameters
       required:
@@ -1224,6 +840,402 @@ components:
           description: Collection of Routing rules to be updated.
       additionalProperties: false
       x-schema-id: MultipleRoutingRuleUpdateParameters
+    GuidUpdateValue:
+      title: Guid update value
+      type: object
+      properties:
+        Value:
+          type: string
+          description: Value which is to be updated.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      additionalProperties: false
+      x-schema-id: GuidUpdateValue
+    Limitation:
+      title: Limitation
+      required:
+      - Count
+      type: object
+      properties:
+        Count:
+          type: integer
+          format: int32
+          example: 1
+        Cursor:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      additionalProperties: false
+      description: Limitation on the quantity of data returned.
+      x-schema-id: Limitation
+    RoutingRuleAdditionResult:
+      title: RoutingRuleAdditionResult
+      required:
+      - RoutingRules
+      type: object
+      properties:
+        RoutingRules:
+          maxItems: 1000
+          type: array
+          items:
+            $ref: '#/components/schemas/RoutingRule'
+          description: Added routing rules.
+      additionalProperties: false
+      x-schema-id: RoutingRuleAdditionResult
+    RoutingRuleResult:
+      title: RoutingRuleResult
+      required:
+      - RoutingRules
+      type: object
+      properties:
+        RoutingRules:
+          maxItems: 1000
+          type: array
+          items:
+            $ref: '#/components/schemas/RoutingRule'
+          description: Collection of routing rules.
+        Cursor:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the item one newer in time order than the items to be returned. If Cursor is not specified, i.e. null, then the latest or most recent items will be returned.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      additionalProperties: false
+      x-schema-id: RoutingRuleResult
+    RoutingRuleCompanyRelation:
+      title: Company relation
+      enum:
+      - PartnerCompany
+      - TravelAgency
+      type: string
+      description: Relation of the company to the routing rule.
+    BooleanUpdateValue:
+      title: Boolean update value
+      type: object
+      properties:
+        Value:
+          type: boolean
+          description: Value which is to be updated.
+          example: true
+      additionalProperties: false
+      x-schema-id: BooleanUpdateValue
+    MultipleRoutingRuleAddParameters:
+      title: MultipleRoutingRuleAddParameters
+      required:
+      - AccessToken
+      - Client
+      - ClientToken
+      - RoutingRules
+      type: object
+      properties:
+        ClientToken:
+          minLength: 1
+          type: string
+          description: Token identifying the client application.
+          example: string
+        AccessToken:
+          minLength: 1
+          type: string
+          description: Access token of the client application.
+          example: string
+        Client:
+          minLength: 1
+          type: string
+          description: Name and version of the client application.
+          example: string
+        RoutingRules:
+          maxItems: 1000
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/RoutingRuleAddParameter'
+          description: Collection of Routing rules to be added.
+      additionalProperties: false
+      x-schema-id: MultipleRoutingRuleAddParameters
+    RoutingRuleAddParameter:
+      title: Routing rule parameters
+      required:
+      - Applicability
+      - CompanyId
+      - CompanyRelation
+      - RouteType
+      - ServiceId
+      type: object
+      properties:
+        CompanyId:
+          type: string
+          description: Unique identifier of the Company routing rule is assigned to.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        ServiceId:
+          type: string
+          description: Unique identifier of the Service routing rule is assigned to.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        CompanyRelation:
+          $ref: '#/components/schemas/RoutingRuleCompanyRelation'
+        Applicability:
+          $ref: '#/components/schemas/RoutingRuleApplicability'
+        RouteType:
+          $ref: '#/components/schemas/RoutingRuleRouteType'
+        AssignmentTargetType:
+          anyOf:
+          - $ref: '#/components/schemas/RoutingRuleAssignmentTargetType'
+          description: Relation of company to the bill. Defaults to `CompanyAsDetails`.
+          example: string
+        SelectedStayItems:
+          title: Selected stay items parameters
+          allOf:
+          - $ref: '#/components/schemas/RoutingRuleStayItemsAddParameters'
+          description: To which stay items routing rule applies to. Required only if `RouteType` value is `SelectedStayItems`.
+          example: string
+      additionalProperties: false
+      x-schema-id: RoutingRuleAddParameter
+    RoutingRuleStayItemsAddParameters:
+      title: Selected stay items parameters
+      type: object
+      properties:
+        Nights:
+          type: boolean
+          description: Whether the routing rule applies to nights.
+          example: true
+        CityTax:
+          type: boolean
+          description: Whether the routing rule applies to city tax.
+          example: true
+        ProductCategoryIds:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: uuid
+          description: Product categories to which the routing rule applies to.
+      additionalProperties: false
+      description: ''
+      x-schema-id: RoutingRuleStayItemsAddParameters
+    RoutingRule:
+      title: Routing rule
+      required:
+      - Applicability
+      - CompanyId
+      - CompanyRelation
+      - CreatedUtc
+      - EnterpriseId
+      - Id
+      - RouteType
+      - ServiceId
+      - UpdatedUtc
+      type: object
+      properties:
+        Id:
+          type: string
+          description: Unique identifier of the routing rule.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        EnterpriseId:
+          type: string
+          description: Unique identifier of the Enterprise.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        CompanyId:
+          type: string
+          description: Unique identifier of the Company routing rule is assigned to.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        CompanyRelation:
+          $ref: '#/components/schemas/RoutingRuleCompanyRelation'
+        Applicability:
+          $ref: '#/components/schemas/RoutingRuleApplicability'
+        RouteType:
+          $ref: '#/components/schemas/RoutingRuleRouteType'
+        ServiceId:
+          type: string
+          description: Unique identifier of the Service routing rule is assigned to.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        SelectedStayItems:
+          title: Selected stay items
+          allOf:
+          - $ref: '#/components/schemas/RoutingRuleStayItems'
+          description: Specific items to which the routing rule applies. Returns only if `RouteType` value is `SelectedStayItems`.
+          example: string
+        CreatedUtc:
+          minLength: 1
+          type: string
+          description: Creation date and time of the routing rule in UTC timezone in ISO 8601 format.
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+        UpdatedUtc:
+          minLength: 1
+          type: string
+          description: Last update date and time of the routing rule in UTC timezone in ISO 8601 format.
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+      additionalProperties: false
+      x-schema-id: RoutingRule
+    Unit:
+      type: object
+      additionalProperties: false
+    RoutingRuleFilterParameters:
+      title: RoutingRuleFilterParameters
+      required:
+      - AccessToken
+      - Client
+      - ClientToken
+      - Limitation
+      type: object
+      properties:
+        ClientToken:
+          minLength: 1
+          type: string
+          description: Token identifying the client application.
+          example: string
+        AccessToken:
+          minLength: 1
+          type: string
+          description: Access token of the client application.
+          example: string
+        Client:
+          minLength: 1
+          type: string
+          description: Name and version of the client application.
+          example: string
+        Limitation:
+          allOf:
+          - $ref: '#/components/schemas/Limitation'
+          description: Limitation on the quantity of data returned and optional Cursor for the starting point of data.
+          example: string
+        EnterpriseIds:
+          maxItems: 1000
+          minItems: 1
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: uuid
+          description: Unique identifiers of the Enterprises. If not specified, the operation returns data for all enterprises within scope of the Access Token.
+        CompanyIds:
+          maxItems: 1000
+          minItems: 1
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: uuid
+          description: Unique identifier of the `Company`.
+        RoutingRuleIds:
+          maxItems: 1000
+          minItems: 1
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: uuid
+          description: Unique identifier of the routing rules.
+        UpdatedUtc:
+          title: Time interval
+          allOf:
+          - $ref: '#/components/schemas/TimeFilterInterval'
+          description: Interval in which the routing rules were updated.
+          x-max-interval-in-months: 3
+          example: string
+      additionalProperties: false
+      x-schema-id: RoutingRuleFilterParameters
+    RoutingRuleUpdateParameters:
+      title: Routing rule update parameters
+      required:
+      - RoutingRuleId
+      type: object
+      properties:
+        RoutingRuleId:
+          type: string
+          description: Unique identifier of the routing rule.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        CompanyId:
+          title: Guid update value
+          allOf:
+          - $ref: '#/components/schemas/GuidUpdateValue'
+          description: Unique identifier of the Company (or null should it not be updated).
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        ServiceId:
+          title: Guid update value
+          allOf:
+          - $ref: '#/components/schemas/GuidUpdateValue'
+          description: Unique identifier of the Service routing rule is assigned to (or null should it not be updated).
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        CompanyRelation:
+          title: String update value
+          allOf:
+          - $ref: '#/components/schemas/StringUpdateValue'
+          anyOf:
+          - $ref: '#/components/schemas/RoutingRuleCompanyRelation'
+          description: Company relation to the routing rule (or null should it not be updated).
+          example: string
+        Applicability:
+          title: String update value
+          allOf:
+          - $ref: '#/components/schemas/StringUpdateValue'
+          anyOf:
+          - $ref: '#/components/schemas/RoutingRuleApplicability'
+          description: Applicability that determines if routing rule apply to all future reservations with this company or travel agency attached or only future reservations that are prepaid in online travel agency (OTA) (or null should it not be updated).
+          example: string
+        RouteType:
+          title: String update value
+          allOf:
+          - $ref: '#/components/schemas/StringUpdateValue'
+          anyOf:
+          - $ref: '#/components/schemas/RoutingRuleRouteType'
+          description: What should be routed Route type (or null should it not be updated).
+          example: string
+        AssignmentTargetType:
+          title: String update value
+          allOf:
+          - $ref: '#/components/schemas/StringUpdateValue'
+          anyOf:
+          - $ref: '#/components/schemas/RoutingRuleAssignmentTargetType'
+          description: Relation of company to the bill Assignment target type (or null should it not be updated).
+          example: string
+        SelectedStayItems:
+          title: Selected stay items update parameters
+          allOf:
+          - $ref: '#/components/schemas/RoutingRuleStayItemsUpdateParameters'
+          description: To which stay items routing rule applies to. Required only if `RouteType` value is `SelectedStayItems`.
+          example: string
+      additionalProperties: false
+      x-schema-id: RoutingRuleUpdateParameters
+    ConnectorApiExceptionResult:
+      title: ConnectorApiExceptionResult
+      type: object
+      properties:
+        Message:
+          type:
+          - string
+          - 'null'
+          example: string
+        RequestId:
+          type:
+          - string
+          - 'null'
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Details:
+          example: string
+      additionalProperties: false
+      x-schema-id: ConnectorApiExceptionResult
+    RoutingRuleApplicability:
+      title: Applicability
+      enum:
+      - Always
+      - PrepaidOnly
+      type: string
+      description: Determines if routing rule applies to all future reservations with this company or travel agency, or only future reservations that are prepaid.
     RoutingRuleStayItemsUpdateParameters:
       title: Selected stay items update parameters
       type: object
@@ -1233,36 +1245,22 @@ components:
           allOf:
           - $ref: '#/components/schemas/BooleanUpdateValue'
           description: Whether the routing rule applies to nights (or null should it not be updated).
-          nullable: true
           example: string
         CityTax:
           title: Boolean update value
           allOf:
           - $ref: '#/components/schemas/BooleanUpdateValue'
           description: Whether the routing rule applies to city tax (or null should it not be updated).
-          nullable: true
           example: string
         ProductCategoryIds:
           title: Guid array update value
           allOf:
           - $ref: '#/components/schemas/GuidIEnumerableUpdateValue'
           description: Product categories to which the routing rule applies to (or null should it not be updated).
-          nullable: true
           example: string
       additionalProperties: false
       description: ''
       x-schema-id: RoutingRuleStayItemsUpdateParameters
-    StringUpdateValue:
-      title: String update value
-      type: object
-      properties:
-        Value:
-          type: string
-          description: Value which is to be updated.
-          nullable: true
-          example: string
-      additionalProperties: false
-      x-schema-id: StringUpdateValue
   securitySchemes:
     MewsClientToken:
       type: apiKey

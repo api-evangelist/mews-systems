@@ -1,4 +1,4 @@
-openapi: 3.0.4
+openapi: 3.2.0
 info:
   title: Mews Booking Engine API (Distributor) Account notes Tax environments API
   version: v1
@@ -176,72 +176,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    TaxEnvironment:
-      title: Tax environment
-      required:
-      - Code
-      - CountryCode
-      - TaxationCodes
-      type: object
-      properties:
-        Code:
-          minLength: 1
-          type: string
-          description: Code of the tax environment.
-          example: string
-        CountryCode:
-          minLength: 1
-          type: string
-          description: ISO 3166-1 alpha-3 code of associated country, e.g. `USA` or `GBR`.
-          example: string
-        ValidityStartUtc:
-          type: string
-          description: If specified, marks the start of the validity interval in UTC timezone in ISO 8601 format.
-          nullable: true
-          example: string
-        ValidityEndUtc:
-          type: string
-          description: If specified, marks the end of the validity interval in UTC timezone in ISO 8601 format.
-          nullable: true
-          example: string
-        TaxationCodes:
-          type: array
-          items:
-            type: string
-          description: Codes of the `Taxation` that are used by this environment.
-      additionalProperties: false
-      description: Tax environment represents set of `Taxation` together with optional validity interval.
-      x-schema-id: TaxEnvironment
-    TaxEnvironmentResult:
-      title: TaxEnvironmentResult
-      required:
-      - TaxEnvironments
-      type: object
-      properties:
-        TaxEnvironments:
-          type: array
-          items:
-            $ref: '#/components/schemas/TaxEnvironment'
-          description: The supported tax environments.
-      additionalProperties: false
-      x-schema-id: TaxEnvironmentResult
-    ConnectorApiExceptionResult:
-      title: ConnectorApiExceptionResult
-      type: object
-      properties:
-        Message:
-          type: string
-          nullable: true
-          example: string
-        RequestId:
-          type: string
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Details:
-          nullable: true
-          example: string
-      additionalProperties: false
-      x-schema-id: ConnectorApiExceptionResult
     Parameters:
       title: Parameters
       required:
@@ -267,6 +201,75 @@ components:
           example: string
       additionalProperties: false
       x-schema-id: Parameters
+    TaxEnvironment:
+      title: Tax environment
+      required:
+      - Code
+      - CountryCode
+      - TaxationCodes
+      type: object
+      properties:
+        Code:
+          minLength: 1
+          type: string
+          description: Code of the tax environment.
+          example: string
+        CountryCode:
+          minLength: 1
+          type: string
+          description: ISO 3166-1 alpha-3 code of associated country, e.g. `USA` or `GBR`.
+          example: string
+        ValidityStartUtc:
+          type:
+          - string
+          - 'null'
+          description: If specified, marks the start of the validity interval in UTC timezone in ISO 8601 format.
+          example: string
+        ValidityEndUtc:
+          type:
+          - string
+          - 'null'
+          description: If specified, marks the end of the validity interval in UTC timezone in ISO 8601 format.
+          example: string
+        TaxationCodes:
+          type: array
+          items:
+            type: string
+          description: Codes of the `Taxation` that are used by this environment.
+      additionalProperties: false
+      description: Tax environment represents set of `Taxation` together with optional validity interval.
+      x-schema-id: TaxEnvironment
+    ConnectorApiExceptionResult:
+      title: ConnectorApiExceptionResult
+      type: object
+      properties:
+        Message:
+          type:
+          - string
+          - 'null'
+          example: string
+        RequestId:
+          type:
+          - string
+          - 'null'
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Details:
+          example: string
+      additionalProperties: false
+      x-schema-id: ConnectorApiExceptionResult
+    TaxEnvironmentResult:
+      title: TaxEnvironmentResult
+      required:
+      - TaxEnvironments
+      type: object
+      properties:
+        TaxEnvironments:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaxEnvironment'
+          description: The supported tax environments.
+      additionalProperties: false
+      x-schema-id: TaxEnvironmentResult
   securitySchemes:
     MewsClientToken:
       type: apiKey

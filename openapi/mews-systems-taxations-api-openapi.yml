@@ -1,4 +1,4 @@
-openapi: 3.0.4
+openapi: 3.2.0
 info:
   title: Mews Booking Engine API (Distributor) Account notes Taxations API
   version: v1
@@ -226,18 +226,25 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    TaxRateStrategyDiscriminator:
-      title: Tax rate strategy discriminator
-      enum:
-      - Relative
-      - Flat
-      - Dependent
-      type: string
-      description: ''
-      x-enumDescriptions:
-      - Used with Relative tax rate strategy (e.g. 21%). Relative tax is calculated only from net base value.
-      - Used with Flat tax rate strategy (e.g. 5.00 EUR).
-      - Used with Dependent tax rate strategy (e.g. 10%). Dependent tax is calculated from net base value and all taxes it depends on.
+    TaxationResult:
+      title: TaxationResult
+      required:
+      - Taxations
+      - TaxRates
+      type: object
+      properties:
+        Taxations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Taxation'
+          description: The supported taxations.
+        TaxRates:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaxRate'
+          description: The supported tax rates.
+      additionalProperties: false
+      x-schema-id: TaxationResult
     RelativeTaxRateStrategy:
       title: Relative tax rate strategy data
       required:
@@ -251,23 +258,22 @@ components:
           example: 100.0
       additionalProperties: false
       x-schema-id: RelativeTaxRateStrategy
-    ConnectorApiExceptionResult:
-      title: ConnectorApiExceptionResult
+    DateTimeIntervalUtc:
+      title: DateTimeIntervalUtc
       type: object
       properties:
-        Message:
-          type: string
-          nullable: true
+        StartUtc:
+          type:
+          - string
+          - 'null'
           example: string
-        RequestId:
-          type: string
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Details:
-          nullable: true
+        EndUtc:
+          type:
+          - string
+          - 'null'
           example: string
       additionalProperties: false
-      x-schema-id: ConnectorApiExceptionResult
+      x-schema-id: DateTimeIntervalUtc
     Parameters:
       title: Parameters
       required:
@@ -293,20 +299,43 @@ components:
           example: string
       additionalProperties: false
       x-schema-id: Parameters
-    DateTimeIntervalUtc:
-      title: DateTimeIntervalUtc
+    FlatTaxRateStrategy:
+      title: Flat tax rate strategy data
+      required:
+      - CurrencyCode
+      - Value
       type: object
       properties:
-        StartUtc:
+        CurrencyCode:
+          minLength: 1
           type: string
-          nullable: true
+          description: Code of `Currency`.
+          example: EUR
+        Value:
+          type: number
+          description: Absolute value of tax.
+          format: double
+          example: 100.0
+      additionalProperties: false
+      x-schema-id: FlatTaxRateStrategy
+    ConnectorApiExceptionResult:
+      title: ConnectorApiExceptionResult
+      type: object
+      properties:
+        Message:
+          type:
+          - string
+          - 'null'
           example: string
-        EndUtc:
-          type: string
-          nullable: true
+        RequestId:
+          type:
+          - string
+          - 'null'
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Details:
           example: string
       additionalProperties: false
-      x-schema-id: DateTimeIntervalUtc
+      x-schema-id: ConnectorApiExceptionResult
     DependentTaxRateStrategy:
       title: Dependent tax rate strategy data
       required:
@@ -352,6 +381,18 @@ components:
       additionalProperties: false
       description: Taxation represents set of `TaxRate` within `TaxEnvironment`.
       x-schema-id: Taxation
+    TaxRateStrategyDiscriminator:
+      title: Tax rate strategy discriminator
+      enum:
+      - Relative
+      - Flat
+      - Dependent
+      type: string
+      description: ''
+      x-enumDescriptions:
+      - Used with Relative tax rate strategy (e.g. 21%). Relative tax is calculated only from net base value.
+      - Used with Flat tax rate strategy (e.g. 5.00 EUR).
+      - Used with Dependent tax rate strategy (e.g. 10%). Dependent tax is calculated from net base value and all taxes it depends on.
     TaxRate:
       title: Tax rate
       required:
@@ -376,11 +417,12 @@ components:
           format: double
           example: 100.0
         ValidityInvervalsUtc:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             $ref: '#/components/schemas/DateTimeIntervalUtc'
           description: Validity intervals in UTC.
-          nullable: true
         Strategy:
           title: Tax rate strategy
           type: object
@@ -398,44 +440,6 @@ components:
       additionalProperties: false
       description: Definition of single tax rate.
       x-schema-id: TaxRate
-    FlatTaxRateStrategy:
-      title: Flat tax rate strategy data
-      required:
-      - CurrencyCode
-      - Value
-      type: object
-      properties:
-        CurrencyCode:
-          minLength: 1
-          type: string
-          description: Code of `Currency`.
-          example: EUR
-        Value:
-          type: number
-          description: Absolute value of tax.
-          format: double
-          example: 100.0
-      additionalProperties: false
-      x-schema-id: FlatTaxRateStrategy
-    TaxationResult:
-      title: TaxationResult
-      required:
-      - Taxations
-      - TaxRates
-      type: object
-      properties:
-        Taxations:
-          type: array
-          items:
-            $ref: '#/components/schemas/Taxation'
-          description: The supported taxations.
-        TaxRates:
-          type: array
-          items:
-            $ref: '#/components/schemas/TaxRate'
-          description: The supported tax rates.
-      additionalProperties: false
-      x-schema-id: TaxationResult
   securitySchemes:
     MewsClientToken:
       type: apiKey

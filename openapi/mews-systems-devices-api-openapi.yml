@@ -1,4 +1,4 @@
-openapi: 3.0.4
+openapi: 3.2.0
 info:
   title: Mews Booking Engine API (Distributor) Account notes Devices API
   version: v1
@@ -148,48 +148,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ConnectorApiExceptionResult:
-      title: ConnectorApiExceptionResult
-      type: object
-      properties:
-        Message:
-          type: string
-          nullable: true
-          example: string
-        RequestId:
-          type: string
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Details:
-          nullable: true
-          example: string
-      additionalProperties: false
-      x-schema-id: ConnectorApiExceptionResult
-    Parameters:
-      title: Parameters
-      required:
-      - AccessToken
-      - Client
-      - ClientToken
-      type: object
-      properties:
-        ClientToken:
-          minLength: 1
-          type: string
-          description: Token identifying the client application.
-          example: string
-        AccessToken:
-          minLength: 1
-          type: string
-          description: Access token of the client application.
-          example: string
-        Client:
-          minLength: 1
-          type: string
-          description: Name and version of the client application.
-          example: string
-      additionalProperties: false
-      x-schema-id: Parameters
     Device:
       title: Device
       required:
@@ -242,9 +200,10 @@ components:
           description: Name of the device.
           example: Example Name
         Identifier:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Device identifier (for internal purposes).
-          nullable: true
           example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
       additionalProperties: false
       x-schema-id: Device
@@ -261,6 +220,31 @@ components:
           description: The devices.
       additionalProperties: false
       x-schema-id: DeviceResult
+    Parameters:
+      title: Parameters
+      required:
+      - AccessToken
+      - Client
+      - ClientToken
+      type: object
+      properties:
+        ClientToken:
+          minLength: 1
+          type: string
+          description: Token identifying the client application.
+          example: string
+        AccessToken:
+          minLength: 1
+          type: string
+          description: Access token of the client application.
+          example: string
+        Client:
+          minLength: 1
+          type: string
+          description: Name and version of the client application.
+          example: string
+      additionalProperties: false
+      x-schema-id: Parameters
     DeviceTypeEnum:
       title: Device type
       enum:
@@ -298,6 +282,24 @@ components:
       - '[Key cutter command data](https://mews-systems.gitbook.io/connector-api/operations/commands#key-cutter-command-data)'
       - '[Fiscal machine command data](https://mews-systems.gitbook.io/connector-api/operations/commands#fiscal-machine-command-data)'
       - '[Passport scanner command data](https://mews-systems.gitbook.io/connector-api/operations/commands#passport-scanner-command-data)'
+    ConnectorApiExceptionResult:
+      title: ConnectorApiExceptionResult
+      type: object
+      properties:
+        Message:
+          type:
+          - string
+          - 'null'
+          example: string
+        RequestId:
+          type:
+          - string
+          - 'null'
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Details:
+          example: string
+      additionalProperties: false
+      x-schema-id: ConnectorApiExceptionResult
   securitySchemes:
     MewsClientToken:
       type: apiKey

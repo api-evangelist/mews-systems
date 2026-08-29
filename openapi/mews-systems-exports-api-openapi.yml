@@ -1,4 +1,4 @@
-openapi: 3.0.4
+openapi: 3.2.0
 info:
   title: Mews Booking Engine API (Distributor) Account notes Exports API
   version: v1
@@ -354,243 +354,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ExportStatusEnum:
-      title: Export status
-      enum:
-      - Pending
-      - Processing
-      - Success
-      - Failed
-      - Expired
-      type: string
-      description: 'Current status of the export.
-
-
-        Pending
-
-
-        Processing
-
-
-        Success
-
-
-        Failed
-
-
-        Expired'
-      x-enumNames:
-      - Pending
-      - Processing
-      - Success
-      - Failed
-      - Expired
-      x-enumDescriptions:
-      - ''
-      - ''
-      - ''
-      - ''
-      - ''
-    ConnectorApiExceptionResult:
-      title: ConnectorApiExceptionResult
-      type: object
-      properties:
-        Message:
-          type: string
-          nullable: true
-          example: string
-        RequestId:
-          type: string
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Details:
-          nullable: true
-          example: string
-      additionalProperties: false
-      x-schema-id: ConnectorApiExceptionResult
-    ExportAddResult:
-      title: ExportAddResult
-      required:
-      - Export
-      type: object
-      properties:
-        Export:
-          allOf:
-          - $ref: '#/components/schemas/Export'
-          description: Added export.
-          example: string
-      additionalProperties: false
-      x-schema-id: ExportAddResult
-    ExportScope:
-      title: Export scope
-      type: object
-      properties:
-        EnterpriseIds:
-          maxItems: 1000
-          minItems: 1
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Unique identifiers of enterprises for which the data is exported.
-          nullable: true
-        ChainIds:
-          maxItems: 1000
-          minItems: 1
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Unique identifiers of chains for which the data is exported.
-          nullable: true
-      additionalProperties: false
-      x-schema-id: ExportScope
-    ExportAddParameters:
-      title: ExportAddParameters
-      required:
-      - AccessToken
-      - Client
-      - ClientToken
-      - EntityType
-      type: object
-      properties:
-        ClientToken:
-          minLength: 1
-          type: string
-          description: Token identifying the client application.
-          example: string
-        AccessToken:
-          minLength: 1
-          type: string
-          description: Access token of the client application.
-          example: string
-        Client:
-          minLength: 1
-          type: string
-          description: Name and version of the client application.
-          example: string
-        EntityType:
-          allOf:
-          - $ref: '#/components/schemas/ExportEntityTypeEnum'
-          description: 'Specifies the type of entity which should be exported.
-
-
-            OrderItem
-
-
-            Payment
-
-
-            Reservation
-
-
-            Customer
-
-
-            Company
-
-
-            Bill
-
-
-            AvailabilityAdjustment
-
-
-            AvailabilityBlock
-
-
-            ResourceBlock
-
-
-            LedgerEntry (**Beta testing - subject to change.** See [Ledger entry type](https://docs.mews.com/connector-api/operations/_export-types#ledger-entry).)'
-          example: string
-        Scope:
-          title: Export scope parameters
-          allOf:
-          - $ref: '#/components/schemas/ExportScopeParameters'
-          description: Selects enterprises or chains for which the data should be exported. Which one is used depends on `EntityType`. If not specified, the export will include all enterprises or chains the client has access to.
-          nullable: true
-          example: string
-        Filters:
-          title: Export data filters
-          allOf:
-          - $ref: '#/components/schemas/ExportDataFilters'
-          description: Specifies filters to apply on the exported data set. If omitted, the export will include all available data.
-          nullable: true
-          example: string
-      additionalProperties: false
-      x-schema-id: ExportAddParameters
-    TimeFilterInterval:
-      title: Time interval
-      type: object
-      properties:
-        StartUtc:
-          type: string
-          format: date-time
-          nullable: true
-          example: '2026-06-02T14:30:00Z'
-        EndUtc:
-          type: string
-          format: date-time
-          nullable: true
-          example: '2026-06-02T14:30:00Z'
-      additionalProperties: false
-      description: "When a time interval is used for **filtering** (for example in parameters such as `CreatedUtc.StartUtc` / `CreatedUtc.EndUtc`), the following rules apply:\r\n\r\n- **Start equals End (equality mode)**  \r\n  If `StartUtc` and `EndUtc` are exactly the same timestamp, the filter is treated as an equality check for that precise moment in time:\r\n  \r\n  ```\r\n  CreatedUtc == StartUtc\r\n  ```\r\n  \r\n  This does not represent an interval; only records with `CreatedUtc` equal to that exact instant are returned.\r\n\r\n- **Start differs from End (interval mode)**  \r\n  If `StartUtc` and `EndUtc` are different, the filter is evaluated as a half-open interval:\r\n  \r\n  ```\r\n  StartUtc <= CreatedUtc < EndUtc\r\n  ```\r\n  \r\n  In other words, the start is inclusive and the end is exclusive.\r\n\r\nMake sure your integration takes inclusive Start / exclusive End behavior of time intervals into account so that no records at the boundaries are omitted."
-      x-schema-id: TimeFilterInterval
-    ExportFilterParameters:
-      title: Export filter parameters
-      required:
-      - AccessToken
-      - Client
-      - ClientToken
-      - ExportIds
-      type: object
-      properties:
-        ClientToken:
-          minLength: 1
-          type: string
-          description: Token identifying the client application.
-          example: string
-        AccessToken:
-          minLength: 1
-          type: string
-          description: Access token of the client application.
-          example: string
-        Client:
-          minLength: 1
-          type: string
-          description: Name and version of the client application.
-          example: string
-        ExportIds:
-          maxItems: 1000
-          minItems: 1
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Unique identifiers of the [Exports](https://mews-systems.gitbook.io/connector-api/operations/#export).
-      additionalProperties: false
-      x-schema-id: ExportFilterParameters
-    ExportFileEntry:
-      title: Export file entry
-      required:
-      - SizeInBytes
-      - Url
-      type: object
-      properties:
-        Url:
-          minLength: 1
-          type: string
-          description: Download URL for the exported file in JSON Lines format. The link remains valid for 10 minutes after it is returned.
-          format: uri
-          example: https://api.mews.com/api/connector/v1
-        SizeInBytes:
-          type: integer
-          description: Total size of the exported file in bytes.
-          format: int64
-          example: 1
-      additionalProperties: false
-      x-schema-id: ExportFileEntry
     Export:
       title: Export
       required:
@@ -709,20 +472,34 @@ components:
             $ref: '#/components/schemas/ExportFileEntry'
           description: Files with exported data. Empty if no files are available or the export is expired.
         ExpiresUtc:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Expiration date and time of the export in UTC timezone in ISO 8601 format. After this time the Exported files may no longer be available for download.
           format: date-time
-          nullable: true
           example: '2026-06-02T14:30:00Z'
         Filters:
           title: Export data filters
           allOf:
           - $ref: '#/components/schemas/ExportDataFilters'
           description: Filters applied to the exported data set. If omitted, all available data is included in the export.
-          nullable: true
           example: string
       additionalProperties: false
       x-schema-id: Export
+    ExportLedgerEntryDataFilters:
+      title: Export ledger entry data filters
+      required:
+      - Posting
+      type: object
+      properties:
+        Posting:
+          title: Date filter interval
+          allOf:
+          - $ref: '#/components/schemas/DateFilterInterval'
+          description: Filters ledger entries by their posting date within the specified date interval, inclusive of both the start and end dates.
+          example: string
+      additionalProperties: false
+      x-schema-id: ExportLedgerEntryDataFilters
     ExportResult:
       title: ExportResult
       required:
@@ -745,14 +522,12 @@ components:
           allOf:
           - $ref: '#/components/schemas/TimeFilterInterval'
           description: Filters entities by the specified UTC update interval. The end of the interval must be no later than 5 minutes in the past. The maximum interval is 180 days.
-          nullable: true
           example: string
         LedgerEntryFilters:
           title: Export ledger entry data filters
           allOf:
           - $ref: '#/components/schemas/ExportLedgerEntryDataFilters'
           description: Filters specific to the `LedgerEntry` entity type. Required when `EntityType` is `LedgerEntry`.
-          nullable: true
           example: string
       additionalProperties: false
       x-schema-id: ExportDataFilters
@@ -823,20 +598,189 @@ components:
       - ''
       - ''
       - '**Beta testing - subject to change.** See [Ledger entry type](https://docs.mews.com/connector-api/operations/_export-types#ledger-entry).'
-    ExportLedgerEntryDataFilters:
-      title: Export ledger entry data filters
+    ExportFilterParameters:
+      title: Export filter parameters
       required:
-      - Posting
+      - AccessToken
+      - Client
+      - ClientToken
+      - ExportIds
       type: object
       properties:
-        Posting:
-          title: Date filter interval
+        ClientToken:
+          minLength: 1
+          type: string
+          description: Token identifying the client application.
+          example: string
+        AccessToken:
+          minLength: 1
+          type: string
+          description: Access token of the client application.
+          example: string
+        Client:
+          minLength: 1
+          type: string
+          description: Name and version of the client application.
+          example: string
+        ExportIds:
+          maxItems: 1000
+          minItems: 1
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Unique identifiers of the [Exports](https://mews-systems.gitbook.io/connector-api/operations/#export).
+      additionalProperties: false
+      x-schema-id: ExportFilterParameters
+    ExportAddResult:
+      title: ExportAddResult
+      required:
+      - Export
+      type: object
+      properties:
+        Export:
           allOf:
-          - $ref: '#/components/schemas/DateFilterInterval'
-          description: Filters ledger entries by their posting date within the specified date interval, inclusive of both the start and end dates.
+          - $ref: '#/components/schemas/Export'
+          description: Added export.
           example: string
       additionalProperties: false
-      x-schema-id: ExportLedgerEntryDataFilters
+      x-schema-id: ExportAddResult
+    ExportScope:
+      title: Export scope
+      type: object
+      properties:
+        EnterpriseIds:
+          maxItems: 1000
+          minItems: 1
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: uuid
+          description: Unique identifiers of enterprises for which the data is exported.
+        ChainIds:
+          maxItems: 1000
+          minItems: 1
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: uuid
+          description: Unique identifiers of chains for which the data is exported.
+      additionalProperties: false
+      x-schema-id: ExportScope
+    TimeFilterInterval:
+      title: Time interval
+      type: object
+      properties:
+        StartUtc:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+        EndUtc:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+      additionalProperties: false
+      description: "When a time interval is used for **filtering** (for example in parameters such as `CreatedUtc.StartUtc` / `CreatedUtc.EndUtc`), the following rules apply:\n\n- **Start equals End (equality mode)**  \n  If `StartUtc` and `EndUtc` are exactly the same timestamp, the filter is treated as an equality check for that precise moment in time:\n  \n  ```\n  CreatedUtc == StartUtc\n  ```\n  \n  This does not represent an interval; only records with `CreatedUtc` equal to that exact instant are returned.\n\n- **Start differs from End (interval mode)**  \n  If `StartUtc` and `EndUtc` are different, the filter is evaluated as a half-open interval:\n  \n  ```\n  StartUtc <= CreatedUtc < EndUtc\n  ```\n  \n  In other words, the start is inclusive and the end is exclusive.\n\nMake sure your integration takes inclusive Start / exclusive End behavior of time intervals into account so that no records at the boundaries are omitted."
+      x-schema-id: TimeFilterInterval
+    ExportAddParameters:
+      title: ExportAddParameters
+      required:
+      - AccessToken
+      - Client
+      - ClientToken
+      - EntityType
+      type: object
+      properties:
+        ClientToken:
+          minLength: 1
+          type: string
+          description: Token identifying the client application.
+          example: string
+        AccessToken:
+          minLength: 1
+          type: string
+          description: Access token of the client application.
+          example: string
+        Client:
+          minLength: 1
+          type: string
+          description: Name and version of the client application.
+          example: string
+        EntityType:
+          allOf:
+          - $ref: '#/components/schemas/ExportEntityTypeEnum'
+          description: 'Specifies the type of entity which should be exported.
+
+
+            OrderItem
+
+
+            Payment
+
+
+            Reservation
+
+
+            Customer
+
+
+            Company
+
+
+            Bill
+
+
+            AvailabilityAdjustment
+
+
+            AvailabilityBlock
+
+
+            ResourceBlock
+
+
+            LedgerEntry (**Beta testing - subject to change.** See [Ledger entry type](https://docs.mews.com/connector-api/operations/_export-types#ledger-entry).)'
+          example: string
+        Scope:
+          title: Export scope parameters
+          allOf:
+          - $ref: '#/components/schemas/ExportScopeParameters'
+          description: Selects enterprises or chains for which the data should be exported. Which one is used depends on `EntityType`. If not specified, the export will include all enterprises or chains the client has access to.
+          example: string
+        Filters:
+          title: Export data filters
+          allOf:
+          - $ref: '#/components/schemas/ExportDataFilters'
+          description: Specifies filters to apply on the exported data set. If omitted, the export will include all available data.
+          example: string
+      additionalProperties: false
+      x-schema-id: ExportAddParameters
+    ConnectorApiExceptionResult:
+      title: ConnectorApiExceptionResult
+      type: object
+      properties:
+        Message:
+          type:
+          - string
+          - 'null'
+          example: string
+        RequestId:
+          type:
+          - string
+          - 'null'
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Details:
+          example: string
+      additionalProperties: false
+      x-schema-id: ConnectorApiExceptionResult
     ExportScopeParameters:
       title: Export scope parameters
       type: object
@@ -844,21 +788,23 @@ components:
         EnterpriseIds:
           maxItems: 1000
           minItems: 1
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
             format: uuid
           description: Unique identifiers of the enterprises to export data for. If not specified, data for all enterprises within the access token's scope will be returned.
-          nullable: true
         ChainIds:
           maxItems: 1000
           minItems: 1
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
             format: uuid
           description: Unique identifiers of the chains to export data for. If not specified, data for all chains within the access token's scope will be returned.
-          nullable: true
       additionalProperties: false
       x-schema-id: ExportScopeParameters
     DateFilterInterval:
@@ -882,6 +828,63 @@ components:
           example: '2026-06-02'
       additionalProperties: false
       x-schema-id: DateFilterInterval
+    ExportFileEntry:
+      title: Export file entry
+      required:
+      - SizeInBytes
+      - Url
+      type: object
+      properties:
+        Url:
+          minLength: 1
+          type: string
+          description: Download URL for the exported file in JSON Lines format. The link remains valid for 10 minutes after it is returned.
+          format: uri
+          example: https://api.mews.com/api/connector/v1
+        SizeInBytes:
+          type: integer
+          description: Total size of the exported file in bytes.
+          format: int64
+          example: 1
+      additionalProperties: false
+      x-schema-id: ExportFileEntry
+    ExportStatusEnum:
+      title: Export status
+      enum:
+      - Pending
+      - Processing
+      - Success
+      - Failed
+      - Expired
+      type: string
+      description: 'Current status of the export.
+
+
+        Pending
+
+
+        Processing
+
+
+        Success
+
+
+        Failed
+
+
+        Expired'
+      x-enumNames:
+      - Pending
+      - Processing
+      - Success
+      - Failed
+      - Expired
+      x-enumDescriptions:
+      - ''
+      - ''
+      - ''
+      - ''
+      - ''
   securitySchemes:
     MewsClientToken:
       type: apiKey

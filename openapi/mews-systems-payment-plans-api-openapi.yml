@@ -1,4 +1,4 @@
-openapi: 3.0.4
+openapi: 3.2.0
 info:
   title: Mews Booking Engine API (Distributor) Account notes Payment plans API
   version: v1
@@ -22,7 +22,9 @@ paths:
       tags:
       - Payment plans
       summary: Mews Add Billing Automation Payment Plan
-      description: "Adds a payment plan connected to a `Billing automation` and returns the payment request URL associated with the created payment plan. The fulfillment of the payment request will activate the payment plan.\r\nNote this operation supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property/)."
+      description: 'Adds a payment plan connected to a `Billing automation` and returns the payment request URL associated with the created payment plan. The fulfillment of the payment request will activate the payment plan.
+
+        Note this operation supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property/).'
       operationId: billingAutomationPaymentPlans_add
       requestBody:
         content:
@@ -159,6 +161,60 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    PaymentPlanAddResult:
+      title: PaymentPlanAddResult
+      required:
+      - PaymentRequestUrl
+      type: object
+      properties:
+        PaymentRequestUrl:
+          minLength: 1
+          type: string
+          description: Payment request URL associated with the created payment plan.
+          example: https://api.mews.com/api/connector/v1
+      additionalProperties: false
+      x-schema-id: PaymentPlanAddResult
+    BillingAutomationPaymentPlanPaymentRequest:
+      title: Billing automation payment plan payment request
+      required:
+      - ExpirationDateUtc
+      - Message
+      - PaymentMethods
+      - SendEmail
+      type: object
+      properties:
+        PaymentMethods:
+          minItems: 1
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentMethodsEnum'
+          description: Allowed payment methods to use for the payment plan.
+        Message:
+          maxLength: 1000
+          minLength: 1
+          type: string
+          description: Message for customer in the payment request email.
+          example: string
+        Note:
+          maxLength: 2000
+          type:
+          - string
+          - 'null'
+          description: Internal note for the payment request.
+          example: string
+        ExpirationDateUtc:
+          minLength: 1
+          type: string
+          description: Expiration date (UTC time) of the payment request. Must be within 30 days of payment plan creation. ISO-8601 format.
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+        SendEmail:
+          type: boolean
+          description: Specifies whether a payment request email is sent to the customer.
+          example: true
+      additionalProperties: false
+      x-schema-id: BillingAutomationPaymentPlanPaymentRequest
     BillingAutomationPaymentPlanAddParameters:
       title: BillingAutomationPaymentPlanAddParameters
       required:
@@ -188,10 +244,11 @@ components:
           description: Name and version of the client application.
           example: string
         EnterpriseId:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Unique identifier of the enterprise. Required when using [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property), ignored otherwise.
           format: uuid
-          nullable: true
           example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
         BillingAutomationId:
           type: string
@@ -221,9 +278,10 @@ components:
           format: int32
           example: 1
         StartMonth:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Specifies the month when the payment plan begins collecting payments, in the 'YYYY-MM' format. The month must be in the future. If a value is not set, it'll start with the earliest available bill created from billing automation.
-          nullable: true
           example: string
       additionalProperties: false
       x-schema-id: BillingAutomationPaymentPlanAddParameters
@@ -232,71 +290,19 @@ components:
       type: object
       properties:
         Message:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           example: string
         RequestId:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
         Details:
-          nullable: true
           example: string
       additionalProperties: false
       x-schema-id: ConnectorApiExceptionResult
-    BillingAutomationPaymentPlanPaymentRequest:
-      title: Billing automation payment plan payment request
-      required:
-      - ExpirationDateUtc
-      - Message
-      - PaymentMethods
-      - SendEmail
-      type: object
-      properties:
-        PaymentMethods:
-          minItems: 1
-          uniqueItems: true
-          type: array
-          items:
-            $ref: '#/components/schemas/PaymentMethodsEnum'
-          description: Allowed payment methods to use for the payment plan.
-        Message:
-          maxLength: 1000
-          minLength: 1
-          type: string
-          description: Message for customer in the payment request email.
-          example: string
-        Note:
-          maxLength: 2000
-          type: string
-          description: Internal note for the payment request.
-          nullable: true
-          example: string
-        ExpirationDateUtc:
-          minLength: 1
-          type: string
-          description: Expiration date (UTC time) of the payment request. Must be within 30 days of payment plan creation. ISO-8601 format.
-          format: date-time
-          example: '2026-06-02T14:30:00Z'
-        SendEmail:
-          type: boolean
-          description: Specifies whether a payment request email is sent to the customer.
-          example: true
-      additionalProperties: false
-      x-schema-id: BillingAutomationPaymentPlanPaymentRequest
-    PaymentPlanAddResult:
-      title: PaymentPlanAddResult
-      required:
-      - PaymentRequestUrl
-      type: object
-      properties:
-        PaymentRequestUrl:
-          minLength: 1
-          type: string
-          description: Payment request URL associated with the created payment plan.
-          example: https://api.mews.com/api/connector/v1
-      additionalProperties: false
-      x-schema-id: PaymentPlanAddResult
     PaymentMethodsEnum:
       title: Available payment plan payment methods
       enum:

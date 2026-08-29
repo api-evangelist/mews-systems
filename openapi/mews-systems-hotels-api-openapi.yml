@@ -1,4 +1,4 @@
-openapi: 3.0.4
+openapi: 3.2.0
 info:
   title: Mews Booking Engine API (Distributor) Account notes Hotels API
   version: v1
@@ -250,89 +250,188 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ResourceCategoryAvailability:
-      title: ResourceCategoryAvailability
+    ProductChargingMode:
+      enum:
+      - Once
+      - PerTimeUnit
+      - PerPersonPerTimeUnit
+      - PerPerson
+      type: string
+    PaymentConfiguration:
+      title: PaymentConfiguration
       required:
-      - AvailableRoomCount
-      - RoomCategoryId
-      - RoomOccupancyAvailabilities
+      - SurchargeConfiguration
       type: object
       properties:
-        RoomCategoryId:
-          type: string
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        AvailableRoomCount:
-          type: integer
-          format: int32
-          example: 1
-        RoomOccupancyAvailabilities:
-          type: array
-          items:
-            $ref: '#/components/schemas/ResourceOccupancyPricing'
+        PaymentGateway:
+          allOf:
+          - $ref: '#/components/schemas/PaymentGateway'
+          example: string
+        SurchargeConfiguration:
+          allOf:
+          - $ref: '#/components/schemas/SurchargeConfiguration'
+          example: string
       additionalProperties: false
-      x-schema-id: ResourceCategoryAvailability
+      x-schema-id: PaymentConfiguration
+    RestrictionType:
+      enum:
+      - ClosedToStay
+      - ClosedToArrival
+      - ClosedToDeparture
+      type: string
+    PaymentGatewayAccount:
+      title: PaymentGatewayAccount
+      required:
+      - CurrencyCode
+      type: object
+      properties:
+        CurrencyCode:
+          maxLength: 3
+          minLength: 1
+          type: string
+          format: currency
+          example: EUR
+      additionalProperties: false
+      x-schema-id: PaymentGatewayAccount
     PricingMode:
       enum:
       - Gross
       - Net
       type: string
-    PaymentMethods:
-      title: PaymentMethods
+    Country:
+      title: Country
       required:
-      - ApplePay
-      - GooglePay
-      - Ideal
-      - PaymentCard
+      - Code
+      - Name
       type: object
       properties:
-        PaymentCard:
-          type: boolean
-          example: true
-        Ideal:
-          type: boolean
-          example: true
-        ApplePay:
-          type: boolean
-          example: true
-        GooglePay:
-          type: boolean
-          example: true
+        Code:
+          maxLength: 2
+          minLength: 1
+          type: string
+          example: string
+        SovereignCountryCode:
+          type:
+          - string
+          - 'null'
+          example: string
+        Name:
+          minLength: 1
+          type: string
+          example: Example Name
       additionalProperties: false
-      x-schema-id: PaymentMethods
-    ResourcePrice:
-      title: ResourcePrice
-      required:
-      - AverageAmountPerTimeUnit
-      - AveragePerTimeUnit
-      - Total
-      - TotalAmount
-      type: object
-      properties:
-        Total:
-          example: string
-        TotalAmount:
-          example: string
-        AveragePerNight:
-          nullable: true
-          deprecated: true
-          example: string
-        AveragePerTimeUnit:
-          example: string
-        AverageAmountPerNight:
-          nullable: true
-          deprecated: true
-          example: string
-        AverageAmountPerTimeUnit:
-          example: string
-      additionalProperties: false
-      x-schema-id: ResourcePrice
-    PaymentGatewayModel:
+      x-schema-id: Country
+    PaymentCardStorageType:
       enum:
-      - MerchantOfRecord
-      - PaymentFacilitator
-      - Direct
+      - Adyen
+      - Stripe
+      - PciProxy
       type: string
+    SettlementRuleTrigger:
+      enum:
+      - Confirmation
+      - Start
+      - End
+      - StartDate
+      - EndDate
+      type: string
+    Address:
+      title: Address
+      type: object
+      properties:
+        Line1:
+          maxLength: 1023
+          type:
+          - string
+          - 'null'
+          example: string
+        Line2:
+          maxLength: 255
+          type:
+          - string
+          - 'null'
+          example: string
+        City:
+          maxLength: 255
+          type:
+          - string
+          - 'null'
+          example: string
+        PostalCode:
+          maxLength: 255
+          type:
+          - string
+          - 'null'
+          example: string
+        CountryCode:
+          maxLength: 8
+          type:
+          - string
+          - 'null'
+          example: string
+        Latitude:
+          type:
+          - number
+          - 'null'
+          format: double
+          example: 100.0
+        Longitude:
+          type:
+          - number
+          - 'null'
+          format: double
+          example: 100.0
+      additionalProperties: false
+      x-schema-id: Address
+    Category:
+      title: Category
+      required:
+      - Description
+      - ExtraBedCount
+      - Id
+      - Name
+      - NormalBedCount
+      - SpaceType
+      type: object
+      properties:
+        Id:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Name:
+          type: object
+          additionalProperties:
+            type: string
+        Description:
+          type: object
+          additionalProperties:
+            type: string
+        ImageIds:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: uuid
+          deprecated: true
+        Ordering:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          example: 1
+        NormalBedCount:
+          type: integer
+          format: int32
+          example: 1
+        ExtraBedCount:
+          type: integer
+          format: int32
+          example: 1
+        SpaceType:
+          $ref: '#/components/schemas/ResourceCategoryType'
+      additionalProperties: false
+      x-schema-id: Category
     SingleHotelResult:
       title: SingleHotelResult
       required:
@@ -376,14 +475,16 @@ components:
           format: uuid
           example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
         ImageId:
-          type: string
+          type:
+          - string
+          - 'null'
           format: uuid
-          nullable: true
           example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
         IntroImageId:
-          type: string
+          type:
+          - string
+          - 'null'
           format: uuid
-          nullable: true
           example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
         DefaultLanguageCode:
           minLength: 1
@@ -426,7 +527,6 @@ components:
         PaymentGateway:
           allOf:
           - $ref: '#/components/schemas/PaymentGateway'
-          nullable: true
           example: string
         TermsAndConditionsUrl:
           minLength: 1
@@ -442,16 +542,18 @@ components:
           type: string
           example: partner@example.com
         Telephone:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           example: string
         AdditionalLegalStatements:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: object
             additionalProperties:
               type: string
-          nullable: true
           deprecated: true
         Address:
           allOf:
@@ -476,212 +578,95 @@ components:
           example: https://api.mews.com/api/connector/v1
       additionalProperties: false
       x-schema-id: SingleHotelResult
-    AmountPart:
-      enum:
-      - NetValue
-      - TaxValue
-      - GrossValue
-      type: string
-    Address:
-      title: Address
-      type: object
-      properties:
-        Line1:
-          maxLength: 1023
-          type: string
-          nullable: true
-          example: string
-        Line2:
-          maxLength: 255
-          type: string
-          nullable: true
-          example: string
-        City:
-          maxLength: 255
-          type: string
-          nullable: true
-          example: string
-        PostalCode:
-          maxLength: 255
-          type: string
-          nullable: true
-          example: string
-        CountryCode:
-          maxLength: 8
-          type: string
-          nullable: true
-          example: string
-        Latitude:
-          type: number
-          format: double
-          nullable: true
-          example: 100.0
-        Longitude:
-          type: number
-          format: double
-          nullable: true
-          example: 100.0
-      additionalProperties: false
-      x-schema-id: Address
-    HotelParameters:
-      title: HotelParameters
+    Product:
+      title: Product
       required:
-      - Client
-      - FullAmounts
-      - HotelId
-      type: object
-      properties:
-        Client:
-          minLength: 1
-          type: string
-          example: string
-        LanguageCode:
-          type: string
-          nullable: true
-          example: string
-        CultureCode:
-          type: string
-          nullable: true
-          example: string
-        FullAmounts:
-          type: boolean
-          example: true
-        Session:
-          type: string
-          nullable: true
-          example: string
-        HotelId:
-          type: string
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-      additionalProperties: false
-      x-schema-id: HotelParameters
-    ProductChargingMode:
-      enum:
-      - Once
-      - PerTimeUnit
-      - PerPersonPerTimeUnit
-      - PerPerson
-      type: string
-    RestrictionExceptions:
-      title: RestrictionExceptions
-      type: object
-      properties:
-        MinAdvance:
-          type: string
-          nullable: true
-          example: string
-        MaxAdvance:
-          type: string
-          nullable: true
-          example: string
-        MinLength:
-          type: string
-          nullable: true
-          example: string
-        MaxLength:
-          type: string
-          nullable: true
-          example: string
-        MinPrice:
-          type: number
-          format: double
-          nullable: true
-          example: 100.0
-        MaxPrice:
-          type: number
-          format: double
-          nullable: true
-          example: 100.0
-        PriceCurrencyCode:
-          maxLength: 3
-          type: string
-          nullable: true
-          example: EUR
-        MaxReservationCount:
-          type: integer
-          format: int32
-          nullable: true
-          example: 1
-      additionalProperties: false
-      x-schema-id: RestrictionExceptions
-    Rate:
-      title: Rate
-      required:
-      - CurrencyCode
+      - AlwaysIncluded
+      - Amounts
+      - ChargingMode
       - Description
       - Id
-      - IsPrivate
+      - IncludedByDefault
       - Name
       - Ordering
-      - RateGroupId
+      - PostingMode
+      - Prices
+      - Pricing
       type: object
       properties:
         Id:
           type: string
           format: uuid
           example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        RateGroupId:
-          type: string
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Ordering:
-          type: integer
-          format: int32
-          example: 1
         Name:
           type: object
           additionalProperties:
             type: string
-            nullable: true
         Description:
           type: object
           additionalProperties:
             type: string
-            nullable: true
-        IsPrivate:
+        CategoryId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        ImageId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        IncludedByDefault:
           type: boolean
           example: true
-        CurrencyCode:
-          maxLength: 3
-          minLength: 1
-          type: string
-          format: currency
-          example: EUR
+        AlwaysIncluded:
+          type: boolean
+          example: true
+        Prices:
+          example: string
+        Pricing:
+          title: Pricing
+          type: object
+          properties:
+            discriminator:
+              type: string
+            value:
+              oneOf:
+              - $ref: '#/components/schemas/RelativeProductPrice'
+          x-coproduct: true
+          x-schema-id: ProductPricingCoproductOfRelativeProductPrice
+        Amounts:
+          example: string
+        RelativePrice:
+          type:
+          - number
+          - 'null'
+          format: double
+          example: 100.0
+        Charging:
+          type:
+          - string
+          - 'null'
+          deprecated: true
+          example: string
+        ChargingMode:
+          $ref: '#/components/schemas/ProductChargingMode'
+        Posting:
+          type:
+          - string
+          - 'null'
+          deprecated: true
+          example: string
+        PostingMode:
+          $ref: '#/components/schemas/ProductPostingMode'
+        Ordering:
+          type: integer
+          format: int32
+          example: 1
       additionalProperties: false
-      x-schema-id: Rate
-    Availability:
-      title: Availability
-      required:
-      - RateGroups
-      - Rates
-      - RoomCategoryAvailabilities
-      type: object
-      properties:
-        RateGroups:
-          type: array
-          items:
-            $ref: '#/components/schemas/RateGroup'
-        Rates:
-          type: array
-          items:
-            $ref: '#/components/schemas/Rate'
-        RoomCategoryAvailabilities:
-          type: array
-          items:
-            $ref: '#/components/schemas/ResourceCategoryAvailability'
-        ViolatedRestrictions:
-          type: array
-          items:
-            $ref: '#/components/schemas/Restriction'
-          nullable: true
-      additionalProperties: false
-      x-schema-id: Availability
-    SettlementRuleAction:
-      enum:
-      - ChargeCreditCard
-      - CreatePreauthorization
-      type: string
+      x-schema-id: Product
     CreditCardTypes:
       enum:
       - MasterCard
@@ -711,6 +696,29 @@ components:
       - Nets
       - Bancontact
       type: string
+    PaymentMethods:
+      title: PaymentMethods
+      required:
+      - ApplePay
+      - GooglePay
+      - Ideal
+      - PaymentCard
+      type: object
+      properties:
+        PaymentCard:
+          type: boolean
+          example: true
+        Ideal:
+          type: boolean
+          example: true
+        ApplePay:
+          type: boolean
+          example: true
+        GooglePay:
+          type: boolean
+          example: true
+      additionalProperties: false
+      x-schema-id: PaymentMethods
     Culture:
       title: Culture
       required:
@@ -728,178 +736,202 @@ components:
           example: EUR
       additionalProperties: false
       x-schema-id: Culture
-    ResourceCategoryType:
-      enum:
-      - Room
-      - Bed
-      - Dorm
-      - Apartment
-      - Suite
-      - Villa
-      - Site
-      - Office
-      - MeetingRoom
-      - ParkingSpot
-      - Desk
-      - TeamArea
-      - Membership
-      - Tent
-      - CaravanOrRV
-      - UnequippedCampsite
-      - Bike
-      - ExtraBed
-      - Cot
-      - Crib
-      - ConferenceRoom
-      - Rooftop
-      - Garden
-      - Restaurant
-      - Amphitheater
-      - PrivateSpaces
-      type: string
-    AvailabilityParameters:
-      title: AvailabilityParameters
+    ResourcePrice:
+      title: ResourcePrice
       required:
-      - Client
-      - EndUtc
-      - FullAmounts
-      - HotelId
-      - StartUtc
+      - AverageAmountPerTimeUnit
+      - AveragePerTimeUnit
+      - Total
+      - TotalAmount
       type: object
       properties:
-        Client:
-          minLength: 1
-          type: string
+        Total:
           example: string
-        LanguageCode:
-          type: string
-          nullable: true
+        TotalAmount:
           example: string
-        CultureCode:
-          type: string
-          nullable: true
-          example: string
-        FullAmounts:
-          type: boolean
-          example: true
-        Session:
-          type: string
-          nullable: true
-          example: string
-        HotelId:
-          type: string
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        ConfigurationId:
-          type: string
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        AvailabilityBlockId:
-          type: string
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        CurrencyCode:
-          type: string
-          nullable: true
+        AveragePerNight:
           deprecated: true
-          example: EUR
-        CurrencyCodes:
+          example: string
+        AveragePerTimeUnit:
+          example: string
+        AverageAmountPerNight:
+          deprecated: true
+          example: string
+        AverageAmountPerTimeUnit:
+          example: string
+      additionalProperties: false
+      x-schema-id: ResourcePrice
+    SurchargeConfiguration:
+      title: SurchargeConfiguration
+      required:
+      - SurchargeFees
+      type: object
+      properties:
+        SurchargeServiceId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        SurchargeFees:
+          type: object
+          additionalProperties:
+            type: number
+            format: double
+      additionalProperties: false
+      x-schema-id: SurchargeConfiguration
+    Availability:
+      title: Availability
+      required:
+      - RateGroups
+      - Rates
+      - RoomCategoryAvailabilities
+      type: object
+      properties:
+        RateGroups:
           type: array
           items:
-            type: string
-          nullable: true
-        StartUtc:
+            $ref: '#/components/schemas/RateGroup'
+        Rates:
+          type: array
+          items:
+            $ref: '#/components/schemas/Rate'
+        RoomCategoryAvailabilities:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceCategoryAvailability'
+        ViolatedRestrictions:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Restriction'
+      additionalProperties: false
+      x-schema-id: Availability
+    AmountPart:
+      enum:
+      - NetValue
+      - TaxValue
+      - GrossValue
+      type: string
+    RateGroup:
+      title: RateGroup
+      required:
+      - Id
+      - Ordering
+      - SettlementAction
+      - SettlementCurrencyCode
+      - SettlementOffset
+      - SettlementTrigger
+      - SettlementType
+      type: object
+      properties:
+        Id:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Ordering:
+          type: integer
+          format: int32
+          example: 1
+        SettlementType:
+          $ref: '#/components/schemas/SettlementRuleType'
+        SettlementAction:
+          $ref: '#/components/schemas/SettlementRuleAction'
+        SettlementTrigger:
+          $ref: '#/components/schemas/SettlementRuleTrigger'
+        SettlementOffset:
           minLength: 1
           type: string
+          example: string
+        SettlementValue:
+          type:
+          - number
+          - 'null'
+          format: double
+          example: 100.0
+        SettlementFlatValue:
+          type:
+          - number
+          - 'null'
+          format: double
+          example: 100.0
+        SettlementMaximumNights:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          deprecated: true
+          example: 1
+        SettlementMaximumTimeUnits:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          example: 1
+        SettlementCurrencyCode:
+          maxLength: 3
+          minLength: 1
+          type: string
+          format: currency
+          example: EUR
+      additionalProperties: false
+      x-schema-id: RateGroup
+    RestrictionConditions:
+      title: RestrictionConditions
+      required:
+      - Days
+      - Type
+      type: object
+      properties:
+        Type:
+          $ref: '#/components/schemas/RestrictionType'
+        ExactRateId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        BaseRateId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        RateGroupId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        ResourceCategoryId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        ResourceCategoryType:
+          anyOf:
+          - $ref: '#/components/schemas/ResourceCategoryType'
+          example: string
+        StartUtc:
+          type:
+          - string
+          - 'null'
           format: date-time
           example: '2026-06-02T14:30:00Z'
         EndUtc:
-          minLength: 1
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
           example: '2026-06-02T14:30:00Z'
-        AdultCount:
-          type: integer
-          format: int32
-          nullable: true
-          deprecated: true
-          example: 1
-        ChildCount:
-          type: integer
-          format: int32
-          nullable: true
-          deprecated: true
-          example: 1
-        OccupancyData:
-          type: array
-          items:
-            $ref: '#/components/schemas/OccupancyData'
-          nullable: true
-        VoucherCode:
-          type: string
-          nullable: true
-          example: string
-        ProductIds:
+        Days:
           type: array
           items:
             type: string
-            format: uuid
-          nullable: true
-        CategoryIds:
-          type: array
-          items:
-            type: string
-            format: uuid
-          nullable: true
-        RateIds:
-          type: array
-          items:
-            type: string
-            format: uuid
-          nullable: true
       additionalProperties: false
-      x-schema-id: AvailabilityParameters
-    RestrictionType:
-      enum:
-      - ClosedToStay
-      - ClosedToArrival
-      - ClosedToDeparture
-      type: string
-    PaymentCardStorageType:
-      enum:
-      - Adyen
-      - Stripe
-      - PciProxy
-      type: string
-    SettlementRuleType:
-      enum:
-      - Manual
-      - Automatic
-      type: string
-    ResourcePricing:
-      title: ResourcePricing
-      required:
-      - MaxPrice
-      - Price
-      - RateId
-      type: object
-      properties:
-        RateId:
-          type: string
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Price:
-          allOf:
-          - $ref: '#/components/schemas/ResourcePrice'
-          example: string
-        MaxPrice:
-          allOf:
-          - $ref: '#/components/schemas/ResourcePrice'
-          example: string
-      additionalProperties: false
-      x-schema-id: ResourcePricing
+      x-schema-id: RestrictionConditions
     PaymentGateway:
       title: PaymentGateway
       required:
@@ -914,8 +946,9 @@ components:
       type: object
       properties:
         PaymentGatewayType:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           deprecated: true
           example: string
         PaymentCardStorageType:
@@ -949,6 +982,403 @@ components:
             $ref: '#/components/schemas/PaymentGatewayAccount'
       additionalProperties: false
       x-schema-id: PaymentGateway
+    Restriction:
+      title: Restriction
+      required:
+      - Conditions
+      - Exceptions
+      - Id
+      - ServiceId
+      type: object
+      properties:
+        Id:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        ServiceId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Conditions:
+          allOf:
+          - $ref: '#/components/schemas/RestrictionConditions'
+          example: string
+        Exceptions:
+          allOf:
+          - $ref: '#/components/schemas/RestrictionExceptions'
+          example: string
+        ExternalIdentifier:
+          type:
+          - string
+          - 'null'
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      additionalProperties: false
+      x-schema-id: Restriction
+    RestrictionExceptions:
+      title: RestrictionExceptions
+      type: object
+      properties:
+        MinAdvance:
+          type:
+          - string
+          - 'null'
+          example: string
+        MaxAdvance:
+          type:
+          - string
+          - 'null'
+          example: string
+        MinLength:
+          type:
+          - string
+          - 'null'
+          example: string
+        MaxLength:
+          type:
+          - string
+          - 'null'
+          example: string
+        MinPrice:
+          type:
+          - number
+          - 'null'
+          format: double
+          example: 100.0
+        MaxPrice:
+          type:
+          - number
+          - 'null'
+          format: double
+          example: 100.0
+        PriceCurrencyCode:
+          maxLength: 3
+          type:
+          - string
+          - 'null'
+          example: EUR
+        MaxReservationCount:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          example: 1
+      additionalProperties: false
+      x-schema-id: RestrictionExceptions
+    Rate:
+      title: Rate
+      required:
+      - CurrencyCode
+      - Description
+      - Id
+      - IsPrivate
+      - Name
+      - Ordering
+      - RateGroupId
+      type: object
+      properties:
+        Id:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        RateGroupId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Ordering:
+          type: integer
+          format: int32
+          example: 1
+        Name:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+        Description:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+        IsPrivate:
+          type: boolean
+          example: true
+        CurrencyCode:
+          maxLength: 3
+          minLength: 1
+          type: string
+          format: currency
+          example: EUR
+      additionalProperties: false
+      x-schema-id: Rate
+    SettlementRuleType:
+      enum:
+      - Manual
+      - Automatic
+      type: string
+    Language:
+      title: Language
+      required:
+      - Code
+      - DefaultCulture
+      - Name
+      type: object
+      properties:
+        Code:
+          minLength: 1
+          type: string
+          example: string
+        Name:
+          minLength: 1
+          type: string
+          example: Example Name
+        DefaultCulture:
+          allOf:
+          - $ref: '#/components/schemas/Culture'
+          example: string
+      additionalProperties: false
+      x-schema-id: Language
+    SettlementRuleAction:
+      enum:
+      - ChargeCreditCard
+      - CreatePreauthorization
+      type: string
+    ResourceOccupancyPricing:
+      title: ResourceOccupancyPricing
+      required:
+      - Pricing
+      type: object
+      properties:
+        AdultCount:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          deprecated: true
+          example: 1
+        ChildCount:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          deprecated: true
+          example: 1
+        OccupancyData:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/OccupancyData'
+        Pricing:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourcePricing'
+      additionalProperties: false
+      x-schema-id: ResourceOccupancyPricing
+    ResourceCategoryAvailability:
+      title: ResourceCategoryAvailability
+      required:
+      - AvailableRoomCount
+      - RoomCategoryId
+      - RoomOccupancyAvailabilities
+      type: object
+      properties:
+        RoomCategoryId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        AvailableRoomCount:
+          type: integer
+          format: int32
+          example: 1
+        RoomOccupancyAvailabilities:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceOccupancyPricing'
+      additionalProperties: false
+      x-schema-id: ResourceCategoryAvailability
+    PaymentGatewayModel:
+      enum:
+      - MerchantOfRecord
+      - PaymentFacilitator
+      - Direct
+      type: string
+    HotelParameters:
+      title: HotelParameters
+      required:
+      - Client
+      - FullAmounts
+      - HotelId
+      type: object
+      properties:
+        Client:
+          minLength: 1
+          type: string
+          example: string
+        LanguageCode:
+          type:
+          - string
+          - 'null'
+          example: string
+        CultureCode:
+          type:
+          - string
+          - 'null'
+          example: string
+        FullAmounts:
+          type: boolean
+          example: true
+        Session:
+          type:
+          - string
+          - 'null'
+          example: string
+        HotelId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      additionalProperties: false
+      x-schema-id: HotelParameters
+    ProductPostingMode:
+      enum:
+      - Once
+      - PerTimeUnit
+      type: string
+    AvailabilityParameters:
+      title: AvailabilityParameters
+      required:
+      - Client
+      - EndUtc
+      - FullAmounts
+      - HotelId
+      - StartUtc
+      type: object
+      properties:
+        Client:
+          minLength: 1
+          type: string
+          example: string
+        LanguageCode:
+          type:
+          - string
+          - 'null'
+          example: string
+        CultureCode:
+          type:
+          - string
+          - 'null'
+          example: string
+        FullAmounts:
+          type: boolean
+          example: true
+        Session:
+          type:
+          - string
+          - 'null'
+          example: string
+        HotelId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        ConfigurationId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        AvailabilityBlockId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        CurrencyCode:
+          type:
+          - string
+          - 'null'
+          deprecated: true
+          example: EUR
+        CurrencyCodes:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+        StartUtc:
+          minLength: 1
+          type: string
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+        EndUtc:
+          minLength: 1
+          type: string
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+        AdultCount:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          deprecated: true
+          example: 1
+        ChildCount:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          deprecated: true
+          example: 1
+        OccupancyData:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/OccupancyData'
+        VoucherCode:
+          type:
+          - string
+          - 'null'
+          example: string
+        ProductIds:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: uuid
+        CategoryIds:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: uuid
+        RateIds:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: uuid
+      additionalProperties: false
+      x-schema-id: AvailabilityParameters
+    OccupancyData:
+      title: OccupancyData
+      required:
+      - AgeCategoryId
+      - PersonCount
+      type: object
+      properties:
+        AgeCategoryId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        PersonCount:
+          type: integer
+          format: int32
+          example: 1
+      additionalProperties: false
+      x-schema-id: OccupancyData
     Currency:
       title: Currency
       required:
@@ -982,429 +1412,35 @@ components:
           example: true
       additionalProperties: false
       x-schema-id: Currency
-    RateGroup:
-      title: RateGroup
-      required:
-      - Id
-      - Ordering
-      - SettlementAction
-      - SettlementCurrencyCode
-      - SettlementOffset
-      - SettlementTrigger
-      - SettlementType
-      type: object
-      properties:
-        Id:
-          type: string
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Ordering:
-          type: integer
-          format: int32
-          example: 1
-        SettlementType:
-          $ref: '#/components/schemas/SettlementRuleType'
-        SettlementAction:
-          $ref: '#/components/schemas/SettlementRuleAction'
-        SettlementTrigger:
-          $ref: '#/components/schemas/SettlementRuleTrigger'
-        SettlementOffset:
-          minLength: 1
-          type: string
-          example: string
-        SettlementValue:
-          type: number
-          format: double
-          nullable: true
-          example: 100.0
-        SettlementFlatValue:
-          type: number
-          format: double
-          nullable: true
-          example: 100.0
-        SettlementMaximumNights:
-          type: integer
-          format: int32
-          nullable: true
-          deprecated: true
-          example: 1
-        SettlementMaximumTimeUnits:
-          type: integer
-          format: int32
-          nullable: true
-          example: 1
-        SettlementCurrencyCode:
-          maxLength: 3
-          minLength: 1
-          type: string
-          format: currency
-          example: EUR
-      additionalProperties: false
-      x-schema-id: RateGroup
-    SurchargeConfiguration:
-      title: SurchargeConfiguration
-      required:
-      - SurchargeFees
-      type: object
-      properties:
-        SurchargeServiceId:
-          type: string
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        SurchargeFees:
-          type: object
-          additionalProperties:
-            type: number
-            format: double
-      additionalProperties: false
-      x-schema-id: SurchargeConfiguration
-    RestrictionConditions:
-      title: RestrictionConditions
-      required:
-      - Days
-      - Type
-      type: object
-      properties:
-        Type:
-          $ref: '#/components/schemas/RestrictionType'
-        ExactRateId:
-          type: string
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        BaseRateId:
-          type: string
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        RateGroupId:
-          type: string
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        ResourceCategoryId:
-          type: string
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        ResourceCategoryType:
-          anyOf:
-          - $ref: '#/components/schemas/ResourceCategoryType'
-          nullable: true
-          example: string
-        StartUtc:
-          type: string
-          format: date-time
-          nullable: true
-          example: '2026-06-02T14:30:00Z'
-        EndUtc:
-          type: string
-          format: date-time
-          nullable: true
-          example: '2026-06-02T14:30:00Z'
-        Days:
-          type: array
-          items:
-            type: string
-      additionalProperties: false
-      x-schema-id: RestrictionConditions
-    PaymentConfiguration:
-      title: PaymentConfiguration
-      required:
-      - SurchargeConfiguration
-      type: object
-      properties:
-        PaymentGateway:
-          allOf:
-          - $ref: '#/components/schemas/PaymentGateway'
-          nullable: true
-          example: string
-        SurchargeConfiguration:
-          allOf:
-          - $ref: '#/components/schemas/SurchargeConfiguration'
-          example: string
-      additionalProperties: false
-      x-schema-id: PaymentConfiguration
-    Category:
-      title: Category
-      required:
-      - Description
-      - ExtraBedCount
-      - Id
-      - Name
-      - NormalBedCount
-      - SpaceType
-      type: object
-      properties:
-        Id:
-          type: string
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Name:
-          type: object
-          additionalProperties:
-            type: string
-        Description:
-          type: object
-          additionalProperties:
-            type: string
-        ImageIds:
-          type: array
-          items:
-            type: string
-            format: uuid
-          nullable: true
-          deprecated: true
-        Ordering:
-          type: integer
-          format: int32
-          nullable: true
-          example: 1
-        NormalBedCount:
-          type: integer
-          format: int32
-          example: 1
-        ExtraBedCount:
-          type: integer
-          format: int32
-          example: 1
-        SpaceType:
-          $ref: '#/components/schemas/ResourceCategoryType'
-      additionalProperties: false
-      x-schema-id: Category
-    Language:
-      title: Language
-      required:
-      - Code
-      - DefaultCulture
-      - Name
-      type: object
-      properties:
-        Code:
-          minLength: 1
-          type: string
-          example: string
-        Name:
-          minLength: 1
-          type: string
-          example: Example Name
-        DefaultCulture:
-          allOf:
-          - $ref: '#/components/schemas/Culture'
-          example: string
-      additionalProperties: false
-      x-schema-id: Language
-    SettlementRuleTrigger:
+    ResourceCategoryType:
       enum:
-      - Confirmation
-      - Start
-      - End
-      - StartDate
-      - EndDate
+      - Room
+      - Bed
+      - Dorm
+      - Apartment
+      - Suite
+      - Villa
+      - Site
+      - Office
+      - MeetingRoom
+      - ParkingSpot
+      - Desk
+      - TeamArea
+      - Membership
+      - Tent
+      - CaravanOrRV
+      - UnequippedCampsite
+      - Bike
+      - ExtraBed
+      - Cot
+      - Crib
+      - ConferenceRoom
+      - Rooftop
+      - Garden
+      - Restaurant
+      - Amphitheater
+      - PrivateSpaces
       type: string
-    Country:
-      title: Country
-      required:
-      - Code
-      - Name
-      type: object
-      properties:
-        Code:
-          maxLength: 2
-          minLength: 1
-          type: string
-          example: string
-        SovereignCountryCode:
-          type: string
-          nullable: true
-          example: string
-        Name:
-          minLength: 1
-          type: string
-          example: Example Name
-      additionalProperties: false
-      x-schema-id: Country
-    ProductPostingMode:
-      enum:
-      - Once
-      - PerTimeUnit
-      type: string
-    PaymentGatewayAccount:
-      title: PaymentGatewayAccount
-      required:
-      - CurrencyCode
-      type: object
-      properties:
-        CurrencyCode:
-          maxLength: 3
-          minLength: 1
-          type: string
-          format: currency
-          example: EUR
-      additionalProperties: false
-      x-schema-id: PaymentGatewayAccount
-    Restriction:
-      title: Restriction
-      required:
-      - Conditions
-      - Exceptions
-      - Id
-      - ServiceId
-      type: object
-      properties:
-        Id:
-          type: string
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        ServiceId:
-          type: string
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Conditions:
-          allOf:
-          - $ref: '#/components/schemas/RestrictionConditions'
-          example: string
-        Exceptions:
-          allOf:
-          - $ref: '#/components/schemas/RestrictionExceptions'
-          example: string
-        ExternalIdentifier:
-          type: string
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-      additionalProperties: false
-      x-schema-id: Restriction
-    ResourceOccupancyPricing:
-      title: ResourceOccupancyPricing
-      required:
-      - Pricing
-      type: object
-      properties:
-        AdultCount:
-          type: integer
-          format: int32
-          nullable: true
-          deprecated: true
-          example: 1
-        ChildCount:
-          type: integer
-          format: int32
-          nullable: true
-          deprecated: true
-          example: 1
-        OccupancyData:
-          type: array
-          items:
-            $ref: '#/components/schemas/OccupancyData'
-          nullable: true
-        Pricing:
-          type: array
-          items:
-            $ref: '#/components/schemas/ResourcePricing'
-      additionalProperties: false
-      x-schema-id: ResourceOccupancyPricing
-    OccupancyData:
-      title: OccupancyData
-      required:
-      - AgeCategoryId
-      - PersonCount
-      type: object
-      properties:
-        AgeCategoryId:
-          type: string
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        PersonCount:
-          type: integer
-          format: int32
-          example: 1
-      additionalProperties: false
-      x-schema-id: OccupancyData
-    Product:
-      title: Product
-      required:
-      - AlwaysIncluded
-      - Amounts
-      - ChargingMode
-      - Description
-      - Id
-      - IncludedByDefault
-      - Name
-      - Ordering
-      - PostingMode
-      - Prices
-      - Pricing
-      type: object
-      properties:
-        Id:
-          type: string
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Name:
-          type: object
-          additionalProperties:
-            type: string
-        Description:
-          type: object
-          additionalProperties:
-            type: string
-        CategoryId:
-          type: string
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        ImageId:
-          type: string
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        IncludedByDefault:
-          type: boolean
-          example: true
-        AlwaysIncluded:
-          type: boolean
-          example: true
-        Prices:
-          example: string
-        Pricing:
-          title: Pricing
-          type: object
-          properties:
-            discriminator:
-              type: string
-            value:
-              oneOf:
-              - $ref: '#/components/schemas/RelativeProductPrice'
-          x-coproduct: true
-          x-schema-id: ProductPricingCoproductOfRelativeProductPrice
-        Amounts:
-          example: string
-        RelativePrice:
-          type: number
-          format: double
-          nullable: true
-          example: 100.0
-        Charging:
-          type: string
-          nullable: true
-          deprecated: true
-          example: string
-        ChargingMode:
-          $ref: '#/components/schemas/ProductChargingMode'
-        Posting:
-          type: string
-          nullable: true
-          deprecated: true
-          example: string
-        PostingMode:
-          $ref: '#/components/schemas/ProductPostingMode'
-        Ordering:
-          type: integer
-          format: int32
-          example: 1
-      additionalProperties: false
-      x-schema-id: Product
     RelativeProductPrice:
       title: RelativeProductPrice
       required:
@@ -1431,6 +1467,28 @@ components:
           $ref: '#/components/schemas/AmountPart'
       additionalProperties: false
       x-schema-id: RelativeProductPrice
+    ResourcePricing:
+      title: ResourcePricing
+      required:
+      - MaxPrice
+      - Price
+      - RateId
+      type: object
+      properties:
+        RateId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Price:
+          allOf:
+          - $ref: '#/components/schemas/ResourcePrice'
+          example: string
+        MaxPrice:
+          allOf:
+          - $ref: '#/components/schemas/ResourcePrice'
+          example: string
+      additionalProperties: false
+      x-schema-id: ResourcePricing
   securitySchemes:
     MewsClientToken:
       type: apiKey

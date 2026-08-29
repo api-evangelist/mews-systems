@@ -1,4 +1,4 @@
-openapi: 3.0.4
+openapi: 3.2.0
 info:
   title: Mews Booking Engine API (Distributor) Account notes Currencies API
   version: v1
@@ -193,6 +193,79 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    BookingEngineParameters:
+      title: BookingEngineParameters
+      required:
+      - Client
+      - ConfigurationId
+      - FullAmounts
+      type: object
+      properties:
+        Client:
+          minLength: 1
+          type: string
+          example: string
+        LanguageCode:
+          type:
+          - string
+          - 'null'
+          example: string
+        CultureCode:
+          type:
+          - string
+          - 'null'
+          example: string
+        FullAmounts:
+          type: boolean
+          example: true
+        Session:
+          type:
+          - string
+          - 'null'
+          example: string
+        ConfigurationId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      additionalProperties: false
+      x-schema-id: BookingEngineParameters
+    CurrencyResult:
+      title: CurrencyResult
+      required:
+      - Currencies
+      type: object
+      properties:
+        Currencies:
+          type: array
+          items:
+            $ref: '#/components/schemas/Currency'
+      additionalProperties: false
+      x-schema-id: CurrencyResult
+    Parameters:
+      title: Parameters
+      required:
+      - AccessToken
+      - Client
+      - ClientToken
+      type: object
+      properties:
+        ClientToken:
+          minLength: 1
+          type: string
+          description: Token identifying the client application.
+          example: string
+        AccessToken:
+          minLength: 1
+          type: string
+          description: Access token of the client application.
+          example: string
+        Client:
+          minLength: 1
+          type: string
+          description: Name and version of the client application.
+          example: string
+      additionalProperties: false
+      x-schema-id: Parameters
     CurrencyResult_2:
       title: CurrencyResult
       required:
@@ -211,18 +284,38 @@ components:
       type: object
       properties:
         Message:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           example: string
         RequestId:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
         Details:
-          nullable: true
           example: string
       additionalProperties: false
       x-schema-id: ConnectorApiExceptionResult
+    Currency_2:
+      title: Currency
+      required:
+      - Code
+      - Precision
+      type: object
+      properties:
+        Code:
+          minLength: 1
+          type: string
+          description: ISO-4217 three-letter code, e.g. USD or GBP.
+          example: string
+        Precision:
+          type: integer
+          description: Precision of the currency (count of decimal places).
+          format: int32
+          example: 1
+      additionalProperties: false
+      x-schema-id: Currency
     Currency:
       title: Currency
       required:
@@ -254,95 +347,6 @@ components:
         SymbolIsBehindValue:
           type: boolean
           example: true
-      additionalProperties: false
-      x-schema-id: Currency
-    Parameters:
-      title: Parameters
-      required:
-      - AccessToken
-      - Client
-      - ClientToken
-      type: object
-      properties:
-        ClientToken:
-          minLength: 1
-          type: string
-          description: Token identifying the client application.
-          example: string
-        AccessToken:
-          minLength: 1
-          type: string
-          description: Access token of the client application.
-          example: string
-        Client:
-          minLength: 1
-          type: string
-          description: Name and version of the client application.
-          example: string
-      additionalProperties: false
-      x-schema-id: Parameters
-    CurrencyResult:
-      title: CurrencyResult
-      required:
-      - Currencies
-      type: object
-      properties:
-        Currencies:
-          type: array
-          items:
-            $ref: '#/components/schemas/Currency'
-      additionalProperties: false
-      x-schema-id: CurrencyResult
-    BookingEngineParameters:
-      title: BookingEngineParameters
-      required:
-      - Client
-      - ConfigurationId
-      - FullAmounts
-      type: object
-      properties:
-        Client:
-          minLength: 1
-          type: string
-          example: string
-        LanguageCode:
-          type: string
-          nullable: true
-          example: string
-        CultureCode:
-          type: string
-          nullable: true
-          example: string
-        FullAmounts:
-          type: boolean
-          example: true
-        Session:
-          type: string
-          nullable: true
-          example: string
-        ConfigurationId:
-          type: string
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-      additionalProperties: false
-      x-schema-id: BookingEngineParameters
-    Currency_2:
-      title: Currency
-      required:
-      - Code
-      - Precision
-      type: object
-      properties:
-        Code:
-          minLength: 1
-          type: string
-          description: ISO-4217 three-letter code, e.g. USD or GBP.
-          example: string
-        Precision:
-          type: integer
-          description: Precision of the currency (count of decimal places).
-          format: int32
-          example: 1
       additionalProperties: false
       x-schema-id: Currency
   securitySchemes:

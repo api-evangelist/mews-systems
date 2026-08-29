@@ -1,4 +1,4 @@
-openapi: 3.0.4
+openapi: 3.2.0
 info:
   title: Mews Booking Engine API (Distributor) Account notes Cashier transactions API
   version: v1
@@ -166,23 +166,123 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    CurrencyValueOld:
+      title: Currency value (ver 2018-06-07)
+      required:
+      - Currency
+      type: object
+      properties:
+        Currency:
+          minLength: 1
+          type: string
+          format: currency
+          example: EUR
+        Value:
+          type:
+          - number
+          - 'null'
+          format: double
+          example: 100.0
+        Net:
+          type:
+          - number
+          - 'null'
+          format: double
+          deprecated: true
+          example: 100.0
+        Tax:
+          type:
+          - number
+          - 'null'
+          format: double
+          deprecated: true
+          example: 100.0
+        TaxRate:
+          type:
+          - number
+          - 'null'
+          format: double
+          deprecated: true
+          example: 100.0
+      additionalProperties: false
+      description: Total price of the reservation.
+      x-schema-id: CurrencyValueOld
+    Limitation:
+      title: Limitation
+      required:
+      - Count
+      type: object
+      properties:
+        Count:
+          type: integer
+          format: int32
+          example: 1
+        Cursor:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      additionalProperties: false
+      description: Limitation on the quantity of data returned.
+      x-schema-id: Limitation
+    CashierTransactionResult:
+      title: CashierTransactionResult
+      required:
+      - CashierTransactions
+      type: object
+      properties:
+        CashierTransactions:
+          type: array
+          items:
+            $ref: '#/components/schemas/CashierTransaction'
+          description: The collection of cashier transactions.
+        Cursor:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the item one newer in time order than the items to be returned. If Cursor is not specified, i.e. null, then the latest or most recent items will be returned.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      additionalProperties: false
+      x-schema-id: CashierTransactionResult
     ConnectorApiExceptionResult:
       title: ConnectorApiExceptionResult
       type: object
       properties:
         Message:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           example: string
         RequestId:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
         Details:
-          nullable: true
           example: string
       additionalProperties: false
       x-schema-id: ConnectorApiExceptionResult
+    TimeFilterInterval:
+      title: Time interval
+      type: object
+      properties:
+        StartUtc:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+        EndUtc:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+      additionalProperties: false
+      description: "When a time interval is used for **filtering** (for example in parameters such as `CreatedUtc.StartUtc` / `CreatedUtc.EndUtc`), the following rules apply:\n\n- **Start equals End (equality mode)**  \n  If `StartUtc` and `EndUtc` are exactly the same timestamp, the filter is treated as an equality check for that precise moment in time:\n  \n  ```\n  CreatedUtc == StartUtc\n  ```\n  \n  This does not represent an interval; only records with `CreatedUtc` equal to that exact instant are returned.\n\n- **Start differs from End (interval mode)**  \n  If `StartUtc` and `EndUtc` are different, the filter is evaluated as a half-open interval:\n  \n  ```\n  StartUtc <= CreatedUtc < EndUtc\n  ```\n  \n  In other words, the start is inclusive and the end is exclusive.\n\nMake sure your integration takes inclusive Start / exclusive End behavior of time intervals into account so that no records at the boundaries are omitted."
+      x-schema-id: TimeFilterInterval
     CashierTransaction:
       title: Cashier transaction
       required:
@@ -210,10 +310,11 @@ components:
           format: uuid
           example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
         PaymentId:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Unique identifier of the corresponding payment [Payment item](https://mews-systems.gitbook.io/connector-api/operations/accountingitems/#payment-item).
           format: uuid
-          nullable: true
           example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
         CreatedUtc:
           minLength: 1
@@ -226,9 +327,10 @@ components:
           description: Number of the transaction.
           example: '1001'
         Notes:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Additional notes of the transaction.
-          nullable: true
           example: string
         Amount:
           title: Currency value (ver 2018-06-07)
@@ -270,122 +372,32 @@ components:
         EnterpriseIds:
           maxItems: 1000
           minItems: 1
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
             format: uuid
           description: Unique identifiers of the Enterprises. If not specified, the operation returns data for all enterprises within scope of the Access Token.
-          nullable: true
         CashierTransactionIds:
           maxItems: 1000
           minItems: 1
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
             format: uuid
           description: Unique identifiers of the Cashier transactions.
-          nullable: true
         CreatedUtc:
           title: Time interval
           allOf:
           - $ref: '#/components/schemas/TimeFilterInterval'
           description: Interval in which Cashier transaction was created.
-          nullable: true
           x-max-interval-in-months: 3
           example: string
       additionalProperties: false
       x-schema-id: CashierTransactionParameters
-    CurrencyValueOld:
-      title: Currency value (ver 2018-06-07)
-      required:
-      - Currency
-      type: object
-      properties:
-        Currency:
-          minLength: 1
-          type: string
-          format: currency
-          example: EUR
-        Value:
-          type: number
-          format: double
-          nullable: true
-          example: 100.0
-        Net:
-          type: number
-          format: double
-          nullable: true
-          deprecated: true
-          example: 100.0
-        Tax:
-          type: number
-          format: double
-          nullable: true
-          deprecated: true
-          example: 100.0
-        TaxRate:
-          type: number
-          format: double
-          nullable: true
-          deprecated: true
-          example: 100.0
-      additionalProperties: false
-      description: Total price of the reservation.
-      x-schema-id: CurrencyValueOld
-    Limitation:
-      title: Limitation
-      required:
-      - Count
-      type: object
-      properties:
-        Count:
-          type: integer
-          format: int32
-          example: 1
-        Cursor:
-          type: string
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-      additionalProperties: false
-      description: Limitation on the quantity of data returned.
-      x-schema-id: Limitation
-    TimeFilterInterval:
-      title: Time interval
-      type: object
-      properties:
-        StartUtc:
-          type: string
-          format: date-time
-          nullable: true
-          example: '2026-06-02T14:30:00Z'
-        EndUtc:
-          type: string
-          format: date-time
-          nullable: true
-          example: '2026-06-02T14:30:00Z'
-      additionalProperties: false
-      description: "When a time interval is used for **filtering** (for example in parameters such as `CreatedUtc.StartUtc` / `CreatedUtc.EndUtc`), the following rules apply:\r\n\r\n- **Start equals End (equality mode)**  \r\n  If `StartUtc` and `EndUtc` are exactly the same timestamp, the filter is treated as an equality check for that precise moment in time:\r\n  \r\n  ```\r\n  CreatedUtc == StartUtc\r\n  ```\r\n  \r\n  This does not represent an interval; only records with `CreatedUtc` equal to that exact instant are returned.\r\n\r\n- **Start differs from End (interval mode)**  \r\n  If `StartUtc` and `EndUtc` are different, the filter is evaluated as a half-open interval:\r\n  \r\n  ```\r\n  StartUtc <= CreatedUtc < EndUtc\r\n  ```\r\n  \r\n  In other words, the start is inclusive and the end is exclusive.\r\n\r\nMake sure your integration takes inclusive Start / exclusive End behavior of time intervals into account so that no records at the boundaries are omitted."
-      x-schema-id: TimeFilterInterval
-    CashierTransactionResult:
-      title: CashierTransactionResult
-      required:
-      - CashierTransactions
-      type: object
-      properties:
-        CashierTransactions:
-          type: array
-          items:
-            $ref: '#/components/schemas/CashierTransaction'
-          description: The collection of cashier transactions.
-        Cursor:
-          type: string
-          description: Unique identifier of the item one newer in time order than the items to be returned. If Cursor is not specified, i.e. null, then the latest or most recent items will be returned.
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-      additionalProperties: false
-      x-schema-id: CashierTransactionResult
   securitySchemes:
     MewsClientToken:
       type: apiKey

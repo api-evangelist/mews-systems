@@ -1,4 +1,4 @@
-openapi: 3.0.4
+openapi: 3.2.0
 info:
   title: Mews Booking Engine API (Distributor) Account notes Payment Cards API
   version: v1
@@ -105,6 +105,108 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    PaymentCardFilterParameters:
+      title: PaymentCardFilterParameters
+      required:
+      - Client
+      - FullAmounts
+      - PaymentCardIds
+      type: object
+      properties:
+        Client:
+          minLength: 1
+          type: string
+          example: string
+        LanguageCode:
+          type:
+          - string
+          - 'null'
+          example: string
+        CultureCode:
+          type:
+          - string
+          - 'null'
+          example: string
+        FullAmounts:
+          type: boolean
+          example: true
+        Session:
+          type:
+          - string
+          - 'null'
+          example: string
+        PaymentCardIds:
+          minItems: 1
+          type: array
+          items:
+            type: string
+            format: uuid
+      additionalProperties: false
+      x-schema-id: PaymentCardFilterParameters
+    PaymentCardResult:
+      title: PaymentCardResult
+      required:
+      - PaymentCards
+      type: object
+      properties:
+        PaymentCards:
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentCard'
+      additionalProperties: false
+      x-schema-id: PaymentCardResult
+    AuthorizePaymentCardParameters:
+      title: AuthorizePaymentCardParameters
+      required:
+      - BrowserInfo
+      - Client
+      - EnterpriseId
+      - FullAmounts
+      - PaymentCardId
+      type: object
+      properties:
+        Client:
+          minLength: 1
+          type: string
+          example: string
+        LanguageCode:
+          type:
+          - string
+          - 'null'
+          example: string
+        CultureCode:
+          type:
+          - string
+          - 'null'
+          example: string
+        FullAmounts:
+          type: boolean
+          example: true
+        Session:
+          type:
+          - string
+          - 'null'
+          example: string
+        EnterpriseId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        PaymentCardId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        BrowserInfo:
+          allOf:
+          - $ref: '#/components/schemas/BrowserInfo'
+          example: string
+      additionalProperties: false
+      x-schema-id: AuthorizePaymentCardParameters
+    PaymentCard3DsAuthorizationState:
+      enum:
+      - Authorized
+      - Authorizable
+      - Unauthorizable
+      type: string
     AuthorizePaymentCardResult:
       title: AuthorizePaymentCardResult
       required:
@@ -126,53 +228,61 @@ components:
         Action:
           allOf:
           - $ref: '#/components/schemas/PaymentCardAuthorizationAction'
-          nullable: true
           example: string
       additionalProperties: false
       x-schema-id: AuthorizePaymentCardResult
-    AuthorizePaymentCardParameters:
-      title: AuthorizePaymentCardParameters
+    PaymentCardAuthorizationAction:
+      title: PaymentCardAuthorizationAction
       required:
-      - BrowserInfo
-      - Client
-      - EnterpriseId
-      - FullAmounts
-      - PaymentCardId
+      - HttpMethod
+      - Type
+      - Url
       type: object
       properties:
-        Client:
+        Type:
+          $ref: '#/components/schemas/PaymentCardAuthorizationRequestedAction'
+        Url:
+          minLength: 1
+          type: string
+          format: uri
+          example: https://api.mews.com/api/connector/v1
+        HttpMethod:
           minLength: 1
           type: string
           example: string
-        LanguageCode:
-          type: string
-          nullable: true
-          example: string
-        CultureCode:
-          type: string
-          nullable: true
-          example: string
-        FullAmounts:
-          type: boolean
-          example: true
-        Session:
-          type: string
-          nullable: true
-          example: string
-        EnterpriseId:
-          type: string
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        PaymentCardId:
-          type: string
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        BrowserInfo:
-          allOf:
-          - $ref: '#/components/schemas/BrowserInfo'
+        Data:
           example: string
       additionalProperties: false
-      x-schema-id: AuthorizePaymentCardParameters
+      x-schema-id: PaymentCardAuthorizationAction
+    PaymentCard:
+      title: PaymentCard
+      required:
+      - AuthorizationState
+      - Id
+      type: object
+      properties:
+        Id:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        AuthorizationState:
+          $ref: '#/components/schemas/PaymentCard3DsAuthorizationState'
+      additionalProperties: false
+      x-schema-id: PaymentCard
+    PaymentCardAuthorizationState:
+      enum:
+      - Authorized
+      - Requested
+      - Pending
+      - Declined
+      - Canceled
+      type: string
+    PaymentCardAuthorizationRequestedAction:
+      enum:
+      - Redirect
+      - Show
+      - Nothing
+      type: string
     BrowserInfo:
       title: BrowserInfo
       required:
@@ -215,112 +325,6 @@ components:
           example: 1
       additionalProperties: false
       x-schema-id: BrowserInfo
-    PaymentCard3DsAuthorizationState:
-      enum:
-      - Authorized
-      - Authorizable
-      - Unauthorizable
-      type: string
-    PaymentCardAuthorizationAction:
-      title: PaymentCardAuthorizationAction
-      required:
-      - HttpMethod
-      - Type
-      - Url
-      type: object
-      properties:
-        Type:
-          $ref: '#/components/schemas/PaymentCardAuthorizationRequestedAction'
-        Url:
-          minLength: 1
-          type: string
-          format: uri
-          example: https://api.mews.com/api/connector/v1
-        HttpMethod:
-          minLength: 1
-          type: string
-          example: string
-        Data:
-          nullable: true
-          example: string
-      additionalProperties: false
-      x-schema-id: PaymentCardAuthorizationAction
-    PaymentCardAuthorizationRequestedAction:
-      enum:
-      - Redirect
-      - Show
-      - Nothing
-      type: string
-    PaymentCardAuthorizationState:
-      enum:
-      - Authorized
-      - Requested
-      - Pending
-      - Declined
-      - Canceled
-      type: string
-    PaymentCardFilterParameters:
-      title: PaymentCardFilterParameters
-      required:
-      - Client
-      - FullAmounts
-      - PaymentCardIds
-      type: object
-      properties:
-        Client:
-          minLength: 1
-          type: string
-          example: string
-        LanguageCode:
-          type: string
-          nullable: true
-          example: string
-        CultureCode:
-          type: string
-          nullable: true
-          example: string
-        FullAmounts:
-          type: boolean
-          example: true
-        Session:
-          type: string
-          nullable: true
-          example: string
-        PaymentCardIds:
-          minItems: 1
-          type: array
-          items:
-            type: string
-            format: uuid
-      additionalProperties: false
-      x-schema-id: PaymentCardFilterParameters
-    PaymentCardResult:
-      title: PaymentCardResult
-      required:
-      - PaymentCards
-      type: object
-      properties:
-        PaymentCards:
-          type: array
-          items:
-            $ref: '#/components/schemas/PaymentCard'
-      additionalProperties: false
-      x-schema-id: PaymentCardResult
-    PaymentCard:
-      title: PaymentCard
-      required:
-      - AuthorizationState
-      - Id
-      type: object
-      properties:
-        Id:
-          type: string
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        AuthorizationState:
-          $ref: '#/components/schemas/PaymentCard3DsAuthorizationState'
-      additionalProperties: false
-      x-schema-id: PaymentCard
   securitySchemes:
     MewsClientToken:
       type: apiKey

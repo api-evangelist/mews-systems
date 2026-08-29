@@ -1,4 +1,4 @@
-openapi: 3.0.4
+openapi: 3.2.0
 info:
   title: Mews Booking Engine API (Distributor) Account notes Messages API
   version: v1
@@ -303,23 +303,19 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ConnectorApiExceptionResult:
-      title: ConnectorApiExceptionResult
+    AddedMessageResult:
+      title: AddedMessageResult
+      required:
+      - Messages
       type: object
       properties:
-        Message:
-          type: string
-          nullable: true
-          example: string
-        RequestId:
-          type: string
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Details:
-          nullable: true
-          example: string
+        Messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/AddedMessage'
+          description: Collection of created messages.
       additionalProperties: false
-      x-schema-id: ConnectorApiExceptionResult
+      x-schema-id: AddedMessageResult
     AddedMessage:
       title: Added message
       required:
@@ -327,9 +323,10 @@ components:
       type: object
       properties:
         Identifier:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Identifier of the created message.
-          nullable: true
           example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
         Message:
           title: Message
@@ -339,65 +336,6 @@ components:
           example: string
       additionalProperties: false
       x-schema-id: AddedMessage
-    Limitation:
-      title: Limitation
-      required:
-      - Count
-      type: object
-      properties:
-        Count:
-          type: integer
-          format: int32
-          example: 1
-        Cursor:
-          type: string
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-      additionalProperties: false
-      description: Limitation on the quantity of data returned.
-      x-schema-id: Limitation
-    TimeFilterInterval:
-      title: Time interval
-      type: object
-      properties:
-        StartUtc:
-          type: string
-          format: date-time
-          nullable: true
-          example: '2026-06-02T14:30:00Z'
-        EndUtc:
-          type: string
-          format: date-time
-          nullable: true
-          example: '2026-06-02T14:30:00Z'
-      additionalProperties: false
-      description: "When a time interval is used for **filtering** (for example in parameters such as `CreatedUtc.StartUtc` / `CreatedUtc.EndUtc`), the following rules apply:\r\n\r\n- **Start equals End (equality mode)**  \r\n  If `StartUtc` and `EndUtc` are exactly the same timestamp, the filter is treated as an equality check for that precise moment in time:\r\n  \r\n  ```\r\n  CreatedUtc == StartUtc\r\n  ```\r\n  \r\n  This does not represent an interval; only records with `CreatedUtc` equal to that exact instant are returned.\r\n\r\n- **Start differs from End (interval mode)**  \r\n  If `StartUtc` and `EndUtc` are different, the filter is evaluated as a half-open interval:\r\n  \r\n  ```\r\n  StartUtc <= CreatedUtc < EndUtc\r\n  ```\r\n  \r\n  In other words, the start is inclusive and the end is exclusive.\r\n\r\nMake sure your integration takes inclusive Start / exclusive End behavior of time intervals into account so that no records at the boundaries are omitted."
-      x-schema-id: TimeFilterInterval
-    MessageAddParameters:
-      title: Message parameters
-      required:
-      - MessageThreadId
-      - Text
-      type: object
-      properties:
-        MessageThreadId:
-          type: string
-          description: Unique identifier of the `MessageThread` to which the message should be added.
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Text:
-          minLength: 1
-          type: string
-          description: Text of the message.
-          example: string
-        Identifier:
-          type: string
-          description: Identifier of the message to be created.
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-      additionalProperties: false
-      x-schema-id: MessageAddParameters
     MultipleMessageAddParameters:
       title: MultipleMessageAddParameters
       required:
@@ -430,144 +368,6 @@ components:
           description: Messages to be added.
       additionalProperties: false
       x-schema-id: MultipleMessageAddParameters
-    SenderDiscriminatorEnum:
-      title: Sender discriminator
-      enum:
-      - Enterprise
-      - Application
-      type: string
-      description: '
-
-
-        Enterprise (The message was created by an employee of the enterprise.)
-
-
-        Application (The message was created by the third party application.)'
-      x-enumNames:
-      - Enterprise
-      - Application
-      x-enumDescriptions:
-      - The message was created by an employee of the enterprise.
-      - The message was created by the third party application.
-    AddedMessageResult:
-      title: AddedMessageResult
-      required:
-      - Messages
-      type: object
-      properties:
-        Messages:
-          type: array
-          items:
-            $ref: '#/components/schemas/AddedMessage'
-          description: Collection of created messages.
-      additionalProperties: false
-      x-schema-id: AddedMessageResult
-    SenderCoproduct:
-      title: Sender
-      required:
-      - Discriminator
-      type: object
-      properties:
-        Discriminator:
-          title: Sender discriminator
-          allOf:
-          - $ref: '#/components/schemas/SenderDiscriminatorEnum'
-          description: 'The sender of the message.
-
-
-            Enterprise (The message was created by an employee of the enterprise.)
-
-
-            Application (The message was created by the third party application.)'
-          x-enumNames:
-          - Enterprise
-          - Application
-          x-enumDescriptions:
-          - The message was created by an employee of the enterprise.
-          - The message was created by the third party application.
-          example: string
-        Value:
-          description: Additional information about the sender. Currently not used and always `null`.
-          nullable: true
-          example: string
-      additionalProperties: false
-      x-schema-id: SenderCoproduct
-    MessageFilterParameters:
-      title: MessageFilterParameters
-      required:
-      - AccessToken
-      - Client
-      - ClientToken
-      - Limitation
-      - MessageThreadIds
-      type: object
-      properties:
-        ClientToken:
-          minLength: 1
-          type: string
-          description: Token identifying the client application.
-          example: string
-        AccessToken:
-          minLength: 1
-          type: string
-          description: Access token of the client application.
-          example: string
-        Client:
-          minLength: 1
-          type: string
-          description: Name and version of the client application.
-          example: string
-        Limitation:
-          allOf:
-          - $ref: '#/components/schemas/Limitation'
-          description: Limitation on the quantity of data returned and optional Cursor for the starting point of data.
-          example: string
-        EnterpriseIds:
-          maxItems: 1000
-          minItems: 1
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Unique identifiers of the Enterprises. If not specified, the operation returns data for all enterprises within scope of the Access Token.
-          nullable: true
-        MessageThreadIds:
-          maxItems: 1000
-          minItems: 1
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Unique identifiers of `MessageThread`s from where to return messages.
-        CreatedUtc:
-          title: Time interval
-          allOf:
-          - $ref: '#/components/schemas/TimeFilterInterval'
-          description: Interval in which the `Message` was created.
-          nullable: true
-          x-max-interval-in-months: 1
-          example: string
-      additionalProperties: false
-      x-schema-id: MessageFilterParameters
-    MessageResult:
-      title: MessageResult
-      required:
-      - Messages
-      type: object
-      properties:
-        Messages:
-          type: array
-          items:
-            $ref: '#/components/schemas/Message'
-          description: The filtered messages.
-        Cursor:
-          type: string
-          description: Unique identifier of the last and hence oldest message returned. This can be used in `Limitation` in a subsequent request to fetch the next batch of older messages.
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-      additionalProperties: false
-      x-schema-id: MessageResult
     Message:
       title: Message
       required:
@@ -607,6 +407,212 @@ components:
           example: '2026-06-02T14:30:00Z'
       additionalProperties: false
       x-schema-id: Message
+    MessageFilterParameters:
+      title: MessageFilterParameters
+      required:
+      - AccessToken
+      - Client
+      - ClientToken
+      - Limitation
+      - MessageThreadIds
+      type: object
+      properties:
+        ClientToken:
+          minLength: 1
+          type: string
+          description: Token identifying the client application.
+          example: string
+        AccessToken:
+          minLength: 1
+          type: string
+          description: Access token of the client application.
+          example: string
+        Client:
+          minLength: 1
+          type: string
+          description: Name and version of the client application.
+          example: string
+        Limitation:
+          allOf:
+          - $ref: '#/components/schemas/Limitation'
+          description: Limitation on the quantity of data returned and optional Cursor for the starting point of data.
+          example: string
+        EnterpriseIds:
+          maxItems: 1000
+          minItems: 1
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: uuid
+          description: Unique identifiers of the Enterprises. If not specified, the operation returns data for all enterprises within scope of the Access Token.
+        MessageThreadIds:
+          maxItems: 1000
+          minItems: 1
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Unique identifiers of `MessageThread`s from where to return messages.
+        CreatedUtc:
+          title: Time interval
+          allOf:
+          - $ref: '#/components/schemas/TimeFilterInterval'
+          description: Interval in which the `Message` was created.
+          x-max-interval-in-months: 1
+          example: string
+      additionalProperties: false
+      x-schema-id: MessageFilterParameters
+    MessageResult:
+      title: MessageResult
+      required:
+      - Messages
+      type: object
+      properties:
+        Messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/Message'
+          description: The filtered messages.
+        Cursor:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the last and hence oldest message returned. This can be used in `Limitation` in a subsequent request to fetch the next batch of older messages.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      additionalProperties: false
+      x-schema-id: MessageResult
+    Limitation:
+      title: Limitation
+      required:
+      - Count
+      type: object
+      properties:
+        Count:
+          type: integer
+          format: int32
+          example: 1
+        Cursor:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      additionalProperties: false
+      description: Limitation on the quantity of data returned.
+      x-schema-id: Limitation
+    SenderDiscriminatorEnum:
+      title: Sender discriminator
+      enum:
+      - Enterprise
+      - Application
+      type: string
+      description: '
+
+
+        Enterprise (The message was created by an employee of the enterprise.)
+
+
+        Application (The message was created by the third party application.)'
+      x-enumNames:
+      - Enterprise
+      - Application
+      x-enumDescriptions:
+      - The message was created by an employee of the enterprise.
+      - The message was created by the third party application.
+    SenderCoproduct:
+      title: Sender
+      required:
+      - Discriminator
+      type: object
+      properties:
+        Discriminator:
+          title: Sender discriminator
+          allOf:
+          - $ref: '#/components/schemas/SenderDiscriminatorEnum'
+          description: 'The sender of the message.
+
+
+            Enterprise (The message was created by an employee of the enterprise.)
+
+
+            Application (The message was created by the third party application.)'
+          x-enumNames:
+          - Enterprise
+          - Application
+          x-enumDescriptions:
+          - The message was created by an employee of the enterprise.
+          - The message was created by the third party application.
+          example: string
+        Value:
+          description: Additional information about the sender. Currently not used and always `null`.
+          example: string
+      additionalProperties: false
+      x-schema-id: SenderCoproduct
+    ConnectorApiExceptionResult:
+      title: ConnectorApiExceptionResult
+      type: object
+      properties:
+        Message:
+          type:
+          - string
+          - 'null'
+          example: string
+        RequestId:
+          type:
+          - string
+          - 'null'
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Details:
+          example: string
+      additionalProperties: false
+      x-schema-id: ConnectorApiExceptionResult
+    TimeFilterInterval:
+      title: Time interval
+      type: object
+      properties:
+        StartUtc:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+        EndUtc:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+      additionalProperties: false
+      description: "When a time interval is used for **filtering** (for example in parameters such as `CreatedUtc.StartUtc` / `CreatedUtc.EndUtc`), the following rules apply:\n\n- **Start equals End (equality mode)**  \n  If `StartUtc` and `EndUtc` are exactly the same timestamp, the filter is treated as an equality check for that precise moment in time:\n  \n  ```\n  CreatedUtc == StartUtc\n  ```\n  \n  This does not represent an interval; only records with `CreatedUtc` equal to that exact instant are returned.\n\n- **Start differs from End (interval mode)**  \n  If `StartUtc` and `EndUtc` are different, the filter is evaluated as a half-open interval:\n  \n  ```\n  StartUtc <= CreatedUtc < EndUtc\n  ```\n  \n  In other words, the start is inclusive and the end is exclusive.\n\nMake sure your integration takes inclusive Start / exclusive End behavior of time intervals into account so that no records at the boundaries are omitted."
+      x-schema-id: TimeFilterInterval
+    MessageAddParameters:
+      title: Message parameters
+      required:
+      - MessageThreadId
+      - Text
+      type: object
+      properties:
+        MessageThreadId:
+          type: string
+          description: Unique identifier of the `MessageThread` to which the message should be added.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Text:
+          minLength: 1
+          type: string
+          description: Text of the message.
+          example: string
+        Identifier:
+          type:
+          - string
+          - 'null'
+          description: Identifier of the message to be created.
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      additionalProperties: false
+      x-schema-id: MessageAddParameters
   securitySchemes:
     MewsClientToken:
       type: apiKey

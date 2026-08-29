@@ -1,4 +1,4 @@
-openapi: 3.0.4
+openapi: 3.2.0
 info:
   title: Mews Booking Engine API (Distributor) Account notes Configuration API
   version: v1
@@ -344,23 +344,1302 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    EnterpriseSubscription:
-      title: Enterprise subscription
+    Service_2:
+      title: Service
+      required:
+      - CreatedUtc
+      - Data
+      - EnterpriseId
+      - Id
+      - IsActive
+      - Name
+      - Names
+      - Options
+      - Ordering
+      - UpdatedUtc
       type: object
       properties:
-        TaxIdentifier:
+        Id:
           type: string
-          description: Tax identifier of the `Enterprise`.
-          nullable: true
+          description: Unique identifier of the service.
+          format: uuid
           example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        EnterpriseId:
+          type: string
+          description: Unique identifier of the [Enterprise](https://mews-systems.gitbook.io/connector-api/operations/enterprises/#enterprise).
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        IsActive:
+          type: boolean
+          description: Whether the service is still active.
+          example: true
+        Name:
+          minLength: 1
+          type: string
+          description: Name of the service.
+          deprecated: true
+          x-deprecatedMessage: Use `Names` instead
+          example: Example Name
+        Names:
+          title: Localized text
+          type: object
+          additionalProperties:
+            type: string
+          description: All translations of the name.
+          x-schema-id: LocalizedStrings
+        StartTime:
+          type:
+          - string
+          - 'null'
+          deprecated: true
+          example: string
+        EndTime:
+          type:
+          - string
+          - 'null'
+          deprecated: true
+          example: string
+        Options:
+          title: Service options
+          allOf:
+          - $ref: '#/components/schemas/ServiceOptions'
+          description: Options of the service.
+          example: string
+        Promotions:
+          allOf:
+          - $ref: '#/components/schemas/Promotions'
+          description: ''
+          deprecated: true
+          x-deprecatedMessage: Use `Promotions` in `Data` instead.
+          example: string
+        Type:
+          type:
+          - string
+          - 'null'
+          deprecated: true
+          example: string
+        Ordering:
+          type: integer
+          description: Order value for presentation purposes.
+          format: int32
+          example: 1
+        Data:
+          title: Service data
+          type: object
+          properties:
+            Discriminator:
+              $ref: '#/components/schemas/ServiceDataDiscriminator'
+            Value:
+              oneOf:
+              - $ref: '#/components/schemas/BookableServiceData'
+              - $ref: '#/components/schemas/AdditionalServiceData'
+          description: Additional information about the specific service.
+          x-coproduct: true
+          x-schema-id: ServiceDataCoproductOfServiceDataDiscriminator
+        ExternalIdentifier:
+          maxLength: 255
+          type:
+          - string
+          - 'null'
+          description: Identifier of the service from external system.
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        CreatedUtc:
+          minLength: 1
+          type: string
+          description: Creation date and time of the service in UTC timezone in ISO 8601 format.
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+        UpdatedUtc:
+          minLength: 1
+          type: string
+          description: Last update date and time of the service in UTC timezone in ISO 8601 format.
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
       additionalProperties: false
       description: ''
-      x-schema-id: EnterpriseSubscription
+      x-schema-id: Service
+    ProductChargingMode:
+      enum:
+      - Once
+      - PerTimeUnit
+      - PerPersonPerTimeUnit
+      - PerPerson
+      type: string
+    Promotions:
+      title: Promotions
+      required:
+      - AfterCheckIn
+      - AfterCheckOut
+      - BeforeCheckIn
+      - BeforeCheckOut
+      - DuringCheckOut
+      - DuringStay
+      type: object
+      properties:
+        BeforeCheckIn:
+          type: boolean
+          description: Whether it can be promoted before check-in.
+          example: true
+        AfterCheckIn:
+          type: boolean
+          description: Whether it can be promoted after check-in.
+          example: true
+        DuringStay:
+          type: boolean
+          description: Whether it can be promoted during stay.
+          example: true
+        BeforeCheckOut:
+          type: boolean
+          description: Whether it can be promoted before check-out.
+          example: true
+        AfterCheckOut:
+          type: boolean
+          description: Whether it can be promoted after check-out.
+          example: true
+        DuringCheckOut:
+          type: boolean
+          description: Whether it can be promoted during check-out.
+          example: true
+      additionalProperties: false
+      description: ''
+      x-schema-id: Promotions
+    ServiceOptions:
+      title: Service options
+      required:
+      - BillAsPackage
+      type: object
+      properties:
+        BillAsPackage:
+          type: boolean
+          description: Products should be displayed as a single package instead of individual items.
+          example: true
+      additionalProperties: false
+      description: Options of the service.
+      x-schema-id: ServiceOptions
     PricingMode:
       enum:
       - Gross
       - Net
       type: string
+    AgeCategoryClassification:
+      enum:
+      - Adult
+      - Child
+      type: string
+    EnterpriseSubscription:
+      title: Enterprise subscription
+      type: object
+      properties:
+        TaxIdentifier:
+          type:
+          - string
+          - 'null'
+          description: Tax identifier of the `Enterprise`.
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      additionalProperties: false
+      description: ''
+      x-schema-id: EnterpriseSubscription
+    BookingEnginePaymentCardRequirement:
+      enum:
+      - NotRequired
+      - NotRequiredForFullyPaidBookings
+      - AlwaysRequired
+      - NotRequiredForFullyOrPartiallyPaidBookings
+      type: string
+    BookableServiceData:
+      title: Bookable service data
+      required:
+      - EndOffset
+      - OccupancyEndOffset
+      - OccupancyStartOffset
+      - StartOffset
+      - TimeUnit
+      - TimeUnitPeriod
+      type: object
+      properties:
+        StartOffset:
+          minLength: 1
+          type: string
+          description: Offset from the start of the [time unit](https://mews-systems.gitbook.io/connector-api/concepts/time-units/) which defines the default start of the service; expressed in ISO 8601 duration format.
+          example: string
+        EndOffset:
+          minLength: 1
+          type: string
+          description: Offset from the end of the [time unit](https://mews-systems.gitbook.io/connector-api/concepts/time-units/) which defines the default end of the service; expressed in ISO 8601 duration format.
+          example: string
+        OccupancyStartOffset:
+          minLength: 1
+          type: string
+          description: Offset from the start of the [time unit](https://mews-systems.gitbook.io/connector-api/concepts/time-units/) which defines the occupancy start of the service; expressed in ISO 8601 duration format. 'Occupancy start' is used for availability and reporting purposes, it implies the time at which the booked resource is considered occupied.
+          example: string
+        OccupancyEndOffset:
+          minLength: 1
+          type: string
+          description: Offset from the end of the [time unit](https://mews-systems.gitbook.io/connector-api/concepts/time-units/) which defines the occupancy end of the service; expressed in ISO 8601 duration format. 'Occupancy end' is used for availability and reporting purposes, it implies the time at which the booked resource is no longer considered occupied.
+          example: string
+        TimeUnit:
+          title: Time unit period
+          allOf:
+          - $ref: '#/components/schemas/TimeUnitPeriodEnum'
+          description: '
+
+
+            Day
+
+
+            Month
+
+
+            Hour'
+          deprecated: true
+          x-enumNames:
+          - Day
+          - Month
+          - Hour
+          x-enumDescriptions:
+          - ''
+          - ''
+          - ''
+          x-deprecatedMessage: Use `TimeUnitPeriod` instead.
+          example: string
+        TimeUnitPeriod:
+          title: Time unit period
+          allOf:
+          - $ref: '#/components/schemas/TimeUnitPeriodEnum'
+          description: 'The length of time or period represented by a [time unit](https://mews-systems.gitbook.io/connector-api/concepts/time-units/), for which the service can be booked.
+
+
+            Day
+
+
+            Month
+
+
+            Hour'
+          x-enumNames:
+          - Day
+          - Month
+          - Hour
+          x-enumDescriptions:
+          - ''
+          - ''
+          - ''
+          example: string
+      additionalProperties: false
+      x-schema-id: BookableServiceData
+    City:
+      title: City
+      required:
+      - Id
+      - Name
+      type: object
+      properties:
+        Id:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Name:
+          type: object
+          additionalProperties:
+            type: string
+        ImageId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      additionalProperties: false
+      x-schema-id: City
+    PricingModeEnum:
+      title: Pricing
+      enum:
+      - Gross
+      - Net
+      type: string
+      description: '
+
+
+        Gross (The enterprise shows amount with gross prices.)
+
+
+        Net (The enterprise shows amount with net prices.)'
+      x-enumNames:
+      - Gross
+      - Net
+      x-enumDescriptions:
+      - The enterprise shows amount with gross prices.
+      - The enterprise shows amount with net prices.
+    ResourceCategoryImageAssignment:
+      title: ResourceCategoryImageAssignment
+      required:
+      - CategoryId
+      - Id
+      - ImageId
+      - Ordering
+      type: object
+      properties:
+        Id:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        CategoryId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        ImageId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Ordering:
+          type: integer
+          format: int32
+          example: 1
+      additionalProperties: false
+      x-schema-id: ResourceCategoryImageAssignment
+    Address:
+      title: Address
+      type: object
+      properties:
+        Line1:
+          maxLength: 1023
+          type:
+          - string
+          - 'null'
+          example: string
+        Line2:
+          maxLength: 255
+          type:
+          - string
+          - 'null'
+          example: string
+        City:
+          maxLength: 255
+          type:
+          - string
+          - 'null'
+          example: string
+        PostalCode:
+          maxLength: 255
+          type:
+          - string
+          - 'null'
+          example: string
+        CountryCode:
+          maxLength: 8
+          type:
+          - string
+          - 'null'
+          example: string
+        Latitude:
+          type:
+          - number
+          - 'null'
+          format: double
+          example: 100.0
+        Longitude:
+          type:
+          - number
+          - 'null'
+          format: double
+          example: 100.0
+      additionalProperties: false
+      x-schema-id: Address
+    Category:
+      title: Category
+      required:
+      - Description
+      - ExtraBedCount
+      - Id
+      - Name
+      - NormalBedCount
+      - SpaceType
+      type: object
+      properties:
+        Id:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Name:
+          type: object
+          additionalProperties:
+            type: string
+        Description:
+          type: object
+          additionalProperties:
+            type: string
+        ImageIds:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: uuid
+          deprecated: true
+        Ordering:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          example: 1
+        NormalBedCount:
+          type: integer
+          format: int32
+          example: 1
+        ExtraBedCount:
+          type: integer
+          format: int32
+          example: 1
+        SpaceType:
+          $ref: '#/components/schemas/ResourceCategoryType'
+      additionalProperties: false
+      x-schema-id: Category
+    BookingEngineBookerReservationCustomerEmailInput:
+      enum:
+      - Required
+      - Optional
+      type: string
+    ConfigurationResult:
+      title: ConfigurationResult
+      required:
+      - AgeCategories
+      - Cities
+      - Configurations
+      - CurrencyCodes
+      - ImageBaseUrl
+      - NowUtc
+      - Services
+      type: object
+      properties:
+        NowUtc:
+          minLength: 1
+          type: string
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+        LanguageCode:
+          type:
+          - string
+          - 'null'
+          example: string
+        CurrencyCode:
+          maxLength: 3
+          type:
+          - string
+          - 'null'
+          format: currency
+          example: EUR
+        IntroVideoUrl:
+          type:
+          - string
+          - 'null'
+          format: uri
+          example: https://api.mews.com/api/connector/v1
+        Theme:
+          anyOf:
+          - $ref: '#/components/schemas/BookingEngineTheme'
+          example: string
+        PrimaryColor:
+          type:
+          - string
+          - 'null'
+          example: string
+        VoucherCode:
+          type:
+          - string
+          - 'null'
+          example: string
+        DisplayVoucherCode:
+          type:
+          - boolean
+          - 'null'
+          example: true
+        GtmContainerId:
+          type:
+          - string
+          - 'null'
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        StartDateOffset:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          example: 1
+        EndDateOffset:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          example: 1
+        CityId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        ImageBaseUrl:
+          minLength: 1
+          type: string
+          format: uri
+          example: https://api.mews.com/api/connector/v1
+        Configurations:
+          type: array
+          items:
+            $ref: '#/components/schemas/BookingEngine'
+        Cities:
+          type: array
+          items:
+            $ref: '#/components/schemas/City'
+        CurrencyCodes:
+          type: array
+          items:
+            type: string
+          format: currency
+        AgeCategories:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgeCategory'
+        Services:
+          type: array
+          items:
+            $ref: '#/components/schemas/Service'
+      additionalProperties: false
+      x-schema-id: ConfigurationResult
+    AccountingConfigurationOptionEnum:
+      title: Accounting configuration option
+      enum:
+      - OptionalCreditCardPaymentDetails
+      - ReceivableTrackingEnabled
+      - SeparateDepositsOnBill
+      - AllowModifyingClosedBills
+      - RequireAccountingCategorySetup
+      - GroupTaxesOnBill
+      - DisplayEmployeeNameOnBill
+      - TaxDeclarationOnDeposit
+      - SplitVatByClassificationOnBill
+      - EmailClosedBillsAfterCheckout
+      type: string
+      description: '
+
+
+        OptionalCreditCardPaymentDetails (Optional credit card payment details)
+
+
+        ReceivableTrackingEnabled (Receivable tracking enabled)
+
+
+        SeparateDepositsOnBill (Separate deposits on bill)
+
+
+        AllowModifyingClosedBills (Allow modifying closed bills)
+
+
+        RequireAccountingCategorySetup (Require accounting category setup)
+
+
+        GroupTaxesOnBill (Group taxes on bill)
+
+
+        DisplayEmployeeNameOnBill (Display employee name on bill)
+
+
+        TaxDeclarationOnDeposit (Tax declaration on deposit)
+
+
+        SplitVatByClassificationOnBill (Split VAT by classification on bill)
+
+
+        EmailClosedBillsAfterCheckout (Send system closed bills automatically after checkout)'
+      x-enumNames:
+      - OptionalCreditCardPaymentDetails
+      - ReceivableTrackingEnabled
+      - SeparateDepositsOnBill
+      - AllowModifyingClosedBills
+      - RequireAccountingCategorySetup
+      - GroupTaxesOnBill
+      - DisplayEmployeeNameOnBill
+      - TaxDeclarationOnDeposit
+      - SplitVatByClassificationOnBill
+      - EmailClosedBillsAfterCheckout
+      x-enumDescriptions:
+      - Optional credit card payment details
+      - Receivable tracking enabled
+      - Separate deposits on bill
+      - Allow modifying closed bills
+      - Require accounting category setup
+      - Group taxes on bill
+      - Display employee name on bill
+      - Tax declaration on deposit
+      - Split VAT by classification on bill
+      - Send system closed bills automatically after checkout
+      x-extensible: true
+    AgeCategory:
+      title: AgeCategory
+      required:
+      - Classification
+      - Id
+      - IsDefault
+      - Name
+      - ServiceId
+      - ShortName
+      type: object
+      properties:
+        Id:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        ServiceId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Name:
+          type: object
+          additionalProperties:
+            type: string
+        ShortName:
+          type: object
+          additionalProperties:
+            type: string
+        MinimalAge:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          example: 1
+        MaximalAge:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          example: 1
+        Classification:
+          $ref: '#/components/schemas/AgeCategoryClassification'
+        IsDefault:
+          type: boolean
+          example: true
+      additionalProperties: false
+      x-schema-id: AgeCategory
+    Product:
+      title: Product
+      required:
+      - AlwaysIncluded
+      - Amounts
+      - ChargingMode
+      - Description
+      - Id
+      - IncludedByDefault
+      - Name
+      - Ordering
+      - PostingMode
+      - Prices
+      - Pricing
+      type: object
+      properties:
+        Id:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Name:
+          type: object
+          additionalProperties:
+            type: string
+        Description:
+          type: object
+          additionalProperties:
+            type: string
+        CategoryId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        ImageId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        IncludedByDefault:
+          type: boolean
+          example: true
+        AlwaysIncluded:
+          type: boolean
+          example: true
+        Prices:
+          example: string
+        Pricing:
+          title: Pricing
+          type: object
+          properties:
+            discriminator:
+              type: string
+            value:
+              oneOf:
+              - $ref: '#/components/schemas/RelativeProductPrice'
+          x-coproduct: true
+          x-schema-id: ProductPricingCoproductOfRelativeProductPrice
+        Amounts:
+          example: string
+        RelativePrice:
+          type:
+          - number
+          - 'null'
+          format: double
+          example: 100.0
+        Charging:
+          type:
+          - string
+          - 'null'
+          deprecated: true
+          example: string
+        ChargingMode:
+          $ref: '#/components/schemas/ProductChargingMode'
+        Posting:
+          type:
+          - string
+          - 'null'
+          deprecated: true
+          example: string
+        PostingMode:
+          $ref: '#/components/schemas/ProductPostingMode'
+        Ordering:
+          type: integer
+          format: int32
+          example: 1
+      additionalProperties: false
+      x-schema-id: Product
+    ServiceDataDiscriminator:
+      title: Service data discriminator
+      enum:
+      - Bookable
+      - Additional
+      type: string
+    CurrencyAcceptance:
+      title: Accepted currency
+      required:
+      - Currency
+      - IsDefault
+      - IsEnabled
+      type: object
+      properties:
+        Currency:
+          minLength: 1
+          type: string
+          description: ISO-4217 code of the `Currency`.
+          format: currency
+          example: EUR
+        IsDefault:
+          type: boolean
+          description: Whether the currency is a default accounting currency.
+          example: true
+        IsEnabled:
+          type: boolean
+          description: Whether the currency is enabled for usage.
+          example: true
+      additionalProperties: false
+      x-schema-id: CurrencyAcceptance
+    BookableService:
+      title: BookableService
+      required:
+      - EndOffset
+      - StartOffset
+      - TimeUnit
+      type: object
+      properties:
+        StartOffset:
+          minLength: 1
+          type: string
+          example: string
+        EndOffset:
+          minLength: 1
+          type: string
+          example: string
+        TimeUnit:
+          $ref: '#/components/schemas/TimeUnitPeriod'
+      additionalProperties: false
+      x-schema-id: BookableService
+    OldAddress:
+      title: Address
+      type: object
+      properties:
+        Id:
+          type: string
+          description: Unique identifier of the address.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Line1:
+          type:
+          - string
+          - 'null'
+          description: First line of the address.
+          example: string
+        Line2:
+          type:
+          - string
+          - 'null'
+          description: Second line of the address.
+          example: string
+        City:
+          type:
+          - string
+          - 'null'
+          description: The city.
+          example: string
+        PostalCode:
+          type:
+          - string
+          - 'null'
+          description: Postal code.
+          example: string
+        CountryCode:
+          type:
+          - string
+          - 'null'
+          description: ISO 3166-1 code of the `Country`.
+          example: string
+        CountrySubdivisionCode:
+          type:
+          - string
+          - 'null'
+          description: ISO 3166-2 code of the administrative division, e.g. `DE-BW`.
+          example: string
+        Latitude:
+          type:
+          - number
+          - 'null'
+          description: The latitude.
+          format: double
+          example: 100.0
+        Longitude:
+          type:
+          - number
+          - 'null'
+          description: The longitude.
+          format: double
+          example: 100.0
+      additionalProperties: false
+      description: ''
+      x-schema-id: OldAddress
+    ConfigurationParameters:
+      title: ConfigurationParameters
+      required:
+      - Client
+      - FullAmounts
+      type: object
+      properties:
+        Client:
+          minLength: 1
+          type: string
+          example: string
+        LanguageCode:
+          type:
+          - string
+          - 'null'
+          example: string
+        CultureCode:
+          type:
+          - string
+          - 'null'
+          example: string
+        FullAmounts:
+          type: boolean
+          example: true
+        Session:
+          type:
+          - string
+          - 'null'
+          example: string
+        Ids:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: uuid
+        PrimaryId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        WebOptions:
+          type:
+          - string
+          - 'null'
+          example: string
+      additionalProperties: false
+      x-schema-id: ConfigurationParameters
+    AdditionalServiceData:
+      title: Additional service data
+      required:
+      - Promotions
+      type: object
+      properties:
+        Promotions:
+          allOf:
+          - $ref: '#/components/schemas/Promotions'
+          description: Promotions of the service.
+          example: string
+      additionalProperties: false
+      x-schema-id: AdditionalServiceData
+    BookingEngineTheme:
+      enum:
+      - Light
+      - Dark
+      type: string
+    SurchargeConfiguration:
+      title: Surcharging fees configuration
+      required:
+      - SurchargeFees
+      type: object
+      properties:
+        SurchargeFees:
+          title: CreditCardTypeDecimalIDictionary
+          type: object
+          properties:
+            MasterCard:
+              type: number
+              format: double
+            Visa:
+              type: number
+              format: double
+            Amex:
+              type: number
+              format: double
+            Discover:
+              type: number
+              format: double
+            DinersClub:
+              type: number
+              format: double
+            Jcb:
+              type: number
+              format: double
+            Maestro:
+              type: number
+              format: double
+            UnionPay:
+              type: number
+              format: double
+            VPay:
+              type: number
+              format: double
+            RuPay:
+              type: number
+              format: double
+            Dankort:
+              type: number
+              format: double
+            Mir:
+              type: number
+              format: double
+            Verve:
+              type: number
+              format: double
+            Troy:
+              type: number
+              format: double
+            PostFinance:
+              type: number
+              format: double
+            Giro:
+              type: number
+              format: double
+            Bancomat:
+              type: number
+              format: double
+            Bc:
+              type: number
+              format: double
+            CarteBleue:
+              type: number
+              format: double
+            Eftpos:
+              type: number
+              format: double
+            Eps:
+              type: number
+              format: double
+            Interac:
+              type: number
+              format: double
+            Isracard:
+              type: number
+              format: double
+            Meps:
+              type: number
+              format: double
+            Nets:
+              type: number
+              format: double
+            Bancontact:
+              type: number
+              format: double
+          additionalProperties: false
+          description: Dictionary keys are `CreditCardType` and values are surcharging fees as a percentage.
+          x-schema-id: CreditCardTypeDecimalIDictionary
+        SurchargeServiceId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the surcharging `Service`.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        SurchargeTaxCode:
+          type:
+          - string
+          - 'null'
+          description: Surcharging fee `TaxCode`.
+          example: string
+      additionalProperties: false
+      x-schema-id: SurchargeConfiguration
+    Service:
+      title: Service
+      required:
+      - CreatedUtc
+      - Data
+      - EnterpriseId
+      - Id
+      - IsActive
+      - Names
+      - Ordering
+      - ShortNames
+      type: object
+      properties:
+        Id:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        EnterpriseId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Ordering:
+          type: integer
+          format: int32
+          example: 1
+        CreatedUtc:
+          minLength: 1
+          type: string
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+        Names:
+          type: object
+          additionalProperties:
+            type: string
+        ShortNames:
+          type: object
+          additionalProperties:
+            type: string
+        IsActive:
+          type: boolean
+          example: true
+        Data:
+          title: Data
+          type: object
+          properties:
+            discriminator:
+              type: string
+            value:
+              oneOf:
+              - $ref: '#/components/schemas/BookableService'
+              - type: object
+                additionalProperties: false
+          x-coproduct: true
+          x-schema-id: ServiceDataCoproductOfBookableServiceAdditionalService
+      additionalProperties: false
+      x-schema-id: Service
+    AmountPart:
+      enum:
+      - NetValue
+      - TaxValue
+      - GrossValue
+      type: string
+    Rate:
+      title: Rate
+      required:
+      - CurrencyCode
+      - Description
+      - Id
+      - IsPrivate
+      - Name
+      - Ordering
+      - RateGroupId
+      type: object
+      properties:
+        Id:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        RateGroupId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Ordering:
+          type: integer
+          format: int32
+          example: 1
+        Name:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+        Description:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+        IsPrivate:
+          type: boolean
+          example: true
+        CurrencyCode:
+          maxLength: 3
+          minLength: 1
+          type: string
+          format: currency
+          example: EUR
+      additionalProperties: false
+      x-schema-id: Rate
+    BookingEngineRequiredFields:
+      enum:
+      - Telephone
+      type: string
+    ConfigurationFilterParameters:
+      title: ConfigurationFilterParameters
+      required:
+      - AccessToken
+      - Client
+      - ClientToken
+      type: object
+      properties:
+        ClientToken:
+          minLength: 1
+          type: string
+          description: Token identifying the client application.
+          example: string
+        AccessToken:
+          minLength: 1
+          type: string
+          description: Access token of the client application.
+          example: string
+        Client:
+          minLength: 1
+          type: string
+          description: Name and version of the client application.
+          example: string
+        EnterpriseId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the [Enterprise](https://mews-systems.gitbook.io/connector-api/operations/#enterprise), defaults to the enterprise associated with the given access token.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      additionalProperties: false
+      x-schema-id: ConfigurationFilterParameters
+    Configuration:
+      title: Configuration
+      required:
+      - Enterprise
+      - NowUtc
+      type: object
+      properties:
+        NowUtc:
+          minLength: 1
+          type: string
+          description: Current server date and time in UTC timezone in ISO 8601 format.
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+        Enterprise:
+          title: Enterprise
+          allOf:
+          - $ref: '#/components/schemas/Enterprise_2'
+          description: The enterprise (e.g. hotel, hostel) associated with the access token.
+          example: string
+        Service:
+          allOf:
+          - $ref: '#/components/schemas/Service_2'
+          description: The reservable service (e.g. accommodation, parking) associated with the access token of the service scoped integration.
+          example: string
+        PaymentCardStorage:
+          title: Payment card storage
+          allOf:
+          - $ref: '#/components/schemas/PaymentCardStorage'
+          description: Contains information about payment card storage.
+          example: string
+        IsIdentityDocumentNumberRequired:
+          type: boolean
+          description: Whether the identity documents for this enterprise include the value of identity document number as required by the legal environment. When `false`, the number is not required, and an empty string can be used in write operations. In read operations, an empty string is returned when an empty string was provided for the number.
+          example: true
+      additionalProperties: false
+      x-schema-id: Configuration
+    AccountingConfiguration:
+      title: Accounting configuration
+      required:
+      - EnabledExternalPaymentTypes
+      - Options
+      - SurchargeConfiguration
+      type: object
+      properties:
+        AdditionalTaxIdentifier:
+          maxLength: 50
+          type:
+          - string
+          - 'null'
+          description: Organization number.
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        CompanyName:
+          maxLength: 100
+          type:
+          - string
+          - 'null'
+          description: Legal name of the company.
+          example: Example Name
+        BankAccountNumber:
+          maxLength: 50
+          type:
+          - string
+          - 'null'
+          description: Bank account number.
+          example: '1001'
+        BankName:
+          maxLength: 100
+          type:
+          - string
+          - 'null'
+          description: Name of the bank.
+          example: Example Name
+        Iban:
+          maxLength: 40
+          type:
+          - string
+          - 'null'
+          description: International Bank Account Number.
+          example: string
+        Bic:
+          maxLength: 11
+          type:
+          - string
+          - 'null'
+          description: Business Identification Code.
+          example: string
+        SurchargeConfiguration:
+          title: Surcharging fees configuration
+          allOf:
+          - $ref: '#/components/schemas/SurchargeConfiguration'
+          description: Configuration for surcharging fees.
+          example: string
+        EnabledExternalPaymentTypes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExternalPaymentTypeEnum'
+          description: External payment types that are enabled for the enterprise and can be used in `payments/addExternal`.
+        Options:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccountingConfigurationOptionEnum'
+          description: Accounting configuration options.
+      additionalProperties: false
+      x-schema-id: AccountingConfiguration
     ExternalPaymentTypeEnum:
       title: External payment type
       enum:
@@ -626,653 +1905,6 @@ components:
       - Deposit - cash
       - Deposit - credit card – deprecated, only for existing partners
       - Deposit - wire transfer
-    AmountPart:
-      enum:
-      - NetValue
-      - TaxValue
-      - GrossValue
-      type: string
-    Address:
-      title: Address
-      type: object
-      properties:
-        Line1:
-          maxLength: 1023
-          type: string
-          nullable: true
-          example: string
-        Line2:
-          maxLength: 255
-          type: string
-          nullable: true
-          example: string
-        City:
-          maxLength: 255
-          type: string
-          nullable: true
-          example: string
-        PostalCode:
-          maxLength: 255
-          type: string
-          nullable: true
-          example: string
-        CountryCode:
-          maxLength: 8
-          type: string
-          nullable: true
-          example: string
-        Latitude:
-          type: number
-          format: double
-          nullable: true
-          example: 100.0
-        Longitude:
-          type: number
-          format: double
-          nullable: true
-          example: 100.0
-      additionalProperties: false
-      x-schema-id: Address
-    AccountingConfigurationOptionEnum:
-      title: Accounting configuration option
-      enum:
-      - OptionalCreditCardPaymentDetails
-      - ReceivableTrackingEnabled
-      - SeparateDepositsOnBill
-      - AllowModifyingClosedBills
-      - RequireAccountingCategorySetup
-      - GroupTaxesOnBill
-      - DisplayEmployeeNameOnBill
-      - TaxDeclarationOnDeposit
-      - SplitVatByClassificationOnBill
-      - EmailClosedBillsAfterCheckout
-      type: string
-      description: '
-
-
-        OptionalCreditCardPaymentDetails (Optional credit card payment details)
-
-
-        ReceivableTrackingEnabled (Receivable tracking enabled)
-
-
-        SeparateDepositsOnBill (Separate deposits on bill)
-
-
-        AllowModifyingClosedBills (Allow modifying closed bills)
-
-
-        RequireAccountingCategorySetup (Require accounting category setup)
-
-
-        GroupTaxesOnBill (Group taxes on bill)
-
-
-        DisplayEmployeeNameOnBill (Display employee name on bill)
-
-
-        TaxDeclarationOnDeposit (Tax declaration on deposit)
-
-
-        SplitVatByClassificationOnBill (Split VAT by classification on bill)
-
-
-        EmailClosedBillsAfterCheckout (Send system closed bills automatically after checkout)'
-      x-enumNames:
-      - OptionalCreditCardPaymentDetails
-      - ReceivableTrackingEnabled
-      - SeparateDepositsOnBill
-      - AllowModifyingClosedBills
-      - RequireAccountingCategorySetup
-      - GroupTaxesOnBill
-      - DisplayEmployeeNameOnBill
-      - TaxDeclarationOnDeposit
-      - SplitVatByClassificationOnBill
-      - EmailClosedBillsAfterCheckout
-      x-enumDescriptions:
-      - Optional credit card payment details
-      - Receivable tracking enabled
-      - Separate deposits on bill
-      - Allow modifying closed bills
-      - Require accounting category setup
-      - Group taxes on bill
-      - Display employee name on bill
-      - Tax declaration on deposit
-      - Split VAT by classification on bill
-      - Send system closed bills automatically after checkout
-      x-extensible: true
-    BookingEnginePaymentCardRequirement:
-      enum:
-      - NotRequired
-      - NotRequiredForFullyPaidBookings
-      - AlwaysRequired
-      - NotRequiredForFullyOrPartiallyPaidBookings
-      type: string
-    AdditionalServiceData:
-      title: Additional service data
-      required:
-      - Promotions
-      type: object
-      properties:
-        Promotions:
-          allOf:
-          - $ref: '#/components/schemas/Promotions'
-          description: Promotions of the service.
-          example: string
-      additionalProperties: false
-      x-schema-id: AdditionalServiceData
-    ProductChargingMode:
-      enum:
-      - Once
-      - PerTimeUnit
-      - PerPersonPerTimeUnit
-      - PerPerson
-      type: string
-    ConfigurationParameters:
-      title: ConfigurationParameters
-      required:
-      - Client
-      - FullAmounts
-      type: object
-      properties:
-        Client:
-          minLength: 1
-          type: string
-          example: string
-        LanguageCode:
-          type: string
-          nullable: true
-          example: string
-        CultureCode:
-          type: string
-          nullable: true
-          example: string
-        FullAmounts:
-          type: boolean
-          example: true
-        Session:
-          type: string
-          nullable: true
-          example: string
-        Ids:
-          type: array
-          items:
-            type: string
-            format: uuid
-          nullable: true
-        PrimaryId:
-          type: string
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        WebOptions:
-          type: string
-          nullable: true
-          example: string
-      additionalProperties: false
-      x-schema-id: ConfigurationParameters
-    BookingEngineBookerReservationCustomerEmailInput:
-      enum:
-      - Required
-      - Optional
-      type: string
-    ConfigurationFilterParameters:
-      title: ConfigurationFilterParameters
-      required:
-      - AccessToken
-      - Client
-      - ClientToken
-      type: object
-      properties:
-        ClientToken:
-          minLength: 1
-          type: string
-          description: Token identifying the client application.
-          example: string
-        AccessToken:
-          minLength: 1
-          type: string
-          description: Access token of the client application.
-          example: string
-        Client:
-          minLength: 1
-          type: string
-          description: Name and version of the client application.
-          example: string
-        EnterpriseId:
-          type: string
-          description: Unique identifier of the [Enterprise](https://mews-systems.gitbook.io/connector-api/operations/#enterprise), defaults to the enterprise associated with the given access token.
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-      additionalProperties: false
-      x-schema-id: ConfigurationFilterParameters
-    Rate:
-      title: Rate
-      required:
-      - CurrencyCode
-      - Description
-      - Id
-      - IsPrivate
-      - Name
-      - Ordering
-      - RateGroupId
-      type: object
-      properties:
-        Id:
-          type: string
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        RateGroupId:
-          type: string
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Ordering:
-          type: integer
-          format: int32
-          example: 1
-        Name:
-          type: object
-          additionalProperties:
-            type: string
-            nullable: true
-        Description:
-          type: object
-          additionalProperties:
-            type: string
-            nullable: true
-        IsPrivate:
-          type: boolean
-          example: true
-        CurrencyCode:
-          maxLength: 3
-          minLength: 1
-          type: string
-          format: currency
-          example: EUR
-      additionalProperties: false
-      x-schema-id: Rate
-    City:
-      title: City
-      required:
-      - Id
-      - Name
-      type: object
-      properties:
-        Id:
-          type: string
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Name:
-          type: object
-          additionalProperties:
-            type: string
-        ImageId:
-          type: string
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-      additionalProperties: false
-      x-schema-id: City
-    PaymentCardStorage:
-      title: Payment card storage
-      required:
-      - PublicKey
-      type: object
-      properties:
-        PublicKey:
-          minLength: 1
-          type: string
-          description: Key for accessing PCI proxy storage.
-          example: string
-      additionalProperties: false
-      description: ''
-      x-schema-id: PaymentCardStorage
-    ConfigurationResult:
-      title: ConfigurationResult
-      required:
-      - AgeCategories
-      - Cities
-      - Configurations
-      - CurrencyCodes
-      - ImageBaseUrl
-      - NowUtc
-      - Services
-      type: object
-      properties:
-        NowUtc:
-          minLength: 1
-          type: string
-          format: date-time
-          example: '2026-06-02T14:30:00Z'
-        LanguageCode:
-          type: string
-          nullable: true
-          example: string
-        CurrencyCode:
-          maxLength: 3
-          type: string
-          format: currency
-          nullable: true
-          example: EUR
-        IntroVideoUrl:
-          type: string
-          format: uri
-          nullable: true
-          example: https://api.mews.com/api/connector/v1
-        Theme:
-          anyOf:
-          - $ref: '#/components/schemas/BookingEngineTheme'
-          nullable: true
-          example: string
-        PrimaryColor:
-          type: string
-          nullable: true
-          example: string
-        VoucherCode:
-          type: string
-          nullable: true
-          example: string
-        DisplayVoucherCode:
-          type: boolean
-          nullable: true
-          example: true
-        GtmContainerId:
-          type: string
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        StartDateOffset:
-          type: integer
-          format: int32
-          nullable: true
-          example: 1
-        EndDateOffset:
-          type: integer
-          format: int32
-          nullable: true
-          example: 1
-        CityId:
-          type: string
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        ImageBaseUrl:
-          minLength: 1
-          type: string
-          format: uri
-          example: https://api.mews.com/api/connector/v1
-        Configurations:
-          type: array
-          items:
-            $ref: '#/components/schemas/BookingEngine'
-        Cities:
-          type: array
-          items:
-            $ref: '#/components/schemas/City'
-        CurrencyCodes:
-          type: array
-          items:
-            type: string
-          format: currency
-        AgeCategories:
-          type: array
-          items:
-            $ref: '#/components/schemas/AgeCategory'
-        Services:
-          type: array
-          items:
-            $ref: '#/components/schemas/Service'
-      additionalProperties: false
-      x-schema-id: ConfigurationResult
-    ResourceCategoryType:
-      enum:
-      - Room
-      - Bed
-      - Dorm
-      - Apartment
-      - Suite
-      - Villa
-      - Site
-      - Office
-      - MeetingRoom
-      - ParkingSpot
-      - Desk
-      - TeamArea
-      - Membership
-      - Tent
-      - CaravanOrRV
-      - UnequippedCampsite
-      - Bike
-      - ExtraBed
-      - Cot
-      - Crib
-      - ConferenceRoom
-      - Rooftop
-      - Garden
-      - Restaurant
-      - Amphitheater
-      - PrivateSpaces
-      type: string
-    Configuration:
-      title: Configuration
-      required:
-      - Enterprise
-      - NowUtc
-      type: object
-      properties:
-        NowUtc:
-          minLength: 1
-          type: string
-          description: Current server date and time in UTC timezone in ISO 8601 format.
-          format: date-time
-          example: '2026-06-02T14:30:00Z'
-        Enterprise:
-          title: Enterprise
-          allOf:
-          - $ref: '#/components/schemas/Enterprise_2'
-          description: The enterprise (e.g. hotel, hostel) associated with the access token.
-          example: string
-        Service:
-          allOf:
-          - $ref: '#/components/schemas/Service_2'
-          description: The reservable service (e.g. accommodation, parking) associated with the access token of the service scoped integration.
-          nullable: true
-          example: string
-        PaymentCardStorage:
-          title: Payment card storage
-          allOf:
-          - $ref: '#/components/schemas/PaymentCardStorage'
-          description: Contains information about payment card storage.
-          nullable: true
-          example: string
-        IsIdentityDocumentNumberRequired:
-          type: boolean
-          description: Whether the identity documents for this enterprise include the value of identity document number as required by the legal environment. When `false`, the number is not required, and an empty string can be used in write operations. In read operations, an empty string is returned when an empty string was provided for the number.
-          example: true
-      additionalProperties: false
-      x-schema-id: Configuration
-    CurrencyAcceptance:
-      title: Accepted currency
-      required:
-      - Currency
-      - IsDefault
-      - IsEnabled
-      type: object
-      properties:
-        Currency:
-          minLength: 1
-          type: string
-          description: ISO-4217 code of the `Currency`.
-          format: currency
-          example: EUR
-        IsDefault:
-          type: boolean
-          description: Whether the currency is a default accounting currency.
-          example: true
-        IsEnabled:
-          type: boolean
-          description: Whether the currency is enabled for usage.
-          example: true
-      additionalProperties: false
-      x-schema-id: CurrencyAcceptance
-    Enterprise:
-      title: Enterprise
-      required:
-      - AcceptedCurrencyCodes
-      - Address
-      - Categories
-      - CategoryImageAssignments
-      - CityId
-      - DefaultCurrencyCode
-      - DefaultLanguageCode
-      - DefaultRateCurrencyCode
-      - Description
-      - Email
-      - IanaTimeZoneIdentifier
-      - Id
-      - Name
-      - Pricing
-      - Products
-      - Rates
-      - TaxEnvironmentCode
-      type: object
-      properties:
-        Id:
-          type: string
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Name:
-          type: object
-          additionalProperties:
-            type: string
-        Description:
-          type: object
-          additionalProperties:
-            type: string
-        Address:
-          allOf:
-          - $ref: '#/components/schemas/Address'
-          example: string
-        CityId:
-          type: string
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        ImageId:
-          type: string
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        IntroImageId:
-          type: string
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Email:
-          minLength: 1
-          type: string
-          example: partner@example.com
-        Telephone:
-          type: string
-          nullable: true
-          example: string
-        TermsAndConditionsUrl:
-          type: object
-          additionalProperties:
-            type: string
-          nullable: true
-        PrivacyPolicyUrl:
-          type: object
-          additionalProperties:
-            type: string
-          nullable: true
-        DefaultLanguageCode:
-          maxLength: 3
-          minLength: 1
-          type: string
-          example: string
-        DefaultCurrencyCode:
-          maxLength: 3
-          minLength: 1
-          type: string
-          format: currency
-          example: EUR
-        DefaultRateCurrencyCode:
-          maxLength: 3
-          minLength: 1
-          type: string
-          format: currency
-          example: EUR
-        IanaTimeZoneIdentifier:
-          minLength: 1
-          type: string
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        AcceptedCurrencyCodes:
-          type: array
-          items:
-            type: string
-          format: currency
-        TaxEnvironmentCode:
-          minLength: 1
-          type: string
-          example: string
-        Pricing:
-          $ref: '#/components/schemas/PricingMode'
-        GrossAmountTaxPrecision:
-          type: integer
-          format: int32
-          nullable: true
-          example: 1
-        Categories:
-          type: array
-          items:
-            $ref: '#/components/schemas/Category'
-        Rates:
-          type: array
-          items:
-            $ref: '#/components/schemas/Rate'
-        CategoryImageAssignments:
-          type: array
-          items:
-            $ref: '#/components/schemas/ResourceCategoryImageAssignment'
-        Products:
-          type: array
-          items:
-            $ref: '#/components/schemas/Product'
-        AdditionalLegalStatements:
-          type: array
-          items:
-            type: object
-            additionalProperties:
-              type: string
-          nullable: true
-          deprecated: true
-      additionalProperties: false
-      x-schema-id: Enterprise
-    TimeUnitPeriodEnum:
-      title: Time unit period
-      enum:
-      - Day
-      - Month
-      - Hour
-      type: string
-      description: '
-
-
-        Day
-
-
-        Month
-
-
-        Hour'
-      x-enumNames:
-      - Day
-      - Month
-      - Hour
-      x-enumDescriptions:
-      - ''
-      - ''
-      - ''
     Enterprise_2:
       title: Enterprise
       required:
@@ -1306,15 +1938,17 @@ components:
           example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
         ExternalIdentifier:
           maxLength: 255
-          type: string
+          type:
+          - string
+          - 'null'
           description: Identifier of the enterprise from external system.
-          nullable: true
           example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
         HoldingKey:
           maxLength: 255
-          type: string
+          type:
+          - string
+          - 'null'
           description: Identifies an enterprise in the external system of a holding company. The holding company may administer multiple portfolios.
-          nullable: true
           example: string
         ChainId:
           type: string
@@ -1345,9 +1979,10 @@ components:
           example: Example Name
         ShortName:
           maxLength: 11
-          type: string
+          type:
+          - string
+          - 'null'
           description: Short name of the enterprise used in Manager Report exports.
-          nullable: true
           example: Example Name
         TimeZoneIdentifier:
           minLength: 1
@@ -1396,39 +2031,45 @@ components:
           description: Editable history interval for operational data in ISO 8601 duration format.
           example: string
         BusinessDayClosingOffset:
-          type: string
+          type:
+          - string
+          - 'null'
           description: The offset value for the business day closing time, in ISO 8601 duration format.
-          nullable: true
           example: string
         WebsiteUrl:
-          type: string
+          type:
+          - string
+          - 'null'
           description: URL of the enterprise website.
           format: uri
-          nullable: true
           example: https://api.mews.com/api/connector/v1
         Email:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Email address of the enterprise.
           format: email
-          nullable: true
           example: partner@example.com
         Phone:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Phone number of the enterprise.
           format: tel
-          nullable: true
           example: string
         LogoImageId:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Unique identifier of the `Image` of the enterprise logo.
           format: uuid
-          nullable: true
           example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
         CoverImageId:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Unique identifier of the `Image` of the enterprise cover.
           format: uuid
-          nullable: true
           example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
         Pricing:
           title: Pricing
@@ -1449,10 +2090,11 @@ components:
           - The enterprise shows amount with net prices.
           example: string
         TaxPrecision:
-          type: integer
+          type:
+          - integer
+          - 'null'
           description: Tax precision used for financial calculations in the enterprise. If `null`, `Currency` precision is used.
           format: int32
-          nullable: true
           example: 1
         AddressId:
           type: string
@@ -1486,7 +2128,6 @@ components:
           allOf:
           - $ref: '#/components/schemas/AccountingConfiguration'
           description: Configuration information containing financial information about the property.
-          nullable: true
           example: string
         IsPortfolio:
           type: boolean
@@ -1495,415 +2136,6 @@ components:
       additionalProperties: false
       description: ''
       x-schema-id: Enterprise
-    ResourceCategoryImageAssignment:
-      title: ResourceCategoryImageAssignment
-      required:
-      - CategoryId
-      - Id
-      - ImageId
-      - Ordering
-      type: object
-      properties:
-        Id:
-          type: string
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        CategoryId:
-          type: string
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        ImageId:
-          type: string
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Ordering:
-          type: integer
-          format: int32
-          example: 1
-      additionalProperties: false
-      x-schema-id: ResourceCategoryImageAssignment
-    Service_2:
-      title: Service
-      required:
-      - CreatedUtc
-      - Data
-      - EnterpriseId
-      - Id
-      - IsActive
-      - Name
-      - Names
-      - Options
-      - Ordering
-      - UpdatedUtc
-      type: object
-      properties:
-        Id:
-          type: string
-          description: Unique identifier of the service.
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        EnterpriseId:
-          type: string
-          description: Unique identifier of the [Enterprise](https://mews-systems.gitbook.io/connector-api/operations/enterprises/#enterprise).
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        IsActive:
-          type: boolean
-          description: Whether the service is still active.
-          example: true
-        Name:
-          minLength: 1
-          type: string
-          description: Name of the service.
-          deprecated: true
-          x-deprecatedMessage: Use `Names` instead
-          example: Example Name
-        Names:
-          title: Localized text
-          type: object
-          additionalProperties:
-            type: string
-          description: All translations of the name.
-          x-schema-id: LocalizedStrings
-        StartTime:
-          type: string
-          nullable: true
-          deprecated: true
-          example: string
-        EndTime:
-          type: string
-          nullable: true
-          deprecated: true
-          example: string
-        Options:
-          title: Service options
-          allOf:
-          - $ref: '#/components/schemas/ServiceOptions'
-          description: Options of the service.
-          example: string
-        Promotions:
-          allOf:
-          - $ref: '#/components/schemas/Promotions'
-          description: ''
-          nullable: true
-          deprecated: true
-          x-deprecatedMessage: Use `Promotions` in `Data` instead.
-          example: string
-        Type:
-          type: string
-          nullable: true
-          deprecated: true
-          example: string
-        Ordering:
-          type: integer
-          description: Order value for presentation purposes.
-          format: int32
-          example: 1
-        Data:
-          title: Service data
-          type: object
-          properties:
-            Discriminator:
-              $ref: '#/components/schemas/ServiceDataDiscriminator'
-            Value:
-              oneOf:
-              - $ref: '#/components/schemas/BookableServiceData'
-              - $ref: '#/components/schemas/AdditionalServiceData'
-          description: Additional information about the specific service.
-          x-coproduct: true
-          x-schema-id: ServiceDataCoproductOfServiceDataDiscriminator
-        ExternalIdentifier:
-          maxLength: 255
-          type: string
-          description: Identifier of the service from external system.
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        CreatedUtc:
-          minLength: 1
-          type: string
-          description: Creation date and time of the service in UTC timezone in ISO 8601 format.
-          format: date-time
-          example: '2026-06-02T14:30:00Z'
-        UpdatedUtc:
-          minLength: 1
-          type: string
-          description: Last update date and time of the service in UTC timezone in ISO 8601 format.
-          format: date-time
-          example: '2026-06-02T14:30:00Z'
-      additionalProperties: false
-      description: ''
-      x-schema-id: Service
-    Service:
-      title: Service
-      required:
-      - CreatedUtc
-      - Data
-      - EnterpriseId
-      - Id
-      - IsActive
-      - Names
-      - Ordering
-      - ShortNames
-      type: object
-      properties:
-        Id:
-          type: string
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        EnterpriseId:
-          type: string
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Ordering:
-          type: integer
-          format: int32
-          example: 1
-        CreatedUtc:
-          minLength: 1
-          type: string
-          format: date-time
-          example: '2026-06-02T14:30:00Z'
-        Names:
-          type: object
-          additionalProperties:
-            type: string
-        ShortNames:
-          type: object
-          additionalProperties:
-            type: string
-        IsActive:
-          type: boolean
-          example: true
-        Data:
-          title: Data
-          type: object
-          properties:
-            discriminator:
-              type: string
-            value:
-              oneOf:
-              - $ref: '#/components/schemas/BookableService'
-              - type: object
-                additionalProperties: false
-          x-coproduct: true
-          x-schema-id: ServiceDataCoproductOfBookableServiceAdditionalService
-      additionalProperties: false
-      x-schema-id: Service
-    OldAddress:
-      title: Address
-      type: object
-      properties:
-        Id:
-          type: string
-          description: Unique identifier of the address.
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Line1:
-          type: string
-          description: First line of the address.
-          nullable: true
-          example: string
-        Line2:
-          type: string
-          description: Second line of the address.
-          nullable: true
-          example: string
-        City:
-          type: string
-          description: The city.
-          nullable: true
-          example: string
-        PostalCode:
-          type: string
-          description: Postal code.
-          nullable: true
-          example: string
-        CountryCode:
-          type: string
-          description: ISO 3166-1 code of the `Country`.
-          nullable: true
-          example: string
-        CountrySubdivisionCode:
-          type: string
-          description: ISO 3166-2 code of the administrative division, e.g. `DE-BW`.
-          nullable: true
-          example: string
-        Latitude:
-          type: number
-          description: The latitude.
-          format: double
-          nullable: true
-          example: 100.0
-        Longitude:
-          type: number
-          description: The longitude.
-          format: double
-          nullable: true
-          example: 100.0
-      additionalProperties: false
-      description: ''
-      x-schema-id: OldAddress
-    SurchargeConfiguration:
-      title: Surcharging fees configuration
-      required:
-      - SurchargeFees
-      type: object
-      properties:
-        SurchargeFees:
-          title: CreditCardTypeDecimalIDictionary
-          type: object
-          properties:
-            MasterCard:
-              type: number
-              format: double
-            Visa:
-              type: number
-              format: double
-            Amex:
-              type: number
-              format: double
-            Discover:
-              type: number
-              format: double
-            DinersClub:
-              type: number
-              format: double
-            Jcb:
-              type: number
-              format: double
-            Maestro:
-              type: number
-              format: double
-            UnionPay:
-              type: number
-              format: double
-            VPay:
-              type: number
-              format: double
-            RuPay:
-              type: number
-              format: double
-            Dankort:
-              type: number
-              format: double
-            Mir:
-              type: number
-              format: double
-            Verve:
-              type: number
-              format: double
-            Troy:
-              type: number
-              format: double
-            PostFinance:
-              type: number
-              format: double
-            Giro:
-              type: number
-              format: double
-            Bancomat:
-              type: number
-              format: double
-            Bc:
-              type: number
-              format: double
-            CarteBleue:
-              type: number
-              format: double
-            Eftpos:
-              type: number
-              format: double
-            Eps:
-              type: number
-              format: double
-            Interac:
-              type: number
-              format: double
-            Isracard:
-              type: number
-              format: double
-            Meps:
-              type: number
-              format: double
-            Nets:
-              type: number
-              format: double
-            Bancontact:
-              type: number
-              format: double
-          additionalProperties: false
-          description: Dictionary keys are `CreditCardType` and values are surcharging fees as a percentage.
-          x-schema-id: CreditCardTypeDecimalIDictionary
-        SurchargeServiceId:
-          type: string
-          description: Unique identifier of the surcharging `Service`.
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        SurchargeTaxCode:
-          type: string
-          description: Surcharging fee `TaxCode`.
-          nullable: true
-          example: string
-      additionalProperties: false
-      x-schema-id: SurchargeConfiguration
-    Category:
-      title: Category
-      required:
-      - Description
-      - ExtraBedCount
-      - Id
-      - Name
-      - NormalBedCount
-      - SpaceType
-      type: object
-      properties:
-        Id:
-          type: string
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Name:
-          type: object
-          additionalProperties:
-            type: string
-        Description:
-          type: object
-          additionalProperties:
-            type: string
-        ImageIds:
-          type: array
-          items:
-            type: string
-            format: uuid
-          nullable: true
-          deprecated: true
-        Ordering:
-          type: integer
-          format: int32
-          nullable: true
-          example: 1
-        NormalBedCount:
-          type: integer
-          format: int32
-          example: 1
-        ExtraBedCount:
-          type: integer
-          format: int32
-          example: 1
-        SpaceType:
-          $ref: '#/components/schemas/ResourceCategoryType'
-      additionalProperties: false
-      x-schema-id: Category
-    AgeCategoryClassification:
-      enum:
-      - Adult
-      - Child
-      type: string
-    BookingEngineTheme:
-      enum:
-      - Light
-      - Dark
-      type: string
     BookingEngine:
       title: BookingEngine
       required:
@@ -1926,50 +2158,59 @@ components:
           format: uuid
           example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
         AdultCount:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
           deprecated: true
           example: 1
         ChildCount:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
           deprecated: true
           example: 1
         MaxAdultCount:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-          nullable: true
           example: 1
         OccupancyData:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             $ref: '#/components/schemas/OccupancyData'
-          nullable: true
         DisplaySpecialRequests:
-          type: boolean
-          nullable: true
+          type:
+          - boolean
+          - 'null'
           example: true
         DisplayRateComparison:
-          type: boolean
-          nullable: true
+          type:
+          - boolean
+          - 'null'
           example: true
         ChildSelectionEnabled:
-          type: boolean
-          nullable: true
+          type:
+          - boolean
+          - 'null'
           example: true
         DisplayAvailability:
-          type: boolean
-          nullable: true
+          type:
+          - boolean
+          - 'null'
           example: true
         PaymentGatewayEnabled:
           type: boolean
           deprecated: true
           example: true
         PaymentCardInput:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           deprecated: true
           example: string
         PaymentCardRequirement:
@@ -1981,10 +2222,11 @@ components:
           items:
             $ref: '#/components/schemas/BookingEngineRequiredFields'
         OnlineTravelAgencies:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
-          nullable: true
         CheckoutStatement:
           type: object
           additionalProperties:
@@ -1994,9 +2236,10 @@ components:
           additionalProperties:
             type: string
         CompetitorPriceRelativeAdjustment:
-          type: number
+          type:
+          - number
+          - 'null'
           format: double
-          nullable: true
           example: 100.0
         Enterprise:
           allOf:
@@ -2004,264 +2247,11 @@ components:
           example: string
       additionalProperties: false
       x-schema-id: BookingEngine
-    Promotions:
-      title: Promotions
-      required:
-      - AfterCheckIn
-      - AfterCheckOut
-      - BeforeCheckIn
-      - BeforeCheckOut
-      - DuringCheckOut
-      - DuringStay
-      type: object
-      properties:
-        BeforeCheckIn:
-          type: boolean
-          description: Whether it can be promoted before check-in.
-          example: true
-        AfterCheckIn:
-          type: boolean
-          description: Whether it can be promoted after check-in.
-          example: true
-        DuringStay:
-          type: boolean
-          description: Whether it can be promoted during stay.
-          example: true
-        BeforeCheckOut:
-          type: boolean
-          description: Whether it can be promoted before check-out.
-          example: true
-        AfterCheckOut:
-          type: boolean
-          description: Whether it can be promoted after check-out.
-          example: true
-        DuringCheckOut:
-          type: boolean
-          description: Whether it can be promoted during check-out.
-          example: true
-      additionalProperties: false
-      description: ''
-      x-schema-id: Promotions
-    BookableServiceData:
-      title: Bookable service data
-      required:
-      - EndOffset
-      - OccupancyEndOffset
-      - OccupancyStartOffset
-      - StartOffset
-      - TimeUnit
-      - TimeUnitPeriod
-      type: object
-      properties:
-        StartOffset:
-          minLength: 1
-          type: string
-          description: Offset from the start of the [time unit](https://mews-systems.gitbook.io/connector-api/concepts/time-units/) which defines the default start of the service; expressed in ISO 8601 duration format.
-          example: string
-        EndOffset:
-          minLength: 1
-          type: string
-          description: Offset from the end of the [time unit](https://mews-systems.gitbook.io/connector-api/concepts/time-units/) which defines the default end of the service; expressed in ISO 8601 duration format.
-          example: string
-        OccupancyStartOffset:
-          minLength: 1
-          type: string
-          description: Offset from the start of the [time unit](https://mews-systems.gitbook.io/connector-api/concepts/time-units/) which defines the occupancy start of the service; expressed in ISO 8601 duration format. 'Occupancy start' is used for availability and reporting purposes, it implies the time at which the booked resource is considered occupied.
-          example: string
-        OccupancyEndOffset:
-          minLength: 1
-          type: string
-          description: Offset from the end of the [time unit](https://mews-systems.gitbook.io/connector-api/concepts/time-units/) which defines the occupancy end of the service; expressed in ISO 8601 duration format. 'Occupancy end' is used for availability and reporting purposes, it implies the time at which the booked resource is no longer considered occupied.
-          example: string
-        TimeUnit:
-          title: Time unit period
-          allOf:
-          - $ref: '#/components/schemas/TimeUnitPeriodEnum'
-          description: '
-
-
-            Day
-
-
-            Month
-
-
-            Hour'
-          deprecated: true
-          x-enumNames:
-          - Day
-          - Month
-          - Hour
-          x-enumDescriptions:
-          - ''
-          - ''
-          - ''
-          x-deprecatedMessage: Use `TimeUnitPeriod` instead.
-          example: string
-        TimeUnitPeriod:
-          title: Time unit period
-          allOf:
-          - $ref: '#/components/schemas/TimeUnitPeriodEnum'
-          description: 'The length of time or period represented by a [time unit](https://mews-systems.gitbook.io/connector-api/concepts/time-units/), for which the service can be booked.
-
-
-            Day
-
-
-            Month
-
-
-            Hour'
-          x-enumNames:
-          - Day
-          - Month
-          - Hour
-          x-enumDescriptions:
-          - ''
-          - ''
-          - ''
-          example: string
-      additionalProperties: false
-      x-schema-id: BookableServiceData
     ProductPostingMode:
       enum:
       - Once
       - PerTimeUnit
       type: string
-    TimeUnitPeriod:
-      enum:
-      - Day
-      - Month
-      - Hour
-      type: string
-    ConnectorApiExceptionResult:
-      title: ConnectorApiExceptionResult
-      type: object
-      properties:
-        Message:
-          type: string
-          nullable: true
-          example: string
-        RequestId:
-          type: string
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Details:
-          nullable: true
-          example: string
-      additionalProperties: false
-      x-schema-id: ConnectorApiExceptionResult
-    BookingEngineRequiredFields:
-      enum:
-      - Telephone
-      type: string
-    ServiceDataDiscriminator:
-      title: Service data discriminator
-      enum:
-      - Bookable
-      - Additional
-      type: string
-    AccountingConfiguration:
-      title: Accounting configuration
-      required:
-      - EnabledExternalPaymentTypes
-      - Options
-      - SurchargeConfiguration
-      type: object
-      properties:
-        AdditionalTaxIdentifier:
-          maxLength: 50
-          type: string
-          description: Organization number.
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        CompanyName:
-          maxLength: 100
-          type: string
-          description: Legal name of the company.
-          nullable: true
-          example: Example Name
-        BankAccountNumber:
-          maxLength: 50
-          type: string
-          description: Bank account number.
-          nullable: true
-          example: '1001'
-        BankName:
-          maxLength: 100
-          type: string
-          description: Name of the bank.
-          nullable: true
-          example: Example Name
-        Iban:
-          maxLength: 40
-          type: string
-          description: International Bank Account Number.
-          nullable: true
-          example: string
-        Bic:
-          maxLength: 11
-          type: string
-          description: Business Identification Code.
-          nullable: true
-          example: string
-        SurchargeConfiguration:
-          title: Surcharging fees configuration
-          allOf:
-          - $ref: '#/components/schemas/SurchargeConfiguration'
-          description: Configuration for surcharging fees.
-          example: string
-        EnabledExternalPaymentTypes:
-          type: array
-          items:
-            $ref: '#/components/schemas/ExternalPaymentTypeEnum'
-          description: External payment types that are enabled for the enterprise and can be used in `payments/addExternal`.
-        Options:
-          type: array
-          items:
-            $ref: '#/components/schemas/AccountingConfigurationOptionEnum'
-          description: Accounting configuration options.
-      additionalProperties: false
-      x-schema-id: AccountingConfiguration
-    BookableService:
-      title: BookableService
-      required:
-      - EndOffset
-      - StartOffset
-      - TimeUnit
-      type: object
-      properties:
-        StartOffset:
-          minLength: 1
-          type: string
-          example: string
-        EndOffset:
-          minLength: 1
-          type: string
-          example: string
-        TimeUnit:
-          $ref: '#/components/schemas/TimeUnitPeriod'
-      additionalProperties: false
-      x-schema-id: BookableService
-    PricingModeEnum:
-      title: Pricing
-      enum:
-      - Gross
-      - Net
-      type: string
-      description: '
-
-
-        Gross (The enterprise shows amount with gross prices.)
-
-
-        Net (The enterprise shows amount with net prices.)'
-      x-enumNames:
-      - Gross
-      - Net
-      x-enumDescriptions:
-      - The enterprise shows amount with gross prices.
-      - The enterprise shows amount with net prices.
     OccupancyData:
       title: OccupancyData
       required:
@@ -2279,147 +2269,53 @@ components:
           example: 1
       additionalProperties: false
       x-schema-id: OccupancyData
-    AgeCategory:
-      title: AgeCategory
-      required:
-      - Classification
-      - Id
-      - IsDefault
-      - Name
-      - ServiceId
-      - ShortName
+    ConnectorApiExceptionResult:
+      title: ConnectorApiExceptionResult
       type: object
       properties:
-        Id:
-          type: string
-          format: uuid
+        Message:
+          type:
+          - string
+          - 'null'
+          example: string
+        RequestId:
+          type:
+          - string
+          - 'null'
           example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        ServiceId:
-          type: string
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Name:
-          type: object
-          additionalProperties:
-            type: string
-        ShortName:
-          type: object
-          additionalProperties:
-            type: string
-        MinimalAge:
-          type: integer
-          format: int32
-          nullable: true
-          example: 1
-        MaximalAge:
-          type: integer
-          format: int32
-          nullable: true
-          example: 1
-        Classification:
-          $ref: '#/components/schemas/AgeCategoryClassification'
-        IsDefault:
-          type: boolean
-          example: true
+        Details:
+          example: string
       additionalProperties: false
-      x-schema-id: AgeCategory
-    Product:
-      title: Product
-      required:
-      - AlwaysIncluded
-      - Amounts
-      - ChargingMode
-      - Description
-      - Id
-      - IncludedByDefault
-      - Name
-      - Ordering
-      - PostingMode
-      - Prices
-      - Pricing
-      type: object
-      properties:
-        Id:
-          type: string
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Name:
-          type: object
-          additionalProperties:
-            type: string
-        Description:
-          type: object
-          additionalProperties:
-            type: string
-        CategoryId:
-          type: string
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        ImageId:
-          type: string
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        IncludedByDefault:
-          type: boolean
-          example: true
-        AlwaysIncluded:
-          type: boolean
-          example: true
-        Prices:
-          example: string
-        Pricing:
-          title: Pricing
-          type: object
-          properties:
-            discriminator:
-              type: string
-            value:
-              oneOf:
-              - $ref: '#/components/schemas/RelativeProductPrice'
-          x-coproduct: true
-          x-schema-id: ProductPricingCoproductOfRelativeProductPrice
-        Amounts:
-          example: string
-        RelativePrice:
-          type: number
-          format: double
-          nullable: true
-          example: 100.0
-        Charging:
-          type: string
-          nullable: true
-          deprecated: true
-          example: string
-        ChargingMode:
-          $ref: '#/components/schemas/ProductChargingMode'
-        Posting:
-          type: string
-          nullable: true
-          deprecated: true
-          example: string
-        PostingMode:
-          $ref: '#/components/schemas/ProductPostingMode'
-        Ordering:
-          type: integer
-          format: int32
-          example: 1
-      additionalProperties: false
-      x-schema-id: Product
-    ServiceOptions:
-      title: Service options
-      required:
-      - BillAsPackage
-      type: object
-      properties:
-        BillAsPackage:
-          type: boolean
-          description: Products should be displayed as a single package instead of individual items.
-          example: true
-      additionalProperties: false
-      description: Options of the service.
-      x-schema-id: ServiceOptions
+      x-schema-id: ConnectorApiExceptionResult
+    ResourceCategoryType:
+      enum:
+      - Room
+      - Bed
+      - Dorm
+      - Apartment
+      - Suite
+      - Villa
+      - Site
+      - Office
+      - MeetingRoom
+      - ParkingSpot
+      - Desk
+      - TeamArea
+      - Membership
+      - Tent
+      - CaravanOrRV
+      - UnequippedCampsite
+      - Bike
+      - ExtraBed
+      - Cot
+      - Crib
+      - ConferenceRoom
+      - Rooftop
+      - Garden
+      - Restaurant
+      - Amphitheater
+      - PrivateSpaces
+      type: string
     RelativeProductPrice:
       title: RelativeProductPrice
       required:
@@ -2446,6 +2342,191 @@ components:
           $ref: '#/components/schemas/AmountPart'
       additionalProperties: false
       x-schema-id: RelativeProductPrice
+    TimeUnitPeriodEnum:
+      title: Time unit period
+      enum:
+      - Day
+      - Month
+      - Hour
+      type: string
+      description: '
+
+
+        Day
+
+
+        Month
+
+
+        Hour'
+      x-enumNames:
+      - Day
+      - Month
+      - Hour
+      x-enumDescriptions:
+      - ''
+      - ''
+      - ''
+    Enterprise:
+      title: Enterprise
+      required:
+      - AcceptedCurrencyCodes
+      - Address
+      - Categories
+      - CategoryImageAssignments
+      - CityId
+      - DefaultCurrencyCode
+      - DefaultLanguageCode
+      - DefaultRateCurrencyCode
+      - Description
+      - Email
+      - IanaTimeZoneIdentifier
+      - Id
+      - Name
+      - Pricing
+      - Products
+      - Rates
+      - TaxEnvironmentCode
+      type: object
+      properties:
+        Id:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Name:
+          type: object
+          additionalProperties:
+            type: string
+        Description:
+          type: object
+          additionalProperties:
+            type: string
+        Address:
+          allOf:
+          - $ref: '#/components/schemas/Address'
+          example: string
+        CityId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        ImageId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        IntroImageId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Email:
+          minLength: 1
+          type: string
+          example: partner@example.com
+        Telephone:
+          type:
+          - string
+          - 'null'
+          example: string
+        TermsAndConditionsUrl:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+        PrivacyPolicyUrl:
+          type:
+          - object
+          - 'null'
+          additionalProperties:
+            type: string
+        DefaultLanguageCode:
+          maxLength: 3
+          minLength: 1
+          type: string
+          example: string
+        DefaultCurrencyCode:
+          maxLength: 3
+          minLength: 1
+          type: string
+          format: currency
+          example: EUR
+        DefaultRateCurrencyCode:
+          maxLength: 3
+          minLength: 1
+          type: string
+          format: currency
+          example: EUR
+        IanaTimeZoneIdentifier:
+          minLength: 1
+          type: string
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        AcceptedCurrencyCodes:
+          type: array
+          items:
+            type: string
+          format: currency
+        TaxEnvironmentCode:
+          minLength: 1
+          type: string
+          example: string
+        Pricing:
+          $ref: '#/components/schemas/PricingMode'
+        GrossAmountTaxPrecision:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          example: 1
+        Categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/Category'
+        Rates:
+          type: array
+          items:
+            $ref: '#/components/schemas/Rate'
+        CategoryImageAssignments:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceCategoryImageAssignment'
+        Products:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+        AdditionalLegalStatements:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            additionalProperties:
+              type: string
+          deprecated: true
+      additionalProperties: false
+      x-schema-id: Enterprise
+    TimeUnitPeriod:
+      enum:
+      - Day
+      - Month
+      - Hour
+      type: string
+    PaymentCardStorage:
+      title: Payment card storage
+      required:
+      - PublicKey
+      type: object
+      properties:
+        PublicKey:
+          minLength: 1
+          type: string
+          description: Key for accessing PCI proxy storage.
+          example: string
+      additionalProperties: false
+      description: ''
+      x-schema-id: PaymentCardStorage
   securitySchemes:
     MewsClientToken:
       type: apiKey

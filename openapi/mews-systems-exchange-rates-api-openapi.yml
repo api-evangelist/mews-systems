@@ -1,4 +1,4 @@
-openapi: 3.0.4
+openapi: 3.2.0
 info:
   title: Mews Booking Engine API (Distributor) Account notes Exchange Rates API
   version: v1
@@ -198,63 +198,33 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ExchangeRateParameters:
-      title: ExchangeRateParameters
+    ExchangeRate:
+      title: ExchangeRate
       required:
-      - Client
-      - FullAmounts
-      - HotelId
-      - SourceCurrencyCode
+      - SourceCurrency
+      - TargetCurrency
       type: object
       properties:
-        Client:
-          minLength: 1
-          type: string
-          example: string
-        LanguageCode:
-          type: string
-          nullable: true
-          example: string
-        CultureCode:
-          type: string
-          nullable: true
-          example: string
-        FullAmounts:
-          type: boolean
-          example: true
-        Session:
-          type: string
-          nullable: true
-          example: string
-        HotelId:
-          type: string
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        SourceCurrencyCode:
+        SourceCurrency:
           maxLength: 3
           minLength: 1
           type: string
           format: currency
           example: EUR
-      additionalProperties: false
-      x-schema-id: ExchangeRateParameters
-    ConnectorApiExceptionResult:
-      title: ConnectorApiExceptionResult
-      type: object
-      properties:
-        Message:
+        TargetCurrency:
+          maxLength: 3
+          minLength: 1
           type: string
-          nullable: true
-          example: string
-        RequestId:
-          type: string
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Details:
-          nullable: true
-          example: string
+          format: currency
+          example: EUR
+        Value:
+          type:
+          - number
+          - 'null'
+          format: double
+          example: 100.0
       additionalProperties: false
-      x-schema-id: ConnectorApiExceptionResult
+      x-schema-id: ExchangeRate
     ExchangeRate_2:
       title: Exchange rate
       required:
@@ -294,23 +264,6 @@ components:
           example: 100.0
       additionalProperties: false
       x-schema-id: ExchangeRate
-    ExchangeRateResult:
-      title: ExchangeRateResult
-      required:
-      - EnterpriseExchangeRates
-      - PlatformExchangeRates
-      type: object
-      properties:
-        EnterpriseExchangeRates:
-          type: array
-          items:
-            $ref: '#/components/schemas/ExchangeRate'
-        PlatformExchangeRates:
-          type: array
-          items:
-            $ref: '#/components/schemas/ExchangeRate'
-      additionalProperties: false
-      x-schema-id: ExchangeRateResult
     CurrencyAcceptanceFilterParameters:
       title: CurrencyAcceptanceFilterParameters
       required:
@@ -335,19 +288,21 @@ components:
           description: Name and version of the client application.
           example: string
         Ids:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
             format: uuid
           description: Unique identifiers of the Exchange Rates. If not specified, the operation returns all exchange rates.
-          nullable: true
         EnterpriseIds:
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
             format: uuid
           description: Unique identifiers of the [Enterprises](https://mews-systems.gitbook.io/connector-api/operations/configuration/#enterprise). If not specified, the operation returns the exchange rates for all enterprises within scope of the Access Token.
-          nullable: true
       additionalProperties: false
       x-schema-id: CurrencyAcceptanceFilterParameters
     ExchangeRateResult_2:
@@ -363,32 +318,84 @@ components:
           description: The available exchange rates.
       additionalProperties: false
       x-schema-id: ExchangeRateResult
-    ExchangeRate:
-      title: ExchangeRate
+    ExchangeRateParameters:
+      title: ExchangeRateParameters
       required:
-      - SourceCurrency
-      - TargetCurrency
+      - Client
+      - FullAmounts
+      - HotelId
+      - SourceCurrencyCode
       type: object
       properties:
-        SourceCurrency:
+        Client:
+          minLength: 1
+          type: string
+          example: string
+        LanguageCode:
+          type:
+          - string
+          - 'null'
+          example: string
+        CultureCode:
+          type:
+          - string
+          - 'null'
+          example: string
+        FullAmounts:
+          type: boolean
+          example: true
+        Session:
+          type:
+          - string
+          - 'null'
+          example: string
+        HotelId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        SourceCurrencyCode:
           maxLength: 3
           minLength: 1
           type: string
           format: currency
           example: EUR
-        TargetCurrency:
-          maxLength: 3
-          minLength: 1
-          type: string
-          format: currency
-          example: EUR
-        Value:
-          type: number
-          format: double
-          nullable: true
-          example: 100.0
       additionalProperties: false
-      x-schema-id: ExchangeRate
+      x-schema-id: ExchangeRateParameters
+    ConnectorApiExceptionResult:
+      title: ConnectorApiExceptionResult
+      type: object
+      properties:
+        Message:
+          type:
+          - string
+          - 'null'
+          example: string
+        RequestId:
+          type:
+          - string
+          - 'null'
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Details:
+          example: string
+      additionalProperties: false
+      x-schema-id: ConnectorApiExceptionResult
+    ExchangeRateResult:
+      title: ExchangeRateResult
+      required:
+      - EnterpriseExchangeRates
+      - PlatformExchangeRates
+      type: object
+      properties:
+        EnterpriseExchangeRates:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExchangeRate'
+        PlatformExchangeRates:
+          type: array
+          items:
+            $ref: '#/components/schemas/ExchangeRate'
+      additionalProperties: false
+      x-schema-id: ExchangeRateResult
   securitySchemes:
     MewsClientToken:
       type: apiKey

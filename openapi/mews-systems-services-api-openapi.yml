@@ -1,4 +1,4 @@
-openapi: 3.0.4
+openapi: 3.2.0
 info:
   title: Mews Booking Engine API (Distributor) Account notes Services API
   version: v1
@@ -923,350 +923,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ServicePricingResult:
-      title: ServicePricingResult
-      required:
-      - CategoryPrices
-      - RateGroups
-      - Rates
-      type: object
-      properties:
-        RateGroups:
-          type: array
-          items:
-            $ref: '#/components/schemas/RateGroup'
-        Rates:
-          type: array
-          items:
-            $ref: '#/components/schemas/Rate'
-        CategoryPrices:
-          type: array
-          items:
-            $ref: '#/components/schemas/ResourceCategoryPricing'
-        ViolatedRestrictions:
-          type: array
-          items:
-            $ref: '#/components/schemas/Restriction'
-          nullable: true
-      additionalProperties: false
-      x-schema-id: ServicePricingResult
-    ServiceAvailabilityParameters:
-      title: ServiceAvailabilityParameters
-      required:
-      - Client
-      - EndUtc
-      - EnterpriseId
-      - FullAmounts
-      - ServiceId
-      - StartUtc
-      type: object
-      properties:
-        Client:
-          minLength: 1
-          type: string
-          example: string
-        LanguageCode:
-          type: string
-          nullable: true
-          example: string
-        CultureCode:
-          type: string
-          nullable: true
-          example: string
-        FullAmounts:
-          type: boolean
-          example: true
-        Session:
-          type: string
-          nullable: true
-          example: string
-        EnterpriseId:
-          type: string
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        ServiceId:
-          type: string
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        StartUtc:
-          minLength: 1
-          type: string
-          format: date-time
-          example: '2026-06-02T14:30:00Z'
-        EndUtc:
-          minLength: 1
-          type: string
-          format: date-time
-          example: '2026-06-02T14:30:00Z'
-        BookingEngineId:
-          type: string
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        AvailabilityBlockId:
-          type: string
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        CategoryIds:
-          type: array
-          items:
-            type: string
-            format: uuid
-          nullable: true
-      additionalProperties: false
-      x-schema-id: ServiceAvailabilityParameters
-    Unit:
-      type: object
-      additionalProperties: false
-    RatePricing:
-      title: RatePricing
-      required:
-      - AverageAmountPerFullTimeUnit
-      - AverageAmountPerTimeUnit
-      - AverageServiceItemAmountPerFullTimeUnit
-      - AverageServiceItemAmountPerTimeUnit
-      - TotalAmount
-      type: object
-      properties:
-        TotalAmount:
-          allOf:
-          - $ref: '#/components/schemas/Amount'
-          example: string
-        AverageAmountPerTimeUnit:
-          allOf:
-          - $ref: '#/components/schemas/Amount'
-          example: string
-        AverageAmountPerFullTimeUnit:
-          allOf:
-          - $ref: '#/components/schemas/Amount'
-          example: string
-        AverageServiceItemAmountPerTimeUnit:
-          allOf:
-          - $ref: '#/components/schemas/Amount'
-          example: string
-        AverageServiceItemAmountPerFullTimeUnit:
-          allOf:
-          - $ref: '#/components/schemas/Amount'
-          example: string
-      additionalProperties: false
-      x-schema-id: RatePricing
-    ServiceAvailabilityUpdateParameters:
-      title: ServiceAvailabilityUpdateParameters
-      required:
-      - AccessToken
-      - AvailabilityUpdates
-      - Client
-      - ClientToken
-      - ServiceId
-      type: object
-      properties:
-        ClientToken:
-          minLength: 1
-          type: string
-          description: Token identifying the client application.
-          example: string
-        AccessToken:
-          minLength: 1
-          type: string
-          description: Access token of the client application.
-          example: string
-        Client:
-          minLength: 1
-          type: string
-          description: Name and version of the client application.
-          example: string
-        ServiceId:
-          type: string
-          description: Unique identifier of the [Service](https://mews-systems.gitbook.io/connector-api/operations/#service) to update.
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        AvailabilityUpdates:
-          maxItems: 1000
-          minItems: 1
-          type: array
-          items:
-            $ref: '#/components/schemas/ServiceAvailabilityUpdateData'
-          description: Availability updates.
-      additionalProperties: false
-      x-schema-id: ServiceAvailabilityUpdateParameters
-    PaxCount:
-      title: PaxCount
-      required:
-      - PersonCount
-      - UnitCount
-      type: object
-      properties:
-        PersonCount:
-          type: integer
-          description: Predicted guest count that will be assigned to the Resource. The guest count must fit within the Resource Category maximum capacity.
-          format: int32
-          example: 1
-        UnitCount:
-          type: integer
-          description: Positive number of adjustments that are assigned to `PersonCount`. The sum of all `UnitCount` in `PaxCounts` should match the adjustment value applied to the interval.
-          format: int32
-          example: 1
-      additionalProperties: false
-      x-schema-id: PaxCount
-    AdditionalServiceData:
-      title: Additional service data
-      required:
-      - Promotions
-      type: object
-      properties:
-        Promotions:
-          allOf:
-          - $ref: '#/components/schemas/Promotions'
-          description: Promotions of the service.
-          example: string
-      additionalProperties: false
-      x-schema-id: AdditionalServiceData
-    RestrictionExceptions:
-      title: RestrictionExceptions
-      type: object
-      properties:
-        MinAdvance:
-          type: string
-          nullable: true
-          example: string
-        MaxAdvance:
-          type: string
-          nullable: true
-          example: string
-        MinLength:
-          type: string
-          nullable: true
-          example: string
-        MaxLength:
-          type: string
-          nullable: true
-          example: string
-        MinPrice:
-          type: number
-          format: double
-          nullable: true
-          example: 100.0
-        MaxPrice:
-          type: number
-          format: double
-          nullable: true
-          example: 100.0
-        PriceCurrencyCode:
-          maxLength: 3
-          type: string
-          nullable: true
-          example: EUR
-        MaxReservationCount:
-          type: integer
-          format: int32
-          nullable: true
-          example: 1
-      additionalProperties: false
-      x-schema-id: RestrictionExceptions
-    ServiceAvailabilityFilterParametersV20240122:
-      title: ServiceAvailabilityFilterParametersV20240122
-      required:
-      - AccessToken
-      - Client
-      - ClientToken
-      - FirstTimeUnitStartUtc
-      - LastTimeUnitStartUtc
-      - Metrics
-      - ServiceId
-      type: object
-      properties:
-        ClientToken:
-          minLength: 1
-          type: string
-          description: Token identifying the client application.
-          example: string
-        AccessToken:
-          minLength: 1
-          type: string
-          description: Access token of the client application.
-          example: string
-        Client:
-          minLength: 1
-          type: string
-          description: Name and version of the client application.
-          example: string
-        ServiceId:
-          type: string
-          description: Unique identifier of the [Service](https://mews-systems.gitbook.io/connector-api/operations/services/#service) whose availability should be returned.
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        FirstTimeUnitStartUtc:
-          minLength: 1
-          type: string
-          description: Start of the time interval, expressed as the timestamp for the start of the first [time unit](https://mews-systems.gitbook.io/connector-api/concepts/time-units/), in UTC timezone ISO 8601 format.
-          format: date-time
-          example: '2026-06-02T14:30:00Z'
-        LastTimeUnitStartUtc:
-          minLength: 1
-          type: string
-          description: 'End of the time interval, expressed as the timestamp for the start of the last [time unit](https://mews-systems.gitbook.io/connector-api/concepts/time-units/), in UTC timezone ISO 8601 format. The maximum size of time interval depends on the service''s [time unit](https://mews-systems.gitbook.io/connector-api/concepts/time-units/): 367 hours if hours, 367 days if days, or 60 months if months.'
-          format: date-time
-          example: '2026-06-02T14:30:00Z'
-        Metrics:
-          minItems: 1
-          uniqueItems: true
-          type: array
-          items:
-            $ref: '#/components/schemas/ResourceAvailabilityMetricTypeEnum'
-          description: Set of [Service availability metrics](https://mews-systems.gitbook.io/connector-api/operations/services/#service-availability-metrics) to be returned.
-      additionalProperties: false
-      x-schema-id: ServiceAvailabilityFilterParametersV20240122
-    Rate:
-      title: Rate
-      required:
-      - CurrencyCode
-      - Description
-      - Id
-      - IsPrivate
-      - Name
-      - Ordering
-      - RateGroupId
-      type: object
-      properties:
-        Id:
-          type: string
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        RateGroupId:
-          type: string
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Ordering:
-          type: integer
-          format: int32
-          example: 1
-        Name:
-          type: object
-          additionalProperties:
-            type: string
-            nullable: true
-        Description:
-          type: object
-          additionalProperties:
-            type: string
-            nullable: true
-        IsPrivate:
-          type: boolean
-          example: true
-        CurrencyCode:
-          maxLength: 3
-          minLength: 1
-          type: string
-          format: currency
-          example: EUR
-      additionalProperties: false
-      x-schema-id: Rate
-    SettlementRuleAction:
-      enum:
-      - ChargeCreditCard
-      - CreatePreauthorization
-      type: string
     Amount:
       title: Amount
       required:
@@ -1301,971 +957,11 @@ components:
           example: string
       additionalProperties: false
       x-schema-id: Amount
-    ServiceAvailabilityResultV20240122:
-      title: ServiceAvailabilityResultV20240122
-      required:
-      - ResourceCategoryAvailabilities
-      - TimeUnitStartsUtc
-      type: object
-      properties:
-        TimeUnitStartsUtc:
-          type: array
-          items:
-            type: string
-          description: Set of all time units covered by the time interval; expressed in UTC timezone ISO 8601 format.
-          format: date-time
-        ResourceCategoryAvailabilities:
-          type: array
-          items:
-            $ref: '#/components/schemas/ResourceCategoryAvailabilityV20240122'
-          description: Resource category availabilities. Can be empty if no resource categories are assigned to the service.
-      additionalProperties: false
-      x-schema-id: ServiceAvailabilityResultV20240122
-    ServicePricingParameters:
-      title: ServicePricingParameters
-      required:
-      - Client
-      - CurrencyCode
-      - EndUtc
-      - EnterpriseId
-      - FullAmounts
-      - ServiceId
-      - StartUtc
-      type: object
-      properties:
-        Client:
-          minLength: 1
-          type: string
-          example: string
-        LanguageCode:
-          type: string
-          nullable: true
-          example: string
-        CultureCode:
-          type: string
-          nullable: true
-          example: string
-        FullAmounts:
-          type: boolean
-          example: true
-        Session:
-          type: string
-          nullable: true
-          example: string
-        EnterpriseId:
-          type: string
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        ServiceId:
-          type: string
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        AvailabilityBlockId:
-          type: string
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        RateIds:
-          type: array
-          items:
-            type: string
-            format: uuid
-          nullable: true
-        CategoryIds:
-          type: array
-          items:
-            type: string
-            format: uuid
-          nullable: true
-        ProductIds:
-          type: array
-          items:
-            type: string
-            format: uuid
-          nullable: true
-        OccupancyData:
-          type: array
-          items:
-            $ref: '#/components/schemas/OccupancyData'
-          nullable: true
-        CurrencyCode:
-          maxLength: 3
-          minLength: 1
-          type: string
-          format: currency
-          example: EUR
-        StartUtc:
-          minLength: 1
-          type: string
-          format: date-time
-          example: '2026-06-02T14:30:00Z'
-        EndUtc:
-          minLength: 1
-          type: string
-          format: date-time
-          example: '2026-06-02T14:30:00Z'
-        VoucherCode:
-          type: string
-          nullable: true
-          example: string
-      additionalProperties: false
-      x-schema-id: ServicePricingParameters
-    ServiceAvailabilityResult:
-      title: ServiceAvailabilityResult
-      required:
-      - ApplicableRestrictions
-      - CategoryAvailabilities
-      - TimeUnitStartsUtc
-      type: object
-      properties:
-        TimeUnitStartsUtc:
-          type: array
-          items:
-            type: string
-        CategoryAvailabilities:
-          type: array
-          items:
-            $ref: '#/components/schemas/CategoryAvailability'
-        ApplicableRestrictions:
-          type: array
-          items:
-            $ref: '#/components/schemas/Restriction'
-      additionalProperties: false
-      x-schema-id: ServiceAvailabilityResult
-    RateGroupPricing:
-      title: RateGroupPricing
-      required:
-      - MaxPrice
-      - MinPrice
-      - MinRateId
-      type: object
-      properties:
-        MinRateId:
-          type: string
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        MinPrice:
-          allOf:
-          - $ref: '#/components/schemas/RatePricing'
-          example: string
-        MaxPrice:
-          allOf:
-          - $ref: '#/components/schemas/RatePricing'
-          example: string
-      additionalProperties: false
-      x-schema-id: RateGroupPricing
-    ResourceCategoryType:
-      enum:
-      - Room
-      - Bed
-      - Dorm
-      - Apartment
-      - Suite
-      - Villa
-      - Site
-      - Office
-      - MeetingRoom
-      - ParkingSpot
-      - Desk
-      - TeamArea
-      - Membership
-      - Tent
-      - CaravanOrRV
-      - UnequippedCampsite
-      - Bike
-      - ExtraBed
-      - Cot
-      - Crib
-      - ConferenceRoom
-      - Rooftop
-      - Garden
-      - Restaurant
-      - Amphitheater
-      - PrivateSpaces
-      type: string
-    TimeFilterInterval:
-      title: Time interval
-      type: object
-      properties:
-        StartUtc:
-          type: string
-          format: date-time
-          nullable: true
-          example: '2026-06-02T14:30:00Z'
-        EndUtc:
-          type: string
-          format: date-time
-          nullable: true
-          example: '2026-06-02T14:30:00Z'
-      additionalProperties: false
-      description: "When a time interval is used for **filtering** (for example in parameters such as `CreatedUtc.StartUtc` / `CreatedUtc.EndUtc`), the following rules apply:\r\n\r\n- **Start equals End (equality mode)**  \r\n  If `StartUtc` and `EndUtc` are exactly the same timestamp, the filter is treated as an equality check for that precise moment in time:\r\n  \r\n  ```\r\n  CreatedUtc == StartUtc\r\n  ```\r\n  \r\n  This does not represent an interval; only records with `CreatedUtc` equal to that exact instant are returned.\r\n\r\n- **Start differs from End (interval mode)**  \r\n  If `StartUtc` and `EndUtc` are different, the filter is evaluated as a half-open interval:\r\n  \r\n  ```\r\n  StartUtc <= CreatedUtc < EndUtc\r\n  ```\r\n  \r\n  In other words, the start is inclusive and the end is exclusive.\r\n\r\nMake sure your integration takes inclusive Start / exclusive End behavior of time intervals into account so that no records at the boundaries are omitted."
-      x-schema-id: TimeFilterInterval
-    ServiceOptions_2:
-      title: Service options
-      required:
-      - BillAsPackage
-      type: object
-      properties:
-        BillAsPackage:
-          type: boolean
-          description: Products should be displayed as a single package instead of individual items.
-          example: true
-      additionalProperties: false
-      description: Options of the service.
-      x-schema-id: ServiceOptions
-    ServiceAvailabilityUpdateData:
-      title: Availability update
-      required:
-      - FirstTimeUnitStartUtc
-      - LastTimeUnitStartUtc
-      - ResourceCategoryId
-      - UnitCountAdjustment
-      type: object
-      properties:
-        FirstTimeUnitStartUtc:
-          minLength: 1
-          type: string
-          description: Start of the time interval, expressed as the timestamp for the start of the first [time unit](https://mews-systems.gitbook.io/connector-api/concepts/time-units), in UTC timezone ISO 8601 format.
-          format: date-time
-          example: '2026-06-02T14:30:00Z'
-        LastTimeUnitStartUtc:
-          minLength: 1
-          type: string
-          description: 'End of the time interval, expressed as the timestamp for the start of the last [time unit](https://mews-systems.gitbook.io/connector-api/concepts/time-units), in UTC timezone ISO 8601 format. The maximum size of time interval depends on the service''s [time unit](https://mews-systems.gitbook.io/connector-api/concepts/time-units): 367 hours if hours, 367 days if days, or 60 months if months.'
-          format: date-time
-          example: '2026-06-02T14:30:00Z'
-        StartUtc:
-          type: string
-          format: date-time
-          nullable: true
-          deprecated: true
-          example: '2026-06-02T14:30:00Z'
-        EndUtc:
-          type: string
-          format: date-time
-          nullable: true
-          deprecated: true
-          example: '2026-06-02T14:30:00Z'
-        ResourceCategoryId:
-          type: string
-          description: Unique identifier of the [Resource category](https://mews-systems.gitbook.io/connector-api/operations/resources#resource-category) whose availability to update.
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        UnitCountAdjustment:
-          title: Int32 update value
-          allOf:
-          - $ref: '#/components/schemas/Int32NullableUpdateValue'
-          description: Adjustment value to be applied on the interval, can be both positive and negative (relative adjustment, not an absolute number). If specified without `Value` parameter, removes all adjustments within the interval.
-          example: string
-        AvailabilityBlockId:
-          type: string
-          description: Unique identifier of the [Availability block](https://mews-systems.gitbook.io/connector-api/operations/availabilityblocks#availability-block) whose availability to update.
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        PaxCounts:
-          maxItems: 5
-          type: array
-          items:
-            $ref: '#/components/schemas/PaxCount'
-          description: Collection of predicted occupancy of availability adjustments. Relates how many adjustments are assigned to each count of guests.
-          nullable: true
-      additionalProperties: false
-      x-schema-id: ServiceAvailabilityUpdateData
     RestrictionType:
       enum:
       - ClosedToStay
       - ClosedToArrival
       - ClosedToDeparture
-      type: string
-    ServiceDataDiscriminatorEnum:
-      title: Service data discriminator
-      enum:
-      - Bookable
-      - Additional
-      type: string
-      description: '
-
-
-        Bookable
-
-
-        Additional'
-      x-enumNames:
-      - Bookable
-      - Additional
-      x-enumDescriptions:
-      - ''
-      - ''
-    ServiceResult:
-      title: ServiceResult
-      required:
-      - Services
-      type: object
-      properties:
-        Services:
-          type: array
-          items:
-            $ref: '#/components/schemas/Service'
-          description: Services offered by the enterprise.
-        Cursor:
-          type: string
-          description: Unique identifier of the item one newer in time order than the items to be returned. If Cursor is not specified, i.e. null, then the latest or most recent items will be returned.
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-      additionalProperties: false
-      x-schema-id: ServiceResult
-    TaxBreakdownItem:
-      title: TaxBreakdownItem
-      required:
-      - NetValue
-      - TaxValue
-      type: object
-      properties:
-        TaxRateCode:
-          type: string
-          nullable: true
-          example: string
-        NetValue:
-          type: number
-          format: double
-          example: 100.0
-        TaxValue:
-          type: number
-          format: double
-          example: 100.0
-      additionalProperties: false
-      x-schema-id: TaxBreakdownItem
-    PromotedServiceResult:
-      title: PromotedServiceResult
-      type: object
-      properties:
-        PromotedServices:
-          type: array
-          items:
-            $ref: '#/components/schemas/PromotedService'
-          nullable: true
-        ResourceCategories:
-          type: array
-          items:
-            $ref: '#/components/schemas/Category'
-          nullable: true
-        Rates:
-          type: array
-          items:
-            $ref: '#/components/schemas/Rate'
-          nullable: true
-      additionalProperties: false
-      x-schema-id: PromotedServiceResult
-    SettlementRuleType:
-      enum:
-      - Manual
-      - Automatic
-      type: string
-    TimeUnitPeriodEnum:
-      title: Time unit period
-      enum:
-      - Day
-      - Month
-      - Hour
-      type: string
-      description: '
-
-
-        Day
-
-
-        Month
-
-
-        Hour'
-      x-enumNames:
-      - Day
-      - Month
-      - Hour
-      x-enumDescriptions:
-      - ''
-      - ''
-      - ''
-    TaxValue:
-      title: TaxValue
-      required:
-      - TaxRateCode
-      - Value
-      type: object
-      properties:
-        TaxRateCode:
-          minLength: 1
-          type: string
-          example: string
-        Value:
-          type: number
-          format: double
-          example: 100.0
-      additionalProperties: false
-      x-schema-id: TaxValue
-    ServicePromotionParameters:
-      title: ServicePromotionParameters
-      required:
-      - Client
-      - CurrencyCode
-      - EndUtc
-      - EnterpriseId
-      - FullAmounts
-      - ServiceId
-      - StartUtc
-      type: object
-      properties:
-        Client:
-          minLength: 1
-          type: string
-          example: string
-        LanguageCode:
-          type: string
-          nullable: true
-          example: string
-        CultureCode:
-          type: string
-          nullable: true
-          example: string
-        FullAmounts:
-          type: boolean
-          example: true
-        Session:
-          type: string
-          nullable: true
-          example: string
-        EnterpriseId:
-          type: string
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        ServiceId:
-          type: string
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        CurrencyCode:
-          minLength: 1
-          type: string
-          example: EUR
-        StartUtc:
-          minLength: 1
-          type: string
-          format: date-time
-          example: '2026-06-02T14:30:00Z'
-        EndUtc:
-          minLength: 1
-          type: string
-          format: date-time
-          example: '2026-06-02T14:30:00Z'
-      additionalProperties: false
-      x-schema-id: ServicePromotionParameters
-    PromotedService:
-      title: PromotedService
-      required:
-      - MinPricePerTimeUnit
-      - Ordering
-      - PromotedRateId
-      - PromotedRateName
-      - PromotedResourceCategoryDescription
-      - PromotedResourceCategoryId
-      - PromotedResourceCategoryName
-      - PromotedServiceAssignmentId
-      - PromotedServiceDefaultOccupancyData
-      - PromotedServiceEndOffset
-      - PromotedServiceId
-      - PromotedServiceOptions
-      - PromotedServiceReservationIntervalLimit
-      - PromotedServiceStartOffset
-      - PromotedServiceTimeUnitPeriod
-      - PromotedServiceUnitCountLimit
-      type: object
-      properties:
-        PromotedServiceAssignmentId:
-          type: string
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        PromotedServiceId:
-          type: string
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        PromotedRateId:
-          type: string
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        PromotedServiceTimeUnitPeriod:
-          $ref: '#/components/schemas/TimeUnitPeriod'
-        PromotedServiceStartOffset:
-          minLength: 1
-          type: string
-          format: date-time
-          example: '2026-06-02T14:30:00Z'
-        PromotedServiceEndOffset:
-          minLength: 1
-          type: string
-          format: date-time
-          example: '2026-06-02T14:30:00Z'
-        PromotedServiceUnitCountLimit:
-          $ref: '#/components/schemas/PromotedServiceAssignmentUnitCountLimit'
-        PromotedServiceReservationIntervalLimit:
-          $ref: '#/components/schemas/PromotedServiceAssignmentReservationIntervalLimit'
-        PromotedServiceDefaultOccupancyData:
-          allOf:
-          - $ref: '#/components/schemas/OccupancyData'
-          example: string
-        PromotedServiceOptions:
-          allOf:
-          - $ref: '#/components/schemas/ServiceOptions'
-          example: string
-        PromotedRateName:
-          type: object
-          additionalProperties:
-            type: string
-        PromotedResourceCategoryId:
-          type: string
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        PromotedResourceCategoryName:
-          type: object
-          additionalProperties:
-            type: string
-        PromotedResourceCategoryDescription:
-          type: object
-          additionalProperties:
-            type: string
-        AvailableCount:
-          type: integer
-          format: int32
-          example: 1
-        TotalAmount:
-          allOf:
-          - $ref: '#/components/schemas/Amount'
-          nullable: true
-          example: string
-        UnitAmount:
-          allOf:
-          - $ref: '#/components/schemas/Amount'
-          nullable: true
-          example: string
-        ImageId:
-          type: string
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Ordering:
-          type: integer
-          format: int32
-          example: 1
-        MinPricePerTimeUnit:
-          allOf:
-          - $ref: '#/components/schemas/Amount'
-          example: string
-      additionalProperties: false
-      x-schema-id: PromotedService
-    CategoryAvailability:
-      title: CategoryAvailability
-      required:
-      - Availabilities
-      - CategoryId
-      type: object
-      properties:
-        CategoryId:
-          type: string
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Availabilities:
-          type: array
-          items:
-            type: integer
-            format: int32
-      additionalProperties: false
-      x-schema-id: CategoryAvailability
-    Service:
-      title: Service
-      required:
-      - CreatedUtc
-      - Data
-      - EnterpriseId
-      - Id
-      - IsActive
-      - Name
-      - Names
-      - Options
-      - Ordering
-      - UpdatedUtc
-      type: object
-      properties:
-        Id:
-          type: string
-          description: Unique identifier of the service.
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        EnterpriseId:
-          type: string
-          description: Unique identifier of the [Enterprise](https://mews-systems.gitbook.io/connector-api/operations/enterprises/#enterprise).
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        IsActive:
-          type: boolean
-          description: Whether the service is still active.
-          example: true
-        Name:
-          minLength: 1
-          type: string
-          description: Name of the service.
-          deprecated: true
-          x-deprecatedMessage: Use `Names` instead
-          example: Example Name
-        Names:
-          title: Localized text
-          type: object
-          additionalProperties:
-            type: string
-          description: All translations of the name.
-          x-schema-id: LocalizedStrings
-        StartTime:
-          type: string
-          nullable: true
-          deprecated: true
-          example: string
-        EndTime:
-          type: string
-          nullable: true
-          deprecated: true
-          example: string
-        Options:
-          title: Service options
-          allOf:
-          - $ref: '#/components/schemas/ServiceOptions_2'
-          description: Options of the service.
-          example: string
-        Promotions:
-          allOf:
-          - $ref: '#/components/schemas/Promotions'
-          description: ''
-          nullable: true
-          deprecated: true
-          x-deprecatedMessage: Use `Promotions` in `Data` instead.
-          example: string
-        Type:
-          type: string
-          nullable: true
-          deprecated: true
-          example: string
-        Ordering:
-          type: integer
-          description: Order value for presentation purposes.
-          format: int32
-          example: 1
-        Data:
-          title: Service data
-          type: object
-          properties:
-            Discriminator:
-              $ref: '#/components/schemas/ServiceDataDiscriminator'
-            Value:
-              oneOf:
-              - $ref: '#/components/schemas/BookableServiceData'
-              - $ref: '#/components/schemas/AdditionalServiceData'
-          description: Additional information about the specific service.
-          x-coproduct: true
-          x-schema-id: ServiceDataCoproductOfServiceDataDiscriminator
-        ExternalIdentifier:
-          maxLength: 255
-          type: string
-          description: Identifier of the service from external system.
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        CreatedUtc:
-          minLength: 1
-          type: string
-          description: Creation date and time of the service in UTC timezone in ISO 8601 format.
-          format: date-time
-          example: '2026-06-02T14:30:00Z'
-        UpdatedUtc:
-          minLength: 1
-          type: string
-          description: Last update date and time of the service in UTC timezone in ISO 8601 format.
-          format: date-time
-          example: '2026-06-02T14:30:00Z'
-      additionalProperties: false
-      description: ''
-      x-schema-id: Service
-    RateGroup:
-      title: RateGroup
-      required:
-      - Id
-      - Ordering
-      - SettlementAction
-      - SettlementCurrencyCode
-      - SettlementOffset
-      - SettlementTrigger
-      - SettlementType
-      type: object
-      properties:
-        Id:
-          type: string
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Ordering:
-          type: integer
-          format: int32
-          example: 1
-        SettlementType:
-          $ref: '#/components/schemas/SettlementRuleType'
-        SettlementAction:
-          $ref: '#/components/schemas/SettlementRuleAction'
-        SettlementTrigger:
-          $ref: '#/components/schemas/SettlementRuleTrigger'
-        SettlementOffset:
-          minLength: 1
-          type: string
-          example: string
-        SettlementValue:
-          type: number
-          format: double
-          nullable: true
-          example: 100.0
-        SettlementFlatValue:
-          type: number
-          format: double
-          nullable: true
-          example: 100.0
-        SettlementMaximumNights:
-          type: integer
-          format: int32
-          nullable: true
-          deprecated: true
-          example: 1
-        SettlementMaximumTimeUnits:
-          type: integer
-          format: int32
-          nullable: true
-          example: 1
-        SettlementCurrencyCode:
-          maxLength: 3
-          minLength: 1
-          type: string
-          format: currency
-          example: EUR
-      additionalProperties: false
-      x-schema-id: RateGroup
-    TaxBreakdown:
-      title: TaxBreakdown
-      required:
-      - Items
-      type: object
-      properties:
-        Items:
-          type: array
-          items:
-            $ref: '#/components/schemas/TaxBreakdownItem'
-      additionalProperties: false
-      x-schema-id: TaxBreakdown
-    CategoryAvailability_2:
-      title: Resource category availability
-      required:
-      - Adjustments
-      - Availabilities
-      - CategoryId
-      type: object
-      properties:
-        CategoryId:
-          type: string
-          description: Unique identifier of the [Resource category](https://mews-systems.gitbook.io/connector-api/operations/resources#resource-category).
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Availabilities:
-          type: array
-          items:
-            type: integer
-            format: int32
-          description: Absolute availabilities of the resource category in the covered dates.
-        Adjustments:
-          type: array
-          items:
-            type: integer
-            format: int32
-          description: Relative availability adjustments set for resource category in the covered dates.
-      additionalProperties: false
-      x-schema-id: CategoryAvailability
-    Category:
-      title: Category
-      required:
-      - Description
-      - ExtraBedCount
-      - Id
-      - Name
-      - NormalBedCount
-      - SpaceType
-      type: object
-      properties:
-        Id:
-          type: string
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Name:
-          type: object
-          additionalProperties:
-            type: string
-        Description:
-          type: object
-          additionalProperties:
-            type: string
-        ImageIds:
-          type: array
-          items:
-            type: string
-            format: uuid
-          nullable: true
-          deprecated: true
-        Ordering:
-          type: integer
-          format: int32
-          nullable: true
-          example: 1
-        NormalBedCount:
-          type: integer
-          format: int32
-          example: 1
-        ExtraBedCount:
-          type: integer
-          format: int32
-          example: 1
-        SpaceType:
-          $ref: '#/components/schemas/ResourceCategoryType'
-      additionalProperties: false
-      x-schema-id: Category
-    RestrictionConditions:
-      title: RestrictionConditions
-      required:
-      - Days
-      - Type
-      type: object
-      properties:
-        Type:
-          $ref: '#/components/schemas/RestrictionType'
-        ExactRateId:
-          type: string
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        BaseRateId:
-          type: string
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        RateGroupId:
-          type: string
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        ResourceCategoryId:
-          type: string
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        ResourceCategoryType:
-          anyOf:
-          - $ref: '#/components/schemas/ResourceCategoryType'
-          nullable: true
-          example: string
-        StartUtc:
-          type: string
-          format: date-time
-          nullable: true
-          example: '2026-06-02T14:30:00Z'
-        EndUtc:
-          type: string
-          format: date-time
-          nullable: true
-          example: '2026-06-02T14:30:00Z'
-        Days:
-          type: array
-          items:
-            type: string
-      additionalProperties: false
-      x-schema-id: RestrictionConditions
-    ResourceAvailabilityMetricTypeEnum:
-      title: Service availability metrics
-      enum:
-      - OutOfOrderBlocks
-      - PublicAvailabilityAdjustment
-      - OtherServiceReservationCount
-      - Occupied
-      - ConfirmedReservations
-      - OptionalReservations
-      - BlockAvailability
-      - AllocatedBlockAvailability
-      - UsableResources
-      - ActiveResources
-      - HouseUse
-      type: string
-      description: '
-
-
-        OutOfOrderBlocks (Number of resources that are out of order for the resource category (see `Resource Block`).)
-
-
-        PublicAvailabilityAdjustment (Number of resources marked as manual availability adjustments.)
-
-
-        OtherServiceReservationCount (Number of resources occupied by another service.)
-
-
-        Occupied (Number of bookings that have been assigned to the resource category (i.e. reservations and blocks).)
-
-
-        ConfirmedReservations (Number of confirmed reservations that have been assigned to the resource category.)
-
-
-        OptionalReservations (Number of optional reservations that have been assigned to the resource category.)
-
-
-        BlockAvailability (Number of blocked resources (from an availability block / allotment).)
-
-
-        AllocatedBlockAvailability (Number of blocked resources that are in a deducting state (from an availability block / allotment).)
-
-
-        UsableResources (Number of usable resources (i.e. which are not out of order).)
-
-
-        ActiveResources (Number of active resources.)
-
-
-        HouseUse (Number of resources marked as house use (internal use).)'
-      x-enumNames:
-      - OutOfOrderBlocks
-      - PublicAvailabilityAdjustment
-      - OtherServiceReservationCount
-      - Occupied
-      - ConfirmedReservations
-      - OptionalReservations
-      - BlockAvailability
-      - AllocatedBlockAvailability
-      - UsableResources
-      - ActiveResources
-      - HouseUse
-      x-enumDescriptions:
-      - Number of resources that are out of order for the resource category (see `Resource Block`).
-      - Number of resources marked as manual availability adjustments.
-      - Number of resources occupied by another service.
-      - Number of bookings that have been assigned to the resource category (i.e. reservations and blocks).
-      - Number of confirmed reservations that have been assigned to the resource category.
-      - Number of optional reservations that have been assigned to the resource category.
-      - Number of blocked resources (from an availability block / allotment).
-      - Number of blocked resources that are in a deducting state (from an availability block / allotment).
-      - Number of usable resources (i.e. which are not out of order).
-      - Number of active resources.
-      - Number of resources marked as house use (internal use).
-    SettlementRuleTrigger:
-      enum:
-      - Confirmation
-      - Start
-      - End
-      - StartDate
-      - EndDate
       type: string
     Promotions:
       title: Promotions
@@ -2305,6 +1001,93 @@ components:
       additionalProperties: false
       description: ''
       x-schema-id: Promotions
+    ServiceOptions:
+      title: ServiceOptions
+      required:
+      - ProRataCharging
+      type: object
+      properties:
+        ProRataCharging:
+          type: boolean
+          example: true
+      additionalProperties: false
+      x-schema-id: ServiceOptions
+    ResourceCategoryAvailabilityV20240122:
+      title: Resource category availability (ver 2024-01-22)
+      required:
+      - Metrics
+      - ResourceCategoryId
+      type: object
+      properties:
+        ResourceCategoryId:
+          type: string
+          description: Unique identifier of the [Resource category](https://mews-systems.gitbook.io/connector-api/operations/resources#resource-category).
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Metrics:
+          title: ResourceAvailabilityMetricTypeInt32IEnumerableIDictionary
+          type: object
+          properties:
+            OutOfOrderBlocks:
+              type: array
+              items:
+                type: integer
+                format: int32
+            PublicAvailabilityAdjustment:
+              type: array
+              items:
+                type: integer
+                format: int32
+            OtherServiceReservationCount:
+              type: array
+              items:
+                type: integer
+                format: int32
+            Occupied:
+              type: array
+              items:
+                type: integer
+                format: int32
+            ConfirmedReservations:
+              type: array
+              items:
+                type: integer
+                format: int32
+            OptionalReservations:
+              type: array
+              items:
+                type: integer
+                format: int32
+            BlockAvailability:
+              type: array
+              items:
+                type: integer
+                format: int32
+            AllocatedBlockAvailability:
+              type: array
+              items:
+                type: integer
+                format: int32
+            UsableResources:
+              type: array
+              items:
+                type: integer
+                format: int32
+            ActiveResources:
+              type: array
+              items:
+                type: integer
+                format: int32
+            HouseUse:
+              type: array
+              items:
+                type: integer
+                format: int32
+          additionalProperties: false
+          description: Dictionary keys are names of [Service availability metrics](https://mews-systems.gitbook.io/connector-api/operations/services#service-availability-metrics), values are arrays of integers with metric values for corresponding time unit in `TimeUnitStartsUtc`.
+          x-schema-id: ResourceAvailabilityMetricTypeInt32IEnumerableIDictionary
+      additionalProperties: false
+      x-schema-id: ResourceCategoryAvailabilityV20240122
     BookableServiceData:
       title: Bookable service data
       required:
@@ -2386,18 +1169,1309 @@ components:
           example: string
       additionalProperties: false
       x-schema-id: BookableServiceData
-    TimeUnitPeriod:
+    Int32NullableUpdateValue:
+      title: Int32 update value
+      type: object
+      properties:
+        Value:
+          type:
+          - integer
+          - 'null'
+          description: Value which is to be updated.
+          format: int32
+          example: 1
+      additionalProperties: false
+      x-schema-id: Int32NullableUpdateValue
+    ServiceAvailabilityResult:
+      title: ServiceAvailabilityResult
+      required:
+      - ApplicableRestrictions
+      - CategoryAvailabilities
+      - TimeUnitStartsUtc
+      type: object
+      properties:
+        TimeUnitStartsUtc:
+          type: array
+          items:
+            type: string
+        CategoryAvailabilities:
+          type: array
+          items:
+            $ref: '#/components/schemas/CategoryAvailability'
+        ApplicableRestrictions:
+          type: array
+          items:
+            $ref: '#/components/schemas/Restriction'
+      additionalProperties: false
+      x-schema-id: ServiceAvailabilityResult
+    TimeFilterInterval:
+      title: Time interval
+      type: object
+      properties:
+        StartUtc:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+        EndUtc:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+      additionalProperties: false
+      description: "When a time interval is used for **filtering** (for example in parameters such as `CreatedUtc.StartUtc` / `CreatedUtc.EndUtc`), the following rules apply:\n\n- **Start equals End (equality mode)**  \n  If `StartUtc` and `EndUtc` are exactly the same timestamp, the filter is treated as an equality check for that precise moment in time:\n  \n  ```\n  CreatedUtc == StartUtc\n  ```\n  \n  This does not represent an interval; only records with `CreatedUtc` equal to that exact instant are returned.\n\n- **Start differs from End (interval mode)**  \n  If `StartUtc` and `EndUtc` are different, the filter is evaluated as a half-open interval:\n  \n  ```\n  StartUtc <= CreatedUtc < EndUtc\n  ```\n  \n  In other words, the start is inclusive and the end is exclusive.\n\nMake sure your integration takes inclusive Start / exclusive End behavior of time intervals into account so that no records at the boundaries are omitted."
+      x-schema-id: TimeFilterInterval
+    SettlementRuleTrigger:
       enum:
-      - Day
-      - Month
-      - Hour
+      - Confirmation
+      - Start
+      - End
+      - StartDate
+      - EndDate
       type: string
+    ServiceResult:
+      title: ServiceResult
+      required:
+      - Services
+      type: object
+      properties:
+        Services:
+          type: array
+          items:
+            $ref: '#/components/schemas/Service'
+          description: Services offered by the enterprise.
+        Cursor:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the item one newer in time order than the items to be returned. If Cursor is not specified, i.e. null, then the latest or most recent items will be returned.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      additionalProperties: false
+      x-schema-id: ServiceResult
+    ServiceOptions_2:
+      title: Service options
+      required:
+      - BillAsPackage
+      type: object
+      properties:
+        BillAsPackage:
+          type: boolean
+          description: Products should be displayed as a single package instead of individual items.
+          example: true
+      additionalProperties: false
+      description: Options of the service.
+      x-schema-id: ServiceOptions
+    ServiceAvailabilityFilterParametersV20240122:
+      title: ServiceAvailabilityFilterParametersV20240122
+      required:
+      - AccessToken
+      - Client
+      - ClientToken
+      - FirstTimeUnitStartUtc
+      - LastTimeUnitStartUtc
+      - Metrics
+      - ServiceId
+      type: object
+      properties:
+        ClientToken:
+          minLength: 1
+          type: string
+          description: Token identifying the client application.
+          example: string
+        AccessToken:
+          minLength: 1
+          type: string
+          description: Access token of the client application.
+          example: string
+        Client:
+          minLength: 1
+          type: string
+          description: Name and version of the client application.
+          example: string
+        ServiceId:
+          type: string
+          description: Unique identifier of the [Service](https://mews-systems.gitbook.io/connector-api/operations/services/#service) whose availability should be returned.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        FirstTimeUnitStartUtc:
+          minLength: 1
+          type: string
+          description: Start of the time interval, expressed as the timestamp for the start of the first [time unit](https://mews-systems.gitbook.io/connector-api/concepts/time-units/), in UTC timezone ISO 8601 format.
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+        LastTimeUnitStartUtc:
+          minLength: 1
+          type: string
+          description: 'End of the time interval, expressed as the timestamp for the start of the last [time unit](https://mews-systems.gitbook.io/connector-api/concepts/time-units/), in UTC timezone ISO 8601 format. The maximum size of time interval depends on the service''s [time unit](https://mews-systems.gitbook.io/connector-api/concepts/time-units/): 367 hours if hours, 367 days if days, or 60 months if months.'
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+        Metrics:
+          minItems: 1
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceAvailabilityMetricTypeEnum'
+          description: Set of [Service availability metrics](https://mews-systems.gitbook.io/connector-api/operations/services/#service-availability-metrics) to be returned.
+      additionalProperties: false
+      x-schema-id: ServiceAvailabilityFilterParametersV20240122
+    Category:
+      title: Category
+      required:
+      - Description
+      - ExtraBedCount
+      - Id
+      - Name
+      - NormalBedCount
+      - SpaceType
+      type: object
+      properties:
+        Id:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Name:
+          type: object
+          additionalProperties:
+            type: string
+        Description:
+          type: object
+          additionalProperties:
+            type: string
+        ImageIds:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: uuid
+          deprecated: true
+        Ordering:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          example: 1
+        NormalBedCount:
+          type: integer
+          format: int32
+          example: 1
+        ExtraBedCount:
+          type: integer
+          format: int32
+          example: 1
+        SpaceType:
+          $ref: '#/components/schemas/ResourceCategoryType'
+      additionalProperties: false
+      x-schema-id: Category
+    RateGroupPricing:
+      title: RateGroupPricing
+      required:
+      - MaxPrice
+      - MinPrice
+      - MinRateId
+      type: object
+      properties:
+        MinRateId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        MinPrice:
+          allOf:
+          - $ref: '#/components/schemas/RatePricing'
+          example: string
+        MaxPrice:
+          allOf:
+          - $ref: '#/components/schemas/RatePricing'
+          example: string
+      additionalProperties: false
+      x-schema-id: RateGroupPricing
+    TaxBreakdownItem:
+      title: TaxBreakdownItem
+      required:
+      - NetValue
+      - TaxValue
+      type: object
+      properties:
+        TaxRateCode:
+          type:
+          - string
+          - 'null'
+          example: string
+        NetValue:
+          type: number
+          format: double
+          example: 100.0
+        TaxValue:
+          type: number
+          format: double
+          example: 100.0
+      additionalProperties: false
+      x-schema-id: TaxBreakdownItem
+    RatePricing:
+      title: RatePricing
+      required:
+      - AverageAmountPerFullTimeUnit
+      - AverageAmountPerTimeUnit
+      - AverageServiceItemAmountPerFullTimeUnit
+      - AverageServiceItemAmountPerTimeUnit
+      - TotalAmount
+      type: object
+      properties:
+        TotalAmount:
+          allOf:
+          - $ref: '#/components/schemas/Amount'
+          example: string
+        AverageAmountPerTimeUnit:
+          allOf:
+          - $ref: '#/components/schemas/Amount'
+          example: string
+        AverageAmountPerFullTimeUnit:
+          allOf:
+          - $ref: '#/components/schemas/Amount'
+          example: string
+        AverageServiceItemAmountPerTimeUnit:
+          allOf:
+          - $ref: '#/components/schemas/Amount'
+          example: string
+        AverageServiceItemAmountPerFullTimeUnit:
+          allOf:
+          - $ref: '#/components/schemas/Amount'
+          example: string
+      additionalProperties: false
+      x-schema-id: RatePricing
+    PromotedServiceAssignmentReservationIntervalLimit:
+      enum:
+      - SameAsParent
+      - InsideParent
+      type: string
+    ResourceCategoryPricing:
+      title: ResourceCategoryPricing
+      required:
+      - CategoryId
+      - OccupancyPrices
+      type: object
+      properties:
+        CategoryId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        OccupancyPrices:
+          type: array
+          items:
+            $ref: '#/components/schemas/OccupancyPricing'
+      additionalProperties: false
+      x-schema-id: ResourceCategoryPricing
+    ServiceAvailabilityParameters:
+      title: ServiceAvailabilityParameters
+      required:
+      - Client
+      - EndUtc
+      - EnterpriseId
+      - FullAmounts
+      - ServiceId
+      - StartUtc
+      type: object
+      properties:
+        Client:
+          minLength: 1
+          type: string
+          example: string
+        LanguageCode:
+          type:
+          - string
+          - 'null'
+          example: string
+        CultureCode:
+          type:
+          - string
+          - 'null'
+          example: string
+        FullAmounts:
+          type: boolean
+          example: true
+        Session:
+          type:
+          - string
+          - 'null'
+          example: string
+        EnterpriseId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        ServiceId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        StartUtc:
+          minLength: 1
+          type: string
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+        EndUtc:
+          minLength: 1
+          type: string
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+        BookingEngineId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        AvailabilityBlockId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        CategoryIds:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: uuid
+      additionalProperties: false
+      x-schema-id: ServiceAvailabilityParameters
+    ServiceDataDiscriminator:
+      title: Service data discriminator
+      enum:
+      - Bookable
+      - Additional
+      type: string
+    ServicePricingResult:
+      title: ServicePricingResult
+      required:
+      - CategoryPrices
+      - RateGroups
+      - Rates
+      type: object
+      properties:
+        RateGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/RateGroup'
+        Rates:
+          type: array
+          items:
+            $ref: '#/components/schemas/Rate'
+        CategoryPrices:
+          type: array
+          items:
+            $ref: '#/components/schemas/ResourceCategoryPricing'
+        ViolatedRestrictions:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Restriction'
+      additionalProperties: false
+      x-schema-id: ServicePricingResult
+    PromotedService:
+      title: PromotedService
+      required:
+      - MinPricePerTimeUnit
+      - Ordering
+      - PromotedRateId
+      - PromotedRateName
+      - PromotedResourceCategoryDescription
+      - PromotedResourceCategoryId
+      - PromotedResourceCategoryName
+      - PromotedServiceAssignmentId
+      - PromotedServiceDefaultOccupancyData
+      - PromotedServiceEndOffset
+      - PromotedServiceId
+      - PromotedServiceOptions
+      - PromotedServiceReservationIntervalLimit
+      - PromotedServiceStartOffset
+      - PromotedServiceTimeUnitPeriod
+      - PromotedServiceUnitCountLimit
+      type: object
+      properties:
+        PromotedServiceAssignmentId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        PromotedServiceId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        PromotedRateId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        PromotedServiceTimeUnitPeriod:
+          $ref: '#/components/schemas/TimeUnitPeriod'
+        PromotedServiceStartOffset:
+          minLength: 1
+          type: string
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+        PromotedServiceEndOffset:
+          minLength: 1
+          type: string
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+        PromotedServiceUnitCountLimit:
+          $ref: '#/components/schemas/PromotedServiceAssignmentUnitCountLimit'
+        PromotedServiceReservationIntervalLimit:
+          $ref: '#/components/schemas/PromotedServiceAssignmentReservationIntervalLimit'
+        PromotedServiceDefaultOccupancyData:
+          allOf:
+          - $ref: '#/components/schemas/OccupancyData'
+          example: string
+        PromotedServiceOptions:
+          allOf:
+          - $ref: '#/components/schemas/ServiceOptions'
+          example: string
+        PromotedRateName:
+          type: object
+          additionalProperties:
+            type: string
+        PromotedResourceCategoryId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        PromotedResourceCategoryName:
+          type: object
+          additionalProperties:
+            type: string
+        PromotedResourceCategoryDescription:
+          type: object
+          additionalProperties:
+            type: string
+        AvailableCount:
+          type: integer
+          format: int32
+          example: 1
+        TotalAmount:
+          allOf:
+          - $ref: '#/components/schemas/Amount'
+          example: string
+        UnitAmount:
+          allOf:
+          - $ref: '#/components/schemas/Amount'
+          example: string
+        ImageId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Ordering:
+          type: integer
+          format: int32
+          example: 1
+        MinPricePerTimeUnit:
+          allOf:
+          - $ref: '#/components/schemas/Amount'
+          example: string
+      additionalProperties: false
+      x-schema-id: PromotedService
+    PromotedServiceResult:
+      title: PromotedServiceResult
+      type: object
+      properties:
+        PromotedServices:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/PromotedService'
+        ResourceCategories:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Category'
+        Rates:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Rate'
+      additionalProperties: false
+      x-schema-id: PromotedServiceResult
+    AdditionalServiceData:
+      title: Additional service data
+      required:
+      - Promotions
+      type: object
+      properties:
+        Promotions:
+          allOf:
+          - $ref: '#/components/schemas/Promotions'
+          description: Promotions of the service.
+          example: string
+      additionalProperties: false
+      x-schema-id: AdditionalServiceData
+    TaxBreakdown:
+      title: TaxBreakdown
+      required:
+      - Items
+      type: object
+      properties:
+        Items:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaxBreakdownItem'
+      additionalProperties: false
+      x-schema-id: TaxBreakdown
+    CategoryAvailability:
+      title: CategoryAvailability
+      required:
+      - Availabilities
+      - CategoryId
+      type: object
+      properties:
+        CategoryId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Availabilities:
+          type: array
+          items:
+            type: integer
+            format: int32
+      additionalProperties: false
+      x-schema-id: CategoryAvailability
+    Service:
+      title: Service
+      required:
+      - CreatedUtc
+      - Data
+      - EnterpriseId
+      - Id
+      - IsActive
+      - Name
+      - Names
+      - Options
+      - Ordering
+      - UpdatedUtc
+      type: object
+      properties:
+        Id:
+          type: string
+          description: Unique identifier of the service.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        EnterpriseId:
+          type: string
+          description: Unique identifier of the [Enterprise](https://mews-systems.gitbook.io/connector-api/operations/enterprises/#enterprise).
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        IsActive:
+          type: boolean
+          description: Whether the service is still active.
+          example: true
+        Name:
+          minLength: 1
+          type: string
+          description: Name of the service.
+          deprecated: true
+          x-deprecatedMessage: Use `Names` instead
+          example: Example Name
+        Names:
+          title: Localized text
+          type: object
+          additionalProperties:
+            type: string
+          description: All translations of the name.
+          x-schema-id: LocalizedStrings
+        StartTime:
+          type:
+          - string
+          - 'null'
+          deprecated: true
+          example: string
+        EndTime:
+          type:
+          - string
+          - 'null'
+          deprecated: true
+          example: string
+        Options:
+          title: Service options
+          allOf:
+          - $ref: '#/components/schemas/ServiceOptions_2'
+          description: Options of the service.
+          example: string
+        Promotions:
+          allOf:
+          - $ref: '#/components/schemas/Promotions'
+          description: ''
+          deprecated: true
+          x-deprecatedMessage: Use `Promotions` in `Data` instead.
+          example: string
+        Type:
+          type:
+          - string
+          - 'null'
+          deprecated: true
+          example: string
+        Ordering:
+          type: integer
+          description: Order value for presentation purposes.
+          format: int32
+          example: 1
+        Data:
+          title: Service data
+          type: object
+          properties:
+            Discriminator:
+              $ref: '#/components/schemas/ServiceDataDiscriminator'
+            Value:
+              oneOf:
+              - $ref: '#/components/schemas/BookableServiceData'
+              - $ref: '#/components/schemas/AdditionalServiceData'
+          description: Additional information about the specific service.
+          x-coproduct: true
+          x-schema-id: ServiceDataCoproductOfServiceDataDiscriminator
+        ExternalIdentifier:
+          maxLength: 255
+          type:
+          - string
+          - 'null'
+          description: Identifier of the service from external system.
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        CreatedUtc:
+          minLength: 1
+          type: string
+          description: Creation date and time of the service in UTC timezone in ISO 8601 format.
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+        UpdatedUtc:
+          minLength: 1
+          type: string
+          description: Last update date and time of the service in UTC timezone in ISO 8601 format.
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+      additionalProperties: false
+      description: ''
+      x-schema-id: Service
+    ServicePricingParameters:
+      title: ServicePricingParameters
+      required:
+      - Client
+      - CurrencyCode
+      - EndUtc
+      - EnterpriseId
+      - FullAmounts
+      - ServiceId
+      - StartUtc
+      type: object
+      properties:
+        Client:
+          minLength: 1
+          type: string
+          example: string
+        LanguageCode:
+          type:
+          - string
+          - 'null'
+          example: string
+        CultureCode:
+          type:
+          - string
+          - 'null'
+          example: string
+        FullAmounts:
+          type: boolean
+          example: true
+        Session:
+          type:
+          - string
+          - 'null'
+          example: string
+        EnterpriseId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        ServiceId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        AvailabilityBlockId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        RateIds:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: uuid
+        CategoryIds:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: uuid
+        ProductIds:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+            format: uuid
+        OccupancyData:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/OccupancyData'
+        CurrencyCode:
+          maxLength: 3
+          minLength: 1
+          type: string
+          format: currency
+          example: EUR
+        StartUtc:
+          minLength: 1
+          type: string
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+        EndUtc:
+          minLength: 1
+          type: string
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+        VoucherCode:
+          type:
+          - string
+          - 'null'
+          example: string
+      additionalProperties: false
+      x-schema-id: ServicePricingParameters
+    CategoryAvailability_2:
+      title: Resource category availability
+      required:
+      - Adjustments
+      - Availabilities
+      - CategoryId
+      type: object
+      properties:
+        CategoryId:
+          type: string
+          description: Unique identifier of the [Resource category](https://mews-systems.gitbook.io/connector-api/operations/resources#resource-category).
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Availabilities:
+          type: array
+          items:
+            type: integer
+            format: int32
+          description: Absolute availabilities of the resource category in the covered dates.
+        Adjustments:
+          type: array
+          items:
+            type: integer
+            format: int32
+          description: Relative availability adjustments set for resource category in the covered dates.
+      additionalProperties: false
+      x-schema-id: CategoryAvailability
+    ServiceAvailabilityResult_2:
+      title: ServiceAvailabilityResult
+      required:
+      - CategoryAvailabilities
+      - TimeUnitStartsUtc
+      type: object
+      properties:
+        DatesUtc:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          deprecated: true
+        TimeUnitStartsUtc:
+          type: array
+          items:
+            type: string
+          description: Set of all time units covered by the time interval; expressed in UTC timezone ISO 8601 format.
+        CategoryAvailabilities:
+          type: array
+          items:
+            $ref: '#/components/schemas/CategoryAvailability_2'
+          description: Resource category availabilities.
+      additionalProperties: false
+      x-schema-id: ServiceAvailabilityResult
+    Limitation:
+      title: Limitation
+      required:
+      - Count
+      type: object
+      properties:
+        Count:
+          type: integer
+          format: int32
+          example: 1
+        Cursor:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      additionalProperties: false
+      description: Limitation on the quantity of data returned.
+      x-schema-id: Limitation
+    OccupancyPricing:
+      title: OccupancyPricing
+      required:
+      - Occupancies
+      - RateGroupPrices
+      type: object
+      properties:
+        Occupancies:
+          type: array
+          items:
+            $ref: '#/components/schemas/OccupancyData'
+        RateGroupPrices:
+          type: array
+          items:
+            $ref: '#/components/schemas/RateGroupPricing'
+      additionalProperties: false
+      x-schema-id: OccupancyPricing
+    RateGroup:
+      title: RateGroup
+      required:
+      - Id
+      - Ordering
+      - SettlementAction
+      - SettlementCurrencyCode
+      - SettlementOffset
+      - SettlementTrigger
+      - SettlementType
+      type: object
+      properties:
+        Id:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Ordering:
+          type: integer
+          format: int32
+          example: 1
+        SettlementType:
+          $ref: '#/components/schemas/SettlementRuleType'
+        SettlementAction:
+          $ref: '#/components/schemas/SettlementRuleAction'
+        SettlementTrigger:
+          $ref: '#/components/schemas/SettlementRuleTrigger'
+        SettlementOffset:
+          minLength: 1
+          type: string
+          example: string
+        SettlementValue:
+          type:
+          - number
+          - 'null'
+          format: double
+          example: 100.0
+        SettlementFlatValue:
+          type:
+          - number
+          - 'null'
+          format: double
+          example: 100.0
+        SettlementMaximumNights:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          deprecated: true
+          example: 1
+        SettlementMaximumTimeUnits:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          example: 1
+        SettlementCurrencyCode:
+          maxLength: 3
+          minLength: 1
+          type: string
+          format: currency
+          example: EUR
+      additionalProperties: false
+      x-schema-id: RateGroup
+    RestrictionConditions:
+      title: RestrictionConditions
+      required:
+      - Days
+      - Type
+      type: object
+      properties:
+        Type:
+          $ref: '#/components/schemas/RestrictionType'
+        ExactRateId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        BaseRateId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        RateGroupId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        ResourceCategoryId:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        ResourceCategoryType:
+          anyOf:
+          - $ref: '#/components/schemas/ResourceCategoryType'
+          example: string
+        StartUtc:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+        EndUtc:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+        Days:
+          type: array
+          items:
+            type: string
+      additionalProperties: false
+      x-schema-id: RestrictionConditions
+    ServicePromotionParameters:
+      title: ServicePromotionParameters
+      required:
+      - Client
+      - CurrencyCode
+      - EndUtc
+      - EnterpriseId
+      - FullAmounts
+      - ServiceId
+      - StartUtc
+      type: object
+      properties:
+        Client:
+          minLength: 1
+          type: string
+          example: string
+        LanguageCode:
+          type:
+          - string
+          - 'null'
+          example: string
+        CultureCode:
+          type:
+          - string
+          - 'null'
+          example: string
+        FullAmounts:
+          type: boolean
+          example: true
+        Session:
+          type:
+          - string
+          - 'null'
+          example: string
+        EnterpriseId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        ServiceId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        CurrencyCode:
+          minLength: 1
+          type: string
+          example: EUR
+        StartUtc:
+          minLength: 1
+          type: string
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+        EndUtc:
+          minLength: 1
+          type: string
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+      additionalProperties: false
+      x-schema-id: ServicePromotionParameters
+    ServiceAvailabilityUpdateParameters:
+      title: ServiceAvailabilityUpdateParameters
+      required:
+      - AccessToken
+      - AvailabilityUpdates
+      - Client
+      - ClientToken
+      - ServiceId
+      type: object
+      properties:
+        ClientToken:
+          minLength: 1
+          type: string
+          description: Token identifying the client application.
+          example: string
+        AccessToken:
+          minLength: 1
+          type: string
+          description: Access token of the client application.
+          example: string
+        Client:
+          minLength: 1
+          type: string
+          description: Name and version of the client application.
+          example: string
+        ServiceId:
+          type: string
+          description: Unique identifier of the [Service](https://mews-systems.gitbook.io/connector-api/operations/#service) to update.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        AvailabilityUpdates:
+          maxItems: 1000
+          minItems: 1
+          type: array
+          items:
+            $ref: '#/components/schemas/ServiceAvailabilityUpdateData'
+          description: Availability updates.
+      additionalProperties: false
+      x-schema-id: ServiceAvailabilityUpdateParameters
+    Restriction:
+      title: Restriction
+      required:
+      - Conditions
+      - Exceptions
+      - Id
+      - ServiceId
+      type: object
+      properties:
+        Id:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        ServiceId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Conditions:
+          allOf:
+          - $ref: '#/components/schemas/RestrictionConditions'
+          example: string
+        Exceptions:
+          allOf:
+          - $ref: '#/components/schemas/RestrictionExceptions'
+          example: string
+        ExternalIdentifier:
+          type:
+          - string
+          - 'null'
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      additionalProperties: false
+      x-schema-id: Restriction
+    Rate:
+      title: Rate
+      required:
+      - CurrencyCode
+      - Description
+      - Id
+      - IsPrivate
+      - Name
+      - Ordering
+      - RateGroupId
+      type: object
+      properties:
+        Id:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        RateGroupId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Ordering:
+          type: integer
+          format: int32
+          example: 1
+        Name:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+        Description:
+          type: object
+          additionalProperties:
+            type:
+            - string
+            - 'null'
+        IsPrivate:
+          type: boolean
+          example: true
+        CurrencyCode:
+          maxLength: 3
+          minLength: 1
+          type: string
+          format: currency
+          example: EUR
+      additionalProperties: false
+      x-schema-id: Rate
+    ResourceAvailabilityMetricTypeEnum:
+      title: Service availability metrics
+      enum:
+      - OutOfOrderBlocks
+      - PublicAvailabilityAdjustment
+      - OtherServiceReservationCount
+      - Occupied
+      - ConfirmedReservations
+      - OptionalReservations
+      - BlockAvailability
+      - AllocatedBlockAvailability
+      - UsableResources
+      - ActiveResources
+      - HouseUse
+      type: string
+      description: '
+
+
+        OutOfOrderBlocks (Number of resources that are out of order for the resource category (see `Resource Block`).)
+
+
+        PublicAvailabilityAdjustment (Number of resources marked as manual availability adjustments.)
+
+
+        OtherServiceReservationCount (Number of resources occupied by another service.)
+
+
+        Occupied (Number of bookings that have been assigned to the resource category (i.e. reservations and blocks).)
+
+
+        ConfirmedReservations (Number of confirmed reservations that have been assigned to the resource category.)
+
+
+        OptionalReservations (Number of optional reservations that have been assigned to the resource category.)
+
+
+        BlockAvailability (Number of blocked resources (from an availability block / allotment).)
+
+
+        AllocatedBlockAvailability (Number of blocked resources that are in a deducting state (from an availability block / allotment).)
+
+
+        UsableResources (Number of usable resources (i.e. which are not out of order).)
+
+
+        ActiveResources (Number of active resources.)
+
+
+        HouseUse (Number of resources marked as house use (internal use).)'
+      x-enumNames:
+      - OutOfOrderBlocks
+      - PublicAvailabilityAdjustment
+      - OtherServiceReservationCount
+      - Occupied
+      - ConfirmedReservations
+      - OptionalReservations
+      - BlockAvailability
+      - AllocatedBlockAvailability
+      - UsableResources
+      - ActiveResources
+      - HouseUse
+      x-enumDescriptions:
+      - Number of resources that are out of order for the resource category (see `Resource Block`).
+      - Number of resources marked as manual availability adjustments.
+      - Number of resources occupied by another service.
+      - Number of bookings that have been assigned to the resource category (i.e. reservations and blocks).
+      - Number of confirmed reservations that have been assigned to the resource category.
+      - Number of optional reservations that have been assigned to the resource category.
+      - Number of blocked resources (from an availability block / allotment).
+      - Number of blocked resources that are in a deducting state (from an availability block / allotment).
+      - Number of usable resources (i.e. which are not out of order).
+      - Number of active resources.
+      - Number of resources marked as house use (internal use).
+    RestrictionExceptions:
+      title: RestrictionExceptions
+      type: object
+      properties:
+        MinAdvance:
+          type:
+          - string
+          - 'null'
+          example: string
+        MaxAdvance:
+          type:
+          - string
+          - 'null'
+          example: string
+        MinLength:
+          type:
+          - string
+          - 'null'
+          example: string
+        MaxLength:
+          type:
+          - string
+          - 'null'
+          example: string
+        MinPrice:
+          type:
+          - number
+          - 'null'
+          format: double
+          example: 100.0
+        MaxPrice:
+          type:
+          - number
+          - 'null'
+          format: double
+          example: 100.0
+        PriceCurrencyCode:
+          maxLength: 3
+          type:
+          - string
+          - 'null'
+          example: EUR
+        MaxReservationCount:
+          type:
+          - integer
+          - 'null'
+          format: int32
+          example: 1
+      additionalProperties: false
+      x-schema-id: RestrictionExceptions
     PromotedServiceAssignmentUnitCountLimit:
       enum:
       - PerReservation
       - PerSpace
       - PerGuest
       - NoLimit
+      type: string
+    SettlementRuleType:
+      enum:
+      - Manual
+      - Automatic
+      type: string
+    SettlementRuleAction:
+      enum:
+      - ChargeCreditCard
+      - CreatePreauthorization
       type: string
     ServiceAvailabilityFilterParameters:
       title: ServiceAvailabilityFilterParameters
@@ -2443,19 +2517,103 @@ components:
           format: date-time
           example: '2026-06-02T14:30:00Z'
         StartUtc:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
           deprecated: true
           example: '2026-06-02T14:30:00Z'
         EndUtc:
-          type: string
+          type:
+          - string
+          - 'null'
           format: date-time
-          nullable: true
           deprecated: true
           example: '2026-06-02T14:30:00Z'
       additionalProperties: false
       x-schema-id: ServiceAvailabilityFilterParameters
+    ServiceDataDiscriminatorEnum:
+      title: Service data discriminator
+      enum:
+      - Bookable
+      - Additional
+      type: string
+      description: '
+
+
+        Bookable
+
+
+        Additional'
+      x-enumNames:
+      - Bookable
+      - Additional
+      x-enumDescriptions:
+      - ''
+      - ''
+    ServiceAvailabilityUpdateData:
+      title: Availability update
+      required:
+      - FirstTimeUnitStartUtc
+      - LastTimeUnitStartUtc
+      - ResourceCategoryId
+      - UnitCountAdjustment
+      type: object
+      properties:
+        FirstTimeUnitStartUtc:
+          minLength: 1
+          type: string
+          description: Start of the time interval, expressed as the timestamp for the start of the first [time unit](https://mews-systems.gitbook.io/connector-api/concepts/time-units), in UTC timezone ISO 8601 format.
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+        LastTimeUnitStartUtc:
+          minLength: 1
+          type: string
+          description: 'End of the time interval, expressed as the timestamp for the start of the last [time unit](https://mews-systems.gitbook.io/connector-api/concepts/time-units), in UTC timezone ISO 8601 format. The maximum size of time interval depends on the service''s [time unit](https://mews-systems.gitbook.io/connector-api/concepts/time-units): 367 hours if hours, 367 days if days, or 60 months if months.'
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+        StartUtc:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          deprecated: true
+          example: '2026-06-02T14:30:00Z'
+        EndUtc:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          deprecated: true
+          example: '2026-06-02T14:30:00Z'
+        ResourceCategoryId:
+          type: string
+          description: Unique identifier of the [Resource category](https://mews-systems.gitbook.io/connector-api/operations/resources#resource-category) whose availability to update.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        UnitCountAdjustment:
+          title: Int32 update value
+          allOf:
+          - $ref: '#/components/schemas/Int32NullableUpdateValue'
+          description: Adjustment value to be applied on the interval, can be both positive and negative (relative adjustment, not an absolute number). If specified without `Value` parameter, removes all adjustments within the interval.
+          example: string
+        AvailabilityBlockId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the [Availability block](https://mews-systems.gitbook.io/connector-api/operations/availabilityblocks#availability-block) whose availability to update.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        PaxCounts:
+          maxItems: 5
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/PaxCount'
+          description: Collection of predicted occupancy of availability adjustments. Relates how many adjustments are assigned to each count of guests.
+      additionalProperties: false
+      x-schema-id: ServiceAvailabilityUpdateData
     ServiceFilterParameters:
       title: ServiceFilterParameters
       required:
@@ -2488,21 +2646,23 @@ components:
         EnterpriseIds:
           maxItems: 1000
           minItems: 1
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
             format: uuid
           description: Unique identifiers of the Enterprises. If not specified, the operation returns data for all enterprises within scope of the Access Token.
-          nullable: true
         ServiceIds:
           maxItems: 1000
           minItems: 1
-          type: array
+          type:
+          - array
+          - 'null'
           items:
             type: string
             format: uuid
           description: Unique identifiers of [Services](https://mews-systems.gitbook.io/connector-api/operations/services/#service).
-          nullable: true
         ServiceType:
           allOf:
           - $ref: '#/components/schemas/ServiceDataDiscriminatorEnum'
@@ -2513,217 +2673,55 @@ components:
 
 
             Additional'
-          nullable: true
           example: string
         UpdatedUtc:
           title: Time interval
           allOf:
           - $ref: '#/components/schemas/TimeFilterInterval'
           description: Interval in which `Services` were updated.
-          nullable: true
           x-max-interval-in-months: 3
           example: string
       additionalProperties: false
       x-schema-id: ServiceFilterParameters
-    ConnectorApiExceptionResult:
-      title: ConnectorApiExceptionResult
-      type: object
-      properties:
-        Message:
-          type: string
-          nullable: true
-          example: string
-        RequestId:
-          type: string
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Details:
-          nullable: true
-          example: string
-      additionalProperties: false
-      x-schema-id: ConnectorApiExceptionResult
-    OccupancyPricing:
-      title: OccupancyPricing
+    PaxCount:
+      title: PaxCount
       required:
-      - Occupancies
-      - RateGroupPrices
+      - PersonCount
+      - UnitCount
       type: object
       properties:
-        Occupancies:
-          type: array
-          items:
-            $ref: '#/components/schemas/OccupancyData'
-        RateGroupPrices:
-          type: array
-          items:
-            $ref: '#/components/schemas/RateGroupPricing'
-      additionalProperties: false
-      x-schema-id: OccupancyPricing
-    Restriction:
-      title: Restriction
-      required:
-      - Conditions
-      - Exceptions
-      - Id
-      - ServiceId
-      type: object
-      properties:
-        Id:
-          type: string
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        ServiceId:
-          type: string
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Conditions:
-          allOf:
-          - $ref: '#/components/schemas/RestrictionConditions'
-          example: string
-        Exceptions:
-          allOf:
-          - $ref: '#/components/schemas/RestrictionExceptions'
-          example: string
-        ExternalIdentifier:
-          type: string
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-      additionalProperties: false
-      x-schema-id: Restriction
-    PromotedServiceAssignmentReservationIntervalLimit:
-      enum:
-      - SameAsParent
-      - InsideParent
-      type: string
-    Limitation:
-      title: Limitation
-      required:
-      - Count
-      type: object
-      properties:
-        Count:
+        PersonCount:
           type: integer
+          description: Predicted guest count that will be assigned to the Resource. The guest count must fit within the Resource Category maximum capacity.
           format: int32
           example: 1
-        Cursor:
-          type: string
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        UnitCount:
+          type: integer
+          description: Positive number of adjustments that are assigned to `PersonCount`. The sum of all `UnitCount` in `PaxCounts` should match the adjustment value applied to the interval.
+          format: int32
+          example: 1
       additionalProperties: false
-      description: Limitation on the quantity of data returned.
-      x-schema-id: Limitation
-    ResourceCategoryAvailabilityV20240122:
-      title: Resource category availability (ver 2024-01-22)
+      x-schema-id: PaxCount
+    TaxValue:
+      title: TaxValue
       required:
-      - Metrics
-      - ResourceCategoryId
+      - TaxRateCode
+      - Value
       type: object
       properties:
-        ResourceCategoryId:
+        TaxRateCode:
+          minLength: 1
           type: string
-          description: Unique identifier of the [Resource category](https://mews-systems.gitbook.io/connector-api/operations/resources#resource-category).
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Metrics:
-          title: ResourceAvailabilityMetricTypeInt32IEnumerableIDictionary
-          type: object
-          properties:
-            OutOfOrderBlocks:
-              type: array
-              items:
-                type: integer
-                format: int32
-            PublicAvailabilityAdjustment:
-              type: array
-              items:
-                type: integer
-                format: int32
-            OtherServiceReservationCount:
-              type: array
-              items:
-                type: integer
-                format: int32
-            Occupied:
-              type: array
-              items:
-                type: integer
-                format: int32
-            ConfirmedReservations:
-              type: array
-              items:
-                type: integer
-                format: int32
-            OptionalReservations:
-              type: array
-              items:
-                type: integer
-                format: int32
-            BlockAvailability:
-              type: array
-              items:
-                type: integer
-                format: int32
-            AllocatedBlockAvailability:
-              type: array
-              items:
-                type: integer
-                format: int32
-            UsableResources:
-              type: array
-              items:
-                type: integer
-                format: int32
-            ActiveResources:
-              type: array
-              items:
-                type: integer
-                format: int32
-            HouseUse:
-              type: array
-              items:
-                type: integer
-                format: int32
-          additionalProperties: false
-          description: Dictionary keys are names of [Service availability metrics](https://mews-systems.gitbook.io/connector-api/operations/services#service-availability-metrics), values are arrays of integers with metric values for corresponding time unit in `TimeUnitStartsUtc`.
-          x-schema-id: ResourceAvailabilityMetricTypeInt32IEnumerableIDictionary
-      additionalProperties: false
-      x-schema-id: ResourceCategoryAvailabilityV20240122
-    ServiceDataDiscriminator:
-      title: Service data discriminator
-      enum:
-      - Bookable
-      - Additional
-      type: string
-    ResourceCategoryPricing:
-      title: ResourceCategoryPricing
-      required:
-      - CategoryId
-      - OccupancyPrices
-      type: object
-      properties:
-        CategoryId:
-          type: string
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        OccupancyPrices:
-          type: array
-          items:
-            $ref: '#/components/schemas/OccupancyPricing'
-      additionalProperties: false
-      x-schema-id: ResourceCategoryPricing
-    Int32NullableUpdateValue:
-      title: Int32 update value
-      type: object
-      properties:
+          example: string
         Value:
-          type: integer
-          description: Value which is to be updated.
-          format: int32
-          nullable: true
-          example: 1
+          type: number
+          format: double
+          example: 100.0
       additionalProperties: false
-      x-schema-id: Int32NullableUpdateValue
+      x-schema-id: TaxValue
+    Unit:
+      type: object
+      additionalProperties: false
     OccupancyData:
       title: OccupancyData
       required:
@@ -2741,42 +2739,104 @@ components:
           example: 1
       additionalProperties: false
       x-schema-id: OccupancyData
-    ServiceAvailabilityResult_2:
-      title: ServiceAvailabilityResult
+    ConnectorApiExceptionResult:
+      title: ConnectorApiExceptionResult
+      type: object
+      properties:
+        Message:
+          type:
+          - string
+          - 'null'
+          example: string
+        RequestId:
+          type:
+          - string
+          - 'null'
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Details:
+          example: string
+      additionalProperties: false
+      x-schema-id: ConnectorApiExceptionResult
+    ServiceAvailabilityResultV20240122:
+      title: ServiceAvailabilityResultV20240122
       required:
-      - CategoryAvailabilities
+      - ResourceCategoryAvailabilities
       - TimeUnitStartsUtc
       type: object
       properties:
-        DatesUtc:
-          type: array
-          items:
-            type: string
-          nullable: true
-          deprecated: true
         TimeUnitStartsUtc:
           type: array
           items:
             type: string
           description: Set of all time units covered by the time interval; expressed in UTC timezone ISO 8601 format.
-        CategoryAvailabilities:
+          format: date-time
+        ResourceCategoryAvailabilities:
           type: array
           items:
-            $ref: '#/components/schemas/CategoryAvailability_2'
-          description: Resource category availabilities.
+            $ref: '#/components/schemas/ResourceCategoryAvailabilityV20240122'
+          description: Resource category availabilities. Can be empty if no resource categories are assigned to the service.
       additionalProperties: false
-      x-schema-id: ServiceAvailabilityResult
-    ServiceOptions:
-      title: ServiceOptions
-      required:
-      - ProRataCharging
-      type: object
-      properties:
-        ProRataCharging:
-          type: boolean
-          example: true
-      additionalProperties: false
-      x-schema-id: ServiceOptions
+      x-schema-id: ServiceAvailabilityResultV20240122
+    ResourceCategoryType:
+      enum:
+      - Room
+      - Bed
+      - Dorm
+      - Apartment
+      - Suite
+      - Villa
+      - Site
+      - Office
+      - MeetingRoom
+      - ParkingSpot
+      - Desk
+      - TeamArea
+      - Membership
+      - Tent
+      - CaravanOrRV
+      - UnequippedCampsite
+      - Bike
+      - ExtraBed
+      - Cot
+      - Crib
+      - ConferenceRoom
+      - Rooftop
+      - Garden
+      - Restaurant
+      - Amphitheater
+      - PrivateSpaces
+      type: string
+    TimeUnitPeriodEnum:
+      title: Time unit period
+      enum:
+      - Day
+      - Month
+      - Hour
+      type: string
+      description: '
+
+
+        Day
+
+
+        Month
+
+
+        Hour'
+      x-enumNames:
+      - Day
+      - Month
+      - Hour
+      x-enumDescriptions:
+      - ''
+      - ''
+      - ''
+    TimeUnitPeriod:
+      enum:
+      - Day
+      - Month
+      - Hour
+      type: string
   securitySchemes:
     MewsClientToken:
       type: apiKey

@@ -1,4 +1,4 @@
-openapi: 3.0.4
+openapi: 3.2.0
 info:
   title: Mews Booking Engine API (Distributor) Account notes Outlet bills API
   version: v1
@@ -171,74 +171,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    AmountParameters:
-      title: Amount parameters
-      required:
-      - Currency
-      - TaxCodes
-      type: object
-      properties:
-        Currency:
-          minLength: 1
-          type: string
-          format: currency
-          example: EUR
-        TaxCodes:
-          type: array
-          items:
-            type: string
-        NetValue:
-          type: number
-          format: double
-          nullable: true
-          example: 100.0
-        GrossValue:
-          type: number
-          format: double
-          nullable: true
-          example: 100.0
-      additionalProperties: false
-      description: Price of the product that overrides the price defined in Mews.
-      x-schema-id: AmountParameters
-    AddOutletBillsResult:
-      title: AddOutletBillsResult
-      required:
-      - OutletBillIds
-      type: object
-      properties:
-        OutletBillIds:
-          type: array
-          items:
-            type: string
-            format: uuid
-          description: Array of unique identifiers of the added Outlet bills.
-      additionalProperties: false
-      x-schema-id: AddOutletBillsResult
-    ConnectorApiExceptionResult:
-      title: ConnectorApiExceptionResult
-      type: object
-      properties:
-        Message:
-          type: string
-          nullable: true
-          example: string
-        RequestId:
-          type: string
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Details:
-          nullable: true
-          example: string
-      additionalProperties: false
-      x-schema-id: ConnectorApiExceptionResult
-    OutletItemType:
-      title: Outlet item type
-      enum:
-      - Revenue
-      - NonRevenue
-      - Payment
-      type: string
-      description: Type of the outlet item.
     OutletItemParameters:
       title: Outlet item parameters
       required:
@@ -275,23 +207,102 @@ components:
           $ref: '#/components/schemas/OutletItemType'
         ExternalIdentifier:
           maxLength: 255
-          type: string
+          type:
+          - string
+          - 'null'
           description: An identifier of this item from another system.
-          nullable: true
           example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
         Notes:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Additional notes of the item.
-          nullable: true
           example: string
         AccountingCategoryId:
-          type: string
+          type:
+          - string
+          - 'null'
           description: Unique identifier of an `AccountingCategory` to be assigned to the item.
           format: uuid
-          nullable: true
           example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
       additionalProperties: false
       x-schema-id: OutletItemParameters
+    AddOutletBillsResult:
+      title: AddOutletBillsResult
+      required:
+      - OutletBillIds
+      type: object
+      properties:
+        OutletBillIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+          description: Array of unique identifiers of the added Outlet bills.
+      additionalProperties: false
+      x-schema-id: AddOutletBillsResult
+    ConnectorApiExceptionResult:
+      title: ConnectorApiExceptionResult
+      type: object
+      properties:
+        Message:
+          type:
+          - string
+          - 'null'
+          example: string
+        RequestId:
+          type:
+          - string
+          - 'null'
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Details:
+          example: string
+      additionalProperties: false
+      x-schema-id: ConnectorApiExceptionResult
+    OutletBillParameters:
+      title: Outlet bill parameters
+      required:
+      - ClosedUtc
+      - Items
+      - Number
+      - OutletId
+      type: object
+      properties:
+        OutletId:
+          type: string
+          description: Unique identifier of the `Outlet` where the bill was issued.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Number:
+          minLength: 1
+          type: string
+          description: Number of the bill.
+          example: '1001'
+        ClosedUtc:
+          minLength: 1
+          type: string
+          description: Date and time of the bill closure in UTC timezone in ISO 8601 format.
+          example: string
+        Items:
+          type: array
+          items:
+            $ref: '#/components/schemas/OutletItemParameters'
+          description: The items on the bill.
+        AccountId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the `Account` to be assigned to the bill.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Notes:
+          type:
+          - string
+          - 'null'
+          description: Additional notes on the bill.
+          example: string
+      additionalProperties: false
+      x-schema-id: OutletBillParameters
     AddOutletBillsParameters:
       title: AddOutletBillsParameters
       required:
@@ -325,48 +336,45 @@ components:
           description: The new outlet bills.
       additionalProperties: false
       x-schema-id: AddOutletBillsParameters
-    OutletBillParameters:
-      title: Outlet bill parameters
+    OutletItemType:
+      title: Outlet item type
+      enum:
+      - Revenue
+      - NonRevenue
+      - Payment
+      type: string
+      description: Type of the outlet item.
+    AmountParameters:
+      title: Amount parameters
       required:
-      - ClosedUtc
-      - Items
-      - Number
-      - OutletId
+      - Currency
+      - TaxCodes
       type: object
       properties:
-        OutletId:
-          type: string
-          description: Unique identifier of the `Outlet` where the bill was issued.
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Number:
+        Currency:
           minLength: 1
           type: string
-          description: Number of the bill.
-          example: '1001'
-        ClosedUtc:
-          minLength: 1
-          type: string
-          description: Date and time of the bill closure in UTC timezone in ISO 8601 format.
-          example: string
-        Items:
+          format: currency
+          example: EUR
+        TaxCodes:
           type: array
           items:
-            $ref: '#/components/schemas/OutletItemParameters'
-          description: The items on the bill.
-        AccountId:
-          type: string
-          description: Unique identifier of the `Account` to be assigned to the bill.
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Notes:
-          type: string
-          description: Additional notes on the bill.
-          nullable: true
-          example: string
+            type: string
+        NetValue:
+          type:
+          - number
+          - 'null'
+          format: double
+          example: 100.0
+        GrossValue:
+          type:
+          - number
+          - 'null'
+          format: double
+          example: 100.0
       additionalProperties: false
-      x-schema-id: OutletBillParameters
+      description: Price of the product that overrides the price defined in Mews.
+      x-schema-id: AmountParameters
   securitySchemes:
     MewsClientToken:
       type: apiKey

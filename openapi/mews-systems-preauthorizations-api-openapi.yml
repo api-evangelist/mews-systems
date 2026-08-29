@@ -1,4 +1,4 @@
-openapi: 3.0.4
+openapi: 3.2.0
 info:
   title: Mews Booking Engine API (Distributor) Account notes Preauthorizations API
   version: v1
@@ -186,55 +186,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    Preauthorization:
-      title: Preauthorization
-      required:
-      - Amount
-      - CreditCardId
-      - Id
-      - State
-      type: object
-      properties:
-        Id:
-          type: string
-          description: Unique identifier of the preauthorization.
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        CreditCardId:
-          type: string
-          description: Unique identifier of the credit card.
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Amount:
-          title: Amount
-          allOf:
-          - $ref: '#/components/schemas/Amount'
-          description: Value of the preauthorization.
-          example: string
-        State:
-          $ref: '#/components/schemas/PreauthorizationState'
-        ReservationId:
-          type: string
-          description: Unique identifier of the `Reservation` the preauthorization belongs to.
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Code:
-          type: string
-          description: Code of the preauthorization.
-          nullable: true
-          example: string
-        CustomerId:
-          type: string
-          description: Unique identifier of the customer.
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        IsActive:
-          type: boolean
-          description: Whether the preauthorization is active.
-          example: true
-      additionalProperties: false
-      x-schema-id: Preauthorization
     Amount:
       title: Amount
       required:
@@ -275,72 +226,31 @@ components:
       additionalProperties: false
       description: ''
       x-schema-id: Amount
-    PreauthorizationResult:
-      title: PreauthorizationResult
+    TaxBreakdownItem:
+      title: Tax breakdown item
       required:
-      - Preauthorizations
+      - NetValue
+      - TaxValue
       type: object
       properties:
-        Preauthorizations:
-          type: array
-          items:
-            $ref: '#/components/schemas/Preauthorization'
-          description: Preauthorizations of the specified `Customer`.
-      additionalProperties: false
-      x-schema-id: PreauthorizationResult
-    PreauthorizationState:
-      title: Preauthorization state
-      enum:
-      - Chargeable
-      - Expired
-      - Cancelled
-      - Charged
-      - Pending
-      - Failed
-      type: string
-      description: State of the preauthorization.
-      x-enumDescriptions:
-      - Created and prepared for the charging.
-      - A preauthorization that is not charged and expired.
-      - A preauthorization that was canceled before charging.
-      - Charged preauthorization.
-      - A preauthorization that is waiting for the charge to be processed.
-      - A preauthorization that failed to be charged.
-    ConnectorApiExceptionResult:
-      title: ConnectorApiExceptionResult
-      type: object
-      properties:
-        Message:
-          type: string
-          nullable: true
+        TaxRateCode:
+          type:
+          - string
+          - 'null'
+          description: Tax rate code for the item. `null` for untaxed amounts.
           example: string
-        RequestId:
-          type: string
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Details:
-          nullable: true
-          example: string
-      additionalProperties: false
-      x-schema-id: ConnectorApiExceptionResult
-    TaxValue:
-      title: Tax value
-      required:
-      - Value
-      type: object
-      properties:
-        Code:
-          type: string
-          description: Code corresponding to tax type.
-          nullable: true
-          example: string
-        Value:
+        NetValue:
           type: number
-          description: Amount of tax applied.
+          description: The net value that the tax is calculated from.
+          format: double
+          example: 100.0
+        TaxValue:
+          type: number
+          description: The value of the tax.
           format: double
           example: 100.0
       additionalProperties: false
-      x-schema-id: TaxValue
+      x-schema-id: TaxBreakdownItem
     MultipleCustomerParameters:
       title: MultipleCustomerParameters
       required:
@@ -375,6 +285,125 @@ components:
           description: Unique identifiers of `Customer`.
       additionalProperties: false
       x-schema-id: MultipleCustomerParameters
+    TaxValue:
+      title: Tax value
+      required:
+      - Value
+      type: object
+      properties:
+        Code:
+          type:
+          - string
+          - 'null'
+          description: Code corresponding to tax type.
+          example: string
+        Value:
+          type: number
+          description: Amount of tax applied.
+          format: double
+          example: 100.0
+      additionalProperties: false
+      x-schema-id: TaxValue
+    Preauthorization:
+      title: Preauthorization
+      required:
+      - Amount
+      - CreditCardId
+      - Id
+      - State
+      type: object
+      properties:
+        Id:
+          type: string
+          description: Unique identifier of the preauthorization.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        CreditCardId:
+          type: string
+          description: Unique identifier of the credit card.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Amount:
+          title: Amount
+          allOf:
+          - $ref: '#/components/schemas/Amount'
+          description: Value of the preauthorization.
+          example: string
+        State:
+          $ref: '#/components/schemas/PreauthorizationState'
+        ReservationId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the `Reservation` the preauthorization belongs to.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Code:
+          type:
+          - string
+          - 'null'
+          description: Code of the preauthorization.
+          example: string
+        CustomerId:
+          type: string
+          description: Unique identifier of the customer.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        IsActive:
+          type: boolean
+          description: Whether the preauthorization is active.
+          example: true
+      additionalProperties: false
+      x-schema-id: Preauthorization
+    ConnectorApiExceptionResult:
+      title: ConnectorApiExceptionResult
+      type: object
+      properties:
+        Message:
+          type:
+          - string
+          - 'null'
+          example: string
+        RequestId:
+          type:
+          - string
+          - 'null'
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Details:
+          example: string
+      additionalProperties: false
+      x-schema-id: ConnectorApiExceptionResult
+    PreauthorizationResult:
+      title: PreauthorizationResult
+      required:
+      - Preauthorizations
+      type: object
+      properties:
+        Preauthorizations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Preauthorization'
+          description: Preauthorizations of the specified `Customer`.
+      additionalProperties: false
+      x-schema-id: PreauthorizationResult
+    PreauthorizationState:
+      title: Preauthorization state
+      enum:
+      - Chargeable
+      - Expired
+      - Cancelled
+      - Charged
+      - Pending
+      - Failed
+      type: string
+      description: State of the preauthorization.
+      x-enumDescriptions:
+      - Created and prepared for the charging.
+      - A preauthorization that is not charged and expired.
+      - A preauthorization that was canceled before charging.
+      - Charged preauthorization.
+      - A preauthorization that is waiting for the charge to be processed.
+      - A preauthorization that failed to be charged.
     TaxBreakdown:
       title: Tax breakdown
       required:
@@ -388,30 +417,6 @@ components:
           description: Tax breakdown items per each tax rate applied.
       additionalProperties: false
       x-schema-id: TaxBreakdown
-    TaxBreakdownItem:
-      title: Tax breakdown item
-      required:
-      - NetValue
-      - TaxValue
-      type: object
-      properties:
-        TaxRateCode:
-          type: string
-          description: Tax rate code for the item. `null` for untaxed amounts.
-          nullable: true
-          example: string
-        NetValue:
-          type: number
-          description: The net value that the tax is calculated from.
-          format: double
-          example: 100.0
-        TaxValue:
-          type: number
-          description: The value of the tax.
-          format: double
-          example: 100.0
-      additionalProperties: false
-      x-schema-id: TaxBreakdownItem
   securitySchemes:
     MewsClientToken:
       type: apiKey

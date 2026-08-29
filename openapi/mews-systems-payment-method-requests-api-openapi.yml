@@ -1,4 +1,4 @@
-openapi: 3.0.4
+openapi: 3.2.0
 info:
   title: Mews Booking Engine API (Distributor) Account notes Payment method requests API
   version: v1
@@ -22,7 +22,9 @@ paths:
       tags:
       - Payment method requests
       summary: Mews Add Payment Method Request
-      description: "Create a payment method request for the specified customer or company account to securely collect a payment method without charging the guest immediately. An optional email notification is sent to the account's email address or a specified override address.\r\nNote this operation supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property/)."
+      description: 'Create a payment method request for the specified customer or company account to securely collect a payment method without charging the guest immediately. An optional email notification is sent to the account''s email address or a specified override address.
+
+        Note this operation supports [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property/).'
       operationId: paymentMethodRequests_add
       requestBody:
         content:
@@ -157,20 +159,117 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    PaymentMethodRequestAdditionResult:
+      title: Payment method request addition result
+      required:
+      - PaymentMethodRequestId
+      type: object
+      properties:
+        PaymentMethodRequestId:
+          type: string
+          description: Unique identifier of the created payment method request.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      additionalProperties: false
+      x-schema-id: PaymentMethodRequestAdditionResult
+    PaymentMethodRequestAddParameters:
+      title: Payment method request parameters
+      required:
+      - AccessToken
+      - AccountId
+      - Client
+      - ClientToken
+      - Description
+      - ExpirationUtc
+      - PaymentMethods
+      type: object
+      properties:
+        ClientToken:
+          minLength: 1
+          type: string
+          description: Token identifying the client application.
+          example: string
+        AccessToken:
+          minLength: 1
+          type: string
+          description: Access token of the client application.
+          example: string
+        Client:
+          minLength: 1
+          type: string
+          description: Name and version of the client application.
+          example: string
+        EnterpriseId:
+          type:
+          - string
+          - 'null'
+          description: Unique identifier of the enterprise. Required when using [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property), ignored otherwise.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        AccountId:
+          type: string
+          description: Unique identifier of the account (`Customer` or `Company`) to which the payment method request is issued.
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        ExpirationUtc:
+          minLength: 1
+          type: string
+          description: Date and time of the payment method request's expiration in ISO 8601 format.
+          format: date-time
+          example: '2026-06-02T14:30:00Z'
+        Description:
+          maxLength: 1000
+          minLength: 1
+          type: string
+          description: Description of the payment method request displayed to the customer.
+          example: string
+        Notes:
+          maxLength: 1000
+          type:
+          - string
+          - 'null'
+          description: Payment method request's internal notes.
+          example: string
+        PaymentMethods:
+          minItems: 1
+          uniqueItems: true
+          type: array
+          items:
+            $ref: '#/components/schemas/PaymentMethodRequestPaymentMethodsEnum'
+          description: Collectable payment methods.
+        Email:
+          maxLength: 500
+          type:
+          - string
+          - 'null'
+          description: Account email address for sending the payment method request. If not provided, uses the email from the customer profile.
+          format: email
+          example: partner@example.com
+        EmailsToSend:
+          uniqueItems: true
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/PaymentMethodRequestEmailTypesEnum'
+          description: Email notifications to send. If not specified, all emails will be sent. To disable all emails send an empty list. Additional email types may be added in the future.
+      additionalProperties: false
+      x-schema-id: PaymentMethodRequestAddParameters
     ConnectorApiExceptionResult:
       title: ConnectorApiExceptionResult
       type: object
       properties:
         Message:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           example: string
         RequestId:
-          type: string
-          nullable: true
+          type:
+          - string
+          - 'null'
           example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
         Details:
-          nullable: true
           example: string
       additionalProperties: false
       x-schema-id: ConnectorApiExceptionResult
@@ -206,98 +305,6 @@ components:
       - PaymentMethodRequestAdded
       x-enumDescriptions:
       - ''
-    PaymentMethodRequestAddParameters:
-      title: Payment method request parameters
-      required:
-      - AccessToken
-      - AccountId
-      - Client
-      - ClientToken
-      - Description
-      - ExpirationUtc
-      - PaymentMethods
-      type: object
-      properties:
-        ClientToken:
-          minLength: 1
-          type: string
-          description: Token identifying the client application.
-          example: string
-        AccessToken:
-          minLength: 1
-          type: string
-          description: Access token of the client application.
-          example: string
-        Client:
-          minLength: 1
-          type: string
-          description: Name and version of the client application.
-          example: string
-        EnterpriseId:
-          type: string
-          description: Unique identifier of the enterprise. Required when using [Portfolio Access Tokens](https://mews-systems.gitbook.io/connector-api/concepts/multi-property), ignored otherwise.
-          format: uuid
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        AccountId:
-          type: string
-          description: Unique identifier of the account (`Customer` or `Company`) to which the payment method request is issued.
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        ExpirationUtc:
-          minLength: 1
-          type: string
-          description: Date and time of the payment method request's expiration in ISO 8601 format.
-          format: date-time
-          example: '2026-06-02T14:30:00Z'
-        Description:
-          maxLength: 1000
-          minLength: 1
-          type: string
-          description: Description of the payment method request displayed to the customer.
-          example: string
-        Notes:
-          maxLength: 1000
-          type: string
-          description: Payment method request's internal notes.
-          nullable: true
-          example: string
-        PaymentMethods:
-          minItems: 1
-          uniqueItems: true
-          type: array
-          items:
-            $ref: '#/components/schemas/PaymentMethodRequestPaymentMethodsEnum'
-          description: Collectable payment methods.
-        Email:
-          maxLength: 500
-          type: string
-          description: Account email address for sending the payment method request. If not provided, uses the email from the customer profile.
-          format: email
-          nullable: true
-          example: partner@example.com
-        EmailsToSend:
-          uniqueItems: true
-          type: array
-          items:
-            $ref: '#/components/schemas/PaymentMethodRequestEmailTypesEnum'
-          description: Email notifications to send. If not specified, all emails will be sent. To disable all emails send an empty list. Additional email types may be added in the future.
-          nullable: true
-      additionalProperties: false
-      x-schema-id: PaymentMethodRequestAddParameters
-    PaymentMethodRequestAdditionResult:
-      title: Payment method request addition result
-      required:
-      - PaymentMethodRequestId
-      type: object
-      properties:
-        PaymentMethodRequestId:
-          type: string
-          description: Unique identifier of the created payment method request.
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-      additionalProperties: false
-      x-schema-id: PaymentMethodRequestAdditionResult
   securitySchemes:
     MewsClientToken:
       type: apiKey

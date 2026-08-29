@@ -1,4 +1,4 @@
-openapi: 3.0.4
+openapi: 3.2.0
 info:
   title: Mews Booking Engine API (Distributor) Account notes Languages API
   version: v1
@@ -333,53 +333,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    Language_2:
-      title: Language
-      required:
-      - Code
-      - EnglishName
-      - LocalName
-      type: object
-      properties:
-        Code:
-          minLength: 1
-          type: string
-          description: Language-culture code of the language.
-          example: string
-        FallbackLanguageCode:
-          type: string
-          description: Language-culture code of the fallback language.
-          nullable: true
-          example: string
-        EnglishName:
-          minLength: 1
-          type: string
-          description: English name of the language.
-          example: Example Name
-        LocalName:
-          minLength: 1
-          type: string
-          description: Local name of the language.
-          example: Example Name
-      additionalProperties: false
-      x-schema-id: Language
-    ConnectorApiExceptionResult:
-      title: ConnectorApiExceptionResult
-      type: object
-      properties:
-        Message:
-          type: string
-          nullable: true
-          example: string
-        RequestId:
-          type: string
-          nullable: true
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
-        Details:
-          nullable: true
-          example: string
-      additionalProperties: false
-      x-schema-id: ConnectorApiExceptionResult
     LanguageResult:
       title: LanguageResult
       required:
@@ -392,31 +345,6 @@ components:
             $ref: '#/components/schemas/Language'
       additionalProperties: false
       x-schema-id: LanguageResult
-    Parameters:
-      title: Parameters
-      required:
-      - AccessToken
-      - Client
-      - ClientToken
-      type: object
-      properties:
-        ClientToken:
-          minLength: 1
-          type: string
-          description: Token identifying the client application.
-          example: string
-        AccessToken:
-          minLength: 1
-          type: string
-          description: Access token of the client application.
-          example: string
-        Client:
-          minLength: 1
-          type: string
-          description: Name and version of the client application.
-          example: string
-      additionalProperties: false
-      x-schema-id: Parameters
     LanguageTextParameters:
       title: LanguageTextParameters
       required:
@@ -454,23 +382,80 @@ components:
           example: string
       additionalProperties: false
       x-schema-id: LanguageTextParameters
-    Culture:
-      title: Culture
+    LanguageTextResult:
+      title: LanguageTextResult
       required:
-      - CurrencyDecimalSeparator
-      - CurrencyGroupSeparator
+      - LanguageTexts
       type: object
       properties:
-        CurrencyDecimalSeparator:
-          minLength: 1
-          type: string
-          example: EUR
-        CurrencyGroupSeparator:
-          minLength: 1
-          type: string
-          example: EUR
+        LanguageTexts:
+          type: array
+          items:
+            $ref: '#/components/schemas/LanguageTexts'
+          description: Texts in the specified languages.
       additionalProperties: false
-      x-schema-id: Culture
+      x-schema-id: LanguageTextResult
+    BookingEngineParameters:
+      title: BookingEngineParameters
+      required:
+      - Client
+      - ConfigurationId
+      - FullAmounts
+      type: object
+      properties:
+        Client:
+          minLength: 1
+          type: string
+          example: string
+        LanguageCode:
+          type:
+          - string
+          - 'null'
+          example: string
+        CultureCode:
+          type:
+          - string
+          - 'null'
+          example: string
+        FullAmounts:
+          type: boolean
+          example: true
+        Session:
+          type:
+          - string
+          - 'null'
+          example: string
+        ConfigurationId:
+          type: string
+          format: uuid
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+      additionalProperties: false
+      x-schema-id: BookingEngineParameters
+    Parameters:
+      title: Parameters
+      required:
+      - AccessToken
+      - Client
+      - ClientToken
+      type: object
+      properties:
+        ClientToken:
+          minLength: 1
+          type: string
+          description: Token identifying the client application.
+          example: string
+        AccessToken:
+          minLength: 1
+          type: string
+          description: Access token of the client application.
+          example: string
+        Client:
+          minLength: 1
+          type: string
+          description: Name and version of the client application.
+          example: string
+      additionalProperties: false
+      x-schema-id: Parameters
     LanguageTexts:
       title: Language texts
       required:
@@ -492,6 +477,24 @@ components:
           x-schema-id: Dictionary
       additionalProperties: false
       x-schema-id: LanguageTexts
+    ConnectorApiExceptionResult:
+      title: ConnectorApiExceptionResult
+      type: object
+      properties:
+        Message:
+          type:
+          - string
+          - 'null'
+          example: string
+        RequestId:
+          type:
+          - string
+          - 'null'
+          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+        Details:
+          example: string
+      additionalProperties: false
+      x-schema-id: ConnectorApiExceptionResult
     Language:
       title: Language
       required:
@@ -527,52 +530,54 @@ components:
           description: The supported languages.
       additionalProperties: false
       x-schema-id: LanguageResult
-    BookingEngineParameters:
-      title: BookingEngineParameters
+    Language_2:
+      title: Language
       required:
-      - Client
-      - ConfigurationId
-      - FullAmounts
+      - Code
+      - EnglishName
+      - LocalName
       type: object
       properties:
-        Client:
+        Code:
           minLength: 1
           type: string
+          description: Language-culture code of the language.
           example: string
-        LanguageCode:
-          type: string
-          nullable: true
+        FallbackLanguageCode:
+          type:
+          - string
+          - 'null'
+          description: Language-culture code of the fallback language.
           example: string
-        CultureCode:
+        EnglishName:
+          minLength: 1
           type: string
-          nullable: true
-          example: string
-        FullAmounts:
-          type: boolean
-          example: true
-        Session:
+          description: English name of the language.
+          example: Example Name
+        LocalName:
+          minLength: 1
           type: string
-          nullable: true
-          example: string
-        ConfigurationId:
-          type: string
-          format: uuid
-          example: 3edd5f9e-7e64-4f2a-9a0e-b3f200e6c111
+          description: Local name of the language.
+          example: Example Name
       additionalProperties: false
-      x-schema-id: BookingEngineParameters
-    LanguageTextResult:
-      title: LanguageTextResult
+      x-schema-id: Language
+    Culture:
+      title: Culture
       required:
-      - LanguageTexts
+      - CurrencyDecimalSeparator
+      - CurrencyGroupSeparator
       type: object
       properties:
-        LanguageTexts:
-          type: array
-          items:
-            $ref: '#/components/schemas/LanguageTexts'
-          description: Texts in the specified languages.
+        CurrencyDecimalSeparator:
+          minLength: 1
+          type: string
+          example: EUR
+        CurrencyGroupSeparator:
+          minLength: 1
+          type: string
+          example: EUR
       additionalProperties: false
-      x-schema-id: LanguageTextResult
+      x-schema-id: Culture
   securitySchemes:
     MewsClientToken:
       type: apiKey
